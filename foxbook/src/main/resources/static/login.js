@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
     newPostForm.addEventListener("submit", (event) => {
         event.preventDefault();
 
-        const formData = new FormData(e.target);
+        const formData = new FormData(event.target);
         const task = Object.fromEntries(formData);
 
         fetch("/authentication", {
