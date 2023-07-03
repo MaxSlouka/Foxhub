@@ -1,6 +1,6 @@
 package com.gfa.foxbook.foxbook.services;
 
-import com.gfa.foxbook.foxbook.models.User;
+import org.springframework.security.core.userdetails.User;
 
 public interface UserService {
     User findById(Long id);
