@@ -1,6 +1,8 @@
 package com.gfa.foxbook.foxbook.models;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -18,12 +20,18 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @NotNull
     private String firstName;
+    @NotNull
     private String lastName;
     @Column(unique = true)
     private String nickname;
+    @NotNull
+    @Column(unique = true)
+    @Email
     private String email;
     private int yearOfBirth;
+    @NotNull
     private String password;
     private String personality;
     private String countryResidence;
@@ -41,7 +49,7 @@ public class User {
             name = "users_social_media",
             joinColumns = {@JoinColumn(name = "users_id", referencedColumnName = "id")},
             inverseJoinColumns = {@JoinColumn(name = "social_media_id", referencedColumnName = "id")})
-    private List<SocialMedia> socialMedia;
+    private List<SocialMedia> socialMedias;
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(
             name = "users_technologies",
