@@ -28,5 +28,26 @@ public class WebControllerTests {
                 .andExpect(MockMvcResultMatchers.view().name("registration.html"));
     }
 
+    @Test
+    public void mainEndpoint_ReturnsMainHtmlView() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.get("/main"))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.view().name("main.html"));
+    }
+
+    @Test
+    public void profileEndpoint_ReturnsProfileHtmlView() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.get("/profile"))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.view().name("profile.html"));
+    }
+
+    @Test
+    public void getAllUsersEndpoint_ReturnsPeopleHtmlView() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.get("/people"))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.view().name("people.html"));
+    }
+
 
 }
