@@ -2,32 +2,34 @@ package com.gfa.foxbook.foxbook.controllers;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
+@RequestMapping("/")
 public class WebController {
 
-    @GetMapping("/")
+    @GetMapping("")
     public String index() {
-        return "index.html";
+        return "index";
     }
 
-    @GetMapping("/login")
+    @GetMapping("login")
     public String login() {
-        return "login.html";
+        return "login";
     }
 
-    @GetMapping("/registration")
+    @GetMapping("registration")
     public String registration() {
-        return "registration.html";
+        return "registration";
     }
 
-    @GetMapping("/profile")
-    public String profil() {
-        return "profile.html";
+    @GetMapping("profile")
+    public String profile() {
+        return "profile";
     }
 
-    @GetMapping("/people")
+    @GetMapping("people")
     public String getAllUsers() {
-        return "people.html";
+        return "people";
     }
 }
