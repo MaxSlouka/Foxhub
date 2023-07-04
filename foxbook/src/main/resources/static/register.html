@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+<div class="container">
+    <h1>Welcome to Foxbook!</h1>
+    <h2>Register</h2>
+    <form action="/registration" method="POST">
+        <label>First Name
+            <input type="text" name="firstname" required>
+        </label>
+        <label>Last Name
+            <input type="text" name="lastname" required>
+        </label>
+        <label>User Name
+            <input type="email" name="username" required>
+        </label>
+        <label>Password
+            <input type="password" name="password" required>
+        </label>
+        <input type="submit" value="Register">
+    </form>
+    <p>Do you already have an account?</p>
+    <p>Login <a href="/login">HERE</a></p>
+</div>
+<script src="register.js"></script>
+</body>
+
+</html>
