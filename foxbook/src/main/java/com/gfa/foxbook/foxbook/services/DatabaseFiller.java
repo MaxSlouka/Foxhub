@@ -19,15 +19,11 @@ public class DatabaseFiller implements CommandLineRunner {
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
 
-    List<Role> roles;
-
     @Override
     public void run(String... args) {
         Faker faker = new Faker();
         List<User> users = new ArrayList<>();
 
-        roles.add(new Role("ADMIN"));
-        roles.add(new Role("USER"));
 
 //        for (int i = 0; i < 20; i++) {
 //            User user = new User();
@@ -53,7 +49,9 @@ public class DatabaseFiller implements CommandLineRunner {
 //        }
 //
 //        userRepository.saveAll(users);
-        roleRepository.saveAll(roles);
+        if(roleRepository.findAll().isEmpty()){
+            roleRepository.saveAll(Role.getRoleList());
+        }
 //
 //    }
 //

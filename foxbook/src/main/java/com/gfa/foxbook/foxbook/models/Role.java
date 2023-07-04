@@ -8,6 +8,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Entity
 @Data
 @AllArgsConstructor
@@ -20,5 +22,12 @@ public class Role {
 
     public Role(String name) {
         this.name = name;
+    }
+
+    public static List<Role> getRoleList() {
+        return List.of(
+                new Role("USER"),
+                new Role("ADMIN")
+        );
     }
 }
