@@ -10,4 +10,9 @@ public class WebController {
     public String index() {
         return "index.html";
     }
+
+    @GetMapping("/people")
+    public String getAllUsers() {
+     return "people.html";
+    }
 }
