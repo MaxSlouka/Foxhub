@@ -36,14 +36,14 @@ public class ApiController {
         return ResponseEntity.ok().body(userService.findAll());
     }
 
-    @PutMapping("/users/{nickname}")
+    @PutMapping("/people/{nickname}")
     public ResponseEntity<?> updateUserByNickname(@RequestBody User user, @PathVariable String nickname) {
         Optional<User> maybeUser = userService.findByNickname(nickname);
 
         if (maybeUser.isEmpty()) {
             return ResponseEntity.notFound().build();
         }
-        userService.updateProfile(user, nickname);
+        userService.updateProfile(user);
 
         return ResponseEntity.ok().build();
     }
