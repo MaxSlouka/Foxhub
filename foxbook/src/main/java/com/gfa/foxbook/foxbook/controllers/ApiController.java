@@ -35,4 +35,16 @@ public class ApiController {
     public ResponseEntity<?> getAllUsers() {
         return ResponseEntity.ok().body(userService.findAll());
     }
+
+    @PutMapping("/people/{nickname}")
+    public ResponseEntity<?> updateUserByNickname(@RequestBody User user, @PathVariable String nickname) {
+        Optional<User> maybeUser = userService.findByNickname(nickname);
+
+        if (maybeUser.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+        userService.updateProfile(user);
+
+        return ResponseEntity.ok().build();
+    }
 }
