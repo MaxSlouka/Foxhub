@@ -6,11 +6,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class WebController {
 
- @GetMapping("/")
+    @GetMapping("/")
     public String index() {
         return "index.html";
     }
-
 
     @GetMapping("registration")
     public String registration() {
@@ -19,6 +18,6 @@ public class WebController {
 
     @GetMapping("/people")
     public String getAllUsers() {
-     return "people.html";
+        return "people.html";
     }
 }
