@@ -1,21 +1,24 @@
 nav {
-    display: flex;
-    text-align: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
     background-color: rgb(67, 183, 122);
-    height: 30px;
+    height: 15px;
+    display: flex;
     align-items: center;
     justify-content: center;
-
+    padding: 1rem;
 }
 
-a {
+nav a {
     padding: 20px 16px;
     text-decoration: none;
     font-size: 17px;
     color: white;
 }
 
-img {
+nav img {
     display: block;
     margin-left: auto;
     margin-right: auto;
@@ -23,7 +26,7 @@ img {
     width: 10%;
 }
 
-a:hover {
+nav a:hover {
     color: rgb(217, 221, 220);
     border-radius: 50%;
 }

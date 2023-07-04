@@ -1,5 +1,11 @@
 document.addEventListener("DOMContentLoaded", () => {
-    const userId = 1; // need to be declared, or obtain the user ID from somewhere (or better - the username)
+    let userId;
+
+    const userIdInput = document.getElementById("userIdTest");
+
+    userIdInput.addEventListener("input", (event) => {
+        userId = event.target.value;
+    });
 
     function fetchUser(id) {
         const url = `/people/${id}`;
