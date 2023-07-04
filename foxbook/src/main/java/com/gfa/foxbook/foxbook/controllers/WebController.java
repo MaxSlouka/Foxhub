@@ -18,32 +18,32 @@ public class WebController {
 
     @GetMapping("")
     public String index() {
-        return "index";
+        return "index.html";
     }
 
     @GetMapping("login")
     public String login() {
-        return "login";
+        return "login.html";
     }
 
     @GetMapping("registration")
     public String registration() {
-        return "registration";
+        return "registration.html";
     }
 
     @GetMapping("main")
     public String main() {
-        return "main";
+        return "main.html";
     }
 
     @GetMapping("profile")
     public String profile() {
-        return "profile";
+        return "profile.html";
     }
 
     @GetMapping("people")
     public String getAllUsers() {
-        return "people";
+        return "people.html";
     }
 
     @GetMapping("person/{nickname}")
