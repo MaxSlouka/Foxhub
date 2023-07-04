@@ -3,29 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>People</title>
+    <link rel="stylesheet" href="login.css">
 </head>
-<style>
-    nav {
-        display: flex;
-        text-align: center;
-        background-color: rgb(67, 183, 122);
-        height: 30px;
-        align-items: center;
-        justify-content: center;
-    }
-
-    a {
-        padding: 20px 16px;
-        text-decoration: none;
-        font-size: 17px;
-        color: white;
-    }
-
-    a:hover{
-        color: rgb(217, 221, 220);
-        border-radius: 50%;
-    }
-</style>
 <body>
 <nav class="main-nav">
     <a href="">Profile</a>
@@ -36,16 +15,6 @@
 <h3>People: </h3>
 <ul class="list-of-people">
 </ul>
-<script>
-    fetch('/api/people')
-        .then(response => response.json())
-        .then(data => {
-            data.forEach(person => {
-                const li = document.createElement('li');
-                li.innerHTML = `${person.firstName} ${person.lastName} (${person.email})`;
-                document.querySelector('.list-of-people').appendChild(li);
-            });
-        });
-</script>
+<script src="people.js"></script>
 </body>
 </html>
