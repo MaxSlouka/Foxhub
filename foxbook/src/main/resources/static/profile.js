@@ -43,9 +43,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
         ageElement.textContent = user.yearOfBirth;
         locationElement.textContent = user.countryResidence;
-        telephoneElement.textContent = user.telephone; // need to be set up in User @Entity (now it's absent)
+        telephoneElement.textContent = user.telephone;
         emailElement.textContent = user.email;
-        aboutContentElement.textContent = user.about; // need to be set up in User @Entity (now it's absent)
+        aboutContentElement.textContent = user.about;
 
         skillsElement.innerHTML = "";
 
