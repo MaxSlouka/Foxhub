@@ -1,6 +1,5 @@
 package com.gfa.foxbook.foxbook.controllers;
 
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
@@ -16,6 +15,7 @@ public class WebController {
     @GetMapping("registration")
     public String registration() {
         return "registration.html";
+    }
 
     @GetMapping("/people")
     public String getAllUsers() {
