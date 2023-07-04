@@ -31,6 +31,11 @@ public class WebController {
         return "registration";
     }
 
+    @GetMapping("main")
+    public String main() {
+        return "main";
+    }
+
     @GetMapping("profile")
     public String profile() {
         return "profile";
