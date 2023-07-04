@@ -1,6 +1,6 @@
 package com.gfa.foxbook.foxbook.services;
 
-import org.springframework.security.core.userdetails.User;
+import com.gfa.foxbook.foxbook.models.User;
 
 import java.util.Optional;
 import java.util.List;

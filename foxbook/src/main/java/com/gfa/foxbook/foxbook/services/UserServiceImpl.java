@@ -1,8 +1,8 @@
 package com.gfa.foxbook.foxbook.services;
 
+import com.gfa.foxbook.foxbook.models.User;
 import com.gfa.foxbook.foxbook.repositories.UserRepository;
 import lombok.AllArgsConstructor;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
