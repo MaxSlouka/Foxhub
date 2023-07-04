@@ -20,16 +20,15 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @NotNull
     private String firstName;
-    @NotNull
     private String lastName;
-    @Column(unique = true)
     private String nickname;
     @NotNull
     @Column(unique = true)
     @Email
     private String email;
+    private int telephone;
+    private String about;
     private int yearOfBirth;
     @NotNull
     private String password;
