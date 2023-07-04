@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Data
 @Entity
 @NoArgsConstructor
@@ -15,4 +17,19 @@ public class Technology {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String name;
+
+    public static List<String> getTechnologyList() {
+        return List.of(
+                "Java",
+                "Angular",
+                "Python",
+                "React",
+                "Node.js",
+                "Ruby",
+                "C++",
+                "HTML",
+                "CSS",
+                "JavaScript"
+        );
+    }
 }
