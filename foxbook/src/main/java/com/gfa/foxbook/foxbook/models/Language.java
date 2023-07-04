@@ -5,7 +5,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Arrays;
 import java.util.List;
 
 @Data
@@ -21,7 +20,8 @@ public class Language {
 
     public Language(String name) {
         this.name = name;
-   
+    }
+
     public static List<Language> getLanguageList() {
         return List.of(
                 new Language("Italian"),
@@ -107,10 +107,3 @@ public class Language {
         );
     }
 }
-
-
-
-
-
-
-
