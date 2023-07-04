@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class WebController {
 
- @GetMapping("/")
+    @GetMapping("/")
     public String index() {
         return "index.html";
     }
@@ -17,8 +17,8 @@ public class WebController {
     public String registration() {
         return "registration.html";
 
-    @GetMapping("/people")
-    public String getAllUsers() {
-     return "people.html";
+        @GetMapping("/people")
+        public String getAllUsers () {
+            return "people.html";
+        }
     }
-}
