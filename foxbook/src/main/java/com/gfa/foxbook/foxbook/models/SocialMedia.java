@@ -19,13 +19,18 @@ public class SocialMedia {
     private String name;
     private String url;
 
+    public SocialMedia(String gitHub, String url) {
+        this.name = gitHub;
+        this.url = url;
+    }
+
     public static List<SocialMedia> getSocialMediaList() {
         return List.of(
-                new SocialMedia(1, "GitHub", "https://github.com"),
-                new SocialMedia(2, "Facebook", "https://facebook.com"),
-                new SocialMedia(3, "Instagram", "https://instagram.com"),
-                new SocialMedia(4, "LinkedIn", "https://linkedin.com"),
-                new SocialMedia(5, "Twitter", "https://twitter.com")
+                new SocialMedia("GitHub", "https://github.com"),
+                new SocialMedia("Facebook", "https://facebook.com"),
+                new SocialMedia("Instagram", "https://instagram.com"),
+                new SocialMedia("LinkedIn", "https://linkedin.com"),
+                new SocialMedia("Twitter", "https://twitter.com")
         );
     }
 }
