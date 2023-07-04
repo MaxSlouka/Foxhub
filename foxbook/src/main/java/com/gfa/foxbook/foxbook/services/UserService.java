@@ -11,4 +11,8 @@ public interface UserService {
     void delete(User user);
 
     List<User> findAll();
+
+    Optional<User> findByNickname(String nickname);
+
+    User updateProfile(User user, String nickname);
 }

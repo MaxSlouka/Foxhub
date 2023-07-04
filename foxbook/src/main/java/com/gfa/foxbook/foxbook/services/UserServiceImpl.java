@@ -29,4 +29,14 @@ public class UserServiceImpl implements UserService {
     public List<User> findAll() {
         return userRepository.findAll();
     }
+
+    @Override
+    public Optional<User> findByNickname(String nickname) {
+        return userRepository.findByNickname(nickname);
+    }
+
+    @Override
+    public User updateProfile(User user, String nickname) {
+        return userRepository.save(user);
+    }
 }
