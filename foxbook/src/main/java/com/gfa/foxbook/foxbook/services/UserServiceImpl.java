@@ -39,4 +39,9 @@ public class UserServiceImpl implements UserService {
     public User updateProfile(User user) {
         return userRepository.save(user);
     }
+
+    @Override
+    public String accessProfileUrl(User user) {
+        return user.getProfileUrl();
+    }
 }
