@@ -11,7 +11,7 @@ public class WebController {
         return "index.html";
     }
 
-    @GetMapping("registration")
+    @GetMapping("/registration")
     public String registration() {
         return "registration.html";
     }
