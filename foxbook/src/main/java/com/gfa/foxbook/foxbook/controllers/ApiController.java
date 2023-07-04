@@ -15,16 +15,11 @@ public class ApiController {
 
     private final UserService userService;
 
-    public ApiController(UserService userService) {
-        this.userService = userService;
-    }
-
     @GetMapping("/people/{id}")
     public ResponseEntity<?> personDetails(@PathVariable Long id) {
         Optional<User> user = userService.findById(id);
         return ResponseEntity.ok().body(user);
     }
-
 
     @DeleteMapping("/people/{id}")
     public ResponseEntity<?> deletePerson(@PathVariable Long id) {
@@ -34,11 +29,10 @@ public class ApiController {
         }
         userService.delete(user.get());
         return ResponseEntity.status(204).build();
-
+    }
 
     @GetMapping("/people")
     public ResponseEntity<?> getAllUsers() {
         return ResponseEntity.ok().body(userService.findAll());
-
     }
 }

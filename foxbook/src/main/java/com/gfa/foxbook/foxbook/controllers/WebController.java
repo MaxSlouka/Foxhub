@@ -1,24 +1,23 @@
 package com.gfa.foxbook.foxbook.controllers;
 
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class WebController {
 
- @GetMapping("/")
+    @GetMapping("/")
     public String index() {
         return "index.html";
     }
 
-
-    @GetMapping("registration")
+    @GetMapping("/registration")
     public String registration() {
         return "registration.html";
+    }
 
     @GetMapping("/people")
     public String getAllUsers() {
-     return "people.html";
+        return "people.html";
     }
 }
