@@ -14,5 +14,5 @@ public interface UserService {
 
     Optional<User> findByNickname(String nickname);
 
-    User updateProfile(User user, String nickname);
+    User updateProfile(User user);
 }

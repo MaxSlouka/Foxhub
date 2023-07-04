@@ -36,7 +36,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User updateProfile(User user, String nickname) {
+    public User updateProfile(User user) {
         return userRepository.save(user);
     }
 }
