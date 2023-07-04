@@ -1,20 +1,23 @@
 .main-main {
-    width: 70%;
+    width: auto;
     height: 100%;
     grid-area: body;
+    align-items: center;
+    justify-self: center;
 }
 
 .main-nav {
     display: flex;
     flex-direction: row;
     grid-area: nav;
+    justify-self: center;
 }
 
 .main-aside {
     grid-area: aside;
     display: flex;
     flex-direction: column;
-    width: 10%;
+    width: auto;
     height: 100%;
 }
 
