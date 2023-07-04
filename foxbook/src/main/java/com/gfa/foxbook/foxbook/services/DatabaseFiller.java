@@ -1,8 +1,7 @@
 package com.gfa.foxbook.foxbook.services;
 
 import com.gfa.foxbook.foxbook.models.*;
-import com.gfa.foxbook.foxbook.repositories.RoleRepository;
-import com.gfa.foxbook.foxbook.repositories.UserRepository;
+import com.gfa.foxbook.foxbook.repositories.*;
 import com.github.javafaker.Faker;
 import lombok.AllArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
@@ -18,6 +17,9 @@ public class DatabaseFiller implements CommandLineRunner {
 
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
+    private final SocialMediaRepository socialMediaRepository;
+    private final TechnologyRepository technologyRepository;
+    private final LanguageRepository languageRepository;
 
     @Override
     public void run(String... args) {
@@ -51,6 +53,18 @@ public class DatabaseFiller implements CommandLineRunner {
 //        userRepository.saveAll(users);
         if(roleRepository.findAll().isEmpty()){
             roleRepository.saveAll(Role.getRoleList());
+        }
+
+        if(socialMediaRepository.findAll().isEmpty()){
+            socialMediaRepository.saveAll(SocialMedia.getSocialMediaList());
+        }
+
+        if(technologyRepository.findAll().isEmpty()){
+            technologyRepository.saveAll(Technology.getTechnologyList());
+        }
+
+        if(languageRepository.findAll().isEmpty()){
+            languageRepository.saveAll(Language.getLanguageList());
         }
 //
 //    }

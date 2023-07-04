@@ -19,7 +19,7 @@ public class Language {
     private long id;
     private String name;
 
-    List<String> spokenLanguages() {
+    public static List<String> getLanguageList() {
         return List.of(
         "Italian", "Persian (Farsi)", "Thai", "Gujarati", "Polish", "Ukrainian", "Malayalam", "Kannada", "Oriya (Odia)",
                 "Burmese", "Hakka", "Bhojpuri", "Tagalog", "Yoruba", "Maithili", "Uzbek", "Sindhi", "Amharic", "Fula",
