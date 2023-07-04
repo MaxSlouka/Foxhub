@@ -38,15 +38,18 @@ public class SecurityConfig {
                 .authorizeHttpRequests(
                         (authorize) -> authorize
                                 .requestMatchers(HttpMethod.POST,"api/v1/auth/**").permitAll()
+                                .requestMatchers(HttpMethod.GET,"/").permitAll()
+                                .requestMatchers(HttpMethod.GET,"/registration").permitAll()
+                                .requestMatchers(HttpMethod.GET,"/people").permitAll()
+                                .requestMatchers(HttpMethod.GET,"api/v1/people/{id}").permitAll()
+                                .requestMatchers(HttpMethod.GET,"api/v1/people").permitAll()
+                                .requestMatchers(HttpMethod.DELETE,"/people/{id}").permitAll()
                                 .anyRequest().authenticated()
                 )
                 .httpBasic(Customizer.withDefaults());
         http.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
-
         return http.build();
     }
-
-
     @Bean
     public AuthenticationManager authenticationManager(
             AuthenticationConfiguration configuration
