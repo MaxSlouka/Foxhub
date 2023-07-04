@@ -9,6 +9,7 @@ import com.gfa.foxbook.foxbook.models.dtos.security.RegisterDto;
 import com.gfa.foxbook.foxbook.security.JWTGenerator;
 import com.gfa.foxbook.foxbook.repositories.RoleRepository;
 import com.gfa.foxbook.foxbook.repositories.UserRepository;
+import com.gfa.foxbook.foxbook.services.SecurityService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -28,17 +29,14 @@ import java.util.Collections;
 @RequiredArgsConstructor
 public class AuthController {
     private final AuthenticationManager authenticationManager;
-    private final UserRepository userRepository;
-    private final RoleRepository roleRepository;
-    private final PasswordEncoder passwordEncoder;
     private final JWTGenerator jwtGenerator;
+    private final SecurityService securityService;
 
 
     @PostMapping("login")
     public ResponseEntity<AuthResponseDTO> login(@RequestBody LoginDto loginDto) {
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(loginDto.getEmail(), loginDto.getPassword()));
-
         SecurityContextHolder.getContext().setAuthentication(authentication);
         String token = jwtGenerator.generateToken(authentication);
 
@@ -47,16 +45,10 @@ public class AuthController {
 
     @PostMapping("register")
     public ResponseEntity<String> register(@RequestBody RegisterDto registerDto) {
-        if (userRepository.existsByEmail(registerDto.getEmail())) {
+        if (securityService.userExistsByEmail(registerDto.getEmail())) {
             return ResponseEntity.badRequest().body("Email already registered");
         }
-        User user = new User();
-        user.setEmail(registerDto.getEmail());
-        user.setPassword(passwordEncoder.encode(registerDto.getPassword()));
-
-        Role roles = roleRepository.findByName("USER").get();
-        user.setRoles(Collections.singletonList(roles));
-        userRepository.save(user);
+        securityService.registerUser(registerDto);
         return ResponseEntity.ok("User registered successfully");
     }
 }
