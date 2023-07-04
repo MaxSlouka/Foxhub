@@ -64,7 +64,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     function setupDeleteButton(username) {
-        const deleteButton = document.querySelector("button[type='submit']");
+        const deleteButton = document.querySelector(".delete-btn");
 
         deleteButton.addEventListener("click", () => {
             deleteUser(username);
