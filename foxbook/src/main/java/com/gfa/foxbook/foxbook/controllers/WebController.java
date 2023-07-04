@@ -21,6 +21,11 @@ public class WebController {
         return "registration.html";
     }
 
+    @GetMapping("/profile")
+    public String profil() {
+        return "profile.html";
+    }
+
     @GetMapping("/people")
     public String getAllUsers() {
         return "people.html";
