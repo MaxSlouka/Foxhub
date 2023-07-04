@@ -14,5 +14,4 @@ public interface UserService {
     void delete(User user);
 
     List<User> findAll();
-
 }

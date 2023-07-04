@@ -1,4 +1,5 @@
 package com.gfa.foxbook.foxbook.controllers;
+
 import com.gfa.foxbook.foxbook.services.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -36,7 +37,7 @@ public class ApiController {
 
 
     @GetMapping("/people")
-    public ResponseEntity<?> getAllUsers(){
+    public ResponseEntity<?> getAllUsers() {
         return ResponseEntity.ok().body(userService.findAll());
 
     }

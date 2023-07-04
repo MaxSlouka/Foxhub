@@ -1,0 +1,36 @@
+.main-main {
+    width: auto;
+    height: 100%;
+    grid-area: body;
+    align-items: center;
+    justify-self: center;
+}
+
+.main-nav {
+    display: flex;
+    flex-direction: row;
+    grid-area: nav;
+    justify-self: center;
+}
+
+.main-aside {
+    grid-area: aside;
+    display: flex;
+    flex-direction: column;
+    width: auto;
+    height: 100%;
+}
+
+.main-body {
+    display: grid;
+    grid-template-areas:
+    "nav nav nav"
+    "body body aside";
+    grid-template-rows: auto 1fr;
+    grid-gap: 10px;
+}
+
+body {
+    margin: 50px;
+    padding: 50px;
+}
