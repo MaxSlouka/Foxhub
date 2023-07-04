@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-    const userId = 1; // need to be declared how do we get the user id???
+    const userId = 1; // need to be declared, or obtain the user ID from somewhere (or better - the username)
 
     function fetchUser(id) {
         const url = `/people/${id}`;
@@ -14,6 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
             })
             .then((user) => {
                 fillUserInfo(user);
+                setupDeleteButton(user.nickname);
             })
             .catch((error) => {
                 console.error("Error:", error);
@@ -54,6 +55,35 @@ document.addEventListener("DOMContentLoaded", () => {
             skill.textContent = technology.name;
             skillsElement.appendChild(skill);
         });
+    }
+
+    function setupDeleteButton(username) {
+        const deleteButton = document.querySelector("button[type='submit']");
+
+        deleteButton.addEventListener("click", () => {
+            deleteUser(username);
+        });
+    }
+
+    function deleteUser(username) { // need to declare if we work with id or username
+        const url = `/delete/${username}`; // need to declare the endpoint
+
+        fetch(url, {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json",
+            },
+        })
+            .then((response) => {
+                if (response.ok) {
+                    console.log("User deleted successfully.");
+                } else {
+                    throw new Error("Error occurred while deleting user.");
+                }
+            })
+            .catch((error) => {
+                console.error("Error:", error);
+            });
     }
 
     fetchUser(userId);
