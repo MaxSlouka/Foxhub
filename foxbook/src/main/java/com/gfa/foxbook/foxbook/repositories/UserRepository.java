@@ -1,7 +1,10 @@
 package com.gfa.foxbook.foxbook.repositories;
 
-import org.springframework.data.jpa.repository.JpaRepository;
 import com.gfa.foxbook.foxbook.models.User;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.gfa.foxbook.foxbook.models.User;
+
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
