@@ -1,8 +1,7 @@
 package com.gfa.foxbook.foxbook.services;
 
 import com.gfa.foxbook.foxbook.models.*;
-import com.gfa.foxbook.foxbook.repositories.RoleRepository;
-import com.gfa.foxbook.foxbook.repositories.UserRepository;
+import com.gfa.foxbook.foxbook.repositories.*;
 import com.github.javafaker.Faker;
 import lombok.AllArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
@@ -18,16 +17,15 @@ public class DatabaseFiller implements CommandLineRunner {
 
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
-
-    List<Role> roles;
+    private final SocialMediaRepository socialMediaRepository;
+    private final TechnologyRepository technologyRepository;
+    private final LanguageRepository languageRepository;
 
     @Override
     public void run(String... args) {
         Faker faker = new Faker();
         List<User> users = new ArrayList<>();
 
-        roles.add(new Role("ADMIN"));
-        roles.add(new Role("USER"));
 
 //        for (int i = 0; i < 20; i++) {
 //            User user = new User();
@@ -53,7 +51,21 @@ public class DatabaseFiller implements CommandLineRunner {
 //        }
 //
 //        userRepository.saveAll(users);
-        roleRepository.saveAll(roles);
+        if(roleRepository.findAll().isEmpty()){
+            roleRepository.saveAll(Role.getRoleList());
+        }
+
+        if(socialMediaRepository.findAll().isEmpty()){
+            socialMediaRepository.saveAll(SocialMedia.getSocialMediaList());
+        }
+
+        if(technologyRepository.findAll().isEmpty()){
+            technologyRepository.saveAll(Technology.getTechnologyList());
+        }
+
+        if(languageRepository.findAll().isEmpty()){
+            languageRepository.saveAll(Language.getLanguageList());
+        }
 //
 //    }
 //

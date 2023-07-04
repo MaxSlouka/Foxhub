@@ -21,9 +21,8 @@ public class Language {
 
     public Language(String name) {
         this.name = name;
-    }
-
-    public static List<Language> spokenLanguages() {
+   
+    public static List<Language> getLanguageList() {
         return List.of(
                 new Language("Italian"),
                 new Language("Persian (Farsi)"),
