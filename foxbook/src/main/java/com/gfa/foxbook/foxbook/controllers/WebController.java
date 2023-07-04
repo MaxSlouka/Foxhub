@@ -12,8 +12,13 @@ public class WebController {
         return "index.html";
     }
 
+
     @GetMapping("registration")
     public String registration() {
         return "registration.html";
+
+    @GetMapping("/people")
+    public String getAllUsers() {
+     return "people.html";
     }
 }
