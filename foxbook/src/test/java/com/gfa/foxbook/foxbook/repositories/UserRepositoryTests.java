@@ -121,4 +121,25 @@ public class UserRepositoryTests {
 
         Assertions.assertThat(userSave).isNotNull();
     }
+
+    @Test
+    public void UserRepository_UpdateUser_ReturnUserNotNull() {
+        User user = User.builder()
+                .firstName("John")
+                .lastName("Doe")
+                .email("john@example.com")
+                .password("qwe123")
+                .build();
+
+        userRepository.save(user);
+
+        User userSave = userRepository.findById(user.getId()).get();
+        userSave.setFirstName("Joseph");
+        userSave.setLastName("Coolio");
+
+        User updatedUser = userRepository.save(userSave);
+
+        Assertions.assertThat(updatedUser.getFirstName()).isNotNull();
+        Assertions.assertThat(updatedUser.getLastName()).isNotNull();
+    }
 }
