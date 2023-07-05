@@ -37,14 +37,8 @@ public class SecurityConfig {
                                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(
                         (authorize) -> authorize
-                                .requestMatchers(HttpMethod.POST,"api/v1/auth/**").permitAll()
-                                .requestMatchers(HttpMethod.GET,"api/v1/hello/**").permitAll()
-                                .requestMatchers(HttpMethod.GET,"/**").permitAll()
-                                .requestMatchers(HttpMethod.GET,"registration").permitAll()
-                                .requestMatchers(HttpMethod.GET,"people").permitAll()
-                                .requestMatchers(HttpMethod.GET,"api/v1/people/{id}").permitAll()
-                                .requestMatchers(HttpMethod.GET,"api/v1/people").permitAll()
-                                .requestMatchers(HttpMethod.DELETE,"/people/{id}").permitAll()
+                                .requestMatchers("/main").hasAnyRole("USER","ADMIN")
+                                .requestMatchers("/**").permitAll()
                                 .anyRequest().authenticated()
                 )
                 .httpBasic(Customizer.withDefaults());
