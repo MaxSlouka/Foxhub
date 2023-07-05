@@ -38,7 +38,7 @@ public class WebControllerTests {
     public void mainEndpoint_ReturnsMainHtmlView() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders.get("/main"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.view().name("main.html"));
+                .andExpect(MockMvcResultMatchers.view().name("mainpage.html"));
     }
 
     @Test

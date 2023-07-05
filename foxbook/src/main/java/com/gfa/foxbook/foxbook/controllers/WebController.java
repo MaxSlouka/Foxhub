@@ -35,9 +35,9 @@ public class WebController {
         return "registration.html";
     }
 
-    @GetMapping("main")
+    @GetMapping("mainpage")
     public String main() {
-        return "main.html";
+        return "mainpage.html";
     }
 
     @GetMapping("profile")
