@@ -3,6 +3,7 @@ package com.gfa.foxbook.foxbook.controllers;
 
 import com.gfa.foxbook.foxbook.models.Role;
 import com.gfa.foxbook.foxbook.models.User;
+import com.gfa.foxbook.foxbook.models.dtos.ResponseDTO;
 import com.gfa.foxbook.foxbook.models.dtos.security.AuthResponseDTO;
 import com.gfa.foxbook.foxbook.models.dtos.security.LoginDto;
 import com.gfa.foxbook.foxbook.models.dtos.security.RegisterDto;
@@ -44,11 +45,11 @@ public class AuthController {
     }
 
     @PostMapping("register")
-    public ResponseEntity<String> register(@RequestBody RegisterDto registerDto) {
+    public ResponseEntity<?> register(@RequestBody RegisterDto registerDto) {
         if (securityService.userExistsByEmail(registerDto.getEmail())) {
             return ResponseEntity.badRequest().body("Email already registered");
         }
         securityService.registerUser(registerDto);
-        return ResponseEntity.ok("User registered successfully");
+        return ResponseEntity.ok(new ResponseDTO("User registered successfully"));
     }
 }

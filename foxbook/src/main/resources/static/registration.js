@@ -1,37 +1,33 @@
-document.addEventListener("DOMContentLoaded", () => {
+const newPostForm = document.querySelector("form");
 
-    const newPostForm = document.querySelector("form");
-    const message = document.querySelector(".message");
-    message.textContent = "";
+newPostForm.addEventListener("submit", async (event) => {
+    event.preventDefault();
 
-    newPostForm.addEventListener("submit", (event) => {
-        event.preventDefault();
+    const formData = new FormData(newPostForm);
+    const data = Object.fromEntries(formData);
 
-        const formData = new FormData(event.target);
-        const task = Object.fromEntries(formData);
-
-        fetch("/registration", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(task)
+    await fetch("/api/v1/auth/register", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    })
+        .then(response => {
+            if (response.ok) {
+                console.log("Response status: " + response.status);
+                return response.json();
+            } else {
+                throw new Error("Email already exists!");
+            }
         })
-            .then(response => {
-                if (response.ok) {
-                    return response.json();
-                } else {
-                    throw new Error("Error occurred!");
-                }
-            })
-            .then(data => {
-                console.log("Provided data: ");
-                console.log(data);
-            })
-            .catch(error => {
-                console.error("Error:", error);
-            });
+        .then(data => {
+            console.log("Provided data: ");
+            console.log(data);
+        })
+        .catch(error => {
+            console.error("Error:", error);
+        });
 
-        newPostForm.reset();
-    });
+    newPostForm.reset();
 });
