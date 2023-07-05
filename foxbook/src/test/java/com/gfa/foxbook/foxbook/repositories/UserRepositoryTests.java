@@ -32,4 +32,29 @@ public class UserRepositoryTests {
         Assertions.assertThat(savedUser).isNotNull();
         Assertions.assertThat(savedUser.getId()).isGreaterThan(0);
     }
+
+    @Test
+    public void UserRepository_GetAll_ReturnMoreThanOneUser() {
+        User user = User.builder()
+                .firstName("John")
+                .lastName("Doe")
+                .email("john@example.com")
+                .password("qwe123")
+                .build();
+
+        User user2 = User.builder()
+                .firstName("Jane")
+                .lastName("Doe")
+                .email("jane@example.com")
+                .password("qwe123")
+                .build();
+
+        userRepository.save(user);
+        userRepository.save(user2);
+
+        List<User> userList = userRepository.findAll();
+
+        Assertions.assertThat(userList).isNotNull();
+        Assertions.assertThat(userList.size()).isEqualTo(2);
+    }
 }
