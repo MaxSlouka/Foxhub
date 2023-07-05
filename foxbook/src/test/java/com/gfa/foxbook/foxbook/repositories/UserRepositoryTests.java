@@ -8,6 +8,7 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 import java.util.List;
+import java.util.Optional;
 
 @DataJpaTest // Spring Boot should configure the test environment and provide an in-memory database for testing purposes.
 @AutoConfigureTestDatabase // should automatically configure the test database based on project's database configuration
@@ -141,5 +142,22 @@ public class UserRepositoryTests {
 
         Assertions.assertThat(updatedUser.getFirstName()).isNotNull();
         Assertions.assertThat(updatedUser.getLastName()).isNotNull();
+    }
+
+    @Test
+    public void UserRepository_UserDelete_ReturnUserIsEmpty() {
+        User user = User.builder()
+                .firstName("John")
+                .lastName("Doe")
+                .email("john@example.com")
+                .password("qwe123")
+                .build();
+
+        userRepository.save(user);
+
+        userRepository.deleteById(user.getId());
+        Optional<User> userReturn = userRepository.findById(user.getId());
+
+        Assertions.assertThat(userReturn).isEmpty();
     }
 }
