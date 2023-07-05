@@ -16,6 +16,10 @@ import java.util.Optional;
 public class WebController {
     private UserService userService;
 
+    public WebController(UserService userService) {
+        this.userService = userService;
+    }
+
     @GetMapping("")
     public String index() {
         return "index.html";
@@ -31,9 +35,9 @@ public class WebController {
         return "registration.html";
     }
 
-    @GetMapping("main")
+    @GetMapping("mainpage")
     public String main() {
-        return "main.html";
+        return "mainpage.html";
     }
 
     @GetMapping("profile")

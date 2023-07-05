@@ -3,6 +3,7 @@ package com.gfa.foxbook.foxbook.services;
 import com.gfa.foxbook.foxbook.models.User;
 import com.gfa.foxbook.foxbook.repositories.UserRepository;
 import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -11,6 +12,7 @@ import java.util.List;
 
 @Service
 @AllArgsConstructor
+@NoArgsConstructor(force = true)
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
