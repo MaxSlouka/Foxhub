@@ -75,7 +75,7 @@ public class UserRepositoryTests {
     }
 
     @Test
-    public void UserRepository_FindByEmail_ReturnPokemonNotNull() {
+    public void UserRepository_FindByEmail_ReturnUserNotNull() {
         User user = User.builder()
                 .firstName("John")
                 .lastName("Doe")
@@ -91,7 +91,7 @@ public class UserRepositoryTests {
     }
 
     @Test
-    public void UserRepository_ExistsByEmail_ReturnPokemonNotNull() {
+    public void UserRepository_ExistsByEmail_ReturnUserNotNull() {
         User user = User.builder()
                 .firstName("John")
                 .lastName("Doe")
@@ -104,5 +104,21 @@ public class UserRepositoryTests {
         boolean existsByEmail = userRepository.existsByEmail(user.getEmail());
 
         Assertions.assertThat(existsByEmail).isTrue();
+    }
+
+    @Test
+    public void UserRepository_FindByNickname_ReturnUserNotNull() {
+        User user = User.builder()
+                .firstName("John")
+                .lastName("Doe")
+                .email("john@example.com")
+                .password("qwe123")
+                .build();
+
+        userRepository.save(user);
+
+        User userSave = userRepository.findByEmail(user.getNickname()).get();
+
+        Assertions.assertThat(userSave).isNotNull();
     }
 }
