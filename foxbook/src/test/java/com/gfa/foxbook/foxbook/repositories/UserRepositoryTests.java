@@ -118,7 +118,7 @@ public class UserRepositoryTests {
 
         userRepository.save(user);
 
-        User userSave = userRepository.findByEmail(user.getNickname()).get();
+        User userSave = userRepository.findByNickname(user.getNickname()).get();
 
         Assertions.assertThat(userSave).isNotNull();
     }
