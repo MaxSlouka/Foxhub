@@ -16,6 +16,10 @@ import java.util.Optional;
 public class WebController {
     private UserService userService;
 
+    public WebController(UserService userService) {
+        this.userService = userService;
+    }
+
     @GetMapping("")
     public String index() {
         return "index.html";
