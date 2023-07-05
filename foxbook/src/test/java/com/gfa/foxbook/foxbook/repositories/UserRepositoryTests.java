@@ -89,4 +89,20 @@ public class UserRepositoryTests {
 
         Assertions.assertThat(userSave).isNotNull();
     }
+
+    @Test
+    public void UserRepository_ExistsByEmail_ReturnPokemonNotNull() {
+        User user = User.builder()
+                .firstName("John")
+                .lastName("Doe")
+                .email("john@example.com")
+                .password("qwe123")
+                .build();
+
+        userRepository.save(user);
+
+        boolean existsByEmail = userRepository.existsByEmail(user.getEmail());
+
+        Assertions.assertThat(existsByEmail).isTrue();
+    }
 }
