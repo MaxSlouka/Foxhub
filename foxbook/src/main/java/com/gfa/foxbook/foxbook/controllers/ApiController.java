@@ -15,11 +15,16 @@ public class ApiController {
 
     private final UserService userService;
 
-    @GetMapping("/people/{id}")
+    @GetMapping("/person/{id}")
     public ResponseEntity<?> personDetails(@PathVariable Long id) {
-        Optional<User> user = userService.findById(id);
-        return ResponseEntity.ok().body(user);
+        Optional<User> optionalUser = userService.findById(id);
+        if (optionalUser.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+        User user = optionalUser.get();
+        return ResponseEntity.ok(user);
     }
+
 
     @DeleteMapping("/people/{id}")
     public ResponseEntity<?> deletePerson(@PathVariable Long id) {
