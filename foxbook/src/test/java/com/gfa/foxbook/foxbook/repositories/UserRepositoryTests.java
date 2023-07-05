@@ -57,4 +57,20 @@ public class UserRepositoryTests {
         Assertions.assertThat(userList).isNotNull();
         Assertions.assertThat(userList.size()).isEqualTo(2);
     }
+
+    @Test
+    public void UserRepository_FindById_ReturnUser() {
+        User user = User.builder()
+                .firstName("John")
+                .lastName("Doe")
+                .email("john@example.com")
+                .password("qwe123")
+                .build();
+
+        userRepository.save(user);
+
+        User userSave = userRepository.findById(user.getId()).get();
+
+        Assertions.assertThat(userSave).isNotNull();
+    }
 }
