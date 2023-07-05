@@ -61,4 +61,8 @@ public class User {
             joinColumns = {@JoinColumn(name = "users_id", referencedColumnName = "id")},
             inverseJoinColumns = {@JoinColumn(name = "languages_id", referencedColumnName = "id")})
     private List<Language> languages;
+
+    public User(long l, String userName) {
+
+    }
 }
