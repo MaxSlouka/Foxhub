@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
+import java.util.List;
 import java.util.Optional;
 
 @DataJpaTest
@@ -63,5 +64,18 @@ public class SocialMediaRepositoryTests {
 
         Optional<SocialMedia> optionalSocialMedia = socialMediaRepository.findById(savedSocialMedia.getId());
         Assertions.assertThat(optionalSocialMedia).isEmpty();
+    }
+
+    @Test
+    public void testGetAllSocialMedia() {
+        SocialMedia socialMedia1 = new SocialMedia("Test-Social-Media", "https://test-social-media.com");
+        SocialMedia socialMedia2 = new SocialMedia("Test-Second-Social-Media", "https://test-second-social-media.com");
+        socialMediaRepository.saveAll(List.of(socialMedia1, socialMedia2));
+
+        List<SocialMedia> allSocialMedia = socialMediaRepository.findAll();
+
+        Assertions.assertThat(allSocialMedia).isNotEmpty();
+        Assertions.assertThat(allSocialMedia.size()).isEqualTo(2);
+        Assertions.assertThat(allSocialMedia).contains(socialMedia1, socialMedia2);
     }
 }
