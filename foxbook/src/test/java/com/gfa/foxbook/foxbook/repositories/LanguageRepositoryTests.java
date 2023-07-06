@@ -35,4 +35,16 @@ public class LanguageRepositoryTests {
         Language foundLanguage = optionalLanguage.get();
         Assertions.assertThat(foundLanguage.getName()).isEqualTo("TEST_LANGUAGE");
     }
+
+    @Test
+    public void testUpdateLanguage() {
+        Language language = new Language("TEST_LANGUAGE");
+        Language savedLanguage = languageRepository.save(language);
+
+        savedLanguage.setName("UPDATED_LANGUAGE");
+        Language updatedLanguage = languageRepository.save(savedLanguage);
+
+        Assertions.assertThat(updatedLanguage.getId()).isEqualTo(savedLanguage.getId());
+        Assertions.assertThat(updatedLanguage.getName()).isEqualTo("UPDATED_LANGUAGE");
+    }
 }
