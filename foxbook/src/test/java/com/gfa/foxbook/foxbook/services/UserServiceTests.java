@@ -32,4 +32,14 @@ public class UserServiceTests {
         verify(userRepository, times(1)).findById(1L);
         verifyNoMoreInteractions(userRepository);
     }
+
+    @Test
+    public void testDelete() {
+        User user = new User();
+
+        userService.delete(user);
+
+        verify(userRepository, times(1)).delete(user);
+        verifyNoMoreInteractions(userRepository);
+    }
 }
