@@ -8,6 +8,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -40,6 +42,20 @@ public class UserServiceTests {
         userService.delete(user);
 
         verify(userRepository, times(1)).delete(user);
+        verifyNoMoreInteractions(userRepository);
+    }
+
+    @Test
+    public void testFindAll() {
+        User user1 = new User();
+        User user2 = new User();
+        List<User> users = Arrays.asList(user1, user2);
+        when(userRepository.findAll()).thenReturn(users);
+
+        List<User> result = userService.findAll();
+
+        assertThat(result).isEqualTo(users);
+        verify(userRepository, times(1)).findAll();
         verifyNoMoreInteractions(userRepository);
     }
 }
