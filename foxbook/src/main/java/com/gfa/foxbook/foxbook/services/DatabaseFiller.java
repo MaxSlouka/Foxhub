@@ -50,23 +50,23 @@ public class DatabaseFiller implements CommandLineRunner {
             users.add(user);
         }
 
-        userRepository.saveAll(users);
+//        userRepository.saveAll(users);
 
         if (roleRepository.findAll().isEmpty()) {
             roleRepository.saveAll(Role.getRoleList());
         }
 
-        if (socialMediaRepository.findAll().isEmpty()) {
-            socialMediaRepository.saveAll(SocialMedia.getSocialMediaList());
-        }
-
-        if (technologyRepository.findAll().isEmpty()) {
-            technologyRepository.saveAll(Technology.getTechnologyList());
-        }
-
-        if (languageRepository.findAll().isEmpty()) {
-            languageRepository.saveAll(Language.getLanguageList());
-        }
+//        if (socialMediaRepository.findAll().isEmpty()) {
+//            socialMediaRepository.saveAll(SocialMedia.getSocialMediaList());
+//        }
+//
+//        if (technologyRepository.findAll().isEmpty()) {
+//            technologyRepository.saveAll(Technology.getTechnologyList());
+//        }
+//
+//        if (languageRepository.findAll().isEmpty()) {
+//            languageRepository.saveAll(Language.getLanguageList());
+//        }
 
     }
 
