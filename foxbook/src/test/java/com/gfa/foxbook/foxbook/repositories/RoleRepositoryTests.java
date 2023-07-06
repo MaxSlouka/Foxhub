@@ -38,4 +38,16 @@ public class RoleRepositoryTests {
         Role foundRole = optionalRole.get();
         Assertions.assertThat(foundRole.getName()).isEqualTo("TEST_ROLE");
     }
+
+    @Test
+    public void testGetRole() {
+        Role role = new Role("TEST_ROLE");
+        Role savedRole = roleRepository.save(role);
+
+        Optional<Role> optionalRole = roleRepository.findById(savedRole.getId());
+
+        Assertions.assertThat(optionalRole).isPresent();
+        Role foundRole = optionalRole.get();
+        Assertions.assertThat(foundRole.getName()).isEqualTo("TEST_ROLE");
+    }
 }
