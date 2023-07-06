@@ -62,4 +62,15 @@ public class RoleRepositoryTests {
         Assertions.assertThat(updatedRole.getId()).isEqualTo(savedRole.getId());
         Assertions.assertThat(updatedRole.getName()).isEqualTo("UPDATED_ROLE");
     }
+
+    @Test
+    public void testDeleteRole() {
+        Role role = new Role("TEST_ROLE");
+        Role savedRole = roleRepository.save(role);
+
+        roleRepository.delete(savedRole);
+
+        Optional<Role> optionalRole = roleRepository.findById(savedRole.getId());
+        Assertions.assertThat(optionalRole).isEmpty();
+    }
 }
