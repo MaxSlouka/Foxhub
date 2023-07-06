@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
+import java.util.Optional;
+
 @DataJpaTest
 @AutoConfigureTestDatabase // need to fix the DB connection - tests always fail
 public class TechnologyRepositoryTests {
@@ -22,5 +24,17 @@ public class TechnologyRepositoryTests {
 
         Assertions.assertThat(savedTechnology.getId()).isNotNull();
         Assertions.assertThat(savedTechnology.getName()).isEqualTo("TestTechnology");
+    }
+
+    @Test
+    public void testGetTechnology() {
+        Technology technology = new Technology("TestTechnology");
+        Technology savedTechnology = technologyRepository.save(technology);
+
+        Optional<Technology> optionalTechnology = technologyRepository.findById(savedTechnology.getId());
+
+        Assertions.assertThat(optionalTechnology).isPresent();
+        Technology foundTechnology = optionalTechnology.get();
+        Assertions.assertThat(foundTechnology.getName()).isEqualTo("TestTechnology");
     }
 }
