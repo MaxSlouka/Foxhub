@@ -85,4 +85,14 @@ public class UserServiceTests {
         verify(userRepository, times(1)).save(user);
         verifyNoMoreInteractions(userRepository);
     }
+
+    @Test
+    public void testAccessProfileUrl() {
+        User user = new User();
+        user.setProfileUrl("https://example.com/profile");
+
+        String result = userService.accessProfileUrl(user);
+
+        assertThat(result).isEqualTo("https://example.com/profile");
+    }
 }
