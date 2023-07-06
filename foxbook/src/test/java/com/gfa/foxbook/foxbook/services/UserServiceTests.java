@@ -71,4 +71,18 @@ public class UserServiceTests {
         verify(userRepository, times(1)).findByNickname("john");
         verifyNoMoreInteractions(userRepository);
     }
+
+    @Test
+    public void testUpdateProfile() {
+        User user = new User();
+        user.setId(1L);
+
+        when(userRepository.save(user)).thenReturn(user);
+
+        User result = userService.updateProfile(user);
+
+        assertThat(result).isEqualTo(user);
+        verify(userRepository, times(1)).save(user);
+        verifyNoMoreInteractions(userRepository);
+    }
 }
