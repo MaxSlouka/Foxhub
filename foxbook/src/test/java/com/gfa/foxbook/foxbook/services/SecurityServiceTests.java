@@ -43,4 +43,24 @@ public class SecurityServiceTests {
         verify(userRepository, times(1)).existsByEmail("test@example.com");
         verifyNoMoreInteractions(userRepository);
     }
+
+    @Test
+    public void testRegisterUser() {
+        RegisterDto registerDto = new RegisterDto();
+        registerDto.setEmail("test@example.com");
+        registerDto.setPassword("password");
+
+        Role role = new Role();
+        role.setName("USER");
+        when(roleRepository.findByName("USER")).thenReturn(Optional.of(role));
+
+        when(passwordEncoder.encode("password")).thenReturn("encodedPassword");
+        when(userRepository.save(any(User.class))).thenReturn(new User());
+
+        securityService.registerUser(registerDto);
+
+        verify(roleRepository, times(1)).findByName("USER");
+        verify(userRepository, times(1)).save(any(User.class));
+        verifyNoMoreInteractions(roleRepository, userRepository);
+    }
 }
