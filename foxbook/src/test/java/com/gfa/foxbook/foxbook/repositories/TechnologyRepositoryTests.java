@@ -37,4 +37,16 @@ public class TechnologyRepositoryTests {
         Technology foundTechnology = optionalTechnology.get();
         Assertions.assertThat(foundTechnology.getName()).isEqualTo("TestTechnology");
     }
+
+    @Test
+    public void testUpdateTechnology() {
+        Technology technology = new Technology("TestTechnology");
+        Technology savedTechnology = technologyRepository.save(technology);
+
+        savedTechnology.setName("Updated TestTechnology");
+        Technology updatedTechnology = technologyRepository.save(savedTechnology);
+
+        Assertions.assertThat(updatedTechnology.getId()).isEqualTo(savedTechnology.getId());
+        Assertions.assertThat(updatedTechnology.getName()).isEqualTo("Updated TestTechnology");
+    }
 }
