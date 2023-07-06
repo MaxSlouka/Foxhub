@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
+import java.util.List;
 import java.util.Optional;
 
 @DataJpaTest
@@ -59,5 +60,16 @@ public class TechnologyRepositoryTests {
 
         Optional<Technology> optionalTechnology = technologyRepository.findById(savedTechnology.getId());
         Assertions.assertThat(optionalTechnology).isEmpty();
+    }
+
+    @Test
+    public void testGetAllTechnologies() {
+        List<Technology> technologies = Technology.getTechnologyList();
+        technologyRepository.saveAll(technologies);
+
+        List<Technology> allTechnologies = technologyRepository.findAll();
+
+        Assertions.assertThat(allTechnologies).isNotEmpty();
+        Assertions.assertThat(allTechnologies).containsExactlyInAnyOrderElementsOf(technologies);
     }
 }
