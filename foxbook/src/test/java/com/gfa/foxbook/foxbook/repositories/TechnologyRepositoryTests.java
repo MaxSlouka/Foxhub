@@ -49,4 +49,15 @@ public class TechnologyRepositoryTests {
         Assertions.assertThat(updatedTechnology.getId()).isEqualTo(savedTechnology.getId());
         Assertions.assertThat(updatedTechnology.getName()).isEqualTo("Updated TestTechnology");
     }
+
+    @Test
+    public void testDeleteTechnology() {
+        Technology technology = new Technology("TestTechnology");
+        Technology savedTechnology = technologyRepository.save(technology);
+
+        technologyRepository.delete(savedTechnology);
+
+        Optional<Technology> optionalTechnology = technologyRepository.findById(savedTechnology.getId());
+        Assertions.assertThat(optionalTechnology).isEmpty();
+    }
 }
