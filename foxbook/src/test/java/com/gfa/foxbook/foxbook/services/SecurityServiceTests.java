@@ -32,4 +32,15 @@ public class SecurityServiceTests {
     public void setUp() {
         MockitoAnnotations.openMocks(this);
     }
+
+    @Test
+    public void testUserExistsByEmail() {
+        when(userRepository.existsByEmail("test@example.com")).thenReturn(true);
+
+        boolean result = securityService.userExistsByEmail("test@example.com");
+
+        assertThat(result).isTrue();
+        verify(userRepository, times(1)).existsByEmail("test@example.com");
+        verifyNoMoreInteractions(userRepository);
+    }
 }
