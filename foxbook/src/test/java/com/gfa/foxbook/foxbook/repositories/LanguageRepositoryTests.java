@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 @DataJpaTest
-@AutoConfigureTestDatabase
+@AutoConfigureTestDatabase // there is problem with DB connection - need to fix this
 public class LanguageRepositoryTests {
 
     @Autowired
