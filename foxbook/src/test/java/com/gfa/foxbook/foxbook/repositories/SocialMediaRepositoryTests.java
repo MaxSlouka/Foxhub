@@ -42,7 +42,7 @@ public class SocialMediaRepositoryTests {
 
     @Test
     public void testUpdateSocialMedia() {
-        SocialMedia socialMedia = new SocialMedia("Test-Social-Media", "https://github.com");
+        SocialMedia socialMedia = new SocialMedia("Test-Social-Media", "https://test-social-media.com");
         SocialMedia savedSocialMedia = socialMediaRepository.save(socialMedia);
 
         savedSocialMedia.setName("Updated Test-Social-Media");
@@ -52,5 +52,16 @@ public class SocialMediaRepositoryTests {
         Assertions.assertThat(updatedSocialMedia.getId()).isEqualTo(savedSocialMedia.getId());
         Assertions.assertThat(updatedSocialMedia.getName()).isEqualTo("Updated Test-Social-Media");
         Assertions.assertThat(updatedSocialMedia.getUrl()).isEqualTo("https://test-social-media.com/updated");
+    }
+
+    @Test
+    public void testDeleteSocialMedia() {
+        SocialMedia socialMedia = new SocialMedia("Test-Social-Media", "https://test-social-media.com");
+        SocialMedia savedSocialMedia = socialMediaRepository.save(socialMedia);
+
+        socialMediaRepository.delete(savedSocialMedia);
+
+        Optional<SocialMedia> optionalSocialMedia = socialMediaRepository.findById(savedSocialMedia.getId());
+        Assertions.assertThat(optionalSocialMedia).isEmpty();
     }
 }
