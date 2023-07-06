@@ -1,7 +1,6 @@
 package com.gfa.foxbook.foxbook.repositories;
 
 import com.gfa.foxbook.foxbook.models.Role;
-import com.gfa.foxbook.foxbook.models.User;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +10,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import java.util.Optional;
 
 @DataJpaTest
-@AutoConfigureTestDatabase
+@AutoConfigureTestDatabase // there is a problem with DB connection, tests always fail - need to handle this
 public class RoleRepositoryTests {
 
     @Autowired
