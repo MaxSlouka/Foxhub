@@ -39,4 +39,18 @@ public class SocialMediaRepositoryTests {
         Assertions.assertThat(foundSocialMedia.getName()).isEqualTo("Test-Social-Media");
         Assertions.assertThat(foundSocialMedia.getUrl()).isEqualTo("https://test-social-media.com");
     }
+
+    @Test
+    public void testUpdateSocialMedia() {
+        SocialMedia socialMedia = new SocialMedia("Test-Social-Media", "https://github.com");
+        SocialMedia savedSocialMedia = socialMediaRepository.save(socialMedia);
+
+        savedSocialMedia.setName("Updated Test-Social-Media");
+        savedSocialMedia.setUrl("https://test-social-media.com/updated");
+        SocialMedia updatedSocialMedia = socialMediaRepository.save(savedSocialMedia);
+
+        Assertions.assertThat(updatedSocialMedia.getId()).isEqualTo(savedSocialMedia.getId());
+        Assertions.assertThat(updatedSocialMedia.getName()).isEqualTo("Updated Test-Social-Media");
+        Assertions.assertThat(updatedSocialMedia.getUrl()).isEqualTo("https://test-social-media.com/updated");
+    }
 }
