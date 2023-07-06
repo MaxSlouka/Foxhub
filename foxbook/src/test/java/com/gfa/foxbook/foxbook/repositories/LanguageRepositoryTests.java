@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
+import java.util.List;
 import java.util.Optional;
 
 @DataJpaTest
@@ -57,5 +58,16 @@ public class LanguageRepositoryTests {
 
         Optional<Language> optionalLanguage = languageRepository.findById(savedLanguage.getId());
         Assertions.assertThat(optionalLanguage).isEmpty();
+    }
+
+    @Test
+    public void testGetAllLanguages() {
+        List<Language> languages = Language.getLanguageList();
+        languageRepository.saveAll(languages);
+
+        List<Language> allLanguages = languageRepository.findAll();
+
+        Assertions.assertThat(allLanguages).isNotEmpty();
+        Assertions.assertThat(allLanguages).containsExactlyInAnyOrderElementsOf(languages);
     }
 }
