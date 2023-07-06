@@ -58,4 +58,17 @@ public class UserServiceTests {
         verify(userRepository, times(1)).findAll();
         verifyNoMoreInteractions(userRepository);
     }
+
+    @Test
+    public void testFindByNickname() {
+        User user = new User();
+        user.setNickname("john");
+        when(userRepository.findByNickname("john")).thenReturn(Optional.of(user));
+
+        Optional<User> result = userService.findByNickname("john");
+
+        assertThat(result).isEqualTo(Optional.of(user));
+        verify(userRepository, times(1)).findByNickname("john");
+        verifyNoMoreInteractions(userRepository);
+    }
 }
