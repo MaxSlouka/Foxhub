@@ -1,20 +1,23 @@
 package com.gfa.foxbook.foxbook.services;
+
 import com.gfa.foxbook.foxbook.models.Role;
 import com.gfa.foxbook.foxbook.models.User;
 import com.gfa.foxbook.foxbook.models.dtos.security.RegisterDto;
 import com.gfa.foxbook.foxbook.repositories.RoleRepository;
 import com.gfa.foxbook.foxbook.repositories.UserRepository;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.*;
+
+@ExtendWith(MockitoExtension.class)
 public class SecurityServiceTests {
     @Mock
     private UserRepository userRepository;
@@ -27,11 +30,6 @@ public class SecurityServiceTests {
 
     @InjectMocks
     private SecurityService securityService;
-
-    @BeforeEach
-    public void setUp() {
-        MockitoAnnotations.openMocks(this);
-    }
 
     @Test
     public void testUserExistsByEmail() {
