@@ -47,4 +47,15 @@ public class LanguageRepositoryTests {
         Assertions.assertThat(updatedLanguage.getId()).isEqualTo(savedLanguage.getId());
         Assertions.assertThat(updatedLanguage.getName()).isEqualTo("UPDATED_LANGUAGE");
     }
+
+    @Test
+    public void testDeleteLanguage() {
+        Language language = new Language("TEST_LANGUAGE");
+        Language savedLanguage = languageRepository.save(language);
+
+        languageRepository.delete(savedLanguage);
+
+        Optional<Language> optionalLanguage = languageRepository.findById(savedLanguage.getId());
+        Assertions.assertThat(optionalLanguage).isEmpty();
+    }
 }
