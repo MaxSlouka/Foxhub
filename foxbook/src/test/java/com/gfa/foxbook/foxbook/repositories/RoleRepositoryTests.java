@@ -50,4 +50,16 @@ public class RoleRepositoryTests {
         Role foundRole = optionalRole.get();
         Assertions.assertThat(foundRole.getName()).isEqualTo("TEST_ROLE");
     }
+
+    @Test
+    public void testUpdateRole() {
+        Role role = new Role("TEST_ROLE");
+        Role savedRole = roleRepository.save(role);
+
+        savedRole.setName("UPDATED_ROLE");
+        Role updatedRole = roleRepository.save(savedRole);
+
+        Assertions.assertThat(updatedRole.getId()).isEqualTo(savedRole.getId());
+        Assertions.assertThat(updatedRole.getName()).isEqualTo("UPDATED_ROLE");
+    }
 }
