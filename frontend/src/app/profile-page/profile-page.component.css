@@ -1,7 +1,9 @@
-.container{
-  width : 100vw;
+.container {
+  width: 100vw;
   height: 100vh;
+  text-align: center;
 }
+
 .theme-container {
   width: 100vw;
   height: 25%;
@@ -15,12 +17,25 @@
   border: 2px black solid;
   border-radius: 50%;
   background-color: rgb(13, 114, 56);
+  margin: 0 auto;
   margin-top: -75px;
-  margin-left: 44vw;
 }
 
-.info-content{
+i {
+  font-size: 20px;
+  margin: 5px;
+}
+
+.info{
   display: flex;
   justify-content: center;
   align-items: center;
+  text-align: start;
 }
+
+.basic-info{
+  margin-right: 20px;
+  margin-left: 30px;
+}
+
+
