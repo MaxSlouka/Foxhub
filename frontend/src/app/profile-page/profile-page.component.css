@@ -4,6 +4,23 @@
 }
 .theme-container {
   width: 100vw;
-  height: 30%;
-  background-color: rgb(13, 114, 56);;
+  height: 25%;
+  background-color: rgb(67, 183, 122);
+  border-bottom: 2px black solid;
+}
+
+.profile-picture-container {
+  width: 150px;
+  height: 150px;
+  border: 2px black solid;
+  border-radius: 50%;
+  background-color: rgb(13, 114, 56);
+  margin-top: -75px;
+  margin-left: 44vw;
+}
+
+.info-content{
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
