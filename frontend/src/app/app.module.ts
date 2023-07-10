@@ -11,6 +11,7 @@ import { MainPageComponent } from './main-page/main-page.component';
 import { ProfilePageComponent } from './profile-page/profile-page.component';
 import { PeoplePageComponent } from './people-page/people-page.component';
 import {NgOptimizedImage} from "@angular/common";
+import { IntroComponent } from './intro/intro.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import {NgOptimizedImage} from "@angular/common";
     RegisterComponent,
     MainPageComponent,
     ProfilePageComponent,
-    PeoplePageComponent
+    PeoplePageComponent,
+    IntroComponent
   ],
     imports: [
         BrowserModule,
