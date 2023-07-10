@@ -1,0 +1,58 @@
+.container {
+  width: 100vw;
+  height: 100vh;
+  text-align: center;
+}
+.toMainButton{
+  color: black;
+}
+
+.theme-container {
+  width: 100vw;
+  height: 25%;
+  background-color: rgb(67, 183, 122);
+  border-bottom: 2px black solid;
+  text-align: start;
+}
+
+.profile-picture-container {
+  width: 150px;
+  height: 150px;
+  border: 2px black solid;
+  border-radius: 50%;
+  background-color: rgb(13, 114, 56);
+  margin: 0 auto;
+  margin-top: -75px;
+}
+h1 {
+  margin: 50px;
+}
+
+i {
+  font-size: 20px;
+  margin: 5px;
+}
+
+.info, .about-skills-container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: start;
+}
+
+.basic-info{
+  margin-right: 20px;
+  margin-left: 30px;
+}
+
+.about-skills-container{
+  margin-top: 30px;
+}
+
+.about, .skills{
+  width: 50%;
+  text-align: center;
+}
+
+
+
