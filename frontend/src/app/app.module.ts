@@ -26,8 +26,6 @@ import { IntroComponent } from './intro/intro.component';
   ],
   imports: [
     FormsModule,
-    PeoplePageComponent,
-    IntroComponent,
     BrowserModule,
     AppRoutingModule,
     NgOptimizedImage
