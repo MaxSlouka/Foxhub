@@ -31,17 +31,23 @@ public class JWTGenerator {
                 .setSigningKey(SecurityConstants.JWT_SECRET)
                 .parseClaimsJws(token)
                 .getBody();
+
         return claims.getSubject();
     }
 
+
+
+
     public boolean isTokenValid(String token) {
         try {
+
             Jwts.parser()
-                    .setSigningKey(SecurityConstants.JWT_SECRET)
+                    .setSigningKey(Keys.hmacShaKeyFor(SecurityConstants.JWT_SECRET))
                     .parseClaimsJws(token);
             return true;
         } catch (Exception e) {
-            throw new AuthenticationCredentialsNotFoundException("JWT token is expired or invalid");
+            return false;
+//            throw new AuthenticationCredentialsNotFoundException("JWT token is expired or invalid");
         }
     }
 }

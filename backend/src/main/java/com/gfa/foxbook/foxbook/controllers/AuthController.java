@@ -11,7 +11,9 @@ import com.gfa.foxbook.foxbook.security.JWTGenerator;
 import com.gfa.foxbook.foxbook.repositories.RoleRepository;
 import com.gfa.foxbook.foxbook.repositories.UserRepository;
 import com.gfa.foxbook.foxbook.services.SecurityService;
+import jakarta.servlet.http.Cookie;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -35,13 +37,31 @@ public class AuthController {
 
 
     @PostMapping("login")
-    public ResponseEntity<AuthResponseDTO> login(@RequestBody LoginDto loginDto) {
+    public ResponseEntity<?> login(@RequestBody LoginDto loginDto) {
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(loginDto.getEmail(), loginDto.getPassword()));
         SecurityContextHolder.getContext().setAuthentication(authentication);
         String token = jwtGenerator.generateToken(authentication);
 
-        return ResponseEntity.ok(new AuthResponseDTO(token));
+
+        // Create a new cookie
+        String cookieName = "token";
+        String cookieValue = token;
+
+        // Set the cookie's path (optional)
+        String cookiePath = "/";
+
+        // Set the cookie's max age (optional)
+        int maxAge = 3600; // 1 hour
+
+        // Create the cookie header value
+        String cookieHeaderValue = cookieName + "=" + cookieValue + "; Path=" + cookiePath + "; Max-Age=" + maxAge+ "; HttpOnly";
+
+        // Create the HttpHeaders object and set the cookie header
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Set-Cookie", cookieHeaderValue);
+
+        return ResponseEntity.ok().headers(headers).build();
     }
 
     @PostMapping("register")
@@ -52,4 +72,6 @@ public class AuthController {
         securityService.registerUser(registerDto);
         return ResponseEntity.ok(new ResponseDTO("User registered successfully"));
     }
+
+
 }
