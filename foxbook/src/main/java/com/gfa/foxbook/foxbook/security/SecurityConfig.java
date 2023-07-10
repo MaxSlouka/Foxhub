@@ -22,6 +22,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class SecurityConfig {
     private final CustomUserDetailsService customUserDetailsService;
     private final JwtAuthEntryPoint authEntryPoint;
+    private final JWTGenerator jwtGenerator;
 
 
     @Bean
