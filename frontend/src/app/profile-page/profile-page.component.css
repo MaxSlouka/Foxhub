@@ -20,13 +20,16 @@
   margin: 0 auto;
   margin-top: -75px;
 }
+h1 {
+  margin: 50px;
+}
 
 i {
   font-size: 20px;
   margin: 5px;
 }
 
-.info{
+.info, .about-skills-container{
   display: flex;
   justify-content: center;
   align-items: center;
@@ -36,6 +39,15 @@ i {
 .basic-info{
   margin-right: 20px;
   margin-left: 30px;
+}
+
+.about-skills-container{
+  margin-top: 30px;
+}
+
+.about, .skills{
+  width: 50%;
+  text-align: center;
 }
 
 
