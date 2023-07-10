@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
@@ -22,13 +22,15 @@ import { IntroComponent } from './intro/intro.component';
     RegisterComponent,
     MainPageComponent,
     ProfilePageComponent,
-    PeoplePageComponent,
-    IntroComponent
+    PeoplePageComponent
   ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        NgOptimizedImage
+  imports: [
+    FormsModule,
+    PeoplePageComponent,
+    IntroComponent,
+    BrowserModule,
+    AppRoutingModule,
+    NgOptimizedImage
     ],
   providers: [],
   bootstrap: [AppComponent]
