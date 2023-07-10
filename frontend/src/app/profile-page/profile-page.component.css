@@ -3,12 +3,16 @@
   height: 100vh;
   text-align: center;
 }
+.toMainButton{
+  color: black;
+}
 
 .theme-container {
   width: 100vw;
   height: 25%;
   background-color: rgb(67, 183, 122);
   border-bottom: 2px black solid;
+  text-align: start;
 }
 
 .profile-picture-container {
@@ -49,5 +53,6 @@ i {
   width: 50%;
   text-align: center;
 }
+
 
 
