@@ -1,41 +1,55 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Main page</title>
-</head>
-
-<body>
 <div>
   <header></header>
   <main>
-    <article>
-      <h3 class="article-heading"></h3>
-      <p class="article-content"></p>
-      <time class="time-stamp"></time>
-      <button class="like">like</button><button class="dislike">dislike</button><button
-      class="comment">comment</button>
-    </article>
-  </main>
-  <aside>
-    <button class="show-all">
-      <a href="">
-        <h4 class="h4-show-all">Show all</h4>
-        <img src="" alt="img of fucking lupa" class="lupa">
-      </a>
-    </button>
-    <div>
-      <a href="" class="profile">
-        <img src="" alt="profile picture" class="profile-pic">
-        <h4 class="h4-user-name">Name of user</h4>
-      </a>
+
+    <div class="article-div">
+      <article>
+        <div class="article-head">
+          <h3 class="article-heading">{{}}</h3>
+          <a href="" class="author">
+            <h5 class="author-name"></h5>
+            <img src="" alt="picture of author" class="author-pic">
+          </a>
+        </div>
+
+        <div class="article-body">
+          <p class="article-content"></p>
+          <time class="time-stamp"></time>
+        </div>
+
+        <div class="article-react">
+          <div class="like">
+            <button class="like">like</button>
+            <button class="dislike">dislike</button>
+          </div>
+
+          <div class="comment">
+            <button class="comment">comment</button>
+          </div>
+        </div>
+      </article>
+
     </div>
-  </aside>
+  </main>
+
+  <div class="aside-div">
+    <aside>
+
+      <div class="show-all">
+        <a href="">
+          <h4 class="h4-show-all">Show all</h4>
+          <img src="" alt="img of fucking lupa" class="lupa">
+        </a>
+      </div>
+
+      <div class="aside-profile">
+        <a href="" class="profile">
+          <img src="" alt="profile picture" class="profile-pic">
+          <h5 class="h4-user-name"></h5>
+        </a>
+      </div>
+    </aside>
+  </div>
+  <a href=""><img src="" alt="img of arrow"></a>
   <footer></footer>
 </div>
-
-</body>
-
-</html>
