@@ -4,7 +4,5 @@ export class CreatePostPayload {
   authorPic?: string;
   content!: string;
   timestamp?: string;
-  like?: number;
-  dislike?: number;
   comments?: string[];
 }

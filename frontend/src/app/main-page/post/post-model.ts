@@ -5,10 +5,6 @@ export class PostModel {
   authorPic?: string;
   content!: string;
   timestamp?: string;
-  like?: number;
-  dislike?: number;
-  upVote?: boolean;
-  downVote?: boolean;
   comments?: string[];
   commentsCount?: number;
 }
