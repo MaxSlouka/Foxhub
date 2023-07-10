@@ -2,6 +2,7 @@ package com.gfa.foxbook.foxbook.security;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.NoArgsConstructor;
@@ -13,6 +14,7 @@ import org.springframework.security.web.authentication.WebAuthenticationDetailsS
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
+import java.util.Arrays;
 
 @NoArgsConstructor
 public class JWTAuthenticationFilter extends OncePerRequestFilter {
@@ -20,9 +22,6 @@ public class JWTAuthenticationFilter extends OncePerRequestFilter {
     private JWTGenerator jwtGenerator;
     @Autowired
     private CustomUserDetailsService customUserDetailsService;
-
-
-
     @Override
     protected void doFilterInternal(
             HttpServletRequest request,
@@ -42,14 +41,16 @@ public class JWTAuthenticationFilter extends OncePerRequestFilter {
             SecurityContextHolder.getContext().setAuthentication(authenticationToken);
         }
         filterChain.doFilter(request, response);
-
     }
 
-
     private String getTokenFromRequest(HttpServletRequest request) {
-        String bearer = request.getHeader("Authorization");
-        if (bearer != null && bearer.startsWith("Bearer ")) {
-            return bearer.substring(7);
+        Cookie[] cookies = request.getCookies();
+        if (cookies != null) {
+            for (Cookie cookie : cookies) {
+                if (cookie.getName().equals("token")) {
+                    return cookie.getValue();
+                }
+            }
         }
         return null;
     }

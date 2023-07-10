@@ -25,6 +25,8 @@ public class SecurityService {
     }
     public void registerUser(RegisterDto registerDto) {
         User user = new User();
+        user.setFirstName(registerDto.getFirstName());
+        user.setLastName(registerDto.getLastName());
         user.setEmail(registerDto.getEmail());
         user.setPassword(passwordEncoder.encode(registerDto.getPassword()));
         Role roles = roleRepository.findByName("USER").get();
