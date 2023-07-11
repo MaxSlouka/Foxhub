@@ -3,6 +3,7 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {CreatePostPayload} from "./create-post.payload";
 import {PostService} from "../post.service";
 import {Router} from "@angular/router";
+import {throwError} from "rxjs";
 
 @Component({
   selector: 'app-create-post',
@@ -11,6 +12,7 @@ import {Router} from "@angular/router";
 })
 export class CreatePostComponent implements OnInit {
 
+  // @ts-ignore
   createPostForm: FormGroup;
   postPayload: CreatePostPayload;
 
@@ -37,6 +39,8 @@ export class CreatePostComponent implements OnInit {
 
     this.postService.createPost(this.postPayload).subscribe((data) => {
       this.router.navigateByUrl('/api/v1/posts');
+    }, error => {
+      throwError(error);
     })
   }
 }

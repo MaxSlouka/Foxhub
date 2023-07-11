@@ -12,6 +12,7 @@ import { ProfilePageComponent } from './profile-page/profile-page.component';
 import { PeoplePageComponent } from './people-page/people-page.component';
 import {NgOptimizedImage} from "@angular/common";
 import { IntroComponent } from './intro/intro.component';
+import { CreatePostComponent } from './main-page/post/create-post/create-post.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { IntroComponent } from './intro/intro.component';
     MainPageComponent,
     ProfilePageComponent,
     PeoplePageComponent,
+    CreatePostComponent,
     IntroComponent
   ],
     imports: [
