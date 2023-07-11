@@ -46,9 +46,9 @@ public class SecurityService {
             while (userRepository.existsByNickname(fName + "-" + lName + index)) {
                 index++;
             }
-            return fName + "-" + lName + index;
+            return (fName + "-" + lName + index).toLowerCase();
         }
-        return fName + "-" + lName;
+        return (fName + "-" + lName).toLowerCase();
     }
 
     private String removeDiacritics(String input) {
