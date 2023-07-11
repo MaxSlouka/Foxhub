@@ -1,0 +1,32 @@
+<div class="container">
+  <div class="row">
+    <hr />
+    <div class="create-post-container">
+      <form class="post-form" [formGroup]="createPostForm" (ngSubmit)="createPost()">
+        <div class="form-group">
+          <div class="create-post-heading">Create Post</div>
+          <hr />
+          <input type="text" [formControlName]="'postName'" class="form-control" placeholder="Title">
+          <input type="text" [formControlName]="'postName'" class="form-control" placeholder="Content">
+
+<!--          <editor [formControlName]="'description'" [init]="{-->
+<!--                        height: 500,-->
+<!--                        menubar: false,-->
+<!--                        plugins: [-->
+<!--                          'advlist autolink lists link image charmap print preview anchor',-->
+<!--                          'searchreplace visualblocks code fullscreen',-->
+<!--                          'insertdatetime media table paste code help wordcount'-->
+<!--                        ],-->
+<!--                        toolbar:-->
+<!--                          'undo redo | formatselect | bold italic backcolor | \-->
+<!--                          alignleft aligncenter alignright alignjustify | \-->
+<!--                          bullist numlist outdent indent | removeformat | help'-->
+<!--                      }"></editor>-->
+          <span>
+                <button class="btnCreatePost">Post</button>
+            </span>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
