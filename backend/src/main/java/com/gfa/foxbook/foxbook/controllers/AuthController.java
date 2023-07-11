@@ -27,7 +27,7 @@ import java.util.Collections;
 @RestController
 @RequestMapping("api/v1/auth")
 @RequiredArgsConstructor
-//@CrossOrigin(origins = "*",maxAge = 3600, allowCredentials = "true")
+@CrossOrigin(origins = "http://localhost:4200", maxAge = 3600, allowCredentials="true")
 public class AuthController {
     private final AuthenticationManager authenticationManager;
     private final JWTGenerator jwtGenerator;
