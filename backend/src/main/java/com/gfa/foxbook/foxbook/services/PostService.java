@@ -2,6 +2,8 @@ package com.gfa.foxbook.foxbook.services;
 
 import com.gfa.foxbook.foxbook.models.Post;
 
+import java.util.List;
+
 public interface PostService {
     public Post save(Post post);
 
@@ -9,15 +11,15 @@ public interface PostService {
 
     public void delete(Post post);
 
-    public Iterable<Post> findAll();
+    public List<Post> findAll();
 
-    public Iterable<Post> findAllByOrderByTimestampDesc();
+    public List<Post> findAllByOrderByTimestampDesc();
 
-    public Iterable<Post> findAllByOrderByTimestampAsc();
+    public List<Post> findAllByOrderByTimestampAsc();
 
-    public Iterable<Post> findAllByOrderByLikesDesc();
+    public List<Post> findAllByOrderByLikesDesc();
 
-    public Iterable<Post> findByUserName(String authorName);
+    public List<Post> findByUserName(String authorName);
 
 
 }

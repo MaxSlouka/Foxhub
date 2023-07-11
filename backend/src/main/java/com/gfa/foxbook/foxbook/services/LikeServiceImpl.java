@@ -2,21 +2,20 @@ package com.gfa.foxbook.foxbook.services;
 
 import com.gfa.foxbook.foxbook.models.Like;
 import com.gfa.foxbook.foxbook.repositories.LikeRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @Transactional
+@AllArgsConstructor
 public class LikeServiceImpl implements LikeService {
 
     private final LikeRepository likeRepository;
 
-    public LikeServiceImpl(LikeRepository likeRepository) {
-        this.likeRepository = likeRepository;
-    }
-
     @Override
     public void like(Long postId, Long userId) {
+        assert likeRepository != null;
         Like like = likeRepository.findByPostIdAndUserId(postId, userId);
         if (like != null) {
             return;
@@ -33,6 +32,7 @@ public class LikeServiceImpl implements LikeService {
 
     @Override
     public boolean hasUserLiked(Long postId, Long userId) {
+        assert likeRepository != null;
         Like like = likeRepository.findByPostIdAndUserId(postId, userId);
         return like != null;
     }
