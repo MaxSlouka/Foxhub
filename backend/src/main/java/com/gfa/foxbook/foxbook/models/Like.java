@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Formula;
 
 @Entity
 @Data
@@ -14,6 +15,7 @@ public class Like {
     public Long getUserId() {
         return userId;
     }
+
 
     public void setUserId(Long userId) {
         this.userId = userId;
