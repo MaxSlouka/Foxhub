@@ -58,7 +58,7 @@ public class PostServiceImpl implements PostService {
         @Override
         public Iterable<Post> findByUserName(String authorName){
             assert PostRepository != null;
-            return PostRepository.findByUserName(authorName);
+            return PostRepository.findByAuthor(authorName);
         }
     }
 
