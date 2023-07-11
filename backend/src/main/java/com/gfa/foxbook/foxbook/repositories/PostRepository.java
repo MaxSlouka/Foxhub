@@ -10,5 +10,5 @@ public interface PostRepository extends JpaRepository<Post, Long> {
 
     Iterable<Post> findAllByOrderByLikesDesc();
 
-    Iterable<Post> findByUserName(String authorName);
+    Iterable<Post> findByAuthor(String authorName);
 }

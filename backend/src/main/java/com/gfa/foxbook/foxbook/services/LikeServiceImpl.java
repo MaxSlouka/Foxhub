@@ -12,21 +12,20 @@ public class LikeServiceImpl  implements LikeService{
 
     private final LikeRepository likeRepository;
 
+
     @Override
     public void like(Long postId, Long userId) {
-        assert likeRepository != null;
-        likeRepository.like(postId, userId);
+
     }
 
     @Override
     public boolean voted(Long postId, Long userId) {
-        assert likeRepository != null;
-        return likeRepository.voted(postId, userId);
+        return false;
     }
 
     @Override
     public int countLikes(Long postId) {
-        assert likeRepository != null;
-        return likeRepository.countLikes(postId);
+        return 0;
     }
 }
+
