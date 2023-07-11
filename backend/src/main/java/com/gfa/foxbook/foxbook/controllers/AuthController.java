@@ -1,17 +1,10 @@
 package com.gfa.foxbook.foxbook.controllers;
 
-
-import com.gfa.foxbook.foxbook.models.Role;
-import com.gfa.foxbook.foxbook.models.User;
 import com.gfa.foxbook.foxbook.models.dtos.ResponseDTO;
-import com.gfa.foxbook.foxbook.models.dtos.security.AuthResponseDTO;
 import com.gfa.foxbook.foxbook.models.dtos.security.LoginDto;
 import com.gfa.foxbook.foxbook.models.dtos.security.RegisterDto;
 import com.gfa.foxbook.foxbook.security.JWTGenerator;
-import com.gfa.foxbook.foxbook.repositories.RoleRepository;
-import com.gfa.foxbook.foxbook.repositories.UserRepository;
 import com.gfa.foxbook.foxbook.services.SecurityService;
-import jakarta.servlet.http.Cookie;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
@@ -19,10 +12,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Collections;
 
 @RestController
 @RequestMapping("api/v1/auth")
@@ -50,7 +40,6 @@ public class AuthController {
         // Create the HttpHeaders object and set the cookie header
         HttpHeaders headers = new HttpHeaders();
         headers.add("Set-Cookie", cookieHeaderValue);
-
         return ResponseEntity.ok().headers(headers).build();
     }
 
