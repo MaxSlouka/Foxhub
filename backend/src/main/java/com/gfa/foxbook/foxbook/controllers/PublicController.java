@@ -30,4 +30,9 @@ public class PublicController {
         User user = maybeUser.get();
         return ResponseEntity.ok(user);
     }
+    @GetMapping("/posts")
+    public ResponseEntity<?> getAllPosts() {
+        //unfinished
+        return ResponseEntity.ok().build();
+    }
 }
