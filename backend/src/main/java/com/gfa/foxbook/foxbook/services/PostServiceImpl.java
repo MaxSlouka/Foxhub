@@ -3,12 +3,12 @@ package com.gfa.foxbook.foxbook.services;
 import com.gfa.foxbook.foxbook.models.Post;
 import com.gfa.foxbook.foxbook.repositories.PostRepository;
 import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 @AllArgsConstructor
-@NoArgsConstructor(force = true)
 public class PostServiceImpl implements PostService {
 
     private final PostRepository PostRepository;
@@ -32,33 +32,33 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public Iterable<Post> findAll() {
+    public List<Post> findAll() {
         assert PostRepository != null;
         return PostRepository.findAll();
     }
 
     @Override
-    public Iterable<Post> findAllByOrderByTimestampDesc() {
+    public List<Post> findAllByOrderByTimestampDesc() {
         assert PostRepository != null;
-        return PostRepository.findAllByOrderByTimestampDesc();
+        return (List<Post>) PostRepository.findAllByOrderByTimestampDesc();
     }
 
     @Override
-    public Iterable<Post> findAllByOrderByTimestampAsc() {
+    public List<Post> findAllByOrderByTimestampAsc() {
         assert PostRepository != null;
-        return PostRepository.findAllByOrderByTimestampAsc();
+        return (List<Post>) PostRepository.findAllByOrderByTimestampAsc();
     }
 
     @Override
-    public Iterable<Post> findAllByOrderByLikesDesc() {
+    public List<Post> findAllByOrderByLikesDesc() {
         assert PostRepository != null;
-        return PostRepository.findAllByOrderByLikesDesc();
+        return (List<Post>) PostRepository.findAllByOrderByLikesDesc();
     }
 
         @Override
-        public Iterable<Post> findByUserName(String authorName){
+        public List<Post> findByUserName(String authorName){
             assert PostRepository != null;
-            return PostRepository.findByUserName(authorName);
+            return (List<Post>) PostRepository.findByAuthor(authorName);
         }
     }
 

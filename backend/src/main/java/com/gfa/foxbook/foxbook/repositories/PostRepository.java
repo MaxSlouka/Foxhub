@@ -2,7 +2,9 @@ package com.gfa.foxbook.foxbook.repositories;
 
 import com.gfa.foxbook.foxbook.models.Post;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface PostRepository extends JpaRepository<Post, Long> {
     Iterable<Post> findAllByOrderByTimestampDesc();
 
@@ -10,5 +12,5 @@ public interface PostRepository extends JpaRepository<Post, Long> {
 
     Iterable<Post> findAllByOrderByLikesDesc();
 
-    Iterable<Post> findByUserName(String authorName);
+    Iterable<Post> findByAuthor(String authorName);
 }

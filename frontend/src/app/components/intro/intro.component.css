@@ -1,0 +1,15 @@
+.img-container{
+  display: flex;
+  justify-content: center;
+}
+
+h1 {
+  color: rgb(13, 114, 56);
+  text-align: center;
+  padding: 20px;
+  font-size: 24px;
+}
+
+img {
+  align-items: center;
+}
