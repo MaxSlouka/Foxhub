@@ -28,10 +28,20 @@ public class SecurityService {
         user.setFirstName(registerDto.getFirstName());
         user.setLastName(registerDto.getLastName());
         user.setEmail(registerDto.getEmail());
+        user.setNickname(generateNickname(registerDto.getFirstName(), registerDto.getLastName()));
         user.setPassword(passwordEncoder.encode(registerDto.getPassword()));
         Role roles = roleRepository.findByName("USER").get();
         user.setRoles(Collections.singletonList(roles));
         userRepository.save(user);
     }
-
+    private String generateNickname(String fName, String lName) {
+        if (userRepository.existsByNickname(fName + "-" + lName)) {
+            int index = 1;
+            while (userRepository.existsByNickname(fName + "-" + lName + index)) {
+                index++;
+            }
+            return fName + "-" + lName + index;
+        }
+        return fName + "-" + lName;
+    }
 }

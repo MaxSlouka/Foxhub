@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {AuthService} from "../_services/auth.service";
-import {StorageService} from "../_services/storage.service";
+import {AuthService} from "../../_services/auth.service";
+import {StorageService} from "../../_services/storage.service";
 
 
 @Component({
@@ -30,12 +30,11 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit(): void {
-    const {username, password} = this.form;
+    const {email, password} = this.form;
 
-    this.authService.login(username, password).subscribe({
+    this.authService.login(email, password).subscribe({
         next: data => {
           this.storageService.saveUser(data);
-
           this.isLoginFailed = false;
           this.isLoggedIn = true;
           this.roles = this.storageService.getUser().roles;
