@@ -20,6 +20,13 @@ public interface PostService {
     public List<Post> findAllByOrderByLikesDesc();
 
     public List<Post> findByUserName(String authorName);
+    Post createPost(String author, String content);
+
+    Post createPost(Post post);
+
+    Post findByID(Long id);
+
+    void remove(Post post);
 
 
 }

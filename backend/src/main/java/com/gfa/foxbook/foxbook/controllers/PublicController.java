@@ -1,6 +1,7 @@
 package com.gfa.foxbook.foxbook.controllers;
 
 import com.gfa.foxbook.foxbook.models.User;
+import com.gfa.foxbook.foxbook.services.PostService;
 import com.gfa.foxbook.foxbook.services.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +17,7 @@ import java.util.Optional;
 @RequestMapping("api/v1/public")
 public class PublicController {
     private final UserService userService;
+    private final PostService postService;
 
     @GetMapping("/people")
     public ResponseEntity<?> getAllUsers() {
@@ -32,7 +34,6 @@ public class PublicController {
     }
     @GetMapping("/posts")
     public ResponseEntity<?> getAllPosts() {
-        //unfinished
-        return ResponseEntity.ok().build();
+        return postService.findAll().isEmpty() ? ResponseEntity.notFound().build() : ResponseEntity.ok(postService.findAll());
     }
 }
