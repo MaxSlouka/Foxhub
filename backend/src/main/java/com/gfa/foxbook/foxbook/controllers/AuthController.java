@@ -40,21 +40,13 @@ public class AuthController {
                 new UsernamePasswordAuthenticationToken(loginDto.getEmail(), loginDto.getPassword()));
         SecurityContextHolder.getContext().setAuthentication(authentication);
         String token = jwtGenerator.generateToken(authentication);
-
-
-        // Create a new cookie
+        // cookies
         String cookieName = "token";
         String cookieValue = token;
-
-        // Set the cookie's path (optional)
         String cookiePath = "/";
-
-        // Set the cookie's max age (optional)
         int maxAge = 3600; // 1 hour
-
         // Create the cookie header value
         String cookieHeaderValue = cookieName + "=" + cookieValue + "; Path=" + cookiePath + "; Max-Age=" + maxAge+ "; HttpOnly";
-
         // Create the HttpHeaders object and set the cookie header
         HttpHeaders headers = new HttpHeaders();
         headers.add("Set-Cookie", cookieHeaderValue);
