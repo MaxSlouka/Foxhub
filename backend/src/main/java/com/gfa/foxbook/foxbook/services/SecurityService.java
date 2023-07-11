@@ -9,7 +9,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.text.Normalizer;
 import java.util.Collections;
+import java.util.regex.Pattern;
 
 @Service
 @RequiredArgsConstructor
@@ -34,7 +36,11 @@ public class SecurityService {
         user.setRoles(Collections.singletonList(roles));
         userRepository.save(user);
     }
+
     private String generateNickname(String fName, String lName) {
+        fName = removeDiacritics(fName);
+        lName = removeDiacritics(lName);
+
         if (userRepository.existsByNickname(fName + "-" + lName)) {
             int index = 1;
             while (userRepository.existsByNickname(fName + "-" + lName + index)) {
@@ -44,4 +50,11 @@ public class SecurityService {
         }
         return fName + "-" + lName;
     }
+
+    private String removeDiacritics(String input) {
+        String normalized = Normalizer.normalize(input, Normalizer.Form.NFD);
+        Pattern pattern = Pattern.compile("\\p{InCombiningDiacriticalMarks}+");
+        return pattern.matcher(normalized).replaceAll("");
+    }
+
 }
