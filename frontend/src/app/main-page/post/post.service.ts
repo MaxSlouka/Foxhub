@@ -2,7 +2,7 @@ import {HttpClient} from "@angular/common/http";
 import {Injectable} from "@angular/core";
 import {Observable} from "rxjs";
 import {PostModel} from "./post-model";
-import {CreatePostPayload} from "../create-post/create-post.payload";
+import {CreatePostPayload} from "./create-post/create-post.payload";
 
 
 @Injectable({
