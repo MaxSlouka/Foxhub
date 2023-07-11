@@ -11,54 +11,80 @@ import java.util.List;
 @AllArgsConstructor
 public class PostServiceImpl implements PostService {
 
-    private final PostRepository PostRepository;
+    private final PostRepository postRepository;
+
 
     @Override
     public Post save(Post post) {
-        assert PostRepository != null;
-        return PostRepository.save(post);
+        assert postRepository != null;
+        return postRepository.save(post);
     }
 
     @Override
     public Post findById(Long id) {
-        assert PostRepository != null;
-        return PostRepository.findById(id).orElse(null);
+        assert postRepository != null;
+        return postRepository.findById(id).orElse(null);
     }
 
     @Override
     public void delete(Post post) {
-        assert PostRepository != null;
-        PostRepository.delete(post);
+        assert postRepository != null;
+        postRepository.delete(post);
     }
 
     @Override
     public List<Post> findAll() {
-        assert PostRepository != null;
-        return PostRepository.findAll();
+        assert postRepository != null;
+        return postRepository.findAll();
     }
 
     @Override
     public List<Post> findAllByOrderByTimestampDesc() {
-        assert PostRepository != null;
-        return (List<Post>) PostRepository.findAllByOrderByTimestampDesc();
+        assert postRepository != null;
+        return (List<Post>) postRepository.findAllByOrderByTimestampDesc();
     }
 
     @Override
     public List<Post> findAllByOrderByTimestampAsc() {
-        assert PostRepository != null;
-        return (List<Post>) PostRepository.findAllByOrderByTimestampAsc();
+        assert postRepository != null;
+        return (List<Post>) postRepository.findAllByOrderByTimestampAsc();
     }
 
     @Override
     public List<Post> findAllByOrderByLikesDesc() {
-        assert PostRepository != null;
-        return (List<Post>) PostRepository.findAllByOrderByLikesDesc();
+        assert postRepository != null;
+        return (List<Post>) postRepository.findAllByOrderByLikesDesc();
     }
 
         @Override
         public List<Post> findByUserName(String authorName){
-            assert PostRepository != null;
-            return (List<Post>) PostRepository.findByAuthor(authorName);
+            assert postRepository != null;
+            return (List<Post>) postRepository.findByAuthor(authorName);
         }
+    @Override
+    public Post createPost(String author, String content) {
+        Post p = new Post();
+        p.setAuthor(author);
+        p.setContent(content);
+        return postRepository.save(p);
+    }
+
+    @Override
+    public Post createPost(Post post) {
+        Post p = new Post();
+        p.setAuthor(post.getAuthor());
+        p.setContent(post.getContent());
+        return postRepository.save(p);
+    }
+
+    @Override
+    public Post findByID(Long id) {
+        return postRepository.findById(id).orElse(null);
+    }
+
+    @Override
+    public void remove(Post post) {
+        postRepository.delete(post);
+    }
     }
 

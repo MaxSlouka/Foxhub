@@ -37,4 +37,7 @@ public class Post {
     public Long getId() {
         return id;
     }
+    public boolean isEmpty() {
+        return false;
+    }
 }
