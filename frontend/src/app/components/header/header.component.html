@@ -44,7 +44,7 @@
 
       <!-- login and sign up -->
 
-      <div class="text-end">
+      <div class="text-end" *ngIf="!isLoggedIn">
         <a href="./login" class="btn btn-primary" role="button" aria-disabled="true">Sign in</a>
         <a href="./register" class="btn btn-outline-secondary" role="button" aria-disabled="true">Sign up</a>
       </div>
