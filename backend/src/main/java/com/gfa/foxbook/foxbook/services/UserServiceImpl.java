@@ -15,6 +15,7 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
+    private final CommentService commentService;
 
     @Override
     public Optional<User> findById(Long id) {
@@ -49,5 +50,16 @@ public class UserServiceImpl implements UserService {
     @Override
     public String accessProfileUrl(User user) {
         return user.getProfileUrl();
+    }
+
+    @Override
+    public Optional<User> findByEmail(String name) {
+        return userRepository.findByEmail(name);
+    }
+
+    @Override
+    public void addComment(User existingUser, String comment) {
+        commentService.comment(existingUser.getId(), existingUser.getId(), comment);
+        userRepository.save(existingUser);
     }
 }
