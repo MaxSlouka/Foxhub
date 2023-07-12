@@ -77,7 +77,7 @@
 
         <div class="form-floating mb-3 form-group">
           <label for="floatingPassword">Password</label>
-          <input type="password" class="form-control" id="floatingPassword" placeholder="Password" name="password"
+          <input type="password" class="form-control" id="floatingPassword" placeholder="password" name="password"
             [(ngModel)]="form.password" required minlength="6" #password="ngModel"
             [ngClass]="{ 'is-invalid': f.submitted && password.errors }" />
           <div class="invalid-feedback" *ngIf="password.errors && f.submitted">
