@@ -15,6 +15,7 @@ import {NgOptimizedImage} from "@angular/common";
 import { IntroComponent } from './components/intro/intro.component';
 import {httpInterceptorProviders} from "./_helpers/interceptor";
 import {PeoplePageCardComponent} from "./components/people-page-card/people-page-card.component";
+import { TechnologiesComponent } from './components/technologies/technologies.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import {PeoplePageCardComponent} from "./components/people-page-card/people-page
     ProfilePageComponent,
     PeoplePageComponent,
     IntroComponent,
-    PeoplePageCardComponent
+    PeoplePageCardComponent,
+    TechnologiesComponent
   ],
   imports: [
     FormsModule,
