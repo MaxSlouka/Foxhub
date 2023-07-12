@@ -17,4 +17,8 @@ public interface UserService {
     User updateProfile(User user);
 
     String accessProfileUrl(User user);
+
+    Optional<User> findByEmail(String name);
+
+    void addComment(User existingUser, String comment);
 }
