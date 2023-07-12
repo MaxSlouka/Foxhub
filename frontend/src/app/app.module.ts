@@ -16,6 +16,8 @@ import { IntroComponent } from './components/intro/intro.component';
 import {httpInterceptorProviders} from "./_helpers/interceptor";
 import {PeoplePageCardComponent} from "./components/people-page-card/people-page-card.component";
 import { TechnologyComponent } from './components/technology/technology.component';
+import { LaguageComponent } from './components/laguage/laguage.component';
+import { SocialMediaComponent } from './components/social-media/social-media.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +31,9 @@ import { TechnologyComponent } from './components/technology/technology.componen
     PeoplePageComponent,
     IntroComponent,
     PeoplePageCardComponent,
-    TechnologyComponent
+    TechnologyComponent,
+    LaguageComponent,
+    SocialMediaComponent
   ],
   imports: [
     FormsModule,
