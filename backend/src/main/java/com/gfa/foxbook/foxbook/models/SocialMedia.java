@@ -21,8 +21,8 @@ public class SocialMedia {
     private String name;
     private String url;
 
-    public SocialMedia(String gitHub, String url) {
-        this.name = gitHub;
+    public SocialMedia(String name, String url) {
+        this.name = name;
         this.url = url;
     }
 

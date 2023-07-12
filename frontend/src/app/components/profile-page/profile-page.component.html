@@ -6,7 +6,7 @@
   <div class="profile-picture-container"></div>
   <div class="social-line">
     <i class="fab fa-facebook"></i>
-    <i class="fab fa-instagram"></i>
+    <a href="https://www.instagram.com/miroslav_doan/"><i class="fab fa-instagram"></i></a>
     <i class="fab fa-github"></i>
     <i class="fab fa-linkedin"></i>
     <i class="fab fa-twitter"></i>
@@ -48,6 +48,12 @@
         <app-technologies *ngFor="let technology of user.technologies"
                           [technology]="technology">
         </app-technologies>
+      </div>
+      <div class="languages">
+        <h3>LANGUAGES</h3>
+        <app-laguage *ngFor="let language of user.languages"
+                          [language]="language">
+        </app-laguage>
       </div>
 
     </div>
