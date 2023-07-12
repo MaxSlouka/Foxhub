@@ -45,8 +45,8 @@
       </div>
       <div class="skills">
         <h3>SKILLS</h3>
-        <app-technologies *ngFor="let technology of user.technologies" [technology] = technology>
-
+        <app-technologies *ngFor="let technology of user.technologies"
+                          [technology]="technology">
         </app-technologies>
       </div>
 

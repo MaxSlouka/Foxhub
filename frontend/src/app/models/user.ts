@@ -1,3 +1,5 @@
+import {Technology} from "./Technology";
+
 export class User {
   id?: number;
   firstName!: string;
@@ -15,6 +17,6 @@ export class User {
   profilePictureUrl?: string;
   roles?: string[];
   socialMedias?: string[];
-  technologies?: string[];
+  technologies?: Technology[];
   languages?: string[];
 }

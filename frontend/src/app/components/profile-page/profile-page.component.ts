@@ -13,8 +13,6 @@ export class ProfilePageComponent {
   username: string | null ="";
   // @ts-ignore
   user: User;
-  // @ts-ignore
-  technology: String;
 
   constructor(private profileService: ProfileService,
               private activatedroute: ActivatedRoute) {

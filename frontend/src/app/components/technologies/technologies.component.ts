@@ -1,4 +1,5 @@
-import {Component} from '@angular/core';
+import {Component, Input} from '@angular/core';
+import {Technology} from "../../models/Technology";
 
 @Component({
   selector: 'app-technologies',
@@ -7,5 +8,5 @@ import {Component} from '@angular/core';
 })
 export class TechnologiesComponent {
   // @ts-ignore
-  technology: String = "";
+ @Input() technology :Technology;
 }
