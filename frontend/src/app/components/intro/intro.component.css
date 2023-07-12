@@ -23,3 +23,17 @@ h1 span {
 img {
     margin: 2rem;
 }
+
+.feature-icons i {
+    font-size: 2rem;
+    margin-right: 1rem;
+    color: rgb(0, 127, 0);
+}
+
+.feature-icons div p {
+    margin-top: 1rem;
+}
+
+#icon-grid {
+    margin-top: 5rem;
+}
