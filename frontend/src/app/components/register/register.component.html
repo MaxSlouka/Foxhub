@@ -4,17 +4,25 @@
 
   <div class="row align-items-center g-lg-5 py-5">
 
+    <!-- left side (text and image) -->
+
     <div class="col-lg-7 text-center text-lg-start">
       <h1 class="display-4 fw-bold lh-1 text-body-emphasis mb-3">Sign up</h1>
-      <p class="col-lg-10 fs-4">Below is an example form built entirely with Bootstrap’s form controls. Each required
-        form group has a validation state that can be triggered by attempting to submit the form without completing it.
+      <p class="lead">Join our vibrant community of learners and professionals who are passionate about
+        coding, networking, and making a positive impact on the world.
       </p>
+      <img src="../../../assets/img/Refer.png" class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" width="300"
+        height="200" loading="lazy">
     </div>
+
+    <!-- right side (sign up form) -->
 
     <div class="col-md-10 mx-auto col-lg-5">
 
       <form class="p-4 p-md-5 border rounded-3 bg-body-tertiary" *ngIf="!isSuccessful" name="form"
         (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+
+      <!-- first name -->
 
         <div class="form-floating mb-3 form-group">
           <label for="floatingInput">First Name</label>
@@ -32,6 +40,8 @@
           </div>
         </div>
 
+        <!-- last name -->
+
         <div class="form-floating mb-3 form-group">
           <label for="floatingInput">Last Name</label>
           <input type="email" class="form-control" id="floatingInput" placeholder="Doe" name="lastName"
@@ -48,6 +58,8 @@
           </div>
         </div>
 
+        <!-- email address -->
+
         <div class="form-floating mb-3">
           <label for="floatingInput">Email address</label>
           <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com" name="email"
@@ -60,6 +72,8 @@
             </div>
           </div>
         </div>
+
+        <!-- password -->
 
         <div class="form-floating mb-3 form-group">
           <label for="floatingPassword">Password</label>
@@ -74,6 +88,8 @@
           </div>
         </div>
 
+        <!-- submit button -->
+
         <div class="form-group">
           <button class="w-100 btn btn-lg btn-primary" type="submit">Sign up</button>
         </div>
@@ -81,6 +97,8 @@
         <div class="alert alert-warning" *ngIf="f.submitted && isSignUpFailed">
           Signup failed!<br />{{ errorMessage }}
         </div>
+
+        <!-- appendix text -->
 
         <hr class="my-4">
         <small class="text-body-secondary">By clicking Sign up, you agree to the terms of use.</small>
