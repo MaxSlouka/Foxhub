@@ -29,8 +29,10 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             FilterChain filterChain
     ) throws ServletException, IOException {
         String token = jwtUtils.getJwtFromCookies(request);
+        System.out.println("token in filter: " + token); // todo remove
         if (token != null && jwtUtils.validateJwtToken(token)) {
             String username = jwtUtils.getUserNameFromJwtToken(token);
+//            System.out.println("username: " + username); // todo remove
             UserDetails userDetails = customUserDetailsService.loadUserByUsername(username);
             UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
                     userDetails,
@@ -40,7 +42,8 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                     new WebAuthenticationDetailsSource().buildDetails(request));
             SecurityContextHolder.getContext().setAuthentication(authenticationToken);
         }
-        System.out.println(response.getStatus());
+        // logic for if the access token is expired and refresh token is valid
+        // but the user is not logged in
         filterChain.doFilter(request, response);
     }
 

@@ -5,6 +5,7 @@ import com.gfa.foxbook.foxbook.models.dtos.security.LoginDto;
 import com.gfa.foxbook.foxbook.models.dtos.security.RegisterDto;
 import com.gfa.foxbook.foxbook.security.jwt.JwtUtils;
 import com.gfa.foxbook.foxbook.services.SecurityService;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseCookie;
@@ -39,6 +40,7 @@ public class AuthController {
                 .header(HttpHeaders.SET_COOKIE,jwtCookie.toString())
                 .header(HttpHeaders.SET_COOKIE,jwtRefreshCookie.toString())
                 .build();
+        //todo bad response if login info is bad
     }
 
     @PostMapping("register")
@@ -49,6 +51,21 @@ public class AuthController {
         securityService.registerUser(registerDto);
         return ResponseEntity.ok(new ResponseDTO("User registered successfully"));
     }
+    @PostMapping("refresh")
+    public ResponseEntity<?> refreshToken(HttpServletRequest request) {
+        if (jwtUtils.getRefreshTokenValidateAndGenerateAccessToken(request) != null) {
+            ResponseCookie jwtCookie = jwtUtils.generateJwtCookie(jwtUtils.getRefreshTokenValidateAndGenerateAccessToken(request));
+
+            return ResponseEntity.ok().header(HttpHeaders.SET_COOKIE, jwtCookie.toString()).build();
+        }
+
+
+            // if access token is expired &&  refresh token is not expired and valid -> send new access token
+            // request.getCookies -> get access token -> check it -> get refresh token -> check it -> send access token
+
+        return ResponseEntity.badRequest().body("Refresh token is expired");
+    }
+
 
 
 }

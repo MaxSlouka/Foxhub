@@ -1,5 +1,6 @@
 package com.gfa.foxbook.foxbook.services;
 
+import com.gfa.foxbook.foxbook.models.Role;
 import com.gfa.foxbook.foxbook.models.User;
 import com.gfa.foxbook.foxbook.repositories.UserRepository;
 import lombok.AllArgsConstructor;
@@ -36,7 +37,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Optional<User> findByNickname(String nickname) {
-        assert userRepository != null;
         return userRepository.findByNickname(nickname);
     }
 
@@ -49,5 +49,16 @@ public class UserServiceImpl implements UserService {
     @Override
     public String accessProfileUrl(User user) {
         return user.getProfileUrl();
+    }
+
+    public Optional<User> upgradeUser(String nickname){
+        Optional<User> maybeUser = userRepository.findByNickname(nickname);
+        if (maybeUser.isEmpty()){
+            return maybeUser;
+        } else {
+//            maybeUser.get().setRoles(ne);
+//            return ;
+        }
+        return null;
     }
 }

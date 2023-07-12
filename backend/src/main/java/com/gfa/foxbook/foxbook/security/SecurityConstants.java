@@ -2,7 +2,8 @@ package com.gfa.foxbook.foxbook.security;
 
 public class SecurityConstants {
 
-    // 15minutes
+    // Todo move to app properties and exp time to env variables
+
     public static final long JWT_EXPIRATION_TIME = 900000; // 15 minutes
 
     public static final long REFRESH_TOKEN_EXPIRATION_TIME = 1209600000; // 14 days
