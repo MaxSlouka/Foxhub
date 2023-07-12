@@ -1,8 +1,8 @@
-package com.gfa.foxbook.foxbook.security;
+package com.gfa.foxbook.foxbook.security.jwt;
 
+import com.gfa.foxbook.foxbook.security.services.CustomUserDetailsService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.NoArgsConstructor;
@@ -14,23 +14,23 @@ import org.springframework.security.web.authentication.WebAuthenticationDetailsS
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
-import java.util.Arrays;
 
 @NoArgsConstructor
-public class JWTAuthenticationFilter extends OncePerRequestFilter {
+public class JwtAuthenticationFilter extends OncePerRequestFilter {
     @Autowired
-    private JWTGenerator jwtGenerator;
+    private JwtUtils jwtUtils;
     @Autowired
     private CustomUserDetailsService customUserDetailsService;
+
     @Override
     protected void doFilterInternal(
             HttpServletRequest request,
             HttpServletResponse response,
             FilterChain filterChain
     ) throws ServletException, IOException {
-        String token = getTokenFromRequest(request);
-        if (token != null && jwtGenerator.isTokenValid(token)) {
-            String username = jwtGenerator.getUsernameFromJWT(token);
+        String token = jwtUtils.getJwtFromCookies(request);
+        if (token != null && jwtUtils.validateJwtToken(token)) {
+            String username = jwtUtils.getUserNameFromJwtToken(token);
             UserDetails userDetails = customUserDetailsService.loadUserByUsername(username);
             UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
                     userDetails,
@@ -40,18 +40,9 @@ public class JWTAuthenticationFilter extends OncePerRequestFilter {
                     new WebAuthenticationDetailsSource().buildDetails(request));
             SecurityContextHolder.getContext().setAuthentication(authenticationToken);
         }
+        System.out.println(response.getStatus());
         filterChain.doFilter(request, response);
     }
 
-    private String getTokenFromRequest(HttpServletRequest request) {
-        Cookie[] cookies = request.getCookies();
-        if (cookies != null) {
-            for (Cookie cookie : cookies) {
-                if (cookie.getName().equals("token")) {
-                    return cookie.getValue();
-                }
-            }
-        }
-        return null;
-    }
+
 }

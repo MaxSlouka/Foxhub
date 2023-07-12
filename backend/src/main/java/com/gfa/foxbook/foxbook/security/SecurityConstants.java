@@ -1,7 +1,11 @@
 package com.gfa.foxbook.foxbook.security;
 
 public class SecurityConstants {
-    public static final long JWT_EXPIRATION_TIME = 1000 * 60 * 60 * 10; // 10 hours
+
+    // 15minutes
+    public static final long JWT_EXPIRATION_TIME = 900000; // 15 minutes
+
+    public static final long REFRESH_TOKEN_EXPIRATION_TIME = 1209600000; // 14 days
 
     public static final byte[] JWT_SECRET = System.getenv("SECRET_KEY").getBytes();
 }

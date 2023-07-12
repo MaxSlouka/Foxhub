@@ -38,4 +38,5 @@ public class PublicController {
     public ResponseEntity<?> getAllPosts() {
         return postService.findAll().isEmpty() ? ResponseEntity.notFound().build() : ResponseEntity.ok(postService.findAll());
     }
+
 }

@@ -1,4 +1,4 @@
-package com.gfa.foxbook.foxbook.security;
+package com.gfa.foxbook.foxbook.security.services;
 
 import com.gfa.foxbook.foxbook.models.User;
 import com.gfa.foxbook.foxbook.models.Role;
