@@ -25,8 +25,8 @@
         by storm!</h2>
       <div class="d-grid gap-2 d-md-flex justify-content-md-start">
         <a href="./main" class="btn btn-primary btn-lg px-4 me-md-2" role="button" aria-disabled="true">Visit</a>
-        <a href="./login" class="btn btn-outline-secondary btn-lg" role="button" aria-disabled="true">Sign in</a>
-        <a href="./register" class="btn btn-outline-secondary btn-lg" role="button" aria-disabled="true">Sign up</a>
+        <a href="./login" class="btn btn-outline-secondary btn-lg" role="button" aria-disabled="true" *ngIf="!isLoggedIn">Sign in</a>
+        <a href="./register" class="btn btn-outline-secondary btn-lg" role="button" aria-disabled="true" *ngIf="!isLoggedIn">Sign up</a>
       </div>
     </div>
 
@@ -78,7 +78,7 @@
             <p>your Career Growth by connecting with experienced mentors and industry professionals </p>
           </div>
         </div>
-        
+
         <div class="col d-flex align-items-start  feature-icons">
           <i class="bi bi-bookmarks flex-shrink-0 me-3" width="1.75em" height="1.75em"></i>
           <div>
@@ -86,7 +86,7 @@
             <p>on Innovative Projects with teams, collaborate with other members, and work on real-world projects </p>
           </div>
         </div>
-        
+
         <div class="col d-flex align-items-start feature-icons">
           <i class="bi bi-flower3 flex-shrink-0 me-3" width="1.75em" height="1.75em"></i>
           <div>
@@ -187,9 +187,10 @@
             in search of exceptional talent, our platform is the catalyst for your success.</p>
           <p class="lead">Together, let's unleash the potential within us and make waves in the exciting world of IT.
             FoxBook awaits you with open arms, ready to empower, connect, and transform.</p>
-          <h2 class="display-5 fw-bold text-body-emphasis lh-1 mb-3">Welcome to the future of IT networking. Welcome to
-            FoxBook.</h2>
-          <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+          <h2 class="display-5 fw-bold text-body-emphasis lh-1 mb-3">Welcome to the future of IT networking. </h2>
+          <h2 class="display-5 fw-bold text-body-emphasis lh-1 mb-3">Welcome to
+            <span>FoxBook</span>.</h2>
+          <div class="d-grid gap-2 d-md-flex justify-content-md-start" *ngIf="!isLoggedIn">
             <a href="./login" class="btn btn-primary btn-lg" role="button" aria-disabled="true">Sign in</a>
             <a href="./register" class="btn btn-outline-secondary btn-lg" role="button" aria-disabled="true">Sign up</a>
           </div>
