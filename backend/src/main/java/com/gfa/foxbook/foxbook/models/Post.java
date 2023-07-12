@@ -4,10 +4,13 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.sql.Timestamp;
 
 @Entity
 @Data
@@ -15,17 +18,17 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Post {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @NotBlank(message = "Title cannot be empty")
     private String title;
     private String author;
     private String authorPic;
+    @NotBlank(message = "Content cannot be empty")
     private String content;
-    private String timestamp;
     private Integer likes;
-    private Boolean upVote;
+    private Timestamp timestamp;
     private Integer commentsCount;
     private String comments;
 
