@@ -78,24 +78,13 @@ public class JwtUtils {
         return getCookieValueByName(request, "refreshToken");
     }
     public String getUserNameFromJwtToken(String token) {
-        String xxx = Jwts.parserBuilder().setSigningKey(key()).build()
+        return Jwts.parserBuilder().setSigningKey(key()).build()
                 .parseClaimsJws(token).getBody().getSubject();
-        // todo format back from testing format
-        System.out.println(xxx); // todo delete
-
-        return xxx;
     }
     public String getUserNameFromJwtRefreshToken(String token) {
-
-        // need to get claims with username from token
         Claims claims = Jwts.parserBuilder().setSigningKey(key()).build()
                 .parseClaimsJws(token).getBody();
         String username = claims.get("sub", String.class);
-        System.out.println(claims);
-        System.out.println(username);
-
-        // todo format back from testing format
-
         return username;
     }
     public String getRefreshTokenValidateAndGenerateAccessToken(HttpServletRequest request){

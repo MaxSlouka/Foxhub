@@ -58,11 +58,6 @@ public class AuthController {
 
             return ResponseEntity.ok().header(HttpHeaders.SET_COOKIE, jwtCookie.toString()).build();
         }
-
-
-            // if access token is expired &&  refresh token is not expired and valid -> send new access token
-            // request.getCookies -> get access token -> check it -> get refresh token -> check it -> send access token
-
         return ResponseEntity.badRequest().body("Refresh token is expired");
     }
 
