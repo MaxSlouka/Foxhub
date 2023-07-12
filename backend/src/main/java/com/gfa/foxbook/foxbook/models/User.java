@@ -29,7 +29,7 @@ public class User {
     @Column(unique = true)
     @Email
     private String email;
-    private int telephone;
+    private String telephone;
     private String about;
     private int yearOfBirth;
     @NotNull
@@ -64,7 +64,5 @@ public class User {
             inverseJoinColumns = {@JoinColumn(name = "languages_id", referencedColumnName = "id")})
     private List<Language> languages;
 
-    public User(long l, String userName) {
 
-    }
 }
