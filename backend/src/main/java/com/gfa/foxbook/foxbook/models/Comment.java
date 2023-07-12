@@ -4,34 +4,29 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.sql.Timestamp;
+import java.sql.Date;
 
 @Entity
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Post {
+public class Comment {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @NotBlank(message = "Title cannot be empty")
-    private String title;
-    private String author;
-    private String authorPic;
-    @NotBlank(message = "Content cannot be empty")
-    private String content;
-    private Integer likes;
-    private Timestamp timestamp;
-    private Integer commentsCount;
-    private String comments;
 
+    private String author;
+    private String content;
+    private String authorPic;
+    private String postId;
+    private Date timestamp;
 
     public void setId(Long id) {
         this.id = id;
@@ -40,7 +35,6 @@ public class Post {
     public Long getId() {
         return id;
     }
-    public boolean isEmpty() {
-        return false;
-    }
+
+
 }

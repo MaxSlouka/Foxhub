@@ -5,7 +5,11 @@ import com.gfa.foxbook.foxbook.repositories.PostRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
+
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -18,12 +22,6 @@ public class PostServiceImpl implements PostService {
     public Post save(Post post) {
         assert postRepository != null;
         return postRepository.save(post);
-    }
-
-    @Override
-    public Post findById(Long id) {
-        assert postRepository != null;
-        return postRepository.findById(id).orElse(null);
     }
 
     @Override
@@ -62,29 +60,43 @@ public class PostServiceImpl implements PostService {
             return (List<Post>) postRepository.findByAuthor(authorName);
         }
     @Override
-    public Post createPost(String author, String content) {
+    public Post createPost(String author, String content, String title) {
+        LocalDateTime currentDateTime = LocalDateTime.now();
         Post p = new Post();
         p.setAuthor(author);
+        p.setTitle(title);
+        p.setContent(content);
+        p.setTimestamp(Timestamp.valueOf(currentDateTime));
+        return postRepository.save(p);
+    }
+
+    @Override
+    public Post editPost(Long id, String title, String content) {
+        Post p = postRepository.findById(id).orElse(null);
+        assert p != null;
+        p.setTitle(title);
         p.setContent(content);
         return postRepository.save(p);
     }
 
     @Override
-    public Post createPost(Post post) {
-        Post p = new Post();
-        p.setAuthor(post.getAuthor());
-        p.setContent(post.getContent());
+    public Post editPost(Post post) {
+        Post p = postRepository.findById(post.getId()).orElse(null);
+        assert p != null;
+        p = post;
         return postRepository.save(p);
     }
 
     @Override
-    public Post findByID(Long id) {
-        return postRepository.findById(id).orElse(null);
+    public Optional<Post> findById(Long id) {
+        return postRepository.findById(id);
     }
 
     @Override
     public void remove(Post post) {
         postRepository.delete(post);
     }
+
+
     }
 
