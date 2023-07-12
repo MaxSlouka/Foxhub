@@ -18,6 +18,7 @@ import {PeoplePageCardComponent} from "./components/people-page-card/people-page
 import { TechnologyComponent } from './components/technology/technology.component';
 import { LaguageComponent } from './components/laguage/laguage.component';
 import { SocialMediaComponent } from './components/social-media/social-media.component';
+import { BackToTopBtnComponent } from './components/back-to-top-btn/back-to-top-btn.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { SocialMediaComponent } from './components/social-media/social-media.com
     PeoplePageCardComponent,
     TechnologyComponent,
     LaguageComponent,
-    SocialMediaComponent
+    SocialMediaComponent,
+    BackToTopBtnComponent
   ],
   imports: [
     FormsModule,
