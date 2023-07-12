@@ -15,7 +15,6 @@ export class PeoplePageComponent implements OnInit{
 
   ngOnInit(): void {
     this.peopleService.getAll().subscribe((users) => this.users = users)
-    console.log(this.users);
   }
 
 }
