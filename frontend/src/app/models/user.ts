@@ -1,4 +1,8 @@
-import {Technology} from "./Technology";
+import {Technology} from "./technology";
+import {SocialMedia} from "./socialMedia";
+import {Language} from "./laguage";
+
+
 
 export class User {
   id?: number;
@@ -16,7 +20,7 @@ export class User {
   profileUrl?: string;
   profilePictureUrl?: string;
   roles?: string[];
-  socialMedias?: string[];
+  socialMedias?: SocialMedia[];
   technologies?: Technology[];
-  languages?: string[];
+  languages?: Language[];
 }
