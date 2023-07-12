@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {User} from "../../user";
 import {ProfileService} from "../../_services/profile.service";
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-profile-page',
@@ -9,14 +10,16 @@ import {ProfileService} from "../../_services/profile.service";
 })
 export class ProfilePageComponent {
   // @ts-ignore
-  username: string = "max";
+  username: string | null ="";
   // @ts-ignore
   user: User;
 
-  constructor(private profileService: ProfileService) {
+  constructor(private profileService: ProfileService,
+              private activatedroute: ActivatedRoute) {
   }
 
   ngOnInit() {
+    this.username=this.activatedroute.snapshot.paramMap.get("username");
     this.profileService.getUser(this.username)
       .subscribe(user => this.user = user);
   }
