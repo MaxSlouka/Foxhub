@@ -1,5 +1,6 @@
 package com.gfa.foxbook.foxbook.controllers;
 
+import com.gfa.foxbook.foxbook.models.Post;
 import com.gfa.foxbook.foxbook.models.User;
 import com.gfa.foxbook.foxbook.services.PostService;
 import com.gfa.foxbook.foxbook.services.UserService;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -23,7 +25,11 @@ public class PublicController {
 
     @GetMapping("/people")
     public ResponseEntity<?> getAllUsers() {
-        return ResponseEntity.ok().body(userService.findAll());
+        List<User> users = userService.findAll();
+        if (users.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok(users);
     }
     @GetMapping("/person/{nickname}")
     public ResponseEntity<?> personDetails(@PathVariable String nickname) {
@@ -34,8 +40,14 @@ public class PublicController {
         User user = maybeUser.get();
         return ResponseEntity.ok(user);
     }
+
     @GetMapping("/posts")
     public ResponseEntity<?> getAllPosts() {
-        return postService.findAll().isEmpty() ? ResponseEntity.notFound().build() : ResponseEntity.ok(postService.findAll());
+        List<Post> posts = postService.findAllByOrderByTimestampDesc();
+        if (posts.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(posts);
     }
+
 }
