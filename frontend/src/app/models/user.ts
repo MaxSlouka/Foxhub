@@ -1,5 +1,4 @@
 import {Technology} from "./technology";
-import {SocialMedia} from "./socialMedia";
 import {Language} from "./laguage";
 
 
