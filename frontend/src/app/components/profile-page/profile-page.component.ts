@@ -14,8 +14,6 @@ export class ProfilePageComponent {
   // @ts-ignore
   user: User ;
 
-
-
   constructor(private profileService: ProfileService,
               private activatedroute: ActivatedRoute) {
   }
