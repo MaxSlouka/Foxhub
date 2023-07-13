@@ -24,9 +24,11 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class JwtUtils {
     private static final Logger logger = LoggerFactory.getLogger(JwtUtils.class);
+    // todo is logger needed? need to be dealt with
     private final UserRepository userRepository;
 
 
+    // ------- Cookie generating -----
     public ResponseCookie generateJwtCookie(Authentication userPrincipal) {
         String jwt = generateTokenFromUsername(userPrincipal.getName());
         return generateCookie("token", jwt, "/", (int) (SecurityConstants.JWT_EXPIRATION_TIME / 1000));
@@ -44,6 +46,9 @@ public class JwtUtils {
         ResponseCookie cookie = ResponseCookie.from(name, value).path(path).maxAge(maxAge).httpOnly(true).build();
         return cookie;
     }
+
+
+    // ------- token generation -----
     public String generateRefreshTokenFromUsername(String username) {
         Claims extraClaims = new DefaultClaims();
         UUID uuid = UUID.randomUUID();
@@ -71,12 +76,18 @@ public class JwtUtils {
                 .compact();
     }
 
+
+    // --- getting jwt from cookies ---
+
     public String getJwtFromCookies(HttpServletRequest request) {
         return getCookieValueByName(request, "token");
     }
     public String getRefreshJwtFromCookies(HttpServletRequest request) {
         return getCookieValueByName(request, "refreshToken");
     }
+
+
+    // --- getting username from token---
     public String getUserNameFromJwtToken(String token) {
         return Jwts.parserBuilder().setSigningKey(key()).build()
                 .parseClaimsJws(token).getBody().getSubject();
@@ -87,6 +98,8 @@ public class JwtUtils {
         String username = claims.get("sub", String.class);
         return username;
     }
+
+    // generating new access token after validating refresh token
     public String getRefreshTokenValidateAndGenerateAccessToken(HttpServletRequest request){
         if(request.getCookies() == null || request.getCookies().length == 0){
             return null;
@@ -100,7 +113,9 @@ public class JwtUtils {
         return null;
 
     }
-    public boolean validateJwtToken(String authToken) {
+
+    // validating
+    public boolean validateJwtToken(String authToken) { // todo error messages needs tobe done properly
         try {
             Jwts.parserBuilder().setSigningKey(key()).build().parse(authToken);
             return true;
@@ -115,48 +130,18 @@ public class JwtUtils {
         }
         return false;
     }
-    // if token expired
-        // any token
-        // if yes check the refresh token
-            // validity
-            // expiration date
-            // check refresh token UIID  to user uiid
-                // if it's same -> ok
-                // if not -> not ok
-        // if both ok send new token
-
-    // probably not needed
-    public String generateToken(Authentication authentication) {
-        String username = authentication.getName();
-        Date currentDate = new Date();
-        Date expirationDate = new Date(currentDate.getTime() + SecurityConstants.JWT_EXPIRATION_TIME);
-
-        String token = Jwts.builder()
-                .setSubject(username)
-                .setIssuedAt(currentDate)
-                .setExpiration(expirationDate)
-                .signWith(key())
-                .compact();
-        return token;
+    // clean cookies
+    public ResponseCookie getCleanJwtCookie() {
+        ResponseCookie cookie = ResponseCookie.from("token", null).path("/").build();
+        return cookie;
     }
 
-
-    public String getUsernameFromJWT(String token) {
-        return Jwts.parserBuilder().setSigningKey(key()).build().parseClaimsJws(token).getBody().getSubject();
+    public ResponseCookie getCleanJwtRefreshCookie() {
+        ResponseCookie cookie = ResponseCookie.from("refreshToken", null).path("/").build();
+        return cookie;
     }
 
-    public boolean isTokenValid(String token) {
-        try {
-            Jwts.parserBuilder()
-                    .setSigningKey(key()).build()
-                    .parseClaimsJws(token);
-            return true;
-        } catch (Exception e) {
-            return false;
-//            throw new AuthenticationCredentialsNotFoundException("JWT token is expired or invalid");
-        }
-    }
-
+    // third level helper methods
     private String getCookieValueByName(HttpServletRequest request, String name) {
         Cookie cookie = WebUtils.getCookie(request, name);
         if (cookie != null) {
@@ -165,7 +150,6 @@ public class JwtUtils {
             return null;
         }
     }
-
     private Key key() {
         return Keys.hmacShaKeyFor(SecurityConstants.JWT_SECRET);
     }
