@@ -18,6 +18,7 @@ import {PeoplePageCardComponent} from "./components/people-page-card/people-page
 import { TechnologyComponent } from './components/technology/technology.component';
 import { LaguageComponent } from './components/laguage/laguage.component';
 import { BackToTopBtnComponent } from './components/back-to-top-btn/back-to-top-btn.component';
+// @ts-ignore
 import { AsideComponent } from './components/aside/aside.component';
 
 @NgModule({
@@ -35,6 +36,7 @@ import { AsideComponent } from './components/aside/aside.component';
     TechnologyComponent,
     LaguageComponent,
     BackToTopBtnComponent,
+    AsideComponent,
     AsideComponent
   ],
   imports: [
