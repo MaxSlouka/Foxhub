@@ -25,7 +25,7 @@
       <!-- logo -->
 
       <a class="navbar-brand" href="./">
-        <img src="../../../assets/img/GFA-logo.png" width="50" height="50" alt="">
+        <img src="../../../assets/img/GFA-logo.png" width="50" height="50" alt="GFA logo">
       </a>
 
       <!-- nav items -->
@@ -55,13 +55,13 @@
       <div class="btn-group" *ngIf="isLoggedIn">
         <a href="#" class="d-block link-body-emphasis text-decoration-none dropdown-toggle" data-toggle="dropdown"
           aria-expanded="false">
-          <img src="https://github.com/mdo.png" alt="mdo" width="32" height="32" class="rounded-circle">
+          <img src="../../../assets/img/logo.png" alt="mdo" width="32" height="32" class="rounded-circle">
         </a>
         <div class="dropdown-menu">
-          <a class="dropdown-item" href="#">Profile</a>
+          <a class="dropdown-item"  [routerLink]="['/profile',userEmail]">Profile - {{userEmail}}</a>
           <a class="dropdown-item" href="#">Settings</a>
           <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Sign out</a>
+          <a class="dropdown-item" href="#" (click)="logout()">Sign out</a>
         </div>
       </div>
 

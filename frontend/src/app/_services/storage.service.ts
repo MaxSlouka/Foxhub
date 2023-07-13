@@ -21,7 +21,10 @@ export class StorageService {
   public getUser(): any {
     const user = window.sessionStorage.getItem(USER_KEY);
     if (user) {
-      return JSON.parse(user)
+
+      console.log(JSON.parse(user));
+      // return JSON.parse(user
+      return JSON.parse(user);
     }
     return {};
   }
@@ -32,5 +35,9 @@ export class StorageService {
       return true;
     }
     return false;
+  }
+  public logout(): void {
+    
+    window.sessionStorage.clear();
   }
 }

@@ -18,6 +18,8 @@ export class User {
   dateOfRegistration?: Date;
   profileUrl?: string;
   profilePictureUrl?: string;
+  completeProjects?: string;
+  yearsOfExperience?: string;
   facebookURL?: string;
   instagramURL?: string;
   linkedInURL?: string;
