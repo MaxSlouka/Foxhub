@@ -20,8 +20,6 @@ import {LaguageComponent} from './components/laguage/laguage.component';
 import {BackToTopBtnComponent} from './components/back-to-top-btn/back-to-top-btn.component';
 import {AsideComponent} from './components/aside/aside.component';
 import {PeoplePageSearchbarComponent} from "./components/people-page-searchbar/people-page-searchbar.component";
-import {NgbHighlight} from "@ng-bootstrap/ng-bootstrap";
-
 
 @NgModule({
   declarations: [
@@ -48,7 +46,6 @@ import {NgbHighlight} from "@ng-bootstrap/ng-bootstrap";
     NgOptimizedImage,
     HttpClientModule,
     ReactiveFormsModule,
-    NgbHighlight
   ],
   providers: [httpInterceptorProviders],
   bootstrap: [AppComponent]

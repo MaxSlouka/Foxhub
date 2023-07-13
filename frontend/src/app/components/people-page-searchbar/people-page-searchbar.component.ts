@@ -13,7 +13,7 @@ export class PeoplePageSearchbarComponent {
   // @ts-ignore
   @Input() fullUsers:User[];
   public searchUser(key: string): void {
-    const results: User[] = [];
+    let results: User[] = [];
     for (const user of this.users) {
       if (user.firstName.toLowerCase().indexOf(key.toLowerCase()) !== -1
         || user.lastName.toLowerCase().indexOf(key.toLowerCase()) !== -1) {
@@ -21,7 +21,7 @@ export class PeoplePageSearchbarComponent {
       }
     }
     this.users = results;
-    if(results.length === 0 || !key){
+    if(!key){
       this.users = this.fullUsers
     }
   }
