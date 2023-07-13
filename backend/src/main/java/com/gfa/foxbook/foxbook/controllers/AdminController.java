@@ -22,15 +22,6 @@ public class AdminController {
     public final PostService postService;
     public final UserService userService;
 
-    @GetMapping("/posts/{id}")
-    public ResponseEntity<?> getPostById(@PathVariable Long id) {
-        Optional<Post> optionalPost = postService.findById(id);
-        if (optionalPost.isEmpty()) {
-            return ResponseEntity.notFound().build();
-        }
-        Post post = optionalPost.get();
-        return ResponseEntity.ok(post);
-    }
 
     @PostMapping("/posts")
     public ResponseEntity<?> makePost(@RequestBody(required = false) Post post) {
