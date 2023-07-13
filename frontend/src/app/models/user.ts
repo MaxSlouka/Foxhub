@@ -19,8 +19,12 @@ export class User {
   dateOfRegistration?: Date;
   profileUrl?: string;
   profilePictureUrl?: string;
+  facebookURL?: string;
+  instagramURL?: string;
+  linkedInURL?: string;
+  gitHubURL?: string;
+  optionalPageURL?: string;
   roles?: string[];
-  socialMedias?: SocialMedia[];
   technologies?: Technology[];
   languages?: Language[];
 }
