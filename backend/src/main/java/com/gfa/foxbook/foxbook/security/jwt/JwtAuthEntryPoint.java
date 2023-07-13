@@ -1,4 +1,4 @@
-package com.gfa.foxbook.foxbook.security;
+package com.gfa.foxbook.foxbook.security.jwt;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

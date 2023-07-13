@@ -15,6 +15,7 @@ public interface UserService {
     Optional<User> findByNickname(String nickname);
 
     User updateProfile(User user);
+    Optional<User> upgradeUser(String nickname);
 
     String accessProfileUrl(User user);
 

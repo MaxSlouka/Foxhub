@@ -3,10 +3,12 @@ package com.gfa.foxbook.foxbook.controllers;
 import com.gfa.foxbook.foxbook.models.dtos.ResponseDTO;
 import com.gfa.foxbook.foxbook.models.dtos.security.LoginDto;
 import com.gfa.foxbook.foxbook.models.dtos.security.RegisterDto;
-import com.gfa.foxbook.foxbook.security.JWTGenerator;
+import com.gfa.foxbook.foxbook.security.jwt.JwtUtils;
 import com.gfa.foxbook.foxbook.services.SecurityService;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseCookie;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -20,7 +22,7 @@ import org.springframework.web.bind.annotation.*;
 @CrossOrigin(origins = "http://localhost:4200", maxAge = 3600, allowCredentials="true")
 public class AuthController {
     private final AuthenticationManager authenticationManager;
-    private final JWTGenerator jwtGenerator;
+    private final JwtUtils jwtUtils;
     private final SecurityService securityService;
 
 
@@ -29,18 +31,16 @@ public class AuthController {
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(loginDto.getEmail(), loginDto.getPassword()));
         SecurityContextHolder.getContext().setAuthentication(authentication);
-        String token = jwtGenerator.generateToken(authentication);
-        // cookies
-        String cookieName = "token";
-        String cookieValue = token;
-        String cookiePath = "/";
-        int maxAge = 3600; // 1 hour
-        // Create the cookie header value
-        String cookieHeaderValue = cookieName + "=" + cookieValue + "; Path=" + cookiePath + "; Max-Age=" + maxAge+ "; HttpOnly";
-        // Create the HttpHeaders object and set the cookie header
-        HttpHeaders headers = new HttpHeaders();
-        headers.add("Set-Cookie", cookieHeaderValue);
-        return ResponseEntity.ok().headers(headers).build();
+
+
+        ResponseCookie jwtRefreshCookie = jwtUtils.generateRefreshJwtCookie(authentication);
+        ResponseCookie jwtCookie = jwtUtils.generateJwtCookie(authentication);
+        return ResponseEntity
+                .ok()
+                .header(HttpHeaders.SET_COOKIE,jwtCookie.toString())
+                .header(HttpHeaders.SET_COOKIE,jwtRefreshCookie.toString())
+                .build();
+        //todo bad response if login info is bad
     }
 
     @PostMapping("register")
@@ -51,6 +51,30 @@ public class AuthController {
         securityService.registerUser(registerDto);
         return ResponseEntity.ok(new ResponseDTO("User registered successfully"));
     }
+    @PostMapping("signout")
+    public ResponseEntity<?> logoutUser() {
+        Object principle = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        System.out.println(principle.toString()); // todo remove
+
+        ResponseCookie jwtCookie = jwtUtils.getCleanJwtCookie();
+        ResponseCookie jwtRefreshCookie = jwtUtils.getCleanJwtRefreshCookie();
+
+        return ResponseEntity.ok()
+                .header(HttpHeaders.SET_COOKIE, jwtCookie.toString())
+                .header(HttpHeaders.SET_COOKIE, jwtRefreshCookie.toString())
+                .build();
+    }
+    @PostMapping("refresh")
+    public ResponseEntity<?> refreshToken(HttpServletRequest request) {
+        if (jwtUtils.getRefreshTokenValidateAndGenerateAccessToken(request) != null) {
+            ResponseCookie jwtCookie = jwtUtils.generateJwtCookie(jwtUtils.getRefreshTokenValidateAndGenerateAccessToken(request));
+
+            return ResponseEntity.ok().header(HttpHeaders.SET_COOKIE, jwtCookie.toString()).build();
+        }
+        return ResponseEntity.badRequest().body("Refresh token is expired");
+    }
+
 
 
 }

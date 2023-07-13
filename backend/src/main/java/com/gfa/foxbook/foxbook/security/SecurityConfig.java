@@ -1,9 +1,12 @@
 package com.gfa.foxbook.foxbook.security;
 
+import com.gfa.foxbook.foxbook.security.jwt.JwtAuthenticationFilter;
+import com.gfa.foxbook.foxbook.security.jwt.JwtAuthEntryPoint;
+import com.gfa.foxbook.foxbook.security.jwt.JwtUtils;
+import com.gfa.foxbook.foxbook.security.services.CustomUserDetailsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
@@ -22,7 +25,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class SecurityConfig {
     private final CustomUserDetailsService customUserDetailsService;
     private final JwtAuthEntryPoint authEntryPoint;
-    private final JWTGenerator jwtGenerator;
+    private final JwtUtils jwtUtils;
 
 
     @Bean
@@ -36,7 +39,7 @@ public class SecurityConfig {
                 .sessionManagement(
                         (sessionManagement) -> sessionManagement
                                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .authorizeHttpRequests(
+                .authorizeHttpRequests(//todo setup who is allowed where
                         (authorize) -> authorize
                                 .requestMatchers("/**").permitAll()
                                 .anyRequest().authenticated()
@@ -56,8 +59,8 @@ public class SecurityConfig {
         return new BCryptPasswordEncoder();
     }
     @Bean
-    public JWTAuthenticationFilter jwtAuthenticationFilter(){
-        return new JWTAuthenticationFilter();
+    public JwtAuthenticationFilter jwtAuthenticationFilter(){
+        return new JwtAuthenticationFilter();
     }
 
 }
