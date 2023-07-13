@@ -37,4 +37,8 @@ public class Comment {
     }
 
 
+    public void setPost(Post post) {
+        this.postId = String.valueOf(post.getId());
+    }
+
 }
