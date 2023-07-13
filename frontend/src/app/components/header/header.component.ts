@@ -10,15 +10,23 @@ import {StorageService} from "../../_services/storage.service";
 export class HeaderComponent implements OnInit {
 
   isLoggedIn = false;
-  
+  userEmail: string = '';
+
   constructor(private authService: AuthService, private storageService: StorageService) {
   }
 
   ngOnInit(): void {
     if (this.storageService.isLoggedIn()) {
       this.isLoggedIn = true;
+      this.userEmail = this.storageService.getUser();
       // this.roles = this.storageService.getUser().roles;
     }
+  }
+  logout(): void {
+    this.storageService.logout();
+    this.authService.logout();
+
+    this.isLoggedIn = false;
   }
 
 }
