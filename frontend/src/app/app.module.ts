@@ -19,6 +19,7 @@ import { TechnologyComponent } from './components/technology/technology.componen
 import { LaguageComponent } from './components/laguage/laguage.component';
 import { SocialMediaComponent } from './components/social-media/social-media.component';
 import { BackToTopBtnComponent } from './components/back-to-top-btn/back-to-top-btn.component';
+import { AsideComponent } from './components/aside/aside.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { BackToTopBtnComponent } from './components/back-to-top-btn/back-to-top-
     TechnologyComponent,
     LaguageComponent,
     SocialMediaComponent,
-    BackToTopBtnComponent
+    BackToTopBtnComponent,
+    AsideComponent
   ],
   imports: [
     FormsModule,
