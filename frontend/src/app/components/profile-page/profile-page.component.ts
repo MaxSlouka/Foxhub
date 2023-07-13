@@ -1,8 +1,7 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {User} from "../../models/user";
 import {ProfileService} from "../../_services/profile.service";
 import {ActivatedRoute} from '@angular/router';
-import {SocialMedia} from "../../models/socialMedia";
 
 @Component({
   selector: 'app-profile-page',
@@ -11,9 +10,10 @@ import {SocialMedia} from "../../models/socialMedia";
 })
 export class ProfilePageComponent {
   // @ts-ignore
-  username: string | null ="";
+  username: string | null = "";
   // @ts-ignore
-  user: User | undefined;
+  user: User ;
+
 
 
   constructor(private profileService: ProfileService,
@@ -21,12 +21,8 @@ export class ProfilePageComponent {
   }
 
   ngOnInit() {
-    this.username=this.activatedroute.snapshot.paramMap.get("username");
+    this.username = this.activatedroute.snapshot.paramMap.get("username");
     this.profileService.getUser(this.username)
-      .subscribe(user => this.user = user);
+      .subscribe(user => this.user = user)
   }
-
-  // @ts-ignore
-  userInstagram: SocialMedia = this.user.socialMedias
-    .find(socialMedia => socialMedia.name == "instagram")
 }
