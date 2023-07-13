@@ -6,6 +6,7 @@ import {PeoplePageComponent} from "./components/people-page/people-page.componen
 import {ProfilePageComponent} from "./components/profile-page/profile-page.component";
 import {RegisterComponent} from "./components/register/register.component";
 import {IntroComponent} from "./components/intro/intro.component";
+import {PageNotFoundComponent} from "./components/page-not-found/page-not-found.component";
 
 const routes: Routes = [
   {path: '', component: IntroComponent},
@@ -14,7 +15,8 @@ const routes: Routes = [
   {path: 'main', component: MainPageComponent},
   {path: 'people', component: PeoplePageComponent},
   {path: 'profile', component: ProfilePageComponent},
-  {path: 'profile/:username', component: ProfilePageComponent}
+  {path: 'profile/:username', component: ProfilePageComponent},
+  {path: '**', pathMatch: 'full', component: PageNotFoundComponent}
 ];
 
 @NgModule({
