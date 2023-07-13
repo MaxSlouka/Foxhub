@@ -53,15 +53,16 @@ public class UserServiceImpl implements UserService {
     }
 
 
-    public Optional<User> upgradeUser(String nickname){
+    public Optional<User> upgradeUser(String nickname) {
         Optional<User> maybeUser = userRepository.findByNickname(nickname);
-        if (maybeUser.isEmpty()){
+        if (maybeUser.isEmpty()) {
             return maybeUser;
         } else {
 //            maybeUser.get().setRoles(ne);
 //            return ;
         }
         return null;
+    }
 
     @Override
     public Optional<User> findByEmail(String name) {
