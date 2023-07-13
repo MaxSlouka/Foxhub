@@ -28,6 +28,16 @@
   transform: scale(1.1);
 }
 
+.nav-link i {
+  font-size: 2rem;
+  color: rgb(123, 123, 123);
+}
+
+.nav-link i:hover {
+  color: rgb(0, 90, 0);
+  transform: scale(1.1);
+}
+
 .widget-content-body {
   height: fit-content;
   padding: 1rem;
