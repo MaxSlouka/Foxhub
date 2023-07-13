@@ -51,6 +51,20 @@ public class AuthController {
         securityService.registerUser(registerDto);
         return ResponseEntity.ok(new ResponseDTO("User registered successfully"));
     }
+    @PostMapping("signout")
+    public ResponseEntity<?> logoutUser() {
+        Object principle = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        System.out.println(principle.toString()); // todo remove
+
+        ResponseCookie jwtCookie = jwtUtils.getCleanJwtCookie();
+        ResponseCookie jwtRefreshCookie = jwtUtils.getCleanJwtRefreshCookie();
+
+        return ResponseEntity.ok()
+                .header(HttpHeaders.SET_COOKIE, jwtCookie.toString())
+                .header(HttpHeaders.SET_COOKIE, jwtRefreshCookie.toString())
+                .build();
+    }
     @PostMapping("refresh")
     public ResponseEntity<?> refreshToken(HttpServletRequest request) {
         if (jwtUtils.getRefreshTokenValidateAndGenerateAccessToken(request) != null) {
