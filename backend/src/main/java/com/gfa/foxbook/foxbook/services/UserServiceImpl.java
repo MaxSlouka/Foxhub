@@ -7,8 +7,7 @@ import lombok.AllArgsConstructor;
 
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
-import java.util.List;
+import java.util.*;
 
 
 @Service
@@ -47,22 +46,30 @@ public class UserServiceImpl implements UserService {
         return userRepository.save(user);
     }
 
-    @Override
-    public String accessProfileUrl(User user) {
-        return user.getProfileUrl();
-    }
-
-
     public Optional<User> upgradeUser(String nickname) {
         Optional<User> maybeUser = userRepository.findByNickname(nickname);
-        if (maybeUser.isEmpty()) {
-            return maybeUser;
+
+        if (maybeUser.isPresent()) {
+            User user = maybeUser.get();
+
+            List<Role> roles = new ArrayList<>();
+            Role adminRole = new Role("ADMIN");
+            roles.add(adminRole);
+
+            user.setRoles(roles);
+
+            User updatedUser = userRepository.save(user);
+            return Optional.of(updatedUser);
         } else {
-//            maybeUser.get().setRoles(ne);
-//            return ;
+            return Optional.empty();
         }
-        return null;
     }
+
+    @Override
+    public String accessProfileUrl(User user) {
+        return "/profile/" + user.getNickname();
+    }
+
 
     @Override
     public Optional<User> findByEmail(String name) {
