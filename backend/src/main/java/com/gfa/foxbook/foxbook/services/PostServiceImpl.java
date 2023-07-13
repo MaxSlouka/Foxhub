@@ -1,5 +1,6 @@
 package com.gfa.foxbook.foxbook.services;
 
+import com.gfa.foxbook.foxbook.models.Comment;
 import com.gfa.foxbook.foxbook.models.Post;
 import com.gfa.foxbook.foxbook.repositories.PostRepository;
 import lombok.AllArgsConstructor;
@@ -85,6 +86,14 @@ public class PostServiceImpl implements PostService {
         assert p != null;
         p = post;
         return postRepository.save(p);
+    }
+
+    @Override
+    public void addComment(Comment newComment) {
+        Post p = postRepository.findById(Long.valueOf(newComment.getPostId())).orElse(null);
+        assert p != null;
+        p.addComment(newComment);
+        postRepository.save(p);
     }
 
     @Override

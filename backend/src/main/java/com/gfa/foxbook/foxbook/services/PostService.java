@@ -1,5 +1,6 @@
 package com.gfa.foxbook.foxbook.services;
 
+import com.gfa.foxbook.foxbook.models.Comment;
 import com.gfa.foxbook.foxbook.models.Post;
 
 import java.util.List;
@@ -29,4 +30,6 @@ public interface PostService {
     Post editPost(Long id, String title, String content);
 
     Post editPost(Post post);
+
+    void addComment(Comment newComment);
 }

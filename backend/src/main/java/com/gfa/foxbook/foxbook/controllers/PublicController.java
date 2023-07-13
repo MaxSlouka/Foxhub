@@ -41,6 +41,16 @@ public class PublicController {
         return ResponseEntity.ok(user);
     }
 
+    @GetMapping("/posts/{id}")
+    public ResponseEntity<?> getPostById(@PathVariable Long id) {
+        Optional<Post> optionalPost = postService.findById(id);
+        if (optionalPost.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+        Post post = optionalPost.get();
+        return ResponseEntity.ok(post);
+    }
+
     @GetMapping("/posts")
     public ResponseEntity<?> getAllPosts() {
         List<Post> posts = postService.findAllByOrderByTimestampDesc();
