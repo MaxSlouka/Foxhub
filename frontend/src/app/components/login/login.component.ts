@@ -17,6 +17,7 @@ export class LoginComponent implements OnInit {
   isLoginFailed = false;
   errorMessage = '';
   roles: string[] = [];
+  userNickname: string = '';
 
   constructor(private authService: AuthService, private storageService: StorageService) {
   }
@@ -25,7 +26,7 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
     if (this.storageService.isLoggedIn()) {
       this.isLoggedIn = true;
-      // this.roles = this.storageService.getUser().roles;
+      this.userNickname = this.storageService.getUser();
     }
   }
 
@@ -46,8 +47,11 @@ export class LoginComponent implements OnInit {
         }
       }
     )
+    // redirect to home page
+    window.location.href = '';
   }
-  reloadPage():void{
+
+  reloadPage(): void {
     window.location.reload();
   }
 

@@ -7,6 +7,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseCookie;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -29,6 +30,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             FilterChain filterChain
     ) throws ServletException, IOException {
         String token = jwtUtils.getJwtFromCookies(request);
+        String refreshToken = jwtUtils.getRefreshJwtFromCookies(request);
         if (token != null && jwtUtils.validateJwtToken(token)) {
             String username = jwtUtils.getUserNameFromJwtToken(token);
             UserDetails userDetails = customUserDetailsService.loadUserByUsername(username);
@@ -39,6 +41,13 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             authenticationToken.setDetails(
                     new WebAuthenticationDetailsSource().buildDetails(request));
             SecurityContextHolder.getContext().setAuthentication(authenticationToken);
+        }
+    if (token == null && refreshToken != null && jwtUtils.validateJwtToken(refreshToken)) {
+        // generate new access token from refresh token add it to response
+        ResponseCookie jwtCookie = jwtUtils.generateJwtCookie(jwtUtils.getRefreshTokenValidateAndGenerateAccessToken(request));
+        response.addHeader("Set-Cookie", jwtCookie.toString());
+
+        // new content might be buggy
         }
         // todo: logic for if the access token is expired and refresh token is valid
         // but the user is not logged in
