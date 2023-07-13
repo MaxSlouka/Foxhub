@@ -44,18 +44,19 @@ public class User {
     private Date dateOfRegistration;
     private String profileUrl;
     private String profilePictureUrl;
+    private String facebookURL;
+    private String instagramURL;
+    private String linkedInURL;
+    private String gitHubURL;
+    private String optionalPageURL;
+
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(
             name = "users_roles",
             joinColumns = {@JoinColumn(name = "users_id", referencedColumnName = "id")},
             inverseJoinColumns = {@JoinColumn(name = "roles_id", referencedColumnName = "id")})
     private List<Role> roles;
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinTable(
-            name = "users_social_media",
-            joinColumns = {@JoinColumn(name = "users_id", referencedColumnName = "id")},
-            inverseJoinColumns = {@JoinColumn(name = "social_media_id", referencedColumnName = "id")})
-    private List<SocialMedia> socialMedias;
+
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(
             name = "users_technologies",

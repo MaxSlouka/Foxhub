@@ -17,7 +17,6 @@ public class DatabaseFiller implements CommandLineRunner {
 
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
-    private final SocialMediaRepository socialMediaRepository;
     private final TechnologyRepository technologyRepository;
     private final LanguageRepository languageRepository;
 
