@@ -34,6 +34,8 @@ public class User {
     private String email;
     private String telephone;
     private String about;
+    private String completeProjects;
+    private String yearsOfExperience;
     private int yearOfBirth;
     @NotNull
     private String password;
