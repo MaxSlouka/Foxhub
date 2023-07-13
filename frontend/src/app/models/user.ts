@@ -19,6 +19,8 @@ export class User {
   dateOfRegistration?: Date;
   profileUrl?: string;
   profilePictureUrl?: string;
+  completeProjects?: string;
+  yearsOfExperience?: string;
   roles?: string[];
   socialMedias?: SocialMedia[];
   technologies?: Technology[];
