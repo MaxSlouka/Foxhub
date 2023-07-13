@@ -34,9 +34,9 @@ import { AsideComponent } from './components/aside/aside.component';
     PeoplePageCardComponent,
     TechnologyComponent,
     LaguageComponent,
-    SocialMediaComponent,
     BackToTopBtnComponent,
-    AsideComponent
+    AsideComponent,
+
   ],
   imports: [
     FormsModule,
