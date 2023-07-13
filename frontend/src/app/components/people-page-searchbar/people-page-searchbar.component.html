@@ -1,1 +1,8 @@
-<p>people-page-searchbar works!</p>
+
+    <input type="search"
+           (ngModelChange)="searchUser(key.value)" #key="ngModel" ngModel
+           name="key"
+           placeholder="Search employees">
+
+
+<app-people-page-card *ngFor="let user of users" [user]="user"></app-people-page-card>

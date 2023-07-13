@@ -5,32 +5,32 @@
 <!-- intro section -->
 
 <div class="container col-xxl-8 px-4 py-5">
-    <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
+  <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
 
-        <div class="col-lg-6">
-            <h1 class="display-5 fw-bold text-body-emphasis lh-1 mb-3">Unleash Your Potential on FoxBook: <span>Connect,
+    <div class="col-lg-6">
+      <h1 class="display-5 fw-bold text-body-emphasis lh-1 mb-3">Unleash Your Potential on FoxBook: <span>Connect,
                     Collaborate, and Conquer the IT World!</span></h1>
-            <br>
-            <h2 class="display-5 fw-bold text-body-emphasis lh-1 mb-3">We got you covered!</h2>
-            <p class="lead">Explore world of remarkable individuals, each with their unique story and
-                expertise. Witness the passion that drives them, the projects that define them, and the accomplishments
-                that set them apart. Whether you seek inspiration, mentorship, or the perfect addition to your team, our
-                user directory is your gateway to connecting with the brightest stars of the tech universe.</p>
-        </div>
-
-        <div class="col-10 col-sm-8 col-lg-6">
-            <img src="../../../assets/img/Meeting.png" class="d-block mx-lg-auto img-fluid" alt="Meeting"
-                width="700" height="500" loading="lazy">
-        </div>
+      <br>
+      <h2 class="display-5 fw-bold text-body-emphasis lh-1 mb-3">We got you covered!</h2>
+      <p class="lead">Explore world of remarkable individuals, each with their unique story and
+        expertise. Witness the passion that drives them, the projects that define them, and the accomplishments
+        that set them apart. Whether you seek inspiration, mentorship, or the perfect addition to your team, our
+        user directory is your gateway to connecting with the brightest stars of the tech universe.</p>
     </div>
+
+    <div class="col-10 col-sm-8 col-lg-6">
+      <img src="../../../assets/img/Meeting.png" class="d-block mx-lg-auto img-fluid" alt="Meeting"
+           width="700" height="500" loading="lazy">
+    </div>
+  </div>
 </div>
 
 <div class="py-5 text-center">
-    <h1 class="display-5 fw-bold text-body-emphasis">Let's explore</h1>
-  </div>
+  <h1 class="display-5 fw-bold text-body-emphasis">Let's explore</h1>
+</div>
 
 <!-- people section -->
-
-<app-people-page-card *ngFor="let user of users" [user]="user"></app-people-page-card>
+<app-people-page-searchbar [users]="users"
+                           [fullUsers]="users"></app-people-page-searchbar>
 
 <app-footer></app-footer>
