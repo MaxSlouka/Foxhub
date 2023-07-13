@@ -31,7 +31,8 @@
               <div class="col-xl-4 col-md-4 d-flex justify-content-center">
                 <div class="image-default">
                   <img class="rounded-circle"
-                    [src]="user.profilePictureUrl ? user.profilePictureUrl : '../../../assets/img/logo.png'" alt="User profile image">
+                    [src]="user.profilePictureUrl ? user.profilePictureUrl : '../../../assets/img/logo.png'"
+                    alt="User profile image">
                 </div>
                 <div class="infos">
                   <h1>{{user.firstName}} {{user.lastName}}</h1>
@@ -82,11 +83,38 @@
   <!-- social links -->
 
   <div class="px-4 py-5 my-5 text-center">
-    <h1 class="display-5 fw-bold text-body-emphasis">Social Links</h1>
+    <p class="lead">Social Links</p>
     <div class="d-flex align-items-start justify-content-center col-lg-6 mx-auto">
-      <app-social-media *ngFor="let social of user.socialMedias" [social]="social"></app-social-media>
+      <ul class="nav justify-content-end">
+        <li class="nav-item">
+          <a [href]="user.gitHubURL" class="nav-link px-2 text-body-secondary">
+            <i class="bi bi-github"></i>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a [href]="user.linkedInURL" class="nav-link px-2 text-body-secondary">
+            <i class="bi bi-linkedin"></i>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a [href]="user.facebookURL" class="nav-link px-2 text-body-secondary">
+            <i class="bi bi-facebook"></i>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a [href]="user.instagramURL" class="nav-link px-2 text-body-secondary">
+            <i class="bi bi-instagram"></i>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a [href]="user.optionalPageURL" class="nav-link px-2 text-body-secondary">
+            <i class="bi bi-globe"></i>
+          </a>
+        </li>
+      </ul>
     </div>
   </div>
+
 
   <!-- about section -->
 
