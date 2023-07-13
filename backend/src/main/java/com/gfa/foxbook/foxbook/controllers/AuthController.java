@@ -56,14 +56,8 @@ public class AuthController {
     }
     @PostMapping("signout")
     public ResponseEntity<?> logoutUser() {
-        Object principle = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-
-        System.out.println(principle.toString()); // todo remove
-
         ResponseCookie jwtCookie = jwtUtils.getCleanJwtCookie();
         ResponseCookie jwtRefreshCookie = jwtUtils.getCleanJwtRefreshCookie();
-        System.out.println("Hello from Max"); // todo remove
-
         return ResponseEntity.ok()
                 .header(HttpHeaders.SET_COOKIE, jwtCookie.toString())
                 .header(HttpHeaders.SET_COOKIE, jwtRefreshCookie.toString())
