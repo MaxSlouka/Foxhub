@@ -1,7 +1,9 @@
 package com.gfa.foxbook.foxbook.controllers;
 
 import com.gfa.foxbook.foxbook.models.User;
+import com.gfa.foxbook.foxbook.security.jwt.JwtUtils;
 import com.gfa.foxbook.foxbook.services.UserService;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +18,22 @@ import java.util.Optional;
 @RequestMapping("api/v1/user")
 public class UserController {
     private final UserService userService;
+    private final JwtUtils jwtUtils;
+
+
+    @GetMapping("/person")
+    public ResponseEntity<?> getUser(HttpServletRequest request) {
+        String token = jwtUtils.getJwtFromCookies(request);
+        String email = jwtUtils.getUserNameFromJwtToken(token);
+        Optional<User> maybeUser = userService.findByEmail(email);
+        if (maybeUser.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+        User user = maybeUser.get();
+        return ResponseEntity.ok(user);
+        // todo recheck security holes
+    }
+
 
     @DeleteMapping("/people/{id}")
     public ResponseEntity<?> deletePerson(@PathVariable Long id, Principal principal) {

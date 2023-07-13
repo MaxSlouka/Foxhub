@@ -19,21 +19,29 @@ export class HeaderComponent implements OnInit {
 
   isLoggedIn = false;
 
+  userEmail: string = '';
+
   constructor(private authService: AuthService, 
     private profileService: ProfileService,
     private storageService: StorageService,
-    private activatedroute: ActivatedRoute) {
-  }
+    private activatedroute: ActivatedRoute) { }
 
   ngOnInit(): void {
     if (this.storageService.isLoggedIn()) {
       this.isLoggedIn = true;
+      this.userEmail = this.storageService.getUser();
       // this.roles = this.storageService.getUser().roles;
     }
 
     this.username=this.activatedroute.snapshot.paramMap.get("username");
     this.profileService.getUser(this.username)
       .subscribe(user => this.user = user);
+  }
+  logout(): void {
+    this.storageService.logout();
+    this.authService.logout();
+
+    this.isLoggedIn = false;
   }
 
 }
