@@ -1,6 +1,7 @@
 import { Component, OnInit, AfterContentInit } from '@angular/core';
 import {PeopleService} from "../../_services/people.service";
 import {User} from "../../models/user";
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-people-page',
@@ -17,4 +18,5 @@ export class PeoplePageComponent implements OnInit{
     this.peopleService.getAll().subscribe((users) => this.users = users)
   }
 
+  protected readonly Observable = Observable;
 }

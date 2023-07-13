@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { HttpClientModule } from "@angular/common/http";
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -19,6 +19,9 @@ import { TechnologyComponent } from './components/technology/technology.componen
 import { LaguageComponent } from './components/laguage/laguage.component';
 import { BackToTopBtnComponent } from './components/back-to-top-btn/back-to-top-btn.component';
 import { AsideComponent } from './components/aside/aside.component';
+import {NgbHighlight} from "@ng-bootstrap/ng-bootstrap";
+
+
 
 @NgModule({
   declarations: [
@@ -36,14 +39,15 @@ import { AsideComponent } from './components/aside/aside.component';
     LaguageComponent,
     BackToTopBtnComponent,
     AsideComponent,
-
   ],
   imports: [
     FormsModule,
     BrowserModule,
     AppRoutingModule,
     NgOptimizedImage,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule,
+    NgbHighlight
   ],
   providers: [httpInterceptorProviders],
   bootstrap: [AppComponent]
