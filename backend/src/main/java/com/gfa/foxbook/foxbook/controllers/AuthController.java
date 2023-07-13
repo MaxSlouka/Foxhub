@@ -10,11 +10,13 @@ import com.gfa.foxbook.foxbook.services.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseCookie;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,22 +31,28 @@ public class AuthController {
     private final UserService userService;
 
 
-    @PostMapping("login")
+    @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginDto loginDto) {
-        Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(loginDto.getEmail(), loginDto.getPassword()));
-        SecurityContextHolder.getContext().setAuthentication(authentication);
+        try {
+            Authentication authentication = authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(loginDto.getEmail(), loginDto.getPassword()));
+            SecurityContextHolder.getContext().setAuthentication(authentication);
 
+            ResponseCookie jwtRefreshCookie = jwtUtils.generateRefreshJwtCookie(authentication);
+            ResponseCookie jwtCookie = jwtUtils.generateJwtCookie(authentication);
 
-        ResponseCookie jwtRefreshCookie = jwtUtils.generateRefreshJwtCookie(authentication);
-        ResponseCookie jwtCookie = jwtUtils.generateJwtCookie(authentication);
-        return ResponseEntity
-                .ok()
-                .header(HttpHeaders.SET_COOKIE,jwtCookie.toString())
-                .header(HttpHeaders.SET_COOKIE,jwtRefreshCookie.toString())
-                .body(new LoginResponseDto(userService.findByEmail(authentication.getName()).get().getNickname()));
-        //todo bad response if login info is bad
+            return ResponseEntity.ok()
+                    .header(HttpHeaders.SET_COOKIE, jwtCookie.toString())
+                    .header(HttpHeaders.SET_COOKIE, jwtRefreshCookie.toString())
+                    .body(new LoginResponseDto(userService.findByEmail(authentication.getName())
+                            .orElseThrow(() -> new IllegalStateException("User not found"))
+                            .getNickname()));
+        } catch (AuthenticationException e) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                    .body("Invalid login credentials");
+        }
     }
+
 
     @PostMapping("register")
     public ResponseEntity<?> register(@RequestBody RegisterDto registerDto) {

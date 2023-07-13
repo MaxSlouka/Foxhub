@@ -1,7 +1,10 @@
 package com.gfa.foxbook.foxbook.controllers;
 
+import com.gfa.foxbook.foxbook.models.Comment;
+import com.gfa.foxbook.foxbook.models.Post;
 import com.gfa.foxbook.foxbook.models.User;
 import com.gfa.foxbook.foxbook.security.jwt.JwtUtils;
+import com.gfa.foxbook.foxbook.services.PostService;
 import com.gfa.foxbook.foxbook.services.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
@@ -11,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 @Controller
@@ -19,6 +23,7 @@ import java.util.Optional;
 public class UserController {
     private final UserService userService;
     private final JwtUtils jwtUtils;
+    private final PostService postService;
 
 
     @GetMapping("/person")
@@ -72,19 +77,32 @@ public class UserController {
         return ResponseEntity.ok().build();
     }
 
-    @PostMapping("/people/comments")
-    public ResponseEntity<?> addComment(@RequestBody String comment, Principal principal) {
+    @PostMapping("/posts/{postId}/comments")
+    public ResponseEntity<?> addComment(@PathVariable Long postId, @RequestBody String comment, Principal principal) {
+        Optional<Post> maybePost = postService.findById(postId);
+
+        if (maybePost.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+
+        Post post = maybePost.get();
         Optional<User> maybeUser = userService.findByEmail(principal.getName());
 
         if (maybeUser.isEmpty()) {
             return ResponseEntity.notFound().build();
         }
 
-        User existingUser = maybeUser.get();
+        User user = maybeUser.get();
 
-        userService.addComment(existingUser, comment);
+        Comment newComment = new Comment();
+        newComment.setPost(post);
+        newComment.setAuthor(user.getNickname());
+        newComment.setContent(comment);
+
+        postService.addComment(newComment);
 
         return ResponseEntity.ok().build();
     }
+
 
 }
