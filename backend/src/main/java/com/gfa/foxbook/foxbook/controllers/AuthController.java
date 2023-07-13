@@ -2,9 +2,11 @@ package com.gfa.foxbook.foxbook.controllers;
 
 import com.gfa.foxbook.foxbook.models.dtos.ResponseDTO;
 import com.gfa.foxbook.foxbook.models.dtos.security.LoginDto;
+import com.gfa.foxbook.foxbook.models.dtos.security.LoginResponseDto;
 import com.gfa.foxbook.foxbook.models.dtos.security.RegisterDto;
 import com.gfa.foxbook.foxbook.security.jwt.JwtUtils;
 import com.gfa.foxbook.foxbook.services.SecurityService;
+import com.gfa.foxbook.foxbook.services.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
@@ -24,6 +26,7 @@ public class AuthController {
     private final AuthenticationManager authenticationManager;
     private final JwtUtils jwtUtils;
     private final SecurityService securityService;
+    private final UserService userService;
 
 
     @PostMapping("login")
@@ -39,7 +42,7 @@ public class AuthController {
                 .ok()
                 .header(HttpHeaders.SET_COOKIE,jwtCookie.toString())
                 .header(HttpHeaders.SET_COOKIE,jwtRefreshCookie.toString())
-                .build();
+                .body(new LoginResponseDto(userService.findByEmail(authentication.getName()).get().getNickname()));
         //todo bad response if login info is bad
     }
 
@@ -59,6 +62,7 @@ public class AuthController {
 
         ResponseCookie jwtCookie = jwtUtils.getCleanJwtCookie();
         ResponseCookie jwtRefreshCookie = jwtUtils.getCleanJwtRefreshCookie();
+        System.out.println("Hello from Max"); // todo remove
 
         return ResponseEntity.ok()
                 .header(HttpHeaders.SET_COOKIE, jwtCookie.toString())

@@ -34,8 +34,7 @@ export class LoginComponent implements OnInit {
 
     this.authService.login(email, password).subscribe({
         next: data => {
-          console.log(data)
-          this.storageService.saveUser(data);
+          this.storageService.saveUser(data.email);
           this.isLoginFailed = false;
           this.isLoggedIn = true;
           // this.roles = this.storageService.getUser().roles;

@@ -2,63 +2,149 @@
 
 <app-back-to-top-btn></app-back-to-top-btn>
 
-<div class="container">
-  <div class="theme-container">
+<div class="container db-social">
+  <div class="jumbotron jumbotron-fluid"
+    [ngStyle]="{'background-image': user.profilePictureUrl ? 'url(' + user.profilePictureUrl + ')' : 'url(../../../assets/img/background.jpg)'}">
   </div>
-  <div class="profile-picture-container"></div>
-  <div class="social-line">
-    <i class="fab fa-facebook"></i>
-    <a href=""><i class="fab fa-instagram"></i></a>
-    <i class="fab fa-github"></i>
-    <i class="fab fa-linkedin"></i>
-    <i class="fab fa-twitter"></i>
-    <i class="fab fa-reddit"></i>
-  </div>
-  <div class="info-container">
-    <h1>{{user.firstName}} {{user.lastName}}</h1>
-    <h3>Info</h3>
-    <div class="info">
-      <div class="basic-info">
-        <p><strong>LOCATION: </strong></p>
-        <p><strong>TEL:</strong></p>
-        <p><strong>EMAIL:</strong></p>
-      </div>
-      <div class="basic-info-content">
-        <p>{{user.countryResidence}}</p>
-        <p>{{user.telephone}}</p>
-        <p>{{user.email}}</p>
-      </div>
-      <div class="basic-info">
+  <div class="container-fluid">
+    <div class="row justify-content-center">
+      <div class="col-xl-11">
+        <div class="widget head-profile has-shadow">
+          <div class="widget-body pb-0">
+            <div class="row d-flex align-items-center justify-content-around widget-content-body">
+              <div
+                class="col-xl-4 col-md-4 d-flex justify-content-lg-start justify-content-md-start justify-content-center">
+                <ul>
+                  <li>
+                    <div class="counter">{{user.completeProjects}}</div>
+                    <div class="heading">Complete </div>
+                    <div class="heading">projects</div>
+                  </li>
+                  <li>
+                    <div class="counter">{{user.yearsOfExperience}}</div>
+                    <div class="heading">Years of </div>
+                    <div class="heading">experience</div>
+                  </li>
+                </ul>
+              </div>
 
-        <p><strong>YEAR OF BIRTH: </strong></p>
-        <p><strong>PERSONALITY: </strong></p>
-        <p><strong>NICKNAME: </strong></p>
-      </div>
-      <div class="basic-info-content">
-        <p>{{user.yearOfBirth}}</p>
-        <p>{{user.personality}}</p>
-        <p>{{user.nickname}}</p>
+              <div class="col-xl-4 col-md-4 d-flex justify-content-center">
+                <div class="image-default">
+                  <img class="rounded-circle"
+                    [src]="user.profilePictureUrl ? user.profilePictureUrl : '../../../assets/img/logo.png'"
+                    alt="User profile image">
+                </div>
+                <div class="infos">
+                  <h1>{{user.firstName}} {{user.lastName}}</h1>
+                  <div class="location">{{user.countryResidence}}</div>
+                </div>
+              </div>
+
+              <!-- button trigger modal -->
+
+              <button type="button"
+                class="btn btn-primary col-xl-2 col-md-2 justify-content-lg-end justify-content-md-end justify-content-center"
+                data-toggle="modal" data-target="#exampleModal">
+                Contact
+              </button>
+
+              <!-- modal -->
+
+              <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">Contact</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="image-default">
+                      <img class="rounded-circle"
+                        [src]="user.profilePictureUrl ? user.profilePictureUrl : '../../../assets/img/logo.png'"
+                        alt="...">
+                    </div>
+                    <div class="modal-body">
+                      <p><b>Email:</b> {{user.email}}</p>
+                      <p><b>Telephone:</b> {{user.telephone}}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-    <div class="about-skills-container">
-      <div class="about">
-        <h3>ABOUT</h3>
-        <p>{{user.about}}</p>
-      </div>
-      <div class="skills">
-        <h3>SKILLS</h3>
-        <app-technologies *ngFor="let technology of user.technologies"
-                          [technology]="technology">
-        </app-technologies>
-      </div>
-      <div class="languages">
-        <h3>LANGUAGES</h3>
-        <app-laguage *ngFor="let language of user.languages"
-                          [language]="language">
-        </app-laguage>
-      </div>
-
-    </div>
-
   </div>
+
+  <!-- social links -->
+
+  <div class="px-4 py-5 my-5 text-center">
+    <p class="lead">Social Links</p>
+    <div class="d-flex align-items-start justify-content-center col-lg-6 mx-auto">
+      <ul class="nav justify-content-end">
+        <li class="nav-item">
+          <a [href]="user.gitHubURL" class="nav-link px-2 text-body-secondary">
+            <i class="bi bi-github"></i>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a [href]="user.linkedInURL" class="nav-link px-2 text-body-secondary">
+            <i class="bi bi-linkedin"></i>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a [href]="user.facebookURL" class="nav-link px-2 text-body-secondary">
+            <i class="bi bi-facebook"></i>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a [href]="user.instagramURL" class="nav-link px-2 text-body-secondary">
+            <i class="bi bi-instagram"></i>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a [href]="user.optionalPageURL" class="nav-link px-2 text-body-secondary">
+            <i class="bi bi-globe"></i>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+
+  <!-- about section -->
+
+  <div class="px-4 py-5 my-5 text-center">
+    <h1 class="display-5 fw-bold text-body-emphasis">About</h1>
+    <div class="col-lg-6 mx-auto">
+      <p class="lead mb-4">{{user.about}}</p>
+    </div>
+  </div>
+
+  <!-- skills section -->
+
+  <div class="px-4 py-5 my-5 text-center">
+    <h1 class="display-5 fw-bold text-body-emphasis">Technology Skills</h1>
+    <div class="d-flex align-items-start justify-content-center col-lg-6 mx-auto">
+      <app-technologies *ngFor="let technology of user.technologies" [technology]="technology">
+      </app-technologies>
+    </div>
+  </div>
+
+  <!-- languages section -->
+
+  <div class="px-4 py-5 my-5 text-center">
+    <h1 class="display-5 fw-bold text-body-emphasis">Languages</h1>
+    <div class="d-flex align-items-start justify-content-center col-lg-6 mx-auto">
+      <app-laguage *ngFor="let language of user.languages" [language]="language">
+      </app-laguage>
+    </div>
+  </div>
+
 </div>
+
+<app-footer></app-footer>
