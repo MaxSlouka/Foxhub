@@ -43,4 +43,16 @@ public class Post {
     public boolean isEmpty() {
         return false;
     }
+
+    public void addComment(Comment newComment) {
+        if (comments == null) {
+            comments = "";
+        }
+        if (!comments.isEmpty()) {
+            comments += "\n";
+        }
+        comments += newComment.getAuthor() + ": " + newComment.getContent();
+        commentsCount++;
+    }
+
 }
