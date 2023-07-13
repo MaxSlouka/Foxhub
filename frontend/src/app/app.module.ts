@@ -17,7 +17,6 @@ import {httpInterceptorProviders} from "./_helpers/interceptor";
 import {PeoplePageCardComponent} from "./components/people-page-card/people-page-card.component";
 import { TechnologyComponent } from './components/technology/technology.component';
 import { LaguageComponent } from './components/laguage/laguage.component';
-import { SocialMediaComponent } from './components/social-media/social-media.component';
 import { BackToTopBtnComponent } from './components/back-to-top-btn/back-to-top-btn.component';
 
 @NgModule({
@@ -34,7 +33,6 @@ import { BackToTopBtnComponent } from './components/back-to-top-btn/back-to-top-
     PeoplePageCardComponent,
     TechnologyComponent,
     LaguageComponent,
-    SocialMediaComponent,
     BackToTopBtnComponent
   ],
   imports: [
