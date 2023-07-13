@@ -1,6 +1,6 @@
 import { Component, OnInit, AfterContentInit } from '@angular/core';
 import {PeopleService} from "../../_services/people.service";
-import {User} from "../../user";
+import {User} from "../../models/user";
 
 @Component({
   selector: 'app-people-page',
@@ -15,7 +15,6 @@ export class PeoplePageComponent implements OnInit{
 
   ngOnInit(): void {
     this.peopleService.getAll().subscribe((users) => this.users = users)
-    console.log(this.users);
   }
 
 }

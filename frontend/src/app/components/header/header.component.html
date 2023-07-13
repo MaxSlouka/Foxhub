@@ -1,50 +1,70 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg">
+
+  <!-- logo -->
+
   <a class="navbar-brand" href="./">
-    <img src="../../../assets/img/GFA-logo.png" width="30" height="30" alt="">
   </a>
+
+  <!-- collapse hamburger -->
+
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
     aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
+    <svg class="ham hamRotate ham7" viewBox="0 0 100 100" width="50" onclick="this.classList.toggle('active')">
+      <path class="line top" d="m 70,33 h -40 c 0,0 -6,1.368796 -6,8.5 0,7.131204 6,8.5013 6,8.5013 l 20,-0.0013" />
+      <path class="line middle" d="m 70,50 h -40" />
+      <path class="line bottom"
+        d="m 69.575405,67.073826 h -40 c -5.592752,0 -6.873604,-9.348582 1.371031,-9.348582 8.244634,0 19.053564,21.797129 19.053564,12.274756 l 0,-40" />
+    </svg>
   </button>
 
+  <!-- navbar -->
+
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="./">Home</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="./register">Register</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="./login">Login</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="./main">Visitor</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="./profile">Profile</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="./people">People</a>
-      </li>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-          aria-haspopup="true" aria-expanded="false">
-          LoggedUser
+    <div class="d-flex flex-wrap align-items-center justify-content-center py-3 mb-4 border-bottom">
+
+      <!-- logo -->
+
+      <a class="navbar-brand" href="./">
+        <img src="../../../assets/img/GFA-logo.png" width="50" height="50" alt="">
+      </a>
+
+      <!-- nav items -->
+
+      <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+        <li class="nav-item"><a href="./main" class="nav-link px-2">Main</a></li>
+        <li class="nav-item"><a href="./people" class="nav-link px-2">People</a></li>
+      </ul>
+
+      <!-- search form -->
+
+      <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
+        <input type="search" class="form-control form-control-dark text-bg-dark" placeholder="Search..."
+          aria-label="Search">
+      </form>
+
+      <!-- login and sign up -->
+
+      <div class="text-end" *ngIf="!isLoggedIn">
+        <a href="./login" class="btn btn-primary" role="button" aria-disabled="true">Sign in</a>
+        <a href="./register" class="btn btn-outline-secondary" role="button" aria-disabled="true">Sign up</a>
+      </div>
+
+      <!-- user options -->
+
+      <!-- Example single danger button -->
+      <div class="btn-group" *ngIf="isLoggedIn">
+        <a href="#" class="d-block link-body-emphasis text-decoration-none dropdown-toggle" data-toggle="dropdown"
+          aria-expanded="false">
+          <img src="https://github.com/mdo.png" alt="mdo" width="32" height="32" class="rounded-circle">
         </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="./profile">My Profile</a>
-          <a class="dropdown-item" href="./profile">Update Profile</a>
+        <div class="dropdown-menu">
+          <a class="dropdown-item" href="#">Profile</a>
+          <a class="dropdown-item" href="#">Settings</a>
           <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="./profile">Delete Profile</a>
+          <a class="dropdown-item" href="#">Sign out</a>
         </div>
-      </li>
-    </ul>
-    <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" />
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
-        Search for User
-      </button>
-    </form>
+      </div>
+
+    </div>
   </div>
 </nav>

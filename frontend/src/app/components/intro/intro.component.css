@@ -1,5 +1,6 @@
 a {
     margin-right: 1rem;
+    margin-top: 1rem;
 }
 
 .btn-primary {
@@ -9,4 +10,31 @@ a {
 
 .btn-primary:hover {
     background-color: rgb(0, 90, 0);
+}
+
+h1 {
+    font-weight: bolder;
+}
+
+h1 span,
+h2 span {
+    color: rgb(0, 127, 0);
+}
+
+img {
+    margin: 2rem;
+}
+
+.feature-icons i {
+    font-size: 2rem;
+    margin-right: 1rem;
+    color: rgb(0, 127, 0);
+}
+
+.feature-icons div p {
+    margin-top: 1rem;
+}
+
+#icon-grid {
+    margin-top: 5rem;
 }

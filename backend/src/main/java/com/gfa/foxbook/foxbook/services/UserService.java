@@ -18,4 +18,8 @@ public interface UserService {
     Optional<User> upgradeUser(String nickname);
 
     String accessProfileUrl(User user);
+
+    Optional<User> findByEmail(String name);
+
+    void addComment(User existingUser, String comment);
 }

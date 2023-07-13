@@ -3,11 +3,12 @@ package com.gfa.foxbook.foxbook.services;
 import com.gfa.foxbook.foxbook.models.Post;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface PostService {
-    public Post save(Post post);
 
-    public Post findById(Long id);
+    Optional<Post> findById(Long id);
+    public Post save(Post post);
 
     public void delete(Post post);
 
@@ -20,13 +21,12 @@ public interface PostService {
     public List<Post> findAllByOrderByLikesDesc();
 
     public List<Post> findByUserName(String authorName);
-    Post createPost(String author, String content);
-
-    Post createPost(Post post);
-
-    Post findByID(Long id);
 
     void remove(Post post);
 
+    Post createPost(String author, String title, String content);
 
+    Post editPost(Long id, String title, String content);
+
+    Post editPost(Post post);
 }

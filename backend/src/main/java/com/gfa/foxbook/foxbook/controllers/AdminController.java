@@ -8,6 +8,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
+import java.net.URI;
+import java.util.Optional;
 
 import java.util.Optional;
 
@@ -19,7 +23,12 @@ public class AdminController {
     public final UserService userService;
     @GetMapping("/posts/{id}")
     public ResponseEntity<?> getPostById(@PathVariable Long id) {
-        return postService.findById(id).isEmpty() ? ResponseEntity.notFound().build() : ResponseEntity.ok().build();
+        Optional<Post> optionalPost = postService.findById(id);
+        if (optionalPost.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+        Post post = optionalPost.get();
+        return ResponseEntity.ok(post);
     }
 
     @PostMapping("/posts")
@@ -27,20 +36,37 @@ public class AdminController {
         if (post == null) {
             return ResponseEntity.badRequest().body("You have to write something!");
         }
-        Post newPost = postService.createPost(post.getAuthor(), post.getContent());
-        return ResponseEntity.ok().body(newPost);
+        Post newPost = postService.createPost(post.getAuthor(), post.getTitle(), post.getContent());
+        URI location = ServletUriComponentsBuilder
+                .fromCurrentRequest()
+                .path("/{id}")
+                .buildAndExpand(newPost.getId())
+                .toUri();
+        return ResponseEntity.created(location).body(newPost);
     }
 
     @PutMapping("/posts/{id}")
     public ResponseEntity<?> updatePost(@PathVariable Long id, @RequestBody Post post) {
-        return postService.findById(id).isEmpty() ? ResponseEntity.notFound().build() : ResponseEntity.ok().build();
+        Optional<Post> optionalPost = postService.findById(id);
+        if (optionalPost.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+        Post existingPost = optionalPost.get();
+        existingPost.setTitle(post.getTitle());
+        existingPost.setContent(post.getContent());
+        Post updatedPost = postService.editPost(existingPost);
+        return ResponseEntity.ok(updatedPost);
     }
 
     @DeleteMapping("/posts/{id}")
     public ResponseEntity<?> deletePost(@PathVariable Long id) {
-        Post post = postService.findByID(id);
+        Optional<Post> optionalPost = postService.findById(id);
+        if (optionalPost.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+        Post post = optionalPost.get();
         postService.remove(post);
-        return ResponseEntity.status(200).body(post);
+        return ResponseEntity.noContent().build();
     }
     //todo: admin can make other users admin
     // following is a draft

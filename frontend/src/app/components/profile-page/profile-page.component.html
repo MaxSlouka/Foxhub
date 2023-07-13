@@ -1,75 +1,61 @@
 <app-header></app-header>
 
+<app-back-to-top-btn></app-back-to-top-btn>
+
 <div class="container">
   <div class="theme-container">
-    <a href="main" class="toMainButton">
-      <i class="fas fa-home"></i>
-    </a>
   </div>
   <div class="profile-picture-container"></div>
   <div class="social-line">
     <i class="fab fa-facebook"></i>
-    <i class="fab fa-instagram"></i>
+    <a href="https://www.instagram.com/miroslav_doan/"><i class="fab fa-instagram"></i></a>
     <i class="fab fa-github"></i>
     <i class="fab fa-linkedin"></i>
     <i class="fab fa-twitter"></i>
     <i class="fab fa-reddit"></i>
   </div>
   <div class="info-container">
-    <h1>JOHN DOE BANANA</h1>
+    <h1>{{user.firstName}} {{user.lastName}}</h1>
     <h3>Info</h3>
     <div class="info">
       <div class="basic-info">
-        <p><strong>AGE: </strong></p>
         <p><strong>LOCATION: </strong></p>
         <p><strong>TEL:</strong></p>
         <p><strong>EMAIL:</strong></p>
       </div>
       <div class="basic-info-content">
-        <p>12</p>
-        <p>Prague</p>
-        <p>278 666</p>
-        <p>monika.s@mirdo.com</p>
+        <p>{{user.countryResidence}}</p>
+        <p>{{user.telephone}}</p>
+        <p>{{user.email}}</p>
       </div>
       <div class="basic-info">
-        <p><strong>SOMETHING:</strong></p>
-        <p><strong>INFO: </strong></p>
-        <p><strong>LOREM: </strong></p>
-        <p><strong>MEHEHE: </strong></p>
+
+        <p><strong>YEAR OF BIRTH: </strong></p>
+        <p><strong>PERSONALITY: </strong></p>
+        <p><strong>NICKNAME: </strong></p>
       </div>
       <div class="basic-info-content">
-        <p>bla bla</p>
-        <p>Miroslav Doan</p>
-        <p>xxx</p>
-        <p>monika.s@mirdo.com</p>
+        <p>{{user.yearOfBirth}}</p>
+        <p>{{user.personality}}</p>
+        <p>{{user.nickname}}</p>
       </div>
     </div>
     <div class="about-skills-container">
       <div class="about">
         <h3>ABOUT</h3>
-        <p>Chuck Norris, born Carlos Ray Norris,
-          is an American martial artist, actor,
-          and former professional fighter.
-          Renowned for his exceptional martial
-          arts skills, Norris has achieved legendary
-          status in pop culture. He gained prominence
-          through his appearances in martial arts films
-          during the 1970s and 1980s, including "Way
-          of the Dragon" alongside Bruce Lee. Besides
-          his film career, Norris is a highly accomplished
-          martial artist, holding black belts in multiple
-          disciplines. He is also known for his philanthropy,
-          supporting various charitable causes. Chuck Norris
-          continues to inspire fans worldwide with his iconic
-          tough-guy persona and his enduring impact on martial
-          arts cinema.</p>
+        <p>{{user.about}}</p>
       </div>
       <div class="skills">
         <h3>SKILLS</h3>
-        <h5>JAVA</h5>
-        <h5>ANGULAR</h5>
-        <h5>REACT</h5>
-        <h5>BOOTSTRAP</h5>
+        <app-technologies *ngFor="let technology of user.technologies"
+                          [technology]="technology">
+        </app-technologies>
+      </div>
+      <div class="languages">
+        <h3>LANGUAGES</h3>
+        <app-laguage *ngFor="let language of user.languages"
+                          [language]="language">
+        </app-laguage>
       </div>
 
     </div>
