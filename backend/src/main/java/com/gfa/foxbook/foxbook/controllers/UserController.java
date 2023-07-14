@@ -3,6 +3,7 @@ package com.gfa.foxbook.foxbook.controllers;
 import com.gfa.foxbook.foxbook.models.Comment;
 import com.gfa.foxbook.foxbook.models.Post;
 import com.gfa.foxbook.foxbook.models.User;
+import com.gfa.foxbook.foxbook.models.dtos.UserBasicDTO;
 import com.gfa.foxbook.foxbook.security.jwt.JwtUtils;
 import com.gfa.foxbook.foxbook.services.PostService;
 import com.gfa.foxbook.foxbook.services.UserService;
@@ -20,6 +21,7 @@ import java.util.Optional;
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("api/v1/user")
+@CrossOrigin(origins = "http://localhost:4200", maxAge = 3600, allowCredentials="true")
 public class UserController {
     private final UserService userService;
     private final JwtUtils jwtUtils;
@@ -35,7 +37,11 @@ public class UserController {
             return ResponseEntity.notFound().build();
         }
         User user = maybeUser.get();
-        return ResponseEntity.ok(user);
+        UserBasicDTO userBasicDTO = new UserBasicDTO();
+        userBasicDTO.setFirstName(user.getFirstName());
+        userBasicDTO.setLastName(user.getLastName());
+        userBasicDTO.setEmail(user.getEmail());
+        return ResponseEntity.ok(userBasicDTO);
         // todo recheck security holes
     }
 
@@ -68,9 +74,9 @@ public class UserController {
 
         User existingUser = maybeUser.get();
 
-        if (!existingUser.getEmail().equals(principal.getName())) {
-            return ResponseEntity.status(HttpStatus.FORBIDDEN).body("You are not allowed to update this profile.");
-        }
+//        if (!existingUser.getEmail().equals(principal.getName())) {
+//            return ResponseEntity.status(HttpStatus.FORBIDDEN).body("You are not allowed to update this profile.");
+//        } // todo recheck security holes
 
         userService.updateProfile(user);
 

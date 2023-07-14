@@ -5,8 +5,7 @@
                 <div class="col-md-3 border-right">
                         <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img
                                         class="rounded-circle mt-5" width="150px"
-                                        src="../../../assets/img/logo.png"><span class="font-weight-bold">userName +
-                                        userLastname</span><span class="text-black-50">user@email.com</span><span>
+                                        src="../../../assets/img/logo.png"><span class="font-weight-bold">{{firstName}} {{lastName}}</span><span class="text-black-50">{{email}}</span><span>
                                 </span></div>
                 </div>
                 <div class="col-md-5 border-right">
@@ -82,7 +81,7 @@
                                                                 <p class="lead">This action can't be undone.</p>
                                                         </div>
                                                         <div class="text-center">
-                                                                <button class="btn btn-danger profile-button profile-delete-btn" type="button" data-toggle="modal" data-target="#exampleModal">Delete
+                                                                <button (click)="deleteAccount()" class="btn btn-danger profile-button profile-delete-btn" type="button" data-toggle="modal" data-target="#exampleModal">Delete
                                                                         Profile</button>
                                                         </div>
                                                 </div>
