@@ -1,5 +1,4 @@
-form{
-  /*position: -webkit-sticky; !* Safari *!*/
+form {
   position: sticky;
   top: 0;
 }
