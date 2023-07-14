@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthService} from "../../_services/auth.service";
 import {StorageService} from "../../_services/storage.service";
+import {Router} from "@angular/router";
 
 
 @Component({
@@ -19,7 +20,7 @@ export class LoginComponent implements OnInit {
   roles: string[] = [];
   userNickname: string = '';
 
-  constructor(private authService: AuthService, private storageService: StorageService) {
+  constructor(private authService: AuthService, private storageService: StorageService, private router: Router) {
   }
 
 
@@ -47,8 +48,7 @@ export class LoginComponent implements OnInit {
         }
       }
     )
-    // redirect to home page
-    window.location.href = '';
+    this.router.navigate(['']);
   }
 
   reloadPage(): void {
