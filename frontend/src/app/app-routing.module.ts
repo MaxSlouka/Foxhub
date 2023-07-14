@@ -19,11 +19,12 @@ const routes: Routes = [
 
   {path: 'profile/:username', component: ProfilePageComponent},
   {path: '**', pathMatch: 'full', component: PageNotFoundComponent}
-
+]
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
+
 export class AppRoutingModule {
 }
