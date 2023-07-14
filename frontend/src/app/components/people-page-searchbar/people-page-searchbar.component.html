@@ -1,0 +1,13 @@
+
+
+    <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
+      <input type="search"
+             (ngModelChange)="searchUser(key.value)" #key="ngModel" ngModel
+             name="key"
+             class="form-control form-control-dark text-bg-dark"
+             placeholder="Search user"
+             aria-label="Search">
+    </form>
+
+
+<app-people-page-card *ngFor="let user of users" [user]="user"></app-people-page-card>
