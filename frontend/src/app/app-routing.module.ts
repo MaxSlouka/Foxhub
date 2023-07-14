@@ -16,11 +16,10 @@ const routes: Routes = [
   {path: 'main', component: MainPageComponent},
   {path: 'people', component: PeoplePageComponent},
   {path: 'profile', component: ProfilePageComponent},
-
   {path: 'profile/:username', component: ProfilePageComponent},
   {path: '**', pathMatch: 'full', component: PageNotFoundComponent}
-
 ]
+
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]

@@ -42,13 +42,13 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                     new WebAuthenticationDetailsSource().buildDetails(request));
             SecurityContextHolder.getContext().setAuthentication(authenticationToken);
         }
-    if (token == null && refreshToken != null && jwtUtils.validateJwtToken(refreshToken)) {
-        // generate new access token from refresh token add it to response
-        ResponseCookie jwtCookie = jwtUtils.generateJwtCookie(jwtUtils.getRefreshTokenValidateAndGenerateAccessToken(request));
-        response.addHeader("Set-Cookie", jwtCookie.toString());
-
-        // new content might be buggy
-        }
+//        if (token == null && refreshToken != null && jwtUtils.validateJwtToken(refreshToken)) {
+//            // generate new access token from refresh token add it to response
+//            ResponseCookie jwtCookie = jwtUtils.generateJwtCookie(jwtUtils.getRefreshTokenValidateAndGenerateAccessToken(request));
+//            response.addHeader("Set-Cookie", jwtCookie.toString());
+//
+//            // new content might be buggy
+//        }
         // todo: logic for if the access token is expired and refresh token is valid
         // but the user is not logged in
         filterChain.doFilter(request, response);
