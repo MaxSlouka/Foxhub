@@ -80,10 +80,18 @@ public class JwtUtils {
     // --- getting jwt from cookies ---
 
     public String getJwtFromCookies(HttpServletRequest request) {
-        return getCookieValueByName(request, "token");
+        try {
+            return getCookieValueByName(request, "token");
+        } catch (Exception e) {
+            return null;
+        }
     }
     public String getRefreshJwtFromCookies(HttpServletRequest request) {
-        return getCookieValueByName(request, "refreshToken");
+        try {
+            return getCookieValueByName(request, "refreshToken");
+        } catch (Exception e) {
+            return null;
+        }
     }
 
 
@@ -132,12 +140,12 @@ public class JwtUtils {
     }
     // clean cookies
     public ResponseCookie getCleanJwtCookie() {
-        ResponseCookie cookie = ResponseCookie.from("token", null).path("/").build();
+        ResponseCookie cookie = ResponseCookie.from("token", "Fox").path("/").build();
         return cookie;
     }
 
     public ResponseCookie getCleanJwtRefreshCookie() {
-        ResponseCookie cookie = ResponseCookie.from("refreshToken", null).path("/").build();
+        ResponseCookie cookie = ResponseCookie.from("refreshToken", "Foxx").path("/").build();
         return cookie;
     }
 
