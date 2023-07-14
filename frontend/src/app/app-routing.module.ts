@@ -8,6 +8,7 @@ import {RegisterComponent} from "./components/register/register.component";
 import {IntroComponent} from "./components/intro/intro.component";
 import {PageNotFoundComponent} from "./components/page-not-found/page-not-found.component";
 import { UserSettingsPageComponent } from './components/user-settings-page/user-settings-page.component';
+import { TermsOfUseComponent } from './components/terms-of-use/terms-of-use.component';
 
 const routes: Routes = [
   {path: '', component: IntroComponent},
@@ -18,6 +19,7 @@ const routes: Routes = [
   {path: 'profile', component: ProfilePageComponent},
   {path: 'profile/:username', component: ProfilePageComponent},
   {path: 'update-profile', component: UserSettingsPageComponent},
+  {path: 'termsOfUse', component: TermsOfUseComponent},
   {path: '**', pathMatch: 'full', component: PageNotFoundComponent}
 ]
 
