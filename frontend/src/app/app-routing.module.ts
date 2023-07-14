@@ -17,6 +17,7 @@ const routes: Routes = [
   {path: 'people', component: PeoplePageComponent},
   {path: 'profile', component: ProfilePageComponent},
   {path: 'profile/:username', component: ProfilePageComponent},
+  {path: 'update-profile', component: UserSettingsPageComponent},
   {path: '**', pathMatch: 'full', component: PageNotFoundComponent}
 ]
 
