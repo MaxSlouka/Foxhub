@@ -31,6 +31,25 @@
     cursor: pointer
 }
 
+.profile-delete-btn {
+    margin: 2rem;
+}
+
+.profile-delete-btn:active {
+    background: rgb(164, 0, 0);
+}
+
+.profile-delete-btn:focus {
+    background: rgb(164, 0, 0);
+}
+
+.modal-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, 50%);
+  }
+
 .labels {
     font-size: 11px
 }
