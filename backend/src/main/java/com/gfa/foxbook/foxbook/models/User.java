@@ -50,7 +50,7 @@ public class User {
     private String gitHubURL;
     private String optionalPageURL;
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
     @JoinTable(
             name = "users_roles",
             joinColumns = {@JoinColumn(name = "users_id", referencedColumnName = "id")},

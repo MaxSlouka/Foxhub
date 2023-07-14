@@ -46,20 +46,17 @@ public class UserController {
     }
 
 
-    @DeleteMapping("/people/{id}")
-    public ResponseEntity<?> deletePerson(@PathVariable Long id, Principal principal) {
-        Optional<User> user = userService.findById(id);
-        if (user.isEmpty()) {
+    @DeleteMapping("/people")
+    public ResponseEntity<?> deletePerson(HttpServletRequest request){
+        String token = jwtUtils.getJwtFromCookies(request);
+        String email = jwtUtils.getUserNameFromJwtToken(token);
+        Optional<User> maybeUser = userService.findByEmail(email);
+        if (maybeUser.isEmpty()) {
             return ResponseEntity.notFound().build();
         }
+        User requestUser = maybeUser.get();
 
-        User existingUser = user.get();
-
-        if (!existingUser.getEmail().equals(principal.getName())) {
-            return ResponseEntity.status(HttpStatus.FORBIDDEN).body("You are not allowed to delete this profile.");
-        }
-
-        userService.delete(existingUser);
+        userService.delete(requestUser);
         return ResponseEntity.noContent().build();
     }
 

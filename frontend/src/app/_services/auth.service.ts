@@ -40,13 +40,11 @@ export class AuthService {
     );
   }
   logout():void{
-    console.log("logout"); // todo: remove
     this.http.post(
       'http://localhost:8080/api/v1/auth/signout',
       {},
       httpOptions
     ).subscribe(ok => {
-      console.log(ok); // todo: remove
 
 
     });
