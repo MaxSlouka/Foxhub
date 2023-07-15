@@ -1,12 +1,16 @@
 import { Injectable } from '@angular/core';
 import {Observable} from "rxjs";
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {User} from "../../models/user";
+
+const httpOptions = {
+  headers: new HttpHeaders({'Content-type': 'application/json'})
+}
 
 @Injectable({
   providedIn: 'root'
 })
-export class RequestsService {
+export class ApiService {
 
 
   constructor(private http: HttpClient) { }
@@ -17,4 +21,13 @@ export class RequestsService {
   deleteUser():Observable<any>{
     return this.http.delete('http://localhost:8080/api/v1/user/people');
   }
+
+  updateUser(firstName: string, lastName: string, email: string):Observable<any> {
+    return this.http.patch("http://localhost:8080/api/v1/user/people", {
+      firstName,
+      lastName,
+      email
+    },
+      httpOptions
+    );}
 }

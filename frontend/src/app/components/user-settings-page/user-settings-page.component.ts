@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {StorageService} from "../../_services/storage.service";
-import {RequestsService} from "../../_services/requests/requests.service";
+import {ApiService} from "../../_services/api/api.service";
 import {User} from "../../models/user";
 import {AuthService} from "../../_services/auth.service";
 
@@ -10,16 +10,23 @@ import {AuthService} from "../../_services/auth.service";
   styleUrls: ['./user-settings-page.component.css']
 })
 export class UserSettingsPageComponent {
+  form:any = {
+    firstName: null,
+    lastName: null,
+    email: null,
+};
 
-firstName: string = "";
-lastName: string = "";
-email: string = "";
-nickname: string = "";
+  firstName: string = "";
+  lastName: string = "";
+  email: string = "";
+  nickname: string = "";
 
-  constructor(private storageService: StorageService, private requestsService:RequestsService, private authService:AuthService) { }
+  constructor(private storageService: StorageService, private apiService: ApiService, private authService: AuthService) {
+  }
+
   ngOnInit(): void {
     this.nickname = this.storageService.getUser();
-    this.requestsService.getUserBasicInfo().subscribe((user: User) => {
+    this.apiService.getUserBasicInfo().subscribe((user: User) => {
       this.firstName = user.firstName;
       this.lastName = user.lastName;
       this.email = user.email;
@@ -28,9 +35,8 @@ nickname: string = "";
   }
 
 
-
   deleteAccount(): void {
-    this.requestsService.deleteUser().subscribe();
+    this.apiService.deleteUser().subscribe();
     this.authService.logout();
     this.storageService.logout();
 
@@ -40,4 +46,9 @@ nickname: string = "";
 
   }
 
+  updateUser() {
+    const {firstName, lastName, email} = this.form;
+    this.apiService.updateUser(firstName, lastName, email).subscribe();
+
+  }
 }
