@@ -33,6 +33,7 @@ export class HeaderComponent implements OnInit {
       // this.roles = this.storageService.getUser().roles;
     }
 
+    // was causing error - maybe needed
     // this.username=this.activatedroute.snapshot.paramMap.get("username");
     // this.profileService.getUser(this.username)
     //   .subscribe(user => this.user = user);
