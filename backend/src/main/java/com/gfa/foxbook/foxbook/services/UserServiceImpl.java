@@ -1,5 +1,6 @@
 package com.gfa.foxbook.foxbook.services;
 
+import com.gfa.foxbook.foxbook.models.dtos.UserBasicDTO;
 import com.gfa.foxbook.foxbook.models.nonusermodels.Role;
 import com.gfa.foxbook.foxbook.models.User;
 import com.gfa.foxbook.foxbook.repositories.UserRepository;
@@ -76,5 +77,13 @@ public class UserServiceImpl implements UserService {
         commentService.comment(existingUser.getId(), existingUser.getId(), comment);
         userRepository.save(existingUser);
 
+    }
+@Override
+    public UserBasicDTO convertToUserBasicDTO(User user) {
+        UserBasicDTO userBasicDTO = new UserBasicDTO();
+        userBasicDTO.setFirstName(user.getFirstName());
+        userBasicDTO.setLastName(user.getLastName());
+        userBasicDTO.setEmail(user.getEmail());
+        return userBasicDTO;
     }
 }

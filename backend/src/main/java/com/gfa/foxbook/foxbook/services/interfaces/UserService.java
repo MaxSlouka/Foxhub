@@ -1,6 +1,7 @@
 package com.gfa.foxbook.foxbook.services.interfaces;
 
 import com.gfa.foxbook.foxbook.models.User;
+import com.gfa.foxbook.foxbook.models.dtos.UserBasicDTO;
 
 import java.util.Optional;
 import java.util.List;
@@ -22,4 +23,5 @@ public interface UserService {
     Optional<User> findByEmail(String name);
 
     void addComment(User existingUser, String comment);
+    public UserBasicDTO convertToUserBasicDTO(User user);
 }
