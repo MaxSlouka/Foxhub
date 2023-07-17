@@ -1,6 +1,6 @@
-package com.gfa.foxbook.foxbook.services;
+package com.gfa.foxbook.foxbook.security.services;
 
-import com.gfa.foxbook.foxbook.models.Role;
+import com.gfa.foxbook.foxbook.models.nonusermodels.Role;
 import com.gfa.foxbook.foxbook.models.User;
 import com.gfa.foxbook.foxbook.models.dtos.security.RegisterDto;
 import com.gfa.foxbook.foxbook.repositories.RoleRepository;

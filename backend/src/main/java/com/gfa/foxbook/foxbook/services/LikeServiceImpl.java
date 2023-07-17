@@ -1,11 +1,12 @@
 package com.gfa.foxbook.foxbook.services;
 
-import com.gfa.foxbook.foxbook.models.Like;
-import com.gfa.foxbook.foxbook.models.Post;
+import com.gfa.foxbook.foxbook.models.nonusermodels.Like;
+import com.gfa.foxbook.foxbook.models.nonusermodels.Post;
 import com.gfa.foxbook.foxbook.models.User;
 import com.gfa.foxbook.foxbook.repositories.LikeRepository;
 import com.gfa.foxbook.foxbook.repositories.PostRepository;
 import com.gfa.foxbook.foxbook.repositories.UserRepository;
+import com.gfa.foxbook.foxbook.services.interfaces.LikeService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,8 +21,8 @@ public class LikeServiceImpl implements LikeService {
     private final LikeRepository likeRepository;
     private final UserRepository userRepository;
     private final PostRepository postRepository;
-
     @Override
+
     public void likePost(Long postId, Long userId) {
         assert likeRepository != null;
         Like like = likeRepository.findByPostIdAndUserId(postId, userId);

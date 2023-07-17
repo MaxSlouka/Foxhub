@@ -1,7 +1,7 @@
 package com.gfa.foxbook.foxbook.security.services;
 
 import com.gfa.foxbook.foxbook.models.User;
-import com.gfa.foxbook.foxbook.models.Role;
+import com.gfa.foxbook.foxbook.models.nonusermodels.Role;
 import com.gfa.foxbook.foxbook.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;

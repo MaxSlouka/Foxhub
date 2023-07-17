@@ -1,6 +1,6 @@
 package com.gfa.foxbook.foxbook.repositories;
 
-import com.gfa.foxbook.foxbook.models.Language;
+import com.gfa.foxbook.foxbook.models.nonusermodels.Language;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

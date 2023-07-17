@@ -1,6 +1,6 @@
 package com.gfa.foxbook.foxbook.repositories;
 
-import com.gfa.foxbook.foxbook.models.Comment;
+import com.gfa.foxbook.foxbook.models.nonusermodels.Comment;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

@@ -1,6 +1,6 @@
-package com.gfa.foxbook.foxbook.services;
+package com.gfa.foxbook.foxbook.services.interfaces;
 
-import com.gfa.foxbook.foxbook.models.Like;
+import com.gfa.foxbook.foxbook.models.nonusermodels.Like;
 import com.gfa.foxbook.foxbook.models.User;
 
 public interface LikeService {

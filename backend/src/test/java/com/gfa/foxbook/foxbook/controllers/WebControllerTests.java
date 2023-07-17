@@ -1,6 +1,6 @@
 package com.gfa.foxbook.foxbook.controllers;
 
-import com.gfa.foxbook.foxbook.services.UserService;
+import com.gfa.foxbook.foxbook.services.interfaces.UserService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mockito;
