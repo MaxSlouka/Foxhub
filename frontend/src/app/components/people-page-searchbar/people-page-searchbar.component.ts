@@ -1,17 +1,22 @@
 import {Component, Input} from '@angular/core';
 import {User} from "../../models/user";
 
+
 @Component({
   selector: 'app-people-page-searchbar',
   templateUrl: './people-page-searchbar.component.html',
-  styleUrls: ['./people-page-searchbar.component.css']
+  styleUrls: ['./people-page-searchbar.component.css'],
+
 })
 export class PeoplePageSearchbarComponent {
-// @ts-ignore
-  @Input() users: User[];
+  // @ts-ignore
+  @Input users: User[] = [];
 
   // @ts-ignore
   filtered: User[];
+
+ngOnInit(){
+}
 
   public searchUser(key: string): void {
     let results: User[] = [];
@@ -39,7 +44,7 @@ export class PeoplePageSearchbarComponent {
 
     this.filtered = results;
 
-    if(!key){
+    if (!key) {
       this.filtered = [];
     }
   }

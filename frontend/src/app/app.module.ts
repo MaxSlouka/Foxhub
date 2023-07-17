@@ -26,6 +26,7 @@ import { TermsOfUseComponent } from './components/terms-of-use/terms-of-use.comp
 import { FoxbookFunLettersComponent } from './components/foxbook-fun-letters/foxbook-fun-letters.component';
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -46,7 +47,8 @@ import { FoxbookFunLettersComponent } from './components/foxbook-fun-letters/fox
     PageNotFoundComponent,
     UserSettingsPageComponent,
     TermsOfUseComponent,
-    FoxbookFunLettersComponent
+    FoxbookFunLettersComponent,
+
 
   ],
   imports: [

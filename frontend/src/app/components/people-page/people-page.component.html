@@ -29,8 +29,9 @@
   <h1 class="display-5 fw-bold text-body-emphasis">Let's explore</h1>
 </div>
 
-<!-- people section -->
-<app-people-page-searchbar [users]="users"
-></app-people-page-searchbar>
 
+<!-- people section -->
+<ng-container *ngIf="dataService.users">
+<app-people-page-searchbar [users] = dataService.users></app-people-page-searchbar>
+</ng-container>
 <app-footer></app-footer>
