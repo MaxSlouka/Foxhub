@@ -1,7 +1,6 @@
 import {Component, Input} from '@angular/core';
 import {User} from "../../models/user";
 
-
 @Component({
   selector: 'app-people-page-searchbar',
   templateUrl: './people-page-searchbar.component.html',
@@ -11,18 +10,31 @@ export class PeoplePageSearchbarComponent {
 // @ts-ignore
   @Input() users: User[];
   // @ts-ignore
-  @Input() fullUsers:User[];
+  @Input() fullUsers: User[];
+
   public searchUser(key: string): void {
     let results: User[] = [];
-    for (const user of this.users) {
-      if (user.firstName.toLowerCase().indexOf(key.toLowerCase()) !== -1
-        || user.lastName.toLowerCase().indexOf(key.toLowerCase()) !== -1) {
-        results.push(user);
+    for (const user of this.fullUsers) {
+      let hasTechnologyMatch = false;
+
+      // @ts-ignore
+      for (const technology of user.technologies) {
+        if (technology.name.toLowerCase().includes(key.toLowerCase())) {
+          results.push(user);
+          hasTechnologyMatch = true;
+          break;
+        }
+      }
+
+      if (!hasTechnologyMatch) {
+        if (
+          user.firstName.toLowerCase().includes(key.toLowerCase()) ||
+          user.lastName.toLowerCase().includes(key.toLowerCase())
+        ) {
+          results.push(user);
+        }
       }
     }
     this.users = results;
-    if(!key){
-      this.users = this.fullUsers
-    }
   }
 }

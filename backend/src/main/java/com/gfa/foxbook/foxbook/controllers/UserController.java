@@ -1,11 +1,13 @@
 package com.gfa.foxbook.foxbook.controllers;
 
 import com.gfa.foxbook.foxbook.models.Comment;
+import com.gfa.foxbook.foxbook.models.Like;
 import com.gfa.foxbook.foxbook.models.Post;
 import com.gfa.foxbook.foxbook.models.User;
 import com.gfa.foxbook.foxbook.models.dtos.UserBasicDTO;
 import com.gfa.foxbook.foxbook.models.dtos.UserUpdateDTO;
 import com.gfa.foxbook.foxbook.security.jwt.JwtUtils;
+import com.gfa.foxbook.foxbook.services.LikeService;
 import com.gfa.foxbook.foxbook.services.PostService;
 import com.gfa.foxbook.foxbook.services.UserService;
 import jakarta.servlet.http.HttpServletRequest;
@@ -13,8 +15,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-
 import java.security.Principal;
+import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -25,6 +28,7 @@ public class UserController {
     private final UserService userService;
     private final JwtUtils jwtUtils;
     private final PostService postService;
+    private final LikeService likeService;
 
 
     @GetMapping("/person")
@@ -115,5 +119,30 @@ public class UserController {
         return ResponseEntity.ok().build();
     }
 
+    @PostMapping("/posts/{postId}/like")
+    public ResponseEntity<?> likePost(@PathVariable Long postId, Principal principal) {
+        Optional<Post> maybePost = postService.findById(postId);
 
-}
+        if (!maybePost.isPresent()) {
+            return ResponseEntity.notFound().build();
+        }
+
+        Post post = maybePost.get();
+        Optional<User> maybeUser = userService.findByEmail(principal.getName());
+
+        if (maybeUser.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+
+        User user = maybeUser.get();
+
+        if (likeService.hasUserLikedPost(postId, user.getId())) {
+            return ResponseEntity.badRequest().body("You already liked this post.");
+        }
+
+        Like like = new Like(post, user.getId(), 0, false);
+        likeService.like(like);
+
+        return ResponseEntity.ok().build();
+    }
+    }
