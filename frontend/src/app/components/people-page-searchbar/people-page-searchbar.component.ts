@@ -12,6 +12,9 @@ export class PeoplePageSearchbarComponent {
   // @ts-ignore
   @Input() fullUsers: User[];
 
+  // @ts-ignore
+  filtered: User[];
+
   public searchUser(key: string): void {
     let results: User[] = [];
     for (const user of this.fullUsers) {
@@ -35,6 +38,11 @@ export class PeoplePageSearchbarComponent {
         }
       }
     }
-    this.users = results;
+
+    this.filtered = results;
+
+    if(!key){
+      this.filtered = [];
+    }
   }
 }
