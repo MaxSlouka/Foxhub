@@ -1,25 +1,24 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, EventEmitter, Output} from '@angular/core';
 import {User} from "../../models/user";
 
 
 @Component({
-  selector: 'app-people-page-searchbar',
-  templateUrl: './people-page-searchbar.component.html',
-  styleUrls: ['./people-page-searchbar.component.css'],
-
+  selector: 'app-header-searchbar',
+  templateUrl: './header-searchbar.component.html',
+  styleUrls: ['./header-searchbar.component.css']
 })
-export class PeoplePageSearchbarComponent {
+export class HeaderSearchbarComponent {
   // @ts-ignore
-  @Input users: User[];
-// @ts-ignore
-  @Input fullUsers: User[];
+  @Input() users: User[];
+  // @ts-ignore
+  filtered: User[];
 
-ngOnInit(){
-}
+  @Output() dataEvent = new EventEmitter<any>();
+
 
   public searchUser(key: string): void {
     let results: User[] = [];
-    for (const user of this.fullUsers) {
+    for (const user of this.users) {
       let hasTechnologyMatch = false;
 
       // @ts-ignore
@@ -40,6 +39,12 @@ ngOnInit(){
         }
       }
     }
-    this.users = results;
+
+    this.filtered = results;
+
+    if (!key) {
+      this.filtered = [];
+    }
+    this.dataEvent.emit(this.filtered)
   }
 }

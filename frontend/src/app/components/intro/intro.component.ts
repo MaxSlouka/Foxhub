@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {AuthService} from "../../_services/auth.service";
 import {StorageService} from "../../_services/storage.service";
 
@@ -10,8 +10,10 @@ import {StorageService} from "../../_services/storage.service";
 export class IntroComponent implements OnInit {
 
   isLoggedIn = false;
-  
-  constructor(private authService: AuthService, private storageService: StorageService) {
+
+
+  constructor(private authService: AuthService,
+              private storageService: StorageService) {
   }
 
   ngOnInit(): void {
@@ -20,5 +22,4 @@ export class IntroComponent implements OnInit {
       // this.roles = this.storageService.getUser().roles;
     }
   }
-
 }

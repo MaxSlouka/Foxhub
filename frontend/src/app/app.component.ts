@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
-import {User} from "./models/user";
-import {PeopleService} from "./_services/people.service";
+import {ApiService} from "./_services/api/api.service"
+import {DataService} from "./_services/api/data.service";
 
 @Component({
   selector: 'app-root',
@@ -9,5 +9,23 @@ import {PeopleService} from "./_services/people.service";
 })
 export class AppComponent {
   title = 'frontend';
+
+  // @ts-ignore
+  constructor(private apiService: ApiService,
+              private dataService: DataService) {
+  }
+
+  ngOnInit(): void {
+    this.getUsers();
+  }
+
+  private getUsers(): void {
+    this.apiService
+      .getAll().subscribe((users) => {
+        this.dataService.users = users;
+        console.log(this.dataService.users);
+      }
+    );
+  }
 
 }
