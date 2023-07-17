@@ -1,5 +1,6 @@
 import {Component, OnInit, AfterContentInit} from '@angular/core';
-import {PeopleService} from "../../_services/people.service";
+//import {PeopleService} from "../../_services/people.service";
+import {ApiService} from "../../_services/api/api.service";
 import {User} from "../../models/user";
 import {Observable} from "rxjs";
 
@@ -11,19 +12,19 @@ import {Observable} from "rxjs";
 export class PeoplePageComponent implements OnInit {
   users: User[] = [];
 
-  constructor(private peopleService: PeopleService) {
+  constructor(private apiService: ApiService) {
   }
 
   ngOnInit(): void {
-    this.getUsers();
+    //this.getUsers();
   }
 
-  private getUsers(): void {
-    this.peopleService
-      .getAll().subscribe((users) =>
-      this.users = users
-    );
-  }
+  // private getUsers(): void {
+  //   this.peopleService
+  //     .getAll().subscribe((users) =>
+  //     this.users = users
+  //   );
+  // }
 
   protected readonly Observable = Observable;
 

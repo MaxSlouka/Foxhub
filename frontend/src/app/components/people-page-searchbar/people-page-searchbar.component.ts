@@ -9,15 +9,13 @@ import {User} from "../../models/user";
 export class PeoplePageSearchbarComponent {
 // @ts-ignore
   @Input() users: User[];
-  // @ts-ignore
-  @Input() fullUsers: User[];
 
   // @ts-ignore
   filtered: User[];
 
   public searchUser(key: string): void {
     let results: User[] = [];
-    for (const user of this.fullUsers) {
+    for (const user of this.users) {
       let hasTechnologyMatch = false;
 
       // @ts-ignore
