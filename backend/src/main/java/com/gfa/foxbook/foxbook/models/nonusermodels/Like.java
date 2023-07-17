@@ -1,4 +1,4 @@
-package com.gfa.foxbook.foxbook.models;
+package com.gfa.foxbook.foxbook.models.nonusermodels;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -28,13 +28,5 @@ public class Like {
         this.userId = userId;
         this.likes = likes;
         this.hasVoted = hasVoted;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Long getId() {
-        return id;
     }
 }

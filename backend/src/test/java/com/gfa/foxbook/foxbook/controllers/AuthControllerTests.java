@@ -1,16 +1,14 @@
 package com.gfa.foxbook.foxbook.controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.gfa.foxbook.foxbook.models.dtos.ResponseDTO;
 import com.gfa.foxbook.foxbook.models.dtos.security.AuthResponseDTO;
 import com.gfa.foxbook.foxbook.models.dtos.security.LoginDto;
 import com.gfa.foxbook.foxbook.models.dtos.security.RegisterDto;
-import com.gfa.foxbook.foxbook.services.SecurityService;
+import com.gfa.foxbook.foxbook.security.services.SecurityService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.MockitoAnnotations;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;

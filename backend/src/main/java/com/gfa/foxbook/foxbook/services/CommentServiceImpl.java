@@ -1,7 +1,9 @@
 package com.gfa.foxbook.foxbook.services;
 
-import com.gfa.foxbook.foxbook.models.Comment;
+import com.gfa.foxbook.foxbook.models.nonusermodels.Comment;
 import com.gfa.foxbook.foxbook.repositories.CommentRepository;
+import com.gfa.foxbook.foxbook.services.interfaces.CommentService;
+import com.gfa.foxbook.foxbook.services.interfaces.LikeService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -9,13 +11,12 @@ import org.springframework.transaction.annotation.Transactional;
 import java.sql.Date;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
-import java.util.Objects;
 import java.util.Optional;
 
 @Service
 @Transactional
 @AllArgsConstructor
-public class CommentServiceImpl implements CommentService{
+public class CommentServiceImpl implements CommentService {
 
     private final CommentRepository commentRepository;
     private final LikeService likeService;
@@ -23,7 +24,7 @@ public class CommentServiceImpl implements CommentService{
     public void comment(Long postId, Long userId, String comment) {
         Comment c = new Comment();
         c.setPostId(String.valueOf(postId));
-        c.setAuthor("AuthorName");
+        c.setAuthor(c.getAuthor());
         c.setContent(comment);
         c.setTimestamp(new Date(Timestamp.valueOf(LocalDateTime.now()).getTime()));
         commentRepository.save(c);

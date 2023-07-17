@@ -1,7 +1,7 @@
 package com.gfa.foxbook.foxbook.controllers;
 
 import com.gfa.foxbook.foxbook.models.User;
-import com.gfa.foxbook.foxbook.services.UserService;
+import com.gfa.foxbook.foxbook.services.interfaces.UserService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
@@ -95,7 +95,7 @@ public class ApiControllerTests {
     public void testGetAllUsers_ReturnsAllUsers() {
         // Arrange
         List<User> users = Arrays.asList(new User(1L, "JohnDoe"), new User(2L, "JaneSmith"));
-        when(userService.findAll()).thenReturn(users);
+        when(userService.getAll()).thenReturn(users);
 
         // Act
         ResponseEntity<?> response = apiController.getAllUsers();

@@ -1,4 +1,4 @@
-package com.gfa.foxbook.foxbook.models;
+package com.gfa.foxbook.foxbook.models.nonusermodels;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;

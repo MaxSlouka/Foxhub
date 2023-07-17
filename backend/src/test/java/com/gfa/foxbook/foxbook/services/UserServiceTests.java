@@ -52,7 +52,7 @@ public class UserServiceTests {
         List<User> users = Arrays.asList(user1, user2);
         when(userRepository.findAll()).thenReturn(users);
 
-        List<User> result = userService.findAll();
+        List<User> result = userService.getAll();
 
         assertThat(result).isEqualTo(users);
         verify(userRepository, times(1)).findAll();
