@@ -1,12 +1,11 @@
 package com.gfa.foxbook.foxbook.controllers;
 
-import com.gfa.foxbook.foxbook.models.dtos.ResponseDTO;
 import com.gfa.foxbook.foxbook.models.dtos.security.LoginDto;
 import com.gfa.foxbook.foxbook.models.dtos.security.LoginResponseDto;
 import com.gfa.foxbook.foxbook.models.dtos.security.RegisterDto;
 import com.gfa.foxbook.foxbook.security.jwt.JwtUtils;
-import com.gfa.foxbook.foxbook.services.SecurityService;
-import com.gfa.foxbook.foxbook.services.UserService;
+import com.gfa.foxbook.foxbook.security.services.SecurityService;
+import com.gfa.foxbook.foxbook.services.interfaces.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
@@ -60,7 +59,7 @@ public class AuthController {
             return ResponseEntity.badRequest().body("Email already registered");
         }
         securityService.registerUser(registerDto);
-        return ResponseEntity.ok(new ResponseDTO("User registered successfully"));
+        return ResponseEntity.ok().build();
     }
     @PostMapping("signout")
     public ResponseEntity<?> logoutUser() {

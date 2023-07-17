@@ -1,4 +1,4 @@
-package com.gfa.foxbook.foxbook.services;
+package com.gfa.foxbook.foxbook.services.interfaces;
 
 import com.gfa.foxbook.foxbook.models.User;
 
@@ -10,14 +10,14 @@ public interface UserService {
 
     void delete(User user);
 
-    List<User> findAll();
+    List<User> getAll();
 
     Optional<User> findByNickname(String nickname);
 
-    User updateProfile(User user);
-    Optional<User> upgradeUser(String nickname);
+    User getByNickname(String nickname);
 
-    String accessProfileUrl(User user);
+    User updateProfile(User user);
+    User upgradeUser(String nickname);
 
     Optional<User> findByEmail(String name);
 

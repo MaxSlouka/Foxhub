@@ -1,4 +1,4 @@
-package com.gfa.foxbook.foxbook.services;
+package com.gfa.foxbook.foxbook.services.interfaces;
 
 public interface CommentService {
 

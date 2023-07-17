@@ -1,10 +1,11 @@
 package com.gfa.foxbook.foxbook.services;
 
-import com.gfa.foxbook.foxbook.models.Role;
+import com.gfa.foxbook.foxbook.models.nonusermodels.Role;
 import com.gfa.foxbook.foxbook.models.User;
 import com.gfa.foxbook.foxbook.models.dtos.security.RegisterDto;
 import com.gfa.foxbook.foxbook.repositories.RoleRepository;
 import com.gfa.foxbook.foxbook.repositories.UserRepository;
+import com.gfa.foxbook.foxbook.security.services.SecurityService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;

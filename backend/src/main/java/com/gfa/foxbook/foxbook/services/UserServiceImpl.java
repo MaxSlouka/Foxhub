@@ -1,8 +1,10 @@
 package com.gfa.foxbook.foxbook.services;
 
-import com.gfa.foxbook.foxbook.models.Role;
+import com.gfa.foxbook.foxbook.models.nonusermodels.Role;
 import com.gfa.foxbook.foxbook.models.User;
 import com.gfa.foxbook.foxbook.repositories.UserRepository;
+import com.gfa.foxbook.foxbook.services.interfaces.CommentService;
+import com.gfa.foxbook.foxbook.services.interfaces.UserService;
 import lombok.AllArgsConstructor;
 
 import org.springframework.stereotype.Service;
@@ -30,7 +32,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<User> findAll() {
+    public List<User> getAll() {
         assert userRepository != null;
         return userRepository.findAll();
     }
@@ -41,16 +43,19 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public User getByNickname(String nickname) {
+        return userRepository.getByNickname(nickname);
+    }
+
+    @Override
     public User updateProfile(User user) {
         assert userRepository != null;
         return userRepository.save(user);
     }
 
-    public Optional<User> upgradeUser(String nickname) {
-        Optional<User> maybeUser = userRepository.findByNickname(nickname);
-
-        if (maybeUser.isPresent()) {
-            User user = maybeUser.get();
+    @Override
+    public User upgradeUser(String nickname) {
+        User user = userRepository.getByNickname(nickname);
 
             List<Role> roles = new ArrayList<>();
             Role adminRole = new Role("ADMIN");
@@ -58,18 +63,8 @@ public class UserServiceImpl implements UserService {
 
             user.setRoles(roles);
 
-            User updatedUser = userRepository.save(user);
-            return Optional.of(updatedUser);
-        } else {
-            return Optional.empty();
-        }
+            return userRepository.save(user);
     }
-
-    @Override
-    public String accessProfileUrl(User user) {
-        return "/profile/" + user.getNickname();
-    }
-
 
     @Override
     public Optional<User> findByEmail(String name) {

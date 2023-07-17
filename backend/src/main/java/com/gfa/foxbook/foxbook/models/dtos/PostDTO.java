@@ -5,7 +5,8 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class ResponseDTO {
-    private String status;
+public class PostDTO {
 
+    private String title;
+    private String content;
 }
