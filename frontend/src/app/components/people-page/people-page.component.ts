@@ -11,7 +11,6 @@ export class PeoplePageComponent implements OnInit {
 
 constructor(public dataService: DataService) {
 }
-
   ngOnInit(): void {
   }
 }

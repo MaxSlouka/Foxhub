@@ -10,17 +10,16 @@ import {User} from "../../models/user";
 })
 export class PeoplePageSearchbarComponent {
   // @ts-ignore
-  @Input users: User[] = [];
-
-  // @ts-ignore
-  filtered: User[];
+  @Input users: User[];
+// @ts-ignore
+  @Input fullUsers: User[];
 
 ngOnInit(){
 }
 
   public searchUser(key: string): void {
     let results: User[] = [];
-    for (const user of this.users) {
+    for (const user of this.fullUsers) {
       let hasTechnologyMatch = false;
 
       // @ts-ignore
@@ -41,11 +40,6 @@ ngOnInit(){
         }
       }
     }
-
-    this.filtered = results;
-
-    if (!key) {
-      this.filtered = [];
-    }
+    this.users = results;
   }
 }

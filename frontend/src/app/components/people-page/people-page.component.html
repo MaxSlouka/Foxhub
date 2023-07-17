@@ -32,6 +32,7 @@
 
 <!-- people section -->
 <ng-container *ngIf="dataService.users">
-<app-people-page-searchbar [users] = dataService.users></app-people-page-searchbar>
+  <app-people-page-searchbar [users]=dataService.users
+                             [fullUsers]="dataService.users"></app-people-page-searchbar>
 </ng-container>
 <app-footer></app-footer>

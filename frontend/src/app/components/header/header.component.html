@@ -37,12 +37,9 @@
 
       <!-- search form -->
 
-      <!--      <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">-->
-      <!--        <input type="search" class="form-control form-control-dark text-bg-dark" placeholder="Search..."-->
-      <!--          aria-label="Search">-->
-      <!--      </form>-->
-<!--      <app-people-page-searchbar [users]="users"-->
-<!--      ></app-people-page-searchbar>-->
+      <ng-container *ngIf="dataSerice.users">
+      <app-header-searchbar [users] = dataSerice.users (dataEvent)="handleDataFromChild($event)"></app-header-searchbar>
+      </ng-container>
 
       <!-- login and sign up -->
 
@@ -68,6 +65,10 @@
       </div>
 
     </div>
+  </div>
+  <div>
+    <app-people-page-card *ngFor="let user of users"
+                          [user]="user"></app-people-page-card>
   </div>
 </nav>
 
