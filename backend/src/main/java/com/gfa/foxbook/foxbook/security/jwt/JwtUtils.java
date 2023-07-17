@@ -27,6 +27,16 @@ public class JwtUtils {
     // todo is logger needed? need to be dealt with
     private final UserRepository userRepository;
 
+    // general serv
+    public User getUserFromRequest(HttpServletRequest request) {
+        String token = getJwtFromCookies(request);
+        if (token == null) {
+            return null;
+        }
+        String email = getUserNameFromJwtToken(token);
+        return userRepository.findByEmail(email).get();
+    }
+
 
     // ------- Cookie generating -----
     public ResponseCookie generateJwtCookie(Authentication userPrincipal) {

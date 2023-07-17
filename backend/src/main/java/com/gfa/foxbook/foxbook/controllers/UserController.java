@@ -31,22 +31,11 @@ public class UserController {
 
     @GetMapping("/person")
     public ResponseEntity<?> getUser(HttpServletRequest request) {
-        String token = jwtUtils.getJwtFromCookies(request);
-        if (token == null) {
-            return ResponseEntity.notFound().build();
+        User user = jwtUtils.getUserFromRequest(request);
+        if (user == null) {
+            return ResponseEntity.badRequest().build();
         }
-        String email = jwtUtils.getUserNameFromJwtToken(token);
-        Optional<User> maybeUser = userService.findByEmail(email);
-        if (maybeUser.isEmpty()) {
-            return ResponseEntity.notFound().build();
-        }
-        User user = maybeUser.get();
-        UserBasicDTO userBasicDTO = new UserBasicDTO();
-        userBasicDTO.setFirstName(user.getFirstName());
-        userBasicDTO.setLastName(user.getLastName());
-        userBasicDTO.setEmail(user.getEmail());
-        return ResponseEntity.ok(userBasicDTO);
-        // todo recheck security holes
+        return ResponseEntity.ok(userService.convertToUserBasicDTO(user));
     }
 
 
