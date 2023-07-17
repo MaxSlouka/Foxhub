@@ -44,13 +44,15 @@ public class User {
     private Date dateOfRegistration;
     private String profileUrl;
     private String profilePictureUrl;
+
     private String facebookURL;
     private String instagramURL;
     private String linkedInURL;
     private String gitHubURL;
+    private String twitterURL;
     private String optionalPageURL;
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
     @JoinTable(
             name = "users_roles",
             joinColumns = {@JoinColumn(name = "users_id", referencedColumnName = "id")},

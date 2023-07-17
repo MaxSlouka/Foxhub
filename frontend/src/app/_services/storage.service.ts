@@ -9,9 +9,6 @@ const USER_KEY = 'auth-user';
 export class StorageService {
   constructor() { }
 
-  clean(): void {
-    window.sessionStorage.clear();
-  }
 
   public saveUser(user: any): void {
     window.sessionStorage.removeItem(USER_KEY);

@@ -23,6 +23,7 @@ import { AsideComponent } from './components/aside/aside.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { UserSettingsPageComponent } from './components/user-settings-page/user-settings-page.component';
 import { TermsOfUseComponent } from './components/terms-of-use/terms-of-use.component';
+import { FoxbookFunLettersComponent } from './components/foxbook-fun-letters/foxbook-fun-letters.component';
 
 
 @NgModule({
@@ -44,7 +45,8 @@ import { TermsOfUseComponent } from './components/terms-of-use/terms-of-use.comp
     PeoplePageSearchbarComponent,
     PageNotFoundComponent,
     UserSettingsPageComponent,
-    TermsOfUseComponent
+    TermsOfUseComponent,
+    FoxbookFunLettersComponent
 
   ],
   imports: [
