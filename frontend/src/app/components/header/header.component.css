@@ -19,6 +19,14 @@ ul li a {
     color: rgb(0, 0, 0);
 }
 
+.search-result-container {
+    position: fixed;
+    z-index: 9999;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
 .ham {
     cursor: pointer;
     -webkit-tap-highlight-color: transparent;
