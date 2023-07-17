@@ -1,7 +1,7 @@
-package com.gfa.foxbook.foxbook.services;
+package com.gfa.foxbook.foxbook.services.interfaces;
 
-import com.gfa.foxbook.foxbook.models.Comment;
-import com.gfa.foxbook.foxbook.models.Post;
+import com.gfa.foxbook.foxbook.models.nonusermodels.Comment;
+import com.gfa.foxbook.foxbook.models.nonusermodels.Post;
 
 import java.util.List;
 import java.util.Optional;

@@ -1,9 +1,9 @@
 package com.gfa.foxbook.foxbook.controllers;
 
-import com.gfa.foxbook.foxbook.models.Post;
+import com.gfa.foxbook.foxbook.models.nonusermodels.Post;
 import com.gfa.foxbook.foxbook.models.User;
-import com.gfa.foxbook.foxbook.services.PostService;
-import com.gfa.foxbook.foxbook.services.UserService;
+import com.gfa.foxbook.foxbook.services.interfaces.PostService;
+import com.gfa.foxbook.foxbook.services.interfaces.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -25,13 +25,13 @@ public class PublicController {
 
     @GetMapping("/people")
     public ResponseEntity<?> getAllUsers() {
-        List<User> users = userService.findAll();
+        List<User> users = userService.getAll();
         if (users.isEmpty()) {
             return ResponseEntity.noContent().build();
         }
         return ResponseEntity.ok(users);
     }
-    @GetMapping("/person/{nickname}")
+    @GetMapping("/people/{nickname}")
     public ResponseEntity<?> personDetails(@PathVariable String nickname) {
         Optional<User> maybeUser = userService.findByNickname(nickname);
         if (maybeUser.isEmpty()) {

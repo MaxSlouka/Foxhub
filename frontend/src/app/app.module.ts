@@ -23,9 +23,8 @@ import { AsideComponent } from './components/aside/aside.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { UserSettingsPageComponent } from './components/user-settings-page/user-settings-page.component';
 import { TermsOfUseComponent } from './components/terms-of-use/terms-of-use.component';
-import { FoxbookFunLettersComponent } from './components/foxbook-fun-letters/foxbook-fun-letters.component';
 import { HeaderSearchbarComponent } from './components/header-searchbar/header-searchbar.component';
-
+import { UpdatePasswordComponent } from './components/update-password/update-password.component';
 
 
 @NgModule({
@@ -48,10 +47,8 @@ import { HeaderSearchbarComponent } from './components/header-searchbar/header-s
     PageNotFoundComponent,
     UserSettingsPageComponent,
     TermsOfUseComponent,
-    FoxbookFunLettersComponent,
     HeaderSearchbarComponent,
-
-
+    UpdatePasswordComponent
   ],
   imports: [
     FormsModule,

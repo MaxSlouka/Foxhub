@@ -1,18 +1,18 @@
 package com.gfa.foxbook.foxbook.controllers;
 
-import com.gfa.foxbook.foxbook.models.Post;
-import com.gfa.foxbook.foxbook.models.Role;
+import com.gfa.foxbook.foxbook.models.nonusermodels.Post;
+import com.gfa.foxbook.foxbook.models.nonusermodels.Role;
 import com.gfa.foxbook.foxbook.models.User;
-import com.gfa.foxbook.foxbook.services.PostService;
-import com.gfa.foxbook.foxbook.services.UserService;
+import com.gfa.foxbook.foxbook.models.dtos.PostDTO;
+import com.gfa.foxbook.foxbook.services.interfaces.PostService;
+import com.gfa.foxbook.foxbook.services.interfaces.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import java.net.URI;
 import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -23,22 +23,18 @@ public class AdminController {
     public final UserService userService;
 
 
+
     @PostMapping("/posts")
     public ResponseEntity<?> makePost(@RequestBody(required = false) Post post) {
         if (post == null) {
-            return ResponseEntity.badRequest().body("You have to write something!");
+            return ResponseEntity.badRequest().build();
         }
         Post newPost = postService.createPost(post.getAuthor(), post.getTitle(), post.getContent());
-        URI location = ServletUriComponentsBuilder
-                .fromCurrentRequest()
-                .path("/{id}")
-                .buildAndExpand(newPost.getId())
-                .toUri();
-        return ResponseEntity.created(location).body(newPost);
+        return ResponseEntity.ok().build();
     }
 
-    @PutMapping("/posts/{id}")
-    public ResponseEntity<?> updatePost(@PathVariable Long id, @RequestBody Post post) {
+    @PatchMapping("/posts/{id}")
+    public ResponseEntity<?> updatePost(@PathVariable Long id, @RequestBody PostDTO post) {
         Optional<Post> optionalPost = postService.findById(id);
         if (optionalPost.isEmpty()) {
             return ResponseEntity.notFound().build();
@@ -69,7 +65,7 @@ public class AdminController {
         }
         User user = maybeUser.get();
         Role adminRole = new Role("ADMIN");
-        user.setRoles(Collections.singletonList(adminRole));
+        user.getRoles().add(adminRole);
         userService.updateProfile(user);
         return ResponseEntity.ok().body(userService.upgradeUser(user.getNickname()));
     }

@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {User} from "../../models/user";
 import {ProfileService} from "../../_services/profile.service";
 import {ActivatedRoute} from '@angular/router';
@@ -8,7 +8,7 @@ import {ActivatedRoute} from '@angular/router';
   templateUrl: './profile-page.component.html',
   styleUrls: ['./profile-page.component.css']
 })
-export class ProfilePageComponent {
+export class ProfilePageComponent implements OnInit{
   // @ts-ignore
   username: string | null = "";
   // @ts-ignore

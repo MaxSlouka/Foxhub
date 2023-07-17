@@ -1,8 +1,9 @@
 package com.gfa.foxbook.foxbook.services;
 
-import com.gfa.foxbook.foxbook.models.Comment;
-import com.gfa.foxbook.foxbook.models.Post;
+import com.gfa.foxbook.foxbook.models.nonusermodels.Comment;
+import com.gfa.foxbook.foxbook.models.nonusermodels.Post;
 import com.gfa.foxbook.foxbook.repositories.PostRepository;
+import com.gfa.foxbook.foxbook.services.interfaces.PostService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -21,44 +22,38 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public Post save(Post post) {
-        assert postRepository != null;
         return postRepository.save(post);
     }
 
     @Override
     public void delete(Post post) {
-        assert postRepository != null;
         postRepository.delete(post);
     }
 
     @Override
     public List<Post> findAll() {
-        assert postRepository != null;
         return postRepository.findAll();
     }
 
     @Override
     public List<Post> findAllByOrderByTimestampDesc() {
-        assert postRepository != null;
-        return (List<Post>) postRepository.findAllByOrderByTimestampDesc();
+        return postRepository.findAllByOrderByTimestampDesc();
     }
 
     @Override
     public List<Post> findAllByOrderByTimestampAsc() {
-        assert postRepository != null;
-        return (List<Post>) postRepository.findAllByOrderByTimestampAsc();
+        return postRepository.findAllByOrderByTimestampAsc();
     }
 
     @Override
     public List<Post> findAllByOrderByLikesDesc() {
-        assert postRepository != null;
-        return (List<Post>) postRepository.findAllByOrderByLikesDesc();
+        return postRepository.findAllByOrderByLikesDesc();
     }
 
         @Override
         public List<Post> findByUserName(String authorName){
-            assert postRepository != null;
-            return (List<Post>) postRepository.findByAuthor(authorName);
+
+            return postRepository.findByAuthor(authorName);
         }
     @Override
     public Post createPost(String author, String content, String title) {
@@ -73,25 +68,33 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public Post editPost(Long id, String title, String content) {
-        Post p = postRepository.findById(id).orElse(null);
-        assert p != null;
+        Post p = postRepository.findById(id).get();
         p.setTitle(title);
         p.setContent(content);
+        p.setId(id);
         return postRepository.save(p);
     }
 
     @Override
     public Post editPost(Post post) {
-        Post p = postRepository.findById(post.getId()).orElse(null);
-        assert p != null;
-        p = post;
-        return postRepository.save(p);
+        Optional<Post> optionalPost = postRepository.findById(post.getId());
+
+        if (optionalPost.isPresent()) {
+            Post existingPost = optionalPost.get();
+            existingPost.setAuthor(post.getAuthor());
+            existingPost.setTitle(post.getTitle());
+            existingPost.setContent(post.getContent());
+
+            return postRepository.save(existingPost);
+        } else {
+            throw new IllegalArgumentException("Post not found");
+        }
     }
+
 
     @Override
     public void addComment(Comment newComment) {
-        Post p = postRepository.findById(Long.valueOf(newComment.getPostId())).orElse(null);
-        assert p != null;
+        Post p = postRepository.findById(Long.valueOf(newComment.getPostId())).get();
         p.addComment(newComment);
         postRepository.save(p);
     }

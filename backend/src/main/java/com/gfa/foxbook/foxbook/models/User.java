@@ -1,5 +1,8 @@
 package com.gfa.foxbook.foxbook.models;
 
+import com.gfa.foxbook.foxbook.models.nonusermodels.Language;
+import com.gfa.foxbook.foxbook.models.nonusermodels.Role;
+import com.gfa.foxbook.foxbook.models.nonusermodels.Technology;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
@@ -7,9 +10,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.w3c.dom.Text;
 
-import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -41,15 +42,10 @@ public class User {
     private String password;
     private String personality;
     private String countryResidence;
-    private Date dateOfRegistration;
-    private String profileUrl;
-    private String profilePictureUrl;
-
     private String facebookURL;
     private String instagramURL;
     private String linkedInURL;
     private String gitHubURL;
-    private String twitterURL;
     private String optionalPageURL;
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
