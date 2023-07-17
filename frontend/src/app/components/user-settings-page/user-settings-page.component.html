@@ -46,76 +46,105 @@
                                                                                  class="form-control"
                                                                                  placeholder="education" value=""></div>
           </div>
-          <div class="row mt-3">
-            <div class="col-md-6"><label class="labels">Country</label><input type="text"
-                                                                              class="form-control" placeholder="country"
-                                                                              value=""></div>
-            <div class="col-md-6"><label class="labels">State/Region</label><input
-              type="text" class="form-control" value="" placeholder="state">
-            </div>
+          <div class="d-flex justify-content-between align-items-center mt-3">
+            <h6 class="text-right">Social media</h6>
           </div>
-          <div class="mt-5 text-center">
-            <button class="btn btn-primary profile-button" type="submit">Save
-              Profile
-            </button>
-            <a href="./" class="btn btn-outline-secondary" role="button"
-               aria-disabled="true">Go Back</a>
-          </div>
-        </form>
+          <div class="row border-top">
+
+            <div class="col-md-12"><label class="labels">Github</label><input type="text"
+                                                                              class="form-control"
+                                                                              [(ngModel)]="form.github"
+                                                                              name="github"
+                                                                              placeholder="github" value=""></div>
+            <div class="col-md-12"><label class="labels">LinkedIn</label><input type="text"
+                                                                                class="form-control"
+                                                                                [(ngModel)]="form.linkedin"
+                                                                                name="linkedin"
+                                                                                placeholder="LinkedIn" value=""></div>
+            <div class="col-md-12"><label class="labels">Twitter</label><input type="text"
+                                                                               class="form-control"
+                                                                               placeholder="Twitter" value=""></div>
+            <div class="col-md-12"><label class="labels">Facebook</label><input type="text"
+                                                                                class="form-control"
+                                                                                [(ngModel)]="form.facebook"
+                                                                                name="facebook"
+                                                                                placeholder="Facebook" value=""></div>
+            <div class="col-md-12"><label class="labels">Instagram</label><input type="text"
+                                                                                 class="form-control"
+                                                                                 [(ngModel)]="form.instagram"
+                                                                                  name="instagram"
+                                                                                 placeholder="Instagram" value=""></div>
       </div>
-    </div>
-    <div class="col-md-4">
-      <div class="p-3 py-5">
-        <div class="d-flex justify-content-between align-items-center experience"><span>Edit
-                                                Skills</span><span class="border px-3 p-1 add-experience"><i
-          class="fa fa-plus"></i>&nbsp;Skill</span></div>
-        <br>
-        <div class="col-md-12"><label class="labels">Programming language</label><input
-          type="text" class="form-control" placeholder="Java" value=""></div>
-        <br>
-        <div class="col-md-12"><label class="labels">Spoken language</label><input type="text"
-                                                                                   class="form-control"
-                                                                                   placeholder="english" value=""></div>
-
-        <!-- button trigger modal -->
-
-        <div class="mt-5 text-center">
-          <button class="btn btn-danger profile-button profile-delete-btn" type="button" data-toggle="modal"
-                  data-target="#exampleModal">Delete
-            Profile
-          </button>
+      <div class="row mt-3">
+        <div class="col-md-6"><label class="labels">Country</label><input type="text"
+                                                                          class="form-control" placeholder="country"
+                                                                          value=""></div>
+        <div class="col-md-6"><label class="labels">State/Region</label><input
+          type="text" class="form-control" value="" placeholder="state">
         </div>
+      </div>
+      <div class="mt-5 text-center">
+        <button class="btn btn-primary profile-button" type="submit">Save
+          Profile
+        </button>
+        <a href="./" class="btn btn-outline-secondary" role="button"
+           aria-disabled="true">Go Back</a>
+      </div>
+      </form>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="p-3 py-5">
+      <div class="d-flex justify-content-between align-items-center experience"><span>Edit
+                                                Skills</span><span class="border px-3 p-1 add-experience"><i
+        class="fa fa-plus"></i>&nbsp;Skill</span></div>
+      <br>
+      <div class="col-md-12"><label class="labels">Programming language</label><input
+        type="text" class="form-control" placeholder="Java" value=""></div>
+      <br>
+      <div class="col-md-12"><label class="labels">Spoken language</label><input type="text"
+                                                                                 class="form-control"
+                                                                                 placeholder="english" value=""></div>
 
-        <!-- modal -->
+      <!-- button trigger modal -->
 
-        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
-             aria-labelledby="exampleModalLabel" aria-hidden="true">
-          <div class="modal-dialog" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Are you sure?
-                </h5>
-                <button type="button" class="close" data-dismiss="modal"
-                        aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <div class="mt-5 text-center">
-                <p class="lead">Do you really want to delete this profile?</p>
-                <p class="lead">This action can't be undone.</p>
-              </div>
-              <div class="text-center">
-                <button (click)="deleteAccount()" class="btn btn-danger profile-button profile-delete-btn" type="button"
-                        data-toggle="modal" data-target="#exampleModal">Delete
-                  Profile
-                </button>
-              </div>
+      <div class="mt-5 text-center">
+        <button class="btn btn-danger profile-button profile-delete-btn" type="button" data-toggle="modal"
+                data-target="#exampleModal">Delete
+          Profile
+        </button>
+      </div>
+
+      <!-- modal -->
+
+      <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+           aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Are you sure?
+              </h5>
+              <button type="button" class="close" data-dismiss="modal"
+                      aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="mt-5 text-center">
+              <p class="lead">Do you really want to delete this profile?</p>
+              <p class="lead">This action can't be undone.</p>
+            </div>
+            <div class="text-center">
+              <button (click)="deleteAccount()" class="btn btn-danger profile-button profile-delete-btn" type="button"
+                      data-toggle="modal" data-target="#exampleModal">Delete
+                Profile
+              </button>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
+</div>
 </div>
 
 <app-footer></app-footer>

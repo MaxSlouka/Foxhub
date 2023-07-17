@@ -14,6 +14,12 @@ export class UserSettingsPageComponent {
     firstName: null,
     lastName: null,
     email: null,
+    github: null,
+    linkedin: null,
+    facebook: null,
+    twitter: null,
+    instagram: null,
+
 };
 
   firstName: string = "";
@@ -47,8 +53,8 @@ export class UserSettingsPageComponent {
   }
 
   updateUser() {
-    const {firstName, lastName, email} = this.form;
-    this.apiService.updateUser(firstName, lastName, email).subscribe();
+    const {firstName, lastName, email, github, linkedin, facebook, twitter, instagram} = this.form;
+    this.apiService.updateUser(firstName, lastName, email, github, linkedin, facebook, twitter, instagram).subscribe();
 
   }
 }

@@ -11,4 +11,10 @@ public class UserUpdateDTO {
     String firstName;
     String lastName;
     String email;
+
+    String github;
+    String linkedin;
+    String facebook;
+    String instagram;
+    String twitter;
 }

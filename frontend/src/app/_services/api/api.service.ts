@@ -22,11 +22,16 @@ export class ApiService {
     return this.http.delete('http://localhost:8080/api/v1/user/people');
   }
 
-  updateUser(firstName: string, lastName: string, email: string):Observable<any> {
+  updateUser(firstName: string, lastName: string, email: string, github:string, linkedin:string, facebook:string, twitter:string, instagram:string):Observable<any> {
     return this.http.patch("http://localhost:8080/api/v1/user/people", {
       firstName,
       lastName,
-      email
+      email,
+      github,
+      linkedin,
+      facebook,
+      twitter,
+      instagram
     },
       httpOptions
     );}
