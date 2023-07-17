@@ -51,19 +51,13 @@ public class UserController {
 
 
     @PatchMapping("/people")
-    public ResponseEntity<?> updateUserByNickname(HttpServletRequest request, @RequestBody UserUpdateDTO updateDTO) {
+    public ResponseEntity<?> updateUserByNickname(HttpServletRequest request, @RequestBody User updateDTO) {
         User requestUser = jwtUtils.getUserFromRequest(request);
-        if (requestUser == null) {
+        if (requestUser == null || updateDTO == null) {
             return ResponseEntity.badRequest().build();
         }
-        requestUser.setFirstName(updateDTO.getFirstName());
-        requestUser.setLastName(updateDTO.getLastName());
-        requestUser.setEmail(updateDTO.getEmail());
-        requestUser.setGitHubURL(updateDTO.getGithub());
-        requestUser.setLinkedInURL(updateDTO.getLinkedin());
-        requestUser.setFacebookURL(updateDTO.getFacebook());
-        requestUser.setInstagramURL(updateDTO.getInstagram());
-        userService.updateProfile(requestUser);
+
+        userService.updateProfile(requestUser, updateDTO);
 
         return ResponseEntity.ok().build();
     }

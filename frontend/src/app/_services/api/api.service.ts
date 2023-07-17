@@ -29,15 +29,18 @@ export class ApiService {
     return this.http.delete('http://localhost:8080/api/v1/user/people');
   }
 
-  updateUser(firstName: string, lastName: string, email: string, github: string, linkedin: string, facebook: string, twitter: string, instagram: string): Observable<any> {
+  updateUser(firstName: string, lastName: string, completeProjects: number, yearsOfExperience: number, phone: string, location: string, about: string, github: string, linkedin: string, facebook: string, instagram: string): Observable<any> {
     return this.http.patch("http://localhost:8080/api/v1/user/people", {
         firstName,
         lastName,
-        email,
+        completeProjects,
+        yearsOfExperience,
+        phone,
+        location,
+        about,
         github,
         linkedin,
         facebook,
-        twitter,
         instagram
       },
       httpOptions
