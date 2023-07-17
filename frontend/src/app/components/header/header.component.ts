@@ -26,7 +26,7 @@ export class HeaderComponent implements OnInit {
               private profileService: ProfileService,
               private storageService: StorageService,
               private activatedroute: ActivatedRoute,
-              public dataSerice: DataService) {
+              public dataService: DataService) {
   }
 
   ngOnInit(): void {
