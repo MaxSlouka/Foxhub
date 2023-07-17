@@ -24,6 +24,7 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
 import { UserSettingsPageComponent } from './components/user-settings-page/user-settings-page.component';
 import { TermsOfUseComponent } from './components/terms-of-use/terms-of-use.component';
 import { FoxbookFunLettersComponent } from './components/foxbook-fun-letters/foxbook-fun-letters.component';
+import { HeaderSearchbarComponent } from './components/header-searchbar/header-searchbar.component';
 
 
 
@@ -48,6 +49,7 @@ import { FoxbookFunLettersComponent } from './components/foxbook-fun-letters/fox
     UserSettingsPageComponent,
     TermsOfUseComponent,
     FoxbookFunLettersComponent,
+    HeaderSearchbarComponent,
 
 
   ],
