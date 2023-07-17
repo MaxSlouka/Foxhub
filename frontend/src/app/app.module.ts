@@ -23,6 +23,7 @@ import { AsideComponent } from './components/aside/aside.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { UserSettingsPageComponent } from './components/user-settings-page/user-settings-page.component';
 import { TermsOfUseComponent } from './components/terms-of-use/terms-of-use.component';
+import { UpdatePasswordComponent } from './components/update-password/update-password.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { TermsOfUseComponent } from './components/terms-of-use/terms-of-use.comp
     PeoplePageSearchbarComponent,
     PageNotFoundComponent,
     UserSettingsPageComponent,
-    TermsOfUseComponent
+    TermsOfUseComponent,
+    UpdatePasswordComponent
   ],
   imports: [
     FormsModule,
