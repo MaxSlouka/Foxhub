@@ -41,28 +41,21 @@ public class UserController {
 
     @DeleteMapping("/people")
     public ResponseEntity<?> deletePerson(HttpServletRequest request) {
-        String token = jwtUtils.getJwtFromCookies(request);
-        String email = jwtUtils.getUserNameFromJwtToken(token);
-        Optional<User> maybeUser = userService.findByEmail(email);
-        if (maybeUser.isEmpty()) {
-            return ResponseEntity.notFound().build();
+        User user = jwtUtils.getUserFromRequest(request);
+        if (user == null) {
+            return ResponseEntity.badRequest().build();
         }
-        User requestUser = maybeUser.get();
-
-        userService.delete(requestUser);
+        userService.delete(user);
         return ResponseEntity.noContent().build();
     }
 
 
     @PatchMapping("/people")
     public ResponseEntity<?> updateUserByNickname(HttpServletRequest request, @RequestBody UserUpdateDTO updateDTO) {
-        String token = jwtUtils.getJwtFromCookies(request);
-        String email = jwtUtils.getUserNameFromJwtToken(token);
-        Optional<User> maybeUser = userService.findByEmail(email);
-        if (maybeUser.isEmpty()) {
-            return ResponseEntity.notFound().build();
+        User requestUser = jwtUtils.getUserFromRequest(request);
+        if (requestUser == null) {
+            return ResponseEntity.badRequest().build();
         }
-        User requestUser = maybeUser.get();
         requestUser.setFirstName(updateDTO.getFirstName());
         requestUser.setLastName(updateDTO.getLastName());
         requestUser.setEmail(updateDTO.getEmail());
