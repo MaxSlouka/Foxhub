@@ -5,17 +5,16 @@ import com.gfa.foxbook.foxbook.models.Like;
 import com.gfa.foxbook.foxbook.models.Post;
 import com.gfa.foxbook.foxbook.models.User;
 import com.gfa.foxbook.foxbook.models.dtos.UserBasicDTO;
+import com.gfa.foxbook.foxbook.models.dtos.UserUpdateDTO;
 import com.gfa.foxbook.foxbook.security.jwt.JwtUtils;
 import com.gfa.foxbook.foxbook.services.LikeService;
 import com.gfa.foxbook.foxbook.services.PostService;
 import com.gfa.foxbook.foxbook.services.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-
 import java.security.Principal;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -35,6 +34,9 @@ public class UserController {
     @GetMapping("/person")
     public ResponseEntity<?> getUser(HttpServletRequest request) {
         String token = jwtUtils.getJwtFromCookies(request);
+        if (token == null) {
+            return ResponseEntity.notFound().build();
+        }
         String email = jwtUtils.getUserNameFromJwtToken(token);
         Optional<User> maybeUser = userService.findByEmail(email);
         if (maybeUser.isEmpty()) {
@@ -50,39 +52,42 @@ public class UserController {
     }
 
 
-    @DeleteMapping("/people/{id}")
-    public ResponseEntity<?> deletePerson(@PathVariable Long id, Principal principal) {
-        Optional<User> user = userService.findById(id);
-        if (user.isEmpty()) {
+    @DeleteMapping("/people")
+    public ResponseEntity<?> deletePerson(HttpServletRequest request){
+        String token = jwtUtils.getJwtFromCookies(request);
+        String email = jwtUtils.getUserNameFromJwtToken(token);
+        Optional<User> maybeUser = userService.findByEmail(email);
+        if (maybeUser.isEmpty()) {
             return ResponseEntity.notFound().build();
         }
+        User requestUser = maybeUser.get();
 
-        User existingUser = user.get();
-
-        if (!existingUser.getEmail().equals(principal.getName())) {
-            return ResponseEntity.status(HttpStatus.FORBIDDEN).body("You are not allowed to delete this profile.");
-        }
-
-        userService.delete(existingUser);
+        userService.delete(requestUser);
         return ResponseEntity.noContent().build();
     }
 
 
-    @PutMapping("/people/{nickname}")
-    public ResponseEntity<?> updateUserByNickname(@RequestBody User user, @PathVariable String nickname, Principal principal) {
-        Optional<User> maybeUser = userService.findByNickname(nickname);
-
+    @PatchMapping("/people")
+    public ResponseEntity<?> updateUserByNickname(HttpServletRequest request, @RequestBody UserUpdateDTO updateDTO) {
+        String token = jwtUtils.getJwtFromCookies(request);
+        String email = jwtUtils.getUserNameFromJwtToken(token);
+        Optional<User> maybeUser = userService.findByEmail(email);
         if (maybeUser.isEmpty()) {
             return ResponseEntity.notFound().build();
         }
+        User requestUser = maybeUser.get();
 
-        User existingUser = maybeUser.get();
+        requestUser.setFirstName(updateDTO.getFirstName());
+        requestUser.setLastName(updateDTO.getLastName());
+        requestUser.setEmail(updateDTO.getEmail());
 
-//        if (!existingUser.getEmail().equals(principal.getName())) {
-//            return ResponseEntity.status(HttpStatus.FORBIDDEN).body("You are not allowed to update this profile.");
-//        } // todo recheck security holes
+        requestUser.setGitHubURL(updateDTO.getGithub());
+        requestUser.setLinkedInURL(updateDTO.getLinkedin());
+        requestUser.setFacebookURL(updateDTO.getFacebook());
+        requestUser.setInstagramURL(updateDTO.getInstagram());
+        requestUser.setTwitterURL(updateDTO.getTwitter());
 
-        userService.updateProfile(user);
+        userService.updateProfile(requestUser);
 
         return ResponseEntity.ok().build();
     }

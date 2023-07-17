@@ -21,7 +21,7 @@ export class HeaderComponent implements OnInit {
 
   userEmail: string = '';
 
-  constructor(private authService: AuthService, 
+  constructor(private authService: AuthService,
     private profileService: ProfileService,
     private storageService: StorageService,
     private activatedroute: ActivatedRoute) { }
@@ -33,9 +33,10 @@ export class HeaderComponent implements OnInit {
       // this.roles = this.storageService.getUser().roles;
     }
 
-    this.username=this.activatedroute.snapshot.paramMap.get("username");
-    this.profileService.getUser(this.username)
-      .subscribe(user => this.user = user);
+    // was causing error - maybe needed
+    // this.username=this.activatedroute.snapshot.paramMap.get("username");
+    // this.profileService.getUser(this.username)
+    //   .subscribe(user => this.user = user);
   }
   logout(): void {
     this.storageService.logout();
