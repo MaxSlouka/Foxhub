@@ -25,6 +25,7 @@ import { UserSettingsPageComponent } from './components/user-settings-page/user-
 import { TermsOfUseComponent } from './components/terms-of-use/terms-of-use.component';
 import { HeaderSearchbarComponent } from './components/header-searchbar/header-searchbar.component';
 import { UpdatePasswordComponent } from './components/update-password/update-password.component';
+import { HeaderSearchbarCardComponent } from './components/header-searchbar-card/header-searchbar-card.component';
 
 
 @NgModule({
@@ -48,7 +49,8 @@ import { UpdatePasswordComponent } from './components/update-password/update-pas
     UserSettingsPageComponent,
     TermsOfUseComponent,
     HeaderSearchbarComponent,
-    UpdatePasswordComponent
+    UpdatePasswordComponent,
+    HeaderSearchbarCardComponent
   ],
   imports: [
     FormsModule,
