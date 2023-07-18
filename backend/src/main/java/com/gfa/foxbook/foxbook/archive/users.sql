@@ -72,4 +72,6 @@ INSERT INTO users_technologies (users_id, technologies_id) VALUES
 INSERT INTO users_languages (users_id, languages_id) VALUES
                                                          ((SELECT id FROM users WHERE nickname = 'bill-gates'), (SELECT id FROM languages WHERE name = 'English')),
                                                          ((SELECT id FROM users WHERE nickname = 'steve-jobs'), (SELECT id FROM languages WHERE name = 'English')),
+                                                         ((SELECT id FROM users WHERE nickname = 'bill-gates'), (SELECT id FROM languages WHERE name = 'Spanish')),
+
                                                          ((SELECT id FROM users WHERE nickname = 'steve-jobs'), (SELECT id FROM languages WHERE name = 'Spanish'));
