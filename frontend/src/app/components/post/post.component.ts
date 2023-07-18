@@ -22,9 +22,11 @@ export class PostComponent implements OnInit {
   replyId: number | null = null;
 
   ngOnInit(): void {
-    this.canReply = Boolean(this.currentUserId);
-    this.canEdit = this.currentUserId === this.post.userId;
-    this.canDelete = this.currentUserId === this.post.userId && this.replies.length === 0;
+    // this.canReply = Boolean(this.currentUserId);
+    this.canReply = this.currentUserId === this.post.userId;
+      this.canEdit = this.currentUserId === this.post.userId;
+    // this.canDelete = this.currentUserId === this.post.userId && this.replies.length === 0;
+    this.canDelete = this.currentUserId === this.post.userId;
     // this.replyId = this.parentPostId ? this.parentPostId : this.post.PostId;
   }
 

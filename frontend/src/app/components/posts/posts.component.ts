@@ -29,6 +29,7 @@ export class PostsComponent implements OnInit {
       .createPost(text, parentPostId)
       .subscribe((createdPost) => {
         this.posts = [...this.posts, createdPost];
+        this.activePost = null;
       });
   }
 
