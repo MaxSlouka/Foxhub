@@ -40,7 +40,7 @@ export class UserSettingsPageComponent {
 
   onUpload() {
     this.uploadService.uploadFile(this.selectedFile).subscribe(
-      res => console.log(res),
+      res => {},
       err => console.error(err)
     );
   }
