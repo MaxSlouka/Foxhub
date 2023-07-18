@@ -49,6 +49,38 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public User upgradeUser(String nickname) {
+        User user = userRepository.getByNickname(nickname);
+
+            List<Role> roles = new ArrayList<>();
+            Role adminRole = new Role("ADMIN");
+            roles.add(adminRole);
+
+            user.setRoles(roles);
+
+            return userRepository.save(user);
+    }
+
+    @Override
+    public Optional<User> findByEmail(String name) {
+        return userRepository.findByEmail(name);
+    }
+
+    @Override
+    public void addComment(User existingUser, String comment) {
+        commentService.comment(existingUser.getId(), existingUser.getId(), comment);
+        userRepository.save(existingUser);
+
+    }
+    @Override
+    public UserBasicDTO convertToUserBasicDTO(User user) {
+        UserBasicDTO userBasicDTO = new UserBasicDTO();
+        userBasicDTO.setFirstName(user.getFirstName());
+        userBasicDTO.setLastName(user.getLastName());
+        userBasicDTO.setEmail(user.getEmail());
+        return userBasicDTO;
+    }
+    @Override
     public User updateProfile(User user, User userDTO) {
         if (userDTO.getFirstName() != null) {
             user.setFirstName(userDTO.getFirstName());
@@ -105,42 +137,6 @@ public class UserServiceImpl implements UserService {
         } else {
             user.setInstagram(user.getInstagram());
         }
-
-
-
         return userRepository.save(user);
-    }
-
-    @Override
-    public User upgradeUser(String nickname) {
-        User user = userRepository.getByNickname(nickname);
-
-            List<Role> roles = new ArrayList<>();
-            Role adminRole = new Role("ADMIN");
-            roles.add(adminRole);
-
-            user.setRoles(roles);
-
-            return userRepository.save(user);
-    }
-
-    @Override
-    public Optional<User> findByEmail(String name) {
-        return userRepository.findByEmail(name);
-    }
-
-    @Override
-    public void addComment(User existingUser, String comment) {
-        commentService.comment(existingUser.getId(), existingUser.getId(), comment);
-        userRepository.save(existingUser);
-
-    }
-@Override
-    public UserBasicDTO convertToUserBasicDTO(User user) {
-        UserBasicDTO userBasicDTO = new UserBasicDTO();
-        userBasicDTO.setFirstName(user.getFirstName());
-        userBasicDTO.setLastName(user.getLastName());
-        userBasicDTO.setEmail(user.getEmail());
-        return userBasicDTO;
     }
 }
