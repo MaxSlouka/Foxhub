@@ -47,6 +47,9 @@
                 data-toggle="modal" data-target="#exampleModal">
                 Contact
               </button>
+              <qrcode (qrCodeURL)="onChangeURL($event)" [qrdata]="'http://localhost:4200/profile/' + username" [width]="80" [errorCorrectionLevel]="'M'"></qrcode>
+              <a [href]="qrCodeDownloadLink" download="qrcode">Download</a>
+
 
               <!-- modal -->
 
