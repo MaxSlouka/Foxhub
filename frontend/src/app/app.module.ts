@@ -26,7 +26,8 @@ import { TermsOfUseComponent } from './components/terms-of-use/terms-of-use.comp
 import { HeaderSearchbarComponent } from './components/header-searchbar/header-searchbar.component';
 import { UpdatePasswordComponent } from './components/update-password/update-password.component';
 import { HeaderSearchbarCardComponent } from './components/header-searchbar-card/header-searchbar-card.component';
-import {QRCodeModule} from "angularx-qrcode";
+import {QRCodeModule} from 'angularx-qrcode';
+
 
 
 
@@ -62,6 +63,7 @@ import {QRCodeModule} from "angularx-qrcode";
     HttpClientModule,
     ReactiveFormsModule,
     QRCodeModule,
+
   ],
   providers: [httpInterceptorProviders],
   bootstrap: [AppComponent]

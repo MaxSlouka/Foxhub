@@ -14,7 +14,7 @@ export class User {
   yearOfBirth?: number;
   password!: string;
   personality?: string;
-  countryResidence?: string;
+  location?: string;
   dateOfRegistration?: Date;
   profileUrl?: string;
   profilePictureUrl?: string;

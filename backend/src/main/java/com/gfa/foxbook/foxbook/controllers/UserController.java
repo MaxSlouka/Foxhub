@@ -11,10 +11,22 @@ import com.gfa.foxbook.foxbook.services.interfaces.PostService;
 import com.gfa.foxbook.foxbook.services.interfaces.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
+import lombok.Value;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.imageio.ImageIO;
+import javax.swing.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Optional;
 
 @Controller
@@ -26,6 +38,9 @@ public class UserController {
     private final JwtUtils jwtUtils;
     private final PostService postService;
     private final LikeService likeService;
+
+
+    private String uploadDir = "./uploads";
 
 
     @GetMapping("/person")
@@ -60,6 +75,25 @@ public class UserController {
         userService.updateProfile(requestUser, updateDTO);
         return ResponseEntity.ok().build();
     }
+    @PostMapping("/upload")
+    public ResponseEntity<?> uploadFile(@RequestParam("file") MultipartFile file, HttpServletRequest request) {
+        User user = jwtUtils.getUserFromRequest(request);
+        if (user == null) {
+            return ResponseEntity.badRequest().build();
+        }
+        String nickname = user.getNickname();
+        try {
+            Files.createDirectories(Paths.get(uploadDir));
+            Path filePath = Paths.get(uploadDir, nickname + ".jpg");
+            file.transferTo(filePath);
+            return ResponseEntity.ok().build();
+        } catch (IOException e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Failed to upload the file: " + e.getMessage());
+        }
+    }
+
+
 
     @PostMapping("/posts/{postId}/comments")
     public ResponseEntity<?> addComment(@PathVariable Long postId, HttpServletRequest request, @RequestBody String comment) {
