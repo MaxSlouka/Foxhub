@@ -11,8 +11,8 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class ApiService {
-  private apiUrlGetAll: string = "http://localhost:8080/api/v1/public/people";
 
+  private apiUrlGetAll: string = "http://localhost:8080/api/v1/public/people";
 
   constructor(private http: HttpClient) {
   }
@@ -51,7 +51,14 @@ export class ApiService {
     }
   }
 
-  updateUser(firstName: string, lastName: string, email: string, github: string, linkedin: string, facebook: string, twitter: string, instagram: string): Observable<any> {
+  updateUser(firstName: string,
+             lastName: string,
+             email: string,
+             github: string | undefined,
+             linkedin: string | undefined,
+             facebook: string | undefined,
+             instagram: string | undefined
+  ): Observable<any> {
     return this.http.patch("http://localhost:8080/api/v1/user/people", {
         firstName,
         lastName,
@@ -59,7 +66,6 @@ export class ApiService {
         github,
         linkedin,
         facebook,
-        twitter,
         instagram
       },
       httpOptions

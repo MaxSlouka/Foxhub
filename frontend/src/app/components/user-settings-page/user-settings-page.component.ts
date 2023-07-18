@@ -10,32 +10,16 @@ import {AuthService} from "../../_services/auth.service";
   styleUrls: ['./user-settings-page.component.css']
 })
 export class UserSettingsPageComponent {
-  form:any = {
-    firstName: null,
-    lastName: null,
-    email: null,
-    github: null,
-    linkedin: null,
-    facebook: null,
-    twitter: null,
-    instagram: null,
+  user: User = new User();
 
-};
-
-  firstName: string = "";
-  lastName: string = "";
-  email: string = "";
-  nickname: string = "";
-
-  constructor(private storageService: StorageService, private apiService: ApiService, private authService: AuthService) {
+  constructor(private storageService: StorageService,
+              private apiService: ApiService,
+              private authService: AuthService) {
   }
 
   ngOnInit(): void {
-    this.nickname = this.storageService.getUser();
     this.apiService.getUserBasicInfo().subscribe((user: User) => {
-      this.firstName = user.firstName;
-      this.lastName = user.lastName;
-      this.email = user.email;
+      this.user = user;
     });
 
   }
@@ -53,8 +37,23 @@ export class UserSettingsPageComponent {
   }
 
   updateUser() {
-    const {firstName, lastName, email, github, linkedin, facebook, twitter, instagram} = this.form;
-    this.apiService.updateUser(firstName, lastName, email, github, linkedin, facebook, twitter, instagram).subscribe();
+    const {
+      firstName,
+      lastName,
+      email,
+      gitHubURL,
+      linkedInURL,
+      facebookURL,
+      instagramURL
+    } = this.user;
 
+    this.apiService.updateUser(
+      firstName,
+      lastName,
+      email,
+      gitHubURL,
+      linkedInURL,
+      facebookURL,
+      instagramURL).subscribe();
   }
 }
