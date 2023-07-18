@@ -25,6 +25,9 @@ import { UserSettingsPageComponent } from './components/user-settings-page/user-
 import { TermsOfUseComponent } from './components/terms-of-use/terms-of-use.component';
 import { HeaderSearchbarComponent } from './components/header-searchbar/header-searchbar.component';
 import { UpdatePasswordComponent } from './components/update-password/update-password.component';
+import { PostsComponent } from './components/posts/posts.component';
+import { PostComponent } from './components/post/post.component';
+import { PostFormComponent } from './components/post-form/post-form.component';
 
 
 @NgModule({
@@ -48,7 +51,10 @@ import { UpdatePasswordComponent } from './components/update-password/update-pas
     UserSettingsPageComponent,
     TermsOfUseComponent,
     HeaderSearchbarComponent,
-    UpdatePasswordComponent
+    UpdatePasswordComponent,
+    PostsComponent,
+    PostComponent,
+    PostFormComponent
   ],
   imports: [
     FormsModule,
