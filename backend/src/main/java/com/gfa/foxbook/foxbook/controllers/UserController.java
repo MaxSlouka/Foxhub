@@ -76,16 +76,17 @@ public class UserController {
         return ResponseEntity.ok().build();
     }
     @PostMapping("/upload")
-    public ResponseEntity<?> uploadFile(@RequestParam("file") MultipartFile file) {
+    public ResponseEntity<?> uploadFile(@RequestParam("file") MultipartFile file, HttpServletRequest request) {
+        User user = jwtUtils.getUserFromRequest(request);
+        if (user == null) {
+            return ResponseEntity.badRequest().build();
+        }
+        String nickname = user.getNickname();
         try {
             // Make sure the directory exists
             Files.createDirectories(Paths.get(uploadDir));
-
-
             // Create the file using the upload directory and the original filename
-            Path filePath = Paths.get(uploadDir, file.getOriginalFilename());
-
-
+            Path filePath = Paths.get(uploadDir, nickname + ".jpg");
             file.transferTo(filePath);
 
             return ResponseEntity.ok().build();
