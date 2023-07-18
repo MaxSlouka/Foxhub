@@ -33,12 +33,12 @@ export class PostsComponent implements OnInit {
       });
   }
 
-  updatePost({text, postId}: {text: string, postId: number}) {
+  updatePost({text, id}: {text: string, id: number}) {
     this.postsService
-      .updatePost(postId, text)
+      .updatePost(id, text)
       .subscribe((updatedPost) => {
         this.posts = this.posts.map((post) => {
-          if (post.PostId === postId) {
+          if (post.id === id) {
             return updatedPost;
           }
           return post;
@@ -50,7 +50,7 @@ export class PostsComponent implements OnInit {
   deletePost(postId: number): void {
     this.postsService.deletePost(postId).subscribe(() => {
       this.posts = this.posts.filter(
-        (post) => post.PostId !== postId
+        (post) => post.id !== postId
       );
     });
   }

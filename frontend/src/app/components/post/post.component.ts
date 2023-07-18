@@ -18,14 +18,13 @@ export class PostComponent implements OnInit {
     text: string, parentPostId: number | null
   }>();
   @Output() updatePost = new EventEmitter<{
-    text: string, postId: number
+    text: string, id: number
   }>();
   @Output() deletePost = new EventEmitter<number>();
 
-  // change all to false in deployment
-  canReply: boolean = true;
-  canEdit: boolean = true;
-  canDelete: boolean = true;
+  canReply: boolean = false;
+  canEdit: boolean = false;
+  canDelete: boolean = false;
   replyId: number | null = null;
 
   ngOnInit(): void {
@@ -40,6 +39,6 @@ export class PostComponent implements OnInit {
       return false;
     }
 
-    return this.activePost.PostId === this.post.PostId;
+    return this.activePost.id === this.post.id;
   }
 }

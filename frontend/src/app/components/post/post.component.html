@@ -12,14 +12,13 @@
     submitLabel="Update"
     [hasCancelButton]="true"
     [initialText]="post.content!"
-    (handleSubmit)="updatePost.emit({text: $event, postId: post.PostId!})"
+    (handleSubmit)="updatePost.emit({text: $event, id: post.id!})"
     (handleCancel)="setActivePost.emit(null)"
     ></app-post-form>
     <div class="post-actions">
       <div class="post-action">Reply</div>
       <div class="post-action">Edit</div>
-      <div class="post-action"
-      (click)="deletePost.emit(post.PostId)">Delete</div>
+      <div class="post-action" (click)="deletePost.emit(post.id)">Delete</div>
       <!--      <div *ngIf="canReply" class="post-action">Reply</div>-->
       <!--      <div *ngIf="canEdit" class="post-action">Edit</div>-->
       <!--      <div *ngIf="canDelete" class="post-action">Delete</div>-->
@@ -36,7 +35,7 @@
                 [activePost]="activePost"
                 (addPost)="addPost.emit($event)"
                 (updatePost)="updatePost.emit($event)"
-                [parentPostId]="post.PostId!"
+                [parentPostId]="post.id!"
                 [replies]="[]"
                 [currentUserId]="currentUserId"
                 (deletePost)="deletePost.emit($event)"
