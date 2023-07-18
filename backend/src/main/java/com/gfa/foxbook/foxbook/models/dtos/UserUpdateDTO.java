@@ -12,7 +12,7 @@ public class UserUpdateDTO {
     String lastName;
     String email;
 
-    String github;
+    String gitHub;
     String linkedin;
     String facebook;
     String instagram;

@@ -60,7 +60,7 @@ export class ApiService {
              phone: string | undefined,
              location: string | undefined,
              about: string | undefined,
-             github: string | undefined,
+             gitHub: string | undefined,
              linkedin: string | undefined,
              facebook: string | undefined,
              instagram: string | undefined
@@ -74,7 +74,7 @@ export class ApiService {
         phone,
         location,
         about,
-        github,
+        gitHub,
         linkedin,
         facebook,
         instagram
