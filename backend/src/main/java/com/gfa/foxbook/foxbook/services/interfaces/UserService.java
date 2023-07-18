@@ -17,7 +17,7 @@ public interface UserService {
 
     User getByNickname(String nickname);
 
-    User updateProfile(User user);
+    User updateProfile(User user, User userDTO);
     User upgradeUser(String nickname);
 
     Optional<User> findByEmail(String name);
