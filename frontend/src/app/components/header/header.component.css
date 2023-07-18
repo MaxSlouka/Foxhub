@@ -20,6 +20,9 @@ ul li a {
 }
 
 .search-result-container {
+    overflow: auto;
+    max-height: 80%;
+    padding: 35px;
     position: fixed;
     z-index: 9999;
     top: 50%;
