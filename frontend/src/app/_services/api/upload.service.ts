@@ -12,6 +12,6 @@ export class UploadService {
     const formData: FormData = new FormData();
     formData.append('file', file, file.name);
 
-    return this.http.post('http://localhost:3000/upload', formData);
+    return this.http.post('http://localhost:8080/api/v1/user/upload', formData);
   }
 }
