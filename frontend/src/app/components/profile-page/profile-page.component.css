@@ -9,3 +9,47 @@
   background-color: rgb(0, 90, 0);
 }
 
+.profile-img {
+  margin: 1rem;
+}
+
+label {
+  font-size: small;
+  font-weight: bold;
+}
+
+ul li a {
+  color: rgb(207, 207, 207);
+  font-size: large;
+}
+
+ul li a:hover {
+  transform: scale(1.5);
+}
+
+.github i:hover {
+  color: black;
+}
+
+.facebook i:hover {
+  color: #3872dc;
+}
+
+.instagram i:hover {
+  color: #d1506a;
+}
+
+.linkedin i:hover {
+  color: #3375b0;
+}
+
+.optional i:hover {
+  color: green;
+}
+
+.modal-dialog {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 1rem);
+}
