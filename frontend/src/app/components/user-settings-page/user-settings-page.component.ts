@@ -4,6 +4,7 @@ import {ApiService} from "../../_services/api/api.service";
 import {User} from "../../models/user";
 import {AuthService} from "../../_services/auth.service";
 import {Router} from "@angular/router";
+import {UploadService} from "../../_services/api/upload.service";
 
 @Component({
   selector: 'app-user-settings-page',
@@ -11,6 +12,8 @@ import {Router} from "@angular/router";
   styleUrls: ['./user-settings-page.component.css']
 })
 export class UserSettingsPageComponent {
+  // @ts-ignore
+
   selectedFile: File = null;
 
 
@@ -20,7 +23,7 @@ export class UserSettingsPageComponent {
               private apiService: ApiService,
               private authService: AuthService,
               private router: Router,
-              private ) {
+              private uploadService:UploadService) {
   }
 
   ngOnInit(): void {
@@ -28,6 +31,18 @@ export class UserSettingsPageComponent {
       this.user = user;
       console.log(this.user);
     });
+  }
+
+  // @ts-ignore
+  onFileSelected(event) {
+    this.selectedFile = <File>event.target.files[0];
+  }
+
+  onUpload() {
+    this.uploadService.uploadFile(this.selectedFile).subscribe(
+      res => console.log(res),
+      err => console.error(err)
+    );
   }
 
 
