@@ -3,6 +3,7 @@ import {StorageService} from "../../_services/storage.service";
 import {ApiService} from "../../_services/api/api.service";
 import {User} from "../../models/user";
 import {AuthService} from "../../_services/auth.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-user-settings-page',
@@ -29,13 +30,15 @@ export class UserSettingsPageComponent {
   email: string = "";
   nickname: string = "";
 
-  constructor(private storageService: StorageService, private apiService: ApiService, private authService: AuthService) {
+  constructor(private storageService: StorageService, private apiService: ApiService, private authService: AuthService, private router:Router) {
   }
 
   ngOnInit(): void {
     this.nickname = this.storageService.getUser();
     this.apiService.getUserBasicInfo().subscribe((user: User) => {
       this.firstName = user.firstName;
+      this.form.firstName = user.firstName;
+      this.form.lastName = user.lastName;
       this.lastName = user.lastName;
       this.email = user.email;
     });
@@ -54,9 +57,22 @@ export class UserSettingsPageComponent {
 
   }
 
-  updateUser() {
-    const {firstName, lastName, completeProjects, yearsOfExperience, phone, location, about, github, linkedin, facebook, instagram} = this.form;
-  this.apiService.updateUser(firstName, lastName, completeProjects, yearsOfExperience, phone, location, about, github, linkedin, facebook, instagram).subscribe();
-
+  async updateUser() {
+    const {
+      firstName,
+      lastName,
+      completeProjects,
+      yearsOfExperience,
+      phone,
+      location,
+      about,
+      github,
+      linkedin,
+      facebook,
+      instagram
+    } = this.form;
+    await this.apiService.updateUser(firstName, lastName, completeProjects, yearsOfExperience, phone, location, about, github, linkedin, facebook, instagram)
+      .subscribe(()=>{window.location.href = "";
+    });
   }
 }

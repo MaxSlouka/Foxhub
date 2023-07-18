@@ -65,12 +65,36 @@
           </div>
 
           <div class="mt-5 text-center">
-            <button class="btn btn-primary profile-button" type="submit">Save
+            <button class="btn btn-primary profile-button" type="button" data-toggle="modal"
+                    data-target="#addModal">Save
               Profile
             </button>
             <a href="./updatePassword" class="btn btn-outline-primary" role="button" aria-disabled="true">Update
               password</a>
             <a href="./" class="btn btn-outline-secondary" role="button" aria-disabled="true">Go Back</a>
+          </div>
+           <!-- modal add-->
+          <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addModalLabel"
+               aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="addModalLabel">Are you sure?
+                  </h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="mt-5 text-center">
+                  <p class="lead">Do you want to update your profile?</p>
+                </div>
+                <div class="text-center">
+                  <button class="btn btn-primary profile-button" type="submit"
+                          data-toggle="modal" data-target="#addModal">Save profile
+                  </button>
+                </div>
+              </div>
+            </div>
           </div>
 
         </form>
@@ -99,7 +123,7 @@
           </button>
         </div>
 
-        <!-- modal -->
+        <!-- modal delete -->
 
         <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
           aria-hidden="true">
@@ -125,6 +149,8 @@
             </div>
           </div>
         </div>
+        <!-- modal add -->
+
       </div>
     </div>
   </div>
