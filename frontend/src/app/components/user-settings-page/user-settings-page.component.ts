@@ -13,7 +13,8 @@ import {Router} from "@angular/router";
 export class UserSettingsPageComponent {
 
 
-  user: User = new User();
+  // @ts-ignore
+  user: User;
 
   constructor(private storageService: StorageService,
               private apiService: ApiService,
