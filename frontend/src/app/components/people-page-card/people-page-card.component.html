@@ -1,18 +1,10 @@
-
-<div class="container col-xxl-8 px-4 py-3 people-card">
-    <div class="row flex-lg-row align-items-center g-5">
-
-        <div class="col col-lg-2">
-            <img [src]="user.profilePictureUrl ? user.profilePictureUrl : '../../../assets/img/logo.png'" width="100" height="100" class="profile-img" loading="lazy">
-        </div>
-
-        <div class="col">
-            <h3 class="display-5 fw-bold text-body-emphasis lh-1 mb-3">{{user.firstName}} {{user.lastName}}</h3>
-            <p class="lead">{{user.about}}</p>
-            <div class="d-grid gap-2 d-md-flex justify-content-md-start">
-                <a [routerLink]="['/profile',user.nickname]" class="btn btn-primary" role="button"
-                    aria-disabled="true">Visit profile</a>
-            </div>
+<a [routerLink]="['/profile',user.nickname]" class="card">
+    <img [src]="user.profilePictureUrl ? user.profilePictureUrl : '../../../assets/img/logo.png'" class="profile-img" loading="lazy" class="card-img-top">
+    <div class="card-body">
+        <h5 class="card-title">{{user.firstName}} {{user.lastName}}</h5>
+        <div class="card-body-technology">
+            <app-technologies *ngFor="let technology of user.technologies" [technology]="technology">
+            </app-technologies>
         </div>
     </div>
-</div>
+</a>
