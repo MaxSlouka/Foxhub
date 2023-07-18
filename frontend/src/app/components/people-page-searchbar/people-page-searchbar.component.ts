@@ -1,5 +1,6 @@
 import {Component, Input} from '@angular/core';
 import {User} from "../../models/user";
+import {ApiService} from "../../_services/api/api.service";
 
 
 @Component({
@@ -14,31 +15,16 @@ export class PeoplePageSearchbarComponent {
 // @ts-ignore
   @Input fullUsers: User[];
 
+  constructor(private apiService: ApiService) {
+  }
+
 ngOnInit(){
 }
 
   public searchUser(key: string): void {
     let results: User[] = [];
     for (const user of this.fullUsers) {
-      let hasTechnologyMatch = false;
-
-      // @ts-ignore
-      for (const technology of user.technologies) {
-        if (technology.name.toLowerCase().includes(key.toLowerCase())) {
-          results.push(user);
-          hasTechnologyMatch = true;
-          break;
-        }
-      }
-
-      if (!hasTechnologyMatch) {
-        if (
-          user.firstName.toLowerCase().includes(key.toLowerCase()) ||
-          user.lastName.toLowerCase().includes(key.toLowerCase())
-        ) {
-          results.push(user);
-        }
-      }
+      this.apiService.search(user, key,results)
     }
     this.users = results;
   }
