@@ -24,6 +24,7 @@ public class UserProfileDTO {
     private String yearsOfExperience;
     private int yearOfBirth;
     private String personality;
+    private String profilePictureUrl;
     private String location;
     private String facebook;
     private String instagram;
@@ -52,5 +53,6 @@ public class UserProfileDTO {
         this.optionalPage = user.getOptionalPage();
         this.technologies = user.getTechnologies();
         this.languages = user.getLanguages();
+        this.profilePictureUrl = user.getProfilePictureUrl();
     }
 }
