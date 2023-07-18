@@ -1,0 +1,23 @@
+<div class="post">
+  <div class="post-image-container">
+    <img ngSrc="/assets/img/AuthorPic.png" width="40" height="50" alt="">
+  </div>
+  <div class="post-right-part">
+    <div class="post-content">
+      <div class="post-author">{{post.author}}</div>
+    </div>
+    <div class="post-text">{{post.content}}</div>
+    POST FORM EDITING
+    <div class="post-actions">
+      <div *ngIf="canReply" class="post-action">Reply</div>
+      <div *ngIf="canEdit" class="post-action">Edit</div>
+      <div *ngIf="canDelete" class="post-action">Delete</div>
+    </div>
+    <app-post-form
+      *ngIf="isReplying()"
+      submitLabel="Reply"
+      (handleSubmit)="addPost.emit({text: $event, parentPostId: replyId})"
+      ></app-post-form>
+    POST FORM REPLYING REPLIES
+  </div>
+</div>
