@@ -18,7 +18,7 @@ public class UserProfileDTO {
     private String lastName;
     private String nickname;
     private String email;
-    private String telephone;
+    private String phone;
     private String about;
     private String completeProjects;
     private String yearsOfExperience;
@@ -39,7 +39,7 @@ public class UserProfileDTO {
         this.lastName = user.getLastName();
         this.nickname = user.getNickname();
         this.email = user.getEmail();
-        this.telephone = user.getPhone();
+        this.phone = user.getPhone();
         this.about = user.getAbout();
         this.completeProjects = user.getCompleteProjects();
         this.yearsOfExperience = user.getYearsOfExperience();
