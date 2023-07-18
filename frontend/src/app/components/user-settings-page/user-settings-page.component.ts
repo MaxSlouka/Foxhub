@@ -11,38 +11,21 @@ import {Router} from "@angular/router";
   styleUrls: ['./user-settings-page.component.css']
 })
 export class UserSettingsPageComponent {
-  form:any = {
-    firstName: null,
-    lastName: null,
-    completeProjects: null,
-    yearsOfExperience: null,
-    phone: null,
-    location: null,
-    about: null,
-    github: null,
-    linkedin: null,
-    facebook: null,
-    instagram: null,
-};
 
-  firstName: string = "";
-  lastName: string = "";
-  email: string = "";
-  nickname: string = "";
 
-  constructor(private storageService: StorageService, private apiService: ApiService, private authService: AuthService, private router:Router) {
+  user: User = new User();
+
+  constructor(private storageService: StorageService,
+              private apiService: ApiService,
+              private authService: AuthService,
+              private router: Router) {
   }
 
   ngOnInit(): void {
-    this.nickname = this.storageService.getUser();
     this.apiService.getUserBasicInfo().subscribe((user: User) => {
-      this.firstName = user.firstName;
-      this.form.firstName = user.firstName;
-      this.form.lastName = user.lastName;
-      this.lastName = user.lastName;
-      this.email = user.email;
+      this.user = user;
+      console.log(this.user);
     });
-
   }
 
 
@@ -57,6 +40,7 @@ export class UserSettingsPageComponent {
 
   }
 
+
   async updateUser() {
     const {
       firstName,
@@ -64,15 +48,27 @@ export class UserSettingsPageComponent {
       completeProjects,
       yearsOfExperience,
       phone,
-      location,
+      countryResidence,
       about,
-      github,
+      gitHub,
       linkedin,
       facebook,
       instagram
-    } = this.form;
-    await this.apiService.updateUser(firstName, lastName, completeProjects, yearsOfExperience, phone, location, about, github, linkedin, facebook, instagram)
-      .subscribe(()=>{window.location.href = "";
-    });
+    } = this.user;
+    await this.apiService.updateUser(
+      firstName,
+      lastName,
+      completeProjects,
+      yearsOfExperience,
+      phone,
+      countryResidence,
+      about,
+      gitHub,
+      linkedin,
+      facebook,
+      instagram)
+      .subscribe(() => {
+        window.location.href = "";
+      });
   }
 }

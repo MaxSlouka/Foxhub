@@ -11,8 +11,8 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class ApiService {
-  private apiUrlGetAll: string = "http://localhost:8080/api/v1/public/people";
 
+  private apiUrlGetAll: string = "http://localhost:8080/api/v1/public/people";
 
   constructor(private http: HttpClient) {
   }
@@ -30,8 +30,7 @@ export class ApiService {
   }
 
 
-
-  search(user: User, key:string, results: User[]) {
+  search(user: User, key: string, results: User[]) {
     let hasTechnologyMatch = false;
 
     // @ts-ignore
@@ -53,7 +52,20 @@ export class ApiService {
     }
   }
 
-  updateUser(firstName: string, lastName: string, completeProjects: number, yearsOfExperience: number, phone: string, location: string, about: string, github: string, linkedin: string, facebook: string, instagram: string): Observable<any> {
+
+  updateUser(firstName: string,
+             lastName: string,
+             github: string | undefined,
+             linkedin: string | undefined,
+             facebook: string | undefined,
+             instagram: string | undefined,
+             completeProjects: string | undefined,
+             yearsOfExperience: string | undefined,
+             phone: string | undefined,
+             location: string | undefined,
+             about: string | undefined
+  ): Observable<any> {
+
     return this.http.patch("http://localhost:8080/api/v1/user/people", {
         firstName,
         lastName,

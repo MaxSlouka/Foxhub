@@ -1,11 +1,10 @@
 package com.gfa.foxbook.foxbook.controllers;
 
+import com.gfa.foxbook.foxbook.models.dtos.UserProfileDTO;
 import com.gfa.foxbook.foxbook.models.nonusermodels.Comment;
 import com.gfa.foxbook.foxbook.models.nonusermodels.Like;
 import com.gfa.foxbook.foxbook.models.nonusermodels.Post;
 import com.gfa.foxbook.foxbook.models.User;
-import com.gfa.foxbook.foxbook.models.dtos.UserBasicDTO;
-import com.gfa.foxbook.foxbook.models.dtos.UserUpdateDTO;
 import com.gfa.foxbook.foxbook.security.jwt.JwtUtils;
 import com.gfa.foxbook.foxbook.services.interfaces.LikeService;
 import com.gfa.foxbook.foxbook.services.interfaces.PostService;
@@ -35,7 +34,9 @@ public class UserController {
         if (user == null) {
             return ResponseEntity.badRequest().build();
         }
-        return ResponseEntity.ok(userService.convertToUserBasicDTO(user));
+        UserProfileDTO userDTO = new UserProfileDTO(user);
+        return ResponseEntity.ok(userDTO);
+        // todo recheck security holes
     }
 
 
@@ -56,9 +57,7 @@ public class UserController {
         if (requestUser == null || updateDTO == null) {
             return ResponseEntity.badRequest().build();
         }
-
         userService.updateProfile(requestUser, updateDTO);
-
         return ResponseEntity.ok().build();
     }
 
