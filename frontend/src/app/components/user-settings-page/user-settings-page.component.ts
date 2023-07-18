@@ -40,7 +40,9 @@ export class UserSettingsPageComponent {
 
   onUpload() {
     this.uploadService.uploadFile(this.selectedFile).subscribe(
-      res => {},
+      res => {
+        this.user.profilePictureUrl = "http://localhost:8080/uploads/" + this.user.nickname+".jpg"
+      },
       err => console.error(err)
     );
   }
