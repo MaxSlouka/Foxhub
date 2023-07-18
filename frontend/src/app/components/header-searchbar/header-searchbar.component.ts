@@ -1,5 +1,6 @@
 import {Component, Input, EventEmitter, Output} from '@angular/core';
 import {User} from "../../models/user";
+import {ApiService} from "../../_services/api/api.service";
 
 
 @Component({
@@ -12,36 +13,17 @@ export class HeaderSearchbarComponent {
   @Input() users: User[];
   // @ts-ignore
   filtered: User[];
-
   @Output() dataEvent = new EventEmitter<any>();
 
+  constructor(private apiService: ApiService) {
+  }
 
   public searchUser(key: string): void {
     let results: User[] = [];
     for (const user of this.users) {
-      let hasTechnologyMatch = false;
-
-      // @ts-ignore
-      for (const technology of user.technologies) {
-        if (technology.name.toLowerCase().includes(key.toLowerCase())) {
-          results.push(user);
-          hasTechnologyMatch = true;
-          break;
-        }
-      }
-
-      if (!hasTechnologyMatch) {
-        if (
-          user.firstName.toLowerCase().includes(key.toLowerCase()) ||
-          user.lastName.toLowerCase().includes(key.toLowerCase())
-        ) {
-          results.push(user);
-        }
-      }
+      this.apiService.search(user,key,results)
     }
-
     this.filtered = results;
-
     if (!key) {
       this.filtered = [];
     }

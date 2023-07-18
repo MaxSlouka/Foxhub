@@ -49,7 +49,6 @@ export class HeaderComponent implements OnInit {
   logout(): void {
     this.storageService.logout();
     this.authService.logout();
-
     this.isLoggedIn = false;
   }
 }

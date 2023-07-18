@@ -29,6 +29,30 @@ export class ApiService {
     return this.http.delete('http://localhost:8080/api/v1/user/people');
   }
 
+
+
+  search(user: User, key:string, results: User[]) {
+    let hasTechnologyMatch = false;
+
+    // @ts-ignore
+    for (const technology of user.technologies) {
+      if (technology.name.toLowerCase().includes(key.toLowerCase())) {
+        results.push(user);
+        hasTechnologyMatch = true;
+        break;
+      }
+    }
+
+    if (!hasTechnologyMatch) {
+      if (
+        user.firstName.toLowerCase().includes(key.toLowerCase()) ||
+        user.lastName.toLowerCase().includes(key.toLowerCase())
+      ) {
+        results.push(user);
+      }
+    }
+  }
+
   updateUser(firstName: string, lastName: string, completeProjects: number, yearsOfExperience: number, phone: string, location: string, about: string, github: string, linkedin: string, facebook: string, instagram: string): Observable<any> {
     return this.http.patch("http://localhost:8080/api/v1/user/people", {
         firstName,
