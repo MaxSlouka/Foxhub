@@ -6,12 +6,37 @@ INSERT INTO role (name) VALUES ('ADMIN');
 INSERT INTO technologies (name) VALUES ('Java');
 INSERT INTO technologies (name) VALUES ('Python');
 INSERT INTO technologies (name) VALUES ('JavaScript');
+INSERT INTO technologies (name) VALUES ('C++');
+INSERT INTO technologies (name) VALUES ('Ruby');
+INSERT INTO technologies (name) VALUES ('PHP');
+INSERT INTO technologies (name) VALUES ('Swift');
+INSERT INTO technologies (name) VALUES ('Go');
+INSERT INTO technologies (name) VALUES ('Rust');
+INSERT INTO technologies (name) VALUES ('C#');
+INSERT INTO technologies (name) VALUES ('HTML');
+INSERT INTO technologies (name) VALUES ('CSS');
+INSERT INTO technologies (name) VALUES ('SQL');
+INSERT INTO technologies (name) VALUES ('Kotlin');
+INSERT INTO technologies (name) VALUES ('Perl');
+INSERT INTO technologies (name) VALUES ('TypeScript');
+INSERT INTO technologies (name) VALUES ('Shell Scripting');
+INSERT INTO technologies (name) VALUES ('Scala');
 -- Add more technologies as needed
 
 -- Inserting Languages
 INSERT INTO languages (name) VALUES ('English');
 INSERT INTO languages (name) VALUES ('Spanish');
 INSERT INTO languages (name) VALUES ('French');
+INSERT INTO languages (name) VALUES ('German');
+INSERT INTO languages (name) VALUES ('Mandarin Chinese');
+INSERT INTO languages (name) VALUES ('Russian');
+INSERT INTO languages (name) VALUES ('Japanese');
+INSERT INTO languages (name) VALUES ('Arabic');
+INSERT INTO languages (name) VALUES ('Ukrainian');
+INSERT INTO languages (name) VALUES ('Italian');
+INSERT INTO languages (name) VALUES ('Vietnamese');
+INSERT INTO languages (name) VALUES ('Dutch');
+INSERT INTO languages (name) VALUES ('Swedish');
 -- Add more languages as needed
 
 -- Inserting Users
@@ -31,18 +56,15 @@ VALUES
 INSERT INTO users_roles (users_id, roles_id) VALUES
                                                  ((SELECT id FROM users WHERE nickname = 'bill-gates'), (SELECT id FROM role WHERE name = 'USER')),
                                                  ((SELECT id FROM users WHERE nickname = 'steve-jobs'), (SELECT id FROM role WHERE name = 'USER'));
--- Assign more roles to users as needed
 
 -- Assigning Technologies to Users
 INSERT INTO users_technologies (users_id, technologies_id) VALUES
-                                                               ((SELECT id FROM users WHERE nickname = 'billgates'), (SELECT id FROM technologies WHERE name = 'Java')),
-                                                               ((SELECT id FROM users WHERE nickname = 'billgates'), (SELECT id FROM technologies WHERE name = 'Python')),
-                                                               ((SELECT id FROM users WHERE nickname = 'stevejobs'), (SELECT id FROM technologies WHERE name = 'JavaScript'));
--- Assign more technologies to users as needed
+                                                               ((SELECT id FROM users WHERE nickname = 'bill-gates'), (SELECT id FROM technologies WHERE name = 'Java')),
+                                                               ((SELECT id FROM users WHERE nickname = 'bill-gates'), (SELECT id FROM technologies WHERE name = 'Python')),
+                                                               ((SELECT id FROM users WHERE nickname = 'steve-jobs'), (SELECT id FROM technologies WHERE name = 'JavaScript'));
 
 -- Assigning Languages to Users
 INSERT INTO users_languages (users_id, languages_id) VALUES
-                                                         ((SELECT id FROM users WHERE nickname = 'billgates'), (SELECT id FROM languages WHERE name = 'English')),
-                                                         ((SELECT id FROM users WHERE nickname = 'stevejobs'), (SELECT id FROM languages WHERE name = 'English')),
-                                                         ((SELECT id FROM users WHERE nickname = 'stevejobs'), (SELECT id FROM languages WHERE name = 'Spanish'));
--- Assign more languages to users as needed
+                                                         ((SELECT id FROM users WHERE nickname = 'bill-gates'), (SELECT id FROM languages WHERE name = 'English')),
+                                                         ((SELECT id FROM users WHERE nickname = 'steve-jobs'), (SELECT id FROM languages WHERE name = 'English')),
+                                                         ((SELECT id FROM users WHERE nickname = 'steve-jobs'), (SELECT id FROM languages WHERE name = 'Spanish'));
