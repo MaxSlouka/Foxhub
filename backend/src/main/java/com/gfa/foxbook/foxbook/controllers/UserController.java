@@ -12,10 +12,17 @@ import com.gfa.foxbook.foxbook.services.interfaces.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.Value;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Optional;
 
 @Controller
@@ -64,7 +71,31 @@ public class UserController {
         userService.updateProfile(requestUser, updateDTO);
         return ResponseEntity.ok().build();
     }
-    
+    @PostMapping("upload")
+    public ResponseEntity<?> uploadFile(@RequestParam("file") MultipartFile file) {
+        try {
+            // Make sure the directory exists
+            Files.createDirectories(Paths.get(uploadDir));
+
+            // Create the file using the upload directory and the original filename
+            Path filePath = Paths.get(uploadDir, file.getOriginalFilename());
+
+            // Save the uploaded file to the file system
+            file.transferTo(filePath.toFile());
+
+            // Return a success response
+            String fileUri = ServletUriComponentsBuilder.fromCurrentContextPath()
+                    .path("/api/upload/")
+                    .path(file.getOriginalFilename())
+                    .toUriString();
+
+            return ResponseEntity.ok(fileUri);
+        } catch (IOException e) {
+            // In case of an exception, return a server error response
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Failed to upload the file: " + e.getMessage());
+        }
+    }
 
 
 
