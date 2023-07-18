@@ -1,15 +1,15 @@
-import { Component } from '@angular/core';
+import { Component} from '@angular/core';
 import {User} from "../../models/user";
 
-interface onInit {
-}
+
+
 
 @Component({
   selector: 'app-main-page',
   templateUrl: './main-page.component.html',
   styleUrls: ['./main-page.component.css']
 })
-export class MainPageComponent implements onInit {
+export class MainPageComponent {
 
-  protected readonly User = User;
+  protected readonly User: User | undefined;
 }

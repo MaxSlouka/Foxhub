@@ -7,5 +7,6 @@ import {User} from "../../models/user";
   styleUrls: ['./aside.component.css']
 })
 export class AsideComponent {
-  user: User = new User();
+  // @ts-ignore
+  user: User;
 }

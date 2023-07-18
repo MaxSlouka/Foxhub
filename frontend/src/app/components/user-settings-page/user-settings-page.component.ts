@@ -17,7 +17,8 @@ export class UserSettingsPageComponent {
   selectedFile: File = null;
 
 
-  user: User = new User();
+  // @ts-ignore
+  user: User;
 
   constructor(private storageService: StorageService,
               private apiService: ApiService,
