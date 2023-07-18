@@ -9,7 +9,7 @@ export class User {
   lastName!: string;
   nickname?: string;
   email!: string;
-  telephone?: string;
+  phone?: string;
   about?: string;
   yearOfBirth?: number;
   password!: string;
