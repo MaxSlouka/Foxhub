@@ -87,15 +87,6 @@ public class UserController {
 
 
             file.transferTo(filePath);
-            // Save the uploaded file to the file system
-//            file.transferTo(new File("./uploads/1"));
-
-            // Return a success response
-//            String fileUri = ServletUriComponentsBuilder.fromCurrentContextPath()
-//                    .path("/api/upload/")
-//                    .path(file.getOriginalFilename())
-//                    .toUriString();
-
 
             return ResponseEntity.ok().build();
         } catch (IOException e) {
