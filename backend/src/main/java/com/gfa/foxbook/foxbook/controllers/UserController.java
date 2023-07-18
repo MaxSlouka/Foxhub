@@ -71,7 +71,7 @@ public class UserController {
         userService.updateProfile(requestUser, updateDTO);
         return ResponseEntity.ok().build();
     }
-    @PostMapping("upload")
+    @PostMapping("/upload")
     public ResponseEntity<?> uploadFile(@RequestParam("file") MultipartFile file) {
         try {
             // Make sure the directory exists
