@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -77,11 +78,15 @@ public class UserController {
             // Make sure the directory exists
             Files.createDirectories(Paths.get(uploadDir));
 
+
             // Create the file using the upload directory and the original filename
             Path filePath = Paths.get(uploadDir, file.getOriginalFilename());
 
+            System.out.println(file.getOriginalFilename());
+
             // Save the uploaded file to the file system
             file.transferTo(filePath.toFile());
+//            file.transferTo(new File("./uploads/1"));
 
             // Return a success response
             String fileUri = ServletUriComponentsBuilder.fromCurrentContextPath()
