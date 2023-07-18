@@ -53,7 +53,6 @@ public class UserController {
         return ResponseEntity.ok(userDTO);
     }
 
-
     @DeleteMapping("/people")
     public ResponseEntity<?> deletePerson(HttpServletRequest request) {
         User user = jwtUtils.getUserFromRequest(request);
