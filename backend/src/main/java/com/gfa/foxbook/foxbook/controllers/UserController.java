@@ -1,10 +1,10 @@
 package com.gfa.foxbook.foxbook.controllers;
 
+import com.gfa.foxbook.foxbook.models.dtos.UserProfileDTO;
 import com.gfa.foxbook.foxbook.models.nonusermodels.Comment;
 import com.gfa.foxbook.foxbook.models.nonusermodels.Like;
 import com.gfa.foxbook.foxbook.models.nonusermodels.Post;
 import com.gfa.foxbook.foxbook.models.User;
-import com.gfa.foxbook.foxbook.models.dtos.UserBasicDTO;
 import com.gfa.foxbook.foxbook.models.dtos.UserUpdateDTO;
 import com.gfa.foxbook.foxbook.security.jwt.JwtUtils;
 import com.gfa.foxbook.foxbook.services.interfaces.LikeService;
@@ -41,11 +41,8 @@ public class UserController {
             return ResponseEntity.notFound().build();
         }
         User user = maybeUser.get();
-        UserBasicDTO userBasicDTO = new UserBasicDTO();
-        userBasicDTO.setFirstName(user.getFirstName());
-        userBasicDTO.setLastName(user.getLastName());
-        userBasicDTO.setEmail(user.getEmail());
-        return ResponseEntity.ok(userBasicDTO);
+        UserProfileDTO userDTO = new UserProfileDTO(user);
+        return ResponseEntity.ok(userDTO);
         // todo recheck security holes
     }
 

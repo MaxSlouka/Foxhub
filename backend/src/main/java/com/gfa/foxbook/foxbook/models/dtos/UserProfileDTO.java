@@ -34,7 +34,7 @@ public class UserProfileDTO {
     private List<Technology> technologies;
     private List<Language> languages;
 
-    UserProfileDTO(User user){
+    public UserProfileDTO(User user){
         this.firstName = user.getFirstName();
         this.lastName = user.getLastName();
         this.nickname = user.getNickname();

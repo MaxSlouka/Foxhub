@@ -1,5 +1,6 @@
 package com.gfa.foxbook.foxbook.controllers;
 
+import com.gfa.foxbook.foxbook.models.dtos.UserProfileDTO;
 import com.gfa.foxbook.foxbook.models.dtos.UserSearchDTO;
 import com.gfa.foxbook.foxbook.models.nonusermodels.Post;
 import com.gfa.foxbook.foxbook.models.User;
@@ -45,7 +46,8 @@ public class PublicController {
             return ResponseEntity.notFound().build();
         }
         User user = maybeUser.get();
-        return ResponseEntity.ok(user);
+        UserProfileDTO userDTO = new UserProfileDTO(user);
+        return ResponseEntity.ok(userDTO);
     }
 
     @GetMapping("/posts/{id}")
