@@ -1,0 +1,17 @@
+<div class="posts">
+  <h3 class="posts-title">Posts</h3>
+  <div class="post-form-tile">Write post</div>
+  <app-post-form
+    submitLabel="Write"
+    (handleSubmit)="addPost({text: $event, parentPostId: null})">
+  </app-post-form>
+  <div class="post-container">
+    <app-post *ngFor="let post of posts"
+              [post]="post"
+              [currentUserId]="currentUserId"
+              [replies]="getReplies(post.PostId!)"
+              [activePost]="activePost"
+              (addPost)="addPost($event)">
+    </app-post>
+  </div>
+</div>
