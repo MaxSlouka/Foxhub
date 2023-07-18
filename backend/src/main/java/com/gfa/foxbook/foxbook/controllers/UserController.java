@@ -19,6 +19,9 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.imageio.ImageIO;
+import javax.swing.*;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -82,19 +85,19 @@ public class UserController {
             // Create the file using the upload directory and the original filename
             Path filePath = Paths.get(uploadDir, file.getOriginalFilename());
 
-            System.out.println(file.getOriginalFilename());
 
+            file.transferTo(filePath);
             // Save the uploaded file to the file system
-            file.transferTo(filePath.toFile());
 //            file.transferTo(new File("./uploads/1"));
 
             // Return a success response
-            String fileUri = ServletUriComponentsBuilder.fromCurrentContextPath()
-                    .path("/api/upload/")
-                    .path(file.getOriginalFilename())
-                    .toUriString();
+//            String fileUri = ServletUriComponentsBuilder.fromCurrentContextPath()
+//                    .path("/api/upload/")
+//                    .path(file.getOriginalFilename())
+//                    .toUriString();
 
-            return ResponseEntity.ok(fileUri);
+
+            return ResponseEntity.ok().build();
         } catch (IOException e) {
             // In case of an exception, return a server error response
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
