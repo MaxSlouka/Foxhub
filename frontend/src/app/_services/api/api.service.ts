@@ -55,15 +55,15 @@ export class ApiService {
 
   updateUser(firstName: string,
              lastName: string,
-             github: string | undefined,
-             linkedin: string | undefined,
-             facebook: string | undefined,
-             instagram: string | undefined,
              completeProjects: string | undefined,
              yearsOfExperience: string | undefined,
              phone: string | undefined,
              location: string | undefined,
-             about: string | undefined
+             about: string | undefined,
+             github: string | undefined,
+             linkedin: string | undefined,
+             facebook: string | undefined,
+             instagram: string | undefined
   ): Observable<any> {
 
     return this.http.patch("http://localhost:8080/api/v1/user/people", {
