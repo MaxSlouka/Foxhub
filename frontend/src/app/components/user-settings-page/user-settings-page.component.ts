@@ -11,6 +11,7 @@ import {Router} from "@angular/router";
   styleUrls: ['./user-settings-page.component.css']
 })
 export class UserSettingsPageComponent {
+  selectedFile: File = null;
 
 
   user: User = new User();
@@ -18,7 +19,8 @@ export class UserSettingsPageComponent {
   constructor(private storageService: StorageService,
               private apiService: ApiService,
               private authService: AuthService,
-              private router: Router) {
+              private router: Router,
+              private ) {
   }
 
   ngOnInit(): void {
