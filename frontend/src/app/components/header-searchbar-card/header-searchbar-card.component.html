@@ -1,7 +1,5 @@
-<div class="userCard">
-    <img [src]="user.profilePictureUrl ? user.profilePictureUrl : '../../../assets/img/logo.png'" width="50"
-        height="50" class="profile-img" loading="lazy">
+<a [routerLink]="['/profile',user.nickname]" class="userCard">
+    <img [src]="user.profilePictureUrl ? user.profilePictureUrl : '../../../assets/img/logo.png'" width="35"
+        height="35" class="profile-img" loading="lazy">
     <p>{{user.firstName}} {{user.lastName}}</p>
-    <a [routerLink]="['/profile',user.nickname]" class="btn btn-primary" role="button" aria-disabled="true">Visit
-        profile</a>
-</div>
+</a>
