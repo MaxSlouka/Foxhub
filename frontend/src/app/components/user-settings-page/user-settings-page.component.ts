@@ -24,7 +24,6 @@ export class UserSettingsPageComponent {
   ngOnInit(): void {
     this.apiService.getUserBasicInfo().subscribe((user: User) => {
       this.user = user;
-      console.log(this.user);
     });
   }
 
@@ -48,7 +47,7 @@ export class UserSettingsPageComponent {
       completeProjects,
       yearsOfExperience,
       phone,
-      countryResidence,
+      location,
       about,
       gitHub,
       linkedin,
@@ -61,7 +60,7 @@ export class UserSettingsPageComponent {
       completeProjects,
       yearsOfExperience,
       phone,
-      countryResidence,
+      location,
       about,
       gitHub,
       linkedin,
