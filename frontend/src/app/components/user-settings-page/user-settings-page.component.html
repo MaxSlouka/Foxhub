@@ -129,13 +129,14 @@
                   <span aria-hidden="true">&times;</span>
                 </button>
               </div>
-              <div class="mt-5 text-center">
+              <div class="mt-5 mb-5 text-center">
                 <p class="lead">Choose your best profile picture</p>
                 <input type="file" (change)="onFileSelected($event)" />
+                <br>
               </div>
               <div class="text-center">
                 <button (click)="onUpload()" class="btn btn-primary profile-button" type="button"
-                        data-toggle="modal" data-target="#addModal">Upload picture</button>
+                        data-toggle="modal" data-target="#imgModal">Upload picture</button>
               </div>
             </div>
           </div>
