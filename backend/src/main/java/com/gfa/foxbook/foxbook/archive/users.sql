@@ -54,8 +54,13 @@ VALUES
 
 -- Assigning Roles to Users
 INSERT INTO users_roles (users_id, roles_id) VALUES
-                                                 ((SELECT id FROM users WHERE nickname = 'bill-gates'), (SELECT id FROM role WHERE name = 'USER')),
-                                                 ((SELECT id FROM users WHERE nickname = 'steve-jobs'), (SELECT id FROM role WHERE name = 'USER'));
+                                                ((SELECT id FROM users WHERE nickname = 'bill-gates'), (SELECT id FROM role WHERE name = 'USER')),
+                                                ((SELECT id FROM users WHERE nickname = 'steve-jobs'), (SELECT id FROM role WHERE name = 'USER')),
+                                                ((SELECT id FROM users WHERE nickname = 'elon-musk'), (SELECT id FROM role WHERE name = 'USER')),
+                                                ((SELECT id FROM users WHERE nickname = 'jeff-bezos'), (SELECT id FROM role WHERE name = 'USER')),
+                                                ((SELECT id FROM users WHERE nickname = 'larry-page'), (SELECT id FROM role WHERE name = 'USER')),
+                                                ((SELECT id FROM users WHERE nickname = 'mark-zuckerberg'), (SELECT id FROM role WHERE name = 'USER')),
+                                                ((SELECT id FROM users WHERE nickname = 'sundar-pichai'), (SELECT id FROM role WHERE name = 'USER'));
 
 -- Assigning Technologies to Users
 INSERT INTO users_technologies (users_id, technologies_id) VALUES
@@ -67,4 +72,6 @@ INSERT INTO users_technologies (users_id, technologies_id) VALUES
 INSERT INTO users_languages (users_id, languages_id) VALUES
                                                          ((SELECT id FROM users WHERE nickname = 'bill-gates'), (SELECT id FROM languages WHERE name = 'English')),
                                                          ((SELECT id FROM users WHERE nickname = 'steve-jobs'), (SELECT id FROM languages WHERE name = 'English')),
+                                                         ((SELECT id FROM users WHERE nickname = 'bill-gates'), (SELECT id FROM languages WHERE name = 'Spanish')),
+
                                                          ((SELECT id FROM users WHERE nickname = 'steve-jobs'), (SELECT id FROM languages WHERE name = 'Spanish'));
