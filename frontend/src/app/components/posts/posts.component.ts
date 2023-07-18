@@ -33,6 +33,28 @@ export class PostsComponent implements OnInit {
       });
   }
 
+  updatePost({text, postId}: {text: string, postId: number}) {
+    this.postsService
+      .updatePost(postId, text)
+      .subscribe((updatedPost) => {
+        this.posts = this.posts.map((post) => {
+          if (post.PostId === postId) {
+            return updatedPost;
+          }
+          return post;
+        });
+        this.activePost = null;
+      });
+  }
+
+  deletePost(postId: number): void {
+    this.postsService.deletePost(postId).subscribe(() => {
+      this.posts = this.posts.filter(
+        (post) => post.PostId !== postId
+      );
+    });
+  }
+
   getReplies(postId: number): Post[] {
     return this.posts
       .filter((post) => post.parentPostId === postId)

@@ -11,7 +11,9 @@
               [currentUserId]="currentUserId"
               [replies]="getReplies(post.PostId!)"
               [activePost]="activePost"
-              (addPost)="addPost($event)">
-    </app-post>
+              (addPost)="addPost($event)"
+              (updatePost)="updatePost($event)"
+              (deletePost)="deletePost($event)"
+    ></app-post>
   </div>
 </div>

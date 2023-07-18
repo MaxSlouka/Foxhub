@@ -6,18 +6,42 @@
     <div class="post-content">
       <div class="post-author">{{post.author}}</div>
     </div>
-    <div class="post-text">{{post.content}}</div>
-    POST FORM EDITING
+    <div class="post-text" *ngIf="!isReplying()">{{post.content}}</div>
+    <app-post-form
+    *ngIf="isReplying()"
+    submitLabel="Update"
+    [hasCancelButton]="true"
+    [initialText]="post.content!"
+    (handleSubmit)="updatePost.emit({text: $event, postId: post.PostId!})"
+    (handleCancel)="setActivePost.emit(null)"
+    ></app-post-form>
     <div class="post-actions">
-      <div *ngIf="canReply" class="post-action">Reply</div>
-      <div *ngIf="canEdit" class="post-action">Edit</div>
-      <div *ngIf="canDelete" class="post-action">Delete</div>
+      <div class="post-action">Reply</div>
+      <div class="post-action">Edit</div>
+      <div class="post-action"
+      (click)="deletePost.emit(post.PostId)">Delete</div>
+      <!--      <div *ngIf="canReply" class="post-action">Reply</div>-->
+      <!--      <div *ngIf="canEdit" class="post-action">Edit</div>-->
+      <!--      <div *ngIf="canDelete" class="post-action">Delete</div>-->
     </div>
     <app-post-form
       *ngIf="isReplying()"
       submitLabel="Reply"
       (handleSubmit)="addPost.emit({text: $event, parentPostId: replyId})"
-      ></app-post-form>
-    POST FORM REPLYING REPLIES
+    ></app-post-form>
+    <div class="replies" *ngIf="replies.length > 0">
+      <app-post *ngFor="let reply of replies"
+                [post]="reply"
+                (setActivePost)="setActivePost.emit($event)"
+                [activePost]="activePost"
+                (addPost)="addPost.emit($event)"
+                (updatePost)="updatePost.emit($event)"
+                [parentPostId]="post.PostId!"
+                [replies]="[]"
+                [currentUserId]="currentUserId"
+                (deletePost)="deletePost.emit($event)"
+      >
+      </app-post>
+    </div>
   </div>
 </div>

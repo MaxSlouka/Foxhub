@@ -12,6 +12,7 @@ export class PostFormComponent implements OnInit {
   @Input() initialText: string = '';
 
   @Output() handleSubmit = new EventEmitter<string>();
+  @Output() handleCancel = new EventEmitter<void>();
 
   form!: FormGroup;
 

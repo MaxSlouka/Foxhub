@@ -6,7 +6,9 @@
   <button
     *ngIf="hasCancelButton"
     type="button"
-    class="post-form-button post-form-cancel-button">
+    class="post-form-button post-form-cancel-button"
+  (click)="handleCancel.emit()"
+  >
     Cancel
   </button>
   </form>

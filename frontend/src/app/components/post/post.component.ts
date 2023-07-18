@@ -13,7 +13,14 @@ export class PostComponent implements OnInit {
   @Input() activePost!: Post | null;
   @Input() parentPostId!: number | null;
 
-  @Output() addPost = new EventEmitter<{text: string, parentPostId: number | null}>();
+  @Output() setActivePost = new EventEmitter<Post | null>();
+  @Output() addPost = new EventEmitter<{
+    text: string, parentPostId: number | null
+  }>();
+  @Output() updatePost = new EventEmitter<{
+    text: string, postId: number
+  }>();
+  @Output() deletePost = new EventEmitter<number>();
 
   // change all to false in deployment
   canReply: boolean = true;
@@ -22,11 +29,9 @@ export class PostComponent implements OnInit {
   replyId: number | null = null;
 
   ngOnInit(): void {
-    // this.canReply = Boolean(this.currentUserId);
-    this.canReply = this.currentUserId === this.post.userId;
+    this.canReply = Boolean(this.currentUserId);
       this.canEdit = this.currentUserId === this.post.userId;
-    // this.canDelete = this.currentUserId === this.post.userId && this.replies.length === 0;
-    this.canDelete = this.currentUserId === this.post.userId;
+    this.canDelete = this.currentUserId === this.post.userId && this.replies.length === 0;
     // this.replyId = this.parentPostId ? this.parentPostId : this.post.PostId;
   }
 
