@@ -11,6 +11,7 @@ import com.gfa.foxbook.foxbook.services.interfaces.PostService;
 import com.gfa.foxbook.foxbook.services.interfaces.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
+import lombok.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -26,6 +27,9 @@ public class UserController {
     private final JwtUtils jwtUtils;
     private final PostService postService;
     private final LikeService likeService;
+
+
+    private String uploadDir = "./uploads";
 
 
     @GetMapping("/person")
@@ -60,6 +64,9 @@ public class UserController {
         userService.updateProfile(requestUser, updateDTO);
         return ResponseEntity.ok().build();
     }
+    
+
+
 
     @PostMapping("/posts/{postId}/comments")
     public ResponseEntity<?> addComment(@PathVariable Long postId, HttpServletRequest request, @RequestBody String comment) {
