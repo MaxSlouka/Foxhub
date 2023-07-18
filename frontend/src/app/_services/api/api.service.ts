@@ -29,7 +29,8 @@ export class ApiService {
     return this.http.delete('http://localhost:8080/api/v1/user/people');
   }
 
-  search(user: User, key:string, results: User[]) {
+
+  search(user: User, key: string, results: User[]) {
     let hasTechnologyMatch = false;
 
     // @ts-ignore
@@ -51,18 +52,28 @@ export class ApiService {
     }
   }
 
+
   updateUser(firstName: string,
              lastName: string,
-             email: string,
              github: string | undefined,
              linkedin: string | undefined,
              facebook: string | undefined,
-             instagram: string | undefined
+             instagram: string | undefined,
+             completeProjects: string | undefined,
+             yearsOfExperience: string | undefined,
+             phone: string | undefined,
+             location: string | undefined,
+             about: string | undefined
   ): Observable<any> {
+
     return this.http.patch("http://localhost:8080/api/v1/user/people", {
         firstName,
         lastName,
-        email,
+        completeProjects,
+        yearsOfExperience,
+        phone,
+        location,
+        about,
         github,
         linkedin,
         facebook,

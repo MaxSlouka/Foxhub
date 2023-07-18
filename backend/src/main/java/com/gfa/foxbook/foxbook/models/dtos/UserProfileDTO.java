@@ -39,17 +39,17 @@ public class UserProfileDTO {
         this.lastName = user.getLastName();
         this.nickname = user.getNickname();
         this.email = user.getEmail();
-        this.telephone = user.getTelephone();
+        this.telephone = user.getPhone();
         this.about = user.getAbout();
         this.completeProjects = user.getCompleteProjects();
         this.yearsOfExperience = user.getYearsOfExperience();
         this.personality = user.getPersonality();
         this.countryResidence = user.getCountryResidence();
-        this.facebookURL = user.getFacebookURL();
-        this.instagramURL = user.getInstagramURL();
-        this.linkedInURL = user.getLinkedInURL();
-        this.gitHubURL = user.getGitHubURL();
-        this.optionalPageURL = user.getOptionalPageURL();
+        this.facebookURL = user.getFacebook();
+        this.instagramURL = user.getInstagram();
+        this.linkedInURL = user.getLinkedin();
+        this.gitHubURL = user.getGitHub();
+        this.optionalPageURL = user.getOptionalPage();
         this.technologies = user.getTechnologies();
         this.languages = user.getLanguages();
     }

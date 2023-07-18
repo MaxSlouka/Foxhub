@@ -33,7 +33,8 @@ public class User {
     @Column(unique = true)
     @Email
     private String email;
-    private String telephone;
+    private String phone;
+    private String location;
     private String about;
     private String completeProjects;
     private String yearsOfExperience;
@@ -42,11 +43,11 @@ public class User {
     private String password;
     private String personality;
     private String countryResidence;
-    private String facebookURL;
-    private String instagramURL;
-    private String linkedInURL;
-    private String gitHubURL;
-    private String optionalPageURL;
+    private String facebook;
+    private String instagram;
+    private String linkedin;
+    private String gitHub;
+    private String optionalPage;
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
     @JoinTable(
@@ -61,11 +62,12 @@ public class User {
             joinColumns = {@JoinColumn(name = "users_id", referencedColumnName = "id")},
             inverseJoinColumns = {@JoinColumn(name = "technologies_id", referencedColumnName = "id")})
     private List<Technology> technologies;
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany
     @JoinTable(
-            name = "users_languages",
+            name = "user_languages",
             joinColumns = {@JoinColumn(name = "users_id", referencedColumnName = "id")},
-            inverseJoinColumns = {@JoinColumn(name = "languages_id", referencedColumnName = "id")})
+            inverseJoinColumns = {@JoinColumn(name = "lang_id", referencedColumnName = "id")}
+    )
     private List<Language> languages;
 
 

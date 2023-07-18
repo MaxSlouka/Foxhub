@@ -14,11 +14,20 @@ a {
 
 h1 {
     font-weight: bolder;
+    font-size: 3.5rem;
+}
+
+h2 {
+    font-size: 1.5rem;
 }
 
 h1 span,
 h2 span {
     color: rgb(0, 127, 0);
+}
+
+h2 span {
+    font-weight: bold;
 }
 
 img {

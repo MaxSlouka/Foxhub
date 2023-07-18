@@ -5,7 +5,6 @@ import com.gfa.foxbook.foxbook.models.nonusermodels.Comment;
 import com.gfa.foxbook.foxbook.models.nonusermodels.Like;
 import com.gfa.foxbook.foxbook.models.nonusermodels.Post;
 import com.gfa.foxbook.foxbook.models.User;
-import com.gfa.foxbook.foxbook.models.dtos.UserUpdateDTO;
 import com.gfa.foxbook.foxbook.security.jwt.JwtUtils;
 import com.gfa.foxbook.foxbook.services.interfaces.LikeService;
 import com.gfa.foxbook.foxbook.services.interfaces.PostService;
@@ -31,16 +30,10 @@ public class UserController {
 
     @GetMapping("/person")
     public ResponseEntity<?> getUser(HttpServletRequest request) {
-        String token = jwtUtils.getJwtFromCookies(request);
-        if (token == null) {
-            return ResponseEntity.notFound().build();
+        User user = jwtUtils.getUserFromRequest(request);
+        if (user == null) {
+            return ResponseEntity.badRequest().build();
         }
-        String email = jwtUtils.getUserNameFromJwtToken(token);
-        Optional<User> maybeUser = userService.findByEmail(email);
-        if (maybeUser.isEmpty()) {
-            return ResponseEntity.notFound().build();
-        }
-        User user = maybeUser.get();
         UserProfileDTO userDTO = new UserProfileDTO(user);
         return ResponseEntity.ok(userDTO);
         // todo recheck security holes
@@ -49,37 +42,22 @@ public class UserController {
 
     @DeleteMapping("/people")
     public ResponseEntity<?> deletePerson(HttpServletRequest request) {
-        String token = jwtUtils.getJwtFromCookies(request);
-        String email = jwtUtils.getUserNameFromJwtToken(token);
-        Optional<User> maybeUser = userService.findByEmail(email);
-        if (maybeUser.isEmpty()) {
-            return ResponseEntity.notFound().build();
+        User user = jwtUtils.getUserFromRequest(request);
+        if (user == null) {
+            return ResponseEntity.badRequest().build();
         }
-        User requestUser = maybeUser.get();
-
-        userService.delete(requestUser);
+        userService.delete(user);
         return ResponseEntity.noContent().build();
     }
 
 
     @PatchMapping("/people")
-    public ResponseEntity<?> updateUserByNickname(HttpServletRequest request, @RequestBody UserUpdateDTO updateDTO) {
-        String token = jwtUtils.getJwtFromCookies(request);
-        String email = jwtUtils.getUserNameFromJwtToken(token);
-        Optional<User> maybeUser = userService.findByEmail(email);
-        if (maybeUser.isEmpty()) {
-            return ResponseEntity.notFound().build();
+    public ResponseEntity<?> updateUserByNickname(HttpServletRequest request, @RequestBody User updateDTO) {
+        User requestUser = jwtUtils.getUserFromRequest(request);
+        if (requestUser == null || updateDTO == null) {
+            return ResponseEntity.badRequest().build();
         }
-        User requestUser = maybeUser.get();
-        requestUser.setFirstName(updateDTO.getFirstName());
-        requestUser.setLastName(updateDTO.getLastName());
-        requestUser.setEmail(updateDTO.getEmail());
-        requestUser.setGitHubURL(updateDTO.getGithub());
-        requestUser.setLinkedInURL(updateDTO.getLinkedin());
-        requestUser.setFacebookURL(updateDTO.getFacebook());
-        requestUser.setInstagramURL(updateDTO.getInstagram());
-        userService.updateProfile(requestUser);
-
+        userService.updateProfile(requestUser, updateDTO);
         return ResponseEntity.ok().build();
     }
 

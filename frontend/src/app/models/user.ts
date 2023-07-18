@@ -9,7 +9,7 @@ export class User {
   lastName!: string;
   nickname?: string;
   email!: string;
-  telephone?: string;
+  phone?: string;
   about?: string;
   yearOfBirth?: number;
   password!: string;
@@ -20,10 +20,10 @@ export class User {
   profilePictureUrl?: string;
   completeProjects?: string;
   yearsOfExperience?: string;
-  facebookURL?: string;
-  instagramURL?: string;
-  linkedInURL?: string;
-  gitHubURL?: string;
+  facebook?: string;
+  instagram?: string;
+  linkedin?: string;
+  gitHub?: string;
   optionalPageURL?: string;
   roles?: string[];
   technologies?: Technology[];
