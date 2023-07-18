@@ -83,14 +83,11 @@ public class UserController {
         }
         String nickname = user.getNickname();
         try {
-            // Make sure the directory exists
             Files.createDirectories(Paths.get(uploadDir));
-            // Create the file using the upload directory and the original filename
             Path filePath = Paths.get(uploadDir, nickname + ".jpg");
             file.transferTo(filePath);
             return ResponseEntity.ok().build();
         } catch (IOException e) {
-            // In case of an exception, return a server error response
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body("Failed to upload the file: " + e.getMessage());
         }
