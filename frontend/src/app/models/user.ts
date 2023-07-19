@@ -1,5 +1,5 @@
 import {Technology} from "./technology";
-import {Language} from "./laguage";
+import {Language} from "./language";
 
 
 export interface User {
