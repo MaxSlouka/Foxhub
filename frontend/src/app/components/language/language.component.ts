@@ -2,12 +2,12 @@ import { Component, Input } from '@angular/core';
 import { Language } from "../../models/language";
 
 @Component({
-  selector: 'app-laguage',
-  templateUrl: './laguage.component.html',
-  styleUrls: ['./laguage.component.css']
+  selector: 'app-language',
+  templateUrl: './language.component.html',
+  styleUrls: ['./language.component.css']
 })
 
-export class LaguageComponent {
+export class LanguageComponent {
   // @ts-ignore
   @Input() language: Language;
 }
