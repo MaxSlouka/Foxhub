@@ -28,4 +28,5 @@ public interface UserService {
     public UserBasicDTO convertToUserBasicDTO(User user);
 
     List<User> searchUsers(String query);
+    void saveUser(User user);
 }
