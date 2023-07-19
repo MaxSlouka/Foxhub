@@ -38,7 +38,6 @@ export class UserSettingsPageComponent {
     });
     this.languageService.getAll().subscribe((languages: Language[]) => {
       this.languages = languages;
-      console.log(this.languages);
     });
   }
 
