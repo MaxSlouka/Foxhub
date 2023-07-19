@@ -17,7 +17,7 @@ import { httpInterceptorProviders } from "./_helpers/interceptor";
 import { PeoplePageCardComponent } from "./components/people-page-card/people-page-card.component";
 import { PeoplePageSearchbarComponent } from "./components/people-page-searchbar/people-page-searchbar.component";
 import { TechnologyComponent } from './components/technology/technology.component';
-import { LaguageComponent } from './components/language/laguage.component';
+import { LanguageComponent } from './components/language/language.component';
 import { BackToTopBtnComponent } from './components/back-to-top-btn/back-to-top-btn.component';
 import { AsideComponent } from './components/aside/aside.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
@@ -41,7 +41,7 @@ import { QRCodeModule } from 'angularx-qrcode';
     IntroComponent,
     PeoplePageCardComponent,
     TechnologyComponent,
-    LaguageComponent,
+    LanguageComponent,
     BackToTopBtnComponent,
     AsideComponent,
     PeoplePageSearchbarComponent,
