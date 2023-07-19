@@ -107,6 +107,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public void saveUser(User user) {
+        userRepository.save(user);
+    }
+
+    @Override
     public User updateProfile(User user, User userDTO) {
         if (userDTO.getFirstName() != null) {
             user.setFirstName(userDTO.getFirstName());
