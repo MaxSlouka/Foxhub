@@ -51,9 +51,7 @@ public class UserController {
         }
         UserProfileDTO userDTO = new UserProfileDTO(user);
         return ResponseEntity.ok(userDTO);
-        // todo recheck security holes
     }
-
 
     @DeleteMapping("/people")
     public ResponseEntity<?> deletePerson(HttpServletRequest request) {

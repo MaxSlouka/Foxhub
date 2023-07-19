@@ -42,6 +42,7 @@ public class User {
     @NotNull
     private String password;
     private String personality;
+    private String profilePictureUrl;
     private String countryResidence;
     private String facebook;
     private String instagram;
