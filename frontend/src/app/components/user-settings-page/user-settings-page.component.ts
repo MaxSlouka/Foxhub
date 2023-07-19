@@ -1,10 +1,12 @@
-import { Component } from '@angular/core';
-import { StorageService } from "../../_services/storage.service";
-import { ApiService } from "../../_services/api/api.service";
-import { User } from "../../models/user";
-import { AuthService } from "../../_services/auth.service";
-import { Router } from "@angular/router";
-import { UploadService } from "../../_services/api/upload.service";
+import {Component} from '@angular/core';
+import {StorageService} from "../../_services/storage.service";
+import {ApiService} from "../../_services/api/api.service";
+import {User} from "../../models/user";
+import {AuthService} from "../../_services/auth.service";
+import {Router} from "@angular/router";
+import {UploadService} from "../../_services/api/upload.service";
+import {Language} from "../../models/language";
+import {LanguageService} from "../../_services/language.service";
 
 @Component({
   selector: 'app-user-settings-page',
@@ -19,16 +21,24 @@ export class UserSettingsPageComponent {
   // @ts-ignore
   user: User;
 
+  // @ts-ignore
+  languages: Language[];
+
   constructor(private storageService: StorageService,
-    private apiService: ApiService,
-    private authService: AuthService,
-    private router: Router,
-    private uploadService: UploadService) {
+              private apiService: ApiService,
+              private authService: AuthService,
+              private router: Router,
+              private uploadService: UploadService,
+              private languageService: LanguageService) {
   }
 
   ngOnInit(): void {
     this.apiService.getUserBasicInfo().subscribe((user: User) => {
       this.user = user;
+    });
+    this.languageService.getAll().subscribe((languages: Language[]) => {
+      this.languages = languages;
+      console.log(this.languages);
     });
   }
 
