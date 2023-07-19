@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Observable } from "rxjs";
+import { ToastrService } from 'ngx-toastr';
 
 const AUTH_API = 'http://localhost:8080/api/v1/auth/';
 
@@ -14,7 +15,9 @@ const httpOptions = {
 
 export class AuthService {
 
-  constructor(private http: HttpClient) {
+  constructor(
+    private http: HttpClient,
+    private toastr: ToastrService) {
   }
 
   login(email: string, password: string): Observable<any> {
@@ -47,6 +50,8 @@ export class AuthService {
       {},
       httpOptions
     ).subscribe(ok => {
+      this.toastr.error('Successfully Logged Out!', 'Success', { timeOut: 5000 });
     });
   }
+  
 }
