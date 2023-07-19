@@ -78,12 +78,14 @@ public class UserController {
             return ResponseEntity.badRequest().build();
         }
         String nickname = user.getNickname();
-        String extension = file.getName().split(".")[1];
+        String extension = file.getContentType();
+        System.out.println(extension);
+        // todo extention
         try {
             Files.createDirectories(Paths.get(uploadDir));
-            Path filePath = Paths.get(uploadDir, nickname + "."+extension);
+            Path filePath = Paths.get(uploadDir, nickname + ".jpg");
             file.transferTo(filePath);
-            user.setProfilePictureUrl("http://localhost:8080/uploads/"+nickname + "."+extension);
+            user.setProfilePictureUrl("http://localhost:8080/uploads/"+nickname+".jpg");
             userService.saveUser(user);
 
 
