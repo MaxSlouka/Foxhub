@@ -52,13 +52,13 @@ public class UserServiceImpl implements UserService {
     public User upgradeUser(String nickname) {
         User user = userRepository.getByNickname(nickname);
 
-            List<Role> roles = new ArrayList<>();
-            Role adminRole = new Role("ADMIN");
-            roles.add(adminRole);
+        List<Role> roles = new ArrayList<>();
+        Role adminRole = new Role("ADMIN");
+        roles.add(adminRole);
 
-            user.setRoles(roles);
+        user.setRoles(roles);
 
-            return userRepository.save(user);
+        return userRepository.save(user);
     }
 
     @Override
@@ -72,6 +72,7 @@ public class UserServiceImpl implements UserService {
         userRepository.save(existingUser);
 
     }
+
     @Override
     public UserBasicDTO convertToUserBasicDTO(User user) {
         UserBasicDTO userBasicDTO = new UserBasicDTO();
@@ -80,6 +81,7 @@ public class UserServiceImpl implements UserService {
         userBasicDTO.setEmail(user.getEmail());
         return userBasicDTO;
     }
+
     @Override
     public User updateProfile(User user, User userDTO) {
         if (userDTO.getFirstName() != null) {

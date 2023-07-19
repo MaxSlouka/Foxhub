@@ -1,16 +1,17 @@
-import {Component, OnInit} from '@angular/core';
-import {AuthService} from "../../_services/auth.service";
-import {StorageService} from "../../_services/storage.service";
-import {ProfileService} from "../../_services/profile.service";
-import {User} from "../../models/user";
-import {ActivatedRoute} from '@angular/router';
-import {DataService} from "../../_services/api/data.service";
+import { Component, OnInit } from '@angular/core';
+import { AuthService } from "../../_services/auth.service";
+import { StorageService } from "../../_services/storage.service";
+import { ProfileService } from "../../_services/profile.service";
+import { User } from "../../models/user";
+import { ActivatedRoute } from '@angular/router';
+import { DataService } from "../../_services/api/data.service";
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
+
 export class HeaderComponent implements OnInit {
 
   // @ts-ignore
@@ -23,10 +24,10 @@ export class HeaderComponent implements OnInit {
   userEmail: string = '';
 
   constructor(private authService: AuthService,
-              private profileService: ProfileService,
-              private storageService: StorageService,
-              private activatedroute: ActivatedRoute,
-              public dataService: DataService) {
+    private profileService: ProfileService,
+    private storageService: StorageService,
+    private activatedroute: ActivatedRoute,
+    public dataService: DataService) {
   }
 
   ngOnInit(): void {

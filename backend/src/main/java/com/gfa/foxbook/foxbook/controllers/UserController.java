@@ -39,9 +39,7 @@ public class UserController {
     private final PostService postService;
     private final LikeService likeService;
 
-
     private String uploadDir = "./uploads";
-
 
     @GetMapping("/person")
     public ResponseEntity<?> getUser(HttpServletRequest request) {
@@ -63,7 +61,6 @@ public class UserController {
         return ResponseEntity.noContent().build();
     }
 
-
     @PatchMapping("/people")
     public ResponseEntity<?> updateUserByNickname(HttpServletRequest request, @RequestBody User updateDTO) {
         User requestUser = jwtUtils.getUserFromRequest(request);
@@ -73,6 +70,7 @@ public class UserController {
         userService.updateProfile(requestUser, updateDTO);
         return ResponseEntity.ok().build();
     }
+
     @PostMapping("/upload")
     public ResponseEntity<?> uploadFile(@RequestParam("file") MultipartFile file, HttpServletRequest request) {
         User user = jwtUtils.getUserFromRequest(request);
@@ -93,8 +91,6 @@ public class UserController {
                     .body("Failed to upload the file: " + e.getMessage());
         }
     }
-
-
 
     @PostMapping("/posts/{postId}/comments")
     public ResponseEntity<?> addComment(@PathVariable Long postId, HttpServletRequest request, @RequestBody String comment) {
@@ -125,7 +121,6 @@ public class UserController {
         return ResponseEntity.ok().build();
     }
 
-
     @PostMapping("/posts/{postId}/like")
     public ResponseEntity<?> likePost(@PathVariable Long postId, HttpServletRequest request) {
         String token = jwtUtils.getJwtFromCookies(request);
@@ -154,5 +149,4 @@ public class UserController {
 
         return ResponseEntity.ok().build();
     }
-
 }

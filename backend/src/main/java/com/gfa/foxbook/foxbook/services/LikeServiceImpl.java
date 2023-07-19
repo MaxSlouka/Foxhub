@@ -21,8 +21,8 @@ public class LikeServiceImpl implements LikeService {
     private final LikeRepository likeRepository;
     private final UserRepository userRepository;
     private final PostRepository postRepository;
-    @Override
 
+    @Override
     public void likePost(Long postId, Long userId) {
         assert likeRepository != null;
         Like like = likeRepository.findByPostIdAndUserId(postId, userId);
@@ -52,7 +52,6 @@ public class LikeServiceImpl implements LikeService {
         assert likeRepository != null;
         likeRepository.save(like);
     }
-
 
     @Override
     public void like(Long postId, Long userId) {

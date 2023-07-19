@@ -20,6 +20,7 @@ public class CommentServiceImpl implements CommentService {
 
     private final CommentRepository commentRepository;
     private final LikeService likeService;
+
     @Override
     public void comment(Long postId, Long userId, String comment) {
         Comment c = new Comment();
@@ -34,7 +35,6 @@ public class CommentServiceImpl implements CommentService {
     public void deleteComment(Long commentId) {
         commentRepository.deleteById(commentId);
     }
-
 
     @Override
     public void editComment(Long commentId, String comment) {

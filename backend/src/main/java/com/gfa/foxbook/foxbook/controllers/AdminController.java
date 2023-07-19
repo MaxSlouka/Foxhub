@@ -22,8 +22,6 @@ public class AdminController {
     public final PostService postService;
     public final UserService userService;
 
-
-
     @PostMapping("/posts")
     public ResponseEntity<?> makePost(@RequestBody(required = false) Post post) {
         if (post == null) {

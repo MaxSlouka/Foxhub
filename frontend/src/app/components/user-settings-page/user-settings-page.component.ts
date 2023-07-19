@@ -1,30 +1,29 @@
-import {Component} from '@angular/core';
-import {StorageService} from "../../_services/storage.service";
-import {ApiService} from "../../_services/api/api.service";
-import {User} from "../../models/user";
-import {AuthService} from "../../_services/auth.service";
-import {Router} from "@angular/router";
-import {UploadService} from "../../_services/api/upload.service";
+import { Component } from '@angular/core';
+import { StorageService } from "../../_services/storage.service";
+import { ApiService } from "../../_services/api/api.service";
+import { User } from "../../models/user";
+import { AuthService } from "../../_services/auth.service";
+import { Router } from "@angular/router";
+import { UploadService } from "../../_services/api/upload.service";
 
 @Component({
   selector: 'app-user-settings-page',
   templateUrl: './user-settings-page.component.html',
   styleUrls: ['./user-settings-page.component.css']
 })
+
 export class UserSettingsPageComponent {
   // @ts-ignore
-
   selectedFile: File = null;
-
 
   // @ts-ignore
   user: User;
 
   constructor(private storageService: StorageService,
-              private apiService: ApiService,
-              private authService: AuthService,
-              private router: Router,
-              private uploadService:UploadService) {
+    private apiService: ApiService,
+    private authService: AuthService,
+    private router: Router,
+    private uploadService: UploadService) {
   }
 
   ngOnInit(): void {
@@ -41,12 +40,11 @@ export class UserSettingsPageComponent {
   onUpload() {
     this.uploadService.uploadFile(this.selectedFile).subscribe(
       res => {
-        this.user.profilePictureUrl = "http://localhost:8080/uploads/" + this.user.nickname+".jpg"
+        this.user.profilePictureUrl = "http://localhost:8080/uploads/" + this.user.nickname + ".jpg"
       },
       err => console.error(err)
     );
   }
-
 
   deleteAccount(): void {
     this.apiService.deleteUser().subscribe();
@@ -57,7 +55,6 @@ export class UserSettingsPageComponent {
       window.location.href = ""
     }, 2000);
   }
-
 
   async updateUser() {
     const {

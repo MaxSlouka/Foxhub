@@ -9,7 +9,6 @@ const USER_KEY = 'auth-user';
 export class StorageService {
   constructor() { }
 
-
   public saveUser(user: any): void {
     window.sessionStorage.removeItem(USER_KEY);
     window.sessionStorage.setItem(USER_KEY, JSON.stringify(user));
@@ -18,7 +17,6 @@ export class StorageService {
   public getUser(): any {
     const user = window.sessionStorage.getItem(USER_KEY);
     if (user) {
-
       // return JSON.parse(user
       return JSON.parse(user);
     }
@@ -32,8 +30,8 @@ export class StorageService {
     }
     return false;
   }
-  public logout(): void {
 
+  public logout(): void {
     window.sessionStorage.clear();
   }
 }
