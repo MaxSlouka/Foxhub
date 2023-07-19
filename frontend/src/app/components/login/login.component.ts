@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from "../../_services/auth.service";
 import { StorageService } from "../../_services/storage.service";
-import { Router } from "@angular/router";
+import { Router, NavigationEnd } from "@angular/router";
 import { ToastrService } from 'ngx-toastr';
-
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-login',
@@ -21,6 +21,7 @@ export class LoginComponent implements OnInit {
   errorMessage = '';
   roles: string[] = [];
   userNickname: string = '';
+  showSuccessToast = false;
 
   constructor(
     private authService: AuthService,
@@ -34,6 +35,12 @@ export class LoginComponent implements OnInit {
       this.isLoggedIn = true;
       this.userNickname = this.storageService.getUserFromSession();
     }
+    this.router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe((event) => {
+      if (this.showSuccessToast) {
+        this.toastr.success('Successfully Logged In!', 'Success', { timeOut: 5000 });
+        this.showSuccessToast = false;
+      }
+    });
   }
 
   onSubmit(): void {
@@ -44,18 +51,14 @@ export class LoginComponent implements OnInit {
         this.storageService.saveUser(data.email);
         this.isLoginFailed = false;
         this.isLoggedIn = true;
-        this.toastr.success('Successfully Logged In!', 'Success', { timeOut: 5000 });
-        // this.reloadPage();
+        this.showSuccessToast = true;
+        this.router.navigate(['']);
       },
       error: err => {
         this.errorMessage = err.error.message;
         this.isLoginFailed = true;
         this.toastr.error(this.errorMessage, 'Error');
       }
-    })
+    });
   }
-
-//   reloadPage(): void {
-//     window.location.reload();
-//   }
 }
