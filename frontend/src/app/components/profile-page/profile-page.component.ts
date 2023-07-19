@@ -13,8 +13,7 @@ import { SafeUrl, SafeValue } from "@angular/platform-browser";
 export class ProfilePageComponent implements OnInit {
   // @ts-ignore
   username: string | null = "";
-  // @ts-ignore
-  user: User;
+  user: User = {email: "", firstName: "", lastName: "", password: ""};
   qrCodeDownloadLink: SafeValue = "";
 
   constructor(private profileService: ProfileService,
