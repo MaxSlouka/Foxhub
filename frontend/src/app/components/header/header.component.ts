@@ -19,8 +19,7 @@ export class HeaderComponent implements OnInit {
   username: string | null = "";
   // @ts-ignore
   users: User[];
-  // @ts-ignore
-  user:User;
+  user:User ={email: "", firstName: "", lastName: "", password: ""};
 
   isLoggedIn = false;
 

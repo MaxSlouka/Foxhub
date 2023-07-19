@@ -18,8 +18,7 @@ export class UserSettingsPageComponent {
   // @ts-ignore
   selectedFile: File = null;
 
-  // @ts-ignore
-  user: User;
+  user: User = {email: "", firstName: "", lastName: "", password: ""};
 
   // @ts-ignore
   languages: Language[];
