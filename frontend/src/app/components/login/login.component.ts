@@ -10,6 +10,7 @@ import { filter } from 'rxjs/operators';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
+
 export class LoginComponent implements OnInit {
   form: any = {
     email: null,
@@ -28,7 +29,7 @@ export class LoginComponent implements OnInit {
     private storageService: StorageService,
     private router: Router,
     private toastr: ToastrService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     if (this.storageService.isLoggedIn()) {
