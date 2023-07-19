@@ -33,8 +33,7 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
     if (this.storageService.isLoggedIn()) {
       this.isLoggedIn = true;
-      this.userEmail = this.storageService.getUser();
-      // this.roles = this.storageService.getUser().roles;
+      this.userEmail = this.storageService.getUserFromSession();
     }
 
     // was causing error - maybe needed
