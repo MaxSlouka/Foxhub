@@ -18,6 +18,8 @@ export class HeaderComponent implements OnInit {
   username: string | null = "";
   // @ts-ignore
   users: User[];
+  // @ts-ignore
+  user:User;
 
   isLoggedIn = false;
 
@@ -34,12 +36,9 @@ export class HeaderComponent implements OnInit {
     if (this.storageService.isLoggedIn()) {
       this.isLoggedIn = true;
       this.userEmail = this.storageService.getUserFromSession();
+      this.profileService.getUser(this.username)
+        .subscribe(user => this.user = user)
     }
-
-    // was causing error - maybe needed
-    // this.username=this.activatedroute.snapshot.paramMap.get("username");
-    // this.profileService.getUser(this.username)
-    //   .subscribe(user => this.user = user);
   }
 
   handleDataFromChild(data: any) {
