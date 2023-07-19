@@ -6,6 +6,7 @@ import { AuthService } from '../../_services/auth.service';
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css']
 })
+
 export class RegisterComponent implements OnInit {
   form: any = {
     firstName: null,
@@ -13,6 +14,7 @@ export class RegisterComponent implements OnInit {
     email: null,
     password: null
   };
+  
   isSuccessful = false;
   isSignUpFailed = false;
   errorMessage = '';

@@ -16,7 +16,6 @@ public class UserSearchDTO {
     private String firstName;
     private String lastName;
     private String nickname;
-
     private String about;
     private List<Technology> technologies;
 

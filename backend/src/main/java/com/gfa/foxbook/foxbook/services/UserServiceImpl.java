@@ -1,8 +1,12 @@
 package com.gfa.foxbook.foxbook.services;
 
 import com.gfa.foxbook.foxbook.models.dtos.UserBasicDTO;
+import com.gfa.foxbook.foxbook.models.nonusermodels.Language;
 import com.gfa.foxbook.foxbook.models.nonusermodels.Role;
 import com.gfa.foxbook.foxbook.models.User;
+import com.gfa.foxbook.foxbook.models.nonusermodels.Technology;
+import com.gfa.foxbook.foxbook.repositories.LanguageRepository;
+import com.gfa.foxbook.foxbook.repositories.TechnologyRepository;
 import com.gfa.foxbook.foxbook.repositories.UserRepository;
 import com.gfa.foxbook.foxbook.services.interfaces.CommentService;
 import com.gfa.foxbook.foxbook.services.interfaces.UserService;
@@ -11,6 +15,8 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 
 @Service
@@ -19,6 +25,8 @@ public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
     private final CommentService commentService;
+    private final TechnologyRepository technologyRepository;
+    private final LanguageRepository languageRepository;
 
     @Override
     public Optional<User> findById(Long id) {
@@ -52,13 +60,13 @@ public class UserServiceImpl implements UserService {
     public User upgradeUser(String nickname) {
         User user = userRepository.getByNickname(nickname);
 
-            List<Role> roles = new ArrayList<>();
-            Role adminRole = new Role("ADMIN");
-            roles.add(adminRole);
+        List<Role> roles = new ArrayList<>();
+        Role adminRole = new Role("ADMIN");
+        roles.add(adminRole);
 
-            user.setRoles(roles);
+        user.setRoles(roles);
 
-            return userRepository.save(user);
+        return userRepository.save(user);
     }
 
     @Override
@@ -72,6 +80,7 @@ public class UserServiceImpl implements UserService {
         userRepository.save(existingUser);
 
     }
+
     @Override
     public UserBasicDTO convertToUserBasicDTO(User user) {
         UserBasicDTO userBasicDTO = new UserBasicDTO();
@@ -80,6 +89,23 @@ public class UserServiceImpl implements UserService {
         userBasicDTO.setEmail(user.getEmail());
         return userBasicDTO;
     }
+
+    @Override
+    public List<User> searchUsers(String query) {
+        List<User> usersByFirstName = userRepository.findByFirstNameContainingIgnoreCase(query);
+        List<User> usersByLastName = userRepository.findByLastNameContainingIgnoreCase(query);
+        List<User> usersByNickname = userRepository.findByNicknameContainingIgnoreCase(query);
+        List<Technology> technologies = technologyRepository.findByNameContainingIgnoreCase(query);
+        List<Language> languages = languageRepository.findByNameContainingIgnoreCase(query);
+
+        //potential bug: if a user has a technology or language in their nickname, it will be returned twice
+
+        return (List<User>) Stream.of(usersByFirstName, usersByLastName, usersByNickname, technologies, languages)
+                .flatMap(List::stream)
+                .distinct()
+                .collect(Collectors.toList());
+    }
+
     @Override
     public User updateProfile(User user, User userDTO) {
         if (userDTO.getFirstName() != null) {
