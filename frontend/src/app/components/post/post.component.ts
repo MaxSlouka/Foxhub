@@ -32,8 +32,9 @@ export class PostComponent implements OnInit {
     const timePassed =
       new Date().getMilliseconds() -
       new Date(this.post.createdAt).getMilliseconds() > timeToEdit;
+
     this.canReply = Boolean(this.currentUserId);
-      this.canEdit = this.currentUserId === this.post.userId;
+    this.canEdit = this.currentUserId === this.post.userId && !timePassed;
     this.canDelete = this.currentUserId === this.post.userId && this.replies.length === 0;
     // this.replyId = this.parentPostId ? this.parentPostId : this.post.PostId;
   }
