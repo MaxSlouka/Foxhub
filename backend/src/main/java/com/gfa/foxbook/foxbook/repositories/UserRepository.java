@@ -1,12 +1,12 @@
 package com.gfa.foxbook.foxbook.repositories;
 
 import com.gfa.foxbook.foxbook.models.User;
+import com.gfa.foxbook.foxbook.models.nonusermodels.Technology;
 import org.springframework.data.jpa.repository.JpaRepository;
-
-import com.gfa.foxbook.foxbook.models.User;
 
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -17,4 +17,9 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     boolean existsByNickname(String nickname);
     boolean existsByEmail(String email);
+
+    List<User> findByFirstNameContainingIgnoreCase(String search);
+    List<User> findByLastNameContainingIgnoreCase(String search);
+    List<User> findByNicknameContainingIgnoreCase(String search);
+
 }
