@@ -28,7 +28,7 @@
 
         <div class="form-floating mb-3 form-group">
           <label for="floatingInput">First Name</label>
-          <input type="email" class="form-control" id="floatingInput" placeholder="John" name="firstName"
+          <input type="email" class="form-control" id="floatingInput" placeholder="enter name" name="firstName"
             [(ngModel)]="form.firstName" required minlength="3" maxlength="20" #firstName="ngModel"
             [ngClass]="{ 'is-invalid': f.submitted && firstName.errors }" />
           <div class="invalid-feedback" *ngIf="firstName.errors && f.submitted">
@@ -46,7 +46,7 @@
 
         <div class="form-floating mb-3 form-group">
           <label for="floatingInput">Last Name</label>
-          <input type="email" class="form-control" id="floatingInput" placeholder="Doe" name="lastName"
+          <input type="email" class="form-control" id="floatingInput" placeholder="enter surname" name="lastName"
             [(ngModel)]="form.lastName" required minlength="3" maxlength="20" #lastName="ngModel"
             [ngClass]="{ 'is-invalid': f.submitted && lastName.errors }" />
           <div class="invalid-feedback" *ngIf="lastName.errors && f.submitted">

@@ -53,6 +53,4 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         // but the user is not logged in
         filterChain.doFilter(request, response);
     }
-
-
 }

@@ -1,33 +1,50 @@
-import {Component} from '@angular/core';
-import {StorageService} from "../../_services/storage.service";
-import {ApiService} from "../../_services/api/api.service";
-import {User} from "../../models/user";
-import {AuthService} from "../../_services/auth.service";
-import {Router} from "@angular/router";
+import { Component } from '@angular/core';
+import { StorageService } from "../../_services/storage.service";
+import { ApiService } from "../../_services/api/api.service";
+import { User } from "../../models/user";
+import { AuthService } from "../../_services/auth.service";
+import { Router } from "@angular/router";
+import { UploadService } from "../../_services/api/upload.service";
 
 @Component({
   selector: 'app-user-settings-page',
   templateUrl: './user-settings-page.component.html',
   styleUrls: ['./user-settings-page.component.css']
 })
+
 export class UserSettingsPageComponent {
+  // @ts-ignore
+  selectedFile: File = null;
 
-
-  user: User = new User();
+  // @ts-ignore
+  user: User;
 
   constructor(private storageService: StorageService,
-              private apiService: ApiService,
-              private authService: AuthService,
-              private router: Router) {
+    private apiService: ApiService,
+    private authService: AuthService,
+    private router: Router,
+    private uploadService: UploadService) {
   }
 
   ngOnInit(): void {
     this.apiService.getUserBasicInfo().subscribe((user: User) => {
       this.user = user;
-      console.log(this.user);
     });
   }
 
+  // @ts-ignore
+  onFileSelected(event) {
+    this.selectedFile = <File>event.target.files[0];
+  }
+
+  onUpload() {
+    this.uploadService.uploadFile(this.selectedFile).subscribe(
+      res => {
+        this.user.profilePictureUrl = "http://localhost:8080/uploads/" + this.user.nickname + ".jpg"
+      },
+      err => console.error(err)
+    );
+  }
 
   deleteAccount(): void {
     this.apiService.deleteUser().subscribe();
@@ -37,9 +54,7 @@ export class UserSettingsPageComponent {
     setTimeout(() => {
       window.location.href = ""
     }, 2000);
-
   }
-
 
   async updateUser() {
     const {
@@ -48,7 +63,7 @@ export class UserSettingsPageComponent {
       completeProjects,
       yearsOfExperience,
       phone,
-      countryResidence,
+      location,
       about,
       gitHub,
       linkedin,
@@ -61,7 +76,7 @@ export class UserSettingsPageComponent {
       completeProjects,
       yearsOfExperience,
       phone,
-      countryResidence,
+      location,
       about,
       gitHub,
       linkedin,

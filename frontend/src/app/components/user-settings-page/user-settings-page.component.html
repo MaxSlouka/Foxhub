@@ -41,7 +41,7 @@
             <div class="col-md-12"><label class="labels">Phone Number</label><input type="text" class="form-control"
                 placeholder="enter phone number" [(ngModel)]="user.phone" name="phone" value=""></div>
             <div class="col-md-12"><label class="labels">Location</label><input type="text" class="form-control"
-                placeholder="enter location" [(ngModel)]="user.countryResidence" name="location" value=""></div>
+                placeholder="enter location" [(ngModel)]="user.location" name="location" value=""></div>
             <div class="col-md-12"><label class="labels">About</label>
               <textarea type="text" class="form-control" [(ngModel)]="user.about" name="about"
                 placeholder="write something about you..." value="" cols="30" rows="3"></textarea>
@@ -108,11 +108,40 @@
             Skills</span><span class="border px-3 p-1 add-experience"><i class="fa fa-plus"></i>&nbsp;Skill</span>
         </div>
         <br>
-        <div class="col-md-12"><label class="labels">Programming language</label><input type="text" class="form-control"
-            placeholder="Java" value=""></div>
+        <div class="d-flex justify-content-between align-items-center experience"><span>Edit
+            languages</span><span class="border px-3 p-1 add-experience"><i class="fa fa-plus"></i>&nbsp;Language</span>
+        </div>
         <br>
-        <div class="col-md-12"><label class="labels">Spoken language</label><input type="text" class="form-control"
-            placeholder="english" value=""></div>
+        <div class="d-flex justify-content-between align-items-center experience"><span>Edit profile picture</span>
+          <button class="btn border px-3 p-1 add-experience" type="button" data-toggle="modal"
+                  data-target="#imgModal"><i class="fa fa-plus"></i>&nbsp;Picture</button>
+        </div>
+
+      <!--        img modal-->
+        <div class="modal fade" id="imgModal" tabindex="-1" role="dialog" aria-labelledby="imgModal"
+             aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="imgModalLabel">Are you sure?
+                </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="mt-5 mb-5 text-center">
+                <p class="lead">Choose your best profile picture</p>
+                <input type="file" (change)="onFileSelected($event)" />
+                <br>
+              </div>
+              <div class="text-center">
+                <button (click)="onUpload()" class="btn btn-primary profile-button" type="button"
+                        data-toggle="modal" data-target="#imgModal">Upload picture</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
 
         <!-- button trigger modal -->
 
@@ -122,6 +151,7 @@
             Profile
           </button>
         </div>
+
 
         <!-- modal delete -->
 

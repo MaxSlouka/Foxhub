@@ -1,6 +1,6 @@
-import {Component, Input, EventEmitter, Output} from '@angular/core';
-import {User} from "../../models/user";
-import {ApiService} from "../../_services/api/api.service";
+import { Component, Input, EventEmitter, Output } from '@angular/core';
+import { User } from "../../models/user";
+import { ApiService } from "../../_services/api/api.service";
 
 
 @Component({
@@ -8,6 +8,7 @@ import {ApiService} from "../../_services/api/api.service";
   templateUrl: './header-searchbar.component.html',
   styleUrls: ['./header-searchbar.component.css']
 })
+
 export class HeaderSearchbarComponent {
   // @ts-ignore
   @Input() users: User[];
@@ -21,7 +22,7 @@ export class HeaderSearchbarComponent {
   public searchUser(key: string): void {
     let results: User[] = [];
     for (const user of this.users) {
-      this.apiService.search(user,key,results)
+      this.apiService.search(user, key, results)
     }
     this.filtered = results;
     if (!key) {

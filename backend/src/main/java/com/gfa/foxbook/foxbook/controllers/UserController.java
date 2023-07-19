@@ -11,10 +11,22 @@ import com.gfa.foxbook.foxbook.services.interfaces.PostService;
 import com.gfa.foxbook.foxbook.services.interfaces.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
+import lombok.Value;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.imageio.ImageIO;
+import javax.swing.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Optional;
 
 @Controller
@@ -27,6 +39,7 @@ public class UserController {
     private final PostService postService;
     private final LikeService likeService;
 
+    private String uploadDir = "./uploads";
 
     @GetMapping("/person")
     public ResponseEntity<?> getUser(HttpServletRequest request) {
@@ -36,9 +49,7 @@ public class UserController {
         }
         UserProfileDTO userDTO = new UserProfileDTO(user);
         return ResponseEntity.ok(userDTO);
-        // todo recheck security holes
     }
-
 
     @DeleteMapping("/people")
     public ResponseEntity<?> deletePerson(HttpServletRequest request) {
@@ -50,7 +61,6 @@ public class UserController {
         return ResponseEntity.noContent().build();
     }
 
-
     @PatchMapping("/people")
     public ResponseEntity<?> updateUserByNickname(HttpServletRequest request, @RequestBody User updateDTO) {
         User requestUser = jwtUtils.getUserFromRequest(request);
@@ -59,6 +69,27 @@ public class UserController {
         }
         userService.updateProfile(requestUser, updateDTO);
         return ResponseEntity.ok().build();
+    }
+
+    @PostMapping("/upload")
+    public ResponseEntity<?> uploadFile(@RequestParam("file") MultipartFile file, HttpServletRequest request) {
+        User user = jwtUtils.getUserFromRequest(request);
+        if (user == null) {
+            return ResponseEntity.badRequest().build();
+        }
+
+        String nickname = user.getNickname();
+        String extention = file.getName().split(".")[1];
+        try {
+            Files.createDirectories(Paths.get(uploadDir));
+            Path filePath = Paths.get(uploadDir, nickname + "."+extention);
+            file.transferTo(filePath);
+            user.setProfilePictureUrl("http://localhost:8080/uploads/"+nickname);
+            return ResponseEntity.ok().build();
+        } catch (IOException e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Failed to upload the file: " + e.getMessage());
+        }
     }
 
     @PostMapping("/posts/{postId}/comments")
@@ -90,7 +121,6 @@ public class UserController {
         return ResponseEntity.ok().build();
     }
 
-
     @PostMapping("/posts/{postId}/like")
     public ResponseEntity<?> likePost(@PathVariable Long postId, HttpServletRequest request) {
         String token = jwtUtils.getJwtFromCookies(request);
@@ -119,5 +149,4 @@ public class UserController {
 
         return ResponseEntity.ok().build();
     }
-
 }

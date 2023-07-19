@@ -23,7 +23,6 @@ public class Post {
 
     @NotBlank(message = "Title cannot be empty")
     private String title;
-
     private String author;
     private String authorPic;
 

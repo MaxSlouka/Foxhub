@@ -1,8 +1,8 @@
 <a [routerLink]="['/profile',user.nickname]" class="card">
-    <img [src]="user.profilePictureUrl ? user.profilePictureUrl : '../../../assets/img/logo.png'" class="profile-img" loading="lazy" class="card-img-top">
+    <img [src]="user.profilePictureUrl ? user.profilePictureUrl : '../../../assets/img/logo.png'" class="profile-img" loading="lazy">
     <div class="card-body">
         <h5 class="card-title">{{user.firstName}} {{user.lastName}}</h5>
-        <div class="card-body-technology">
+        <div class="card-body-technology border-top">
             <app-technologies *ngFor="let technology of user.technologies" [technology]="technology">
             </app-technologies>
         </div>

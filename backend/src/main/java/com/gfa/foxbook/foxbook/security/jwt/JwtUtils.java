@@ -37,7 +37,6 @@ public class JwtUtils {
         return userRepository.findByEmail(email).get();
     }
 
-
     // ------- Cookie generating -----
     public ResponseCookie generateJwtCookie(Authentication userPrincipal) {
         String jwt = generateTokenFromUsername(userPrincipal.getName());
@@ -57,7 +56,6 @@ public class JwtUtils {
         return cookie;
     }
 
-
     // ------- token generation -----
     public String generateRefreshTokenFromUsername(String username) {
         Claims extraClaims = new DefaultClaims();
@@ -67,7 +65,6 @@ public class JwtUtils {
         extraClaims.put("sub", username);
         extraClaims.put("jti", uuid.toString());
         userRepository.save(user);
-
 
         return Jwts.builder()
                 .setClaims(extraClaims)
@@ -86,7 +83,6 @@ public class JwtUtils {
                 .compact();
     }
 
-
     // --- getting jwt from cookies ---
 
     public String getJwtFromCookies(HttpServletRequest request) {
@@ -96,6 +92,7 @@ public class JwtUtils {
             return null;
         }
     }
+
     public String getRefreshJwtFromCookies(HttpServletRequest request) {
         try {
             return getCookieValueByName(request, "refreshToken");
@@ -104,13 +101,13 @@ public class JwtUtils {
         }
     }
 
-
     // --- getting username from token---
     public String getUserNameFromJwtToken(String token) {
 
         return Jwts.parserBuilder().setSigningKey(key()).build()
                 .parseClaimsJws(token).getBody().getSubject();
     }
+
     public String getUserNameFromJwtRefreshToken(String token) {
         Claims claims = Jwts.parserBuilder().setSigningKey(key()).build()
                 .parseClaimsJws(token).getBody();
@@ -130,7 +127,6 @@ public class JwtUtils {
             return username;
         }
         return null;
-
     }
 
     // validating
@@ -149,6 +145,7 @@ public class JwtUtils {
         }
         return false;
     }
+
     // clean cookies
     public ResponseCookie getCleanJwtCookie() {
         ResponseCookie cookie = ResponseCookie.from("token", "Fox").path("/").build();
