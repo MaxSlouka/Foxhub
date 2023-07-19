@@ -5,6 +5,7 @@ import { Component } from '@angular/core';
   templateUrl: './terms-of-use.component.html',
   styleUrls: ['./terms-of-use.component.css']
 })
+
 export class TermsOfUseComponent {
 
 }

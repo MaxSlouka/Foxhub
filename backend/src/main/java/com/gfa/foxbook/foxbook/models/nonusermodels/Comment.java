@@ -21,7 +21,6 @@ public class Comment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String author;
     private String content;
     private String authorPic;
@@ -36,9 +35,7 @@ public class Comment {
         return id;
     }
 
-
     public void setPost(Post post) {
         this.postId = String.valueOf(post.getId());
     }
-
 }

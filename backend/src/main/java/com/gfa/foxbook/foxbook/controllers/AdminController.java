@@ -23,8 +23,6 @@ public class AdminController {
     public final PostService postService;
     public final UserService userService;
 
-
-
     @PostMapping("/posts")
     public ResponseEntity<?> makePost(@RequestBody(required = false) Post post) {
         if (post == null) {
@@ -67,7 +65,8 @@ public class AdminController {
         User user = maybeUser.get();
         Role adminRole = new Role("ADMIN");
         user.getRoles().add(adminRole);
-        userService.updateProfile(user);
+        //userService.updateProfile(user);
+        // todo: fix this
         return ResponseEntity.ok().body(userService.upgradeUser(user.getNickname()));
     }
 }
