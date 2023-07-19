@@ -24,4 +24,6 @@ public interface UserService {
 
     void addComment(User existingUser, String comment);
     public UserBasicDTO convertToUserBasicDTO(User user);
+
+    List<User> searchUsers(String query);
 }
