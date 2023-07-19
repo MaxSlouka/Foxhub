@@ -56,7 +56,6 @@ export class UserSettingsPageComponent {
     setTimeout(() => {
       window.location.href = ""
     }, 2000);
-
   }
 
 
