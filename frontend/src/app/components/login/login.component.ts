@@ -15,7 +15,7 @@ export class LoginComponent implements OnInit {
     email: null,
     password: null
   };
-  
+
   isLoggedIn = false;
   isLoginFailed = false;
   errorMessage = '';
@@ -28,7 +28,7 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
     if (this.storageService.isLoggedIn()) {
       this.isLoggedIn = true;
-      this.userNickname = this.storageService.getUser();
+      this.userNickname = this.storageService.getUserFromSession();
     }
   }
 
