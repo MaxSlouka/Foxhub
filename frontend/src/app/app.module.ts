@@ -25,8 +25,15 @@ import { UserSettingsPageComponent } from './components/user-settings-page/user-
 import { TermsOfUseComponent } from './components/terms-of-use/terms-of-use.component';
 import { HeaderSearchbarComponent } from './components/header-searchbar/header-searchbar.component';
 import { UpdatePasswordComponent } from './components/update-password/update-password.component';
+import { PostsComponent } from './components/posts/posts.component';
+import { PostComponent } from './components/post/post.component';
+import { PostFormComponent } from './components/post-form/post-form.component';
 import { HeaderSearchbarCardComponent } from './components/header-searchbar-card/header-searchbar-card.component';
 import { QRCodeModule } from 'angularx-qrcode';
+import { CommonModule } from '@angular/common';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -50,6 +57,9 @@ import { QRCodeModule } from 'angularx-qrcode';
     TermsOfUseComponent,
     HeaderSearchbarComponent,
     UpdatePasswordComponent,
+    PostsComponent,
+    PostComponent,
+    PostFormComponent,
     HeaderSearchbarCardComponent
   ],
   imports: [
@@ -59,7 +69,10 @@ import { QRCodeModule } from 'angularx-qrcode';
     NgOptimizedImage,
     HttpClientModule,
     ReactiveFormsModule,
-    QRCodeModule
+    QRCodeModule,
+    CommonModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot(),
   ],
   providers: [httpInterceptorProviders],
   bootstrap: [AppComponent]

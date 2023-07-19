@@ -5,6 +5,7 @@ import { ProfileService } from "../../_services/profile.service";
 import { User } from "../../models/user";
 import { ActivatedRoute } from '@angular/router';
 import { DataService } from "../../_services/api/data.service";
+import {ApiService} from "../../_services/api/api.service";
 
 @Component({
   selector: 'app-header',
@@ -18,6 +19,8 @@ export class HeaderComponent implements OnInit {
   username: string | null = "";
   // @ts-ignore
   users: User[];
+  // @ts-ignore
+  user:User;
 
   isLoggedIn = false;
 
@@ -26,6 +29,7 @@ export class HeaderComponent implements OnInit {
   constructor(private authService: AuthService,
     private profileService: ProfileService,
     private storageService: StorageService,
+              private apiService: ApiService,
     private activatedroute: ActivatedRoute,
     public dataService: DataService) {
   }
@@ -33,14 +37,11 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
     if (this.storageService.isLoggedIn()) {
       this.isLoggedIn = true;
-      this.userEmail = this.storageService.getUser();
-      // this.roles = this.storageService.getUser().roles;
+      this.userEmail = this.storageService.getUserFromSession();
+      this.apiService.getUserBasicInfo().subscribe((user: User) => {
+        this.user = user;
+      });
     }
-
-    // was causing error - maybe needed
-    // this.username=this.activatedroute.snapshot.paramMap.get("username");
-    // this.profileService.getUser(this.username)
-    //   .subscribe(user => this.user = user);
   }
 
   handleDataFromChild(data: any) {
