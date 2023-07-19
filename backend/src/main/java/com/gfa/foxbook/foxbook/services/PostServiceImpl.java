@@ -19,7 +19,6 @@ public class PostServiceImpl implements PostService {
 
     private final PostRepository postRepository;
 
-
     @Override
     public Post save(Post post) {
         return postRepository.save(post);
@@ -50,11 +49,11 @@ public class PostServiceImpl implements PostService {
         return postRepository.findAllByOrderByLikesDesc();
     }
 
-        @Override
-        public List<Post> findByUserName(String authorName){
+    @Override
+    public List<Post> findByUserName(String authorName) {
+        return postRepository.findByAuthor(authorName);
+    }
 
-            return postRepository.findByAuthor(authorName);
-        }
     @Override
     public Post createPost(String author, String content, String title) {
         LocalDateTime currentDateTime = LocalDateTime.now();
@@ -91,7 +90,6 @@ public class PostServiceImpl implements PostService {
         }
     }
 
-
     @Override
     public void addComment(Comment newComment) {
         Post p = postRepository.findById(Long.valueOf(newComment.getPostId())).get();
@@ -108,7 +106,5 @@ public class PostServiceImpl implements PostService {
     public void remove(Post post) {
         postRepository.delete(post);
     }
-
-
-    }
+}
 

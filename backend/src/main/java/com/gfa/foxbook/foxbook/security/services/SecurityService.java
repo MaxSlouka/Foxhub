@@ -20,11 +20,10 @@ public class SecurityService {
     private final RoleRepository roleRepository;
     private final PasswordEncoder passwordEncoder;
 
-
-
     public boolean userExistsByEmail(String email) {
         return userRepository.existsByEmail(email);
     }
+
     public void registerUser(RegisterDto registerDto) {
         User user = new User();
         user.setFirstName(registerDto.getFirstName());
@@ -56,5 +55,4 @@ public class SecurityService {
         Pattern pattern = Pattern.compile("\\p{InCombiningDiacriticalMarks}+");
         return pattern.matcher(normalized).replaceAll("");
     }
-
 }

@@ -1,9 +1,7 @@
-import {Technology} from "./technology";
-import {Language} from "./language";
-
+import { Technology } from "./technology";
+import { Language } from "./language";
 
 export interface User {
-
   id?: number;
   firstName: string,
   lastName: string,
