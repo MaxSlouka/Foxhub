@@ -27,6 +27,10 @@ import { HeaderSearchbarComponent } from './components/header-searchbar/header-s
 import { UpdatePasswordComponent } from './components/update-password/update-password.component';
 import { HeaderSearchbarCardComponent } from './components/header-searchbar-card/header-searchbar-card.component';
 import { QRCodeModule } from 'angularx-qrcode';
+import { CommonModule } from '@angular/common';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -50,7 +54,7 @@ import { QRCodeModule } from 'angularx-qrcode';
     TermsOfUseComponent,
     HeaderSearchbarComponent,
     UpdatePasswordComponent,
-    HeaderSearchbarCardComponent
+    HeaderSearchbarCardComponent,
   ],
   imports: [
     FormsModule,
@@ -59,7 +63,10 @@ import { QRCodeModule } from 'angularx-qrcode';
     NgOptimizedImage,
     HttpClientModule,
     ReactiveFormsModule,
-    QRCodeModule
+    QRCodeModule,
+    CommonModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot(),
   ],
   providers: [httpInterceptorProviders],
   bootstrap: [AppComponent]
