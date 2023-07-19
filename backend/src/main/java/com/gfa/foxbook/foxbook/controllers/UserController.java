@@ -77,12 +77,11 @@ public class UserController {
         if (user == null) {
             return ResponseEntity.badRequest().build();
         }
-
         String nickname = user.getNickname();
-        String extention = file.getName().split(".")[1];
+        String extension = file.getName().split(".")[1];
         try {
             Files.createDirectories(Paths.get(uploadDir));
-            Path filePath = Paths.get(uploadDir, nickname + "."+extention);
+            Path filePath = Paths.get(uploadDir, nickname + "."+extension);
             file.transferTo(filePath);
             user.setProfilePictureUrl("http://localhost:8080/uploads/"+nickname);
             return ResponseEntity.ok().build();

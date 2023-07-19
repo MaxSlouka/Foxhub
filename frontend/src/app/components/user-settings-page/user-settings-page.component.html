@@ -6,8 +6,11 @@
   <div class="row">
     <div class="col-md-3 border-right">
       <div class="d-flex flex-column align-items-center text-center p-3 py-2"><img class="rounded-circle mt-2"
-          width="150px" src="../../../assets/img/logo.png"><span class="font-weight-bold">{{user.firstName}}
-          {{user.lastName}}</span><span class="text-black-50">{{user.email}}</span><span>
+                                                                                   width=150
+                                                                                   height=150
+                                                                                   ngSrc="{{  user.profilePictureUrl  }}"><span
+        class="font-weight-bold">{{user.firstName}}
+        {{user.lastName}}</span><span class="text-black-50">{{user.email}}</span><span>
         </span></div>
     </div>
     <div class="col-md-5 border-right">
@@ -21,30 +24,45 @@
 
           <div class="row mt-2">
             <div class="col-md-6"><label class="labels">First Name</label><input type="text" class="form-control"
-                [(ngModel)]="user.firstName" name="firstName" placeholder="first name" value="">
+                                                                                 [(ngModel)]="user.firstName"
+                                                                                 name="firstName"
+                                                                                 placeholder="first name" value="">
             </div>
             <div class="col-md-6"><label class="labels">Last Name</label><input type="text" class="form-control"
-                [(ngModel)]="user.lastName" name="lastName" value="" placeholder="last name"></div>
+                                                                                [(ngModel)]="user.lastName"
+                                                                                name="lastName" value=""
+                                                                                placeholder="last name"></div>
           </div>
 
           <div class="row mt-2">
             <div class="col-md-6"><label class="labels">Completed projects</label><input type="text"
-                class="form-control" [(ngModel)]="user.completeProjects" name="completeProjects"
-                placeholder="enter number" value="">
+                                                                                         class="form-control"
+                                                                                         [(ngModel)]="user.completeProjects"
+                                                                                         name="completeProjects"
+                                                                                         placeholder="enter number"
+                                                                                         value="">
             </div>
             <div class="col-md-6"><label class="labels">Years of experience</label><input type="text"
-                class="form-control" [(ngModel)]="user.yearsOfExperience" name="yearsOfExperience" value=""
-                placeholder="enter year"></div>
+                                                                                          class="form-control"
+                                                                                          [(ngModel)]="user.yearsOfExperience"
+                                                                                          name="yearsOfExperience"
+                                                                                          value=""
+                                                                                          placeholder="enter year">
+            </div>
           </div>
 
           <div class="row mt-3">
             <div class="col-md-12"><label class="labels">Phone Number</label><input type="text" class="form-control"
-                placeholder="enter phone number" [(ngModel)]="user.phone" name="phone" value=""></div>
+                                                                                    placeholder="enter phone number"
+                                                                                    [(ngModel)]="user.phone"
+                                                                                    name="phone" value=""></div>
             <div class="col-md-12"><label class="labels">Location</label><input type="text" class="form-control"
-                placeholder="enter location" [(ngModel)]="user.location" name="location" value=""></div>
+                                                                                placeholder="enter location"
+                                                                                [(ngModel)]="user.location"
+                                                                                name="location" value=""></div>
             <div class="col-md-12"><label class="labels">About</label>
               <textarea type="text" class="form-control" [(ngModel)]="user.about" name="about"
-                placeholder="write something about you..." value="" cols="30" rows="3"></textarea>
+                        placeholder="write something about you..." value="" cols="30" rows="3"></textarea>
             </div>
           </div>
 
@@ -55,13 +73,20 @@
           <div class="row">
 
             <div class="col-md-12"><label class="labels">Github</label><input type="text" class="form-control"
-                [(ngModel)]="user.gitHub" name="github" placeholder="Github" value=""></div>
+                                                                              [(ngModel)]="user.gitHub" name="github"
+                                                                              placeholder="Github" value=""></div>
             <div class="col-md-12"><label class="labels">LinkedIn</label><input type="text" class="form-control"
-                [(ngModel)]="user.linkedin" name="linkedin" placeholder="LinkedIn" value=""></div>
+                                                                                [(ngModel)]="user.linkedin"
+                                                                                name="linkedin" placeholder="LinkedIn"
+                                                                                value=""></div>
             <div class="col-md-12"><label class="labels">Facebook</label><input type="text" class="form-control"
-                [(ngModel)]="user.facebook" name="facebook" placeholder="Facebook" value=""></div>
+                                                                                [(ngModel)]="user.facebook"
+                                                                                name="facebook" placeholder="Facebook"
+                                                                                value=""></div>
             <div class="col-md-12"><label class="labels">Instagram</label><input type="text" class="form-control"
-                [(ngModel)]="user.instagram" name="instagram" placeholder="Instagram" value=""></div>
+                                                                                 [(ngModel)]="user.instagram"
+                                                                                 name="instagram"
+                                                                                 placeholder="Instagram" value=""></div>
           </div>
 
           <div class="mt-5 text-center">
@@ -73,7 +98,7 @@
               password</a>
             <a href="./" class="btn btn-outline-secondary" role="button" aria-disabled="true">Go Back</a>
           </div>
-           <!-- modal add-->
+          <!-- modal add-->
           <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addModalLabel"
                aria-hidden="true">
             <div class="modal-dialog" role="document">
@@ -114,10 +139,11 @@
         <br>
         <div class="d-flex justify-content-between align-items-center experience"><span>Edit profile picture</span>
           <button class="btn border px-3 p-1 add-experience" type="button" data-toggle="modal"
-                  data-target="#imgModal"><i class="fa fa-plus"></i>&nbsp;Picture</button>
+                  data-target="#imgModal"><i class="fa fa-plus"></i>&nbsp;Picture
+          </button>
         </div>
 
-      <!--        img modal-->
+        <!--        img modal-->
         <div class="modal fade" id="imgModal" tabindex="-1" role="dialog" aria-labelledby="imgModal"
              aria-hidden="true">
           <div class="modal-dialog" role="document">
@@ -131,12 +157,13 @@
               </div>
               <div class="mt-5 mb-5 text-center">
                 <p class="lead">Choose your best profile picture</p>
-                <input type="file" (change)="onFileSelected($event)" />
+                <input type="file" (change)="onFileSelected($event)"/>
                 <br>
               </div>
               <div class="text-center">
                 <button (click)="onUpload()" class="btn btn-primary profile-button" type="button"
-                        data-toggle="modal" data-target="#imgModal">Upload picture</button>
+                        data-toggle="modal" data-target="#imgModal">Upload picture
+                </button>
               </div>
             </div>
           </div>
@@ -147,7 +174,7 @@
 
         <div class="mt-5 text-center">
           <button class="btn btn-danger profile-button profile-delete-btn" type="button" data-toggle="modal"
-            data-target="#exampleModal">Delete
+                  data-target="#exampleModal">Delete
             Profile
           </button>
         </div>
@@ -156,7 +183,7 @@
         <!-- modal delete -->
 
         <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-          aria-hidden="true">
+             aria-hidden="true">
           <div class="modal-dialog" role="document">
             <div class="modal-content">
               <div class="modal-header">
@@ -172,7 +199,7 @@
               </div>
               <div class="text-center">
                 <button (click)="deleteAccount()" class="btn btn-danger profile-button profile-delete-btn" type="button"
-                  data-toggle="modal" data-target="#exampleModal">Delete
+                        data-toggle="modal" data-target="#exampleModal">Delete
                   Profile
                 </button>
               </div>
