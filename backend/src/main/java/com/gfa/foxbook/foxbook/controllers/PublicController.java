@@ -9,10 +9,7 @@ import com.gfa.foxbook.foxbook.services.interfaces.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -67,6 +64,19 @@ public class PublicController {
             return ResponseEntity.notFound().build();
         }
         return ResponseEntity.ok(posts);
+    }
+
+    @GetMapping("/people/search")
+    public ResponseEntity<?> searchUsers(@RequestParam ("query") String query) {
+        List<User> users = userService.searchUsers(query);
+        List<UserSearchDTO> usersDTO = new ArrayList<>();
+        for (User user : users) {
+            usersDTO.add(new UserSearchDTO(user));
+        }
+        if (users.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok(usersDTO);
     }
 
 }
