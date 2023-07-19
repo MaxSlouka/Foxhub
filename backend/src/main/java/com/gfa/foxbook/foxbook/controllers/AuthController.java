@@ -57,6 +57,7 @@ public class AuthController {
             return ResponseEntity.badRequest().body("Email already registered");
         }
         securityService.registerUser(registerDto);
+
         return ResponseEntity.ok().build();
     }
 
