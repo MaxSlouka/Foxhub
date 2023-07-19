@@ -1,10 +1,11 @@
-import { Injectable } from '@angular/core';
-import { Observable } from "rxjs";
-import { HttpClient, HttpHeaders } from "@angular/common/http";
-import { User } from "../../models/user";
+import {Injectable} from '@angular/core';
+import {Observable} from "rxjs";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {User} from "../../models/user";
+import {Language} from "../../models/language";
 
 const httpOptions = {
-  headers: new HttpHeaders({ 'Content-type': 'application/json' })
+  headers: new HttpHeaders({'Content-type': 'application/json'})
 }
 
 @Injectable({
@@ -54,31 +55,33 @@ export class ApiService {
 
 
   updateUser(firstName: string,
-    lastName: string,
-    completeProjects: string | undefined,
-    yearsOfExperience: string | undefined,
-    phone: string | undefined,
-    location: string | undefined,
-    about: string | undefined,
-    gitHub: string | undefined,
-    linkedin: string | undefined,
-    facebook: string | undefined,
-    instagram: string | undefined
+             lastName: string,
+             completeProjects: string | undefined,
+             yearsOfExperience: string | undefined,
+             phone: string | undefined,
+             location: string | undefined,
+             about: string | undefined,
+             gitHub: string | undefined,
+             linkedin: string | undefined,
+             facebook: string | undefined,
+             instagram: string | undefined,
+             languages: Language[] | undefined
   ): Observable<any> {
 
     return this.http.patch("http://localhost:8080/api/v1/user/people", {
-      firstName,
-      lastName,
-      completeProjects,
-      yearsOfExperience,
-      phone,
-      location,
-      about,
-      gitHub,
-      linkedin,
-      facebook,
-      instagram
-    },
+        firstName,
+        lastName,
+        completeProjects,
+        yearsOfExperience,
+        phone,
+        location,
+        about,
+        gitHub,
+        linkedin,
+        facebook,
+        instagram,
+        languages
+      },
       httpOptions
     );
   }

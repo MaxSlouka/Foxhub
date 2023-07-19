@@ -24,7 +24,6 @@ export class AppComponent {
     this.apiService
       .getAll().subscribe((users) => {
         this.dataService.users = users;
-        console.log(this.dataService.users);
       }
       );
   }
