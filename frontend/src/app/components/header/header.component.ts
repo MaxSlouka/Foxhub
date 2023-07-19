@@ -5,6 +5,7 @@ import { ProfileService } from "../../_services/profile.service";
 import { User } from "../../models/user";
 import { ActivatedRoute } from '@angular/router';
 import { DataService } from "../../_services/api/data.service";
+import {ApiService} from "../../_services/api/api.service";
 
 @Component({
   selector: 'app-header',
@@ -28,6 +29,7 @@ export class HeaderComponent implements OnInit {
   constructor(private authService: AuthService,
     private profileService: ProfileService,
     private storageService: StorageService,
+              private apiService: ApiService,
     private activatedroute: ActivatedRoute,
     public dataService: DataService) {
   }
@@ -36,8 +38,9 @@ export class HeaderComponent implements OnInit {
     if (this.storageService.isLoggedIn()) {
       this.isLoggedIn = true;
       this.userEmail = this.storageService.getUserFromSession();
-      this.profileService.getUser(this.username)
-        .subscribe(user => this.user = user)
+      this.apiService.getUserBasicInfo().subscribe((user: User) => {
+        this.user = user;
+      });
     }
   }
 
