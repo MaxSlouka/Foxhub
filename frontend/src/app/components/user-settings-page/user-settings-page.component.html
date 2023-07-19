@@ -137,8 +137,9 @@
         <br>
         <div class="d-flex justify-content-between align-items-center experience"><span>Edit
             languages</span>
-          <button class="btn border px-3 p-1 add-experience" type="button" data-toggle="modal"
-                  data-target="#languagesModal"><i class="fa fa-plus"></i>&nbsp;Lang
+          <button class="btn border px-3 p-1 add-experience" (click)="unusedLanguagesHandle()" type="button"
+                  data-toggle="modal"
+                  data-target="#languagesModal"><i class="fa fa-plus"></i>&nbsp;Language
           </button>
         </div>
 
@@ -148,18 +149,37 @@
           <div class="modal-dialog" role="document">
             <div class="modal-content">
               <div class="modal-header">
-                <app-language *ngFor="let language of languages"
-                             [language]="language"></app-language>
+                <div>
+                  <h5 class="modal-title" id="languagesModalLabel">Languages
+                  </h5>
+                  <p class="lead">Select your languages</p>
+                  <app-language-button *ngFor="let language of unusedLanguages"
+                                       [language]="language"
+                                       [unusedLanguages]="unusedLanguages"
+                                       [userLanguages]="userLanguages"
+                                       (languageComponentEmitter)="handleLanguageComponentEmitter($event)"
+                  ></app-language-button>
+                </div>
+
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
+              </div>
+              <div>
+                <h5>Your Languages</h5>
+                <app-language-button *ngFor="let language of userLanguages"
+                                     [language]="language"
+                                     [unusedLanguages]="unusedLanguages"
+                                     [userLanguages]="userLanguages"
+                                     (languageComponentEmitter)="handleLanguageComponentEmitter($event)"
+                ></app-language-button>
               </div>
               <div class="mt-5 text-center">
                 <p class="lead">Do you want to update your profile?</p>
               </div>
               <div class="text-center">
                 <button class="btn btn-primary profile-button" type="submit"
-                        data-toggle="modal" data-target="#languagesModal">Save profile
+                        data-toggle="modal" data-target="#languagesModal">Sure
                 </button>
               </div>
             </div>

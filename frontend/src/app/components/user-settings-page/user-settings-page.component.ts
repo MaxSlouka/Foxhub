@@ -18,10 +18,15 @@ export class UserSettingsPageComponent {
   // @ts-ignore
   selectedFile: File = null;
 
+
   user: User = {email: "", firstName: "", lastName: "", password: ""};
 
   // @ts-ignore
   languages: Language[];
+  // @ts-ignore
+  userLanguages: Language[] | undefined;
+  unusedLanguages: Language[] | undefined;
+
 
   constructor(private storageService: StorageService,
               private apiService: ApiService,
@@ -34,12 +39,24 @@ export class UserSettingsPageComponent {
   ngOnInit(): void {
     this.apiService.getUserBasicInfo().subscribe((user: User) => {
       this.user = user;
+      this.userLanguages = user.languages;
     });
     this.languageService.getAll().subscribe((languages: Language[]) => {
       this.languages = languages;
-      console.log(this.languages);
     });
   }
+
+  unusedLanguagesHandle() {
+    this.unusedLanguages = this.languages.filter(language => {
+      // @ts-ignore
+      return !this.userLanguages.some(userLanguage => userLanguage.name === language.name);
+    });
+  }
+
+  handleLanguageComponentEmitter(languages: Language[]) {
+    this.user.languages = languages;
+  }
+
 
   // @ts-ignore
   onFileSelected(event) {
@@ -77,8 +94,10 @@ export class UserSettingsPageComponent {
       gitHub,
       linkedin,
       facebook,
-      instagram
+      instagram,
+      languages
     } = this.user;
+
     await this.apiService.updateUser(
       firstName,
       lastName,
@@ -90,7 +109,8 @@ export class UserSettingsPageComponent {
       gitHub,
       linkedin,
       facebook,
-      instagram)
+      instagram,
+      languages)
       .subscribe(() => {
         window.location.href = "";
       });

@@ -168,6 +168,11 @@ public class UserServiceImpl implements UserService {
         } else {
             user.setInstagram(user.getInstagram());
         }
+        if (userDTO.getLanguages() != null) {
+            user.setLanguages(userDTO.getLanguages());
+        } else {
+            user.setLanguages(user.getLanguages());
+        }
         return userRepository.save(user);
     }
 }
