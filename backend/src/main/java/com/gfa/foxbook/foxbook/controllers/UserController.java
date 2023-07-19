@@ -79,11 +79,14 @@ public class UserController {
         if (user == null) {
             return ResponseEntity.badRequest().build();
         }
+
         String nickname = user.getNickname();
+        String extention = file.getName().split(".")[1];
         try {
             Files.createDirectories(Paths.get(uploadDir));
-            Path filePath = Paths.get(uploadDir, nickname + ".jpg");
+            Path filePath = Paths.get(uploadDir, nickname + "."+extention);
             file.transferTo(filePath);
+            user.setProfilePictureUrl("http://localhost:8080/uploads/"+nickname);
             return ResponseEntity.ok().build();
         } catch (IOException e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)

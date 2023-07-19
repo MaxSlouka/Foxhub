@@ -27,6 +27,7 @@ public class SecurityService {
     }
     public void registerUser(RegisterDto registerDto) {
         User user = new User();
+        user.setProfilePictureUrl("../../../assets/img/logo.png");
         user.setFirstName(registerDto.getFirstName());
         user.setLastName(registerDto.getLastName());
         user.setEmail(registerDto.getEmail());
