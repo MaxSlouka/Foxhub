@@ -28,6 +28,10 @@ export class PostComponent implements OnInit {
   replyId: number | null = null;
 
   ngOnInit(): void {
+    const timeToEdit = 300000;
+    const timePassed =
+      new Date().getMilliseconds() -
+      new Date(this.post.createdAt).getMilliseconds() > timeToEdit;
     this.canReply = Boolean(this.currentUserId);
       this.canEdit = this.currentUserId === this.post.userId;
     this.canDelete = this.currentUserId === this.post.userId && this.replies.length === 0;

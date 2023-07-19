@@ -21,7 +21,7 @@
       <div class="post-action" (click)="deletePost.emit(post.id)">Delete</div>
       <!--      <div *ngIf="canReply" class="post-action">Reply</div>-->
       <!--      <div *ngIf="canEdit" class="post-action">Edit</div>-->
-      <!--      <div *ngIf="canDelete" class="post-action">Delete</div>-->
+      <!--      <div *ngIf="canDelete" class="post-action" (click)="deletePost.emit(post.id)">Delete</div>-->
     </div>
     <app-post-form
       *ngIf="isReplying()"
