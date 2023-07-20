@@ -53,14 +53,14 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public Post editPost(Long id, String content) {
+    public void editPost(Long id, String content) {
         Optional<Post> optionalPost = postRepository.findById(id);
 
         if (optionalPost.isPresent()) {
             Post existingPost = optionalPost.get();
             existingPost.setContent(content);
 
-            return postRepository.save(existingPost);
+            postRepository.save(existingPost);
         } else {
             throw new IllegalArgumentException("Post not found");
         }

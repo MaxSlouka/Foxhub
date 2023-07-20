@@ -19,7 +19,7 @@ public interface PostService {
 
     Post createPost(Post post);
 
-    Post editPost(Long id, String content);
+    void editPost(Long id, String content);
 
 //    Optional<Post> findById(Long id);
 //

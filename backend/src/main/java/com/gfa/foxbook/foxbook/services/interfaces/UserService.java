@@ -23,8 +23,6 @@ public interface UserService {
 
     Optional<User> findByEmail(String name);
 
-    void addComment(User existingUser, String comment);
-
     public UserBasicDTO convertToUserBasicDTO(User user);
 
     List<User> searchUsers(String query);
