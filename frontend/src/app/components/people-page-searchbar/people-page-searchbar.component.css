@@ -4,9 +4,8 @@ form {
 }
 
 .card-deck {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr); 
   padding: 3rem;
+  overflow: auto;
 }
 
 @media only screen and (max-width: 768px) {
