@@ -1,13 +1,7 @@
 <aside>
   <div class="card mb-3">
     <div class="card-body">
-      <a routerLink="/people" class="d-flex align-items-center">
-        <h4 class="h4-show-all mr-2">Show all People</h4>
-      </a>
-    </div>
-  </div>
-  <div class="card mb-3">
-    <div class="card-body">
+      <h4 class="h4-show-all mr-2">All People</h4>
       <app-aside-user-card *ngFor="let user of users" [user]="user"></app-aside-user-card>
     </div>
   </div>
