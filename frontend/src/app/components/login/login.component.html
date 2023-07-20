@@ -36,6 +36,8 @@
           </div>
         </div>
 
+
+
         <!-- password -->
 
         <div class="form-floating mb-3 form-group">
@@ -69,6 +71,11 @@
             Login failed: {{ errorMessage }}
           </div>
         </div>
+
+      </form >
+      <form class="p-4 p-md-5 border rounded-3 bg-body-tertiary" *ngIf="isLoggedIn&&!isVerrified" name="form">
+
+        <p> give me pin</p>
 
       </form>
 
