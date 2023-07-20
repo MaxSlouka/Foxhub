@@ -60,7 +60,7 @@ public class AuthController {
             return ResponseEntity.badRequest().body("Email already registered");
         }
         securityService.registerUser(registerDto);
-        emailService.send("gfafoxbook@gmail.com",registerDto.getEmail(),"Welcome to Foxbook","Hello, and welcome");
+        emailService.send(registerDto.getEmail(),"Welcome to Foxbook", emailService.generateWelcomeEmail(registerDto.getFirstName()));
 
         return ResponseEntity.ok().build();
     }
