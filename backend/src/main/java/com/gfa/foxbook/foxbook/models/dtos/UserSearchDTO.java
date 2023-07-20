@@ -18,6 +18,7 @@ public class UserSearchDTO {
     private String nickname;
     private String about;
     private List<Technology> technologies;
+    private String profilePictureUrl;
 
     public UserSearchDTO(User user) {
         this.firstName = user.getFirstName();
@@ -25,5 +26,6 @@ public class UserSearchDTO {
         this.nickname = user.getNickname();
         this.about = user.getAbout();
         this.technologies = user.getTechnologies();
+        this.profilePictureUrl = user.getProfilePictureUrl();
     }
 }
