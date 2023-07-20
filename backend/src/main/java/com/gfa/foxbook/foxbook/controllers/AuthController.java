@@ -5,7 +5,9 @@ import com.gfa.foxbook.foxbook.models.dtos.security.LoginResponseDto;
 import com.gfa.foxbook.foxbook.models.dtos.security.RegisterDto;
 import com.gfa.foxbook.foxbook.security.jwt.JwtUtils;
 import com.gfa.foxbook.foxbook.security.services.SecurityService;
+import com.gfa.foxbook.foxbook.services.EmailServiceImpl;
 import com.gfa.foxbook.foxbook.services.interfaces.UserService;
+import jakarta.mail.MessagingException;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
@@ -28,6 +30,7 @@ public class AuthController {
     private final JwtUtils jwtUtils;
     private final SecurityService securityService;
     private final UserService userService;
+    private final EmailServiceImpl emailService;
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginDto loginDto) {
@@ -52,11 +55,12 @@ public class AuthController {
     }
 
     @PostMapping("register")
-    public ResponseEntity<?> register(@RequestBody RegisterDto registerDto) {
+    public ResponseEntity<?> register(@RequestBody RegisterDto registerDto) throws MessagingException {
         if (securityService.userExistsByEmail(registerDto.getEmail())) {
             return ResponseEntity.badRequest().body("Email already registered");
         }
         securityService.registerUser(registerDto);
+        emailService.send("gfafoxbook@gmail.com",registerDto.getEmail(),"Welcome to Foxbook","Hello, and welcome");
 
         return ResponseEntity.ok().build();
     }
