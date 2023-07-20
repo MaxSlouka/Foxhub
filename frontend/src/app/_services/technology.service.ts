@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import {Observable} from "rxjs";
-import {Language} from "../models/language";
 import {HttpClient} from "@angular/common/http";
 import {Technology} from "../models/technology";
 
