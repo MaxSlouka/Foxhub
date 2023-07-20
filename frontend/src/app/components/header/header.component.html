@@ -20,27 +20,24 @@
   <!-- navbar -->
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <div class="d-flex flex-wrap align-items-center justify-content-center py-2 mb-2 border-bottom">
+    <div class="d-flex flex-wrap align-items-center justify-content-between py-2 mb-2 border-bottom">
 
       <!-- logo -->
 
-      <a class="navbar-brand" href="./">
+      <a class="navbar-brand" href="./main">
         <img src="../../../assets/img/GFA-logo.png" width="50" height="50" alt="GFA logo">
       </a>
 
       <!-- nav items -->
 
-      <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-        <li class="nav-item"><a href="./main" class="nav-link px-2">Main</a></li>
-        <li class="nav-item"><a href="./people" class="nav-link px-2">People</a></li>
-      </ul>
-
-      <!-- search form -->
-
-      <ng-container *ngIf="dataService.users">
-        <app-header-searchbar [users]=dataService.users
-          (dataEvent)="handleDataFromChild($event)"></app-header-searchbar>
-      </ng-container>
+      <!-- <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-start mb-md-0">
+        <li class="nav-item" routerLinkActive="active">
+          <a routerLink="/main" class="nav-link px-2">Main</a>
+        </li>
+        <li class="nav-item" routerLinkActive="active">
+          <a routerLink="/people" class="nav-link px-2">People</a>
+        </li>
+      </ul> -->
 
       <!-- login and sign up -->
 
@@ -51,11 +48,11 @@
 
       <!-- user options -->
 
-      <!-- Example single danger button -->
       <div class="btn-group" *ngIf="isLoggedIn">
         <a href="#" class="d-block link-body-emphasis text-decoration-none dropdown-toggle" data-toggle="dropdown"
           aria-expanded="false">
-          <img *ngIf="user.profilePictureUrl" ngSrc="{{  user.profilePictureUrl  }}" alt="mdo" width=32 height=32 class="rounded-circle">
+          <img *ngIf="user.profilePictureUrl" ngSrc="{{  user.profilePictureUrl  }}" alt="mdo" width=32 height=32
+            class="rounded-circle">
         </a>
         <div class="dropdown-menu">
           <a class="dropdown-item" [routerLink]="['/profile',userEmail]">Profile - {{userEmail}}</a>
@@ -66,10 +63,6 @@
       </div>
 
     </div>
-  </div>
-
-  <div class="search-result-container">
-    <app-header-searchbar-card *ngFor="let user of users" [user]="user" class="search-bar-result"></app-header-searchbar-card>
   </div>
 
 </nav>
