@@ -41,6 +41,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public User getUserByVerificationToken(String verificationToken) {
+        return userRepository.getUserByVerificationToken(verificationToken);
+    }
+
+    @Override
     public List<User> getAll() {
         assert userRepository != null;
         return userRepository.findAll();
