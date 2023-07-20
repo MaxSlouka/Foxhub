@@ -60,3 +60,8 @@
 .modal-header {
     border: none;
 }
+
+.allTechnologies{
+  max-height: 150px;
+  overflow: auto;
+}
