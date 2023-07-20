@@ -1,5 +1,6 @@
 package com.gfa.foxbook.foxbook.controllers;
 
+import com.gfa.foxbook.foxbook.models.User;
 import com.gfa.foxbook.foxbook.models.dtos.security.LoginDto;
 import com.gfa.foxbook.foxbook.models.dtos.security.LoginResponseDto;
 import com.gfa.foxbook.foxbook.models.dtos.security.RegisterDto;
@@ -84,4 +85,15 @@ public class AuthController {
         }
         return ResponseEntity.badRequest().body("Refresh token is expired");
     }
+
+    @GetMapping("verify-email/{token}")
+    public ResponseEntity<?> verify(@PathVariable String token){
+        User user = userService.getUserByVerificationToken(token);
+
+        if (user != null && user.getVerificationToken().equals(token)) {
+            user.setVerified(true);
+            userService.saveUser(user);
+            return ResponseEntity.ok("Email verification successful");
+        }
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid verification token");
 }
