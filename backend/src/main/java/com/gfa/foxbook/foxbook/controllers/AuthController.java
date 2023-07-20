@@ -61,7 +61,7 @@ public class AuthController {
             return ResponseEntity.badRequest().body("Email already registered");
         }
         securityService.registerUser(registerDto);
-        emailService.send(registerDto.getEmail(),"Welcome to Foxbook", emailService.generateWelcomeEmail(registerDto.getFirstName()));
+        emailService.send(registerDto.getEmail(), "Welcome to Foxbook", emailService.generateWelcomeEmail(registerDto.getFirstName()));
 
         return ResponseEntity.ok().build();
     }
@@ -87,7 +87,7 @@ public class AuthController {
     }
 
     @GetMapping("verify-email/{token}")
-    public ResponseEntity<?> verify(@PathVariable String token){
+    public ResponseEntity<?> verify(@PathVariable String token) {
         User user = userService.getUserByVerificationToken(token);
 
         if (user != null && user.getVerificationToken().equals(token)) {
@@ -96,4 +96,5 @@ public class AuthController {
             return ResponseEntity.ok("Email verification successful");
         }
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid verification token");
+    }
 }
