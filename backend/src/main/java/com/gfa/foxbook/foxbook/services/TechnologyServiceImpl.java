@@ -10,7 +10,7 @@ import java.util.List;
 @Service
 public class TechnologyServiceImpl implements TechnologyService {
 
-    private TechnologyRepository technologyRepository;
+    private final TechnologyRepository technologyRepository;
 
     public TechnologyServiceImpl(TechnologyRepository technologyRepository) {
         this.technologyRepository = technologyRepository;
