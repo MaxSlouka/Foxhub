@@ -56,13 +56,14 @@ public class User {
             inverseJoinColumns = {@JoinColumn(name = "roles_id", referencedColumnName = "id")})
     private List<Role> roles;
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
     @JoinTable(
             name = "users_technologies",
             joinColumns = {@JoinColumn(name = "users_id", referencedColumnName = "id")},
             inverseJoinColumns = {@JoinColumn(name = "technologies_id", referencedColumnName = "id")})
     private List<Technology> technologies;
-    @ManyToMany
+
+    @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
     @JoinTable(
             name = "user_languages",
             joinColumns = {@JoinColumn(name = "users_id", referencedColumnName = "id")},
