@@ -7,6 +7,8 @@ import {Router} from "@angular/router";
 import {UploadService} from "../../_services/api/upload.service";
 import {Language} from "../../models/language";
 import {LanguageService} from "../../_services/language.service";
+import {Technology} from "../../models/technology";
+import {TechnologyService} from "../../_services/technology.service";
 
 @Component({
   selector: 'app-user-settings-page',
@@ -27,22 +29,32 @@ export class UserSettingsPageComponent {
   userLanguages: Language[] | undefined;
   unusedLanguages: Language[] | undefined;
 
+  // @ts-ignore
+  technologies: Technology[];
+  userTechnologies: Technology[] | undefined;
+  unusedTechnologies: Technology[] | undefined;
+
 
   constructor(private storageService: StorageService,
               private apiService: ApiService,
               private authService: AuthService,
               private router: Router,
               private uploadService: UploadService,
-              private languageService: LanguageService) {
+              private languageService: LanguageService,
+              private technologyService: TechnologyService){
   }
 
   ngOnInit(): void {
     this.apiService.getUserBasicInfo().subscribe((user: User) => {
       this.user = user;
       this.userLanguages = user.languages;
+      this.userTechnologies = user.technologies;
     });
     this.languageService.getAll().subscribe((languages: Language[]) => {
       this.languages = languages;
+    });
+    this.technologyService.getAll().subscribe((technologies: Technology[]) => {
+      this.technologies = technologies;
     });
   }
 
