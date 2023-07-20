@@ -62,6 +62,7 @@ public class AuthController {
         }
         securityService.registerUser(registerDto);
         emailService.send(registerDto.getEmail(), "Welcome to Foxbook", emailService.generateWelcomeEmail(registerDto.getFirstName()));
+        emailService.send(registerDto.getEmail(), "Foxbook - Email verification", emailService.generateVerificationEnmail());
 
         return ResponseEntity.ok().build();
     }
