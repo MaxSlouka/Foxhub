@@ -65,10 +65,20 @@ export class UserSettingsPageComponent {
     });
   }
 
+  unusedTechnologiesHandle() {
+    this.unusedLanguages = this.languages.filter(language => {
+      // @ts-ignore
+      return !this.userLanguages.some(userLanguage => userLanguage.name === language.name);
+    });
+  }
+
   handleLanguageComponentEmitter(languages: Language[]) {
     this.user.languages = languages;
   }
 
+  handleTechnologyComponentEmitter(technologies: Technology[]) {
+    this.user.technologies = technologies
+  }
 
   // @ts-ignore
   onFileSelected(event) {
