@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from "@angular/common/http";
+import {HttpClient, HttpHeaders, HttpResponse} from "@angular/common/http";
 import { Observable } from "rxjs";
 import { ToastrService } from 'ngx-toastr';
 
@@ -53,5 +53,18 @@ export class AuthService {
       this.toastr.error('Successfully Logged Out!', 'Success', { timeOut: 5000 });
     });
   }
-  
+
+  getVerified():boolean {
+    this.http.get<any>(
+      'http://localhost:8080/api/v1/auth/verify',
+    ).subscribe((response: HttpResponse<any>) => {
+      console.log(response);
+      if (response.status === 200) {
+        return true;
+      }
+      return false;
+    })
+
+    return false;
+  }
 }
