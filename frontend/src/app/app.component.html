@@ -1,1 +1,20 @@
-<router-outlet></router-outlet>
+<router-outlet></router-outlet>,
+
+<div style="text-align: center;" >
+  <h5>Cookies In Angular</h5>
+  <h5>Cookie Data:</h5>
+  <p>Name: {{cookie_name}}</p>
+  <p>Cookie Object: {{all_cookies | json}}</p>
+  <br>
+  <button (click)="setCookie()">Set Cookies</button>
+  <br><br>
+  <button (click)="deleteCookie()">Delete</button>
+  <br><br>
+  <button (click)="deleteAll()">Delete All</button>
+</div>
+
+<div *ngIf="showCookiePopup" class="cookie-popup">
+  <p>We use cookies to improve your experience. By using our site, you agree to our use of cookies.</p>
+  <button (click)="acceptCookies()">Accept</button>
+  <button (click)="declineCookies()">Decline</button>
+</div>
