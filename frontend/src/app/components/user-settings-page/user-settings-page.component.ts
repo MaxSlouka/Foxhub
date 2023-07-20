@@ -95,6 +95,7 @@ export class UserSettingsPageComponent {
       linkedin,
       facebook,
       instagram,
+      optionalPage,
       languages
     } = this.user;
 
@@ -110,6 +111,7 @@ export class UserSettingsPageComponent {
       linkedin,
       facebook,
       instagram,
+      optionalPage,
       languages)
       .subscribe(() => {
         window.location.href = "";
