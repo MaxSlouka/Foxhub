@@ -35,6 +35,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { ToastrModule } from 'ngx-toastr';
 import { LanguageButtonComponent } from './components/language-button/language-button.component';
+import { AsideUserCardComponent } from './components/aside-user-card/aside-user-card.component';
 
 @NgModule({
   declarations: [
@@ -62,7 +63,8 @@ import { LanguageButtonComponent } from './components/language-button/language-b
     PostComponent,
     PostFormComponent,
     HeaderSearchbarCardComponent,
-    LanguageButtonComponent
+    LanguageButtonComponent,
+    AsideUserCardComponent
   ],
   imports: [
     FormsModule,
