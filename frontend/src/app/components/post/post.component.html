@@ -1,46 +1,36 @@
-<div class="post">
-  <div class="post-image-container">
-    <img ngSrc="/favicon.ico" width="50" height="50" alt="user icon">
-  </div>
-  <div class="post-right-part">
-    <div class="post-content">
-      <div class="post-author">{{post.author}}</div>
-    </div>
-    <div class="post-text" *ngIf="!isReplying()">{{post.content}}</div>
-    <app-post-form
-    *ngIf="isReplying()"
-    submitLabel="Update"
-    [hasCancelButton]="true"
-    [initialText]="post.content!"
-    (handleSubmit)="updatePost.emit({text: $event, id: post.id!})"
-    (handleCancel)="setActivePost.emit(null)"
-    ></app-post-form>
-    <div class="post-actions">
-      <div class="post-action">Reply</div>
-      <div class="post-action">Edit</div>
-      <div class="post-action" (click)="deletePost.emit(post.id)">Delete</div>
-      <!--      <div *ngIf="canReply" class="post-action">Reply</div>-->
-      <!--      <div *ngIf="canEdit" class="post-action">Edit</div>-->
-      <!--      <div *ngIf="canDelete" class="post-action" (click)="deletePost.emit(post.id)">Delete</div>-->
-    </div>
-    <app-post-form
-      *ngIf="isReplying()"
-      submitLabel="Reply"
-      (handleSubmit)="addPost.emit({text: $event, parentPostId: replyId})"
-    ></app-post-form>
-    <div class="replies" *ngIf="replies.length > 0">
-      <app-post *ngFor="let reply of replies"
-                [post]="reply"
-                (setActivePost)="setActivePost.emit($event)"
-                [activePost]="activePost"
-                (addPost)="addPost.emit($event)"
-                (updatePost)="updatePost.emit($event)"
-                [parentPostId]="post.id!"
-                [replies]="[]"
-                [currentUserId]="currentUserId"
-                (deletePost)="deletePost.emit($event)"
-      >
-      </app-post>
+<div class="card mb-3">
+  <div class="card-body">
+    <div class="d-flex align-items-center mb-2">
+      <div class="post-image-container mr-3">
+        <img src="/favicon.ico" width="50" height="50" alt="user icon" class="img-fluid rounded-circle">
+      </div>
+      <div class="post-right-part">
+        <div class="post-content">
+          <div class="post-author">{{ post.author }}</div>
+        </div>
+        <div class="post-text" *ngIf="!isReplying()">{{ post.content }}</div>
+        <app-post-form *ngIf="isReplying()" submitLabel="Update" [hasCancelButton]="true" [initialText]="post.content!"
+          (handleSubmit)="updatePost.emit({text: $event, id: post.id!})"
+          (handleCancel)="setActivePost.emit(null)"></app-post-form>
+        <div class="post-actions">
+          <div class="post-action">Reply</div>
+          <div class="post-action">Edit</div>
+          <div class="post-action" (click)="deletePost.emit(post.id)">Delete</div>
+        </div>
+        <app-post-form *ngIf="isReplying()" submitLabel="Reply"
+          (handleSubmit)="addPost.emit({text: $event, parentPostId: replyId})">
+        </app-post-form>
+        <div class="replies" *ngIf="replies.length > 0">
+          <div *ngFor="let reply of replies" class="card mb-3">
+            <div class="card-body">
+              <app-post [post]="reply" (setActivePost)="setActivePost.emit($event)" [activePost]="activePost"
+                (addPost)="addPost.emit($event)" (updatePost)="updatePost.emit($event)" [parentPostId]="post.id!"
+                [replies]="[]" [currentUserId]="currentUserId" (deletePost)="deletePost.emit($event)">
+              </app-post>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
