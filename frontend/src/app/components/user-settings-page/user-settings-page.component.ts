@@ -66,9 +66,9 @@ export class UserSettingsPageComponent {
   }
 
   unusedTechnologiesHandle() {
-    this.unusedLanguages = this.languages.filter(language => {
+    this.unusedTechnologies = this.technologies.filter(technology => {
       // @ts-ignore
-      return !this.userLanguages.some(userLanguage => userLanguage.name === language.name);
+      return !this.userTechnologies.some(userTechnology => userTechnology.name === technology.name);
     });
   }
 
