@@ -32,7 +32,7 @@ export class ApiService {
   }
 
 
-  search(user: User, key: string, results: User[]) {
+  search(user: any, key: string, results: any[]) {
     let hasTechnologyMatch = false;
 
     // @ts-ignore

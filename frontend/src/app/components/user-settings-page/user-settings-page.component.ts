@@ -26,6 +26,7 @@ export class UserSettingsPageComponent {
   languages: Language[];
   userLanguages: Language[] | undefined;
   unusedLanguages: Language[] | undefined;
+  languageInput: string = "";
 
   // @ts-ignore
   technologies: Technology[];
@@ -54,6 +55,30 @@ export class UserSettingsPageComponent {
       this.technologies = technologies;
     });
   }
+
+  public searchLanguage(key: string): void {
+    const results: Language[] = [];
+
+    for (const language of this.languages) {
+      if (language.name.toLowerCase().includes(key.toLowerCase())) {
+        results.push(language);
+      }
+    }
+    // Update the languages array with the search results
+    this.unusedLanguages= results;
+  }
+
+  public searchTechnology(key: string): void {
+    const results: Technology[] = [];
+
+    for (const technology of this.technologies){
+      if (technology.name.toLowerCase().includes(key.toLowerCase())) {
+        results.push(technology);
+      }
+    }
+    this.unusedTechnologies= results;
+  }
+
 
   unusedLanguagesHandle() {
     this.unusedLanguages = this.languages.filter(language => {
