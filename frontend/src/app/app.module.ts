@@ -35,6 +35,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { ToastrModule } from 'ngx-toastr';
 import { LanguageButtonComponent } from './components/language-button/language-button.component';
+import { AsideUserCardComponent } from './components/aside-user-card/aside-user-card.component';
 import { TechnologyButtonComponent } from './components/technology-button/technology-button.component';
 
 @NgModule({
@@ -64,6 +65,7 @@ import { TechnologyButtonComponent } from './components/technology-button/techno
     PostFormComponent,
     HeaderSearchbarCardComponent,
     LanguageButtonComponent,
+    AsideUserCardComponent,
     TechnologyButtonComponent
   ],
   imports: [

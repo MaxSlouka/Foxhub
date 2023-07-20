@@ -7,7 +7,8 @@
   <div class="row">
     <div class="col-md-3 border-right">
       <div class="d-flex flex-column align-items-center text-center p-3 py-2">
-        <img class="profile-img rounded-circle" *ngIf="user.profilePictureUrl"  height=150 width=150 ngSrc="{{user.profilePictureUrl}}" alt="profile picture"/>
+        <img class="profile-img rounded-circle" *ngIf="user.profilePictureUrl" height=150 width=150
+          ngSrc="{{user.profilePictureUrl}}" alt="profile picture" />
       </div>
 
       <!-- social links -->
@@ -44,6 +45,7 @@
         </div>
       </div>
 
+      <!-- qr code -->
 
       <div class="d-flex flex-column align-items-center text-center p-3 py-2 qr-code">
         <qrcode (qrCodeURL)="onChangeURL($event)" [qrdata]="'http://localhost:4200/profile/' + username" [width]="80"
