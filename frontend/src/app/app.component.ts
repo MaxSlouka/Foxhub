@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
-import { ApiService } from "./_services/api/api.service"
-import { DataService } from "./_services/api/data.service";
+import {Component} from '@angular/core';
+import {ApiService} from "./_services/api/api.service";
+import {DataService} from "./_services/api/data.service";
 
 @Component({
   selector: 'app-root',
@@ -11,10 +11,13 @@ import { DataService } from "./_services/api/data.service";
 export class AppComponent {
   title = 'frontend';
 
+
   // @ts-ignore
   constructor(private apiService: ApiService,
-    private dataService: DataService) {
+              private dataService: DataService,
+              ) {
   }
+
 
   ngOnInit(): void {
     this.getUsers();
@@ -25,6 +28,6 @@ export class AppComponent {
       .getAll().subscribe((users) => {
         this.dataService.users = users;
       }
-      );
+    );
   }
 }

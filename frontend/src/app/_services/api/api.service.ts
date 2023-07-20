@@ -3,6 +3,7 @@ import {Observable} from "rxjs";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {User} from "../../models/user";
 import {Language} from "../../models/language";
+import {Technology} from "../../models/technology";
 
 const httpOptions = {
   headers: new HttpHeaders({'Content-type': 'application/json'})
@@ -66,7 +67,8 @@ export class ApiService {
              facebook: string | undefined,
              instagram: string | undefined,
              optionalPage: string | undefined,
-             languages: Language[] | undefined
+             languages: Language[] | undefined,
+             technologies: Technology[] | undefined
   ): Observable<any> {
 
     return this.http.patch("http://localhost:8080/api/v1/user/people", {
@@ -81,7 +83,8 @@ export class ApiService {
         linkedin,
         facebook,
         instagram,
-        languages
+        languages,
+      technologies,
       },
       httpOptions
     );

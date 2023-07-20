@@ -7,6 +7,8 @@ import {Router} from "@angular/router";
 import {UploadService} from "../../_services/api/upload.service";
 import {Language} from "../../models/language";
 import {LanguageService} from "../../_services/language.service";
+import {Technology} from "../../models/technology";
+import {TechnologyService} from "../../_services/technology.service";
 
 @Component({
   selector: 'app-user-settings-page',
@@ -23,9 +25,13 @@ export class UserSettingsPageComponent {
 
   // @ts-ignore
   languages: Language[];
-  // @ts-ignore
   userLanguages: Language[] | undefined;
   unusedLanguages: Language[] | undefined;
+
+  // @ts-ignore
+  technologies: Technology[];
+  userTechnologies: Technology[] | undefined;
+  unusedTechnologies: Technology[] | undefined;
 
 
   constructor(private storageService: StorageService,
@@ -33,16 +39,21 @@ export class UserSettingsPageComponent {
               private authService: AuthService,
               private router: Router,
               private uploadService: UploadService,
-              private languageService: LanguageService) {
+              private languageService: LanguageService,
+              private technologyService: TechnologyService){
   }
 
   ngOnInit(): void {
     this.apiService.getUserBasicInfo().subscribe((user: User) => {
       this.user = user;
       this.userLanguages = user.languages;
+      this.userTechnologies = user.technologies;
     });
     this.languageService.getAll().subscribe((languages: Language[]) => {
       this.languages = languages;
+    });
+    this.technologyService.getAll().subscribe((technologies: Technology[]) => {
+      this.technologies = technologies;
     });
   }
 
@@ -53,10 +64,20 @@ export class UserSettingsPageComponent {
     });
   }
 
+  unusedTechnologiesHandle() {
+    this.unusedTechnologies = this.technologies.filter(technology => {
+      // @ts-ignore
+      return !this.userTechnologies.some(userTechnology => userTechnology.name === technology.name);
+    });
+  }
+
   handleLanguageComponentEmitter(languages: Language[]) {
     this.user.languages = languages;
   }
 
+  handleTechnologyComponentEmitter(technologies: Technology[]) {
+    this.user.technologies = technologies
+  }
 
   // @ts-ignore
   onFileSelected(event) {
@@ -96,7 +117,8 @@ export class UserSettingsPageComponent {
       facebook,
       instagram,
       optionalPage,
-      languages
+      languages,
+      technologies
     } = this.user;
 
     await this.apiService.updateUser(
@@ -112,7 +134,8 @@ export class UserSettingsPageComponent {
       facebook,
       instagram,
       optionalPage,
-      languages)
+      languages,
+      technologies)
       .subscribe(() => {
         window.location.href = "";
       });
