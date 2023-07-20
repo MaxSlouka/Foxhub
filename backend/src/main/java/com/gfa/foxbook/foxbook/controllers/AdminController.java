@@ -16,31 +16,26 @@ import java.util.Optional;
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("api/v1/admin")
-@CrossOrigin(origins = "http://localhost:4200", maxAge = 3600, allowCredentials="true")
+@CrossOrigin(origins = "http://localhost:4200", maxAge = 3600, allowCredentials = "true")
 public class AdminController {
     public final PostService postService;
     public final UserService userService;
 
     @PostMapping("/posts")
-    public ResponseEntity<?> makePost(@RequestBody(required = false) Post post) {
-        if (post == null) {
-            return ResponseEntity.badRequest().build();
-        }
-        Post newPost = postService.createPost(post.getUsername(), post.getTitle(), post.getContent());
-        return ResponseEntity.ok().build();
+    public ResponseEntity<?> makePost(@RequestBody Post post) {
+        return ResponseEntity.ok(postService.save(post));
     }
 
     @PatchMapping("/posts/{id}")
     public ResponseEntity<?> updatePost(@PathVariable Long id, @RequestBody PostDTO post) {
         Optional<Post> optionalPost = postService.findById(id);
+
         if (optionalPost.isEmpty()) {
             return ResponseEntity.notFound().build();
         }
-        Post existingPost = optionalPost.get();
-        existingPost.setTitle(post.getTitle());
-        existingPost.setContent(post.getContent());
-        Post updatedPost = postService.editPost(existingPost);
-        return ResponseEntity.ok(updatedPost);
+
+        postService.editPost(optionalPost.get().getId(), post.getContent());
+        return ResponseEntity.ok().build();
     }
 
     @DeleteMapping("/posts/{id}")
@@ -50,7 +45,7 @@ public class AdminController {
             return ResponseEntity.notFound().build();
         }
         Post post = optionalPost.get();
-        postService.remove(post);
+        postService.delete(post);
         return ResponseEntity.noContent().build();
     }
 
