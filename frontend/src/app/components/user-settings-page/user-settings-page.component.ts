@@ -34,6 +34,8 @@ export class UserSettingsPageComponent {
   unusedTechnologies: Technology[] | undefined;
 
 
+
+
   constructor(private storageService: StorageService,
               private apiService: ApiService,
               private authService: AuthService,
