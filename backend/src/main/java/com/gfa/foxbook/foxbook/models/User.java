@@ -62,7 +62,7 @@ public class User {
             joinColumns = {@JoinColumn(name = "users_id", referencedColumnName = "id")},
             inverseJoinColumns = {@JoinColumn(name = "technologies_id", referencedColumnName = "id")})
     private List<Technology> technologies;
-    @OneToMany
+    @ManyToMany
     @JoinTable(
             name = "user_languages",
             joinColumns = {@JoinColumn(name = "users_id", referencedColumnName = "id")},
