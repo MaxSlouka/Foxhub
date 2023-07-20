@@ -10,6 +10,7 @@ public interface UserService {
     Optional<User> findById(Long id);
 
     void delete(User user);
+    User getUserByVerificationToken(String verificationToken);
 
     List<User> getAll();
 
