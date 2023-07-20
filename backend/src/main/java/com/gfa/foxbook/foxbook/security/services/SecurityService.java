@@ -30,6 +30,7 @@ public class SecurityService {
         user.setFirstName(registerDto.getFirstName());
         user.setLastName(registerDto.getLastName());
         user.setEmail(registerDto.getEmail());
+        user.setVerified(false);
         user.setNickname(generateNickname(registerDto.getFirstName(), registerDto.getLastName()));
         user.setPassword(passwordEncoder.encode(registerDto.getPassword()));
         Role roles = roleRepository.findByName("USER").get();
