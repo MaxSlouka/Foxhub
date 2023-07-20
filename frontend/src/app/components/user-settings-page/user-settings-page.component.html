@@ -6,11 +6,9 @@
   <div class="row">
     <div class="col-md-3 border-right">
       <div class="d-flex flex-column align-items-center text-center p-3 py-2"><img *ngIf="user.profilePictureUrl"
-                                                                                   class="rounded-circle mt-2" width=150
-                                                                                   height=150
-                                                                                   ngSrc="{{  user.profilePictureUrl  }}"><span
-        class="font-weight-bold">{{user.firstName}}
-        {{user.lastName}}</span><span class="text-black-50">{{user.email}}</span><span>
+          class="rounded-circle mt-2" width=150 height=150 ngSrc="{{  user.profilePictureUrl  }}"><span
+          class="font-weight-bold">{{user.firstName}}
+          {{user.lastName}}</span><span class="text-black-50">{{user.email}}</span><span>
         </span></div>
     </div>
     <div class="col-md-5 border-right">
@@ -24,45 +22,31 @@
 
           <div class="row mt-2">
             <div class="col-md-6"><label class="labels">First Name</label><input type="text" class="form-control"
-                                                                                 [(ngModel)]="user.firstName"
-                                                                                 name="firstName"
-                                                                                 placeholder="first name" value="">
+                [(ngModel)]="user.firstName" name="firstName" placeholder="first name" value="">
             </div>
             <div class="col-md-6"><label class="labels">Last Name</label><input type="text" class="form-control"
-                                                                                [(ngModel)]="user.lastName"
-                                                                                name="lastName" value=""
-                                                                                placeholder="last name"></div>
+                [(ngModel)]="user.lastName" name="lastName" value="" placeholder="last name"></div>
           </div>
 
           <div class="row mt-2">
             <div class="col-md-6"><label class="labels">Completed projects</label><input type="text"
-                                                                                         class="form-control"
-                                                                                         [(ngModel)]="user.completeProjects"
-                                                                                         name="completeProjects"
-                                                                                         placeholder="enter number"
-                                                                                         value="">
+                class="form-control" [(ngModel)]="user.completeProjects" name="completeProjects"
+                placeholder="enter number" value="">
             </div>
             <div class="col-md-6"><label class="labels">Years of experience</label><input type="text"
-                                                                                          class="form-control"
-                                                                                          [(ngModel)]="user.yearsOfExperience"
-                                                                                          name="yearsOfExperience"
-                                                                                          value=""
-                                                                                          placeholder="enter year">
+                class="form-control" [(ngModel)]="user.yearsOfExperience" name="yearsOfExperience" value=""
+                placeholder="enter year">
             </div>
           </div>
 
           <div class="row mt-3">
             <div class="col-md-12"><label class="labels">Phone Number</label><input type="text" class="form-control"
-                                                                                    placeholder="enter phone number"
-                                                                                    [(ngModel)]="user.phone"
-                                                                                    name="phone" value=""></div>
+                placeholder="enter phone number" [(ngModel)]="user.phone" name="phone" value=""></div>
             <div class="col-md-12"><label class="labels">Location</label><input type="text" class="form-control"
-                                                                                placeholder="enter location"
-                                                                                [(ngModel)]="user.location"
-                                                                                name="location" value=""></div>
+                placeholder="enter location" [(ngModel)]="user.location" name="location" value=""></div>
             <div class="col-md-12"><label class="labels">About</label>
               <textarea type="text" class="form-control" [(ngModel)]="user.about" name="about"
-                        placeholder="write something about you..." value="" cols="30" rows="3"></textarea>
+                placeholder="write something about you..." value="" cols="30" rows="3"></textarea>
             </div>
           </div>
 
@@ -73,30 +57,21 @@
           <div class="row">
 
             <div class="col-md-12"><label class="labels">Github</label><input type="text" class="form-control"
-                                                                              [(ngModel)]="user.gitHub" name="github"
-                                                                              placeholder="Github" value=""></div>
+                [(ngModel)]="user.gitHub" name="github" placeholder="Github" value=""></div>
             <div class="col-md-12"><label class="labels">LinkedIn</label><input type="text" class="form-control"
-                                                                                [(ngModel)]="user.linkedin"
-                                                                                name="linkedin" placeholder="LinkedIn"
-                                                                                value=""></div>
+                [(ngModel)]="user.linkedin" name="linkedin" placeholder="LinkedIn" value=""></div>
             <div class="col-md-12"><label class="labels">Facebook</label><input type="text" class="form-control"
-                                                                                [(ngModel)]="user.facebook"
-                                                                                name="facebook" placeholder="Facebook"
-                                                                                value=""></div>
+                [(ngModel)]="user.facebook" name="facebook" placeholder="Facebook" value=""></div>
             <div class="col-md-12"><label class="labels">Instagram</label><input type="text" class="form-control"
-                                                                                 [(ngModel)]="user.instagram"
-                                                                                 name="instagram"
-                                                                                 placeholder="Instagram" value=""></div>
+                [(ngModel)]="user.instagram" name="instagram" placeholder="Instagram" value=""></div>
             <div class="col-md-12"><label class="labels">Your Webpage</label><input type="text" class="form-control"
-                                                                                    [(ngModel)]="user.optionalPage"
-                                                                                    name="optionalPage"
-                                                                                    placeholder="Your Webpage" value="">
+                [(ngModel)]="user.optionalPage" name="optionalPage" placeholder="Your Webpage" value="">
             </div>
           </div>
 
           <div class="mt-5 text-center">
             <button class="btn btn-primary profile-button" type="button" data-toggle="modal"
-                    data-target="#addModal">Save
+              data-target="#addModal">Save
               Profile
             </button>
             <a href="./updatePassword" class="btn btn-outline-primary" role="button" aria-disabled="true">Change
@@ -105,8 +80,9 @@
           </div>
 
           <!-- modal add-->
+
           <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addModalLabel"
-               aria-hidden="true">
+            aria-hidden="true">
             <div class="modal-dialog" role="document">
               <div class="modal-content">
                 <div class="modal-header">
@@ -121,7 +97,7 @@
                 </div>
                 <div class="text-center">
                   <button class="btn btn-primary profile-button" type="submit" data-toggle="modal"
-                          data-target="#addModal">Save profile
+                    data-target="#addModal">Save profile
                   </button>
                 </div>
               </div>
@@ -138,140 +114,137 @@
         <div class="d-flex justify-content-between align-items-center experience"><span>Edit
             Skills</span>
           <button class="btn border px-3 p-1 add-experience" (click)="unusedTechnologiesHandle()" type="button"
-                  data-toggle="modal" data-target="#skillsModal"><i class="fa fa-plus"></i>&nbsp;Skill
+            data-toggle="modal" data-target="#skillsModal"><i class="fa fa-plus"></i>&nbsp;Skill
           </button>
         </div>
 
         <!-- modal skills-->
+
         <div class="modal fade" id="skillsModal" tabindex="-1" role="dialog" aria-labelledby="skillsModalLabel"
-             aria-hidden="true">
+          aria-hidden="true">
           <div class="modal-dialog" role="document">
             <div class="modal-content">
               <div class="modal-header">
                 <div>
-                  <h5 class="modal-title" id="skillsModalLabel">Skills
-                  </h5>
-                  <p class="lead">Select your skill</p>
+                  <h5 class="modal-title mb-3">Select your skill </h5>
                   <app-technology-button *ngFor="let technology of unusedTechnologies" [technology]="technology"
-                                         [unusedTechnologies]="unusedTechnologies" [userTechnologies]="userTechnologies"
-                                         (technologyComponentEmitter)="handleTechnologyComponentEmitter($event)"></app-technology-button>
+                    [unusedTechnologies]="unusedTechnologies" [userTechnologies]="userTechnologies"
+                    (technologyComponentEmitter)="handleTechnologyComponentEmitter($event)"></app-technology-button>
                 </div>
 
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
+
               </div>
-              <div>
-                <h5>Your Skills</h5>
-                <app-technology-button *ngFor="let technology of userTechnologies" [technology]="technology"
-                                       [unusedTechnologies]="unusedTechnologies" [userTechnologies]="userTechnologies"
-                                       (technologyComponentEmitter)="handleTechnologyComponentEmitter($event)"></app-technology-button>
+
+              <div class="modal-header">
+                <div>
+                  <h5 class="modal-title mb-3">Your Skills</h5>
+                  <app-technology-button *ngFor="let technology of userTechnologies" [technology]="technology"
+                    [unusedTechnologies]="unusedTechnologies" [userTechnologies]="userTechnologies"
+                    (technologyComponentEmitter)="handleTechnologyComponentEmitter($event)"></app-technology-button>
+                </div>
               </div>
-              <div class="mt-5 text-center">
-                <p class="lead">Do you want to send me all your money ?</p>
-              </div>
+
               <div class="text-center">
-                <button class="btn btn-primary profile-button" type="button" data-dismiss="modal" aria-label="Close"
-                >Sure
+                <button class="btn btn-primary profile-button" type="button" data-dismiss="modal"
+                  aria-label="Close">Sure
                 </button>
               </div>
+
             </div>
           </div>
         </div>
 
-
-        <br>
         <div class="d-flex justify-content-between align-items-center experience"><span>Edit
             languages</span>
           <button class="btn border px-3 p-1 add-experience" (click)="unusedLanguagesHandle()" type="button"
-                  data-toggle="modal" data-target="#languagesModal"><i class="fa fa-plus"></i>&nbsp;Language
+            data-toggle="modal" data-target="#languagesModal"><i class="fa fa-plus"></i>&nbsp;Language
           </button>
         </div>
 
         <!-- modal languages-->
+
         <div class="modal fade" id="languagesModal" tabindex="-1" role="dialog" aria-labelledby="languagesModalLabel"
-             aria-hidden="true">
+          aria-hidden="true">
           <div class="modal-dialog" role="document">
             <div class="modal-content">
               <div class="modal-header">
                 <div>
-                  <h5 class="modal-title" id="languagesModalLabel">Languages
-                  </h5>
-                  <p class="lead">Select your languages</p>
+                  <h5 class="modal-title" id="languagesModalLabel">Languages</h5>
                   <app-language-button *ngFor="let language of unusedLanguages" [language]="language"
-                                       [unusedLanguages]="unusedLanguages" [userLanguages]="userLanguages"
-                                       (languageComponentEmitter)="handleLanguageComponentEmitter($event)"></app-language-button>
+                    [unusedLanguages]="unusedLanguages" [userLanguages]="userLanguages"
+                    (languageComponentEmitter)="handleLanguageComponentEmitter($event)"></app-language-button>
                 </div>
 
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
               </div>
-              <div>
-                <h5>Your Languages</h5>
-                <app-language-button *ngFor="let language of userLanguages" [language]="language"
-                                     [unusedLanguages]="unusedLanguages" [userLanguages]="userLanguages"
-                                     (languageComponentEmitter)="handleLanguageComponentEmitter($event)"></app-language-button>
+
+              <div class="modal-header">
+                <div>
+                  <h5>Your Languages</h5>
+                  <app-language-button *ngFor="let language of userLanguages" [language]="language"
+                    [unusedLanguages]="unusedLanguages" [userLanguages]="userLanguages"
+                    (languageComponentEmitter)="handleLanguageComponentEmitter($event)"></app-language-button>
+                </div>
               </div>
-              <div class="mt-5 text-center">
-                <p class="lead">Can you sing Titanic by Celine Dion ?</p>
-              </div>
+
               <div class="text-center">
-                <button class="btn btn-primary profile-button" type="button" data-dismiss="modal" aria-label="Close"
-                >Sure
+                <button class="btn btn-primary profile-button" type="button" data-dismiss="modal"
+                  aria-label="Close">Sure
                 </button>
               </div>
             </div>
           </div>
         </div>
 
-        <br>
         <div class="d-flex justify-content-between align-items-center experience"><span>Edit profile picture</span>
           <button class="btn border px-3 p-1 add-experience" type="button" data-toggle="modal"
-                  data-target="#imgModal"><i class="fa fa-plus"></i>&nbsp;Picture
+            data-target="#imgModal"><i class="fa fa-plus"></i>&nbsp;Picture
           </button>
         </div>
 
-        <!--        img modal-->
+        <!-- img modal -->
+
         <div class="modal fade" id="imgModal" tabindex="-1" role="dialog" aria-labelledby="imgModal" aria-hidden="true">
           <div class="modal-dialog" role="document">
             <div class="modal-content">
               <div class="modal-header">
-                <h5 class="modal-title" id="imgModalLabel">Are you sure?
+                <h5 class="modal-title" id="imgModalLabel">Choose profile picture
                 </h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
               </div>
               <div class="mt-5 mb-5 text-center">
-                <p class="lead">Choose your best profile picture</p>
-                <input type="file" (change)="onFileSelected($event)"/>
+                <input type="file" (change)="onFileSelected($event)" />
                 <br>
               </div>
               <div class="text-center">
                 <button (click)="onUpload()" class="btn btn-primary profile-button" type="button" data-toggle="modal"
-                        data-target="#imgModal">Upload picture
+                  data-target="#imgModal">Upload picture
                 </button>
               </div>
             </div>
           </div>
         </div>
 
-
         <!-- button trigger modal -->
 
         <div class="mt-5 text-center">
           <button class="btn btn-danger profile-button profile-delete-btn" type="button" data-toggle="modal"
-                  data-target="#exampleModal">Delete
+            data-target="#exampleModal">Delete
             Profile
           </button>
         </div>
 
-
         <!-- modal delete -->
 
         <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-             aria-hidden="true">
+          aria-hidden="true">
           <div class="modal-dialog" role="document">
             <div class="modal-content">
               <div class="modal-header">
@@ -287,14 +260,13 @@
               </div>
               <div class="text-center">
                 <button (click)="deleteAccount()" class="btn btn-danger profile-button profile-delete-btn" type="button"
-                        data-toggle="modal" data-target="#exampleModal">Delete
+                  data-toggle="modal" data-target="#exampleModal">Delete
                   Profile
                 </button>
               </div>
             </div>
           </div>
         </div>
-        <!-- modal add -->
 
       </div>
     </div>

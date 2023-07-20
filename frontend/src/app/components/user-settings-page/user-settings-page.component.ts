@@ -1,14 +1,14 @@
-import {Component} from '@angular/core';
-import {StorageService} from "../../_services/storage.service";
-import {ApiService} from "../../_services/api/api.service";
-import {User} from "../../models/user";
-import {AuthService} from "../../_services/auth.service";
-import {Router} from "@angular/router";
-import {UploadService} from "../../_services/api/upload.service";
-import {Language} from "../../models/language";
-import {LanguageService} from "../../_services/language.service";
-import {Technology} from "../../models/technology";
-import {TechnologyService} from "../../_services/technology.service";
+import { Component } from '@angular/core';
+import { StorageService } from "../../_services/storage.service";
+import { ApiService } from "../../_services/api/api.service";
+import { User } from "../../models/user";
+import { AuthService } from "../../_services/auth.service";
+import { Router } from "@angular/router";
+import { UploadService } from "../../_services/api/upload.service";
+import { Language } from "../../models/language";
+import { LanguageService } from "../../_services/language.service";
+import { Technology } from "../../models/technology";
+import { TechnologyService } from "../../_services/technology.service";
 
 @Component({
   selector: 'app-user-settings-page',
@@ -20,8 +20,7 @@ export class UserSettingsPageComponent {
   // @ts-ignore
   selectedFile: File = null;
 
-
-  user: User = {email: "", firstName: "", lastName: "", password: ""};
+  user: User = { email: "", firstName: "", lastName: "", password: "" };
 
   // @ts-ignore
   languages: Language[];
@@ -33,14 +32,13 @@ export class UserSettingsPageComponent {
   userTechnologies: Technology[] | undefined;
   unusedTechnologies: Technology[] | undefined;
 
-
   constructor(private storageService: StorageService,
-              private apiService: ApiService,
-              private authService: AuthService,
-              private router: Router,
-              private uploadService: UploadService,
-              private languageService: LanguageService,
-              private technologyService: TechnologyService){
+    private apiService: ApiService,
+    private authService: AuthService,
+    private router: Router,
+    private uploadService: UploadService,
+    private languageService: LanguageService,
+    private technologyService: TechnologyService) {
   }
 
   ngOnInit(): void {
