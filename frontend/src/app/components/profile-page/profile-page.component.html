@@ -7,8 +7,9 @@
   <div class="row">
     <div class="col-md-3 border-right">
       <div class="d-flex flex-column align-items-center text-center p-3 py-2">
-        <img class="profile-img rounded-circle" *ngIf="user.profilePictureUrl" height=150 width=150
+        <img class="profile-img rounded-circle" *ngIf="user.profilePictureUrl" height=200 width=200
           ngSrc="{{user.profilePictureUrl}}" alt="profile picture" />
+          <h1 class="display-4 fw-bold text-body-emphasis lh-1 mb-4 userName-mobile">{{ user.firstName }} {{ user.lastName }}</h1>
       </div>
 
       <!-- social links -->
@@ -47,14 +48,37 @@
 
       <!-- qr code -->
 
-      <div class="d-flex flex-column align-items-center text-center p-3 py-2 qr-code">
-        <qrcode (qrCodeURL)="onChangeURL($event)" [qrdata]="'http://localhost:4200/profile/' + username" [width]="80"
-          [errorCorrectionLevel]="'M'"></qrcode>
-        <a [href]="qrCodeDownloadLink" download="qrcode">Download QR</a>
+      <!-- button trigger modal -->
+      <div class="mt-2 text-center">
+        <div class="d-flex flex-column align-items-center text-center p-3 py-2 qr-code">
+          <qrcode data-toggle="modal" data-target="#qrModal" (qrCodeURL)="onChangeURL($event)" [qrdata]="'http://localhost:4200/profile/' + username" [width]="80"
+            [errorCorrectionLevel]="'M'" class="qrModal-btn"></qrcode>
+          <a [href]="qrCodeDownloadLink" download="qrcode" class="btn btn-outline-success px-4 me-md-2" role="button" aria-disabled="true">Download QR</a>
+        </div>
+      </div>
+
+      <!-- modal -->
+
+      <div class="modal fade" id="qrModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">QR Code for {{user.firstName}} {{user.lastName}}</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="d-flex flex-column align-items-center text-center p-3 py-2 qr-code">
+              <qrcode (qrCodeURL)="onChangeURL($event)" [qrdata]="'http://localhost:4200/profile/' + username" [width]="250"
+                [errorCorrectionLevel]="'M'"></qrcode>
+            </div>
+          </div>
+        </div>
       </div>
 
       <!-- button trigger modal -->
-      <div class="mt-5 text-center">
+      <div class="mt-2 text-center">
         <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#exampleModal">
           Contact
         </button>
@@ -87,12 +111,7 @@
       <div class="p-3 py-5">
         <div class="row mt-2">
           <div class="col-md-6">
-            <label class="labels">Name</label>
-            <p class="lead">{{ user.firstName }}</p>
-          </div>
-          <div class="col-md-6">
-            <label class="labels">Surname</label>
-            <p class="lead">{{ user.lastName }}</p>
+            <h1 class="display-4 fw-bold text-body-emphasis lh-1 mb-4 userName-desktop">{{ user.firstName }} {{ user.lastName }}</h1>
           </div>
           <div class="col-md-12">
             <label class="labels">Location</label>

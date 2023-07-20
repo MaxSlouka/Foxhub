@@ -1,3 +1,7 @@
+.qrModal-btn:hover {
+  cursor: pointer;
+  transform: scale(1.1);
+}
 
 .profile-img {
   margin: 1rem;
@@ -10,7 +14,7 @@ label {
 
 ul li a {
   color: rgb(207, 207, 207);
-  font-size: large;
+  font-size: 1.5rem;
 }
 
 ul li a:hover {
@@ -44,3 +48,20 @@ ul li a:hover {
   min-height: calc(100vh - 1rem);
 }
 
+.userName-desktop {
+  display: block;
+}
+
+.userName-mobile {
+  display: none;
+}
+
+@media (max-width: 767.98px) {
+  .userName-desktop {
+    display: none;
+  }
+
+  .userName-mobile {
+    display: block;
+  }
+}
