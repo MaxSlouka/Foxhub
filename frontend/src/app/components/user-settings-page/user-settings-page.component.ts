@@ -25,7 +25,6 @@ export class UserSettingsPageComponent {
 
   // @ts-ignore
   languages: Language[];
-  // @ts-ignore
   userLanguages: Language[] | undefined;
   unusedLanguages: Language[] | undefined;
 
@@ -118,7 +117,8 @@ export class UserSettingsPageComponent {
       facebook,
       instagram,
       optionalPage,
-      languages
+      languages,
+      technologies
     } = this.user;
 
     await this.apiService.updateUser(
@@ -134,7 +134,8 @@ export class UserSettingsPageComponent {
       facebook,
       instagram,
       optionalPage,
-      languages)
+      languages,
+      technologies)
       .subscribe(() => {
         window.location.href = "";
       });

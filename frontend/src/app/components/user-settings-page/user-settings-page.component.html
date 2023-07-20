@@ -152,7 +152,7 @@
                   <h5 class="modal-title" id="skillsModalLabel">Skills
                   </h5>
                   <p class="lead">Select your skill</p>
-                  <app-technology-button *ngFor="let technology of unusedLanguages" [technology]="technology"
+                  <app-technology-button *ngFor="let technology of unusedTechnologies" [technology]="technology"
                                          [unusedTechnologies]="unusedTechnologies" [userTechnologies]="userTechnologies"
                                          (technologyComponentEmitter)="handleTechnologyComponentEmitter($event)"></app-technology-button>
                 </div>
@@ -163,7 +163,7 @@
               </div>
               <div>
                 <h5>Your Skills</h5>
-                <app-technology-button *ngFor="let technology of unusedLanguages" [technology]="technology"
+                <app-technology-button *ngFor="let technology of userTechnologies" [technology]="technology"
                                        [unusedTechnologies]="unusedTechnologies" [userTechnologies]="userTechnologies"
                                        (technologyComponentEmitter)="handleTechnologyComponentEmitter($event)"></app-technology-button>
               </div>
@@ -171,8 +171,8 @@
                 <p class="lead">Do you want to send me all your money ?</p>
               </div>
               <div class="text-center">
-                <button class="btn btn-primary profile-button" type="submit" data-toggle="modal"
-                        data-target="#languagesModal">Sure
+                <button class="btn btn-primary profile-button" type="button" data-dismiss="modal" aria-label="Close"
+                >Sure
                 </button>
               </div>
             </div>
@@ -214,11 +214,11 @@
                                      (languageComponentEmitter)="handleLanguageComponentEmitter($event)"></app-language-button>
               </div>
               <div class="mt-5 text-center">
-                <p class="lead">Do you want to update your profile?</p>
+                <p class="lead">Can you sing Titanic by Celine Dion ?</p>
               </div>
               <div class="text-center">
-                <button class="btn btn-primary profile-button" type="submit" data-toggle="modal"
-                        data-target="#languagesModal">Sure
+                <button class="btn btn-primary profile-button" type="button" data-dismiss="modal" aria-label="Close"
+                >Sure
                 </button>
               </div>
             </div>
