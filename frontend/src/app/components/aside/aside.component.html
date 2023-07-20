@@ -1,8 +1,11 @@
 <aside>
   <div class="card mb-3">
-    <div class="card-body">
-      <h4 class="h4-show-all mr-2">All People</h4>
-      <app-aside-user-card *ngFor="let user of users" [user]="user"></app-aside-user-card>
+    <div class="card-body text-center">
+      <a href="./people">
+        <h4 class="h4-show-all mr-2">All People</h4>
+      </a>
+      <p class="lead text-center">Search by name or technology</p>
+      <app-aside-search-bar [users]="users" [fullUsers]="users"></app-aside-search-bar>
     </div>
   </div>
 </aside>
