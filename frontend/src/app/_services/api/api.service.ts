@@ -65,6 +65,7 @@ export class ApiService {
              linkedin: string | undefined,
              facebook: string | undefined,
              instagram: string | undefined,
+             optionalPage: string | undefined,
              languages: Language[] | undefined
   ): Observable<any> {
 
