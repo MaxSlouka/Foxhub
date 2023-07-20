@@ -8,8 +8,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Data
@@ -21,20 +19,13 @@ public class Post {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank(message = "Title cannot be empty")
-    private String title;
-    private String author;
-    private String authorPic;
-
+    private Long parentPostId;
+    private String username;
+    private Long usernameId;
     @NotBlank(message = "Content cannot be empty")
     private String content;
-
-    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Like> likes = new ArrayList<>();
-
-    private Timestamp timestamp;
-    private Integer commentsCount;
-    private String comments;
+    private Timestamp createdAt;
+    private Integer likesCount;
 
     public void setId(Long id) {
         this.id = id;
@@ -42,20 +33,5 @@ public class Post {
 
     public Long getId() {
         return id;
-    }
-
-    public boolean isEmpty() {
-        return false;
-    }
-
-    public void addComment(Comment newComment) {
-        if (comments == null) {
-            comments = "";
-        }
-        if (!comments.isEmpty()) {
-            comments += "\n";
-        }
-        comments += newComment.getAuthor() + ": " + newComment.getContent();
-        commentsCount++;
     }
 }

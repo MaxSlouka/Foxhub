@@ -11,8 +11,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Collections;
-import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -28,7 +26,7 @@ public class AdminController {
         if (post == null) {
             return ResponseEntity.badRequest().build();
         }
-        Post newPost = postService.createPost(post.getAuthor(), post.getTitle(), post.getContent());
+        Post newPost = postService.createPost(post.getUsername(), post.getTitle(), post.getContent());
         return ResponseEntity.ok().build();
     }
 

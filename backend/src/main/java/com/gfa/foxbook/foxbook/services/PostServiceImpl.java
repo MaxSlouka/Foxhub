@@ -58,10 +58,10 @@ public class PostServiceImpl implements PostService {
     public Post createPost(String author, String content, String title) {
         LocalDateTime currentDateTime = LocalDateTime.now();
         Post p = new Post();
-        p.setAuthor(author);
+        p.setUsername(author);
         p.setTitle(title);
         p.setContent(content);
-        p.setTimestamp(Timestamp.valueOf(currentDateTime));
+        p.setCreatedAt(Timestamp.valueOf(currentDateTime));
         return postRepository.save(p);
     }
 
@@ -80,7 +80,7 @@ public class PostServiceImpl implements PostService {
 
         if (optionalPost.isPresent()) {
             Post existingPost = optionalPost.get();
-            existingPost.setAuthor(post.getAuthor());
+            existingPost.setUsername(post.getUsername());
             existingPost.setTitle(post.getTitle());
             existingPost.setContent(post.getContent());
 
