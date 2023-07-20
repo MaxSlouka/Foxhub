@@ -4,6 +4,7 @@ import { StorageService } from "../../_services/storage.service";
 import { Router, NavigationEnd } from "@angular/router";
 import { ToastrService } from 'ngx-toastr';
 import { filter } from 'rxjs/operators';
+import {User} from "../../models/user";
 
 @Component({
   selector: 'app-login',
@@ -20,9 +21,9 @@ export class LoginComponent implements OnInit {
   isLoggedIn = false;
   isLoginFailed = false;
   errorMessage = '';
-  roles: string[] = [];
   userNickname: string = '';
   showSuccessToast = false;
+  isVerrified =false;
 
   constructor(
     private authService: AuthService,
@@ -36,9 +37,16 @@ export class LoginComponent implements OnInit {
       this.isLoggedIn = true;
       this.userNickname = this.storageService.getUserFromSession();
     }
+    console.log(this.isVerrified);
+
+    if (this.authService.getVerified()) {
+      this.isVerrified = true;
+      console.log(this.isVerrified);
+    }
+
     this.router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe((event) => {
       if (this.showSuccessToast) {
-        this.toastr.success('Successfully Logged In!', 'Success', { timeOut: 5000 });
+        this.toastr.success('Successfully Logged In!', 'Success', {timeOut: 5000});
         this.showSuccessToast = false;
       }
     });
@@ -48,12 +56,15 @@ export class LoginComponent implements OnInit {
     const { email, password } = this.form;
 
     this.authService.login(email, password).subscribe({
-      next: data => {
+      next: async data => {
+        if (await this.authService.getVerified()) {
+          this.isVerrified = false;
+        }
         this.storageService.saveUser(data.email);
         this.isLoginFailed = false;
         this.isLoggedIn = true;
         this.showSuccessToast = true;
-        this.router.navigate(['']);
+        // this.router.navigate(['']);
       },
       error: err => {
         this.errorMessage = err.error.message;
