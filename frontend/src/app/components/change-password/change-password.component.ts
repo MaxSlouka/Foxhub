@@ -8,15 +8,15 @@ import {AuthService} from "../../_services/auth.service";
 })
 export class ChangePasswordComponent {
   form: any = {
-    oldPassword: null,
+
     newPassword:null
   };
   constructor(private authService:AuthService) {
   }
 
   onSubmit() {
-    const { oldPassword, newPassword } = this.form;
-    this.authService.changePassword(oldPassword,newPassword).subscribe();
+    const { newPassword } = this.form;
+    this.authService.changePassword(newPassword).subscribe();
 
   }
 }
