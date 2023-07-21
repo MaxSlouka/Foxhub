@@ -29,6 +29,6 @@ private final JavaMailSender mailSender;
     }
 
     public String generateVerificationEnmail(String token) {
-        return message ="hi go to <a href=\"http://localhost:8080/api/v1/auth/verify-email/"+token+"\"";
+        return "hi go to <a href=\"http://localhost:8080/api/v1/auth/verify-email/"+token+"\"";
     }
 }
