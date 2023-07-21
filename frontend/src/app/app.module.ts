@@ -35,6 +35,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { ToastrModule } from 'ngx-toastr';
 import { LanguageButtonComponent } from './components/language-button/language-button.component';
+import { AsideUserCardComponent } from './components/aside-user-card/aside-user-card.component';
+import { TechnologyButtonComponent } from './components/technology-button/technology-button.component';
+import { AsideSearchBarComponent } from './components/aside-search-bar/aside-search-bar.component';
 
 @NgModule({
   declarations: [
@@ -62,7 +65,10 @@ import { LanguageButtonComponent } from './components/language-button/language-b
     PostComponent,
     PostFormComponent,
     HeaderSearchbarCardComponent,
-    LanguageButtonComponent
+    LanguageButtonComponent,
+    AsideUserCardComponent,
+    TechnologyButtonComponent,
+    AsideSearchBarComponent
   ],
   imports: [
     FormsModule,
@@ -74,7 +80,7 @@ import { LanguageButtonComponent } from './components/language-button/language-b
     QRCodeModule,
     CommonModule,
     BrowserAnimationsModule,
-    ToastrModule.forRoot(),
+    ToastrModule.forRoot()
   ],
   providers: [httpInterceptorProviders],
   bootstrap: [AppComponent]

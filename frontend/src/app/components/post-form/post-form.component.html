@@ -1,14 +1,13 @@
-<form [formGroup]="form" (ngSubmit)="onSubmit()">
-  <textarea class="post-form-textarea" formControlName="title"></textarea>
-  <button class="post-form-button" type="submit" [disabled]="form.invalid">
-    {{submitLabel}}
+<form [formGroup]="form" (ngSubmit)="onSubmit()" class="mb-3">
+  <div class="form-group">
+    <textarea class="form-control post-form-textarea" formControlName="title" rows="4"
+      placeholder="Type your post here..."></textarea>
+  </div>
+  <button class="btn btn-primary post-form-button" type="submit" [disabled]="form.invalid">
+    {{ submitLabel }}
   </button>
-  <button
-    *ngIf="hasCancelButton"
-    type="button"
-    class="post-form-button post-form-cancel-button"
-  (click)="handleCancel.emit()"
-  >
+  <button *ngIf="hasCancelButton" type="button" class="btn btn-secondary post-form-button post-form-cancel-button"
+    (click)="handleCancel.emit()">
     Cancel
   </button>
-  </form>
+</form>

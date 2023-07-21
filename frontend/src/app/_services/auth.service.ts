@@ -53,6 +53,4 @@ export class AuthService {
       this.toastr.error('Successfully Logged Out!', 'Success', { timeOut: 5000 });
     });
   }
-
-
 }

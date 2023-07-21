@@ -65,7 +65,8 @@
             <div class="col-md-12"><label class="labels">Instagram</label><input type="text" class="form-control"
                 [(ngModel)]="user.instagram" name="instagram" placeholder="Instagram" value=""></div>
             <div class="col-md-12"><label class="labels">Your Webpage</label><input type="text" class="form-control"
-                [(ngModel)]="user.optionalPage" name="optionalPage" placeholder="Your Webpage" value=""></div>
+                [(ngModel)]="user.optionalPage" name="optionalPage" placeholder="Your Webpage" value="">
+            </div>
           </div>
 
           <div class="mt-5 text-center">
@@ -79,6 +80,7 @@
           </div>
 
           <!-- modal add-->
+
           <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addModalLabel"
             aria-hidden="true">
             <div class="modal-dialog" role="document">
@@ -90,7 +92,7 @@
                     <span aria-hidden="true">&times;</span>
                   </button>
                 </div>
-                <div class="mt-5 text-center">
+                <div class="mt-2 mb-2 text-center">
                   <p class="lead">Do you want to update your profile?</p>
                 </div>
                 <div class="text-center">
@@ -110,9 +112,54 @@
       <div class="p-3 py-5">
 
         <div class="d-flex justify-content-between align-items-center experience"><span>Edit
-            Skills</span><span class="border px-3 p-1 add-experience"><i class="fa fa-plus"></i>&nbsp;Skill</span>
+            Skills</span>
+          <button class="btn border px-3 p-1 add-experience" (click)="unusedTechnologiesHandle()" type="button"
+            data-toggle="modal" data-target="#skillsModal"><i class="fa fa-plus"></i>&nbsp;Skill
+          </button>
         </div>
-        <br>
+
+        <!-- modal skills-->
+
+        <div class="modal fade" id="skillsModal" tabindex="-1" role="dialog" aria-labelledby="skillsModalLabel"
+          aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <div class="allTechnologies">
+                  <h5 class="modal-title mb-3">Select your skill </h5>
+                  <input type="search" (ngModelChange)="searchTechnology(keyTech.value)" #keyTech="ngModel" ngModel
+                    name="key" class="form-control form-control-dark text-bg-dark" placeholder="Search technology..."
+                    aria-label="Search">
+                  <app-technology-button *ngFor="let technology of unusedTechnologies" [technology]="technology"
+                    [unusedTechnologies]="unusedTechnologies" [userTechnologies]="userTechnologies"
+                    (technologyComponentEmitter)="handleTechnologyComponentEmitter($event)"></app-technology-button>
+                </div>
+
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+
+              </div>
+
+              <div class="modal-header">
+                <div>
+                  <h5 class="modal-title mb-3">Your Skills</h5>
+                  <app-technology-button *ngFor="let technology of userTechnologies" [technology]="technology"
+                    [unusedTechnologies]="unusedTechnologies" [userTechnologies]="userTechnologies"
+                    (technologyComponentEmitter)="handleTechnologyComponentEmitter($event)"></app-technology-button>
+                </div>
+              </div>
+
+              <div class="text-center">
+                <button class="btn btn-primary profile-button" type="button" data-dismiss="modal"
+                  aria-label="Close">Sure
+                </button>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
         <div class="d-flex justify-content-between align-items-center experience"><span>Edit
             languages</span>
           <button class="btn border px-3 p-1 add-experience" (click)="unusedLanguagesHandle()" type="button"
@@ -121,62 +168,64 @@
         </div>
 
         <!-- modal languages-->
+
         <div class="modal fade" id="languagesModal" tabindex="-1" role="dialog" aria-labelledby="languagesModalLabel"
           aria-hidden="true">
           <div class="modal-dialog" role="document">
             <div class="modal-content">
               <div class="modal-header">
-                <div>
-                  <h5 class="modal-title" id="languagesModalLabel">Languages
-                  </h5>
-                  <p class="lead">Select your languages</p>
+                <div class="allTechnologies">
+                  <h5 class="modal-title mb-3" id="languagesModalLabel">Languages</h5>
+                  <input type="search" (ngModelChange)="searchLanguage(keyLang.value)" #keyLang="ngModel" ngModel
+                    name="key" class="form-control form-control-dark text-bg-dark"
+                    placeholder="Search by name or technology..." aria-label="Search">
+
                   <app-language-button *ngFor="let language of unusedLanguages" [language]="language"
                     [unusedLanguages]="unusedLanguages" [userLanguages]="userLanguages"
                     (languageComponentEmitter)="handleLanguageComponentEmitter($event)"></app-language-button>
                 </div>
-
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
               </div>
-              <div>
-                <h5>Your Languages</h5>
-                <app-language-button *ngFor="let language of userLanguages" [language]="language"
-                  [unusedLanguages]="unusedLanguages" [userLanguages]="userLanguages"
-                  (languageComponentEmitter)="handleLanguageComponentEmitter($event)"></app-language-button>
+
+              <div class="modal-header">
+                <div>
+                  <h5>Your Languages</h5>
+                  <app-language-button *ngFor="let language of userLanguages" [language]="language"
+                    [unusedLanguages]="unusedLanguages" [userLanguages]="userLanguages"
+                    (languageComponentEmitter)="handleLanguageComponentEmitter($event)"></app-language-button>
+                </div>
               </div>
-              <div class="mt-5 text-center">
-                <p class="lead">Do you want to update your profile?</p>
-              </div>
+
               <div class="text-center">
-                <button class="btn btn-primary profile-button" type="submit" data-toggle="modal"
-                  data-target="#languagesModal">Sure
+                <button class="btn btn-primary profile-button" type="button" data-dismiss="modal"
+                  aria-label="Close">Sure
                 </button>
               </div>
             </div>
           </div>
         </div>
 
-        <br>
         <div class="d-flex justify-content-between align-items-center experience"><span>Edit profile picture</span>
           <button class="btn border px-3 p-1 add-experience" type="button" data-toggle="modal"
             data-target="#imgModal"><i class="fa fa-plus"></i>&nbsp;Picture
           </button>
         </div>
 
-        <!--        img modal-->
+        <!-- img modal -->
+
         <div class="modal fade" id="imgModal" tabindex="-1" role="dialog" aria-labelledby="imgModal" aria-hidden="true">
           <div class="modal-dialog" role="document">
             <div class="modal-content">
               <div class="modal-header">
-                <h5 class="modal-title" id="imgModalLabel">Are you sure?
+                <h5 class="modal-title" id="imgModalLabel">Choose profile picture
                 </h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
               </div>
               <div class="mt-5 mb-5 text-center">
-                <p class="lead">Choose your best profile picture</p>
                 <input type="file" (change)="onFileSelected($event)" />
                 <br>
               </div>
@@ -189,7 +238,6 @@
           </div>
         </div>
 
-
         <!-- button trigger modal -->
 
         <div class="mt-5 text-center">
@@ -198,7 +246,6 @@
             Profile
           </button>
         </div>
-
 
         <!-- modal delete -->
 
@@ -226,7 +273,6 @@
             </div>
           </div>
         </div>
-        <!-- modal add -->
 
       </div>
     </div>

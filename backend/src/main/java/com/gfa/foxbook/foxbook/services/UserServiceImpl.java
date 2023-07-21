@@ -178,6 +178,11 @@ public class UserServiceImpl implements UserService {
         } else {
             user.setLanguages(user.getLanguages());
         }
+        if (userDTO.getTechnologies() != null) {
+            user.setTechnologies(userDTO.getTechnologies());
+        } else {
+            user.setTechnologies(user.getTechnologies());
+        }
         return userRepository.save(user);
     }
 }

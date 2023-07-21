@@ -6,7 +6,6 @@ import { ApiService } from "../../_services/api/api.service";
   selector: 'app-people-page-searchbar',
   templateUrl: './people-page-searchbar.component.html',
   styleUrls: ['./people-page-searchbar.component.css'],
-
 })
 
 export class PeoplePageSearchbarComponent {

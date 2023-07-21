@@ -1,12 +1,6 @@
-.btn-primary {
-  background-color: rgb(0, 127, 0);
-  color: rgb(255, 255, 255);
-  margin-left: 3rem;
-  margin-right: 3rem;
-}
-
-.btn-primary:hover {
-  background-color: rgb(0, 90, 0);
+.qrModal-btn:hover {
+  cursor: pointer;
+  transform: scale(1.1);
 }
 
 .profile-img {
@@ -20,7 +14,7 @@ label {
 
 ul li a {
   color: rgb(207, 207, 207);
-  font-size: large;
+  font-size: 1.5rem;
 }
 
 ul li a:hover {
@@ -54,3 +48,20 @@ ul li a:hover {
   min-height: calc(100vh - 1rem);
 }
 
+.userName-desktop {
+  display: block;
+}
+
+.userName-mobile {
+  display: none;
+}
+
+@media (max-width: 767.98px) {
+  .userName-desktop {
+    display: none;
+  }
+
+  .userName-mobile {
+    display: block;
+  }
+}

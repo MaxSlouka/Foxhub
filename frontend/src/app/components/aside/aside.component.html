@@ -1,14 +1,14 @@
 <aside>
-  <div class="show-all">
-    <a routerLink="/people">
-      <h4 class="h4-show-all">Show all</h4>
-      <img src="placeholder-url" alt="img of lupa" class="lupa">
-    </a>
-  </div>
-  <div class="aside-profile">
-    <a [routerLink]="['/profile', user.nickname]">
-      <img [src]="user.profilePictureUrl" alt="profile picture" class="profile-pic">
-      <h5 class="h5-user-name">{{ user.firstName }} {{ user.lastName }}</h5>
-    </a>
+  <div class="card mb-3">
+    <div class="card-body text-center">
+      <a href="./people">
+        <h4 class="h4-show-all mr-2 all-people-desktop">All People</h4>
+      </a>
+      <a href="./people">
+        <h4 class="h4-show-all mr-2 all-people-mobile">All People</h4>
+      </a>
+      <p class="lead text-center all-people-desktop">Search by name or technology</p>
+      <app-aside-search-bar class="all-people-desktop" [users]="users" [fullUsers]="users"></app-aside-search-bar>
+    </div>
   </div>
 </aside>

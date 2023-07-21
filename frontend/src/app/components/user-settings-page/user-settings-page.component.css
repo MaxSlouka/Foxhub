@@ -8,15 +8,6 @@
     margin-bottom: 1rem;
 }
 
-.btn-primary {
-    background-color: #007f00;
-    color: rgb(255, 255, 255);
-}
-
-.btn-primary:hover {
-    background-color: rgb(0, 90, 0);
-}
-
 .profile-button:focus {
     background: rgb(0, 90, 0);
     box-shadow: none
@@ -49,7 +40,7 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, 50%);
-  }
+}
 
 .labels {
     font-size: 11px
@@ -64,4 +55,13 @@
     color: #fff;
     cursor: pointer;
     border: solid 1px #007f00;
+}
+
+.modal-header {
+    border: none;
+}
+
+.allTechnologies{
+  max-height: 150px;
+  overflow: auto;
 }
