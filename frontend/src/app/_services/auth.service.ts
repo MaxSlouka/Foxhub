@@ -54,17 +54,5 @@ export class AuthService {
     });
   }
 
-  getVerified():boolean {
-    this.http.get<any>(
-      'http://localhost:8080/api/v1/auth/verify',
-    ).subscribe((response: HttpResponse<any>) => {
-      console.log(response);
-      if (response.status === 200) {
-        return true;
-      }
-      return false;
-    })
 
-    return false;
-  }
 }
