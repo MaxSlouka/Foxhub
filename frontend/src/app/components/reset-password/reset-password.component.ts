@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-update-password',
@@ -6,6 +6,16 @@ import { Component } from '@angular/core';
   styleUrls: ['./reset-password.component.css']
 })
 
-export class ResetPasswordComponent {
+export class ResetPasswordComponent implements OnInit{
+  form: any = {
+    email: null
+  };
+
+  ngOnInit(): void {
+
+  }
+public onSubmit(){
+
+}
 
 }
