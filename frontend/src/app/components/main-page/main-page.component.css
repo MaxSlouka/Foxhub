@@ -4,7 +4,6 @@ a {
     margin-top: 1rem;
 }
 
-/* Media query for mobile devices */
 @media (max-width: 767.98px) {
     .main-container .row {
         flex-wrap: wrap;
@@ -20,6 +19,6 @@ a {
     }
 
     .main-container .col-12.col-md-3 {
-        display: none;
+        display: block;
     }
 }

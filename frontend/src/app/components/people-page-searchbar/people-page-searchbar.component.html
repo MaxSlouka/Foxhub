@@ -1,4 +1,4 @@
-<!-- <div class="container">
+<div class="container">
   <div class="row justify-content-center">
     <div class="col-lg-6 text-center">
       <p class="lead mb-4">Find your colleague, mentor, student.</p>
@@ -12,11 +12,8 @@
       </form>
     </div>
   </div>
-</div> -->
-
-<input type="search" (ngModelChange)="searchUser(key.value)" #key="ngModel" ngModel name="key"
-  class="form-control form-control-dark text-bg-dark" placeholder="Search..." aria-label="Search">
+</div>
 
 <div class="card-deck">
-  <app-aside-user-card *ngFor="let user of users" [user]="user"></app-aside-user-card>
+  <app-people-page-card *ngFor="let user of users" [user]="user"></app-people-page-card>
 </div>
