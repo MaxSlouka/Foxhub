@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.text.Normalizer;
 import java.util.Collections;
+import java.util.UUID;
 import java.util.regex.Pattern;
 
 @Service
@@ -30,11 +31,18 @@ public class SecurityService {
         user.setFirstName(registerDto.getFirstName());
         user.setLastName(registerDto.getLastName());
         user.setEmail(registerDto.getEmail());
+        user.setVerified(false);
+        user.setVerificationToken(generateToken());
         user.setNickname(generateNickname(registerDto.getFirstName(), registerDto.getLastName()));
         user.setPassword(passwordEncoder.encode(registerDto.getPassword()));
         Role roles = roleRepository.findByName("USER").get();
         user.setRoles(Collections.singletonList(roles));
         userRepository.save(user);
+    }
+
+    private String generateToken() {
+        UUID tokenUUID = UUID.randomUUID();
+        return tokenUUID.toString();
     }
 
     private String generateNickname(String fName, String lName) {

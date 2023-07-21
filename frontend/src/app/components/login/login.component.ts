@@ -20,7 +20,6 @@ export class LoginComponent implements OnInit {
   isLoggedIn = false;
   isLoginFailed = false;
   errorMessage = '';
-  roles: string[] = [];
   userNickname: string = '';
   showSuccessToast = false;
 
@@ -36,9 +35,12 @@ export class LoginComponent implements OnInit {
       this.isLoggedIn = true;
       this.userNickname = this.storageService.getUserFromSession();
     }
+
+
+
     this.router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe((event) => {
       if (this.showSuccessToast) {
-        this.toastr.success('Successfully Logged In!', 'Success', { timeOut: 5000 });
+        this.toastr.success('Successfully Logged In!', 'Success', {timeOut: 5000});
         this.showSuccessToast = false;
       }
     });
@@ -57,6 +59,7 @@ export class LoginComponent implements OnInit {
       },
       error: err => {
         this.errorMessage = err.error.message;
+        // console.log(err); // todo error message is not placed
         this.isLoginFailed = true;
         this.toastr.error(this.errorMessage, 'Error');
       }

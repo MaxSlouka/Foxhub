@@ -26,6 +26,8 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private UUID uuid;
+    private String verificationToken;
+    private boolean verified;
     private String firstName;
     private String lastName;
     private String nickname;

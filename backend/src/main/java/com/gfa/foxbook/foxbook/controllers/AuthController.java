@@ -1,11 +1,14 @@
 package com.gfa.foxbook.foxbook.controllers;
 
+import com.gfa.foxbook.foxbook.models.User;
 import com.gfa.foxbook.foxbook.models.dtos.security.LoginDto;
 import com.gfa.foxbook.foxbook.models.dtos.security.LoginResponseDto;
 import com.gfa.foxbook.foxbook.models.dtos.security.RegisterDto;
 import com.gfa.foxbook.foxbook.security.jwt.JwtUtils;
 import com.gfa.foxbook.foxbook.security.services.SecurityService;
+import com.gfa.foxbook.foxbook.services.EmailServiceImpl;
 import com.gfa.foxbook.foxbook.services.interfaces.UserService;
+import jakarta.mail.MessagingException;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
@@ -28,6 +31,7 @@ public class AuthController {
     private final JwtUtils jwtUtils;
     private final SecurityService securityService;
     private final UserService userService;
+    private final EmailServiceImpl emailService;
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginDto loginDto) {
@@ -38,6 +42,9 @@ public class AuthController {
 
             ResponseCookie jwtRefreshCookie = jwtUtils.generateRefreshJwtCookie(authentication);
             ResponseCookie jwtCookie = jwtUtils.generateJwtCookie(authentication);
+            if (!(userService.findByEmail(authentication.getName()).get().isVerified())){
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("You have to verify your email");
+            }
 
             return ResponseEntity.ok()
                     .header(HttpHeaders.SET_COOKIE, jwtCookie.toString())
@@ -52,11 +59,13 @@ public class AuthController {
     }
 
     @PostMapping("register")
-    public ResponseEntity<?> register(@RequestBody RegisterDto registerDto) {
+    public ResponseEntity<?> register(@RequestBody RegisterDto registerDto) throws MessagingException {
         if (securityService.userExistsByEmail(registerDto.getEmail())) {
             return ResponseEntity.badRequest().body("Email already registered");
         }
         securityService.registerUser(registerDto);
+        emailService.send(registerDto.getEmail(), "Welcome to Foxbook", emailService.generateWelcomeEmail(registerDto.getFirstName()));
+        emailService.send(registerDto.getEmail(), "Foxbook - Email verification", emailService.generateVerificationEmail(userService.findByEmail(registerDto.getEmail()).get().getVerificationToken()));
 
         return ResponseEntity.ok().build();
     }
@@ -79,5 +88,17 @@ public class AuthController {
             return ResponseEntity.ok().header(HttpHeaders.SET_COOKIE, jwtCookie.toString()).build();
         }
         return ResponseEntity.badRequest().body("Refresh token is expired");
+    }
+
+    @GetMapping("verify-email/{token}")
+    public ResponseEntity<?> verify(@PathVariable String token) {
+        User user = userService.getUserByVerificationToken(token);
+
+        if (user != null && user.getVerificationToken().equals(token)) {
+            user.setVerified(true);
+            userService.saveUser(user);
+            return ResponseEntity.ok("Email verification successful <a href=\"http://localhost:4200/login\">continue to login<a/>");
+        }
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid verification token");
     }
 }
