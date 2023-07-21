@@ -9,7 +9,6 @@
 
 .profile-img {
   margin: 1rem;
-  box-shadow: 0 0 2rem grey;
 }
 
 .profile-img:hover {
@@ -67,8 +66,7 @@ ul li a:hover {
   z-index: 1;
   cursor: pointer;
   transition-duration: .3s;
-  animation: pop-btn .3s both ease-in-out .5s;
-  
+  /* animation: pop-btn .3s both ease-in-out .5s; */
   position: relative;
   left: -90px;
   top: -20px;
