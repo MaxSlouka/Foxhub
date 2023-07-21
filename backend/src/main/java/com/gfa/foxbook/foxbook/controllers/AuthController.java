@@ -62,7 +62,7 @@ public class AuthController {
         }
         securityService.registerUser(registerDto);
         emailService.send(registerDto.getEmail(), "Welcome to Foxbook", emailService.generateWelcomeEmail(registerDto.getFirstName()));
-        emailService.send(registerDto.getEmail(), "Foxbook - Email verification", emailService.generateVerificationEnmail());
+        emailService.send(registerDto.getEmail(), "Foxbook - Email verification", emailService.generateVerificationEnmail(userService.findByEmail(registerDto.getEmail()).get().getVerificationToken()));
 
         return ResponseEntity.ok().build();
     }
@@ -94,7 +94,7 @@ public class AuthController {
         if (user != null && user.getVerificationToken().equals(token)) {
             user.setVerified(true);
             userService.saveUser(user);
-            return ResponseEntity.ok("Email verification successful");
+            return ResponseEntity.ok("Email verification successful <a href=\"http://localhost:4200/login\">continue to login<a/>");
         }
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid verification token");
     }
