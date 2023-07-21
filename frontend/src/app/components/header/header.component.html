@@ -20,7 +20,7 @@
   <!-- navbar -->
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <div class="d-flex flex-wrap align-items-center justify-content-between py-2 mb-2 border-bottom">
+    <div class="d-flex flex-wrap align-items-center py-2 mb-2 border-bottom justify-content-between">
 
       <!-- logo -->
 
@@ -42,23 +42,32 @@
       <!-- login and sign up -->
 
       <div class="text-end" *ngIf="!isLoggedIn">
+        <a href="./people" class="people-btn" aria-disabled="true">
+          <i class="bi bi-people"></i>
+        </a>
         <a href="./login" class="btn btn-primary" role="button" aria-disabled="true">Login</a>
         <a href="./register" class="btn btn-outline-secondary" role="button" aria-disabled="true">Sign up</a>
       </div>
 
       <!-- user options -->
 
-      <div class="btn-group" *ngIf="isLoggedIn">
+      <div class="btn-group align-items-center" *ngIf="isLoggedIn">
+        <a href="./people" class="people-btn" aria-disabled="true">
+          <i class="bi bi-people"></i>
+        </a>
         <a href="#" class="d-block link-body-emphasis text-decoration-none dropdown-toggle" data-toggle="dropdown"
           aria-expanded="false">
-          <img *ngIf="user.profilePictureUrl" ngSrc="{{  user.profilePictureUrl  }}" alt="mdo" width=32 height=32
+          <img *ngIf="user.profilePictureUrl" ngSrc="{{  user.profilePictureUrl  }}" alt="mdo" width=42 height=42
             class="rounded-circle">
         </a>
         <div class="dropdown-menu">
-          <a class="dropdown-item" [routerLink]="['/profile',userEmail]">Profile - {{userEmail}}</a>
-          <a class="dropdown-item" href="./update-profile">Settings</a>
+          <a class="dropdown-item" [routerLink]="['/profile',userEmail]">
+            <i class="bi bi-person-circle"></i>Profile - {{userEmail}}</a>
+          <a class="dropdown-item" href="./update-profile">
+            <i class="bi bi-gear"></i>Settings</a>
           <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#" (click)="logout()">Sign out</a>
+          <a class="dropdown-item" href="#" (click)="logout()">
+            <i class="bi bi-door-closed"></i>Sign out</a>
         </div>
       </div>
 
