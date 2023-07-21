@@ -65,11 +65,10 @@ export class AuthService {
 
   }
 
-  changePassword(oldPassword: String, newPassword: String) {
+  changePassword(newPassword: String) {
     return this.http.post(
       'http://localhost:8080/api/v1/user/password-change',
       {
-        oldPassword,
         newPassword
       },
       httpOptions
