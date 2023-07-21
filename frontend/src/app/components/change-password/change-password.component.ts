@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {AuthService} from "../../_services/auth.service";
 
 @Component({
   selector: 'app-change-password',
@@ -10,8 +11,12 @@ export class ChangePasswordComponent {
     oldPassword: null,
     newPassword:null
   };
+  constructor(private authService:AuthService) {
+  }
 
   onSubmit() {
+    const { oldPassword, newPassword } = this.form;
+    this.authService.changePassword(oldPassword,newPassword).subscribe();
 
   }
 }
