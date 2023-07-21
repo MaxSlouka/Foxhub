@@ -136,6 +136,6 @@ public class UserController {
         }
         user.setPassword(passwordEncoder.encode(passwordDTO.getNewPassword()));
         userService.saveUser(user);
-        return ResponseEntity.badRequest().body("some shit happened");
+        return ResponseEntity.ok().build();
     }
 }
