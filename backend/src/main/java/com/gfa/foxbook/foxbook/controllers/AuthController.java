@@ -42,6 +42,9 @@ public class AuthController {
 
             ResponseCookie jwtRefreshCookie = jwtUtils.generateRefreshJwtCookie(authentication);
             ResponseCookie jwtCookie = jwtUtils.generateJwtCookie(authentication);
+            if (!(userService.findByEmail(authentication.getName()).get().isVerified())){
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("You have to verify your email");
+            }
 
             return ResponseEntity.ok()
                     .header(HttpHeaders.SET_COOKIE, jwtCookie.toString())
