@@ -5,7 +5,10 @@ form {
 
 .card-deck {
   display: grid;
-  grid-template-columns: repeat(4, 1fr); 
+  grid-template-columns: repeat(3, 1fr); 
+  grid-gap: 1rem;
+  margin-left: 3rem;
+  margin-right: 3rem;
   padding: 3rem;
 }
 
