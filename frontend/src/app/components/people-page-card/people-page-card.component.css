@@ -25,6 +25,10 @@
     justify-content: center;
 }
 
+.profile .photo:hover {
+    transform: scale(1.1);
+}
+
 .profile .photo img {
     border-radius: 50%;
 }
@@ -195,7 +199,6 @@ p {
     transition-delay: initial !important;
 }
 
-/* CSS for icon colors */
 .bi-facebook:hover {
     color: #3b5998;
 }
