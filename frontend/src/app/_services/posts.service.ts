@@ -14,17 +14,14 @@ export class PostsService {
     return this.httpClient.get<Post[]>('http://localhost:8080/api/v1/public/posts');
   }
 
-  createPost(creator: string, text: string, parentPostId: null | number): Observable<Post> {
+  createPost(userID: number | undefined, username: string, text: string, parentPostId: number | null): Observable<Post> {
     return this.httpClient.post<Post>(
       'http://localhost:8080/api/v1/admin/posts', {
+        userID: userID,
+        username: username,
         content: text,
-        author: creator,
-        parentPostId,
-
-      //   ToDo: fields below move to backend
         createdAt: new Date().toISOString(),
-        userId: '1',
-        username: 'John',
+        parentPostId,
       }
     );
   }
