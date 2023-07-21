@@ -14,6 +14,7 @@ export class PostsComponent implements OnInit {
   @Input userRole: string;
   // @ts-ignore
   @Input() userFullName: string;
+  @Input() userID: number | undefined;
 
   posts: Post[] = [];
   activePost: Post | null = null;
@@ -27,15 +28,14 @@ export class PostsComponent implements OnInit {
     })
   }
 
-  addPost({text, parentPostId}: {text: string, parentPostId: null | number }): void {
-    console.log('addPost', text, parentPostId, this.userFullName);
+  addPost({text, parentPostId}: { text: string, parentPostId: null | number }): void {
     this.postsService
-      .createPost(this.userFullName, text,parentPostId)
+      .createPost(this.userID, this.userFullName, text, parentPostId)
       .subscribe((createdPost) => {
       });
   }
 
-  updatePost({text, id}: {text: string, id: number}) {
+  updatePost({text, id}: { text: string, id: number }) {
     this.postsService
       .updatePost(id, text)
       .subscribe((updatedPost) => {
