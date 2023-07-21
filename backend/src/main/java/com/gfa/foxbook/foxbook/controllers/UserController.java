@@ -1,5 +1,6 @@
 package com.gfa.foxbook.foxbook.controllers;
 
+import com.gfa.foxbook.foxbook.models.dtos.PasswordDTO;
 import com.gfa.foxbook.foxbook.models.dtos.UserProfileDTO;
 import com.gfa.foxbook.foxbook.models.nonusermodels.Like;
 import com.gfa.foxbook.foxbook.models.nonusermodels.Post;
@@ -13,6 +14,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -37,6 +39,8 @@ public class UserController {
     private final JwtUtils jwtUtils;
     private final PostService postService;
     private final LikeService likeService;
+    private final PasswordEncoder passwordEncoder;
+
 
     private String uploadDir = "./uploads";
 
@@ -122,6 +126,16 @@ public class UserController {
         Like like = new Like(post, user.getId(), 0, false);
         likeService.like(like);
 
+        return ResponseEntity.ok().build();
+    }
+    @PostMapping("password-change")
+    public ResponseEntity<?> changePassword(@RequestBody PasswordDTO passwordDTO, HttpServletRequest request){
+        User user = jwtUtils.getUserFromRequest(request);
+        if (user == null) {
+            return ResponseEntity.badRequest().build();
+        }
+        user.setPassword(passwordEncoder.encode(passwordDTO.getNewPassword()));
+        userService.saveUser(user);
         return ResponseEntity.ok().build();
     }
 }

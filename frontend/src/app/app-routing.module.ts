@@ -9,7 +9,8 @@ import { IntroComponent } from "./components/intro/intro.component";
 import { PageNotFoundComponent } from "./components/page-not-found/page-not-found.component";
 import { UserSettingsPageComponent } from './components/user-settings-page/user-settings-page.component';
 import { TermsOfUseComponent } from './components/terms-of-use/terms-of-use.component';
-import { UpdatePasswordComponent } from './components/update-password/update-password.component';
+import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
+import {ChangePasswordComponent} from "./components/change-password/change-password.component";
 
 const routes: Routes = [
   { path: '', component: IntroComponent },
@@ -19,7 +20,8 @@ const routes: Routes = [
   { path: 'people', component: PeoplePageComponent },
   { path: 'profile/:username', component: ProfilePageComponent },
   { path: 'update-profile', component: UserSettingsPageComponent },
-  { path: 'updatePassword', component: UpdatePasswordComponent },
+  { path: 'reset-password', component: ResetPasswordComponent },
+  { path: 'change-password', component:ChangePasswordComponent},
   { path: 'termsOfUse', component: TermsOfUseComponent },
   { path: '**', pathMatch: 'full', component: PageNotFoundComponent }
 ]

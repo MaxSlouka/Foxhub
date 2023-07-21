@@ -1,6 +1,8 @@
 package com.gfa.foxbook.foxbook.controllers;
 
 import com.gfa.foxbook.foxbook.models.User;
+import com.gfa.foxbook.foxbook.models.dtos.EmailDTO;
+import com.gfa.foxbook.foxbook.models.dtos.PasswordDTO;
 import com.gfa.foxbook.foxbook.models.dtos.security.LoginDto;
 import com.gfa.foxbook.foxbook.models.dtos.security.LoginResponseDto;
 import com.gfa.foxbook.foxbook.models.dtos.security.RegisterDto;
@@ -20,7 +22,12 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Optional;
+import java.util.Random;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("api/v1/auth")
@@ -32,6 +39,8 @@ public class AuthController {
     private final SecurityService securityService;
     private final UserService userService;
     private final EmailServiceImpl emailService;
+    private final PasswordEncoder passwordEncoder;
+
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginDto loginDto) {
@@ -89,6 +98,21 @@ public class AuthController {
         }
         return ResponseEntity.badRequest().body("Refresh token is expired");
     }
+    @PostMapping("password-reset")
+    public ResponseEntity<?> resetPassword(@RequestBody EmailDTO emailDTO) throws MessagingException {
+        Optional<User> user = userService.findByEmail(emailDTO.getEmail());
+        if (user.isEmpty()){
+            return ResponseEntity.badRequest().body("user does not exist");
+        }
+        String newPassword = UUID.randomUUID().toString();
+        user.get().setPassword(passwordEncoder.encode(newPassword));
+
+        userService.saveUser(user.get());
+
+        emailService.send(emailDTO.getEmail(),"Foxbook - Password reset", "You have reseted your password. Your new password is: "+newPassword+" \n Please change in after login");
+        return ResponseEntity.ok().build();
+    }
+
 
     @GetMapping("verify-email/{token}")
     public ResponseEntity<?> verify(@PathVariable String token) {
@@ -101,4 +125,5 @@ public class AuthController {
         }
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid verification token");
     }
+
 }
