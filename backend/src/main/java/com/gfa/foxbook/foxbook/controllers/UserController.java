@@ -134,11 +134,8 @@ public class UserController {
         if (user == null) {
             return ResponseEntity.badRequest().build();
         }
-        if(user.getPassword().equals(passwordEncoder.encode(passwordDTO.getOldPassword()))){
-            user.setPassword(passwordEncoder.encode(passwordDTO.getNewPassword()));
-            userService.saveUser(user);
-            return ResponseEntity.ok().build();
-        }
-        return ResponseEntity.badRequest().build();
+        user.setPassword(passwordEncoder.encode(passwordDTO.getNewPassword()));
+        userService.saveUser(user);
+        return ResponseEntity.badRequest().body("some shit happened");
     }
 }
