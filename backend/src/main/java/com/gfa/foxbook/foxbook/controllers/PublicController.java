@@ -59,7 +59,7 @@ public class PublicController {
 
     @GetMapping("/posts")
     public ResponseEntity<?> getAllPosts() {
-        List<Post> posts = postService.findAllByOrderByTimestampDesc();
+        List<Post> posts = postService.getAll();
         if (posts.isEmpty()) {
             return ResponseEntity.notFound().build();
         }

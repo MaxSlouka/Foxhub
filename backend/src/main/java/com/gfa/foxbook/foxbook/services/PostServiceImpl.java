@@ -1,13 +1,11 @@
 package com.gfa.foxbook.foxbook.services;
 
-import com.gfa.foxbook.foxbook.models.nonusermodels.Comment;
 import com.gfa.foxbook.foxbook.models.nonusermodels.Post;
 import com.gfa.foxbook.foxbook.repositories.PostRepository;
 import com.gfa.foxbook.foxbook.services.interfaces.PostService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 import java.util.List;
@@ -20,6 +18,16 @@ public class PostServiceImpl implements PostService {
     private final PostRepository postRepository;
 
     @Override
+    public List<Post> getAll() {
+        return postRepository.findAll();
+    }
+
+    @Override
+    public Optional<Post> findById(Long id) {
+        return postRepository.findById(id);
+    }
+
+    @Override
     public Post save(Post post) {
         return postRepository.save(post);
     }
@@ -30,81 +38,32 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public List<Post> findAll() {
-        return postRepository.findAll();
+    public List<Post> findByUserName(String username) {
+        return postRepository.findByUsername(username);
     }
 
     @Override
-    public List<Post> findAllByOrderByTimestampDesc() {
-        return postRepository.findAllByOrderByTimestampDesc();
-    }
-
-    @Override
-    public List<Post> findAllByOrderByTimestampAsc() {
-        return postRepository.findAllByOrderByTimestampAsc();
-    }
-
-    @Override
-    public List<Post> findAllByOrderByLikesDesc() {
-        return postRepository.findAllByOrderByLikesDesc();
-    }
-
-    @Override
-    public List<Post> findByUserName(String authorName) {
-        return postRepository.findByAuthor(authorName);
-    }
-
-    @Override
-    public Post createPost(String author, String content, String title) {
+    public Post createPost(Post post) {
         LocalDateTime currentDateTime = LocalDateTime.now();
         Post p = new Post();
-        p.setAuthor(author);
-        p.setTitle(title);
-        p.setContent(content);
-        p.setTimestamp(Timestamp.valueOf(currentDateTime));
+        p.setUsername(post.getUsername());
+        p.setContent(post.getContent());
+        p.setCreatedAt(currentDateTime);
         return postRepository.save(p);
     }
 
     @Override
-    public Post editPost(Long id, String title, String content) {
-        Post p = postRepository.findById(id).get();
-        p.setTitle(title);
-        p.setContent(content);
-        p.setId(id);
-        return postRepository.save(p);
-    }
-
-    @Override
-    public Post editPost(Post post) {
-        Optional<Post> optionalPost = postRepository.findById(post.getId());
+    public void editPost(Long id, String content) {
+        Optional<Post> optionalPost = postRepository.findById(id);
 
         if (optionalPost.isPresent()) {
             Post existingPost = optionalPost.get();
-            existingPost.setAuthor(post.getAuthor());
-            existingPost.setTitle(post.getTitle());
-            existingPost.setContent(post.getContent());
+            existingPost.setContent(content);
 
-            return postRepository.save(existingPost);
+            postRepository.save(existingPost);
         } else {
             throw new IllegalArgumentException("Post not found");
         }
-    }
-
-    @Override
-    public void addComment(Comment newComment) {
-        Post p = postRepository.findById(Long.valueOf(newComment.getPostId())).get();
-        p.addComment(newComment);
-        postRepository.save(p);
-    }
-
-    @Override
-    public Optional<Post> findById(Long id) {
-        return postRepository.findById(id);
-    }
-
-    @Override
-    public void remove(Post post) {
-        postRepository.delete(post);
     }
 }
 

@@ -1,7 +1,6 @@
 package com.gfa.foxbook.foxbook.controllers;
 
 import com.gfa.foxbook.foxbook.models.dtos.UserProfileDTO;
-import com.gfa.foxbook.foxbook.models.nonusermodels.Comment;
 import com.gfa.foxbook.foxbook.models.nonusermodels.Like;
 import com.gfa.foxbook.foxbook.models.nonusermodels.Post;
 import com.gfa.foxbook.foxbook.models.User;
@@ -95,35 +94,6 @@ public class UserController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body("Failed to upload the file: " + e.getMessage());
         }
-    }
-
-    @PostMapping("/posts/{postId}/comments")
-    public ResponseEntity<?> addComment(@PathVariable Long postId, HttpServletRequest request, @RequestBody String comment) {
-        String token = jwtUtils.getJwtFromCookies(request);
-        String email = jwtUtils.getUserNameFromJwtToken(token);
-        Optional<User> maybeUser = userService.findByEmail(email);
-
-        if (maybeUser.isEmpty()) {
-            return ResponseEntity.notFound().build();
-        }
-
-        Optional<Post> maybePost = postService.findById(postId);
-
-        if (maybePost.isEmpty()) {
-            return ResponseEntity.notFound().build();
-        }
-
-        User user = maybeUser.get();
-        Post post = maybePost.get();
-
-        Comment newComment = new Comment();
-        newComment.setPost(post);
-        newComment.setAuthor(user.getNickname());
-        newComment.setContent(comment);
-
-        postService.addComment(newComment);
-
-        return ResponseEntity.ok().build();
     }
 
     @PostMapping("/posts/{postId}/like")

@@ -8,7 +8,6 @@ import com.gfa.foxbook.foxbook.models.nonusermodels.Technology;
 import com.gfa.foxbook.foxbook.repositories.LanguageRepository;
 import com.gfa.foxbook.foxbook.repositories.TechnologyRepository;
 import com.gfa.foxbook.foxbook.repositories.UserRepository;
-import com.gfa.foxbook.foxbook.services.interfaces.CommentService;
 import com.gfa.foxbook.foxbook.services.interfaces.UserService;
 import lombok.AllArgsConstructor;
 
@@ -24,7 +23,6 @@ import java.util.stream.Stream;
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
-    private final CommentService commentService;
     private final TechnologyRepository technologyRepository;
     private final LanguageRepository languageRepository;
 
@@ -79,12 +77,11 @@ public class UserServiceImpl implements UserService {
         return userRepository.findByEmail(name);
     }
 
-    @Override
-    public void addComment(User existingUser, String comment) {
-        commentService.comment(existingUser.getId(), existingUser.getId(), comment);
-        userRepository.save(existingUser);
-
-    }
+//    @Override
+//    public void addComment(User existingUser, String comment) {
+//        commentService.comment(existingUser.getId(), existingUser.getId(), comment);
+//        userRepository.save(existingUser);
+//    }
 
     @Override
     public UserBasicDTO convertToUserBasicDTO(User user) {

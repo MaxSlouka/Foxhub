@@ -19,6 +19,11 @@ export class PostsService {
       'http://localhost:8080/api/v1/admin/posts', {
         content: text,
         parentPostId,
+
+      //   ToDo: fields below move to backend
+        createdAt: new Date().toISOString(),
+        userId: '1',
+        username: 'John',
       }
     );
   }

@@ -1,6 +1,5 @@
 package com.gfa.foxbook.foxbook.services.interfaces;
 
-import com.gfa.foxbook.foxbook.models.nonusermodels.Comment;
 import com.gfa.foxbook.foxbook.models.nonusermodels.Post;
 
 import java.util.List;
@@ -8,29 +7,43 @@ import java.util.Optional;
 
 public interface PostService {
 
+    List<Post> getAll();
+
     Optional<Post> findById(Long id);
 
-    public Post save(Post post);
+    Post save(Post post);
 
-    public void delete(Post post);
+    void delete(Post post);
 
-    public List<Post> findAll();
+    List<Post> findByUserName(String username);
 
-    public List<Post> findAllByOrderByTimestampDesc();
+    Post createPost(Post post);
 
-    public List<Post> findAllByOrderByTimestampAsc();
+    void editPost(Long id, String content);
 
-    public List<Post> findAllByOrderByLikesDesc();
-
-    public List<Post> findByUserName(String authorName);
-
-    void remove(Post post);
-
-    Post createPost(String author, String title, String content);
-
-    Post editPost(Long id, String title, String content);
-
-    Post editPost(Post post);
-
-    void addComment(Comment newComment);
+//    Optional<Post> findById(Long id);
+//
+//    public Post save(Post post);
+//
+//    public void delete(Post post);
+//
+//    public List<Post> findAll();
+//
+//    public List<Post> findAllByOrderByTimestampDesc();
+//
+//    public List<Post> findAllByOrderByTimestampAsc();
+//
+//    public List<Post> findAllByOrderByLikesDesc();
+//
+//    public List<Post> findByUserName(String authorName);
+//
+//    void remove(Post post);
+//
+//    Post createPost(String author, String title, String content);
+//
+//    Post editPost(Long id, String title, String content);
+//
+//    Post editPost(Post post);
+//
+//    void addComment(Comment newComment);
 }

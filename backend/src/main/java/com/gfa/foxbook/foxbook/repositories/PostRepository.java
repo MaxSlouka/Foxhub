@@ -8,11 +8,13 @@ import java.util.List;
 
 @Repository
 public interface PostRepository extends JpaRepository<Post, Long> {
-    List<Post> findAllByOrderByTimestampDesc();
+    List<Post> findAllByOrderByCreatedAtDesc();
 
-    List<Post> findAllByOrderByTimestampAsc();
+    List<Post> findAllByOrderByCreatedAtAsc();
 
-    List<Post> findAllByOrderByLikesDesc();
+    List<Post> findAllByOrderByLikesCountDesc();
 
-    List<Post> findByAuthor(String authorName);
+    List<Post> findAllByOrderByLikesCountAsc();
+
+    List<Post> findByUsername(String username);
 }
