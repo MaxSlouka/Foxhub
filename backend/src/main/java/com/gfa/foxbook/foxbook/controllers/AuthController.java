@@ -2,6 +2,7 @@ package com.gfa.foxbook.foxbook.controllers;
 
 import com.gfa.foxbook.foxbook.models.User;
 import com.gfa.foxbook.foxbook.models.dtos.EmailDTO;
+import com.gfa.foxbook.foxbook.models.dtos.PasswordDTO;
 import com.gfa.foxbook.foxbook.models.dtos.security.LoginDto;
 import com.gfa.foxbook.foxbook.models.dtos.security.LoginResponseDto;
 import com.gfa.foxbook.foxbook.models.dtos.security.RegisterDto;
@@ -112,6 +113,7 @@ public class AuthController {
         return ResponseEntity.ok().build();
     }
 
+
     @GetMapping("verify-email/{token}")
     public ResponseEntity<?> verify(@PathVariable String token) {
         User user = userService.getUserByVerificationToken(token);
@@ -123,4 +125,5 @@ public class AuthController {
         }
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid verification token");
     }
+
 }
