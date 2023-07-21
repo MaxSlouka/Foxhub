@@ -38,6 +38,7 @@ import { LanguageButtonComponent } from './components/language-button/language-b
 import { AsideUserCardComponent } from './components/aside-user-card/aside-user-card.component';
 import { TechnologyButtonComponent } from './components/technology-button/technology-button.component';
 import { AsideSearchBarComponent } from './components/aside-search-bar/aside-search-bar.component';
+import { ChangePasswordComponent } from './components/change-password/change-password.component';
 
 @NgModule({
   declarations: [
@@ -68,7 +69,8 @@ import { AsideSearchBarComponent } from './components/aside-search-bar/aside-sea
     LanguageButtonComponent,
     AsideUserCardComponent,
     TechnologyButtonComponent,
-    AsideSearchBarComponent
+    AsideSearchBarComponent,
+    ChangePasswordComponent
   ],
   imports: [
     FormsModule,
