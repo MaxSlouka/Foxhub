@@ -1,11 +1,39 @@
-<a [routerLink]="['/profile',user.nickname]" class="card">
-    <!-- <img *ngIf="user.profilePictureUrl" ngSrc="{{  user.profilePictureUrl  }}" height=100 width=100 class="profile-img"
-        loading="lazy" alt="profile_picture"> -->
-    <div class="card-body">
-        <h5 class="card-title">{{user.firstName}} {{user.lastName}}</h5>
-        <div class="card-body-technology border-top">
-            <app-technologies *ngFor="let technology of user.technologies" [technology]="technology">
-            </app-technologies>
-        </div>
+<div class="profile">
+
+    <div class="photo">
+        <a [routerLink]="['/profile',user.nickname]" class="card">
+            <img *ngIf="user.profilePictureUrl" ngSrc="{{  user.profilePictureUrl  }}" height=100 width=100
+                class="profile-img" loading="lazy" alt="profile_picture">
+        </a>
     </div>
-</a>
+
+    <div class="content">
+        <div class="text">
+            <h3>{{user.firstName}} {{user.lastName}}</h3>
+            <p>Open to work</p>
+        </div>
+
+        <div class="btn" [ngClass]="{ 'active': isOpen }">
+            <span></span>
+            <div class="box" [ngClass]="{ 'open': isOpen }">
+                <a [href]="user.facebook">
+                    <i class="bi bi-facebook"></i>
+                </a>
+                <a [href]="user.instagram">
+                    <i class="bi bi-instagram"></i>
+                </a>
+                <a [href]="user.linkedin">
+                    <i class="bi bi-linkedin"></i>
+                </a>
+                <a [href]="user.gitHub">
+                    <i class="bi bi-github"></i>
+                </a>
+                <a [href]="user.optionalPage">
+                    <i class="bi bi-globe"></i>
+                </a>
+            </div>
+        </div>
+
+    </div>
+
+</div>
