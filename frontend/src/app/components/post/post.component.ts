@@ -13,6 +13,7 @@ export class PostComponent implements OnInit {
   @Input() activePost!: Post | null;
   @Input() parentPostId!: number | null;
 
+
   @Output() setActivePost = new EventEmitter<Post | null>();
   @Output() addPost = new EventEmitter<{
     text: string, parentPostId: number | null

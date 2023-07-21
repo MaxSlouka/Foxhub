@@ -9,6 +9,7 @@ import {Post} from "../../models/post";
 })
 export class PostsComponent implements OnInit {
   @Input() currentUserId!: number;
+  @Input() userRole!: string;
 
   posts: Post[] = [];
   activePost: Post | null = null;
