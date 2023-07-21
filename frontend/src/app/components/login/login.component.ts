@@ -22,7 +22,6 @@ export class LoginComponent implements OnInit {
   errorMessage = '';
   userNickname: string = '';
   showSuccessToast = false;
-  isVerrified =false;
 
   constructor(
     private authService: AuthService,
