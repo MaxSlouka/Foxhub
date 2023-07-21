@@ -64,4 +64,15 @@ export class AuthService {
     );
 
   }
+
+  changePassword(oldPassword: String, newPassword: String) {
+    return this.http.post(
+      'http://localhost:8080/api/v1/auth/change-reset',
+      {
+        oldPassword,
+        newPassword
+      },
+      httpOptions
+    );
+  }
 }
