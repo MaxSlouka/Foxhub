@@ -7,10 +7,11 @@ import { Component } from '@angular/core';
 })
 export class ChangePasswordComponent {
   form: any = {
-    password: null
+    oldPassword: null,
+    newPassword:null
   };
 
   onSubmit() {
-    
+
   }
 }
