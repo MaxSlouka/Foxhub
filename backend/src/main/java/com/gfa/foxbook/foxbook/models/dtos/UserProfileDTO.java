@@ -35,6 +35,7 @@ public class UserProfileDTO {
     private List<Technology> technologies;
     private List<Language> languages;
 
+
     public UserProfileDTO(User user){
         this.firstName = user.getFirstName();
         this.lastName = user.getLastName();
@@ -51,6 +52,7 @@ public class UserProfileDTO {
         this.linkedin = user.getLinkedin();
         this.gitHub = user.getGitHub();
         this.optionalPage = user.getOptionalPage();
+        this.roles = user.getRoles();
         this.technologies = user.getTechnologies();
         this.languages = user.getLanguages();
         this.profilePictureUrl = user.getProfilePictureUrl();

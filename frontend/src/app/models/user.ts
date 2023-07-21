@@ -1,5 +1,6 @@
 import { Technology } from "./technology";
 import { Language } from "./language";
+import {Role} from "./role";
 
 export interface User {
   id?: number;
@@ -23,7 +24,7 @@ export interface User {
   linkedin?: string,
   gitHub?: string,
   optionalPage?: string,
-  roles?: string[],
+  roles?: Role[],
   technologies?: Technology[],
   languages?: Language[],
 }
