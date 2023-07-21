@@ -105,6 +105,9 @@ public class AuthController {
         }
         String newPassword = UUID.randomUUID().toString();
         user.get().setPassword(passwordEncoder.encode(newPassword));
+
+        userService.saveUser(user.get());
+
         emailService.send(emailDTO.getEmail(),"Foxbook - Password reset", "You have reseted your password. Your new password is: "+newPassword+" \n Please change in after login");
         return ResponseEntity.ok().build();
     }
