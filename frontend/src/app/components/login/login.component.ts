@@ -50,7 +50,7 @@ export class LoginComponent implements OnInit {
     const { email, password } = this.form;
 
     this.authService.login(email, password).subscribe({
-      next: async data => {
+      next: data => {
         this.storageService.saveUser(data.email);
         this.isLoginFailed = false;
         this.isLoggedIn = true;
@@ -59,6 +59,7 @@ export class LoginComponent implements OnInit {
       },
       error: err => {
         this.errorMessage = err.error.message;
+        // console.log(err); // todo error message is not placed
         this.isLoginFailed = true;
         this.toastr.error(this.errorMessage, 'Error');
       }
