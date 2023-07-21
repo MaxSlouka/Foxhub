@@ -14,10 +14,11 @@ export class PostsService {
     return this.httpClient.get<Post[]>('http://localhost:8080/api/v1/public/posts');
   }
 
-  createPost(text: string, parentPostId: null | number): Observable<Post> {
+  createPost(creator: string, text: string, parentPostId: null | number): Observable<Post> {
     return this.httpClient.post<Post>(
       'http://localhost:8080/api/v1/admin/posts', {
         content: text,
+        author: creator,
         parentPostId,
 
       //   ToDo: fields below move to backend

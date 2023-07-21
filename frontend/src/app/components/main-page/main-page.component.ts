@@ -10,17 +10,21 @@ import {ApiService} from "../../_services/api/api.service";
 
 export class MainPageComponent {
 
-  protected User: User | undefined;
-  userRole: string = '';
+  // @ts-ignore
+  user: User;
+  // @ts-ignore
+  userRole: string;
+  // @ts-ignore
+  userFullName: string;
 
   constructor(private apiService: ApiService) {}
 
   ngOnInit(): void {
     this.apiService.getUserBasicInfo().subscribe((user: User) => {
-      this.User = user;
+      this.user = user;
       // @ts-ignore
-      this.userRole = this.User.roles[0].name;
-      console.log(this.userRole)
+      this.userRole = user.roles[0].name;
+      this.userFullName = user.firstName + ' ' + user.lastName;
     });
   }
 }
