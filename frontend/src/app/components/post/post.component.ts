@@ -12,6 +12,7 @@ export class PostComponent implements OnInit {
   @Input() replies!: Post[];
   @Input() activePost!: Post | null;
   @Input() parentPostId!: number | null;
+  @Input() userRole!: string;
 
 
   @Output() setActivePost = new EventEmitter<Post | null>();

@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {PostsService} from "../../_services/posts.service";
 import {Post} from "../../models/post";
+import {User} from "../../models/user";
 
 @Component({
   selector: 'app-posts',
@@ -9,7 +10,10 @@ import {Post} from "../../models/post";
 })
 export class PostsComponent implements OnInit {
   @Input() currentUserId!: number;
-  @Input() userRole!: string;
+  // @ts-ignore
+  @Input userRole: string;
+  // @ts-ignore
+  @Input() userFullName: string;
 
   posts: Post[] = [];
   activePost: Post | null = null;
@@ -20,17 +24,14 @@ export class PostsComponent implements OnInit {
   ngOnInit() {
     this.postsService.getPosts().subscribe((posts: Post[]) => {
       this.posts = posts;
-      console.log(posts);
     })
   }
 
-  addPost({text, parentPostId}: { text: string, parentPostId: null | number }): void {
-    console.log('addPost', text, parentPostId);
+  addPost({text, parentPostId}: {text: string, parentPostId: null | number }): void {
+    console.log('addPost', text, parentPostId, this.userFullName);
     this.postsService
-      .createPost(text, parentPostId)
+      .createPost(this.userFullName, text,parentPostId)
       .subscribe((createdPost) => {
-        this.posts = [...this.posts, createdPost];
-        this.activePost = null;
       });
   }
 

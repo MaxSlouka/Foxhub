@@ -14,8 +14,8 @@
           (handleCancel)="setActivePost.emit(null)"></app-post-form>
         <div class="post-actions">
           <div class="post-action">Reply</div>
-          <div class="post-action">Edit</div>
-          <div class="post-action" (click)="deletePost.emit(post.id)">Delete</div>
+          <div class="post-action"  *ngIf="userRole==='ADMIN'">Edit</div>
+          <div class="post-action" (click)="deletePost.emit(post.id)"  *ngIf="userRole==='ADMIN'">Delete</div>
         </div>
         <app-post-form *ngIf="isReplying()" submitLabel="Reply"
           (handleSubmit)="addPost.emit({text: $event, parentPostId: replyId})">
