@@ -56,7 +56,7 @@ export class AuthService {
 
   resetPassword(email:String):Observable<any> {
     return this.http.post(
-      AUTH_API + 'password-reset',
+      'http://localhost:8080/api/v1/auth/password-reset',
       {
         email
       },
