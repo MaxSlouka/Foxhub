@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Renderer2, ElementRef } from '@angular/core';
 import { User } from "../../models/user";
 
 @Component({
@@ -10,4 +10,23 @@ import { User } from "../../models/user";
 export class PeoplePageCardComponent {
   // @ts-ignore
   @Input() user: User;
+  isOpen: boolean = false; 
+
+  constructor(private renderer: Renderer2, private el: ElementRef) { }
+
+  ngOnInit() {
+    const btnElement = this.el.nativeElement.querySelector('.btn');
+    const boxElement = this.el.nativeElement.querySelector('.box');
+
+    this.renderer.listen(btnElement, 'click', () => {
+      this.isOpen = !this.isOpen; 
+      if (this.isOpen) {
+        this.renderer.addClass(btnElement, 'active');
+        this.renderer.addClass(boxElement, 'open');
+      } else {
+        this.renderer.removeClass(btnElement, 'active');
+        this.renderer.removeClass(boxElement, 'open');
+      }
+    });
+  }
 }
