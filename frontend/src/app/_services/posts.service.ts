@@ -30,13 +30,14 @@ export class PostsService {
   }
 
   updatePost(id: number, text: string): Observable<Post> {
-    return this.httpClient.put<Post>(
+    return this.httpClient.patch<Post>(
       `http://localhost:8080/api/v1/admin/posts/${id}`,
       {
         content: text,
       }
     );
   }
+
 
   deletePost(id: number): Observable<{}> {
     return this.httpClient.delete(
