@@ -37,7 +37,6 @@ export class PostsComponent implements OnInit {
       });
   }
 
-
   loadPosts() {
     this.postsService.getPosts().subscribe((posts: Post[]) => {
       this.posts = posts;
