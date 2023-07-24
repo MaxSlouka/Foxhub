@@ -72,14 +72,15 @@ export class PeoplePageComponent implements OnInit, AfterViewInit {
     this.filterContentExpanded = !this.filterContentExpanded;
   }
 
-  // @ts-ignore
-  usedTechnologiesList(): Technology[] {
+
+  usedTechnologiesList(){
+    const usedTechNames: string[] = [];
     for (let user of this.users) {
       // @ts-ignore
       for (let tech of user.technologies) {
-        // @ts-ignore
-        if (!this.usedTechnologies.includes(tech)) {
-          // @ts-ignore
+        const techName = tech.name.toLowerCase();
+        if (!usedTechNames.includes(techName)) {
+          usedTechNames.push(techName);
           this.usedTechnologies.push(tech);
         }
       }
@@ -89,10 +90,13 @@ export class PeoplePageComponent implements OnInit, AfterViewInit {
 
   // @ts-ignore
   usedLanguagesList(): Language[] {
+    const usedLangNames: string[] = [];
     for (let user of this.users) {
       // @ts-ignore
       for (let lang of user.languages) {
-        if (!this.usedLanguages.includes(lang)) {
+        const langName = lang.name.toLowerCase();
+        if (!usedLangNames.includes(langName)) {
+          usedLangNames.push(langName);
           this.usedLanguages.push(lang);
         }
       }
