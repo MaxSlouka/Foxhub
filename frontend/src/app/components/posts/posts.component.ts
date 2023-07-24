@@ -1,7 +1,6 @@
-import {Component, Input, OnInit, ChangeDetectorRef} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {PostsService} from "../../_services/posts.service";
 import {Post} from "../../models/post";
-import {User} from "../../models/user";
 
 @Component({
   selector: 'app-posts',
@@ -9,21 +8,35 @@ import {User} from "../../models/user";
   styleUrls: ['./posts.component.css']
 })
 export class PostsComponent implements OnInit {
-  @Input() currentUserId!: number;
   @Input() userRole!: string;
   @Input() userFullName!: string;
+  @Input() currentUserId!: number | undefined;
 
 
   posts: Post[] = [];
   activePost: Post | null = null;
 
-  constructor(private postsService: PostsService, private cdr: ChangeDetectorRef) {
+  constructor(private postsService: PostsService) {
   }
-
 
   ngOnInit() {
-    this.loadPosts();
+    this.postsService.getPosts().subscribe((posts: Post[]) => {
+      this.posts = posts;
+    })
   }
+
+  addPost({text, parentPostId}: {text: string, parentPostId: null | number }): void {
+    if (this.currentUserId === undefined) {
+      // Handle the error: maybe show a message to the user, or just return
+      return;
+    }
+    this.postsService
+      .createPost(this.currentUserId, this.userFullName, text, parentPostId)
+      .subscribe((createdPost) => {
+        this.loadPosts();
+      });
+  }
+
 
   loadPosts() {
     this.postsService.getPosts().subscribe((posts: Post[]) => {
@@ -31,28 +44,19 @@ export class PostsComponent implements OnInit {
     })
   }
 
-
-  addPost({text, parentPostId}: {text: string, parentPostId: null | number }): void {
-
-    this.postsService
-      .createPost(this.userID, this.userFullName, text, parentPostId)
-      .subscribe((createdPost) => {
-        this.loadPosts(); // reload posts after adding a new one
-      });
-  }
-
-
   updatePost({text, id}: {text: string, id: number}) {
-    this.postsService.updatePost(id, text).subscribe(
-      (updatedPost) => {
-        this.loadPosts(); // reload posts after updating a post
-
+    this.postsService
+      .updatePost(id, text)
+      .subscribe((updatedPost) => {
+        this.posts = this.posts.map((post) => {
+          if (post.id === id) {
+            this.loadPosts();
+            return updatedPost;
+          }
+          return post;
+        });
         this.activePost = null;
-      },
-      (error) => {
-        console.error('error updating post', error);
-      }
-    );
+      });
   }
 
   deletePost(postId: number): void {
@@ -60,7 +64,6 @@ export class PostsComponent implements OnInit {
       this.posts = this.posts.filter(
         (post) => post.id !== postId
       );
-      this.cdr.detectChanges(); // Trigger change detection
     });
   }
 
@@ -77,6 +80,4 @@ export class PostsComponent implements OnInit {
   setActivePost(activePost: Post | null): void {
     this.activePost = activePost;
   }
-
-
 }
