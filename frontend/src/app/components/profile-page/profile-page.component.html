@@ -29,7 +29,8 @@
           </div>
         </div>
         <h1 class="display-4 fw-bold text-body-emphasis lh-1 mb-4 userName-mobile">{{ user.firstName }} {{ user.lastName
-          }}</h1>
+          }}
+        </h1>
       </div>
 
       <!-- qr code -->
@@ -37,11 +38,9 @@
       <!-- button trigger modal -->
       <div class="mt-2 text-center">
         <div class="d-flex flex-column align-items-center text-center p-3 py-2 qr-code">
-          <qrcode data-toggle="modal" data-target="#qrModal" (qrCodeURL)="onChangeURL($event)"
-            [qrdata]="'http://localhost:4200/profile/' + username" [width]="80" [errorCorrectionLevel]="'M'"
-            class="qrModal-btn"></qrcode>
-          <a [href]="qrCodeDownloadLink" download="qrcode" class="btn btn-outline-success px-4 me-md-2" role="button"
-            aria-disabled="true">Download QR</a>
+          <button class="btn btn-outline-primary" type="button" data-toggle="modal" data-target="#qrModal">
+            QR Code
+          </button>
         </div>
       </div>
 
@@ -61,13 +60,17 @@
               <qrcode (qrCodeURL)="onChangeURL($event)" [qrdata]="'http://localhost:4200/profile/' + username"
                 [width]="250" [errorCorrectionLevel]="'M'"></qrcode>
             </div>
+            <div class="text-center py-3">
+              <a [href]="qrCodeDownloadLink" download="qrcode" class="btn btn-outline-primary px-4 me-md-2"
+                role="button" aria-disabled="true">Download QR</a>
+            </div>
           </div>
         </div>
       </div>
 
       <!-- button trigger modal -->
       <div class="mt-2 text-center">
-        <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#exampleModal">
+        <button class="btn btn-outline-primary" type="button" data-toggle="modal" data-target="#exampleModal">
           Contact
         </button>
       </div>
