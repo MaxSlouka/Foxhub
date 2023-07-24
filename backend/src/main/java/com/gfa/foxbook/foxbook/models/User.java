@@ -37,6 +37,8 @@ public class User {
     private String email;
     private String phone;
     private String location;
+    @Column(columnDefinition = "text")
+    @Lob
     private String about;
     private String completeProjects;
     private String yearsOfExperience;
@@ -49,6 +51,7 @@ public class User {
     private String instagram;
     private String linkedin;
     private String gitHub;
+    private Boolean workStatus;
     private String optionalPage;
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
