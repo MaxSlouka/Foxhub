@@ -16,9 +16,9 @@ import {LanguageService} from "../../_services/language.service";
 
 
 export class PeoplePageComponent implements OnInit, AfterViewInit {
-  @ViewChild('customRange3', { static: true }) rangeInputRef!: ElementRef<HTMLInputElement>;
-  @ViewChild('rangeValue', { static: true }) rangeValueRef!: ElementRef<HTMLSpanElement>;
-  
+  @ViewChild('customRange3', {static: true}) rangeInputRef!: ElementRef<HTMLInputElement>;
+  @ViewChild('rangeValue', {static: true}) rangeValueRef!: ElementRef<HTMLSpanElement>;
+
   technologies: Technology[] = [];
   languages: Language[] = [];
   selectedTechnologies: string[] = [];
@@ -31,7 +31,7 @@ export class PeoplePageComponent implements OnInit, AfterViewInit {
   users: User[] = [];
   fullUsers: User[] = [];
 
-  filterContentExpanded: boolean = true
+  filterContentExpanded: boolean = true;
 
   constructor(public dataService: DataService,
               private technologyService: TechnologyService,
@@ -76,7 +76,7 @@ export class PeoplePageComponent implements OnInit, AfterViewInit {
   }
 
   // @ts-ignore
-  usedTechnologiesList(): Technology[] {
+  usedTechnologiesList(){
 
     for (let user of this.users) {
 
@@ -90,12 +90,11 @@ export class PeoplePageComponent implements OnInit, AfterViewInit {
         }
       }
     }
-    return usedTechnologies;
   }
 
 
   // @ts-ignore
-  usedLanguagesList(): Language[] {
+  usedLanguagesList(){
     for (let user of this.users) {
       console.log(user)
       // @ts-ignore
@@ -105,7 +104,6 @@ export class PeoplePageComponent implements OnInit, AfterViewInit {
         }
       }
     }
-
   }
 
 
@@ -124,7 +122,6 @@ export class PeoplePageComponent implements OnInit, AfterViewInit {
   }
 
 
-
   addToLangList(event: any, tech: string) {
     if (event.target.checked) {
       if (!this.selectedLanguages.includes(tech)) {
@@ -138,20 +135,25 @@ export class PeoplePageComponent implements OnInit, AfterViewInit {
     }
 
 
-  technologiesFilter(keys: string[]) {
-    if (keys.length === 0) {
-      this.users = this.fullUsers;
-      return;
+    technologiesFilter(keys
+  :
+    string[]
+  )
+    {
+      if (keys.length === 0) {
+        this.users = this.fullUsers;
+        return;
+      }
+
+      const lowerCaseKeys = keys.map(key => key.toLowerCase());
+      this.users = this.fullUsers.filter(user =>
+        lowerCaseKeys.every(key =>
+            user.technologies && user.technologies.some(technology =>
+              technology.name.toLowerCase().includes(key)
+            )
+        )
+      );
+
     }
-
-    const lowerCaseKeys = keys.map(key => key.toLowerCase());
-    this.users = this.fullUsers.filter(user =>
-      lowerCaseKeys.every(key =>
-          user.technologies && user.technologies.some(technology =>
-            technology.name.toLowerCase().includes(key)
-          )
-      )
-    );
-
   }
 }
