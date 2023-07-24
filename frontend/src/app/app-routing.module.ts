@@ -10,7 +10,9 @@ import { PageNotFoundComponent } from "./components/page-not-found/page-not-foun
 import { UserSettingsPageComponent } from './components/user-settings-page/user-settings-page.component';
 import { TermsOfUseComponent } from './components/terms-of-use/terms-of-use.component';
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
-import {ChangePasswordComponent} from "./components/change-password/change-password.component";
+import { ChangePasswordComponent } from "./components/change-password/change-password.component";
+import { CartComponent } from "./components/cart/cart.component";
+import { CartCheckoutComponent } from "./components/cart-checkout/cart-checkout.component";
 
 const routes: Routes = [
   { path: '', component: IntroComponent },
@@ -21,8 +23,10 @@ const routes: Routes = [
   { path: 'profile/:username', component: ProfilePageComponent },
   { path: 'update-profile', component: UserSettingsPageComponent },
   { path: 'reset-password', component: ResetPasswordComponent },
-  { path: 'change-password', component:ChangePasswordComponent},
+  { path: 'change-password', component: ChangePasswordComponent },
   { path: 'termsOfUse', component: TermsOfUseComponent },
+  { path: 'cart', component: CartComponent },
+  { path: 'cart-checkout', component: CartCheckoutComponent },
   { path: '**', pathMatch: 'full', component: PageNotFoundComponent }
 ]
 
