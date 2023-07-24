@@ -1,7 +1,7 @@
-import {Component, OnInit} from '@angular/core';
-import {DataService} from "../../_services/api/data.service";
+import { Component, OnInit } from '@angular/core';
+import { DataService } from "../../_services/api/data.service";
 import {Technology} from "../../models/technology";
-import {User} from "../../models/user";
+import {TechnologyService} from "../../_services/technology.service";
 
 @Component({
   selector: 'app-people-page',
@@ -10,37 +10,38 @@ import {User} from "../../models/user";
 })
 
 export class PeoplePageComponent implements OnInit {
+  technologies:Technology[] = [];
+  selectedTechnologies:string[] = [];
 
-  usedTechnologies: Technology[] = [];
-  // @ts-ignore
-  users: User[] ;
-
-  constructor(public dataService: DataService) {
+  constructor(public dataService: DataService, private technolgyService:TechnologyService) {
   }
 
   ngOnInit(): void {
-   if(this.dataService.users){
-     this.users = this.dataService.users;
-     usedTechnologiesList();
-     console.log(this.users);
-   }
+    this.technolgyService.getAll().subscribe(technologies=>{
+      for (const technology of technologies) {
+        this.technologies.push(technology);
+      }
+    });
   }
-}
+
+  onSomthing() {
+    console.log(this.technologies);
+  }
 
 
-// @ts-ignore
-function usedTechnologiesList(): Technology[] {
-  // @ts-ignore
-  for(let user: User of this.users) {
-   // @ts-ignore
-    for(let technology: Technology of user.technologies) {
-     // @ts-ignore
-     if(!this.usedTechnologies.includes(technology)) {
-       // @ts-ignore
-       this.usedTechnologies.push(technology);
-     }
-   }
+
+  addToTechList(event: any, tech: string) {
+    if (event.target.checked) {
+      if (!this.selectedTechnologies.includes(tech)) {
+        this.selectedTechnologies.push(tech);
+      }
+    } else {
+      const index = this.selectedTechnologies.indexOf(tech);
+      if (index > -1) {
+        this.selectedTechnologies.splice(index, 1);
+      }
+    }
+    console.log(this.selectedTechnologies);
   }
-  // @ts-ignore
-  console.log(this.usedTechnologies);
+
 }
