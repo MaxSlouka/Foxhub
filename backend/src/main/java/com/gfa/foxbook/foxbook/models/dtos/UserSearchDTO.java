@@ -18,6 +18,7 @@ public class UserSearchDTO {
     private String lastName;
     private String nickname;
     private String about;
+    private Boolean workStatus;
     private List<Technology> technologies;
     private List<Language> languages;
     private String profilePictureUrl;
