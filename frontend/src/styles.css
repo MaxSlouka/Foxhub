@@ -21,3 +21,21 @@ body, nav, a {
 .btn-primary:active {
   background-color: #007f00;
 }
+
+.btn-outline-primary {
+  border: 1px solid green;
+  color: green;
+}
+
+.btn-outline-primary:hover {
+  background-color: green;
+  color: rgb(255, 255, 255);
+}
+
+.btn-outline-primary:active {
+  background-color: #007f00;
+}
+
+.btn-outline-primary:active {
+  background-color: #007f00;
+}
