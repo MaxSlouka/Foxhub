@@ -1,51 +1,62 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Post} from "../../models/post";
 
+
 @Component({
-  selector: 'app-post',
-  templateUrl: './post.component.html',
-  styleUrls: ['./post.component.css']
+    selector: 'app-post',
+    templateUrl: './post.component.html',
+    styleUrls: ['./post.component.css']
 })
 export class PostComponent implements OnInit {
-  @Input() post!: Post;
-  @Input() currentUserId!: number;
-  @Input() replies!: Post[];
-  @Input() activePost!: Post | null;
-  @Input() parentPostId!: number | null;
-  @Input() userRole!: string;
+    @Input() post!: Post;
+    @Input() currentUserId!: number;
+    @Input() replies!: Post[];
+    @Input() activePost!: Post | null;
+    @Input() parentPostId!: number | null;
+    @Input() userRole!: string;
 
+    @Output() setActivePost = new EventEmitter<Post | null>();
+    @Output() addPost = new EventEmitter<{text: string, parentPostId: number | null}>();
+    @Output() updatePost = new EventEmitter<{text: string, id: number}>();
+    @Output() deletePost = new EventEmitter<number>();
 
-  @Output() setActivePost = new EventEmitter<Post | null>();
-  @Output() addPost = new EventEmitter<{
-    text: string, parentPostId: number | null
-  }>();
-  @Output() updatePost = new EventEmitter<{
-    text: string, id: number
-  }>();
-  @Output() deletePost = new EventEmitter<number>();
+    canReply: boolean = false;
+    canEdit: boolean = false;
+    canDelete: boolean = false;
+    replyId: number | null = null;
+    isEditing: boolean = false;
 
-  canReply: boolean = false;
-  canEdit: boolean = false;
-  canDelete: boolean = false;
-  replyId: number | null = null;
+    ngOnInit(): void {
+        const timeToEdit = 300000;
+        const timePassed = new Date().getMilliseconds() -
+            new Date(this.post.createdAt).getMilliseconds() > timeToEdit;
+        this.stopEditing();
 
-  ngOnInit(): void {
-    const timeToEdit = 300000;
-    const timePassed =
-      new Date().getMilliseconds() -
-      new Date(this.post.createdAt).getMilliseconds() > timeToEdit;
+        this.canReply = Boolean(this.currentUserId);
+        this.canEdit = this.currentUserId === this.post.userId && !timePassed;
+        this.canDelete = this.currentUserId === this.post.userId && this.replies.length === 0;
 
-    this.canReply = Boolean(this.currentUserId);
-    this.canEdit = this.currentUserId === this.post.userId && !timePassed;
-    this.canDelete = this.currentUserId === this.post.userId && this.replies.length === 0;
-    // this.replyId = this.parentPostId ? this.parentPostId : this.post.PostId;
-  }
-
-  isReplying(): Boolean {
-    if (!this.activePost) {
-      return false;
+        console.log('ngOnInit method in PostComponent called');
+        console.log('userRole:', this.userRole);
+        console.log('isEditing:', this.isEditing);
+        console.log('canEdit:', this.canEdit);
     }
 
-    return this.activePost.id === this.post.id;
-  }
+
+    startEditing() {
+        console.log('startEditing method in PostComponent called');
+        this.isEditing = true;
+    }
+
+    stopEditing() {
+        this.isEditing = false;
+    }
+
+    isReplying(): Boolean {
+        if (!this.activePost) {
+            return false;
+        }
+
+        return this.activePost.id === this.post.id;
+    }
 }
