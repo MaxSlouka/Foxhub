@@ -8,24 +8,27 @@
         <div class="post-content">
           <div class="post-author">{{ post.username }}</div>
         </div>
-        <div class="post-text" *ngIf="!isReplying()">{{ post.content }}</div>
-        <app-post-form *ngIf="isReplying()" submitLabel="Update" [hasCancelButton]="true" [initialText]="post.content!"
-          (handleSubmit)="updatePost.emit({text: $event, id: post.id!})"
-          (handleCancel)="setActivePost.emit(null)"></app-post-form>
+        <div class="post-text" *ngIf="!isEditing && !isReplying()">{{ post.content }}</div>
+        <app-post-form *ngIf="isEditing" submitLabel="Update" [hasCancelButton]="true" [initialText]="post.content"
+                       (handleSubmit)="updatePost.emit({text: $event, id: post.id}); stopEditing()"
+                       (handleCancel)="stopEditing()"></app-post-form>
+        <app-post-form *ngIf="isReplying() && !isEditing" submitLabel="Update" [hasCancelButton]="true" [initialText]="post.content!"
+                       (handleSubmit)="updatePost.emit({text: $event, id: post.id!})"
+                       (handleCancel)="setActivePost.emit(null)"></app-post-form>
         <div class="post-actions">
           <div class="post-action">Reply</div>
-          <div class="post-action"  *ngIf="userRole==='ADMIN'">Edit</div>
-          <div class="post-action" (click)="deletePost.emit(post.id)"  *ngIf="userRole==='ADMIN'">Delete</div>
+          <div class="post-action btn btn-primary" (click)="startEditing()" *ngIf="userRole==='ADMIN' && !isEditing">Edit</div>
+          <div class="post-action btn btn-danger" (click)="deletePost.emit(post.id)"  *ngIf="userRole==='ADMIN'">Delete</div>
         </div>
-        <app-post-form *ngIf="isReplying()" submitLabel="Reply"
-          (handleSubmit)="addPost.emit({text: $event, parentPostId: replyId})">
+        <app-post-form *ngIf="isReplying() && !isEditing" submitLabel="Reply"
+                       (handleSubmit)="addPost.emit({text: $event, parentPostId: replyId})">
         </app-post-form>
         <div class="replies" *ngIf="replies.length > 0">
           <div *ngFor="let reply of replies" class="card mb-3">
             <div class="card-body">
               <app-post [post]="reply" (setActivePost)="setActivePost.emit($event)" [activePost]="activePost"
-                (addPost)="addPost.emit($event)" (updatePost)="updatePost.emit($event)" [parentPostId]="post.id!"
-                [replies]="[]" [currentUserId]="currentUserId" (deletePost)="deletePost.emit($event)">
+                        (addPost)="addPost.emit($event)" (updatePost)="updatePost.emit($event)" [parentPostId]="post.id!"
+                        [replies]="[]" [currentUserId]="currentUserId" (deletePost)="deletePost.emit($event)">
               </app-post>
             </div>
           </div>
