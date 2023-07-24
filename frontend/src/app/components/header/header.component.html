@@ -28,17 +28,6 @@
         <img src="../../../assets/img/GFA-logo.png" width="50" height="50" alt="GFA logo">
       </a>
 
-      <!-- nav items -->
-
-      <!-- <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-start mb-md-0">
-        <li class="nav-item" routerLinkActive="active">
-          <a routerLink="/main" class="nav-link px-2">Main</a>
-        </li>
-        <li class="nav-item" routerLinkActive="active">
-          <a routerLink="/people" class="nav-link px-2">People</a>
-        </li>
-      </ul> -->
-
       <!-- login and sign up -->
 
       <div class="text-end" *ngIf="!isLoggedIn">
@@ -54,6 +43,9 @@
       <div class="btn-group align-items-center" *ngIf="isLoggedIn">
         <a href="./people" class="people-btn" aria-disabled="true">
           <i class="bi bi-people"></i>
+        </a>
+        <a href="./cart" class="cart-btn" aria-disabled="true">
+          <i class="bi bi-bag"></i>
         </a>
         <a href="#" class="d-block link-body-emphasis text-decoration-none dropdown-toggle" data-toggle="dropdown"
           aria-expanded="false">
