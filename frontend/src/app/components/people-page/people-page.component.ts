@@ -1,11 +1,11 @@
-
 import { Component, OnInit, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
 import { DataService } from "../../_services/api/data.service";
-
 import {Technology} from "../../models/technology";
 import {TechnologyService} from "../../_services/technology.service";
 import {ApiService} from "../../_services/api/api.service";
 import {User} from "../../models/user";
+import {Language} from "../../models/language";
+import {LanguageService} from "../../_services/language.service";
 
 
 @Component({
@@ -19,9 +19,13 @@ export class PeoplePageComponent implements OnInit, AfterViewInit {
   @ViewChild('customRange3', { static: true }) rangeInputRef!: ElementRef<HTMLInputElement>;
   @ViewChild('rangeValue', { static: true }) rangeValueRef!: ElementRef<HTMLSpanElement>;
   
-  technologies:Technology[] = [];
-  selectedTechnologies:string[] = [];
-  usedTechnologies:Technology[] = [];
+  technologies: Technology[] = [];
+  languages: Language[] = [];
+  selectedTechnologies: string[] = [];
+  selectedLanguages: string[] = [];
+  usedTechnologies: Technology[] = [];
+  usedLanguages: Language[] = [];
+
 
   // @ts-ignore
   users: User[] = [];
@@ -30,18 +34,27 @@ export class PeoplePageComponent implements OnInit, AfterViewInit {
   filterContentExpanded: boolean = true
 
   constructor(public dataService: DataService,
-              private technolgyService:TechnologyService,
-              private apiService:ApiService){
+              private technologyService: TechnologyService,
+              private languageService: LanguageService,
+              private apiService: ApiService) {
   }
 
   ngOnInit(): void {
-    this.technolgyService.getAll().subscribe(technologies => {
+
+    this.technologyService.getAll().subscribe(technologies => {
       this.technologies = technologies;
-      this.usedTechnologiesList();
+
     });
+    this.languageService.getAll().subscribe(languages => {
+      this.languages = languages;
+    })
     // @ts-ignore
     this.apiService.getAll().subscribe(users => {
       this.users = users;
+
+      this.usedTechnologiesList();
+
+
       this.fullUsers = users;
       this.usedTechnologiesList();
     });
@@ -54,6 +67,7 @@ export class PeoplePageComponent implements OnInit, AfterViewInit {
     rangeInput.addEventListener('input', (event) => {
       const target = event.target as HTMLInputElement;
       rangeValue.textContent = target.value;
+
     });
   }
 
@@ -63,17 +77,37 @@ export class PeoplePageComponent implements OnInit, AfterViewInit {
 
   // @ts-ignore
   usedTechnologiesList(): Technology[] {
-    const usedTechnologies: Technology[] = [];
+
     for (let user of this.users) {
+
       // @ts-ignore
       for (let tech of user.technologies) {
-        if (!usedTechnologies.some(usedTech => usedTech.name === tech.name)) {
-          usedTechnologies.push(tech);
+        // @ts-ignore
+        if (!this.usedTechnologies.includes(tech)) {
+          // @ts-ignore
+          this.usedTechnologies.push(tech);
+
         }
       }
     }
     return usedTechnologies;
   }
+
+
+  // @ts-ignore
+  usedLanguagesList(): Language[] {
+    for (let user of this.users) {
+      console.log(user)
+      // @ts-ignore
+      for (let lang of user.languages) {
+        if (!this.usedLanguages.includes(lang)) {
+          this.usedLanguages.push(lang);
+        }
+      }
+    }
+
+  }
+
 
   addToTechList(event: any, tech: string) {
     if (event.target.checked) {
@@ -91,6 +125,19 @@ export class PeoplePageComponent implements OnInit, AfterViewInit {
 
 
 
+  addToLangList(event: any, tech: string) {
+    if (event.target.checked) {
+      if (!this.selectedLanguages.includes(tech)) {
+        this.selectedLanguages.push(tech);
+      }
+    } else {
+      const index = this.selectedLanguages.indexOf(tech);
+      if (index > -1) {
+        this.selectedLanguages.splice(index, 1);
+      }
+    }
+
+
   technologiesFilter(keys: string[]) {
     if (keys.length === 0) {
       this.users = this.fullUsers;
@@ -105,5 +152,6 @@ export class PeoplePageComponent implements OnInit, AfterViewInit {
           )
       )
     );
+
   }
 }

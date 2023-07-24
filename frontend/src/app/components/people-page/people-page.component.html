@@ -20,7 +20,7 @@
 
     <div class="col-10 col-sm-8 col-lg-6">
       <img src="../../../assets/img/Meeting.png" class="d-block mx-lg-auto img-fluid" alt="Meeting" width="700"
-        height="500" loading="lazy">
+           height="500" loading="lazy">
     </div>
   </div>
 </div>
@@ -30,12 +30,25 @@
 </div>
 <div class="py-5 text-center">
   <div class="dropdown">
-    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-      Dropdown button
+    <button class="btn btn-secondary dropdown-toggle" type="button" id="techDropdown" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+      Techs
     </button>
-    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+    <div class="dropdown-menu" aria-labelledby="techDropdown">
       <tr *ngFor="let tech of usedTechnologies">
-        <td>{{tech.name}} <input type="checkbox" (change)="addToTechList($event, tech.name)" ></td>
+        <td>{{tech.name}} <input type="checkbox" (change)="addToTechList($event, tech.name)"></td>
+      </tr>
+    </div>
+  </div>
+
+  <div class="dropdown">
+    <button class="btn btn-secondary dropdown-toggle" type="button" id="langDropDown" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+      Languages
+    </button>
+    <div class="dropdown-menu" aria-labelledby="langDropDown">
+      <tr *ngFor="let lang of usedLanguages">
+        <td>{{lang.name}} <input type="checkbox" (change)="addToLangList($event, lang.name)"></td>
       </tr>
     </div>
   </div>
