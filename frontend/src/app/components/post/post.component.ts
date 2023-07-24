@@ -1,5 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Post} from "../../models/post";
+import {User} from "../../models/user";
 
 @Component({
   selector: 'app-post',
@@ -13,9 +14,6 @@ export class PostComponent implements OnInit {
   @Input() parentPostId!: number | null;
   @Input() userRole!: string;
   @Input() currentUserId!: number | undefined;
-
-
-
   @Output() setActivePost = new EventEmitter<Post | null>();
   @Output() addPost = new EventEmitter<{
     text: string, parentPostId: number | null
