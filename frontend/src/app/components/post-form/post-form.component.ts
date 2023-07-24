@@ -13,6 +13,7 @@ export class PostFormComponent implements OnInit {
 
   @Output() handleSubmit = new EventEmitter<string>();
   @Output() handleCancel = new EventEmitter<void>();
+  @Output() handleSubmitted = new EventEmitter<void>();
 
   form!: FormGroup;
 
@@ -26,6 +27,9 @@ export class PostFormComponent implements OnInit {
   }
 
   onSubmit(): void {
-    this.handleSubmit.emit(this.form.value.title);
+    const inputValue = this.form.value.title;
+    this.handleSubmit.emit(inputValue);
+    this.initialText = ''; // Clear the initialText
+    this.form.reset();
   }
 }
