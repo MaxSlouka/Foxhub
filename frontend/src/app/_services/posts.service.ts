@@ -14,7 +14,7 @@ export class PostsService {
     return this.httpClient.get<Post[]>('http://localhost:8080/api/v1/public/posts');
   }
 
-  createPost(userID: number | undefined, username: string, text: string, parentPostId: number | null): Observable<Post> {
+  createPost(userID: number, username: string, text: string, parentPostId: number | null): Observable<Post> {
     return this.httpClient.post<Post>(
       'http://localhost:8080/api/v1/admin/posts', {
         userID: userID,
@@ -27,13 +27,14 @@ export class PostsService {
   }
 
   updatePost(id: number, text: string): Observable<Post> {
-    return this.httpClient.put<Post>(
+    return this.httpClient.patch<Post>(
       `http://localhost:8080/api/v1/admin/posts/${id}`,
       {
         content: text,
       }
     );
   }
+
 
   deletePost(id: number): Observable<{}> {
     return this.httpClient.delete(

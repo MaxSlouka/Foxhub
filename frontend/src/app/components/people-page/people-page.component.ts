@@ -1,5 +1,7 @@
-import {Component, OnInit} from '@angular/core';
-import {DataService} from "../../_services/api/data.service";
+
+import { Component, OnInit, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
+import { DataService } from "../../_services/api/data.service";
+
 import {Technology} from "../../models/technology";
 import {TechnologyService} from "../../_services/technology.service";
 import {ApiService} from "../../_services/api/api.service";
@@ -12,20 +14,24 @@ import {User} from "../../models/user";
   styleUrls: ['./people-page.component.css']
 })
 
-export class PeoplePageComponent implements OnInit {
-  technologies: Technology[] = [];
-  selectedTechnologies: string[] = [];
-  usedTechnologies: Technology[] = [];
 
+export class PeoplePageComponent implements OnInit, AfterViewInit {
+  @ViewChild('customRange3', { static: true }) rangeInputRef!: ElementRef<HTMLInputElement>;
+  @ViewChild('rangeValue', { static: true }) rangeValueRef!: ElementRef<HTMLSpanElement>;
+  
+  technologies:Technology[] = [];
+  selectedTechnologies:string[] = [];
+  usedTechnologies:Technology[] = [];
 
   // @ts-ignore
   users: User[] = [];
   fullUsers: User[] = [];
 
-  constructor(
-              private technolgyService: TechnologyService,
-              private apiService: ApiService,
-              ){
+  filterContentExpanded: boolean = true
+
+  constructor(public dataService: DataService,
+              private technolgyService:TechnologyService,
+              private apiService:ApiService){
   }
 
   ngOnInit(): void {
@@ -39,6 +45,20 @@ export class PeoplePageComponent implements OnInit {
       this.fullUsers = users;
       this.usedTechnologiesList();
     });
+  }
+
+  ngAfterViewInit(): void {
+    const rangeInput = this.rangeInputRef.nativeElement;
+    const rangeValue = this.rangeValueRef.nativeElement;
+
+    rangeInput.addEventListener('input', (event) => {
+      const target = event.target as HTMLInputElement;
+      rangeValue.textContent = target.value;
+    });
+  }
+
+  toggleFilterContent(): void {
+    this.filterContentExpanded = !this.filterContentExpanded;
   }
 
   // @ts-ignore
@@ -55,8 +75,6 @@ export class PeoplePageComponent implements OnInit {
     return usedTechnologies;
   }
 
-
-
   addToTechList(event: any, tech: string) {
     if (event.target.checked) {
       if (!this.selectedTechnologies.includes(tech)) {
@@ -70,6 +88,7 @@ export class PeoplePageComponent implements OnInit {
     }
     this.technologiesFilter(this.selectedTechnologies);
   }
+
 
 
   technologiesFilter(keys: string[]) {
