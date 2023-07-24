@@ -1,0 +1,16 @@
+.bg-primary {
+    background-color: green!important;
+    color: white;
+}
+
+.cart-count {
+    font-size: large;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+}
+
+.delete-btn:hover {
+    background-color: #222529!important;
+    color: rgb(255, 255, 255);
+}
