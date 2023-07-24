@@ -35,6 +35,8 @@ public class UserProfileDTO {
     private List<Role> roles;
     private List<Technology> technologies;
     private List<Language> languages;
+    private Boolean workStatus;
+
 
 
     public UserProfileDTO(User user) {

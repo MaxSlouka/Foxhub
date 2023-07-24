@@ -23,6 +23,7 @@ export interface User {
   instagram?: string,
   linkedin?: string,
   gitHub?: string,
+  workStatus?:boolean;
   optionalPage?: string,
   roles?: Role[],
   technologies?: Technology[],
