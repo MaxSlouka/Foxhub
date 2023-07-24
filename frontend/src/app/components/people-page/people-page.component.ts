@@ -18,7 +18,7 @@ import {LanguageService} from "../../_services/language.service";
 export class PeoplePageComponent implements OnInit, AfterViewInit {
   @ViewChild('customRange3', { static: true }) rangeInputRef!: ElementRef<HTMLInputElement>;
   @ViewChild('rangeValue', { static: true }) rangeValueRef!: ElementRef<HTMLSpanElement>;
-  
+
   technologies: Technology[] = [];
   languages: Language[] = [];
   selectedTechnologies: string[] = [];
@@ -51,12 +51,9 @@ export class PeoplePageComponent implements OnInit, AfterViewInit {
     // @ts-ignore
     this.apiService.getAll().subscribe(users => {
       this.users = users;
-
       this.usedTechnologiesList();
-
-
       this.fullUsers = users;
-      this.usedTechnologiesList();
+      this.usedLanguagesList();
     });
   }
 
@@ -90,7 +87,6 @@ export class PeoplePageComponent implements OnInit, AfterViewInit {
         }
       }
     }
-    return usedTechnologies;
   }
 
 
@@ -125,6 +121,7 @@ export class PeoplePageComponent implements OnInit, AfterViewInit {
 
 
 
+
   addToLangList(event: any, tech: string) {
     if (event.target.checked) {
       if (!this.selectedLanguages.includes(tech)) {
@@ -136,6 +133,7 @@ export class PeoplePageComponent implements OnInit, AfterViewInit {
         this.selectedLanguages.splice(index, 1);
       }
     }
+  }
 
 
   technologiesFilter(keys: string[]) {
@@ -154,4 +152,5 @@ export class PeoplePageComponent implements OnInit, AfterViewInit {
     );
 
   }
+
 }
