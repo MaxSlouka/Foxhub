@@ -18,22 +18,27 @@ ul li a {
     margin-right: 1rem;
 }
 
-.people-btn {
+.people-btn,
+.cart-btn {
     width: 42px;
     height: 42px;
-    background-color: #007f00;
+    background-color: #ffffff;
     cursor: pointer;
     text-decoration: none;
-    color: aliceblue;
+    color: #007f00;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     margin-right: 1rem;
+    border: 1px solid #007f00;
 }
 
-.people-btn:hover {
+.people-btn:hover,
+.cart-btn:hover {
     transform: scale(1.1);
+    color: white;
+    background-color: #007f00;
 }
 
 .dropdown-item {

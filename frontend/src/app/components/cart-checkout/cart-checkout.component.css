@@ -1,0 +1,9 @@
+.text-primary {
+    color: green!important;
+}
+
+.bg-primary {
+    background-color: green!important;
+    color: white;
+}
+
