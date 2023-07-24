@@ -39,6 +39,8 @@ import { AsideUserCardComponent } from './components/aside-user-card/aside-user-
 import { TechnologyButtonComponent } from './components/technology-button/technology-button.component';
 import { AsideSearchBarComponent } from './components/aside-search-bar/aside-search-bar.component';
 import { ChangePasswordComponent } from './components/change-password/change-password.component';
+import { CartComponent } from './components/cart/cart.component';
+import { CartCheckoutComponent } from './components/cart-checkout/cart-checkout.component';
 
 @NgModule({
   declarations: [
@@ -70,7 +72,9 @@ import { ChangePasswordComponent } from './components/change-password/change-pas
     AsideUserCardComponent,
     TechnologyButtonComponent,
     AsideSearchBarComponent,
-    ChangePasswordComponent
+    ChangePasswordComponent,
+    CartComponent,
+    CartCheckoutComponent
   ],
   imports: [
     FormsModule,
