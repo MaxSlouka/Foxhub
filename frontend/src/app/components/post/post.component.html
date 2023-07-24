@@ -1,39 +1,65 @@
-<div class="card mb-3">
+<div class="card mb-3" style="border: none;">
+
   <div class="card-body">
+
     <div class="d-flex align-items-center mb-2">
-      <div class="post-image-container mr-3">
-        <img src="/favicon.ico" width="50" height="50" alt="user icon" class="img-fluid rounded-circle">
-      </div>
-      <div class="post-right-part">
+
+      <div class="post-right-part flex-grow-1">
+
         <div class="post-content">
-          <div class="post-author">{{ post.username }}</div>
-          <div class="post-time">{{ post.createdAt}}</div>
-        </div>
-        <div class="post-text" *ngIf="!isEditing && !isReplying()">{{ post.content }}</div>
-        <app-post-form *ngIf="isEditing" submitLabel="Update" [hasCancelButton]="true" [initialText]="post.content"
-                       (handleSubmit)="updatePost.emit({text: $event, id: post.id}); stopEditing()"
-                       (handleCancel)="stopEditing()"></app-post-form>
-        <app-post-form *ngIf="isReplying() && !isEditing" submitLabel="Update" [hasCancelButton]="true" [initialText]="post.content!"
-                       (handleSubmit)="updatePost.emit({text: $event, id: post.id!})"
-                       (handleCancel)="setActivePost.emit(null)"></app-post-form>
-        <div class="post-actions">
-          <div class="post-action">Reply</div>
-          <div class="post-action btn btn-primary" (click)="startEditing()" *ngIf="userRole==='ADMIN' && !isEditing">Edit</div>
-          <div class="post-action btn btn-danger" (click)="deletePost.emit(post.id)"  *ngIf="userRole==='ADMIN'">Delete</div>
-        </div>
-        <app-post-form *ngIf="isReplying() && !isEditing" submitLabel="Reply"
-                       (handleSubmit)="addPost.emit({text: $event, parentPostId: replyId})">
-        </app-post-form>
-        <div class="replies" *ngIf="replies.length > 0">
-          <div *ngFor="let reply of replies" class="card mb-3">
-            <div class="card-body">
-              <app-post [post]="reply" (setActivePost)="setActivePost.emit($event)" [activePost]="activePost"
-                        (addPost)="addPost.emit($event)" (updatePost)="updatePost.emit($event)" [parentPostId]="post.id!"
-                        [replies]="[]" [currentUserId]="currentUserId" (deletePost)="deletePost.emit($event)">
-              </app-post>
-            </div>
+          <div class="post-author">
+            <p class="lead mb-1"><b>{{ post.username }}</b></p>
+          </div>
+          <div class="post-time">
+            <p style="font-size: smaller;">Created at: {{ post.createdAt }}</p>
           </div>
         </div>
+
+        <div class="post-text" *ngIf="!isEditing && !isReplying()">
+          <p class="lead my-4">{{ post.content }}</p>
+        </div>
+
+        <app-post-form *ngIf="isEditing" submitLabel="Update" [hasCancelButton]="true" [initialText]="post.content"
+          (handleSubmit)="updatePost.emit({text: $event, id: post.id}); stopEditing()"
+          (handleCancel)="stopEditing()"></app-post-form>
+
+        <app-post-form *ngIf="isReplying() && !isEditing" submitLabel="Update" [hasCancelButton]="true"
+          [initialText]="post.content!" (handleSubmit)="updatePost.emit({text: $event, id: post.id!})"
+          (handleCancel)="setActivePost.emit(null)"></app-post-form>
+
+        <div class="post-actions">
+
+          <div class="post-action btn btn-primary mr-2" (click)="startEditing()"
+            *ngIf="userRole==='ADMIN' && !isEditing">
+            Edit</div>
+          <div class="post-action btn btn-outline-secondary mr-2">Comment</div>
+          <div class="post-action btn btn-danger mr-2" (click)="deletePost.emit(post.id)" *ngIf="userRole==='ADMIN'">
+            Delete
+          </div>
+
+        </div>
+
+        <app-post-form *ngIf="isReplying() && !isEditing" submitLabel="Reply"
+          (handleSubmit)="addPost.emit({text: $event, parentPostId: replyId})">
+        </app-post-form>
+
+        <div class="replies" *ngIf="replies.length > 0">
+
+          <div *ngFor="let reply of replies" class="card mb-3">
+
+            <div class="card-body">
+
+              <app-post [post]="reply" (setActivePost)="setActivePost.emit($event)" [activePost]="activePost"
+                (addPost)="addPost.emit($event)" (updatePost)="updatePost.emit($event)" [parentPostId]="post.id!"
+                [replies]="[]" [currentUserId]="currentUserId" (deletePost)="deletePost.emit($event)">
+              </app-post>
+
+            </div>
+
+          </div>
+
+        </div>
+
       </div>
     </div>
   </div>
