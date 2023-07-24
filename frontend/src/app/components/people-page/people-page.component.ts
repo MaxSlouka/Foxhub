@@ -51,8 +51,8 @@ export class PeoplePageComponent implements OnInit, AfterViewInit {
     // @ts-ignore
     this.apiService.getAll().subscribe(users => {
       this.users = users;
-      this.usedTechnologiesList();
       this.fullUsers = users;
+      this.usedTechnologiesList();
       this.usedLanguagesList();
     });
   }
@@ -74,16 +74,13 @@ export class PeoplePageComponent implements OnInit, AfterViewInit {
 
   // @ts-ignore
   usedTechnologiesList(): Technology[] {
-
     for (let user of this.users) {
-
       // @ts-ignore
       for (let tech of user.technologies) {
         // @ts-ignore
         if (!this.usedTechnologies.includes(tech)) {
           // @ts-ignore
           this.usedTechnologies.push(tech);
-
         }
       }
     }
@@ -93,7 +90,6 @@ export class PeoplePageComponent implements OnInit, AfterViewInit {
   // @ts-ignore
   usedLanguagesList(): Language[] {
     for (let user of this.users) {
-      console.log(user)
       // @ts-ignore
       for (let lang of user.languages) {
         if (!this.usedLanguages.includes(lang)) {
@@ -101,7 +97,6 @@ export class PeoplePageComponent implements OnInit, AfterViewInit {
         }
       }
     }
-
   }
 
 
@@ -133,6 +128,7 @@ export class PeoplePageComponent implements OnInit, AfterViewInit {
         this.selectedLanguages.splice(index, 1);
       }
     }
+    this.languagesFilter(this.selectedLanguages);
   }
 
 
@@ -150,7 +146,21 @@ export class PeoplePageComponent implements OnInit, AfterViewInit {
           )
       )
     );
-
   }
 
+  languagesFilter(keys: string[]) {
+    if (keys.length === 0) {
+      this.users = this.fullUsers;
+      return;
+    }
+
+    const lowerCaseKeys = keys.map(key => key.toLowerCase());
+    this.users = this.fullUsers.filter(user =>
+      lowerCaseKeys.every(key =>
+          user.languages && user.languages.some(language =>
+            language.name.toLowerCase().includes(key)
+          )
+      )
+    );
+  }
 }
