@@ -29,11 +29,11 @@
 
         <div class="post-actions">
 
-          <div class="post-action btn btn-primary mr-2" (click)="startEditing()"
+          <div class="post-action btn btn-outline-primary mr-2" (click)="startEditing()"
             *ngIf="userRole==='ADMIN' && !isEditing">
             Edit</div>
           <div class="post-action btn btn-outline-secondary mr-2">Comment</div>
-          <div class="post-action btn btn-danger mr-2" (click)="deletePost.emit(post.id)" *ngIf="userRole==='ADMIN'">
+          <div class="post-action btn btn-outline-danger mr-2" (click)="deletePost.emit(post.id)" *ngIf="userRole==='ADMIN'">
             Delete
           </div>
 
