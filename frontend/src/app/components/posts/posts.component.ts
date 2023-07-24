@@ -1,7 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {PostsService} from "../../_services/posts.service";
 import {Post} from "../../models/post";
-import {User} from "../../models/user";
 
 @Component({
   selector: 'app-posts',
@@ -9,12 +8,10 @@ import {User} from "../../models/user";
   styleUrls: ['./posts.component.css']
 })
 export class PostsComponent implements OnInit {
-  @Input() currentUserId!: number;
-  // @ts-ignore
-  @Input userRole: string;
-  // @ts-ignore
-  @Input() userFullName: string;
-  @Input() userID: number | undefined;
+  @Input() userRole!: string;
+  @Input() userFullName!: string;
+  @Input() currentUserId!: number | undefined;
+
 
   posts: Post[] = [];
   activePost: Post | null = null;
@@ -28,19 +25,32 @@ export class PostsComponent implements OnInit {
     })
   }
 
-  addPost({text, parentPostId}: { text: string, parentPostId: null | number }): void {
+  addPost({text, parentPostId}: {text: string, parentPostId: null | number }): void {
+    if (this.currentUserId === undefined) {
+      // Handle the error: maybe show a message to the user, or just return
+      return;
+    }
     this.postsService
-      .createPost(this.userID, this.userFullName, text, parentPostId)
+      .createPost(this.currentUserId, this.userFullName, text, parentPostId)
       .subscribe((createdPost) => {
+        this.loadPosts();
       });
   }
 
-  updatePost({text, id}: { text: string, id: number }) {
+
+  loadPosts() {
+    this.postsService.getPosts().subscribe((posts: Post[]) => {
+      this.posts = posts;
+    })
+  }
+
+  updatePost({text, id}: {text: string, id: number}) {
     this.postsService
       .updatePost(id, text)
       .subscribe((updatedPost) => {
         this.posts = this.posts.map((post) => {
           if (post.id === id) {
+            this.loadPosts();
             return updatedPost;
           }
           return post;

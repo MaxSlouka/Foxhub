@@ -8,11 +8,12 @@ import {Post} from "../../models/post";
 })
 export class PostComponent implements OnInit {
   @Input() post!: Post;
-  @Input() currentUserId!: number;
   @Input() replies!: Post[];
   @Input() activePost!: Post | null;
   @Input() parentPostId!: number | null;
   @Input() userRole!: string;
+  @Input() currentUserId!: number | undefined;
+
 
 
   @Output() setActivePost = new EventEmitter<Post | null>();
@@ -47,5 +48,16 @@ export class PostComponent implements OnInit {
     }
 
     return this.activePost.id === this.post.id;
+  }
+
+
+  isEditing = false;
+
+  startEditing() {
+    this.isEditing = true;
+  }
+
+  stopEditing() {
+    this.isEditing = false;
   }
 }
