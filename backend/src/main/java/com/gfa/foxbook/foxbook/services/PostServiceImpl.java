@@ -65,5 +65,10 @@ public class PostServiceImpl implements PostService {
             throw new IllegalArgumentException("Post not found");
         }
     }
+
+    @Override
+    public List<Post> findAllByOrderByTimestampDesc() {
+        return postRepository.findAllByOrderByCreatedAtDesc();
+    }
 }
 
