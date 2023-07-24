@@ -23,6 +23,8 @@ public class Post {
     private String username;
     private Long userId;
     @NotBlank(message = "Content cannot be empty")
+    @Lob
+    @Column(columnDefinition = "text")
     private String content;
     private LocalDateTime createdAt;
     private Integer likesCount;
