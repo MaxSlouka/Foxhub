@@ -34,7 +34,7 @@
       Dropdown button
     </button>
     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-      <tr *ngFor="let tech of technologies">
+      <tr *ngFor="let tech of usedTechnologies">
         <td>{{tech.name}} <input type="checkbox" (change)="addToTechList($event, tech.name)" ></td>
       </tr>
     </div>
