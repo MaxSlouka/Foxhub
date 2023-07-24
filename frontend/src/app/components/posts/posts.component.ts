@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit, ChangeDetectorRef} from '@angular/core';
 import {PostsService} from "../../_services/posts.service";
 import {Post} from "../../models/post";
 import {User} from "../../models/user";
@@ -10,43 +10,44 @@ import {User} from "../../models/user";
 })
 export class PostsComponent implements OnInit {
   @Input() currentUserId!: number;
-  // @ts-ignore
-  @Input userRole: string;
-  // @ts-ignore
-  @Input() userFullName: string;
+  @Input() userRole!: string;
+  @Input() userFullName!: string;
 
   posts: Post[] = [];
   activePost: Post | null = null;
 
-  constructor(private postsService: PostsService) {
+  constructor(private postsService: PostsService, private cdr: ChangeDetectorRef) {
   }
 
+
   ngOnInit() {
+    this.loadPosts();
+  }
+
+  loadPosts() {
     this.postsService.getPosts().subscribe((posts: Post[]) => {
       this.posts = posts;
     })
   }
 
   addPost({text, parentPostId}: {text: string, parentPostId: null | number }): void {
-    console.log('addPost', text, parentPostId, this.userFullName);
     this.postsService
       .createPost(this.userFullName, text,parentPostId)
       .subscribe((createdPost) => {
+        this.loadPosts(); // reload posts after adding a new one
       });
   }
 
   updatePost({text, id}: {text: string, id: number}) {
-    this.postsService
-      .updatePost(id, text)
-      .subscribe((updatedPost) => {
-        this.posts = this.posts.map((post) => {
-          if (post.id === id) {
-            return updatedPost;
-          }
-          return post;
-        });
+    this.postsService.updatePost(id, text).subscribe(
+      (updatedPost) => {
+        this.loadPosts(); // reload posts after updating a post
         this.activePost = null;
-      });
+      },
+      (error) => {
+        console.error('error updating post', error);
+      }
+    );
   }
 
   deletePost(postId: number): void {
@@ -54,6 +55,7 @@ export class PostsComponent implements OnInit {
       this.posts = this.posts.filter(
         (post) => post.id !== postId
       );
+      this.cdr.detectChanges(); // Trigger change detection
     });
   }
 
@@ -70,4 +72,6 @@ export class PostsComponent implements OnInit {
   setActivePost(activePost: Post | null): void {
     this.activePost = activePost;
   }
+
+
 }
