@@ -7,43 +7,29 @@
   <div class="row">
     <div class="col-md-3 border-right">
       <div class="d-flex flex-column align-items-center text-center p-3 py-2">
-        <img class="profile-img rounded-circle" *ngIf="user.profilePictureUrl" height=200 width=200
-          ngSrc="{{user.profilePictureUrl}}" alt="profile picture" />
-          <h1 class="display-4 fw-bold text-body-emphasis lh-1 mb-4 userName-mobile">{{ user.firstName }} {{ user.lastName }}</h1>
-      </div>
-
-      <!-- social links -->
-      <div class="d-flex flex-column align-items-center text-center p-3 py-2">
-        <h4 class="text-right">Social Links</h4>
-        <div class="row mt-2">
-          <ul class="nav justify-content-end">
-            <li class="nav-item">
-              <a [href]="user.gitHub" class="nav-link px-2 text-body-secondary github">
-                <i class="bi bi-github"></i>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a [href]="user.linkedin" class="nav-link px-2 text-body-secondary linkedin">
-                <i class="bi bi-linkedin"></i>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a [href]="user.facebook" class="nav-link px-2 text-body-secondary facebook">
-                <i class="bi bi-facebook"></i>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a [href]="user.instagram" class="nav-link px-2 text-body-secondary instagram">
-                <i class="bi bi-instagram"></i>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a [href]="user.optionalPage" class="nav-link px-2 text-body-secondary optional">
-                <i class="bi bi-globe"></i>
-              </a>
-            </li>
-          </ul>
+        <div class="links-btn" [ngClass]="{ 'active': isOpen }" (click)="toggleSocialLinks()">
+          <img class="profile-img rounded-circle" *ngIf="user.profilePictureUrl" height=200 width=200
+            ngSrc="{{user.profilePictureUrl}}" alt="profile picture" />
+          <div class="links-box" [ngClass]="{ 'open': isOpen }">
+            <a [href]="user.facebook">
+              <i class="bi bi-facebook"></i>
+            </a>
+            <a [href]="user.instagram">
+              <i class="bi bi-instagram"></i>
+            </a>
+            <a [href]="user.linkedin">
+              <i class="bi bi-linkedin"></i>
+            </a>
+            <a [href]="user.gitHub">
+              <i class="bi bi-github"></i>
+            </a>
+            <a [href]="user.optionalPage">
+              <i class="bi bi-globe"></i>
+            </a>
+          </div>
         </div>
+        <h1 class="display-4 fw-bold text-body-emphasis lh-1 mb-4 userName-mobile">{{ user.firstName }} {{ user.lastName
+          }}</h1>
       </div>
 
       <!-- qr code -->
@@ -51,9 +37,11 @@
       <!-- button trigger modal -->
       <div class="mt-2 text-center">
         <div class="d-flex flex-column align-items-center text-center p-3 py-2 qr-code">
-          <qrcode data-toggle="modal" data-target="#qrModal" (qrCodeURL)="onChangeURL($event)" [qrdata]="'http://localhost:4200/profile/' + username" [width]="80"
-            [errorCorrectionLevel]="'M'" class="qrModal-btn"></qrcode>
-          <a [href]="qrCodeDownloadLink" download="qrcode" class="btn btn-outline-success px-4 me-md-2" role="button" aria-disabled="true">Download QR</a>
+          <qrcode data-toggle="modal" data-target="#qrModal" (qrCodeURL)="onChangeURL($event)"
+            [qrdata]="'http://localhost:4200/profile/' + username" [width]="80" [errorCorrectionLevel]="'M'"
+            class="qrModal-btn"></qrcode>
+          <a [href]="qrCodeDownloadLink" download="qrcode" class="btn btn-outline-success px-4 me-md-2" role="button"
+            aria-disabled="true">Download QR</a>
         </div>
       </div>
 
@@ -69,9 +57,9 @@
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
-            <div class="d-flex flex-column align-items-center text-center p-3 py-2 qr-code">
-              <qrcode (qrCodeURL)="onChangeURL($event)" [qrdata]="'http://localhost:4200/profile/' + username" [width]="250"
-                [errorCorrectionLevel]="'M'"></qrcode>
+            <div class="d-flex flex-column align-items-center text-center p-3 py-2 qr-code-modal">
+              <qrcode (qrCodeURL)="onChangeURL($event)" [qrdata]="'http://localhost:4200/profile/' + username"
+                [width]="250" [errorCorrectionLevel]="'M'"></qrcode>
             </div>
           </div>
         </div>
@@ -111,7 +99,8 @@
       <div class="p-3 py-5">
         <div class="row mt-2">
           <div class="col-md-6">
-            <h1 class="display-4 fw-bold text-body-emphasis lh-1 mb-4 userName-desktop">{{ user.firstName }} {{ user.lastName }}</h1>
+            <h1 class="display-4 fw-bold text-body-emphasis lh-1 mb-4 userName-desktop">{{ user.firstName }} {{
+              user.lastName }}</h1>
           </div>
           <div class="col-md-12">
             <label class="labels">Location</label>

@@ -16,6 +16,8 @@ export class MainPageComponent {
   userRole: string;
   // @ts-ignore
   userFullName: string;
+  // @ts-ignore
+  userID: number | undefined;
 
   constructor(private apiService: ApiService) {}
 
@@ -25,6 +27,7 @@ export class MainPageComponent {
       // @ts-ignore
       this.userRole = user.roles[0].name;
       this.userFullName = user.firstName + ' ' + user.lastName;
+      this.userID = user.id;
     });
   }
 }

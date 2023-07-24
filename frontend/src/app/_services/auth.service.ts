@@ -53,4 +53,25 @@ export class AuthService {
       this.toastr.error('Successfully Logged Out!', 'Success', { timeOut: 5000 });
     });
   }
+
+  resetPassword(email:String):Observable<any> {
+    return this.http.post(
+      'http://localhost:8080/api/v1/auth/password-reset',
+      {
+        email
+      },
+      httpOptions
+    );
+
+  }
+
+  changePassword(newPassword: String) {
+    return this.http.post(
+      'http://localhost:8080/api/v1/user/password-change',
+      {
+        newPassword
+      },
+      httpOptions
+    );
+  }
 }

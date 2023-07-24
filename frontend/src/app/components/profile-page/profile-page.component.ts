@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { User } from "../../models/user";
 import { ProfileService } from "../../_services/profile.service";
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
+
 import { SafeUrl, SafeValue } from "@angular/platform-browser";
 import { filter } from 'rxjs/operators';
 
@@ -10,15 +11,16 @@ import { filter } from 'rxjs/operators';
   templateUrl: './profile-page.component.html',
   styleUrls: ['./profile-page.component.css']
 })
-export class ProfilePageComponent implements OnInit {
+export class ProfilePageComponent {
   // @ts-ignore
   username: string | null = "";
-  user: User = {email: "", firstName: "", lastName: "", password: ""};
+  user: User = { email: "", firstName: "", lastName: "", password: "" };
   qrCodeDownloadLink: SafeValue = "";
+  isOpen: boolean = false;
 
   constructor(private profileService: ProfileService,
-              private activatedroute: ActivatedRoute,
-              private router: Router
+    private activatedroute: ActivatedRoute,
+    private router: Router
   ) {
     router.events.pipe(
       filter(event => event instanceof NavigationEnd)
@@ -33,6 +35,10 @@ export class ProfilePageComponent implements OnInit {
       .subscribe(user => this.user = user)
     // @ts-ignore
     this.onChangeURL();
+  }
+
+  toggleSocialLinks() {
+    this.isOpen = !this.isOpen;
   }
 
   onChangeURL(url: SafeValue) {
