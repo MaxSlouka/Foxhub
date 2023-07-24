@@ -29,7 +29,7 @@ public interface PostService {
 //
 //    public List<Post> findAll();
 //
-//    public List<Post> findAllByOrderByTimestampDesc();
+    public List<Post> findAllByOrderByTimestampDesc();
 //
 //    public List<Post> findAllByOrderByTimestampAsc();
 //
