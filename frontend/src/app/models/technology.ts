@@ -1,4 +1,4 @@
-export class Technology {
-  id?: number;
-  name!: string;
+export interface Technology {
+  id: number;
+  name: string;
 }

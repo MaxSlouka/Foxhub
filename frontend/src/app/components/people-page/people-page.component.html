@@ -44,9 +44,10 @@
 
 
 <!-- people section -->
-<ng-container *ngIf="dataService.users">
-  <app-people-page-searchbar [users]="dataService.users" [fullUsers]="dataService.users"></app-people-page-searchbar>
-</ng-container>
+<app-people-page-card *ngFor="let user of users" [user]="user"></app-people-page-card>
+<!--<ng-container *ngIf="dataService.users">-->
+<!--  <app-people-page-searchbar [users]="dataService.users" [fullUsers]="dataService.users"></app-people-page-searchbar>-->
+<!--</ng-container>-->
 
 <div class="container">
 
