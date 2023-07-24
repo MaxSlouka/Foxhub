@@ -4,11 +4,9 @@
 
 <div class="container">
     <div class="py-5 text-center">
-        <img class="d-block mx-auto mb-4" src="../assets/brand/bootstrap-logo.svg" alt="" width="72" height="57">
-        <h2>Checkout</h2>
-        <p class="lead">Thank you for choosing FoxBook Social App! We're excited to have you as part of our community.
-            Before you complete your checkout, please provide us with some essential information to ensure a
-            seamless and personalized experience on our platform.</p>
+        <img class="d-block mx-auto mb-4" src="../../../assets/img/Approve.png" alt="" width="200">
+        <h1>Checkout</h1>
+        <p class="lead">Thank you for choosing FoxBook Social App!</p>
     </div>
 
     <div class="row g-5 mb-4">
@@ -49,7 +47,7 @@
                 <div class="row g-3">
                     <div class="col-sm-6 mt-4">
                         <label for="firstName" class="form-label">First name</label>
-                        <input type="text" class="form-control" id="firstName" placeholder="" value="" required>
+                        <input type="text" class="form-control" id="firstName" placeholder="your first name" value="" required>
                         <div class="invalid-feedback">
                             Valid first name is required.
                         </div>
@@ -57,7 +55,7 @@
 
                     <div class="col-sm-6 mt-4">
                         <label for="lastName" class="form-label">Last name</label>
-                        <input type="text" class="form-control" id="lastName" placeholder="" value="" required>
+                        <input type="text" class="form-control" id="lastName" placeholder="your last name" value="" required>
                         <div class="invalid-feedback">
                             Valid last name is required.
                         </div>
@@ -75,11 +73,18 @@
                     </div>
 
                     <div class="col-12 mt-4">
-                        <label for="email" class="form-label">Email <span
-                                class="text-body-secondary">(Optional)</span></label>
+                        <label for="email" class="form-label">Email </label>
                         <input type="email" class="form-control" id="email" placeholder="you@example.com">
                         <div class="invalid-feedback">
-                            Please enter a valid email address for shipping updates.
+                            Please enter a valid email address.
+                        </div>
+                    </div>
+
+                    <div class="col-12 mt-4">
+                        <label for="email" class="form-label">Phone Number </label>
+                        <input type="email" class="form-control" id="phone" placeholder="your phone number">
+                        <div class="invalid-feedback">
+                            Please enter a valid phone number.
                         </div>
                     </div>
 
@@ -87,7 +92,7 @@
                         <label for="address" class="form-label">Company</label>
                         <input type="text" class="form-control" id="company" placeholder="your company" required>
                         <div class="invalid-feedback">
-                            Please enter your Company address.
+                            Please enter your Company.
                         </div>
                     </div>
 
@@ -95,13 +100,13 @@
                         <label for="address" class="form-label">Address</label>
                         <input type="text" class="form-control" id="address" placeholder="1234 Main St" required>
                         <div class="invalid-feedback">
-                            Please enter your shipping address.
+                            Please enter your Company address.
                         </div>
                     </div>
 
                     <div class="col-sm-6 mt-4">
                         <label for="firstName" class="form-label">Country</label>
-                        <input type="text" class="form-control" id="country" placeholder="" value="" required>
+                        <input type="text" class="form-control" id="country" placeholder="your country" value="" required>
                         <div class="invalid-feedback">
                             Valid Country is required.
                         </div>
@@ -109,7 +114,7 @@
 
                     <div class="col-sm-6 mt-4">
                         <label for="lastName" class="form-label">City</label>
-                        <input type="text" class="form-control" id="city" placeholder="" value="" required>
+                        <input type="text" class="form-control" id="city" placeholder="your city" value="" required>
                         <div class="invalid-feedback">
                             Valid City is required.
                         </div>
@@ -117,7 +122,7 @@
 
                     <div class="col-md-3 mt-4">
                         <label for="zip" class="form-label">Zip</label>
-                        <input type="text" class="form-control" id="zip" placeholder="" required>
+                        <input type="text" class="form-control" id="zip" placeholder="your zip code" required>
                         <div class="invalid-feedback">
                             Zip code required.
                         </div>
@@ -151,7 +156,7 @@
                     </div>
 
                     <div class="col-md-6">
-                        <label for="cc-number" class="form-label">Credit card number</label>
+                        <label for="cc-number" class="form-label">Card number</label>
                         <input type="text" class="form-control" id="cc-number" placeholder="" required>
                         <div class="invalid-feedback">
                             Credit card number is required
@@ -177,9 +182,10 @@
 
                 <hr class="my-4">
 
-                <p class="lead my-4">After checkout, the <b>message</b> is sent to people in your cart.</p>
+                <p class="lead my-4">After Checkout, the <b>message</b> is sent to people in your cart.</p>
 
-                <button class="w-100 btn btn-primary btn-lg" type="submit">Checkout</button>
+                <a href="./cart" class="btn btn-outline-primary btn-lg mr-2" role="button" aria-disabled="true">Back to Cart</a>
+                <button class="btn btn-primary btn-lg" type="submit">Checkout</button>
             </form>
         </div>
     </div>
