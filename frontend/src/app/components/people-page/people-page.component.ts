@@ -72,14 +72,15 @@ export class PeoplePageComponent implements OnInit, AfterViewInit {
     this.filterContentExpanded = !this.filterContentExpanded;
   }
 
-  // @ts-ignore
-  usedTechnologiesList(): Technology[] {
+
+  usedTechnologiesList(){
+    const usedTechNames: string[] = [];
     for (let user of this.users) {
       // @ts-ignore
       for (let tech of user.technologies) {
-        // @ts-ignore
-        if (!this.usedTechnologies.includes(tech)) {
-          // @ts-ignore
+        const techName = tech.name.toLowerCase();
+        if (!usedTechNames.includes(techName)) {
+          usedTechNames.push(techName);
           this.usedTechnologies.push(tech);
         }
       }
@@ -89,10 +90,13 @@ export class PeoplePageComponent implements OnInit, AfterViewInit {
 
   // @ts-ignore
   usedLanguagesList(): Language[] {
+    const usedLangNames: string[] = [];
     for (let user of this.users) {
       // @ts-ignore
       for (let lang of user.languages) {
-        if (!this.usedLanguages.includes(lang)) {
+        const langName = lang.name.toLowerCase();
+        if (!usedLangNames.includes(langName)) {
+          usedLangNames.push(langName);
           this.usedLanguages.push(lang);
         }
       }
@@ -111,11 +115,8 @@ export class PeoplePageComponent implements OnInit, AfterViewInit {
         this.selectedTechnologies.splice(index, 1);
       }
     }
-    this.technologiesFilter(this.selectedTechnologies);
+    this.allFilters()
   }
-
-
-
 
   addToLangList(event: any, tech: string) {
     if (event.target.checked) {
@@ -128,19 +129,31 @@ export class PeoplePageComponent implements OnInit, AfterViewInit {
         this.selectedLanguages.splice(index, 1);
       }
     }
-    this.languagesFilter(this.selectedLanguages);
+    this.allFilters();
   }
 
+  allFilters() {
+    let filteredUsers = [...this.fullUsers];
 
-  technologiesFilter(keys: string[]) {
-    if (keys.length === 0) {
-      this.users = this.fullUsers;
-      return;
+    if (this.selectedTechnologies.length > 0) {
+      filteredUsers = this.technologiesFilter(filteredUsers, this.selectedTechnologies);
     }
 
+    if (this.selectedLanguages.length > 0) {
+      filteredUsers = this.languagesFilter(filteredUsers, this.selectedLanguages);
+    }
+
+    this.users = filteredUsers;
+  }
+
+  // @ts-ignore
+  technologiesFilter(users, keys: string[]) {
     const lowerCaseKeys = keys.map(key => key.toLowerCase());
-    this.users = this.fullUsers.filter(user =>
+
+    // @ts-ignore
+    return users.filter(user =>
       lowerCaseKeys.every(key =>
+        // @ts-ignore
           user.technologies && user.technologies.some(technology =>
             technology.name.toLowerCase().includes(key)
           )
@@ -148,15 +161,13 @@ export class PeoplePageComponent implements OnInit, AfterViewInit {
     );
   }
 
-  languagesFilter(keys: string[]) {
-    if (keys.length === 0) {
-      this.users = this.fullUsers;
-      return;
-    }
-
+  // @ts-ignore
+  languagesFilter(users, keys: string[]) {
     const lowerCaseKeys = keys.map(key => key.toLowerCase());
-    this.users = this.fullUsers.filter(user =>
+    // @ts-ignore
+    return users.filter(user =>
       lowerCaseKeys.every(key =>
+        // @ts-ignore
           user.languages && user.languages.some(language =>
             language.name.toLowerCase().includes(key)
           )
@@ -164,3 +175,5 @@ export class PeoplePageComponent implements OnInit, AfterViewInit {
     );
   }
 }
+
+
