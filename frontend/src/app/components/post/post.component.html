@@ -26,10 +26,10 @@
         <app-post-form *ngIf="isReplying() && !isEditing" submitLabel="Update" [hasCancelButton]="true"
           [initialText]="post.content!" (handleSubmit)="updatePost.emit({text: $event, id: post.id!})"
           (handleCancel)="setActivePost.emit(null)"></app-post-form>
-
-        <button [class.liked]="post.isLikedByCurrentUser" (click)="likePost(post.id)">
+        <button [class.liked]="post.isLikedByCurrentUser" (click)="likePost.emit(post.id)">
           Like
         </button>
+
 
 
 
