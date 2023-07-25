@@ -32,6 +32,9 @@ export class PeoplePageComponent implements OnInit, AfterViewInit {
   filterContentExpanded: boolean = true
   isRangeChanged: boolean = false;
 
+  // @ts-ignore
+  workStatus: string;
+
 
   constructor(private technologyService: TechnologyService,
               private languageService: LanguageService,
@@ -132,6 +135,9 @@ export class PeoplePageComponent implements OnInit, AfterViewInit {
     this.allFilters();
   }
 
+  onWorkStatusChange() {
+    this.allFilters();
+  }
 
   allFilters() {
     let filteredUsers = [...this.fullUsers];
@@ -202,8 +208,13 @@ export class PeoplePageComponent implements OnInit, AfterViewInit {
   openToWorkFilter(filteredUsers) {
     const actualFilteredUsers: User[] = [];
     for (let user of filteredUsers) {
+      console.log(this.workStatus);
       // @ts-ignore
-      if (user.openToWork === true) {
+      if (this.workStatus === "open" && user.workStatus === true) {
+        actualFilteredUsers.push(user);
+      }
+      // @ts-ignore
+      if(this.workStatus === "closed" && user.workStatus === false){
         actualFilteredUsers.push(user);
       }
     }
