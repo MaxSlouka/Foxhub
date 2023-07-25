@@ -67,20 +67,7 @@
                                                                                          value="">
           </div>
           </div>
-          <div class="row mt-2">
-            <div class="btn-group" role="group" aria-label="radio button for work status">
-              <p>looking for work?</p>
 
-              <input type="radio" class="btn-check" name="workStatus" id="radio1" [(ngModel)]="user.workStatus"
-                     [value]="true" autocomplete="off">
-              <label for="radio1">Looking for Work</label>
-
-              <input type="radio" class="btn-check" name="workStatus" id="radio2" [(ngModel)]="user.workStatus"
-                     [value]="false" autocomplete="off" checked>
-              <label for="radio2">Working</label>
-
-            </div>
-          </div>
 
             <div class="row mt-3">
               <div class="col-md-12">
@@ -96,27 +83,27 @@
                 <textarea type="text" class="form-control" [(ngModel)]="user.about" name="about" placeholder="write something about you..." cols="30" rows="3"></textarea>
               </div>
             </div>
-          
+
             <div class="d-flex justify-content-between align-items-center my-4">
               <h6 class="text-left">Looking for Work?</h6>
             </div>
-          
+
             <div class="mt-2">
               <div class="btn-group d-flex justify-content-around align-items-center" role="group" aria-label="radio button for work status">
-            
+
                 <div class="d-flex align-items-center">
                   <input class="btn-check text mr-2" type="radio" name="workStatus" id="radio1" [(ngModel)]="user.workStatus" [value]="true" autocomplete="off">
                   <label for="radio1" class="btn btn-outline-primary form-check-label">Yes</label>
                 </div>
-            
+
                 <div class="d-flex align-items-center">
                   <input class="btn-check mr-2" type="radio" name="workStatus" id="radio2" [(ngModel)]="user.workStatus" [value]="false" autocomplete="off" checked>
                   <label for="radio2" class="btn btn-outline-danger form-check-label">No</label>
                 </div>
-            
+
               </div>
-            </div>            
-          
+            </div>
+
             <div class="d-flex justify-content-between align-items-center my-4">
               <h6 class="text-right">Social media</h6>
             </div>
@@ -142,7 +129,7 @@
               <a href="./change-password" class="btn btn-outline-primary my-2 mx-2" role="button" aria-disabled="true">Change Password</a>
               <a href="./" class="btn btn-outline-secondary my-2 mx-2" role="button" aria-disabled="true">Go Back</a>
             </div>
-            
+
 
             <!-- modal add-->
 
