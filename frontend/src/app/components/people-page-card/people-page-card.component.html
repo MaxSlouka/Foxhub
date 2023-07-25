@@ -9,11 +9,13 @@
 
     <div class="content">
         <div class="text">
-            <h3>{{user.firstName}} {{user.lastName}}</h3>
-            <p>Open to work</p>
+            <p class="lead">{{user.firstName}} {{user.lastName}}</p>
+            <label class="labels">Open for Work:</label>
+            <p class="lead">{{user.workStatus}}</p>
+            <button class="btn btn-outline-primary" type="button"> Add to Cart </button>
         </div>
 
-        <div class="btn" [ngClass]="{ 'active': isOpen }">
+        <div class="btn-opener" [ngClass]="{ 'active': isOpen }">
             <span></span>
             <div class="box" [ngClass]="{ 'open': isOpen }">
                 <a [href]="user.facebook">
