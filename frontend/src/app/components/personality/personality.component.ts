@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {Personality} from "../../models/personality";
 
 @Component({
@@ -8,5 +8,5 @@ import {Personality} from "../../models/personality";
 })
 export class PersonalityComponent {
   // @ts-ignore
-  personality: Personality;
+  @Input personality: Personality;
 }

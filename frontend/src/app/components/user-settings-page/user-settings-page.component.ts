@@ -38,6 +38,11 @@ export class UserSettingsPageComponent {
   // @ts-ignore
   personalities: Personality[];
 
+  // @ts-ignore
+  selectedPersonality: Personality | undefined;
+
+
+
   constructor(private storageService: StorageService,
               private apiService: ApiService,
               private authService: AuthService,
@@ -63,6 +68,12 @@ export class UserSettingsPageComponent {
     this.personalityService.getAll().subscribe((personalities: Personality[]) => {
       this.personalities = personalities;
     });
+  }
+
+  onPersonalitySelect(event: any) {
+   const selectedPersonalityId = +event.target.value;
+    this.selectedPersonality = this.personalities.find(p => p.id === selectedPersonalityId);
+    console.log(this.selectedPersonality);
   }
 
   public searchLanguage(key: string): void {
