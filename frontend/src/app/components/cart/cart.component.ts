@@ -8,7 +8,7 @@ import {User} from "../../models/user";
   styleUrls: ['./cart.component.css']
 })
 export class CartComponent implements OnInit{
-  private cartItems:User[] = [];
+   cartItems:User[] = [];
 
 
   constructor(private cartService:CartService) {
@@ -16,7 +16,6 @@ export class CartComponent implements OnInit{
   }
   ngOnInit(): void {
     this.cartItems = this.cartService.getCartItems();
-
   }
 
   show() {
