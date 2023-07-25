@@ -19,4 +19,5 @@ public class Personality {
     private String type;
     private String name;
     private String description;
+    private String eg;
 }

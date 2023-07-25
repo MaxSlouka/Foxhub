@@ -1,6 +1,7 @@
 package com.gfa.foxbook.foxbook.models;
 
 import com.gfa.foxbook.foxbook.models.nonusermodels.Language;
+import com.gfa.foxbook.foxbook.models.nonusermodels.Personality;
 import com.gfa.foxbook.foxbook.models.nonusermodels.Role;
 import com.gfa.foxbook.foxbook.models.nonusermodels.Technology;
 import jakarta.persistence.*;
@@ -45,7 +46,6 @@ public class User {
     private int yearOfBirth;
     @NotNull
     private String password;
-    private String personality;
     private String profilePictureUrl;
     private String facebook;
     private String instagram;
@@ -76,5 +76,11 @@ public class User {
     )
     private List<Language> languages;
 
+    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
+    @JoinTable(
+            name = "users_personality",
+            joinColumns = {@JoinColumn(name = "users_id", referencedColumnName = "id")},
+            inverseJoinColumns = {@JoinColumn(name = "personality_id", referencedColumnName = "id")})
+    private Personality personality;
 
 }
