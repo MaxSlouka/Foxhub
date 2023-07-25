@@ -5,6 +5,7 @@ import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 
 import { SafeUrl, SafeValue } from "@angular/platform-browser";
 import { filter } from 'rxjs/operators';
+import {StorageService} from "../../_services/storage.service";
 
 @Component({
   selector: 'app-profile-page',
@@ -17,9 +18,12 @@ export class ProfilePageComponent {
   user: User = { email: "", firstName: "", lastName: "", password: "" };
   qrCodeDownloadLink: SafeValue = "";
   isOpen: boolean = false;
+  isLoggedIn: boolean = false;
 
-  constructor(private profileService: ProfileService,
+  constructor(
+    private profileService: ProfileService,
     private activatedroute: ActivatedRoute,
+    private storageService: StorageService,
     private router: Router
   ) {
     router.events.pipe(
@@ -35,6 +39,9 @@ export class ProfilePageComponent {
       .subscribe(user => this.user = user)
     // @ts-ignore
     this.onChangeURL();
+    if (this.storageService.isLoggedIn()) {
+      this.isLoggedIn = true;
+    }
   }
 
   toggleSocialLinks() {
