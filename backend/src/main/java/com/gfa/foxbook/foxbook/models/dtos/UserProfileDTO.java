@@ -35,7 +35,7 @@ public class UserProfileDTO {
     private List<Role> roles;
     private List<Technology> technologies;
     private List<Language> languages;
-    private Boolean workStatus;
+    private boolean workStatus;
 
 
 
@@ -60,5 +60,6 @@ public class UserProfileDTO {
         this.technologies = user.getTechnologies();
         this.languages = user.getLanguages();
         this.profilePictureUrl = user.getProfilePictureUrl();
+        this.workStatus =user.isWorkStatus();
     }
 }

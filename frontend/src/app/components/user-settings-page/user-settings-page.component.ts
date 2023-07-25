@@ -141,7 +141,8 @@ export class UserSettingsPageComponent {
       instagram,
       optionalPage,
       languages,
-      technologies
+      technologies,
+      workStatus
     } = this.user;
 
     await this.apiService.updateUser(
@@ -158,9 +159,10 @@ export class UserSettingsPageComponent {
       instagram,
       optionalPage,
       languages,
-      technologies)
+      technologies,
+      workStatus)
       .subscribe(() => {
-        window.location.href = "";
+        window.location.href = "/profile/"+this.user.nickname;
       });
   }
 }

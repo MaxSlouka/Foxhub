@@ -51,7 +51,7 @@ public class User {
     private String instagram;
     private String linkedin;
     private String gitHub;
-    private Boolean workStatus;
+    private boolean workStatus;
     private String optionalPage;
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
