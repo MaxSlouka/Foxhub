@@ -1,5 +1,6 @@
 package com.gfa.foxbook.foxbook.models.nonusermodels;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -17,6 +18,7 @@ public class Like {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "post_id")
+    @JsonBackReference
     private Post post;
 
     private Long userId;
