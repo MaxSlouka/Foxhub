@@ -157,16 +157,14 @@ public class UserController {
         }
 
         try {
-            comment.setPost(maybePost.get());
+            Post post = maybePost.get();
             comment.setUserId(user.getId());
             comment.setUsername(user.getNickname());
-            comment.getPost().setCommentsCount(comment.getPost().getCommentsCount() + 1);
+            post.addComment(comment);
             commentService.saveComment(comment);
             return ResponseEntity.ok().build();
         } catch (Exception e) {
-            System.out.println(e.getMessage());
             return new ResponseEntity<>("An error occurred while saving the comment", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-
 }

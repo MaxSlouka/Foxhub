@@ -67,7 +67,7 @@ public class PublicController {
     }
 
     @GetMapping("/people/search")
-    public ResponseEntity<?> searchUsers(@RequestParam ("query") String query) {
+    public ResponseEntity<?> searchUsers(@RequestParam("query") String query) {
         List<User> users = userService.searchUsers(query);
         List<UserSearchDTO> usersDTO = new ArrayList<>();
         for (User user : users) {
@@ -79,15 +79,13 @@ public class PublicController {
         return ResponseEntity.ok(usersDTO);
     }
 
-
-    @GetMapping("/posts/comments/{id}")
-    public ResponseEntity<?> getCommentsByPostId(@PathVariable Long id) {
-        Optional<Post> optionalPost = postService.findById(id);
-        if (optionalPost.isEmpty()) {
-            return ResponseEntity.notFound().build();
-        }
-        Post post = optionalPost.get();
-        return ResponseEntity.ok(post.getComments());
-    }
-
+//    @GetMapping("/posts/comments/{id}")
+//    public ResponseEntity<?> getPostComments(@PathVariable Long id) {
+//        Optional<Post> optionalPost = postService.findById(id);
+//        if (optionalPost.isEmpty()) {
+//            return ResponseEntity.notFound().build();
+//        }
+//        Post post = optionalPost.get();
+//        return ResponseEntity.ok(post.getComments());
+//    }
 }
