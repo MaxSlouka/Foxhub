@@ -1,11 +1,13 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Post} from "../../models/post";
 import {User} from "../../models/user";
+import {PostsService} from "../../_services/posts.service";
 
 @Component({
   selector: 'app-post',
   templateUrl: './post.component.html',
   styleUrls: ['./post.component.css']
+
 })
 export class PostComponent implements OnInit {
   @Input() post!: Post;
@@ -27,6 +29,10 @@ export class PostComponent implements OnInit {
   canEdit: boolean = false;
   canDelete: boolean = false;
   replyId: number | null = null;
+  postId = 1;
+
+
+  constructor(private postService: PostsService) {}
 
   ngOnInit(): void {
     const timeToEdit = 300000;
@@ -57,5 +63,16 @@ export class PostComponent implements OnInit {
 
   stopEditing() {
     this.isEditing = false;
+  }
+
+  likePost() {
+    this.postService.likePost(this.postId).subscribe(
+      response => {
+        console.log('Post liked successfully', response);
+      },
+      error => {
+        console.log('Error liking post', error);
+      }
+    );
   }
 }
