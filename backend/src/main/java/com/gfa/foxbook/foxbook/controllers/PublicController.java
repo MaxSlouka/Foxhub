@@ -80,4 +80,14 @@ public class PublicController {
     }
 
 
+    @GetMapping("/posts/comments/{id}")
+    public ResponseEntity<?> getCommentsByPostId(@PathVariable Long id) {
+        Optional<Post> optionalPost = postService.findById(id);
+        if (optionalPost.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+        Post post = optionalPost.get();
+        return ResponseEntity.ok(post.getComments());
+    }
+
 }
