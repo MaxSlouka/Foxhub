@@ -68,7 +68,8 @@ export class ApiService {
              instagram: string | undefined,
              optionalPage: string | undefined,
              languages: Language[] | undefined,
-             technologies: Technology[] | undefined
+             technologies: Technology[] | undefined,
+             workStatus:boolean | undefined
   ): Observable<any> {
 
     return this.http.patch("http://localhost:8080/api/v1/user/people", {
@@ -85,6 +86,7 @@ export class ApiService {
         instagram,
         languages,
       technologies,
+      workStatus
       },
       httpOptions
     );
