@@ -30,7 +30,6 @@ public class UserSearchDTO {
         this.lastName = user.getLastName();
         this.nickname = user.getNickname();
         this.about = user.getAbout();
-        this.workStatus = user.getWorkStatus();
         this.yearOfBirth = user.getYearOfBirth();
         this.technologies = user.getTechnologies();
         this.profilePictureUrl = user.getProfilePictureUrl();
