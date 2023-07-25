@@ -19,7 +19,7 @@ import { TechnologyService } from "../../_services/technology.service";
 export class UserSettingsPageComponent {
   // @ts-ignore
   selectedFile: File = null;
-
+  profileProgress:number = 15;
   user: User = { email: "", firstName: "", lastName: "", password: "" };
 
   // @ts-ignore
@@ -166,4 +166,6 @@ export class UserSettingsPageComponent {
         window.location.href = "/profile/"+this.user.nickname;
       });
   }
+
+  protected readonly innerWidth = innerWidth;
 }
