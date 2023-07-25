@@ -3,6 +3,7 @@ package com.gfa.foxbook.foxbook.models.dtos;
 
 import com.gfa.foxbook.foxbook.models.User;
 import com.gfa.foxbook.foxbook.models.nonusermodels.Language;
+import com.gfa.foxbook.foxbook.models.nonusermodels.Personality;
 import com.gfa.foxbook.foxbook.models.nonusermodels.Technology;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -20,6 +21,7 @@ public class UserSearchDTO {
     private String about;
     private Boolean workStatus;
     private Integer yearOfBirth;
+    private Personality personality;
 
     private List<Technology> technologies;
     private List<Language> languages;
@@ -35,5 +37,6 @@ public class UserSearchDTO {
         this.profilePictureUrl = user.getProfilePictureUrl();
         this.languages = user.getLanguages();
         this.workStatus = user.isWorkStatus();
+        this.personality = user.getPersonality();
     }
 }

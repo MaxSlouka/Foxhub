@@ -1,6 +1,7 @@
 import { Technology } from "./technology";
 import { Language } from "./language";
 import {Role} from "./role";
+import {Personality} from "./personality";
 
 export interface User {
   id?: number;
@@ -12,7 +13,7 @@ export interface User {
   about?: string,
   yearOfBirth?: number,
   password: string,
-  personality?: string,
+  personality?: Personality,
   location?: string,
   dateOfRegistration?: Date,
   profileUrl?: string,
