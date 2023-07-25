@@ -2,10 +2,12 @@ package com.gfa.foxbook.foxbook.controllers;
 
 import com.gfa.foxbook.foxbook.models.dtos.PasswordDTO;
 import com.gfa.foxbook.foxbook.models.dtos.UserProfileDTO;
+import com.gfa.foxbook.foxbook.models.nonusermodels.Comment;
 import com.gfa.foxbook.foxbook.models.nonusermodels.Like;
 import com.gfa.foxbook.foxbook.models.nonusermodels.Post;
 import com.gfa.foxbook.foxbook.models.User;
 import com.gfa.foxbook.foxbook.security.jwt.JwtUtils;
+import com.gfa.foxbook.foxbook.services.interfaces.CommentService;
 import com.gfa.foxbook.foxbook.services.interfaces.LikeService;
 import com.gfa.foxbook.foxbook.services.interfaces.PostService;
 import com.gfa.foxbook.foxbook.services.interfaces.UserService;
@@ -40,6 +42,7 @@ public class UserController {
     private final PostService postService;
     private final LikeService likeService;
     private final PasswordEncoder passwordEncoder;
+    private final CommentService commentService;
 
 
     private String uploadDir = "./uploads";
@@ -125,7 +128,9 @@ public class UserController {
 
         Like like = new Like(post, user.getId(), 0, false);
         likeService.like(like);
+        like.getPost().setLikesCount(like.getPost().getLikesCount() + 1);
 
+        postService.save(like.getPost());
         return ResponseEntity.ok().build();
     }
     @PostMapping("password-change")
@@ -137,5 +142,29 @@ public class UserController {
         user.setPassword(passwordEncoder.encode(passwordDTO.getNewPassword()));
         userService.saveUser(user);
         return ResponseEntity.ok().build();
+    }
+
+    @PostMapping("post/{postId}/comment")
+    public ResponseEntity<?> commentPost(@PathVariable Long postId, @RequestBody Comment comment, HttpServletRequest request) {
+        User user = jwtUtils.getUserFromRequest(request);
+        if (user == null) {
+            return ResponseEntity.badRequest().build();
+        }
+
+        Optional<Post> maybePost = postService.findById(postId);
+        if (maybePost.isEmpty()) {
+            return new ResponseEntity<>("Post not found", HttpStatus.NOT_FOUND);
+        }
+
+        try {
+            Post post = maybePost.get();
+            comment.setUserId(user.getId());
+            comment.setUsername(user.getNickname());
+            post.addComment(comment);
+            commentService.saveComment(comment);
+            return ResponseEntity.ok().build();
+        } catch (Exception e) {
+            return new ResponseEntity<>("An error occurred while saving the comment", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 }

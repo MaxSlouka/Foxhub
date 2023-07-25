@@ -6,29 +6,22 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Entity
 @Data
+@Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "_likes")
-public class Like {
+public class Comment {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY)
     private Long id;
-
+    private String username;
+    private String content;
+    private Long userId;
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "post_id")
+    @JoinColumn(name = "post_id", nullable = false)
     @JsonBackReference
     private Post post;
-
-    private Long userId;
-    private Integer likes;
-    private Boolean hasVoted;
-
-    public Like(Post post, Long userId, Integer likes, Boolean hasVoted) {
+    public void setPost(Post post) {
         this.post = post;
-        this.userId = userId;
-        this.likes = likes;
-        this.hasVoted = hasVoted;
     }
 }
