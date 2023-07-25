@@ -56,6 +56,7 @@ export class UserSettingsPageComponent {
       this.technologies = technologies;
     });
   }
+
   setProgress(): number {
     let filledFields: number = 0;
     let totalFields: number = Object.keys(this.user).length;
