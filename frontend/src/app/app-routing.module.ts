@@ -26,7 +26,7 @@ const routes: Routes = [
   { path: 'change-password', component: ChangePasswordComponent },
   { path: 'termsOfUse', component: TermsOfUseComponent },
   { path: 'cart', component: CartComponent },
-  { path: 'cart-checkout', component: CartCheckoutComponent },
+  { path: 'checkout', component: CartCheckoutComponent },
   { path: '**', pathMatch: 'full', component: PageNotFoundComponent }
 ]
 

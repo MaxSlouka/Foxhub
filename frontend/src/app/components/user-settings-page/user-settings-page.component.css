@@ -58,9 +58,15 @@
 
 }
 
-.modal-picture {
+.modal-picture, 
+.modal-save {
     width: 500px;
     height: 250px;
+}
+
+.modal-delete {
+    width: 500px;
+    height: 300px;
 }
 
 .labels {
