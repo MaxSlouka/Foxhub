@@ -9,18 +9,13 @@ import {User} from "../../models/user";
 })
 export class CartComponent implements OnInit{
    cartItems:User[] = [];
+   countItems:number = 0;
 
 
-  constructor(private cartService:CartService) {
-
-  }
+  constructor(private cartService:CartService) {}
   ngOnInit(): void {
     this.cartItems = this.cartService.getCartItems();
   }
 
-  show() {
-    this.cartItems = this.cartService.getCartItems();
 
-    console.log(this.cartItems);
-  }
 }
