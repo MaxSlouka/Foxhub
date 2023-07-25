@@ -3,14 +3,6 @@
     border-color: #007f00;
 }
 
-.btn {
-    margin-right: 1rem;
-    margin-bottom: 1rem;
-}
-.btn-group label {
-  margin: 0;
-}
-
 
 .profile-button:focus {
     background: rgb(0, 90, 0);
@@ -58,7 +50,7 @@
 
 }
 
-.modal-picture, 
+.modal-picture,
 .modal-save {
     width: 500px;
     height: 250px;

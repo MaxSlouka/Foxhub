@@ -54,7 +54,6 @@ public class UserController {
             return ResponseEntity.badRequest().build();
         }
         UserProfileDTO userDTO = new UserProfileDTO(user);
-        System.out.println(userDTO.isWorkStatus());
         return ResponseEntity.ok(userDTO);
     }
 
