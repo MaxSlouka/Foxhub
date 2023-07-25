@@ -27,6 +27,9 @@
           [initialText]="post.content!" (handleSubmit)="updatePost.emit({text: $event, id: post.id!})"
           (handleCancel)="setActivePost.emit(null)"></app-post-form>
 
+        <button (click)="likePost()">Like</button>
+
+
         <div class="post-actions">
 
           <div class="post-action btn btn-outline-primary mr-2" (click)="startEditing()"

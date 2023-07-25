@@ -79,4 +79,16 @@ export class PostsComponent implements OnInit {
   setActivePost(activePost: Post | null): void {
     this.activePost = activePost;
   }
+
+  likePost(postId: number) {
+    this.postsService.likePost(postId).subscribe(
+      response => {
+        console.log('Post liked successfully', response);
+        // TODO: Update the UI to reflect the new like
+      },
+      error => {
+        console.log('Error liking post', error);
+      }
+    );
+  }
 }
