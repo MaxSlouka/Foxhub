@@ -85,6 +85,7 @@ export class ApiService {
         linkedin,
         facebook,
         instagram,
+        optionalPage,
         languages,
       technologies,
       yearOfBirth,
