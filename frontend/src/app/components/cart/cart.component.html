@@ -12,8 +12,10 @@
                 <p class="lead my-4">People in Cart: </p>
                 <span class="badge bg-primary rounded-pill mx-4 cart-count">3</span>
             </div>
+          <app-people-page-card class="ml-4" *ngFor="let user of cartItems" [user]="user"></app-people-page-card>
 
-            <table id="shoppingCart" class="table table-condensed">
+
+          <table id="shoppingCart" class="table table-condensed">
 
                 <thead>
                     <tr>
@@ -41,7 +43,7 @@
                         <td data-th="Price">What here?</td>
                         <td class="actions" data-th="">
                             <div class="text-right">
-                                <button class="btn btn-outline-danger btn-md mb-2" (click)="show()">
+                                <button class="btn btn-outline-danger btn-md mb-2">
                                     <i class="fas fa-trash"></i>
                                 </button>
                             </div>
