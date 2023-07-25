@@ -15,7 +15,7 @@ export class CartService {
   }
 
   addToCart(user:User){
-    if (!this.cartItems.includes(user)){
+    if (!this.cartItems.some(item => item.nickname === user.nickname)){
       this.cartItems.push(user);
       this.updateLocalStorage();
     }
