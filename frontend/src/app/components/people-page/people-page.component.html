@@ -25,39 +25,6 @@
   </div>
 </div>
 
-<div class="py-5 text-center">
-  <h1 class="display-5 fw-bold text-body-emphasis">Let's explore</h1>
-</div>
-
-<div class="py-5 text-center">
-
-  <div class="dropdown">
-    <button class="btn btn-secondary dropdown-toggle" type="button" id="techDropdown" data-toggle="dropdown"
-      aria-haspopup="true" aria-expanded="false">
-      Techs
-    </button>
-    <div class="dropdown-menu" aria-labelledby="techDropdown">
-      <tr *ngFor="let tech of usedTechnologies">
-        <td>{{tech.name}} <input type="checkbox" (change)="addToTechList($event, tech.name)"></td>
-      </tr>
-    </div>
-  </div>
-
-  <div class="dropdown">
-    <button class="btn btn-secondary dropdown-toggle" type="button" id="langDropDown" data-toggle="dropdown"
-      aria-haspopup="true" aria-expanded="false">
-      Languages
-    </button>
-    <div class="dropdown-menu" aria-labelledby="langDropDown">
-      <tr *ngFor="let lang of usedLanguages">
-        <td>{{lang.name}} <input type="checkbox" (change)="addToLangList($event, lang.name)"></td>
-      </tr>
-    </div>
-  </div>
-
-</div>
-
-
 <div class="container">
 
   <div class="py-5 text-center">
@@ -75,85 +42,63 @@
       </div>
 
       <div [ngClass]="filterContentExpanded ? 'collapse show' : 'collapse'" id="filterContent">
-        <p class="lead mt-4 border-bottom">Search bar</p>
-        <form class="form-inline">
-          <input class="form-control mr-sm-2 my-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-        </form>
-
-        <p class="lead mt-4 border-bottom">Range</p>
-        <div class="input-group">
-          <input type="range" class="form-range flex-fill" min="18" max="70" step="1" id="customRange3" #customRange3
-            value="70">
-          <span class="input-group-text ml-2" id="rangeValue" #rangeValue>70</span>
+        <p class="lead mt-4 border-bottom">Technology</p>
+        <div class="dropdown">
+          <button class="btn btn-outline-primary dropdown-toggle" type="button" id="techDropdown" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            Techs
+          </button>
+          <div class="dropdown-menu" aria-labelledby="techDropdown">
+            <tr *ngFor="let tech of usedTechnologies">
+              <td class="py-2 px-2"><label><input class="mr-2" type="checkbox"
+                    (change)="addToTechList($event, tech.name)"> <span>{{tech.name}}</span></label></td>
+            </tr>
+          </div>
         </div>
+
+        <p class="lead mt-4 border-bottom">Languages</p>
+        <div class="dropdown">
+          <button class="btn btn-outline-primary dropdown-toggle" type="button" id="langDropDown" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            Languages
+          </button>
+          <div class="dropdown-menu" aria-labelledby="langDropDown">
+            <tr *ngFor="let lang of usedLanguages">
+              <td class="py-2 px-2"><label><input class="mr-2" type="checkbox"
+                    (change)="addToLangList($event, lang.name)"> <span>{{lang.name}}</span></label></td>
+            </tr>
+          </div>
+        </div>
+
+        <p class="lead mt-4 border-bottom">Personality</p>
+        <select class="form-select" aria-label="Default select example">
+          <option value="1">Choose one</option>
+          <option value="2">One</option>
+          <option value="3">Two</option>
+          <option value="4">Three</option>
+        </select>
 
         <p class="lead mt-4 border-bottom">Work Openness</p>
         <div class="form-check">
-          <input class="form-check-input" type="radio" name="exampleRadios"
-                 id="exampleRadios1" value="open" checked
-                 [(ngModel)]="workStatus" (ngModelChange)="onWorkStatusChange()" >
+          <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="open" checked
+            [(ngModel)]="workStatus" (ngModelChange)="onWorkStatusChange()">
           <label class="form-check-label" for="exampleRadios1">
             Open for Work
           </label>
         </div>
         <div class="form-check">
-          <input class="form-check-input" type="radio" name="exampleRadios"
-                 id="exampleRadios2" value="closed"
-                 [(ngModel)]="workStatus" (ngModelChange)="onWorkStatusChange()">
+          <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="closed"
+            [(ngModel)]="workStatus" (ngModelChange)="onWorkStatusChange()">
           <label class="form-check-label" for="exampleRadios2">
             Closed for Work
           </label>
         </div>
 
-        <p class="lead mt-4 border-bottom">Technology Skills</p>
-        <select class="form-select" aria-label="Default select example">
-          <option value="1">Choose one</option>
-          <option value="2">One</option>
-          <option value="3">Two</option>
-          <option value="4">Three</option>
-        </select>
-
-        <p class="lead mt-4 border-bottom">Languages</p>
-        <select class="form-select" aria-label="Default select example">
-          <option value="1">Choose one</option>
-          <option value="2">One</option>
-          <option value="3">Two</option>
-          <option value="4">Three</option>
-        </select>
-
-        <p class="lead mt-4 border-bottom">Personality</p>
-        <select class="form-select" aria-label="Default select example">
-          <option value="1">Choose one</option>
-          <option value="2">One</option>
-          <option value="3">Two</option>
-          <option value="4">Three</option>
-        </select>
-
-        <p class="lead mt-4 border-bottom">Personality</p>
-        <div class="form-check">
-          <input class="form-check-input" type="checkbox" value="Checkbox 1" id="flexCheck7">
-          <label class="form-check-label" for="flexCheck7">
-            Default checkbox 1
-          </label>
-        </div>
-        <div class="form-check">
-          <input class="form-check-input" type="checkbox" value="Checkbox 2" id="flexCheck8">
-          <label class="form-check-label" for="flexCheck8">
-            Default checkbox 2
-          </label>
-        </div>
-        <div class="form-check">
-          <input class="form-check-input" type="checkbox" value="Checkbox 3" id="flexCheck9">
-          <label class="form-check-label" for="flexCheck9">
-            Default checkbox 3
-          </label>
-        </div>
-        <div class="form-check mb-5">
-          <input class="form-check-input" type="checkbox" value="Checkbox 4" id="flexCheck10">
-          <label class="form-check-label" for="flexCheck10">
-            Default checkbox 4
-          </label>
+        <p class="lead mt-4 border-bottom">Age up to</p>
+        <div class="input-group mb-5">
+          <input type="range" class="form-range flex-fill" min="18" max="70" step="1" id="customRange3" #customRange3
+            value="70">
+          <span class="input-group-text ml-2" id="rangeValue" #rangeValue>70</span>
         </div>
 
       </div>
@@ -161,10 +106,9 @@
     </div>
 
     <div class="col-md-8">
-      <div class="row">
+      <div class="row people-list">
 
-        <app-people-page-card *ngFor="let user of users" [user]="user"></app-people-page-card>
-
+        <app-people-page-card class="ml-4" *ngFor="let user of users" [user]="user"></app-people-page-card>
 
       </div>
     </div>
