@@ -4,6 +4,7 @@ import com.gfa.foxbook.foxbook.models.dtos.UserProfileDTO;
 import com.gfa.foxbook.foxbook.models.dtos.UserSearchDTO;
 import com.gfa.foxbook.foxbook.models.nonusermodels.Post;
 import com.gfa.foxbook.foxbook.models.User;
+import com.gfa.foxbook.foxbook.services.interfaces.PersonalityService;
 import com.gfa.foxbook.foxbook.services.interfaces.PostService;
 import com.gfa.foxbook.foxbook.services.interfaces.UserService;
 import lombok.RequiredArgsConstructor;
@@ -22,6 +23,7 @@ import java.util.Optional;
 public class PublicController {
     private final UserService userService;
     private final PostService postService;
+    private final PersonalityService personalityService;
 
     @GetMapping("/people")
     public ResponseEntity<?> getAllUsers() {
@@ -88,4 +90,9 @@ public class PublicController {
 //        Post post = optionalPost.get();
 //        return ResponseEntity.ok(post.getComments());
 //    }
+
+    @GetMapping("/personalities")
+    public ResponseEntity<?> getAllPersonalities() {
+        return ResponseEntity.ok(personalityService.getAllPersonalities());
+    }
 }

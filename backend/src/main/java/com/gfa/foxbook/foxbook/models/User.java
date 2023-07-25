@@ -76,11 +76,12 @@ public class User {
     )
     private List<Language> languages;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
+    @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
     @JoinTable(
             name = "users_personality",
             joinColumns = {@JoinColumn(name = "users_id", referencedColumnName = "id")},
-            inverseJoinColumns = {@JoinColumn(name = "personality_id", referencedColumnName = "id")})
+            inverseJoinColumns = {@JoinColumn(name = "personality_id", referencedColumnName = "id")}
+    )
     private Personality personality;
 
 }

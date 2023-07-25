@@ -56,6 +56,7 @@ export class PeoplePageComponent implements OnInit, AfterViewInit {
       this.fullUsers = users;
       this.usedTechnologiesList();
       this.usedLanguagesList();
+      console.log(this.users);
     });
   }
 
