@@ -22,20 +22,20 @@ body, nav, a {
   background-color: #007f00;
 }
 
-.btn-outline-primary {
+.btn-outline-primary:not([disabled]) {
   border: 1px solid green;
   color: green;
 }
 
-.btn-outline-primary:hover {
+.btn-outline-primary:not([disabled]):hover {
   background-color: green;
   color: rgb(255, 255, 255);
 }
 
-.btn-outline-primary:active {
+.btn-outline-primary:focus {
   background-color: #007f00;
 }
 
-.btn-outline-primary:active {
+.btn-outline-primary:not([disabled]):active {
   background-color: #007f00;
 }
