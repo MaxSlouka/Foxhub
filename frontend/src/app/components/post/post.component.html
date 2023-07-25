@@ -27,7 +27,11 @@
           [initialText]="post.content!" (handleSubmit)="updatePost.emit({text: $event, id: post.id!})"
           (handleCancel)="setActivePost.emit(null)"></app-post-form>
 
-        <button (click)="likePost()">Like</button>
+        <button [class.liked]="post.isLikedByCurrentUser" (click)="likePost(post.id)">
+          Like
+        </button>
+
+
 
 
         <div class="post-actions">

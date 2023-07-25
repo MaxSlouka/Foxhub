@@ -65,14 +65,16 @@ export class PostComponent implements OnInit {
     this.isEditing = false;
   }
 
-  likePost() {
-    this.postService.likePost(this.postId).subscribe(
+  likePost(postId: number) {
+    this.postService.likePost(postId).subscribe(
       response => {
         console.log('Post liked successfully', response);
+        this.post.isLikedByCurrentUser = true;
       },
       error => {
         console.log('Error liking post', error);
       }
     );
   }
+
 }

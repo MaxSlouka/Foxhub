@@ -84,11 +84,15 @@ export class PostsComponent implements OnInit {
     this.postsService.likePost(postId).subscribe(
       response => {
         console.log('Post liked successfully', response);
-        // TODO: Update the UI to reflect the new like
+        const post = this.posts.find(post => post.id === postId);
+        if (post) {
+          post.isLikedByCurrentUser = true;
+        }
       },
       error => {
         console.log('Error liking post', error);
       }
     );
   }
+
 }
