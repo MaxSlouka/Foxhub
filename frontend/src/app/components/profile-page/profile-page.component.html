@@ -28,7 +28,8 @@
             </a>
           </div>
         </div>
-        <h1 class="display-4 fw-bold text-body-emphasis lh-1 mb-4 userName-mobile">{{ user.firstName }} {{ user.lastName}}
+        <h1 class="display-4 fw-bold text-body-emphasis lh-1 mb-4 userName-mobile">{{ user.firstName }} {{
+          user.lastName}}
         </h1>
       </div>
 
@@ -93,9 +94,12 @@
           </div>
         </div>
       </div>
-    <div>
-      <p><b>Looking for work?</b>{{user.workStatus}}</p>
-    </div>
+
+      <div class="labels text-center mt-4">
+        <p class="lead labels">Open for work?</p>
+        <p class="lead">No{{user.workStatus}}</p>
+      </div>
+
     </div>
 
     <!-- main info section -->
