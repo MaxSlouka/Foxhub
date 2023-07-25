@@ -32,10 +32,6 @@ body, nav, a {
   color: rgb(255, 255, 255);
 }
 
-.btn-outline-primary:focus {
-  background-color: #007f00;
-}
-
 .btn-outline-primary:not([disabled]):active {
   background-color: #007f00;
 }
