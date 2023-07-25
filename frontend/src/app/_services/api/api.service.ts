@@ -4,6 +4,7 @@ import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {User} from "../../models/user";
 import {Language} from "../../models/language";
 import {Technology} from "../../models/technology";
+import {Personality} from "../../models/personality";
 
 const httpOptions = {
   headers: new HttpHeaders({'Content-type': 'application/json'})
@@ -69,7 +70,8 @@ export class ApiService {
              optionalPage: string | undefined,
              languages: Language[] | undefined,
              technologies: Technology[] | undefined,
-             workStatus:boolean | undefined
+             workStatus:boolean | undefined,
+             personality: Personality | undefined
   ): Observable<any> {
 
     return this.http.patch("http://localhost:8080/api/v1/user/people", {
@@ -86,7 +88,8 @@ export class ApiService {
         instagram,
         languages,
       technologies,
-      workStatus
+      workStatus,
+      personality
       },
       httpOptions
     );

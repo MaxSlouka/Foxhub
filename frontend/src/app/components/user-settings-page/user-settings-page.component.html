@@ -55,7 +55,7 @@
             </div>
           </div>
           <p class="lead mt-4 border-bottom">Personality</p>
-          <select class="form-select" aria-label="Default select example" (change)="onPersonalitySelect($event)">
+          <select class="form-select" aria-label="Default select example" (change)="onPersonalitySelect($event)" >
           <option *ngFor="let personality of personalities" [value]="personality.id">{{personality.type}}</option>
           </select>
 

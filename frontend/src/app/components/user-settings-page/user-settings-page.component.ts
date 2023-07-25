@@ -38,10 +38,6 @@ export class UserSettingsPageComponent {
   // @ts-ignore
   personalities: Personality[];
 
-  // @ts-ignore
-  selectedPersonality: Personality | undefined;
-
-
 
   constructor(private storageService: StorageService,
               private apiService: ApiService,
@@ -71,9 +67,8 @@ export class UserSettingsPageComponent {
   }
 
   onPersonalitySelect(event: any) {
-   const selectedPersonalityId = +event.target.value;
-    this.selectedPersonality = this.personalities.find(p => p.id === selectedPersonalityId);
-    console.log(this.selectedPersonality);
+    const selectedPersonalityId = +event.target.value;
+    this.user.personality = this.personalities.find(p => p.id === selectedPersonalityId);
   }
 
   public searchLanguage(key: string): void {
@@ -147,6 +142,8 @@ export class UserSettingsPageComponent {
   }
 
   async updateUser() {
+    // @ts-ignore
+    // @ts-ignore
     const {
       firstName,
       lastName,
@@ -162,7 +159,8 @@ export class UserSettingsPageComponent {
       optionalPage,
       languages,
       technologies,
-      workStatus
+      workStatus,
+      personality
     } = this.user;
 
     await this.apiService.updateUser(
@@ -180,7 +178,8 @@ export class UserSettingsPageComponent {
       optionalPage,
       languages,
       technologies,
-      workStatus)
+      workStatus,
+      personality)
       .subscribe(() => {
         window.location.href = "/profile/" + this.user.nickname;
       });
