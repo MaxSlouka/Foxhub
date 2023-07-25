@@ -20,6 +20,7 @@ public class UserSearchDTO {
     private String about;
     private Boolean workStatus;
     private Integer yearOfBirth;
+
     private List<Technology> technologies;
     private List<Language> languages;
     private String profilePictureUrl;
@@ -34,5 +35,6 @@ public class UserSearchDTO {
         this.technologies = user.getTechnologies();
         this.profilePictureUrl = user.getProfilePictureUrl();
         this.languages = user.getLanguages();
+        this.workStatus = user.isWorkStatus();
     }
 }
