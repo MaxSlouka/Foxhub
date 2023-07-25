@@ -4,17 +4,17 @@
 
 <div class="container rounded bg-white mt-2 mb-5">
 
+    <!--  progress bar   -->
   <div class="d-flex flex-column justify-content-center align-items-center">
     <p class="lead">Profile Completion Progress Bar</p>
     <p class="lead labels font-weight-bold text-center">Pro tip: If you want to be visible and increase you chances to
       get a job, fill up all the profile
       information.</p>
   </div>
-
   <div class="progress my-4">
-    <div class="progress-bar bg-success" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0"
-      aria-valuemax="100"></div>
+    <div class="progress-bar bg-success" role="progressbar" [style.width.%]="profileProgress" aria-valuemin="0" aria-valuemax="100"></div>
   </div>
+    <!-- end progress bar -->
 
   <div class="row">
 
