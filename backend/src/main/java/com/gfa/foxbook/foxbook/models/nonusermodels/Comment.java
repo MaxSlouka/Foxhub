@@ -1,5 +1,6 @@
 package com.gfa.foxbook.foxbook.models.nonusermodels;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -13,17 +14,14 @@ public class Comment {
     @Id
     @GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY)
     private Long id;
-    private Long postId;
     private String username;
     private String content;
     private Long userId;
-    @ManyToOne
-    @JoinTable(
-            name = "prcat",
-            joinColumns = {@JoinColumn(name = "comments", referencedColumnName = "id")},
-            inverseJoinColumns = {@JoinColumn(name = "post_id", referencedColumnName = "id")})
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "post_id", nullable = false)
+    @JsonBackReference
     private Post post;
     public void setPost(Post post) {
-        this.postId = post.getId();
+        this.post = post;
     }
 }
