@@ -41,6 +41,7 @@ import { AsideSearchBarComponent } from './components/aside-search-bar/aside-sea
 import { ChangePasswordComponent } from './components/change-password/change-password.component';
 import { CartComponent } from './components/cart/cart.component';
 import { CartCheckoutComponent } from './components/cart-checkout/cart-checkout.component';
+import { CardComponent } from './components/cart/card/card.component';
 
 @NgModule({
   declarations: [
@@ -74,7 +75,8 @@ import { CartCheckoutComponent } from './components/cart-checkout/cart-checkout.
     AsideSearchBarComponent,
     ChangePasswordComponent,
     CartComponent,
-    CartCheckoutComponent
+    CartCheckoutComponent,
+    CardComponent
   ],
   imports: [
     FormsModule,
