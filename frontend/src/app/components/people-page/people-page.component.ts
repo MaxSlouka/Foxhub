@@ -1,5 +1,4 @@
-import { Component, OnInit, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
-import { DataService } from "../../_services/api/data.service";
+import {Component, OnInit, AfterViewInit, ViewChild, ElementRef} from '@angular/core';
 import {Technology} from "../../models/technology";
 import {TechnologyService} from "../../_services/technology.service";
 import {ApiService} from "../../_services/api/api.service";
@@ -16,8 +15,8 @@ import {LanguageService} from "../../_services/language.service";
 
 
 export class PeoplePageComponent implements OnInit, AfterViewInit {
-  @ViewChild('customRange3', { static: true }) rangeInputRef!: ElementRef<HTMLInputElement>;
-  @ViewChild('rangeValue', { static: true }) rangeValueRef!: ElementRef<HTMLSpanElement>;
+  @ViewChild('customRange3', {static: true}) rangeInputRef!: ElementRef<HTMLInputElement>;
+  @ViewChild('rangeValue', {static: true}) rangeValueRef!: ElementRef<HTMLSpanElement>;
 
   technologies: Technology[] = [];
   languages: Language[] = [];
@@ -30,11 +29,11 @@ export class PeoplePageComponent implements OnInit, AfterViewInit {
   // @ts-ignore
   users: User[] = [];
   fullUsers: User[] = [];
-
   filterContentExpanded: boolean = true
+  isRangeChanged: boolean = false;
 
-  constructor(public dataService: DataService,
-              private technologyService: TechnologyService,
+
+  constructor(private technologyService: TechnologyService,
               private languageService: LanguageService,
               private apiService: ApiService) {
   }
@@ -64,7 +63,8 @@ export class PeoplePageComponent implements OnInit, AfterViewInit {
     rangeInput.addEventListener('input', (event) => {
       const target = event.target as HTMLInputElement;
       rangeValue.textContent = target.value;
-
+      this.isRangeChanged = true;
+      this.allFilters();
     });
   }
 
@@ -73,7 +73,7 @@ export class PeoplePageComponent implements OnInit, AfterViewInit {
   }
 
 
-  usedTechnologiesList(){
+  usedTechnologiesList() {
     const usedTechNames: string[] = [];
     for (let user of this.users) {
       // @ts-ignore
@@ -132,6 +132,7 @@ export class PeoplePageComponent implements OnInit, AfterViewInit {
     this.allFilters();
   }
 
+
   allFilters() {
     let filteredUsers = [...this.fullUsers];
 
@@ -143,6 +144,13 @@ export class PeoplePageComponent implements OnInit, AfterViewInit {
       filteredUsers = this.languagesFilter(filteredUsers, this.selectedLanguages);
     }
 
+    // @ts-ignore
+    if(this.isRangeChanged){
+      filteredUsers = this.ageFilter(filteredUsers);
+    }
+
+    filteredUsers = this.openToWorkFilter(filteredUsers);
+
     this.users = filteredUsers;
   }
 
@@ -153,7 +161,7 @@ export class PeoplePageComponent implements OnInit, AfterViewInit {
     // @ts-ignore
     return users.filter(user =>
       lowerCaseKeys.every(key =>
-        // @ts-ignore
+          // @ts-ignore
           user.technologies && user.technologies.some(technology =>
             technology.name.toLowerCase().includes(key)
           )
@@ -167,12 +175,39 @@ export class PeoplePageComponent implements OnInit, AfterViewInit {
     // @ts-ignore
     return users.filter(user =>
       lowerCaseKeys.every(key =>
-        // @ts-ignore
+          // @ts-ignore
           user.languages && user.languages.some(language =>
             language.name.toLowerCase().includes(key)
           )
       )
     );
+  }
+
+  ageFilter(filteredUsers: User[]) {
+    const currentYear = new Date().getFullYear();
+    const actualFilteredUsers: User[] = [];
+    for (let user of filteredUsers) {
+      // @ts-ignore
+      const age = currentYear - user.yearOfBirth;
+      { // @ts-ignore
+        if (age <= this.rangeInputRef.nativeElement.value) {
+          actualFilteredUsers.push(user);
+        }
+      }
+    }
+    return actualFilteredUsers;
+  }
+
+  // @ts-ignore
+  openToWorkFilter(filteredUsers) {
+    const actualFilteredUsers: User[] = [];
+    for (let user of filteredUsers) {
+      // @ts-ignore
+      if (user.openToWork === true) {
+        actualFilteredUsers.push(user);
+      }
+    }
+    return actualFilteredUsers;
   }
 }
 
