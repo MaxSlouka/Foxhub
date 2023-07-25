@@ -59,7 +59,6 @@ export class PeoplePageComponent implements OnInit, AfterViewInit {
   ngAfterViewInit(): void {
     const rangeInput = this.rangeInputRef.nativeElement;
     const rangeValue = this.rangeValueRef.nativeElement;
-    console.log(rangeValue);
 
     rangeInput.addEventListener('input', (event) => {
       const target = event.target as HTMLInputElement;
@@ -150,6 +149,8 @@ export class PeoplePageComponent implements OnInit, AfterViewInit {
       filteredUsers = this.ageFilter(filteredUsers);
     }
 
+    filteredUsers = this.openToWorkFilter(filteredUsers);
+
     this.users = filteredUsers;
   }
 
@@ -192,6 +193,18 @@ export class PeoplePageComponent implements OnInit, AfterViewInit {
         if (age <= this.rangeInputRef.nativeElement.value) {
           actualFilteredUsers.push(user);
         }
+      }
+    }
+    return actualFilteredUsers;
+  }
+
+  // @ts-ignore
+  openToWorkFilter(filteredUsers) {
+    const actualFilteredUsers: User[] = [];
+    for (let user of filteredUsers) {
+      // @ts-ignore
+      if (user.openToWork === true) {
+        actualFilteredUsers.push(user);
       }
     }
     return actualFilteredUsers;
