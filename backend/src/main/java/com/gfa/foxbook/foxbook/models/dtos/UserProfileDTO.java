@@ -61,5 +61,6 @@ public class UserProfileDTO {
         this.languages = user.getLanguages();
         this.profilePictureUrl = user.getProfilePictureUrl();
         this.workStatus =user.isWorkStatus();
+        this.yearOfBirth=user.getYearOfBirth();
     }
 }

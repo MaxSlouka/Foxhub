@@ -180,6 +180,7 @@ public class UserServiceImpl implements UserService {
         } else {
             user.setTechnologies(user.getTechnologies());
         }
+        user.setYearOfBirth(userDTO.getYearOfBirth());
         user.setWorkStatus(userDTO.isWorkStatus());
 
         return userRepository.save(user);

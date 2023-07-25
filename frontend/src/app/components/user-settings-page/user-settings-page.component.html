@@ -50,8 +50,35 @@
                 placeholder="enter number" value="">
             </div>
             <div class="col-md-6"><label class="labels">Years of experience</label><input type="text"
-                class="form-control" [(ngModel)]="user.yearsOfExperience" name="yearsOfExperience" value=""
-                placeholder="enter year">
+
+                                                                                          class="form-control"
+                                                                                          [(ngModel)]="user.yearsOfExperience"
+                                                                                          name="yearsOfExperience"
+                                                                                          value=""
+                                                                                          placeholder="enter year">
+            </div>
+          </div>
+          <div class="row mt-2">
+            <div class="col-md-6"><label class="labels">Year of birth</label><input type="number"
+                                                                                         class="form-control"
+                                                                                         [(ngModel)]="user.yearOfBirth"
+                                                                                         name="yearOfBirth"
+                                                                                         placeholder="enter year"
+                                                                                         value="">
+          </div>
+          </div>
+          <div class="row mt-2">
+            <div class="btn-group" role="group" aria-label="radio button for work status">
+              <p>looking for work?</p>
+
+              <input type="radio" class="btn-check" name="workStatus" id="radio1" [(ngModel)]="user.workStatus"
+                     [value]="true" autocomplete="off">
+              <label for="radio1">Looking for Work</label>
+
+              <input type="radio" class="btn-check" name="workStatus" id="radio2" [(ngModel)]="user.workStatus"
+                     [value]="false" autocomplete="off" checked>
+              <label for="radio2">Working</label>
+
             </div>
           </div>
 
