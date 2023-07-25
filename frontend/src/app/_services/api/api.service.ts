@@ -69,6 +69,7 @@ export class ApiService {
              optionalPage: string | undefined,
              languages: Language[] | undefined,
              technologies: Technology[] | undefined,
+             yearOfBirth:number | undefined,
              workStatus:boolean | undefined
   ): Observable<any> {
 
@@ -86,6 +87,7 @@ export class ApiService {
         instagram,
         languages,
       technologies,
+      yearOfBirth,
       workStatus
       },
       httpOptions
