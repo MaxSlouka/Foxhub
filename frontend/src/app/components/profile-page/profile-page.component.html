@@ -8,8 +8,11 @@
     <div class="col-md-3 border-right">
       <div class="d-flex flex-column align-items-center text-center p-3 py-2">
         <div class="links-btn" [ngClass]="{ 'active': isOpen }" (click)="toggleSocialLinks()">
-          <img class="profile-img rounded-circle" *ngIf="user.profilePictureUrl" height=200 width=200
-            ngSrc="{{user.profilePictureUrl}}" alt="profile picture" />
+          <div class="profile-img-container">
+            <img class="profile-img rounded-circle" *ngIf="user.profilePictureUrl" height=200 width=200
+              ngSrc="{{user.profilePictureUrl}}" alt="profile picture" />
+            <div class="profile-img-label">Click me for Socials!</div>
+          </div>
           <div class="links-box" [ngClass]="{ 'open': isOpen }">
             <a [href]="user.facebook">
               <i class="bi bi-facebook"></i>
@@ -97,8 +100,8 @@
       </div>
 
       <div class="labels text-center mt-4">
-        <p class="lead labels">Open for work?</p>
-        <p class="lead">No{{user.workStatus}}</p>
+        <label class="labels">Open for Work?</label>
+        <p class="lead">{{user.workStatus}}</p>
       </div>
 
     </div>
