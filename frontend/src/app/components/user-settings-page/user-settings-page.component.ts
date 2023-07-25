@@ -21,8 +21,9 @@ import {Personality} from "../../models/personality";
 export class UserSettingsPageComponent {
   // @ts-ignore
   selectedFile: File = null;
+  profileProgress:number = 0;
+  user: User = { email: "", firstName: "", lastName: "", password: "" };
 
-  user: User = {email: "", firstName: "", lastName: "", password: ""};
 
   // @ts-ignore
   languages: Language[];
@@ -54,6 +55,7 @@ export class UserSettingsPageComponent {
       this.user = user;
       this.userLanguages = user.languages;
       this.userTechnologies = user.technologies;
+      this.profileProgress = this.setProgress();
     });
     this.languageService.getAll().subscribe((languages: Language[]) => {
       this.languages = languages;
@@ -69,6 +71,19 @@ export class UserSettingsPageComponent {
   onPersonalitySelect(event: any) {
     const selectedPersonalityId = +event.target.value;
     this.user.personality = this.personalities.find(p => p.id === selectedPersonalityId);
+  }
+  setProgress(): number {
+    let filledFields: number = 0;
+    let totalFields: number = Object.keys(this.user).length;
+    console.log(this.user)
+
+    for (let prop in this.user) {
+      // @ts-ignore
+      if(this.user[prop] !== null){
+        filledFields++;
+      }
+    }
+    return Math.round((filledFields / totalFields) * 100);
   }
 
   public searchLanguage(key: string): void {
@@ -101,6 +116,7 @@ export class UserSettingsPageComponent {
       return !this.userLanguages.some(userLanguage => userLanguage.name === language.name);
     });
   }
+
 
   unusedTechnologiesHandle() {
     this.unusedTechnologies = this.technologies.filter(technology => {
@@ -159,10 +175,11 @@ export class UserSettingsPageComponent {
       optionalPage,
       languages,
       technologies,
-      workStatus,
-      personality
-    } = this.user;
+      personality,
+      yearOfBirth,
+      workStatus
 
+    } = this.user;
     await this.apiService.updateUser(
       firstName,
       lastName,
@@ -178,10 +195,14 @@ export class UserSettingsPageComponent {
       optionalPage,
       languages,
       technologies,
+    yearOfBirth,
       workStatus,
       personality)
+
       .subscribe(() => {
         window.location.href = "/profile/" + this.user.nickname;
       });
   }
+
+  protected readonly innerWidth = innerWidth;
 }

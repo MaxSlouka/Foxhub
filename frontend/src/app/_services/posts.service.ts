@@ -35,9 +35,11 @@ export class PostsService {
     );
   }
 
-
   deletePost(id: number): Observable<{}> {
     return this.httpClient.delete(
       `http://localhost:8080/api/v1/admin/posts/${id}`)
+  }
+  likePost(postID: number): Observable<any> {
+    return this.httpClient.post<any>(`http://localhost:8080/api/v1/user/posts/${postID}/like`, {});
   }
 }

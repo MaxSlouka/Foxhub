@@ -15,7 +15,7 @@ export class PeoplePageCardComponent {
   constructor(private renderer: Renderer2, private el: ElementRef) { }
 
   ngOnInit() {
-    const btnElement = this.el.nativeElement.querySelector('.btn');
+    const btnElement = this.el.nativeElement.querySelector('.btn-opener');
     const boxElement = this.el.nativeElement.querySelector('.box');
 
     this.renderer.listen(btnElement, 'click', () => {

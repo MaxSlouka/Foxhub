@@ -70,8 +70,10 @@ export class ApiService {
              optionalPage: string | undefined,
              languages: Language[] | undefined,
              technologies: Technology[] | undefined,
-             workStatus:boolean | undefined,
-             personality: Personality | undefined
+             personality: Personality | undefined,
+             yearOfBirth:number | undefined,
+             workStatus:boolean | undefined
+
   ): Observable<any> {
 
     return this.http.patch("http://localhost:8080/api/v1/user/people", {
@@ -86,10 +88,13 @@ export class ApiService {
         linkedin,
         facebook,
         instagram,
+        optionalPage,
         languages,
       technologies,
-      workStatus,
-      personality
+      personality,
+      yearOfBirth,
+      workStatus
+
       },
       httpOptions
     );

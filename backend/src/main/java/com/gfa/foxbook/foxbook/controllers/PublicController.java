@@ -81,18 +81,19 @@ public class PublicController {
         return ResponseEntity.ok(usersDTO);
     }
 
-//    @GetMapping("/posts/comments/{id}")
-//    public ResponseEntity<?> getPostComments(@PathVariable Long id) {
-//        Optional<Post> optionalPost = postService.findById(id);
-//        if (optionalPost.isEmpty()) {
-//            return ResponseEntity.notFound().build();
-//        }
-//        Post post = optionalPost.get();
-//        return ResponseEntity.ok(post.getComments());
-//    }
 
     @GetMapping("/personalities")
     public ResponseEntity<?> getAllPersonalities() {
         return ResponseEntity.ok(personalityService.getAllPersonalities());
+
+    @GetMapping("/posts/comments/{id}")
+    public ResponseEntity<?> getPostComments(@PathVariable Long id) {
+        Optional<Post> optionalPost = postService.findById(id);
+        if (optionalPost.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+        Post post = optionalPost.get();
+        return ResponseEntity.ok(post.getComments());
+
     }
 }

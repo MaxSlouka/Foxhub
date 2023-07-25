@@ -1,12 +1,13 @@
 .profile {
-    width: 250px;
-    height: 100px;
-    border-radius: 5px;
-    background-color: #f3f3f3;
-    box-shadow: 0 0 2rem grey;
+    width: 300px;
+    height: 200px;
+    border-radius: 50px 5px 5px 50px;
+    background-color: #ffffff;
+    box-shadow: 0 0 1rem grey;
     display: flex;
     align-items: center;
     margin: 2rem;
+    border-right: 2px solid green;
 }
 
 .profile .photo {
@@ -15,8 +16,7 @@
     border-radius: 50%;
     overflow: hidden;
     border: 5px solid #dadada;
-    background-color: #ffffff;
-    box-shadow: 0 0 2rem #737373;
+    box-shadow: 0 0 1rem #d1d1d1;
     animation: rotate-photo .5s forwards ease-in-out;
     margin-left: -50px;
     display: flex;
@@ -29,9 +29,9 @@
     transform: scale(1.1);
 }
 
-.profile .photo img {
+/* .profile .photo img {
     border-radius: 50%;
-}
+} */
 
 .profile .content {
     padding: 10px;
@@ -48,7 +48,7 @@
 
 .profile .content .text h3,
 .profile .content .text h6 {
-    font-size: 15px;
+    font-size: 20px;
 }
 
 .app-technologies {
@@ -61,7 +61,12 @@ p {
     flex-wrap: wrap;
 }
 
-.profile .btn {
+.labels {
+    font-weight: bold;
+    font-size: small;
+}
+
+.profile .btn-opener {
     background-color: #e9e9e9;
     width: 50px;
     height: 50px;
@@ -87,11 +92,11 @@ p {
     }
 }
 
-.profile .btn:hover {
+.profile .btn-opener:hover {
     box-shadow: 0 0 0 5px #ffffff;
 }
 
-.profile .btn span {
+.profile .btn-opener span {
     width: 60%;
     height: 2px;
     position: absolute;
@@ -102,8 +107,8 @@ p {
     animation: to-hamburger .3s forwards ease-in-out;
 }
 
-.profile .btn span:before,
-.profile .btn span:after {
+.profile .btn-opener span:before,
+.profile .btn-opener span:after {
     content: "";
     width: 100%;
     height: 2px;
@@ -114,29 +119,29 @@ p {
     right: 0;
 }
 
-.profile .btn span:before {
+.profile .btn-opener span:before {
     margin-top: -7px;
 }
 
-.profile .btn span:after {
+.profile .btn-opener span:after {
     margin-top: 7px;
 }
 
-.profile .btn.active span {
+.profile .btn-opener.active span {
     animation: to-arrow .3s forwards ease-in-out;
 }
 
-.profile .btn.active span:after,
-.profile .btn.active span:before {
+.profile .btn-opener.active span:after,
+.profile .btn-opener.active span:before {
     width: 60%;
     right: -1px;
 }
 
-.profile .btn.active span:before {
+.profile .btn-opener.active span:before {
     transform: rotate(45deg);
 }
 
-.profile .btn.active span:after {
+.profile .btn-opener.active span:after {
     transform: rotate(-45deg);
 }
 
@@ -160,7 +165,7 @@ p {
     }
 }
 
-.profile .btn .box {
+.profile .btn-opener .box {
     width: 150px;
     height: 150px;
     opacity: 0;
@@ -173,12 +178,12 @@ p {
     pointer-events: none;
 }
 
-.profile .btn.active .box {
+.profile .btn-opener.active .box {
     opacity: 1;
     pointer-events: auto;
 }
 
-.profile .btn .box a {
+.profile .btn-opener .box a {
     width: 50px;
     height: 50px;
     border-radius: 50%;
