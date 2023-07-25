@@ -142,9 +142,9 @@ export class UserSettingsPageComponent {
       optionalPage,
       languages,
       technologies,
+      yearOfBirth,
       workStatus
     } = this.user;
-
     await this.apiService.updateUser(
       firstName,
       lastName,
@@ -160,6 +160,7 @@ export class UserSettingsPageComponent {
       optionalPage,
       languages,
       technologies,
+      yearOfBirth,
       workStatus)
       .subscribe(() => {
         window.location.href = "/profile/"+this.user.nickname;
