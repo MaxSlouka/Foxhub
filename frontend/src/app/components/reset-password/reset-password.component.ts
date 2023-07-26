@@ -27,7 +27,9 @@ export class ResetPasswordComponent implements OnInit {
     const {email, yearOfBirth} = this.form;
     this.authService.resetPassword(email, yearOfBirth).subscribe({
       next: data => {
+        console.log(data);
         this.isSuccessful = true;
+        this.isSignUpFailed = false;
       },
       error: err => {
         this.errorMessage = err.error.message;
