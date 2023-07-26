@@ -46,6 +46,7 @@ import { ItemsCounterComponent } from './components/items-counter/items-counter.
 import { SwiperArrowComponent } from './components/swiper-arrow/swiper-arrow.component';
 import { CreatorsComponent } from './components/creators/creators.component';
 import { RevealOnScrollDirective } from './directives/reveal-on-scroll.directive';
+import { PersonalityInfoPageComponent } from './components/personality-info-page/personality-info-page.component';
 
 
 @NgModule({
@@ -86,6 +87,7 @@ import { RevealOnScrollDirective } from './directives/reveal-on-scroll.directive
     SwiperArrowComponent,
     CreatorsComponent,
     RevealOnScrollDirective,
+    PersonalityInfoPageComponent,
     ItemsCounterComponent
   ],
   imports: [
