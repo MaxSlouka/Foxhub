@@ -1,23 +1,29 @@
-<div class="profile">
 
-    <div class="photo">
+<div class="center">
+    <div class="box center">
+
         <a [routerLink]="['/profile',user.nickname]" class="card">
             <img *ngIf="user.profilePictureUrl" ngSrc="{{  user.profilePictureUrl  }}" height=100 width=100
                 class="profile-img" loading="lazy" alt="profile_picture">
         </a>
-    </div>
 
-    <div class="content">
-        <div class="text">
-            <p class="lead">{{user.firstName}} {{user.lastName}}</p>
-            <label class="labels">Open for Work:</label>
-            <p class="lead">{{user.workStatus}}</p>
+        <div>
+            <p class="lead username">{{user.firstName}} {{user.lastName}}</p>
+            <p class="lead skill">Commander</p>
             <button class="btn btn-outline-primary" type="button" (click)="addToCart(user)"> Add to Cart </button>
         </div>
 
-        <div class="btn-opener" [ngClass]="{ 'active': isOpen }">
-            <span></span>
-            <div class="box" [ngClass]="{ 'open': isOpen }">
+        <div class="arr-container center">
+            <i class="bi bi-arrow-right"></i>
+        </div>
+
+        <div class="left-container off">
+            <p>Personality</p>
+            <div class="personality-about">
+                <div>Bold, Imaginative and strong-willed leader, always finding a way - or making one</div>
+            </div>
+
+            <div class="icons">
                 <a [href]="user.facebook">
                     <i class="bi bi-facebook"></i>
                 </a>
@@ -34,8 +40,11 @@
                     <i class="bi bi-globe"></i>
                 </a>
             </div>
+
+            <div class="cancel center">
+                <i class="bi bi-x-lg"></i>
+            </div>
+
         </div>
-
     </div>
-
 </div>

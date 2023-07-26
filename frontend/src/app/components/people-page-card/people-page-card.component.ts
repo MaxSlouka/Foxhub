@@ -1,6 +1,6 @@
-import { Component, Input, Renderer2, ElementRef } from '@angular/core';
+import { Component, Input, ElementRef } from '@angular/core';
 import { User } from "../../models/user";
-import {CartService} from "../../_services/cart.service";
+import { CartService } from "../../_services/cart.service";
 
 @Component({
   selector: 'app-people-page-card',
@@ -9,30 +9,47 @@ import {CartService} from "../../_services/cart.service";
 })
 
 export class PeoplePageCardComponent {
+
   // @ts-ignore
   @Input() user: User;
   isOpen: boolean = false;
 
-  constructor(private renderer: Renderer2, private el: ElementRef, private cartService:CartService) { }
-
-  ngOnInit() {
-    const btnElement = this.el.nativeElement.querySelector('.btn-opener');
-    const boxElement = this.el.nativeElement.querySelector('.box');
-
-    this.renderer.listen(btnElement, 'click', () => {
-      this.isOpen = !this.isOpen;
-      if (this.isOpen) {
-        this.renderer.addClass(btnElement, 'active');
-        this.renderer.addClass(boxElement, 'open');
-      } else {
-        this.renderer.removeClass(btnElement, 'active');
-        this.renderer.removeClass(boxElement, 'open');
-      }
-    });
-  }
+  constructor(
+    private cartService: CartService,
+    private elementRef: ElementRef
+    ) { }
 
   addToCart(user: User) {
     this.cartService.addToCart(user);
+  }
 
+  toggleLeftContainer() {
+    const arr = this.elementRef.nativeElement.querySelector(".arr-container");
+    const leftContainer = this.elementRef.nativeElement.querySelector(".left-container");
+
+    if (!this.isOpen) {
+      arr.classList.add("active-arr");
+      leftContainer.classList.remove("off");
+      leftContainer.classList.add("active");
+    } else {
+      arr.classList.remove("active-arr");
+      leftContainer.classList.remove("active");
+      leftContainer.classList.add("off");
+    }
+
+    this.isOpen = !this.isOpen;
+  }
+
+  ngAfterViewInit() {
+    const arr = this.elementRef.nativeElement.querySelector(".arr-container");
+    const clc = this.elementRef.nativeElement.querySelector(".cancel");
+
+    arr.addEventListener("click", () => {
+      this.toggleLeftContainer();
+    });
+
+    clc.addEventListener("click", () => {
+      this.toggleLeftContainer();
+    });
   }
 }
