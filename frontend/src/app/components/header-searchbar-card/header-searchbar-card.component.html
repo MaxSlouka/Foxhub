@@ -1,5 +1,5 @@
 <a [routerLink]="['/profile',user.nickname]" class="userCard">
-    <img [src]="user.profilePictureUrl ? user.profilePictureUrl : '../../../assets/img/logo.png'" width="35"
+    <img [src]="user.profilePictureUrl ? user.profilePictureUrl : '/assets/img/logo.png'" width="35"
         height="35" class="profile-img" loading="lazy">
     <p>{{user.firstName}} {{user.lastName}}</p>
 </a>
