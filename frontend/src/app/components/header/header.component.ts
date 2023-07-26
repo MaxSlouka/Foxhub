@@ -5,7 +5,7 @@ import { ProfileService } from "../../_services/profile.service";
 import { User } from "../../models/user";
 import { ActivatedRoute } from '@angular/router';
 import { DataService } from "../../_services/api/data.service";
-import {ApiService} from "../../_services/api/api.service";
+import { ApiService } from "../../_services/api/api.service";
 
 @Component({
   selector: 'app-header',
@@ -19,7 +19,7 @@ export class HeaderComponent implements OnInit {
   username: string | null = "";
   // @ts-ignore
   users: User[];
-  user:User ={email: "", firstName: "", lastName: "", password: ""};
+  user: User = { email: "", firstName: "", lastName: "", password: "" };
 
   isLoggedIn = false;
 
@@ -28,7 +28,7 @@ export class HeaderComponent implements OnInit {
   constructor(private authService: AuthService,
     private profileService: ProfileService,
     private storageService: StorageService,
-              private apiService: ApiService,
+    private apiService: ApiService,
     private activatedroute: ActivatedRoute,
     public dataService: DataService) {
   }
