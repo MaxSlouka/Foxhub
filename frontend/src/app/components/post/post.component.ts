@@ -85,6 +85,7 @@ export class PostComponent implements OnInit {
     this.postService.likePost(postId).subscribe(
       response => {
         console.log('Post liked successfully', response);
+        this.loadPost();
         this.post.isLikedByCurrentUser = true;
       },
       error => {
