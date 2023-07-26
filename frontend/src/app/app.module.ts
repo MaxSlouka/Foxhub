@@ -83,7 +83,7 @@ import { CreatorsComponent } from './components/creators/creators.component';
     CartCheckoutComponent,
     PersonalityComponent,
     SwiperArrowComponent,
-    CreatorsComponent
+    CreatorsComponent,
     ItemsCounterComponent
   ],
   imports: [
