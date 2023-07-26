@@ -39,7 +39,7 @@ export class PeoplePageComponent implements OnInit, AfterViewInit {
 
   personalities: Personality[] = [];
   selectedPersonality: Personality | undefined;
-  selectAllPersonalities: boolean = false;
+  selectAllPersonalities: boolean = true;
 
 
   constructor(private technologyService: TechnologyService,
