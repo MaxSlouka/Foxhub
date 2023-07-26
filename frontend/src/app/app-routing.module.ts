@@ -14,6 +14,7 @@ import { ChangePasswordComponent } from "./components/change-password/change-pas
 import { CartComponent } from "./components/cart/cart.component";
 import { CartCheckoutComponent } from "./components/cart-checkout/cart-checkout.component";
 import { CreatorsComponent } from "./components/creators/creators.component";
+import { PersonalityInfoPageComponent } from "./components/personality-info-page/personality-info-page.component";
 
 const routes: Routes = [
   { path: '', component: IntroComponent },
@@ -29,6 +30,7 @@ const routes: Routes = [
   { path: 'cart', component: CartComponent },
   { path: 'checkout', component: CartCheckoutComponent },
   { path: 'creators', component: CreatorsComponent },
+  { path: 'personality-test', component: PersonalityInfoPageComponent },
   { path: '**', pathMatch: 'full', component: PageNotFoundComponent }
 ]
 
