@@ -103,7 +103,7 @@ public class AuthController {
     public ResponseEntity<?> resetPassword(@RequestBody EmailDTO emailDTO) throws MessagingException {
         Optional<User> user = userService.findByEmailAndYearOfBirth(emailDTO.getEmail(), emailDTO.getYearOfBirth());
         if (user.isEmpty()){
-            return ResponseEntity.badRequest().body("user does not exist");
+            return ResponseEntity.badRequest().body("this user does not exist");
         }
 
         if (!(user.get().getEmail().equals(emailDTO.getEmail()) && user.get().getYearOfBirth() == emailDTO.getYearOfBirth())) {
