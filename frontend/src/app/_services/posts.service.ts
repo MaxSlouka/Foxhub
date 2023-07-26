@@ -42,4 +42,11 @@ export class PostsService {
   likePost(postID: number): Observable<any> {
     return this.httpClient.post<any>(`http://localhost:8080/api/v1/user/posts/${postID}/like`, {});
   }
+
+  commentPost(postId: number, commentText: string): Observable<any> {
+    return this.httpClient.post<any>(
+      `http://localhost:8080/api/v1/user/post/${postId}/comment`,
+      { content: commentText }
+    );
+  }
 }

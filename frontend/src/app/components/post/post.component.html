@@ -26,7 +26,9 @@
         <app-post-form *ngIf="isReplying() && !isEditing" submitLabel="Update" [hasCancelButton]="true"
           [initialText]="post.content!" (handleSubmit)="updatePost.emit({text: $event, id: post.id!})"
           (handleCancel)="setActivePost.emit(null)"></app-post-form>
-        <button [class.liked]="post.isLikedByCurrentUser" (click)="likePost.emit(post.id)">
+
+
+        <button [class.liked]="post.isLikedByCurrentUser" (click)="likePost(post.id)">
           Like
         </button>
 
@@ -42,6 +44,10 @@
           <div class="post-action btn btn-outline-secondary mr-2">Comment</div>
           <div class="post-action btn btn-outline-danger mr-2" (click)="deletePost.emit(post.id)" *ngIf="userRole==='ADMIN'">
             Delete
+          </div>
+          <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="Your comment" [(ngModel)]="commentText">
+            <button class="btn btn-outline-primary" type="button" (click)="commentPost()">Comment</button>
           </div>
 
         </div>
