@@ -44,6 +44,7 @@ import { CartCheckoutComponent } from './components/cart-checkout/cart-checkout.
 import { PersonalityComponent } from './components/personality/personality.component';
 import { SwiperArrowComponent } from './components/swiper-arrow/swiper-arrow.component';
 import { CreatorsComponent } from './components/creators/creators.component';
+import { RevealOnScrollDirective } from './directives/reveal-on-scroll.directive';
 
 
 @NgModule({
@@ -82,8 +83,8 @@ import { CreatorsComponent } from './components/creators/creators.component';
     CartCheckoutComponent,
     PersonalityComponent,
     SwiperArrowComponent,
-    CreatorsComponent
-
+    CreatorsComponent,
+    RevealOnScrollDirective
   ],
   imports: [
     FormsModule,
