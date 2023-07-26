@@ -1,6 +1,10 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Post} from "../../models/post";
 import {PostsService} from "../../_services/posts.service";
+import { AuthService } from "../../_services/auth.service";
+import { StorageService } from "../../_services/storage.service";
+import { ApiService } from "../../_services/api/api.service";
+import { User } from "../../models/user";
 
 @Component({
   selector: 'app-post',
@@ -24,7 +28,18 @@ export class PostComponent implements OnInit {
   canDelete: boolean = false;
   replyId: number | null = null;
 
-  constructor(private postService: PostsService) {
+  // @ts-ignore
+  users: User[];
+  user: User = { email: "", firstName: "", lastName: "", password: "" };
+  userEmail: string = '';
+  isLoggedIn = false;
+
+  constructor(
+    private postService: PostsService,
+    private storageService: StorageService,
+    private apiService: ApiService,
+    private authService: AuthService
+    ) {
   }
 
   ngOnInit(): void {
@@ -37,6 +52,14 @@ export class PostComponent implements OnInit {
     this.canEdit = this.currentUserId === this.post.userId && !timePassed;
     this.canDelete = this.currentUserId === this.post.userId && this.replies.length === 0;
     this.loadPost();
+
+    if (this.storageService.isLoggedIn()) {
+      this.isLoggedIn = true;
+      this.userEmail = this.storageService.getUserFromSession();
+      this.apiService.getUserBasicInfo().subscribe((user: User) => {
+        this.user = user;
+      });
+    }
   }
 
   loadPost(): void {

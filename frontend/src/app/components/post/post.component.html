@@ -20,16 +20,18 @@
               </div>
             </div>
           </div>
-        
+
           <div class="post-actions">
-            <div class="post-action btn btn-outline-primary mr-2" (click)="startEditing()" *ngIf="userRole==='ADMIN' && !isEditing">
+            <div class="post-action btn btn-outline-primary mr-2" (click)="startEditing()"
+              *ngIf="userRole==='ADMIN' && !isEditing">
               Edit
             </div>
-            <div class="post-action btn btn-outline-danger" (click)="deletePost.emit(post.id)" *ngIf="userRole==='ADMIN'">
+            <div class="post-action btn btn-outline-danger" (click)="deletePost.emit(post.id)"
+              *ngIf="userRole==='ADMIN'">
               Delete
             </div>
           </div>
-        </div>        
+        </div>
 
         <div class="post-text" *ngIf="!isEditing && !isReplying()">
           <p class="lead my-4">{{ post.content }}</p>
@@ -37,11 +39,13 @@
 
         <app-post-form *ngIf="isEditing" submitLabel="Update" [hasCancelButton]="true" [initialText]="post.content"
           (handleSubmit)="updatePost.emit({text: $event, id: post.id}); stopEditing()"
-          (handleCancel)="stopEditing()"></app-post-form>
+          (handleCancel)="stopEditing()">
+        </app-post-form>
 
         <app-post-form *ngIf="isReplying() && !isEditing" submitLabel="Update" [hasCancelButton]="true"
           [initialText]="post.content!" (handleSubmit)="updatePost.emit({text: $event, id: post.id!})"
-          (handleCancel)="setActivePost.emit(null)"></app-post-form>
+          (handleCancel)="setActivePost.emit(null)">
+        </app-post-form>
 
         <div class="post-container d-flex justify-items-end">
 
@@ -51,6 +55,9 @@
 
           <div class="post-comments mr-3">
             <p>Comments: {{ post.comments.length }}</p>
+          </div>
+
+          <div class="post-comments mr-3">
             <div *ngFor="let comment of post.comments">
               <p class="lead">{{ comment.content }} </p>
             </div>
@@ -60,7 +67,7 @@
 
         <div class="post-actions">
 
-          <div class="input-group my-3">
+          <div class="input-group my-3" *ngIf="isLoggedIn">
             <button class="btn btn-outline-primary mr-2" type="button" [class.liked]="post.isLikedByCurrentUser"
               (click)="likePost(post.id)">
               Like
