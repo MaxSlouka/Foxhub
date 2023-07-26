@@ -5,7 +5,7 @@ import { ProfileService } from "../../_services/profile.service";
 import { User } from "../../models/user";
 import { ActivatedRoute } from '@angular/router';
 import { DataService } from "../../_services/api/data.service";
-import {ApiService} from "../../_services/api/api.service";
+import { ApiService } from "../../_services/api/api.service";
 
 @Component({
   selector: 'app-header',
