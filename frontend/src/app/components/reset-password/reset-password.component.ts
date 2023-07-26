@@ -14,10 +14,11 @@ export class ResetPasswordComponent implements OnInit {
   };
 
   isSuccessful = false;
-  isSignUpFailed = false;
+  isResetFailed = false;
   errorMessage = '';
 
-  constructor(private authService: AuthService) {  }
+  constructor(private authService: AuthService) {
+  }
 
   ngOnInit(): void {
 
@@ -26,14 +27,13 @@ export class ResetPasswordComponent implements OnInit {
   public onSubmit() {
     const {email, yearOfBirth} = this.form;
     this.authService.resetPassword(email, yearOfBirth).subscribe({
-      next: data => {
-        console.log(data);
+      next: () => {
         this.isSuccessful = true;
-        this.isSignUpFailed = false;
+        this.isResetFailed = false;
       },
       error: err => {
         this.errorMessage = err.error.message;
-        this.isSignUpFailed = true;
+        this.isResetFailed = true;
       }
     });
   }
