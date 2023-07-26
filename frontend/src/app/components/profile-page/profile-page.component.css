@@ -196,9 +196,16 @@ ul li a:hover {
   transform: rotate(90deg) translateX(120px) rotate(-90deg);
   transition-delay: .1s;
 }
+
 .green{
   color: #0d9c00;
 }
+
 .red{
   color: red;
+}
+
+.btn-outline-primary:disabled {
+  border: 1px solid grey;
+  color: grey;
 }
