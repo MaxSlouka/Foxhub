@@ -9,6 +9,8 @@ import { Language } from "../../models/language";
 import { LanguageService } from "../../_services/language.service";
 import { Technology } from "../../models/technology";
 import { TechnologyService } from "../../_services/technology.service";
+import { PersonalityService } from "../../_services/personality.service";
+import { Personality } from "../../models/personality";
 
 @Component({
   selector: 'app-user-settings-page',
@@ -19,8 +21,9 @@ import { TechnologyService } from "../../_services/technology.service";
 export class UserSettingsPageComponent {
   // @ts-ignore
   selectedFile: File = null;
-  profileProgress:number = 0;
+  profileProgress: number = 0;
   user: User = { email: "", firstName: "", lastName: "", password: "" };
+
 
   // @ts-ignore
   languages: Language[];
@@ -33,13 +36,18 @@ export class UserSettingsPageComponent {
   userTechnologies: Technology[] | undefined;
   unusedTechnologies: Technology[] | undefined;
 
+  // @ts-ignore
+  personalities: Personality[];
+
+
   constructor(private storageService: StorageService,
     private apiService: ApiService,
     private authService: AuthService,
     private router: Router,
     private uploadService: UploadService,
     private languageService: LanguageService,
-    private technologyService: TechnologyService) {
+    private technologyService: TechnologyService,
+    private personalityService: PersonalityService) {
   }
 
   ngOnInit(): void {
@@ -55,6 +63,14 @@ export class UserSettingsPageComponent {
     this.technologyService.getAll().subscribe((technologies: Technology[]) => {
       this.technologies = technologies;
     });
+    this.personalityService.getAll().subscribe((personalities: Personality[]) => {
+      this.personalities = personalities;
+    });
+  }
+
+  onPersonalitySelect(event: any) {
+    const selectedPersonalityId = +event.target.value;
+    this.user.personality = this.personalities.find(p => p.id === selectedPersonalityId);
   }
   setProgress(): number {
     let filledFields: number = 0;
@@ -63,7 +79,7 @@ export class UserSettingsPageComponent {
 
     for (let prop in this.user) {
       // @ts-ignore
-      if(this.user[prop] !== null){
+      if (this.user[prop] !== null) {
         filledFields++;
       }
     }
@@ -79,18 +95,18 @@ export class UserSettingsPageComponent {
       }
     }
     // Update the languages array with the search results
-    this.unusedLanguages= results;
+    this.unusedLanguages = results;
   }
 
   public searchTechnology(key: string): void {
     const results: Technology[] = [];
 
-    for (const technology of this.technologies){
+    for (const technology of this.technologies) {
       if (technology.name.toLowerCase().includes(key.toLowerCase())) {
         results.push(technology);
       }
     }
-    this.unusedTechnologies= results;
+    this.unusedTechnologies = results;
   }
 
 
@@ -142,6 +158,8 @@ export class UserSettingsPageComponent {
   }
 
   async updateUser() {
+    // @ts-ignore
+    // @ts-ignore
     const {
       firstName,
       lastName,
@@ -157,8 +175,10 @@ export class UserSettingsPageComponent {
       optionalPage,
       languages,
       technologies,
+      personality,
       yearOfBirth,
       workStatus
+
     } = this.user;
     await this.apiService.updateUser(
       firstName,
@@ -175,10 +195,13 @@ export class UserSettingsPageComponent {
       optionalPage,
       languages,
       technologies,
+      personality,
       yearOfBirth,
-      workStatus)
+      workStatus
+    )
+
       .subscribe(() => {
-        window.location.href = "/profile/"+this.user.nickname;
+        window.location.href = "/profile/" + this.user.nickname;
       });
   }
 

@@ -58,6 +58,12 @@
                                                                                           placeholder="enter year">
             </div>
           </div>
+
+          <p class="lead mt-4 border-bottom">Personality</p>
+          <select class="form-select" aria-label="Default select example" (change)="onPersonalitySelect($event)" >
+          <option *ngFor="let personality of personalities" [value]="personality.id">{{personality.type}}</option>
+          </select>
+
           <div class="row mt-2">
             <div class="col-md-6"><label class="labels">Year of birth</label><input type="number"
                                                                                          class="form-control"
@@ -69,7 +75,9 @@
           </div>
 
 
-            <div class="row mt-3">
+
+
+          <div class="row mt-3">
               <div class="col-md-12">
                 <label class="labels">Phone Number</label>
                 <input type="text" class="form-control" placeholder="enter phone number" [(ngModel)]="user.phone" name="phone" value="">

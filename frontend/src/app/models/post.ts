@@ -5,4 +5,5 @@ export interface Post {
   userId: number;
   parentPostId: number | null;
   createdAt: string;
+  isLikedByCurrentUser: boolean;
 }
