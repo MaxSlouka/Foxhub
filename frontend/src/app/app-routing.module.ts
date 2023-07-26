@@ -13,6 +13,7 @@ import { ResetPasswordComponent } from './components/reset-password/reset-passwo
 import { ChangePasswordComponent } from "./components/change-password/change-password.component";
 import { CartComponent } from "./components/cart/cart.component";
 import { CartCheckoutComponent } from "./components/cart-checkout/cart-checkout.component";
+import { CreatorsComponent } from "./components/creators/creators.component";
 
 const routes: Routes = [
   { path: '', component: IntroComponent },
@@ -27,6 +28,7 @@ const routes: Routes = [
   { path: 'termsOfUse', component: TermsOfUseComponent },
   { path: 'cart', component: CartComponent },
   { path: 'checkout', component: CartCheckoutComponent },
+  { path: 'creators', component: CreatorsComponent },
   { path: '**', pathMatch: 'full', component: PageNotFoundComponent }
 ]
 
