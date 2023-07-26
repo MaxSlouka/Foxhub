@@ -8,18 +8,20 @@
   <div class="row flex-lg-row-reverse align-items-center g-5 py-4">
 
     <div class="col-lg-6">
-      <h1 class="display-5 fw-bold text-body-emphasis lh-1 mb-3">Unleash Your Potential on FoxBook: <span>Connect,
-          Collaborate, and Conquer the IT World!</span></h1>
+      <h1 class="display-5 fw-bold text-body-emphasis lh-1 mb-3 page-header">Looking for a <span>Support</span>?</h1>
       <br>
       <h2 class="display-5 fw-bold text-body-emphasis lh-1 mb-3">We got you covered!</h2>
       <p class="lead">Explore world of remarkable individuals, each with their unique story and
-        expertise. Witness the passion that drives them, the projects that define them, and the accomplishments
-        that set them apart. Whether you seek inspiration, mentorship, or the perfect addition to your team, our
-        user directory is your gateway to connecting with the brightest stars of the tech universe.</p>
+        expertise. Witness the <b>passion</b> that drives them, the <b>projects</b> that define them, and the
+        <b>accomplishments</b>
+        that set them apart.
+      </p>
+      <p class="lead">Whether you seek inspiration, mentorship, or the perfect addition to your team, our
+        user directory is your <b>gateway</b> to connecting with the brightest stars of the tech universe. </p>
     </div>
 
     <div class="col-10 col-sm-8 col-lg-6">
-      <img src="../../../assets/img/Meeting.png" class="d-block mx-lg-auto img-fluid" alt="Meeting" width="700"
+      <img src="../../../assets/img/peopleSearch.png" class="d-block mx-lg-auto img-fluid" alt="Meeting" width="700"
         height="500" loading="lazy">
     </div>
   </div>
@@ -28,10 +30,12 @@
 <div class="container">
 
   <div class="py-5 text-center">
-    <h1 class="display-5 fw-bold text-body-emphasis">Shop your colleague</h1>
+    <h2 class="display-5 fw-bold text-body-emphasis mb-4">Shop your colleague and</h2>
+    <h1 class="display-5 fw-bold text-body-emphasis lh-1 mb-4">Find a perfect <span>Match</span> for you!</h1>
+    <p class="lead"><b>Pro Tip:</b> Use the filters to boost your results.</p>
   </div>
 
-  <div class="row">
+  <div class="row my-4">
     <div class="col-md-3">
 
       <div class="py-2 text-center">
@@ -71,10 +75,11 @@
         </div>
 
         <p class="lead mt-4 border-bottom">Personality</p>
-          <select class="form-select" aria-label="Default select example" (change)="onPersonalitySelect($event)" >
-            <option>All</option>
-            <option *ngFor="let personality of personalities" [value]="personality.id">{{personality.type}} - {{personality.name}}</option>
-          </select>
+        <select class="form-select" aria-label="Default select example" (change)="onPersonalitySelect($event)">
+          <option>All</option>
+          <option *ngFor="let personality of personalities" [value]="personality.id">{{personality.type}} -
+            {{personality.name}}</option>
+        </select>
 
 
         <p class="lead mt-4 border-bottom">Work Openness</p>
