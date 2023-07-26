@@ -11,8 +11,13 @@
       get a job, fill up all the profile
       information.</p>
   </div>
-  <div class="progress my-4">
-    <div class="progress-bar bg-success" role="progressbar" [style.width.%]="profileProgress" aria-valuemin="0" aria-valuemax="100"></div>
+  <div class="position-relative">
+    <div class="progress-label position-absolute w-100 text-center" style="top: -25px;">
+      {{ profileProgress }}%
+    </div>
+    <div class="progress my-4">
+      <div class="progress-bar bg-success" role="progressbar" [style.width.%]="profileProgress" aria-valuemin="0" aria-valuemax="100"></div>
+    </div>
   </div>
     <!-- end progress bar -->
 

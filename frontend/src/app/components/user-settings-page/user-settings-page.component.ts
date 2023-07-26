@@ -72,6 +72,7 @@ export class UserSettingsPageComponent {
     const selectedPersonalityId = +event.target.value;
     this.user.personality = this.personalities.find(p => p.id === selectedPersonalityId);
   }
+
   setProgress(): number {
     let filledFields: number = 0;
     let totalFields: number = Object.keys(this.user).length;
