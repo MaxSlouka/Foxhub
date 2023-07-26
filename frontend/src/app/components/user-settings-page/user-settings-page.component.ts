@@ -1,16 +1,16 @@
-import {Component} from '@angular/core';
-import {StorageService} from "../../_services/storage.service";
-import {ApiService} from "../../_services/api/api.service";
-import {User} from "../../models/user";
-import {AuthService} from "../../_services/auth.service";
-import {Router} from "@angular/router";
-import {UploadService} from "../../_services/api/upload.service";
-import {Language} from "../../models/language";
-import {LanguageService} from "../../_services/language.service";
-import {Technology} from "../../models/technology";
-import {TechnologyService} from "../../_services/technology.service";
-import {PersonalityService} from "../../_services/personality.service";
-import {Personality} from "../../models/personality";
+import { Component } from '@angular/core';
+import { StorageService } from "../../_services/storage.service";
+import { ApiService } from "../../_services/api/api.service";
+import { User } from "../../models/user";
+import { AuthService } from "../../_services/auth.service";
+import { Router } from "@angular/router";
+import { UploadService } from "../../_services/api/upload.service";
+import { Language } from "../../models/language";
+import { LanguageService } from "../../_services/language.service";
+import { Technology } from "../../models/technology";
+import { TechnologyService } from "../../_services/technology.service";
+import { PersonalityService } from "../../_services/personality.service";
+import { Personality } from "../../models/personality";
 
 @Component({
   selector: 'app-user-settings-page',
@@ -21,7 +21,7 @@ import {Personality} from "../../models/personality";
 export class UserSettingsPageComponent {
   // @ts-ignore
   selectedFile: File = null;
-  profileProgress:number = 0;
+  profileProgress: number = 0;
   user: User = { email: "", firstName: "", lastName: "", password: "" };
 
 
@@ -41,13 +41,13 @@ export class UserSettingsPageComponent {
 
 
   constructor(private storageService: StorageService,
-              private apiService: ApiService,
-              private authService: AuthService,
-              private router: Router,
-              private uploadService: UploadService,
-              private languageService: LanguageService,
-              private technologyService: TechnologyService,
-              private personalityService: PersonalityService) {
+    private apiService: ApiService,
+    private authService: AuthService,
+    private router: Router,
+    private uploadService: UploadService,
+    private languageService: LanguageService,
+    private technologyService: TechnologyService,
+    private personalityService: PersonalityService) {
   }
 
   ngOnInit(): void {
@@ -79,7 +79,7 @@ export class UserSettingsPageComponent {
 
     for (let prop in this.user) {
       // @ts-ignore
-      if(this.user[prop] !== null){
+      if (this.user[prop] !== null) {
         filledFields++;
       }
     }
@@ -195,9 +195,10 @@ export class UserSettingsPageComponent {
       optionalPage,
       languages,
       technologies,
-    yearOfBirth,
-      workStatus,
-      personality)
+      personality,
+      yearOfBirth,
+      workStatus
+    )
 
       .subscribe(() => {
         window.location.href = "/profile/" + this.user.nickname;
