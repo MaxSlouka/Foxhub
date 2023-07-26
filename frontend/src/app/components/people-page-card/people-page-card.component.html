@@ -9,7 +9,7 @@
 
         <div>
             <p class="lead username">{{user.firstName}} {{user.lastName}}</p>
-            <p class="lead skill">Commander</p>
+            <p class="lead skill">{{user.personality?.name}}</p>
             <button class="btn btn-outline-primary" type="button" (click)="addToCart(user)"> Add to Cart </button>
         </div>
 
@@ -20,7 +20,7 @@
         <div class="left-container off">
             <p>Personality</p>
             <div class="personality-about">
-                <div>Bold, Imaginative and strong-willed leader, always finding a way - or making one</div>
+                <div>{{user.personality?.description}}</div>
             </div>
 
             <div class="icons">
