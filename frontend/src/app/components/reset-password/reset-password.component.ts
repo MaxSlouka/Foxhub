@@ -7,21 +7,32 @@ import {AuthService} from "../../_services/auth.service";
   styleUrls: ['./reset-password.component.css']
 })
 
-export class ResetPasswordComponent implements OnInit{
+export class ResetPasswordComponent implements OnInit {
   form: any = {
-    email: null
+    email: null,
+    yearOfBirth: null
   };
 
-  constructor(
-    private authService: AuthService
-  ) { }
+  isSuccessful = false;
+  isSignUpFailed = false;
+  errorMessage = '';
+
+  constructor(private authService: AuthService) {  }
 
   ngOnInit(): void {
 
   }
-public onSubmit(){
-  const { email } = this.form;
-  this.authService.resetPassword(email).subscribe();
-}
 
+  public onSubmit() {
+    const {email, yearOfBirth} = this.form;
+    this.authService.resetPassword(email, yearOfBirth).subscribe({
+      next: data => {
+        this.isSuccessful = true;
+      },
+      error: err => {
+        this.errorMessage = err.error.message;
+        this.isSignUpFailed = true;
+      }
+    });
+  }
 }
