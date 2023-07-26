@@ -1,258 +1,120 @@
-.profile {
-    width: 300px;
-    height: 200px;
-    border-radius: 50px 5px 5px 50px;
-    background-color: #ffffff;
-    box-shadow: 0 0 1rem grey;
-    display: flex;
-    align-items: center;
-    margin: 2rem;
-    border-right: 2px solid green;
+.card {
+    border: none;
 }
 
-.profile .photo {
+.username {
+    font-weight: bold;
+}
+
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.box {
+    width: 250px;
+    height: 250px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.288);
+    border-radius: 23px;
+    flex-direction: column;
+    color: rgb(0, 0, 0);
+    position: relative;
+    overflow: hidden;
+    margin: 1rem;
+}
+
+.box a img {
     width: 100px;
     height: 100px;
     border-radius: 50%;
-    overflow: hidden;
-    border: 5px solid #dadada;
-    box-shadow: 0 0 1rem #d1d1d1;
-    animation: rotate-photo .5s forwards ease-in-out;
-    margin-left: -50px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
 }
 
-.profile .photo:hover {
+.box a img:hover {
     transform: scale(1.1);
 }
 
-/* .profile .photo img {
-    border-radius: 50%;
-} */
-
-.profile .content {
-    padding: 10px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: calc(100% - 50px);
+.user-name {
+    margin-bottom: 5px;
+    font-size: 2rem;
 }
 
-.profile .content .text {
-    display: flex;
-    flex-direction: column;
+.btn-outline-primary {
+    border: solid 1px #0f2711;
+    color: #0f2711;
 }
 
-.profile .content .text h3,
-.profile .content .text h6 {
-    font-size: 20px;
+.btn-outline-primary:hover {
+    background-color: #0f2711;
+    color: white;
 }
 
-.app-technologies {
-    display: flex;
-    flex-direction: row;
-}
-
-p {
-    display: flex;
-    flex-wrap: wrap;
-}
-
-.labels {
-    font-weight: bold;
-    font-size: small;
-}
-
-.profile .btn-opener {
-    background-color: #e9e9e9;
+.arr-container,
+.cancel {
+    position: absolute;
     width: 50px;
     height: 50px;
-    border-radius: 50%;
-    z-index: 1;
-    cursor: pointer;
-    transition-duration: .3s;
-    animation: pop-btn .3s both ease-in-out .5s;
-    position: relative;
-}
-
-@keyframes pop-btn {
-    0% {
-        transform: scale(0);
-    }
-
-    80% {
-        transform: scale(1.2);
-    }
-
-    100% {
-        transform: scale(1);
-    }
-}
-
-.profile .btn-opener:hover {
-    box-shadow: 0 0 0 5px #ffffff;
-}
-
-.profile .btn-opener span {
-    width: 60%;
-    height: 2px;
-    position: absolute;
-    background-color: #000000;
-    top: 50%;
-    left: 20%;
-    transform: translateY(-50%);
-    animation: to-hamburger .3s forwards ease-in-out;
-}
-
-.profile .btn-opener span:before,
-.profile .btn-opener span:after {
-    content: "";
-    width: 100%;
-    height: 2px;
-    position: absolute;
-    background-color: #000000;
-    transition-duration: .3s;
-    transform: rotate(0);
+    background: rgb(128, 128, 128);
+    bottom: 0;
     right: 0;
+    border-radius: 23px 0 23px 0;
+    color: rgb(255, 255, 255);
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: all .4s;
 }
 
-.profile .btn-opener span:before {
-    margin-top: -7px;
-}
-
-.profile .btn-opener span:after {
-    margin-top: 7px;
-}
-
-.profile .btn-opener.active span {
-    animation: to-arrow .3s forwards ease-in-out;
-}
-
-.profile .btn-opener.active span:after,
-.profile .btn-opener.active span:before {
-    width: 60%;
-    right: -1px;
-}
-
-.profile .btn-opener.active span:before {
+.arr-container i {
     transform: rotate(45deg);
 }
 
-.profile .btn-opener.active span:after {
-    transform: rotate(-45deg);
+.active-arr {
+    transform: translate(80%, 80%);
 }
 
-@keyframes to-hamburger {
-    from {
-        transform: translateY(-50%) rotate(0);
-    }
-
-    to {
-        transform: translateY(-50%) rotate(180deg);
-    }
-}
-
-@keyframes to-arrow {
-    from {
-        transform: translateY(-50%) rotate(0);
-    }
-
-    to {
-        transform: translateY(-50%) rotate(180deg);
-    }
-}
-
-.profile .btn-opener .box {
-    width: 150px;
-    height: 150px;
-    opacity: 0;
-    border-radius: 50%;
+.left-container {
     position: absolute;
-    top: 50%;
-    right: 50px;
-    transform: translate(-50%, -50%);
-    transition-duration: .3s;
-    pointer-events: none;
+    background: #0f2711;
+    color: #ffffff;
+    width: 100%;
+    height: 100%;
+    border-radius: 23px;
+    padding: 20px;
+    transition: all .4s;
 }
 
-.profile .btn-opener.active .box {
-    opacity: 1;
-    pointer-events: auto;
+.off {
+    transform: translate(-80%, -80%) rotate(90deg);
 }
 
-.profile .btn-opener .box a {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    background-color: #f6f6f6;
-    font-size: 26px;
-    text-align: center;
-    line-height: 50px;
-    position: absolute;
-    left: 18px;
-    top: calc(75px - 50px/2);
-    box-shadow: 0 0 .5rem grey;
-    transition-duration: .3s;
-    text-decoration: none;
-    color: #111111;
+.active {
+    transform: translate(0) rotate(0);
 }
 
-.profile .box a:hover {
-    transition-delay: initial !important;
+.left-container p {
+    margin-bottom: 15px;
+    font-size: 1.2rem;
 }
 
-.bi-facebook:hover {
-    color: #3b5998;
+.left-container .personality-about div {
+    display: inline-block;
+    color: rgb(155, 155, 155);
+    font-size: .9rem;
+    margin: 4px 4px 4px 0;
 }
 
-.bi-globe:hover {
-    color: #0d9c00;
+.left-container .icons {
+    font-size: 1.6rem;
+    margin-top: 10px;
 }
 
-.bi-linkedin:hover {
-    color: #0077b5;
+.left-container .icons a i {
+    color: #cfcfcf;
+    cursor: pointer;
+    margin-right: 10px;
+    transition: all .4s;
 }
 
-.bi-instagram:hover {
-    color: #bc2a8d;
-}
-
-.bi-github:hover {
-    color: #272727;
-}
-
-.profile .box.open {
-    opacity: 1;
-}
-
-.profile .box.open a {
-    left: 60px;
-}
-
-.profile .box.open a:nth-of-type(1) {
-    transform: rotate(-90deg) translateX(120px) rotate(90deg);
-    transition-delay: .1s;
-}
-
-.profile .box.open a:nth-of-type(2) {
-    transform: rotate(-45deg) translateX(120px) rotate(45deg);
-    transition-delay: .1s;
-}
-
-.profile .box.open a:nth-of-type(3) {
-    transform: rotate(0deg) translateX(120px) rotate(0deg);
-    transition-delay: .1s;
-}
-
-.profile .box.open a:nth-of-type(4) {
-    transform: rotate(45deg) translateX(120px) rotate(-45deg);
-    transition-delay: .1s;
-}
-
-.profile .box.open a:nth-of-type(5) {
-    transform: rotate(90deg) translateX(120px) rotate(-90deg);
-    transition-delay: .1s;
+.left-container .icons a i:hover {
+    color: #2c5364;
 }
