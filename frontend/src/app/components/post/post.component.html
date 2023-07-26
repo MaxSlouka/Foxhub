@@ -33,6 +33,16 @@
         </button>
 
 
+        <div class="post-likes">
+          Likes: {{ post.likesCount }}
+        </div>
+        <div class="post-comments">
+          Comments: {{ post.comments.length }}
+          <div *ngFor="let comment of post.comments">
+            {{ comment.content }}
+          </div>
+        </div>
+
 
 
 
