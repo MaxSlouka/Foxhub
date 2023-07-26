@@ -5,6 +5,14 @@
 <div class="container col-xxl-8 px-3">
   <div class="row flex-lg-row-reverse align-items-center g-5 py-1">
 
+    <!-- cookies -->
+
+    <div *ngIf="showCookiePopup" class="cookie-popup">
+      <p>We use cookies to improve your experience. By using our site, you agree to our use of cookies.</p>
+      <button (click)="acceptCookies()">Accept</button>
+      <button (click)="declineCookies()">Decline</button>
+    </div>
+
     <!-- image -->
 
     <div class="col-10 col-sm-8 col-lg-6">
@@ -12,11 +20,6 @@
       <img src="/assets/img/Coder.png" class="d-block mx-lg-auto img-fluid" alt="Coder" width="500"
         height="400" loading="lazy">
 
-    </div>
-    <div *ngIf="showCookiePopup" class="cookie-popup">
-      <p>We use cookies to improve your experience. By using our site, you agree to our use of cookies.</p>
-      <button (click)="acceptCookies()">Accept</button>
-      <button (click)="declineCookies()">Decline</button>
     </div>
 
     <!-- intro text with image-->
@@ -46,7 +49,7 @@
 
     <!-- icon grid -->
 
-    <div class="container px-4 py-5" id="icon-grid">
+    <div class="container px-4 py-5 reveal-section" id="icon-grid" appRevealOnScroll>
       <h2 class="pb-2 border-bottom"><span>Fox</span>Hub Perks</h2>
 
       <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4 py-5">
@@ -88,7 +91,7 @@
 
     <!-- about app -->
 
-    <div class="container col-xxl-8 px-4 py-3 my-4">
+    <div class="container col-xxl-8 px-4 py-3 my-4 reveal-section" appRevealOnScroll>
       <div class="row flex-lg-row align-items-center g-5 py-3">
 
         <div class="col-10 col-sm-8 col-lg-6">
@@ -121,7 +124,7 @@
 
     <!-- introduction -->
 
-    <div class="container col-xxl-8 px-4 py-4 my-4">
+    <div class="container col-xxl-8 px-4 py-4 my-4 reveal-section" appRevealOnScroll>
       <div class="row flex-lg-row-reverse align-items-center g-5 py-4">
 
         <div class="col-10 col-sm-8 col-lg-6">
@@ -157,7 +160,7 @@
 
     <!-- search intro -->
 
-    <div class="container col-xxl-8 px-4 py-4 my-4">
+    <div class="container col-xxl-8 px-4 py-4 my-4 reveal-section" appRevealOnScroll>
       <div class="row flex-lg-row align-items-center g-5 py-4">
 
         <div class="col-10 col-sm-8 col-lg-6">
@@ -187,7 +190,7 @@
 
     <!-- end text -->
 
-    <div class="container col-xxl-8 px-4 py-4 my-4">
+    <div class="container col-xxl-8 px-4 py-4 my-4 reveal-section" appRevealOnScroll>
       <div class="row flex-lg-row align-items-center g-5 py-4">
 
         <div class="col-lg-6">
