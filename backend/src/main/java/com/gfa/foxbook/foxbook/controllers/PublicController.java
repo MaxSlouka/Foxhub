@@ -85,6 +85,7 @@ public class PublicController {
     @GetMapping("/personalities")
     public ResponseEntity<?> getAllPersonalities() {
         return ResponseEntity.ok(personalityService.getAllPersonalities());
+    }
 
     @GetMapping("/posts/comments/{id}")
     public ResponseEntity<?> getPostComments(@PathVariable Long id) {
