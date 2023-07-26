@@ -1,8 +1,8 @@
-# FoxBook
-A social platform developed by our team specifically for GreenFox students and enthusiasts. This comprehensive guide aims to familiarize you with the platform's features, functionality, and architecture. Whether you're a developer, user, or administrator, this documentation will serve as your go-to resource for understanding and utilizing FoxBook to its fullest potential.
+# FoxHub
+A social platform developed by our team specifically for GreenFox students and enthusiasts. This comprehensive guide aims to familiarize you with the platform's features, functionality, and architecture. Whether you're a developer, user, or administrator, this documentation will serve as your go-to resource for understanding and utilizing FoxHub to its fullest potential.
 
 ## Platform Overview:
-FoxBook provides a range of features and functionalities tailored to different user roles, including admins, users, and visitors. Let's explore each role in detail!
+FoxHub provides a range of features and functionalities tailored to different user roles, including admins, users, and visitors. Let's explore each role in detail!
 
 ## First things first
 Let us see how your welcome page will look like when you first time visit our site.
@@ -48,7 +48,7 @@ Same as every site, we have our terms of use. You can read them by clicking on t
 ![search](https://github.com/green-fox-academy/Foxbook/assets/108043386/47c5bbe1-833f-430e-bac2-e901002f11bd)
 
 
-In our header, you can redirect yourself to the main page by clicking on the FoxBook logo. You can search for a specific user by their name or programming language. You can also click on the people button, and you will be redirected to the people page.
+In our header, you can redirect yourself to the main page by clicking on the FoxHub logo. You can search for a specific user by their name or programming language. You can also click on the people button, and you will be redirected to the people page.
 You can also sign in, sign up, and sign out by clicking on the buttons in the header.
 
 ## Footer
