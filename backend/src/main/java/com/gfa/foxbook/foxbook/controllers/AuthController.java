@@ -73,8 +73,8 @@ public class AuthController {
             return ResponseEntity.badRequest().body("Email already registered");
         }
         securityService.registerUser(registerDto);
-        emailService.send(registerDto.getEmail(), "Welcome to Foxbook", emailService.generateWelcomeEmail(registerDto.getFirstName()));
-        emailService.send(registerDto.getEmail(), "Foxbook - Email verification", emailService.generateVerificationEmail(userService.findByEmail(registerDto.getEmail()).get().getVerificationToken()));
+        emailService.send(registerDto.getEmail(), "Welcome to Foxhub", emailService.generateWelcomeEmail(registerDto.getFirstName()));
+        emailService.send(registerDto.getEmail(), "Foxhub - Email verification", emailService.generateVerificationEmail(userService.findByEmail(registerDto.getEmail()).get().getVerificationToken()));
 
         return ResponseEntity.ok().build();
     }
@@ -98,12 +98,18 @@ public class AuthController {
         }
         return ResponseEntity.badRequest().body("Refresh token is expired");
     }
+
     @PostMapping("password-reset")
     public ResponseEntity<?> resetPassword(@RequestBody EmailDTO emailDTO) throws MessagingException {
-        Optional<User> user = userService.findByEmail(emailDTO.getEmail());
+        Optional<User> user = userService.findByEmailAndYearOfBirth(emailDTO.getEmail(), emailDTO.getYearOfBirth());
         if (user.isEmpty()){
-            return ResponseEntity.badRequest().body("user does not exist");
+            return ResponseEntity.badRequest().body("this user does not exist");
         }
+
+        if (!(user.get().getEmail().equals(emailDTO.getEmail()) && user.get().getYearOfBirth() == emailDTO.getYearOfBirth())) {
+            return ResponseEntity.badRequest().body("given user info is not valid");
+        }
+
         String newPassword = UUID.randomUUID().toString();
         user.get().setPassword(passwordEncoder.encode(newPassword));
 
@@ -112,6 +118,7 @@ public class AuthController {
         String emailBody = "<!DOCTYPE html><html lang=\"en\"><head><meta charset=\"UTF-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1.0\"><title>FoxHub - Password Reset</title></head><body><div style=\"max-width:600px;margin:0 auto;padding:20px;background-color:#ffffff;box-shadow:0px 0px 10px 0px rgba(0,0,0,0.1);\"><h1 style=\"color:#4CAF50;text-align:left;\">FoxHub - Password Reset</h1><h3 style=\"color:#333333;\">Hello,</h3><p style=\"color:#666666;\">You have requested a password reset. Your new password is: <strong>" + newPassword + "</strong></p><p style=\"color:#666666;\">Please change it after logging in.</p><p style=\"margin-top:20px;font-size:12px;color:#aaaaaa;text-align:center;\">If you did not request a password reset, please ignore this email or contact us if you have any questions.</p></div></body></html>";
 
         emailService.send(emailDTO.getEmail(), "FoxHub - Password reset", emailBody);
+      
         return ResponseEntity.ok().build();
     }
 
