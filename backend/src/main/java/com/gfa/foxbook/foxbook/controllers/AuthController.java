@@ -73,8 +73,8 @@ public class AuthController {
             return ResponseEntity.badRequest().body("Email already registered");
         }
         securityService.registerUser(registerDto);
-        emailService.send(registerDto.getEmail(), "Welcome to Foxbook", emailService.generateWelcomeEmail(registerDto.getFirstName()));
-        emailService.send(registerDto.getEmail(), "Foxbook - Email verification", emailService.generateVerificationEmail(userService.findByEmail(registerDto.getEmail()).get().getVerificationToken()));
+        emailService.send(registerDto.getEmail(), "Welcome to Foxhub", emailService.generateWelcomeEmail(registerDto.getFirstName()));
+        emailService.send(registerDto.getEmail(), "Foxhub - Email verification", emailService.generateVerificationEmail(userService.findByEmail(registerDto.getEmail()).get().getVerificationToken()));
 
         return ResponseEntity.ok().build();
     }
@@ -98,18 +98,24 @@ public class AuthController {
         }
         return ResponseEntity.badRequest().body("Refresh token is expired");
     }
+
     @PostMapping("password-reset")
     public ResponseEntity<?> resetPassword(@RequestBody EmailDTO emailDTO) throws MessagingException {
-        Optional<User> user = userService.findByEmail(emailDTO.getEmail());
+        Optional<User> user = userService.findByEmailAndYearOfBirth(emailDTO.getEmail(), emailDTO.getYearOfBirth());
         if (user.isEmpty()){
             return ResponseEntity.badRequest().body("user does not exist");
         }
+
+        if (!(user.get().getEmail().equals(emailDTO.getEmail()) && user.get().getYearOfBirth() == emailDTO.getYearOfBirth())) {
+            return ResponseEntity.badRequest().body("given user info is not valid");
+        }
+
         String newPassword = UUID.randomUUID().toString();
         user.get().setPassword(passwordEncoder.encode(newPassword));
 
         userService.saveUser(user.get());
 
-        emailService.send(emailDTO.getEmail(),"Foxbook - Password reset", "You have reseted your password. Your new password is: "+newPassword+" \n Please change in after login");
+        emailService.send(emailDTO.getEmail(),"Foxhub - Password reset", "You have reseted your password. Your new password is: "+newPassword+" \n Please change in after login");
         return ResponseEntity.ok().build();
     }
 
