@@ -43,6 +43,7 @@ import { CardComponent } from './components/cart/card/card.component';
 import { CartCheckoutComponent } from './components/cart-checkout/cart-checkout.component';
 import { PersonalityComponent } from './components/personality/personality.component';
 import { ItemsCounterComponent } from './components/items-counter/items-counter.component';
+import { SwiperArrowComponent } from './components/swiper-arrow/swiper-arrow.component';
 
 
 @NgModule({
@@ -80,7 +81,8 @@ import { ItemsCounterComponent } from './components/items-counter/items-counter.
     CardComponent,
     CartCheckoutComponent,
     PersonalityComponent,
-    ItemsCounterComponent
+    ItemsCounterComponent,
+    SwiperArrowComponent
 
   ],
   imports: [

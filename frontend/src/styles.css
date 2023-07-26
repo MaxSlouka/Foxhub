@@ -5,6 +5,11 @@ body, nav, a {
   padding: 0;
 }
 
+.page-header {
+  font-weight: bold;
+  font-size: 3.5rem;
+}
+
 .btn-primary {
   background-color: #007f00;
   color: rgb(255, 255, 255);

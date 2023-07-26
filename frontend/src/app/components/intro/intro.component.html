@@ -5,7 +5,6 @@
 <div class="container col-xxl-8 px-3">
   <div class="row flex-lg-row-reverse align-items-center g-5 py-1">
 
-
     <!-- image -->
 
     <div class="col-10 col-sm-8 col-lg-6">
@@ -23,12 +22,13 @@
     <!-- intro text with image-->
 
     <div class="col-lg-6">
-      <h1 class="display-5 fw-bold text-body-emphasis lh-1 mb-3">Welcome to <span>FoxBook</span> App</h1>
+      <h1 class="display-5 fw-bold text-body-emphasis lh-1 mb-3 page-header">Welcome to <span>Fox</span>Hub</h1>
       <p class="lead">The ultimate platform connecting individuals within
         the dynamic world of IT. </p>
       <p class="lead">Designed exclusively for the vibrant community of <b>Green Fox Academy</b>, this app bridges
         the gap between talented professionals, aspiring developers, and eager headhunters.</p>
-      <h2 class="display-5 fw-bold text-body-emphasis lh-1 mb-3">Join the FoxBook revolution today and take the IT world
+      <h2 class="display-5 fw-bold text-body-emphasis lh-1 mb-3">Join the <span>Fox</span>Hub revolution today and take
+        the IT world
         by storm!</h2>
       <div class="d-grid gap-2 d-md-flex justify-content-md-start">
         <a routerLink="/main" class="btn btn-primary btn-lg px-4 me-md-2" role="button" aria-disabled="true">Visit</a>
@@ -36,83 +36,53 @@
            *ngIf="!isLoggedIn">Login</a>
         <a routerLink="/register" class="btn btn-outline-secondary btn-lg" role="button" aria-disabled="true"
            *ngIf="!isLoggedIn">Sign up</a>
-      </div>
+
     </div>
+    </div>
+
+    <!-- swiper chevron -->
+
+    <app-swiper-arrow></app-swiper-arrow>
 
     <!-- icon grid -->
 
     <div class="container px-4 py-5" id="icon-grid">
-      <h2 class="pb-2 border-bottom">Discover the Benefits of the <span>Green Fox Academy</span> Social App</h2>
+      <h2 class="pb-2 border-bottom"><span>Fox</span>Hub Perks</h2>
 
       <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4 py-5">
 
         <div class="col d-flex align-items-start feature-icons">
-          <i class="bi bi-person-square flex-shrink-0 me-3" width="1.75em" height="1.75em"></i>
+          <i class="bi bi-person-workspace flex-shrink-0 me-3" width="1.75em" height="1.75em"></i>
           <div>
-            <h3 class="fw-bold mb-0 fs-4 text-body-emphasis">Connect </h3>
-            <p>with Like-minded Professionals and community of passionate individuals within the IT industry </p>
-          </div>
-        </div>
-
-        <div class="col d-flex align-items-start feature-icons">
-          <i class="bi bi-capslock flex-shrink-0 me-3" width="1.75em" height="1.75em"></i>
-          <div>
-            <h3 class="fw-bold mb-0 fs-4 text-body-emphasis">Enhance </h3>
-            <p>your Skills and Knowledge via learning resources, tutorials, and coding challenges to sharpen your
-              technical abilities</p>
-          </div>
-        </div>
-
-        <div class="col d-flex align-items-start feature-icons">
-          <i class="bi bi-chat-square-dots flex-shrink-0 me-3" width="1.75em" height="1.75em"></i>
-          <div>
-            <h3 class="fw-bold mb-0 fs-4 text-body-emphasis">Discover </h3>
-            <p>exciting Events and Meetups and stay informed about upcoming events, workshops, and networking
-              opportunities organized by Green Fox Academy</p>
+            <h3 class="fw-bold mb-0 fs-4 text-body-emphasis">Networking </h3>
+            <p>Limitless opportunities for students, mentors, coworkers, and headhunters. </p>
           </div>
         </div>
 
         <div class="col d-flex align-items-start feature-icons">
           <i class="bi bi-braces flex-shrink-0 me-3" width="1.75em" height="1.75em"></i>
           <div>
-            <h3 class="fw-bold mb-0 fs-4 text-body-emphasis">Create </h3>
-            <p>your Personal Profile and showcase your skills, projects, and accomplishments through your profile </p>
+            <h3 class="fw-bold mb-0 fs-4 text-body-emphasis">Skill Development </h3>
+            <p>Seamless communication and mentorship for students.</p>
           </div>
         </div>
 
         <div class="col d-flex align-items-start feature-icons">
-          <i class="bi bi-chevron-double-right flex-shrink-0 me-3" width="1.75em" height="1.75em"></i>
+          <i class="bi bi-chat-square-dots flex-shrink-0 me-3" width="1.75em" height="1.75em"></i>
           <div>
-            <h3 class="fw-bold mb-0 fs-4 text-body-emphasis">Accelerate </h3>
-            <p>your Career Growth by connecting with experienced mentors and industry professionals </p>
-          </div>
-        </div>
-
-        <div class="col d-flex align-items-start  feature-icons">
-          <i class="bi bi-bookmarks flex-shrink-0 me-3" width="1.75em" height="1.75em"></i>
-          <div>
-            <h3 class="fw-bold mb-0 fs-4 text-body-emphasis">Collaborate </h3>
-            <p>on Innovative Projects with teams, collaborate with other members, and work on real-world projects </p>
+            <h3 class="fw-bold mb-0 fs-4 text-body-emphasis">Headhunter Connections </h3>
+            <p>Easy connections for headhunters to identify potential candidates.</p>
           </div>
         </div>
 
         <div class="col d-flex align-items-start feature-icons">
-          <i class="bi bi-flower3 flex-shrink-0 me-3" width="1.75em" height="1.75em"></i>
+          <i class="bi bi-cup-straw flex-shrink-0 me-3" width="1.75em" height="1.75em"></i>
           <div>
-            <h3 class="fw-bold mb-0 fs-4 text-body-emphasis">Expand </h3>
-            <p>your Professional Network with headhunters from leading tech companies who are actively seeking top
-              talent </p>
+            <h3 class="fw-bold mb-0 fs-4 text-body-emphasis">Community </h3>
+            <p>Fosters a sense of community and collaboration within GreenFox Academy. </p>
           </div>
         </div>
 
-        <div class="col d-flex align-items-start feature-icons">
-          <i class="bi bi-envelope flex-shrink-0 me-3" width="1.75em" height="1.75em"></i>
-          <div>
-            <h3 class="fw-bold mb-0 fs-4 text-body-emphasis">Stay </h3>
-            <p>informed and Inspired with updates, industry news, and inspirational stories from the ever-evolving world
-              of technology </p>
-          </div>
-        </div>
       </div>
     </div>
 
@@ -122,24 +92,30 @@
       <div class="row flex-lg-row align-items-center g-5 py-3">
 
         <div class="col-10 col-sm-8 col-lg-6">
+
           <img src="/assets/img/Build.png" class="d-block mx-lg-auto img-fluid" alt="Build"
                width="700" height="500" loading="lazy">
+
         </div>
 
         <div class="col-lg-6">
-          <h1 class="display-5 fw-bold text-body-emphasis lh-1 mb-3">About FoxBook</h1>
-          <h2 class="display-5 fw-bold text-body-emphasis lh-1 mb-3">Why should you join?</h2>
-          <p class="lead">Welcome to FoxBook App: <b>the game-changing social platform</b> that brings together the brightest
-            minds in the ever-evolving realm of IT. </p>
-          <p class="lead">With FoxBook, <b>vision becomes a powerful reality</b>. This exclusive platform is designed to empower
-            you, enabling you to network, showcase your skills, and explore new horizons in the vast landscape of the IT
-            industry.</p>
+          <h1 class="display-5 fw-bold text-body-emphasis lh-1 mb-3">Be <span>Fox</span>Hub</h1>
+          <h2 class="display-5 fw-bold text-body-emphasis lh-1 mb-3">Discover Your Limitless Potential! </h2>
+          <p class="lead">Craft an irresistible profile that catches the eye of headhunters, launching your path to
+            <b>success</b>. At the same time, connect with inspiring mentors and like-minded individuals, propelling
+            your
+            career to extraordinary heights. Join <span>Fox</span>Hub now and embrace a world of endless opportunities!
+          </p>
           <div class="d-grid gap-2 d-md-flex justify-content-md-start">
-            <a routerLink="./main" class="btn btn-primary btn-lg px-4 me-md-2" role="button" aria-disabled="true">Take a look inside.</a>
+
+            <a routerLink="/main" class="btn btn-primary btn-lg px-4 me-md-2" role="button" aria-disabled="true">Take a look inside.</a>
+
           </div>
         </div>
       </div>
     </div>
+
+    <!-- introduction -->
 
     <div class="container col-xxl-8 px-4 py-4 my-4">
       <div class="row flex-lg-row-reverse align-items-center g-5 py-4">
@@ -147,22 +123,28 @@
         <div class="col-10 col-sm-8 col-lg-6">
           <img src="/assets/img/Rating.png" class="d-block mx-lg-auto img-fluid" alt="Rating"
                width="700" height="500" loading="lazy">
+
         </div>
 
         <div class="col-lg-6">
-          <h1 class="display-5 fw-bold text-body-emphasis lh-1 mb-3">Introducing FoxBook</h1>
-          <h2 class="display-5 fw-bold text-body-emphasis lh-1 mb-3">Empowering Your Learning, Mentorship, and Talent Acquisition Journey</h2>
-          <p class="lead">For <b>students</b>, FoxBook is digital companion throughout your learning journey.</p>
-          <p class="lead">For <b>Mentors</b>, FoxBook is arena to guide and inspire the next generation of tech
+          <h1 class="display-5 fw-bold text-body-emphasis lh-1 mb-3">Introducing <span>Fox</span>Hub</h1>
+          <h2 class="display-5 fw-bold text-body-emphasis lh-1 mb-3">Empowering Your Learning, Mentorship, and Talent
+            Acquisition Journey</h2>
+          <p class="lead">For <b>students</b>, FoxHub is digital companion throughout your learning journey.</p>
+          <p class="lead">For <b>mentors</b>, FoxHub is arena to guide and inspire the next generation of tech
             enthusiasts.</p>
-          <p class="lead">For <b>headhunters</b> seeking top talent, FoxBook is treasure trove of potential.</p>
+          <p class="lead">For <b>headhunters</b> seeking top talent, FoxHub is treasure trove of potential.</p>
           <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+
             <a routerLink="/people" class="btn btn-primary btn-lg px-4 me-md-2" role="button" aria-disabled="true">Show
+
               community</a>
           </div>
         </div>
       </div>
     </div>
+
+    <!-- end text -->
 
     <div class="container col-xxl-8 px-4 py-4 my-4">
       <div class="row flex-lg-row align-items-center g-5 py-4">
@@ -170,18 +152,20 @@
         <div class="col-10 col-sm-8 col-lg-6">
           <img src="/assets/img/Launch.png" class="d-block mx-lg-auto img-fluid" alt="Launch"
                width="700" height="500" loading="lazy">
+
         </div>
 
         <div class="col-lg-6">
           <h1 class="display-5 fw-bold text-body-emphasis lh-1 mb-3">Be one of us!</h1>
-          <h2 class="display-5 fw-bold text-body-emphasis lh-1 mb-3">Right here, right now.</h2>
-          <p class="lead">At FoxBook, we understand that success in the IT world is not just about what you know; it's
+          <p class="lead">At FoxHub, we understand that success in the IT world is not just about what you know; it's
             about who you know. </p>
-          <p class="lead">Together, let's unleash the potential within us and <b>make waves in the exciting world of IT</b>.
+          <p class="lead">Together, let's unleash the potential within us and <b>make waves in the exciting world of
+              IT</b>.
             FoxBook awaits you with open arms, ready to empower, connect, and transform.</p>
           <h2 class="display-5 fw-bold text-body-emphasis lh-1 mb-3">Welcome to the future of IT networking. </h2>
           <h2 class="display-5 fw-bold text-body-emphasis lh-1 mb-3">Welcome to
-            <span>FoxBook</span>.</h2>
+            <span>Fox</span>Hub.
+          </h2>
           <div class="d-grid gap-2 d-md-flex justify-content-md-start" *ngIf="!isLoggedIn">
             <a routerLink="/login" class="btn btn-primary btn-lg" role="button" aria-disabled="true">Login</a>
             <a routerLink="/register" class="btn btn-outline-secondary btn-lg" role="button" aria-disabled="true">Sign up</a>
