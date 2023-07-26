@@ -24,6 +24,8 @@ public interface UserService {
 
     Optional<User> findByEmail(String name);
 
+    Optional<User> findByEmailAndYearOfBirth(String name, int yearOfBirth);
+
     public UserBasicDTO convertToUserBasicDTO(User user);
 
     List<User> searchUsers(String query);

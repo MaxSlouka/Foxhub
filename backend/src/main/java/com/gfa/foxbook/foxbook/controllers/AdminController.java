@@ -62,4 +62,15 @@ public class AdminController {
         // todo: fix this
         return ResponseEntity.ok().body(userService.upgradeUser(user.getNickname()));
     }
+
+    @DeleteMapping("/people/{nickname}")
+    public ResponseEntity<?> deleteUser(@PathVariable String nickname) {
+        Optional<User> maybeUser = userService.findByNickname(nickname);
+        if (maybeUser.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+        User user = maybeUser.get();
+        userService.delete(user);
+        return ResponseEntity.noContent().build();
+    }
 }
