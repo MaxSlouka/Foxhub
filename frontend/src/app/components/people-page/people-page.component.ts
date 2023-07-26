@@ -5,6 +5,8 @@ import {ApiService} from "../../_services/api/api.service";
 import {User} from "../../models/user";
 import {Language} from "../../models/language";
 import {LanguageService} from "../../_services/language.service";
+import {Personality} from "../../models/personality";
+import {PersonalityService} from "../../_services/personality.service";
 
 
 @Component({
@@ -35,10 +37,15 @@ export class PeoplePageComponent implements OnInit, AfterViewInit {
   // @ts-ignore
   workStatus: string;
 
+  personalities: Personality[] = [];
+  selectedPersonality: Personality | undefined;
+  selectAllPersonalities: boolean = false;
+
 
   constructor(private technologyService: TechnologyService,
               private languageService: LanguageService,
-              private apiService: ApiService) {
+              private apiService: ApiService,
+              private personalityService: PersonalityService) {
   }
 
   ngOnInit(): void {
@@ -46,11 +53,13 @@ export class PeoplePageComponent implements OnInit, AfterViewInit {
 
     this.technologyService.getAll().subscribe(technologies => {
       this.technologies = technologies;
-
     });
     this.languageService.getAll().subscribe(languages => {
       this.languages = languages;
-    })
+    });
+    this.personalityService.getAll().subscribe(personalities => {
+      this.personalities = personalities
+    });
     // @ts-ignore
     this.apiService.getAll().subscribe(users => {
       this.users = users;
@@ -70,6 +79,18 @@ export class PeoplePageComponent implements OnInit, AfterViewInit {
       this.isRangeChanged = true;
       this.allFilters();
     });
+  }
+
+  onPersonalitySelect(event: any) {
+    const selectedPersonalityId = +event.target.value;
+    this.selectAllPersonalities = false
+    this.selectedPersonality = this.personalities.find(p =>
+      p.id === selectedPersonalityId
+    );
+    if (event.target.value === "All") {
+      this.selectAllPersonalities = true;
+    }
+    this.allFilters();
   }
 
   toggleFilterContent(): void {
@@ -151,11 +172,12 @@ export class PeoplePageComponent implements OnInit, AfterViewInit {
     }
 
     // @ts-ignore
-    if(this.isRangeChanged){
+    if (this.isRangeChanged) {
       filteredUsers = this.ageFilter(filteredUsers);
     }
 
     filteredUsers = this.openToWorkFilter(filteredUsers);
+    filteredUsers = this.personalityFilter(filteredUsers);
 
     this.users = filteredUsers;
   }
@@ -208,14 +230,26 @@ export class PeoplePageComponent implements OnInit, AfterViewInit {
   openToWorkFilter(filteredUsers) {
     const actualFilteredUsers: User[] = [];
     for (let user of filteredUsers) {
-      console.log(this.workStatus);
       // @ts-ignore
       if (this.workStatus === "open" && user.workStatus === true) {
         actualFilteredUsers.push(user);
       }
       // @ts-ignore
-      if(this.workStatus === "closed" && user.workStatus === false){
+      if (this.workStatus === "closed" && user.workStatus === false) {
         actualFilteredUsers.push(user);
+      }
+    }
+    return actualFilteredUsers;
+  }
+
+  personalityFilter(filteredUsers: User[]) {
+    const actualFilteredUsers: User[] = [];
+    for (let user of filteredUsers) {
+      // @ts-ignore
+      if (user.personality?.id === this.selectedPersonality?.id) {
+        actualFilteredUsers.push(user);
+        } else if (this.selectAllPersonalities) {
+          actualFilteredUsers.push(user);
       }
     }
     return actualFilteredUsers;
