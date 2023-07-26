@@ -42,6 +42,7 @@ import { CartComponent } from './components/cart/cart.component';
 import { CardComponent } from './components/cart/card/card.component';
 import { CartCheckoutComponent } from './components/cart-checkout/cart-checkout.component';
 import { PersonalityComponent } from './components/personality/personality.component';
+import { ItemsCounterComponent } from './components/items-counter/items-counter.component';
 
 
 @NgModule({
@@ -78,7 +79,8 @@ import { PersonalityComponent } from './components/personality/personality.compo
     CartComponent,
     CardComponent,
     CartCheckoutComponent,
-    PersonalityComponent
+    PersonalityComponent,
+    ItemsCounterComponent
 
   ],
   imports: [
