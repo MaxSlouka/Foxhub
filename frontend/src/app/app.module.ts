@@ -32,7 +32,6 @@ import { HeaderSearchbarCardComponent } from './components/header-searchbar-card
 import { QRCodeModule } from 'angularx-qrcode';
 import { CommonModule } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
 import { ToastrModule } from 'ngx-toastr';
 import { LanguageButtonComponent } from './components/language-button/language-button.component';
 import { AsideUserCardComponent } from './components/aside-user-card/aside-user-card.component';
@@ -42,6 +41,7 @@ import { ChangePasswordComponent } from './components/change-password/change-pas
 import { CartComponent } from './components/cart/cart.component';
 import { CartCheckoutComponent } from './components/cart-checkout/cart-checkout.component';
 import { PersonalityComponent } from './components/personality/personality.component';
+
 
 @NgModule({
   declarations: [
@@ -77,6 +77,7 @@ import { PersonalityComponent } from './components/personality/personality.compo
     CartComponent,
     CartCheckoutComponent,
     PersonalityComponent
+
   ],
   imports: [
     FormsModule,

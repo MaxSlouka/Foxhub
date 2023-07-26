@@ -22,7 +22,7 @@
 
 .profile-img-label {
   position: absolute;
-  top: -20px; 
+  top: -20px;
   left: 50%;
   transform: translateX(-50%);
   background-color: rgba(255, 255, 255, 0.7);
@@ -195,4 +195,10 @@ ul li a:hover {
 .container .links-box.open a:nth-of-type(5) {
   transform: rotate(90deg) translateX(120px) rotate(-90deg);
   transition-delay: .1s;
+}
+.green{
+  color: #0d9c00;
+}
+.red{
+  color: red;
 }

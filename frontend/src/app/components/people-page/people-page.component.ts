@@ -42,6 +42,7 @@ export class PeoplePageComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
+    this.workStatus = 'open';
 
     this.technologyService.getAll().subscribe(technologies => {
       this.technologies = technologies;
@@ -89,7 +90,6 @@ export class PeoplePageComponent implements OnInit, AfterViewInit {
       }
     }
   }
-
 
   // @ts-ignore
   usedLanguagesList(): Language[] {
