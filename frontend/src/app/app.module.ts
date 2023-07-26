@@ -39,6 +39,7 @@ import { TechnologyButtonComponent } from './components/technology-button/techno
 import { AsideSearchBarComponent } from './components/aside-search-bar/aside-search-bar.component';
 import { ChangePasswordComponent } from './components/change-password/change-password.component';
 import { CartComponent } from './components/cart/cart.component';
+import { CardComponent } from './components/cart/card/card.component';
 import { CartCheckoutComponent } from './components/cart-checkout/cart-checkout.component';
 import { PersonalityComponent } from './components/personality/personality.component';
 
@@ -75,6 +76,7 @@ import { PersonalityComponent } from './components/personality/personality.compo
     AsideSearchBarComponent,
     ChangePasswordComponent,
     CartComponent,
+    CardComponent,
     CartCheckoutComponent,
     PersonalityComponent
 
