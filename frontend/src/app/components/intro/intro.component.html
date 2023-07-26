@@ -9,7 +9,7 @@
 
     <div class="col-10 col-sm-8 col-lg-6">
 
-      <img src="../../../assets/img/online.png" class="d-block mx-lg-auto img-fluid" alt="Coder" width="500"
+      <img src="/assets/img/Coder.png" class="d-block mx-lg-auto img-fluid" alt="Coder" width="500"
         height="400" loading="lazy">
 
     </div>
@@ -31,12 +31,13 @@
         the IT world
         by storm!</h2>
       <div class="d-grid gap-2 d-md-flex justify-content-md-start">
-        <a href="./main" class="btn btn-primary btn-lg px-4 me-md-2" role="button" aria-disabled="true">Visit</a>
-        <a href="./login" class="btn btn-outline-secondary btn-lg" role="button" aria-disabled="true"
-          *ngIf="!isLoggedIn">Login</a>
-        <a href="./register" class="btn btn-outline-secondary btn-lg" role="button" aria-disabled="true"
-          *ngIf="!isLoggedIn">Sign up</a>
-      </div>
+        <a routerLink="/main" class="btn btn-primary btn-lg px-4 me-md-2" role="button" aria-disabled="true">Visit</a>
+        <a routerLink="/login" class="btn btn-outline-secondary btn-lg" role="button" aria-disabled="true"
+           *ngIf="!isLoggedIn">Login</a>
+        <a routerLink="/register" class="btn btn-outline-secondary btn-lg" role="button" aria-disabled="true"
+           *ngIf="!isLoggedIn">Sign up</a>
+
+    </div>
     </div>
 
     <!-- swiper chevron -->
@@ -91,8 +92,10 @@
       <div class="row flex-lg-row align-items-center g-5 py-3">
 
         <div class="col-10 col-sm-8 col-lg-6">
-          <img src="../../../assets/img/connected.png" class="d-block mx-lg-auto img-fluid" alt="Build" width="700"
-            height="500" loading="lazy">
+
+          <img src="/assets/img/Build.png" class="d-block mx-lg-auto img-fluid" alt="Build"
+               width="700" height="500" loading="lazy">
+
         </div>
 
         <div class="col-lg-6">
@@ -104,9 +107,13 @@
             career to extraordinary heights. Join <span>Fox</span>Hub now and embrace a world of endless opportunities!
           </p>
           <div class="d-grid gap-2 d-md-flex justify-content-md-start">
-            <a href="./main" class="btn btn-outline-primary btn-lg px-4 me-md-2" role="button" aria-disabled="true">Take
-              a look
-              inside</a>
+
+
+
+            <a routerLink="/main" class="btn btn-primary btn-lg px-4 me-md-2" role="button" aria-disabled="true">Take a look inside.</a>
+
+
+
           </div>
         </div>
       </div>
@@ -118,8 +125,9 @@
       <div class="row flex-lg-row-reverse align-items-center g-5 py-4">
 
         <div class="col-10 col-sm-8 col-lg-6">
-          <img src="../../../assets/img/digitalPresentation.png" class="d-block mx-lg-auto img-fluid" alt="Rating"
-            width="700" height="500" loading="lazy">
+          <img src="/assets/img/Rating.png" class="d-block mx-lg-auto img-fluid" alt="Rating"
+               width="700" height="500" loading="lazy">
+
         </div>
 
         <div class="col-lg-6">
@@ -131,9 +139,17 @@
             enthusiasts.</p>
           <p class="lead">For <b>headhunters</b> seeking top talent, FoxHub is treasure trove of potential.</p>
           <div class="d-grid gap-2 d-md-flex justify-content-md-start">
-            <a href="./creators" class="btn btn-outline-primary btn-lg px-4 me-md-2" role="button"
+
+
+
+            <a routerLink="/people" class="btn btn-primary btn-lg px-4 me-md-2" role="button" aria-disabled="true">Show
+
+              community</a>
+
+            <a routerLink="/creators" class="btn btn-outline-primary btn-lg px-4 me-md-2" role="button"
               aria-disabled="true">Show
               Creators</a>
+
           </div>
         </div>
       </div>
@@ -145,8 +161,12 @@
       <div class="row flex-lg-row align-items-center g-5 py-4">
 
         <div class="col-10 col-sm-8 col-lg-6">
-          <img src="../../../assets/img/treasure.png" class="d-block mx-lg-auto img-fluid" alt="Launch" width="700"
+
+
+          <img src="/assets/img/treasure.png" class="d-block mx-lg-auto img-fluid" alt="Launch" width="700"
+
             height="500" loading="lazy">
+
         </div>
 
         <div class="col-lg-6">
@@ -182,8 +202,8 @@
             <span>Fox</span>Hub.
           </h2>
           <div class="d-grid gap-2 d-md-flex justify-content-md-start" *ngIf="!isLoggedIn">
-            <a href="./login" class="btn btn-primary btn-lg" role="button" aria-disabled="true">Login</a>
-            <a href="./register" class="btn btn-outline-secondary btn-lg" role="button" aria-disabled="true">Sign up</a>
+            <a routerLink="/login" class="btn btn-primary btn-lg" role="button" aria-disabled="true">Login</a>
+            <a routerLink="/register" class="btn btn-outline-secondary btn-lg" role="button" aria-disabled="true">Sign up</a>
           </div>
         </div>
 
