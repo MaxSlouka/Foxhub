@@ -90,8 +90,7 @@ export class PeoplePageComponent implements OnInit, AfterViewInit {
       }
     }
   }
-
-
+  
   // @ts-ignore
   usedLanguagesList(): Language[] {
     const usedLangNames: string[] = [];
