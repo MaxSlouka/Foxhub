@@ -1,0 +1,8 @@
+.post-likes p,
+.post-comments p {
+    font-size: 15px;
+}
+
+.post-author-image img {
+    border-radius: 50%;
+}

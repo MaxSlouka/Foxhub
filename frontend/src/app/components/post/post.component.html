@@ -1,4 +1,4 @@
-<div class="card mb-3" style="border: none;">
+<div class="card" style="border: none;">
 
   <div class="card-body">
 
@@ -6,14 +6,30 @@
 
       <div class="post-right-part flex-grow-1">
 
-        <div class="post-content">
-          <div class="post-author">
-            <p class="lead mb-1"><b>{{ post.username }}</b></p>
+        <div class="post-content d-flex align-items-center justify-content-between">
+          <div class="post-info d-flex align-items-center">
+            <div class="post-author-image mx-2">
+              <img src="../../../assets/img/logo.png" height="52" width="52" loading="lazy" alt="profile_picture">
+            </div>
+            <div class="post-details ml-2">
+              <div class="post-author">
+                <p class="lead mb-1"><b>{{ post.username }}</b></p>
+              </div>
+              <div class="post-time">
+                <p style="font-size: smaller;">Created at: {{ post.createdAt }}</p>
+              </div>
+            </div>
           </div>
-          <div class="post-time">
-            <p style="font-size: smaller;">Created at: {{ post.createdAt }}</p>
+        
+          <div class="post-actions">
+            <div class="post-action btn btn-outline-primary mr-2" (click)="startEditing()" *ngIf="userRole==='ADMIN' && !isEditing">
+              Edit
+            </div>
+            <div class="post-action btn btn-outline-danger" (click)="deletePost.emit(post.id)" *ngIf="userRole==='ADMIN'">
+              Delete
+            </div>
           </div>
-        </div>
+        </div>        
 
         <div class="post-text" *ngIf="!isEditing && !isReplying()">
           <p class="lead my-4">{{ post.content }}</p>
@@ -27,36 +43,29 @@
           [initialText]="post.content!" (handleSubmit)="updatePost.emit({text: $event, id: post.id!})"
           (handleCancel)="setActivePost.emit(null)"></app-post-form>
 
+        <div class="post-container d-flex justify-items-end">
 
-        <button [class.liked]="post.isLikedByCurrentUser" (click)="likePost(post.id)">
-          Like
-        </button>
-
-
-        <div class="post-likes">
-          Likes: {{ post.likesCount }}
-        </div>
-        <div class="post-comments">
-          Comments: {{ post.comments.length }}
-          <div *ngFor="let comment of post.comments">
-            {{ comment.content }}
+          <div class="post-likes mr-3">
+            <p>Likes: {{ post.likesCount }}</p>
           </div>
+
+          <div class="post-comments mr-3">
+            <p>Comments: {{ post.comments.length }}</p>
+            <div *ngFor="let comment of post.comments">
+              <p class="lead">{{ comment.content }} </p>
+            </div>
+          </div>
+
         </div>
-
-
-
 
         <div class="post-actions">
 
-          <div class="post-action btn btn-outline-primary mr-2" (click)="startEditing()"
-            *ngIf="userRole==='ADMIN' && !isEditing">
-            Edit</div>
-          <div class="post-action btn btn-outline-secondary mr-2">Comment</div>
-          <div class="post-action btn btn-outline-danger mr-2" (click)="deletePost.emit(post.id)" *ngIf="userRole==='ADMIN'">
-            Delete
-          </div>
-          <div class="input-group mb-3">
-            <input type="text" class="form-control" placeholder="Your comment" [(ngModel)]="commentText">
+          <div class="input-group my-3">
+            <button class="btn btn-outline-primary mr-2" type="button" [class.liked]="post.isLikedByCurrentUser"
+              (click)="likePost(post.id)">
+              Like
+            </button>
+            <input type="text" class="form-control mr-2" placeholder="add comment..." [(ngModel)]="commentText">
             <button class="btn btn-outline-primary" type="button" (click)="commentPost()">Comment</button>
           </div>
 
