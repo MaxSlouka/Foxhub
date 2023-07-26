@@ -1,0 +1,18 @@
+h1 span,
+h2 span {
+    color: rgb(0, 127, 0);
+}
+
+.grid-of-users {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    grid-template-columns: repeat(5, 1fr);
+    grid-gap: 1rem;
+}
+
+.grid-of-users .profile-img {
+    height: 100px;
+    width: 100px;
+    border-radius: 50%;
+}

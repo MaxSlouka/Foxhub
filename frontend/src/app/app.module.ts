@@ -44,6 +44,7 @@ import { CartCheckoutComponent } from './components/cart-checkout/cart-checkout.
 import { PersonalityComponent } from './components/personality/personality.component';
 import { ItemsCounterComponent } from './components/items-counter/items-counter.component';
 import { SwiperArrowComponent } from './components/swiper-arrow/swiper-arrow.component';
+import { CreatorsComponent } from './components/creators/creators.component';
 
 
 @NgModule({
@@ -81,9 +82,9 @@ import { SwiperArrowComponent } from './components/swiper-arrow/swiper-arrow.com
     CardComponent,
     CartCheckoutComponent,
     PersonalityComponent,
-    ItemsCounterComponent,
-    SwiperArrowComponent
-
+    SwiperArrowComponent,
+    CreatorsComponent
+    ItemsCounterComponent
   ],
   imports: [
     FormsModule,
