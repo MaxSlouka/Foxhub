@@ -1,6 +1,6 @@
-import {Component} from '@angular/core';
-import {ApiService} from "./_services/api/api.service";
-import {DataService} from "./_services/api/data.service";
+import { Component } from '@angular/core';
+import { ApiService } from "./_services/api/api.service";
+import { DataService } from "./_services/api/data.service";
 
 @Component({
   selector: 'app-root',
@@ -14,8 +14,8 @@ export class AppComponent {
 
   // @ts-ignore
   constructor(private apiService: ApiService,
-              private dataService: DataService,
-              ) {
+    private dataService: DataService,
+  ) {
   }
 
 
@@ -28,6 +28,6 @@ export class AppComponent {
       .getAll().subscribe((users) => {
         this.dataService.users = users;
       }
-    );
+      );
   }
 }
