@@ -77,11 +77,17 @@ public class UserServiceImpl implements UserService {
         return userRepository.findByEmail(name);
     }
 
+    @Override
+    public Optional<User> findByEmailAndYearOfBirth(String email, int yearOfBirth) {
+        return userRepository.findByEmailAndYearOfBirth(email, yearOfBirth);
+    }
+
 //    @Override
 //    public void addComment(User existingUser, String comment) {
 //        commentService.comment(existingUser.getId(), existingUser.getId(), comment);
 //        userRepository.save(existingUser);
 //    }
+
 
     @Override
     public UserBasicDTO convertToUserBasicDTO(User user) {

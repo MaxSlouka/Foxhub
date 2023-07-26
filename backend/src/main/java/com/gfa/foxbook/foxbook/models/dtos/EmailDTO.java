@@ -9,4 +9,5 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class EmailDTO {
     private String email;
+    private int yearOfBirth;
 }
