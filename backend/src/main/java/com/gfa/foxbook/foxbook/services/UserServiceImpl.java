@@ -185,6 +185,11 @@ public class UserServiceImpl implements UserService {
         } else {
             user.setOptionalPage(user.getOptionalPage());
         }
+        if (userDTO.getPersonality() != null) {
+            user.setPersonality(userDTO.getPersonality());
+        } else {
+            user.setPersonality(user.getPersonality());
+        }
         user.setYearOfBirth(userDTO.getYearOfBirth());
         user.setWorkStatus(userDTO.isWorkStatus());
 
