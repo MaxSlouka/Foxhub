@@ -3,11 +3,14 @@ h2 span {
     color: rgb(0, 127, 0);
 }
 
-.creator-profile {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.creators img {
+    -webkit-box-shadow: 10px 10px 19px 0px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 10px 10px 19px 0px rgba(0, 0, 0, 0.75);
+    box-shadow: 10px 10px 19px 0px rgba(0, 0, 0, 0.75);
+    clip-path: polygon(0% 100%, 100% 75%, 100% 0%, 0% 25%);
+    border-left: 10px solid green;
 }
+
 
 .creator-profile:hover {
     transform: scale(1.1);
@@ -19,7 +22,26 @@ h2 span {
 }
 
 .creator-profile a img {
-    width: 100px;
-    height: 100px;
+    width: 150px;
+    height: 150px;
     border-radius: 50%;
+}
+
+.medallion-photo {
+    height: 550px;
+    border-radius: 10px;
+    clip-path: polygon(50% 0%, 95% 25%, 95% 75%, 50% 100%, 5% 75%, 5% 25%);
+    -webkit-box-shadow: 10px 10px 19px 0px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 10px 10px 19px 0px rgba(0, 0, 0, 0.75);
+    box-shadow: 10px 10px 19px 0px rgba(0, 0, 0, 0.75);
+}
+
+@media (max-width: 767px) {
+    .medallion-photo {
+        height: 300px;
+        border-radius: 10px;
+        clip-path: none;
+        box-shadow: 10px 10px 19px 0px rgba(0, 0, 0, 0.75);
+        margin-bottom: 1rem;
+    }
 }
