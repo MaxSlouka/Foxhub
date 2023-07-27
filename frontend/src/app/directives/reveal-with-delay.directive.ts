@@ -14,7 +14,7 @@ export class RevealWithDelayDirective implements OnInit {
           element.classList.add('reveal');
         }
       }
-    }, 200); // Delay of 1 second (1000 milliseconds)
+    }, 200); // 1 sec is 1000 (milliseconds)
   }
 
   private isElementInViewport(element: HTMLElement): boolean {
