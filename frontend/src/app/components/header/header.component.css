@@ -34,6 +34,18 @@ ul li a {
     border: 1px solid #007f00;
 }
 
+.cart-btn{
+  position: relative;
+}
+
+.cart-btn>span{
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  border-radius: 50%;
+}
+
+
 .people-btn:hover,
 .cart-btn:hover {
     transform: scale(1.1);

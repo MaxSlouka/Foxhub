@@ -1,5 +1,6 @@
-import { Injectable } from '@angular/core';
-import { User } from "../models/user";
+import {Injectable} from '@angular/core';
+import {User} from "../models/user";
+import {Subject} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -7,6 +8,7 @@ import { User } from "../models/user";
 
 export class CartService {
   cartItems: User[] = [];
+  usersLength = new Subject<number>();
 
   constructor() {
     let storedCart = sessionStorage.getItem('cart');
@@ -21,6 +23,7 @@ export class CartService {
       this.updateLocalStorage();
     }
   }
+
   removeFromCart(user: User) {
     const index = this.cartItems.indexOf(user);
     if (index > -1) {
@@ -32,6 +35,7 @@ export class CartService {
   getCartItems() {
     return this.cartItems;
   }
+
   private updateLocalStorage() {
     sessionStorage.setItem('cart', JSON.stringify(this.cartItems));
   }
