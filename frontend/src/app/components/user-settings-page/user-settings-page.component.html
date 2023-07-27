@@ -65,8 +65,8 @@
           </div>
 
           <p class="lead mt-4 border-bottom">Personality</p>
-          <select class="form-select" aria-label="Default select example" (change)="onPersonalitySelect($event)">
-            <option *ngFor="let personality of personalities" [value]="personality.id">{{personality.type}}</option>
+          <select class="btn btn-outline-primary dropdown-toggle" aria-label="Default select example" (change)="onPersonalitySelect($event)">
+            <option *ngFor="let personality of personalities" [value]="personality.id">{{personality.name}}</option>
           </select>
 
           <div class="mt-5 text-center">
@@ -89,8 +89,8 @@
             </div>
             <div class="col-md-12">
               <label class="labels">About</label>
-              <textarea type="text" class="form-control" [(ngModel)]="user.about" name="about"
-                placeholder="write something about you..." cols="30" rows="3"></textarea>
+              <textarea type="text" class="form-control preformatted-text" [(ngModel)]="user.about" name="about"
+                placeholder="write something about you..." cols="30" rows="5"></textarea>
             </div>
           </div>
 
