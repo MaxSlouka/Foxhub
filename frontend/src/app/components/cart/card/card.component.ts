@@ -11,11 +11,11 @@ export class CardComponent {
 
   // @ts-ignore
   @Input() user: User;
-  constructor(private cartService:CartService) {}
+
+  constructor(private cartService: CartService) {
+  }
 
   removeItem(user: User) {
     this.cartService.removeFromCart(user)
-
-
   }
 }
