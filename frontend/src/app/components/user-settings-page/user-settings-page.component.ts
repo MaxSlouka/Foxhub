@@ -24,7 +24,6 @@ export class UserSettingsPageComponent {
   profileProgress: number = 0;
   user: User = { email: "", firstName: "", lastName: "", password: "" };
 
-
   // @ts-ignore
   languages: Language[];
   userLanguages: Language[] | undefined;
@@ -38,7 +37,6 @@ export class UserSettingsPageComponent {
 
   // @ts-ignore
   personalities: Personality[];
-
 
   constructor(private storageService: StorageService,
     private apiService: ApiService,
@@ -95,7 +93,6 @@ export class UserSettingsPageComponent {
         results.push(language);
       }
     }
-    // Update the languages array with the search results
     this.unusedLanguages = results;
   }
 
@@ -176,7 +173,6 @@ export class UserSettingsPageComponent {
       personality,
       yearOfBirth,
       workStatus
-
     } = this.user;
     await this.apiService.updateUser(
       firstName,
@@ -197,7 +193,6 @@ export class UserSettingsPageComponent {
       yearOfBirth,
       workStatus
     )
-
       .subscribe(() => {
         window.location.href = "/profile/" + this.user.nickname;
       });
