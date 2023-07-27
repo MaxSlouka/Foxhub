@@ -16,6 +16,7 @@ public class Comment {
     private Long id;
     private String username;
     private String content;
+    private String authorProfilePic;
     private Long userId;
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "post_id", nullable = false)
