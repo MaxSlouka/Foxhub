@@ -89,10 +89,8 @@ public class UserController {
             Files.createDirectories(Paths.get(uploadDir));
             Path filePath = Paths.get(uploadDir, nickname + extension);
             file.transferTo(filePath);
-            user.setProfilePictureUrl("http://localhost:8080/uploads/" + nickname + extension);
+            user.setProfilePictureUrl("http://foxhub.gfapp.eu/uploads/" + nickname + extension);
             userService.saveUser(user);
-
-
             return ResponseEntity.ok().build();
         } catch (IOException e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
