@@ -32,8 +32,18 @@ export class AuthService {
         password
       },
       httpOptions
+    ).pipe(
+      catchError((error: HttpErrorResponse) => {
+        let errorMessage = 'An unknown error occurred.';
+        if (error.status === 401) {
+          errorMessage = error.error;
+        }
+        this.toastr.error(errorMessage, 'Error', {timeOut: 5000});
+        return throwError(errorMessage);
+      })
     );
   }
+
 
   register(firstName: string, lastName: string, email: string, password: string): Observable<any> {
     return this.http.post(
