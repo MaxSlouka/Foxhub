@@ -1,7 +1,7 @@
-import {Injectable} from '@angular/core';
-import {Observable} from "rxjs";
-import {Post} from "../models/post";
-import {HttpClient} from "@angular/common/http";
+import { Injectable } from '@angular/core';
+import { Observable } from "rxjs";
+import { Post } from "../models/post";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 
 @Injectable({
   providedIn: 'root'
@@ -14,15 +14,13 @@ export class PostsService {
     return this.httpClient.get<Post[]>('http://localhost:8080/api/v1/public/posts');
   }
 
-  createPost(userID: number, username: string, text: string, parentPostId: number | null): Observable<Post> {
+  createPost(postData: any): Observable<Post> {
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+
     return this.httpClient.post<Post>(
-      'http://localhost:8080/api/v1/admin/posts', {
-        userID: userID,
-        username: username,
-        content: text,
-        createdAt: new Date().toISOString(),
-        parentPostId,
-      }
+      'http://localhost:8080/api/v1/admin/posts',
+      postData,
+      { headers: headers }
     );
   }
 
@@ -39,6 +37,7 @@ export class PostsService {
     return this.httpClient.delete(
       `http://localhost:8080/api/v1/admin/posts/${id}`)
   }
+  
   likePost(postID: number): Observable<any> {
     return this.httpClient.post<any>(`http://localhost:8080/api/v1/user/posts/${postID}/like`, {});
   }
