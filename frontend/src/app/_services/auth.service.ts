@@ -2,8 +2,12 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpErrorResponse, HttpHeaders, HttpResponse} from "@angular/common/http";
 import {catchError, Observable, throwError} from "rxjs";
 import {ToastrService} from 'ngx-toastr';
+import {GlobalConstants} from "../common/global-constants";
 
-const AUTH_API = '/api/v1/auth/';
+
+const prefix = GlobalConstants.prefix;
+const AUTH_API = prefix + '/api/v1/auth/';
+
 
 const httpOptions = {
   headers: new HttpHeaders({'Content-type': 'application/json'})
