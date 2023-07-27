@@ -5,6 +5,9 @@ import {User} from "../../models/user";
 import {Language} from "../../models/language";
 import {Technology} from "../../models/technology";
 import {Personality} from "../../models/personality";
+import { GlobalConstants } from "../../common/global-constants";
+
+const prefix = GlobalConstants.prefix;
 
 const httpOptions = {
   headers: new HttpHeaders({'Content-type': 'application/json'})
@@ -15,7 +18,7 @@ const httpOptions = {
 })
 export class ApiService {
 
-  private apiUrlGetAll: string = "http://localhost:8080/api/v1/public/people";
+  private apiUrlGetAll: string = prefix + "/api/v1/public/people";
 
   constructor(private http: HttpClient) {
   }
@@ -25,11 +28,11 @@ export class ApiService {
   }
 
   getUserBasicInfo(): Observable<User> {
-    return this.http.get<User>('http://localhost:8080/api/v1/user/person');
+    return this.http.get<User>(prefix + '/api/v1/user/person');
   }
 
   deleteUser(): Observable<any> {
-    return this.http.delete('http://localhost:8080/api/v1/user/people');
+    return this.http.delete(prefix + '/api/v1/user/people');
   }
 
 
@@ -76,7 +79,7 @@ export class ApiService {
 
   ): Observable<any> {
 
-    return this.http.patch("http://localhost:8080/api/v1/user/people", {
+    return this.http.patch(prefix +"/api/v1/user/people", {
         firstName,
         lastName,
         completeProjects,
