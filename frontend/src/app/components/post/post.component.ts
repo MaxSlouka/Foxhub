@@ -35,14 +35,22 @@ export class PostComponent implements OnInit {
   user: User = { email: "", firstName: "", lastName: "", password: "" };
   userEmail: string = '';
   isLoggedIn = false;
+  showComments = false;
 
   constructor(
     private postService: PostsService,
     private storageService: StorageService,
     private apiService: ApiService,
     private authService: AuthService,
-    ) {
+  ) {
 
+  }
+
+  rotationClass = ''; 
+
+  toggleComments(): void {
+    this.showComments = !this.showComments;
+    this.rotationClass = this.showComments ? 'rotate-up' : 'rotate-down';
   }
 
   async ngOnInit(): Promise<void> {
@@ -126,7 +134,7 @@ export class PostComponent implements OnInit {
     );
   }
 
-   findUserProfilePicture(): void {
+  findUserProfilePicture(): void {
     const postAuthor = this.users.find(u => u.id === this.post.userId);
     if (postAuthor) {
       if (postAuthor.profilePictureUrl != null) {
