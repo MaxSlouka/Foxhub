@@ -10,6 +10,11 @@ version = '0.0.1-SNAPSHOT'
 java {
 	sourceCompatibility = '17'
 }
+jar {
+	manifest {
+		attributes 'Main-Class': 'com.gfa.foxbook.foxbook.FoxbookApplication'
+	}
+}
 
 configurations {
 	compileOnly {
