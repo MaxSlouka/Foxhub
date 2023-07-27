@@ -44,7 +44,7 @@ public class UserController {
     private final PasswordEncoder passwordEncoder;
     private final CommentService commentService;
 
-    private String uploadDir = "./uploads";
+    private String uploadDir = "/uploads";
 
     @GetMapping("/person")
     public ResponseEntity<?> getUser(HttpServletRequest request) {
