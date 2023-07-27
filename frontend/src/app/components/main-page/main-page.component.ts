@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { User } from "../../models/user";
-import {ApiService} from "../../_services/api/api.service";
+import { ApiService } from "../../_services/api/api.service";
 
 @Component({
   selector: 'app-main-page',
@@ -19,7 +19,7 @@ export class MainPageComponent {
   // @ts-ignore
   userID: number | undefined;
 
-  constructor(private apiService: ApiService) {}
+  constructor(private apiService: ApiService) { }
 
   ngOnInit(): void {
     this.apiService.getUserBasicInfo().subscribe((user: User) => {
