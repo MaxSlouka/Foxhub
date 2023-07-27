@@ -48,7 +48,7 @@ export class AuthService {
 
   logout(): void {
     this.http.post(
-      'http://localhost:8080/api/v1/auth/signout',
+      prefix + '/api/v1/auth/signout',
       {},
       httpOptions
     ).subscribe(ok => {
@@ -58,7 +58,7 @@ export class AuthService {
 
   resetPassword(email: String, yearOfBirth: number): Observable<any> {
     return this.http.post(
-      'http://localhost:8080/api/v1/auth/password-reset',
+      prefix + '/api/v1/auth/password-reset',
       {
         email,
         yearOfBirth
@@ -78,7 +78,7 @@ export class AuthService {
 
   changePassword(newPassword: String) {
     return this.http.post(
-      'http://localhost:8080/api/v1/user/password-change',
+      prefix + '/api/v1/user/password-change',
       {
         newPassword
       },
