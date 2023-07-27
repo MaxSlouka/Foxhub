@@ -1,5 +1,5 @@
-import {Component, OnInit} from '@angular/core';
-import {AuthService} from "../../_services/auth.service";
+import { Component, OnInit } from '@angular/core';
+import { AuthService } from "../../_services/auth.service";
 
 @Component({
   selector: 'app-update-password',
@@ -21,11 +21,10 @@ export class ResetPasswordComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
   }
 
   public onSubmit() {
-    const {email, yearOfBirth} = this.form;
+    const { email, yearOfBirth } = this.form;
     this.authService.resetPassword(email, yearOfBirth).subscribe({
       next: () => {
         this.isSuccessful = true;
