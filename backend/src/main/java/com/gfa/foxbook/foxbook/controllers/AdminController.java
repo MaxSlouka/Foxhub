@@ -16,7 +16,7 @@ import java.util.Optional;
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("api/v1/admin")
-@CrossOrigin(origins = "http://localhost:4200", maxAge = 3600, allowCredentials = "true")
+@CrossOrigin(origins = {"http://localhost:4200", "http://foxhub.gfapp.eu"}, maxAge = 3600, allowCredentials = "true")
 public class AdminController {
     public final PostService postService;
     public final UserService userService;

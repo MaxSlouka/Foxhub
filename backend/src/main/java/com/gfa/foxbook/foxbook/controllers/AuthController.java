@@ -2,7 +2,6 @@ package com.gfa.foxbook.foxbook.controllers;
 
 import com.gfa.foxbook.foxbook.models.User;
 import com.gfa.foxbook.foxbook.models.dtos.EmailDTO;
-import com.gfa.foxbook.foxbook.models.dtos.PasswordDTO;
 import com.gfa.foxbook.foxbook.models.dtos.security.LoginDto;
 import com.gfa.foxbook.foxbook.models.dtos.security.LoginResponseDto;
 import com.gfa.foxbook.foxbook.models.dtos.security.RegisterDto;
@@ -26,13 +25,14 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
-import java.util.Random;
 import java.util.UUID;
 
 @RestController
 @RequestMapping("api/v1/auth")
 @RequiredArgsConstructor
-@CrossOrigin(origins = {"http://localhost:4200", "http://foxhub.gfapp.eu"}, maxAge = 3600, allowCredentials = "true")
+@CrossOrigin(origins = {"http://localhost:4200", "http://foxhub.gfapp.eu"},
+        maxAge = 3600, allowCredentials = "true")
+
 public class AuthController {
     private final AuthenticationManager authenticationManager;
     private final JwtUtils jwtUtils;
@@ -115,7 +115,24 @@ public class AuthController {
 
         userService.saveUser(user.get());
 
-        String emailBody = "<!DOCTYPE html><html lang=\"en\"><head><meta charset=\"UTF-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1.0\"><title>FoxHub - Password Reset</title></head><body><div style=\"max-width:600px;margin:0 auto;padding:20px;background-color:#ffffff;box-shadow:0px 0px 10px 0px rgba(0,0,0,0.1);\"><h1 style=\"color:#4CAF50;text-align:left;\">FoxHub - Password Reset</h1><h3 style=\"color:#333333;\">Hello,</h3><p style=\"color:#666666;\">You have requested a password reset. Your new password is: <strong>" + newPassword + "</strong></p><p style=\"color:#666666;\">Please change it after logging in.</p><p style=\"margin-top:20px;font-size:12px;color:#aaaaaa;text-align:center;\">If you did not request a password reset, please ignore this email or contact us if you have any questions.</p></div></body></html>";
+        String emailBody = "<!DOCTYPE html><html lang=\"en\">" +
+                "<head><meta charset=\"UTF-8\"><meta name=\"viewport\" " +
+                "content=\"width=device-width,initial-scale=1.0\">" +
+                "<title>FoxHub - Password Reset</title></head>" +
+                "<body><div style=\"max-width:600px;margin:0 " +
+                "auto;padding:20px;background-color:#ffffff;" +
+                "box-shadow:0px 0px 10px 0px rgba(0,0,0,0.1);\">" +
+                "<h1 style=\"color:#4CAF50;text-align:left;\">" +
+                "FoxHub - Password Reset</h1><h3 style=\"color:#333333;\">" +
+                "Hello,</h3><p style=\"color:#666666;\">" +
+                "You have requested a password reset. " +
+                "Your new password is: <strong>" + newPassword +
+                "</strong></p><p style=\"color:#666666;\">" +
+                "Please change it after logging in.</p>" +
+                "<p style=\"margin-top:20px;font-size:12px;color:#aaaaaa;text-align:center;\">" +
+                "If you did not request a password reset," +
+                " please ignore this email or contact us if you have any questions." +
+                "</p></div></body></html>";
 
         emailService.send(emailDTO.getEmail(), "FoxHub - Password reset", emailBody);
       
@@ -130,7 +147,17 @@ public class AuthController {
         if (user != null && user.getVerificationToken().equals(token)) {
             user.setVerified(true);
             userService.saveUser(user);
-            String responseHtml = "<!DOCTYPE html><html lang=\"en\"><head><meta charset=\"UTF-8\"><title>Email Verification Successful</title><style>body {font-family: Arial, sans-serif; text-align: center;} h2 {color: #4CAF50;} p {color: #666666; text-decoration: none;} p a {color: #666666; text-decoration: none;} img {margin-top: 30px;}</style></head><body><h2>Email verification successful</h2><p><a href=\"http://localhost:4200/login\">Continue to login</a></p><div><img src=\"https://uploads-ssl.webflow.com/5a8e9877a63d300001a1b0bc/64831b7b4d0859996e81ed15_corporate%20logo%20c.png\" alt=\"Logo\"></div></body></html>";
+            String responseHtml = "<!DOCTYPE html><html lang=\"en\"><head><meta charset=\"UTF-8\">" +
+                    "<title>Email Verification Successful</title>" +
+                    "<style>body {font-family: Arial, sans-serif; text-align: center;} " +
+                    "h2 {color: #4CAF50;} p {color: #666666; text-decoration: none;} " +
+                    "p a {color: #666666; text-decoration: none;} " +
+                    "img {margin-top: 30px;}</style></head><body>" +
+                    "<h2>Email verification successful</h2>" +
+                    "<p><a href=\"http://foxhub.gfapp.eu/login\">Continue to login</a>" +
+                    "</p><div><img " +
+                    "src=\"https://uploads-ssl.webflow.com/5a8e9877a63d300001a1b0bc/64831b7b4d0859996e81ed15_corporate%20logo%20c.png\"" +
+                    " alt=\"Logo\"></div></body></html>";
             return ResponseEntity.ok(responseHtml);
         }
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid verification token");
