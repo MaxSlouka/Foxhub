@@ -53,6 +53,10 @@ ul li a {
     background-color: #007f00;
 }
 
+.dropdown-toggle:hover {
+    cursor: pointer;
+}
+
 .dropdown-item {
     display: flex;
     align-items: center;

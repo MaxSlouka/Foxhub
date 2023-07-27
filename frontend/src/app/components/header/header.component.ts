@@ -1,12 +1,10 @@
-import {Component, OnInit, Input} from '@angular/core';
-import {AuthService} from "../../_services/auth.service";
-import {StorageService} from "../../_services/storage.service";
-import {User} from "../../models/user";
-import {DataService} from "../../_services/api/data.service";
-import {ApiService} from "../../_services/api/api.service";
-import {CartService} from "../../_services/cart.service";
+import { Component, OnInit } from '@angular/core';
+import { AuthService } from "../../_services/auth.service";
+import { StorageService } from "../../_services/storage.service";
+import { User } from "../../models/user";
+import { DataService } from "../../_services/api/data.service";
+import { ApiService } from "../../_services/api/api.service";
 
-// @ts-ignore
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -20,23 +18,17 @@ export class HeaderComponent implements OnInit {
 
   // @ts-ignore
   users: User[];
-  user: User = {email: "", firstName: "", lastName: "", password: ""};
+  user: User = { email: "", firstName: "", lastName: "", password: "" };
 
   isLoggedIn = false;
 
   userEmail: string = '';
 
-
-  // @ts-ignore
-  countItems: number = this.cartService.getCartItems().length;
-
-
-
-  constructor(private authService: AuthService,
-              private storageService: StorageService,
-              private apiService: ApiService,
-              public dataService: DataService,
-              public cartService: CartService) {
+  constructor(
+    private authService: AuthService,
+    private storageService: StorageService,
+    private apiService: ApiService,
+    public dataService: DataService) {
   }
 
   ngOnInit(): void {
@@ -53,12 +45,9 @@ export class HeaderComponent implements OnInit {
     this.users = data;
   }
 
-
   logout(): void {
     this.storageService.logout();
     this.authService.logout();
     this.isLoggedIn = false;
   }
-
-  protected readonly caches = caches;
 }
