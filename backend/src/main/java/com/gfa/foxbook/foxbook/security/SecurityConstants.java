@@ -7,5 +7,5 @@ public class SecurityConstants {
 
     public static final long REFRESH_TOKEN_EXPIRATION_TIME = 1209600000; // 14 days
 
-    public static final byte[] JWT_SECRET = "NeedsToBeChangedToEnvVarButIDontKnowHowOnServsadsadeffnuvbtribsbfdvfdisvriuenviruesnvirnsvruvnfdsivnfudisnvdfis".getBytes();
+    public static final byte[] JWT_SECRET = "SecretKeyToGenJWTsdsadsadeffnuvbtribsbfdvfdisvriuenviruesnvirnsvruvnfdsivnfudisnvdfis".getBytes();
 }
