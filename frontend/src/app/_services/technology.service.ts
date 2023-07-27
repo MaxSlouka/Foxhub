@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
-import {Observable} from "rxjs";
-import {HttpClient} from "@angular/common/http";
-import {Technology} from "../models/technology";
-
+import { Observable } from "rxjs";
+import { HttpClient } from "@angular/common/http";
+import { Technology } from "../models/technology";
 
 @Injectable({
   providedIn: 'root'
 })
+
 export class TechnologyService {
 
   readonly urlTechnology: string = "http://localhost:8080/api/v1/public/technologies";
