@@ -51,7 +51,7 @@ export class ProfilePageComponent {
   }
 
   onChangeURL(url: SafeValue) {
-    let qrCodeURL = 'http://localhost:4200/profile/' + this.username;
+    let qrCodeURL = '/profile/' + this.username;
     this.qrCodeDownloadLink = url;
   }
 }
