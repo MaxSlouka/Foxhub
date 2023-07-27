@@ -1,7 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Post } from "../../models/post";
 import { PostsService } from "../../_services/posts.service";
-import { AuthService } from "../../_services/auth.service";
 import { StorageService } from "../../_services/storage.service";
 import { ApiService } from "../../_services/api/api.service";
 import { User } from "../../models/user";
@@ -40,8 +39,7 @@ export class PostComponent implements OnInit {
   constructor(
     private postService: PostsService,
     private storageService: StorageService,
-    private apiService: ApiService,
-    private authService: AuthService,
+    private apiService: ApiService
   ) {
 
   }
