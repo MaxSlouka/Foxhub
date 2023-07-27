@@ -20,7 +20,9 @@ public class Post {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private String author;
     private Long parentPostId;
+    private String authorProfilePic;
     private String username;
     private Long userId;
     @NotBlank(message = "Content cannot be empty")
