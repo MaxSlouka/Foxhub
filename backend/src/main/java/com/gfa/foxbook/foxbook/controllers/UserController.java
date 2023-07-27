@@ -161,6 +161,7 @@ public class UserController {
             comment.setUserId(user.getId());
             comment.setUsername(user.getNickname());
             post.addComment(comment);
+            comment.setAuthorProfilePic(user.getProfilePictureUrl());
             commentService.saveComment(comment);
             return ResponseEntity.ok().build();
         } catch (Exception e) {
