@@ -1,5 +1,4 @@
 <div class="card" style="border: none;">
-  <img src="/assets/img/newTeam.png" width="700" height="500" alt="Image description">
 
   <div class="card-body">
     <div class="d-flex align-items-center mb-2">
@@ -8,9 +7,8 @@
           <div class="post-info d-flex align-items-center">
             <div class="post-author-image mx-2">
 
-              <img class="profile-img rounded-circle" height="52" width="52"
-                   [src]="post.authorProfilePic" (error)="post.authorProfilePic = '/assets/img/default-profile.png'"
-                   alt="profile picture" />
+              <img class="profile-img rounded-circle" height="52" width="52" [src]="post.authorProfilePic"
+                (error)="post.authorProfilePic = '/assets/img/default-profile.png'" alt="profile picture" />
 
             </div>
             <div class="post-details ml-2">
@@ -25,11 +23,11 @@
 
           <div class="post-actions">
             <div class="post-action btn btn-outline-primary mr-2" (click)="startEditing()"
-                 *ngIf="userRole === 'ADMIN' && !isEditing">
+              *ngIf="userRole === 'ADMIN' && !isEditing">
               Edit
             </div>
             <div class="post-action btn btn-outline-danger" (click)="deletePost.emit(post.id)"
-                 *ngIf="userRole === 'ADMIN'">
+              *ngIf="userRole === 'ADMIN'">
               Delete
             </div>
           </div>
@@ -40,14 +38,13 @@
         </div>
 
         <app-post-form *ngIf="isEditing" submitLabel="Update" [hasCancelButton]="true" [initialText]="post.content"
-                       (handleSubmit)="updatePost.emit({text: $event, id: post.id}); stopEditing()"
-                       (handleCancel)="stopEditing()">
+          (handleSubmit)="updatePost.emit({text: $event, id: post.id}); stopEditing()" (handleCancel)="stopEditing()">
 
         </app-post-form>
 
         <app-post-form *ngIf="isReplying() && !isEditing" submitLabel="Update" [hasCancelButton]="true"
-                       [initialText]="post.content" (handleSubmit)="updatePost.emit({text: $event, id: post.id})"
-                       (handleCancel)="setActivePost.emit(null)">
+          [initialText]="post.content" (handleSubmit)="updatePost.emit({text: $event, id: post.id})"
+          (handleCancel)="setActivePost.emit(null)">
         </app-post-form>
 
         <div class="post-container d-flex justify-items-end">
@@ -63,8 +60,8 @@
           <div class="post-comments mr-3">
             <div *ngFor="let comment of post.comments">
               <div class="flex-comment">
-                <img class="profile-img rounded-circle" height="22" width="22"
-                     [src]="comment.authorProfilePic" alt="profile picture" />
+                <img class="profile-img rounded-circle" height="22" width="22" [src]="comment.authorProfilePic"
+                  alt="profile picture" />
                 <p class="lead mb-1"><b>{{ comment.username }}</b></p>
               </div>
               <p class="lead">{{ comment.content }}</p>
@@ -77,7 +74,7 @@
 
           <div class="input-group my-3" *ngIf="isLoggedIn">
             <button class="btn btn-outline-primary mr-2" type="button" [class.liked]="post.isLikedByCurrentUser"
-                    (click)="likePost(post.id)">
+              (click)="likePost(post.id)">
               Like
             </button>
             <input type="text" class="form-control mr-2" placeholder="add comment..." [(ngModel)]="commentText">
@@ -87,7 +84,7 @@
         </div>
 
         <app-post-form *ngIf="isReplying() && !isEditing" submitLabel="Reply"
-                       (handleSubmit)="addPost.emit({text: $event, parentPostId: replyId})">
+          (handleSubmit)="addPost.emit({text: $event, parentPostId: replyId})">
         </app-post-form>
 
         <div class="replies" *ngIf="replies.length > 0">
@@ -95,9 +92,8 @@
           <div *ngFor="let reply of replies" class="card mb-3">
             <div class="card-body">
               <app-post [post]="reply" (setActivePost)="setActivePost.emit($event)" [activePost]="activePost"
-                        (addPost)="addPost.emit($event)" (updatePost)="updatePost.emit($event)"
-                        [parentPostId]="post.id" [replies]="[]" [currentUserId]="currentUserId"
-                        (deletePost)="deletePost.emit($event)">
+                (addPost)="addPost.emit($event)" (updatePost)="updatePost.emit($event)" [parentPostId]="post.id"
+                [replies]="[]" [currentUserId]="currentUserId" (deletePost)="deletePost.emit($event)">
               </app-post>
             </div>
           </div>

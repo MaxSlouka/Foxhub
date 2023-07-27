@@ -149,7 +149,7 @@ export class PostComponent implements OnInit {
       this.apiService.getAll().subscribe((usersFetch: User[]) => {
         this.users = usersFetch;
         this.findUserProfilePicture();
-        resolve(); // Resolve the promise once the user profiles are fetched.
+        resolve();
       });
     });
   }
