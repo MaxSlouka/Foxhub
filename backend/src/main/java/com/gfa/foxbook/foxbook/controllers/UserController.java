@@ -85,8 +85,6 @@ public class UserController {
         String nickname = user.getNickname();
         String fileName = file.getOriginalFilename();
         String extension = fileName.substring(fileName.lastIndexOf("."));
-        System.out.println(extension);
-        // todo extention
         try {
             Files.createDirectories(Paths.get(uploadDir));
             Path filePath = Paths.get(uploadDir, nickname + extension);
