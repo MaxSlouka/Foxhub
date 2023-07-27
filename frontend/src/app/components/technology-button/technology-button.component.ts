@@ -1,11 +1,12 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {Technology} from "../../models/technology";
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Technology } from "../../models/technology";
 
 @Component({
   selector: 'app-technology-button',
   templateUrl: './technology-button.component.html',
   styleUrls: ['./technology-button.component.css']
 })
+
 export class TechnologyButtonComponent {
 
   // @ts-ignore
@@ -17,6 +18,7 @@ export class TechnologyButtonComponent {
   sendTechnologiesUp() {
     this.technologyComponentEmitter.emit(this.userTechnologies);
   }
+  
   switchTechnology() {
     if (this.userTechnologies?.some(userTechnology =>
       userTechnology.name === this.technology.name)) {
