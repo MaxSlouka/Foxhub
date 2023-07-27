@@ -27,7 +27,7 @@ export class PostsComponent implements OnInit {
 
   addPost({text, parentPostId}: {text: string, parentPostId: null | number }): void {
     if (this.currentUserId === undefined) {
-      // Handle the error: maybe show a message to the user, or just return
+      console.error('User is not logged in')
       return;
     }
     this.postsService
