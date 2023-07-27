@@ -25,7 +25,7 @@ export class SwiperArrowComponent {
 
     function smoothScroll() {
       const distance = finalPosition - window.scrollY;
-      const step = Math.ceil(distance / 20); 
+      const step = Math.ceil(distance / 20);
 
       if (Math.abs(distance) <= Math.abs(step)) {
         window.scroll(0, finalPosition);

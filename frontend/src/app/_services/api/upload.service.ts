@@ -7,6 +7,7 @@ const prefix = GlobalConstants.prefix;
 @Injectable({
   providedIn: 'root'
 })
+
 export class UploadService {
 
   constructor(private http: HttpClient) { }

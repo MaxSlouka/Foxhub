@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from "../../_services/auth.service";
 import { StorageService } from "../../_services/storage.service";
-import { ProfileService } from "../../_services/profile.service";
 import { User } from "../../models/user";
-import { ActivatedRoute } from '@angular/router';
 import { DataService } from "../../_services/api/data.service";
 import { ApiService } from "../../_services/api/api.service";
 
@@ -17,6 +15,7 @@ export class HeaderComponent implements OnInit {
 
   // @ts-ignore
   username: string | null = "";
+  
   // @ts-ignore
   users: User[];
   user: User = { email: "", firstName: "", lastName: "", password: "" };
@@ -26,10 +25,8 @@ export class HeaderComponent implements OnInit {
   userEmail: string = '';
 
   constructor(private authService: AuthService,
-    private profileService: ProfileService,
     private storageService: StorageService,
     private apiService: ApiService,
-    private activatedroute: ActivatedRoute,
     public dataService: DataService) {
   }
 

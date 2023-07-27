@@ -4,6 +4,7 @@ import { User } from "../../models/user";
 @Injectable({
   providedIn: 'root'
 })
+
 export class DataService {
 
   // @ts-ignore

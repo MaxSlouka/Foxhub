@@ -12,7 +12,6 @@
                    [src]="post.authorProfilePic" (error)="post.authorProfilePic = '/assets/img/default-profile.png'"
                    alt="profile picture" />
 
-
             </div>
             <div class="post-details ml-2">
               <div class="post-author">
@@ -36,13 +35,14 @@
           </div>
         </div>
 
-        <div class="post-text" *ngIf="!isEditing && !isReplying()">
+        <div class="post-text text-formated" *ngIf="!isEditing && !isReplying()">
           <p class="lead my-4">{{ post.content }}</p>
         </div>
 
         <app-post-form *ngIf="isEditing" submitLabel="Update" [hasCancelButton]="true" [initialText]="post.content"
                        (handleSubmit)="updatePost.emit({text: $event, id: post.id}); stopEditing()"
                        (handleCancel)="stopEditing()">
+
         </app-post-form>
 
         <app-post-form *ngIf="isReplying() && !isEditing" submitLabel="Update" [hasCancelButton]="true"
@@ -68,9 +68,9 @@
                 <p class="lead mb-1"><b>{{ comment.username }}</b></p>
               </div>
               <p class="lead">{{ comment.content }}</p>
+
             </div>
           </div>
-
         </div>
 
         <div class="post-actions">

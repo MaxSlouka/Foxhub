@@ -1,17 +1,17 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {PostsService} from "../../_services/posts.service";
-import {Post} from "../../models/post";
+import { Component, Input, OnInit } from '@angular/core';
+import { PostsService } from "../../_services/posts.service";
+import { Post } from "../../models/post";
 
 @Component({
   selector: 'app-posts',
   templateUrl: './posts.component.html',
   styleUrls: ['./posts.component.css']
 })
+
 export class PostsComponent implements OnInit {
   @Input() userRole!: string;
   @Input() userFullName!: string;
   @Input() currentUserId!: number | undefined;
-
 
   posts: Post[] = [];
   activePost: Post | null = null;
@@ -25,13 +25,22 @@ export class PostsComponent implements OnInit {
     })
   }
 
-  addPost({text, parentPostId}: {text: string, parentPostId: null | number }): void {
+  addPost({ text, parentPostId }: { text: string, parentPostId: null | number }): void {
+    const postData = {
+      userID: this.currentUserId,
+      username: this.userFullName,
+      content: text,
+      createdAt: new Date().toISOString(),
+      parentPostId: parentPostId
+    };
+
     if (this.currentUserId === undefined) {
       console.error('User is not logged in')
+
       return;
     }
-    this.postsService
-      .createPost(this.currentUserId, this.userFullName, text, parentPostId)
+
+    this.postsService.createPost(postData)
       .subscribe((createdPost) => {
         this.loadPosts();
       });
@@ -43,7 +52,7 @@ export class PostsComponent implements OnInit {
     })
   }
 
-  updatePost({text, id}: {text: string, id: number}) {
+  updatePost({ text, id }: { text: string, id: number }) {
     this.postsService
       .updatePost(id, text)
       .subscribe((updatedPost) => {

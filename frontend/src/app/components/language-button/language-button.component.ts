@@ -1,13 +1,14 @@
-import {Component, Input,EventEmitter, Output} from '@angular/core';
-import {Language} from "../../models/language";
+import { Component, Input, EventEmitter, Output } from '@angular/core';
+import { Language } from "../../models/language";
 
 @Component({
   selector: 'app-language-button',
   templateUrl: './language-button.component.html',
   styleUrls: ['./language-button.component.css']
 })
+
 export class LanguageButtonComponent {
-// @ts-ignore
+  // @ts-ignore
   @Input() language: Language;
   @Input() userLanguages: Language[] | undefined;
   @Input() unusedLanguages: Language[] | undefined;
@@ -16,6 +17,7 @@ export class LanguageButtonComponent {
   sendLanguagesUp() {
     this.languageComponentEmitter.emit(this.userLanguages);
   }
+  
   switchLanguage() {
     if (this.userLanguages?.some(userLanguage =>
       userLanguage.name === this.language.name)) {
