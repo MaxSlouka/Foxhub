@@ -110,14 +110,12 @@ export class UserSettingsPageComponent {
     this.unusedTechnologies = results;
   }
 
-
   unusedLanguagesHandle() {
     this.unusedLanguages = this.languages.filter(language => {
       // @ts-ignore
       return !this.userLanguages.some(userLanguage => userLanguage.name === language.name);
     });
   }
-
 
   unusedTechnologiesHandle() {
     this.unusedTechnologies = this.technologies.filter(technology => {
@@ -159,7 +157,6 @@ export class UserSettingsPageComponent {
   }
 
   async updateUser() {
-    // @ts-ignore
     // @ts-ignore
     const {
       firstName,
