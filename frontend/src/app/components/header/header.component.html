@@ -8,12 +8,12 @@
   <!-- collapse hamburger -->
 
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <svg class="ham hamRotate ham7" viewBox="0 0 100 100" width="50" onclick="this.classList.toggle('active')">
-      <path class="line top" d="m 70,33 h -40 c 0,0 -6,1.368796 -6,8.5 0,7.131204 6,8.5013 6,8.5013 l 20,-0.0013" />
-      <path class="line middle" d="m 70,50 h -40" />
+      <path class="line top" d="m 70,33 h -40 c 0,0 -6,1.368796 -6,8.5 0,7.131204 6,8.5013 6,8.5013 l 20,-0.0013"/>
+      <path class="line middle" d="m 70,50 h -40"/>
       <path class="line bottom"
-        d="m 69.575405,67.073826 h -40 c -5.592752,0 -6.873604,-9.348582 1.371031,-9.348582 8.244634,0 19.053564,21.797129 19.053564,12.274756 l 0,-40" />
+            d="m 69.575405,67.073826 h -40 c -5.592752,0 -6.873604,-9.348582 1.371031,-9.348582 8.244634,0 19.053564,21.797129 19.053564,12.274756 l 0,-40"/>
     </svg>
   </button>
 
@@ -24,7 +24,7 @@
 
       <!-- logo -->
 
-      <a class="navbar-brand" href="/main">
+      <a class="navbar-brand" routerLink="/main">
         <img ngSrc="/assets/img/GFA-logo.png" width=50 height=50 alt="GFA logo">
       </a>
 
@@ -51,11 +51,13 @@
         <a routerLink="/cart" class="cart-btn" aria-disabled="true">
           <i class="bi bi-bag"></i>
         </a>
-        <a routerLink="#" class="d-block link-body-emphasis text-decoration-none dropdown-toggle" data-toggle="dropdown"
-          aria-expanded="false">
+
+        <div class="d-block link-body-emphasis text-decoration-none dropdown-toggle" data-toggle="dropdown"
+             aria-expanded="false">
           <img *ngIf="user.profilePictureUrl" ngSrc="{{  user.profilePictureUrl  }}" alt="mdo" width=42 height=42
-            class="rounded-circle">
-        </a>
+               class="rounded-circle">
+        </div>
+
         <div class="dropdown-menu">
           <a class="dropdown-item" [routerLink]="['/profile',userEmail]">
             <i class="bi bi-person-circle"></i>Profile - {{userEmail}}</a>

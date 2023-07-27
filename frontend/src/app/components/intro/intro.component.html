@@ -15,7 +15,7 @@
 
     <!-- image -->
 
-    <div class="col-10 col-sm-8 col-lg-6 reveal-delay" appRevealWithDelay>
+    <div class="col-10 col-sm-8 col-lg-6" appRevealWithDelay>
 
       <img ngSrc="/assets/img/online.png" class="d-block mx-lg-auto img-fluid" alt="Coder" width="500" height="400"
         loading="lazy">
@@ -24,7 +24,7 @@
 
     <!-- intro text with image-->
 
-    <div class="col-lg-6 reveal-delay" appRevealWithDelay>
+    <div class="col-lg-6 " appRevealWithDelay>
       <h1 class="display-5 fw-bold text-body-emphasis lh-1 mb-3 page-header">Welcome to <span>Fox</span>Hub</h1>
       <p class="lead">The ultimate platform connecting individuals within
         the dynamic world of IT. </p>
@@ -49,7 +49,7 @@
 
     <!-- icon grid -->
 
-    <div class="container px-4 py-5 reveal-section" id="icon-grid" appRevealOnScroll>
+    <div class="container px-4 py-5 " id="icon-grid" appRevealOnScroll>
       <h2 class="pb-2 border-bottom"><span>Fox</span>Hub Perks</h2>
 
       <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4 py-5">
@@ -91,7 +91,7 @@
 
     <!-- about app -->
 
-    <div class="container col-xxl-8 px-4 py-3 my-4 reveal-section" appRevealOnScroll>
+    <div class="container col-xxl-8 px-4 py-3 my-4 " appRevealOnScroll>
       <div class="row flex-lg-row align-items-center g-5 py-3">
 
         <div class="col-10 col-sm-8 col-lg-6">
@@ -121,7 +121,7 @@
 
     <!-- introduction -->
 
-    <div class="container col-xxl-8 px-4 py-4 my-4 reveal-section" appRevealOnScroll>
+    <div class="container col-xxl-8 px-4 py-4 my-4 " appRevealOnScroll>
       <div class="row flex-lg-row-reverse align-items-center g-5 py-4">
 
         <div class="col-10 col-sm-8 col-lg-6">
@@ -157,7 +157,7 @@
 
     <!-- search intro -->
 
-    <div class="container col-xxl-8 px-4 py-4 my-4 reveal-section" appRevealOnScroll>
+    <div class="container col-xxl-8 px-4 py-4 my-4 " appRevealOnScroll>
       <div class="row flex-lg-row align-items-center g-5 py-4">
 
         <div class="col-10 col-sm-8 col-lg-6">
@@ -176,9 +176,9 @@
             casual online shopping. But this time you choose people.</p>
           <p class="lead"> People you <b>need</b>.</p>
           <div class="d-grid gap-2 d-md-flex justify-content-md-start" *ngIf="!isLoggedIn">
-            <a href="./people" class="btn btn-outline-primary btn-lg" role="button" aria-disabled="true">Find Best
+            <a routerLink="/people" class="btn btn-outline-primary btn-lg" role="button" aria-disabled="true">Find Best
               Match</a>
-            <a href="./personality-test" class="btn btn-outline-primary btn-lg" role="button"
+            <a routerLink="/personality-test" class="btn btn-outline-primary btn-lg" role="button"
               aria-disabled="true">Personality</a>
           </div>
         </div>
@@ -187,7 +187,7 @@
 
     <!-- end text -->
 
-    <div class="container col-xxl-8 px-4 py-4 my-4 reveal-section" appRevealOnScroll>
+    <div class="container col-xxl-8 px-4 py-4 my-4 " appRevealOnScroll>
       <div class="row flex-lg-row align-items-center g-5 py-4">
 
         <div class="col-lg-6">
@@ -209,7 +209,7 @@
         </div>
 
         <div class="col-10 col-sm-8 col-lg-6">
-          <img ngSrc="../../../assets/img/projectRocket.png" class="d-block mx-lg-auto img-fluid" alt="Launch" width="700"
+          <img ngSrc="/assets/img/projectRocket.png" class="d-block mx-lg-auto img-fluid" alt="Launch" width="700"
             height="500" loading="lazy">
         </div>
 
