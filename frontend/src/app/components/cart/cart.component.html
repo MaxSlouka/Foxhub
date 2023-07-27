@@ -11,14 +11,14 @@
 
       <table id="shoppingCart" class="table table-condensed">
         <thead>
-        <tr>
-          <th style="width:60%">Person</th>
-          <th style="width:30%">Something</th>
-          <th style="width:10%"></th>
-        </tr>
+          <tr>
+            <th style="width:60%">Person</th>
+            <th style="width:30%">Character</th>
+            <th style="width:10%"></th>
+          </tr>
         </thead>
         <tbody>
-        <app-card *ngFor="let user of cartItems" [user]="user"></app-card>
+          <app-card *ngFor="let user of cartItems" [user]="user"></app-card>
         </tbody>
       </table>
     </div>
@@ -35,22 +35,7 @@
       <a href="./checkout" class="btn btn-primary mb-4 btn-lg pl-5 pr-5">Checkout</a>
     </div>
   </div>
-</div>
-
-<div class="row mt-4 d-flex align-items-center">
-
-  <div class="col-sm-6 order-md-2 d-flex justify-content-center justify-content-md-start">
-    <a routerLink="/checkout" class="btn btn-primary mb-4 btn-lg pl-5 pr-5">Contact all</a>
-  </div>
-
-  <div class="col-sm-6 mb-3 order-md-2 d-flex justify-content-center justify-content-md-end">
-    <a routerLink="/people" class="btn btn-outline-primary btn-lg mr-2" role="button" aria-disabled="true">Back to
-      People</a>
-  </div>
-
-  <div class="col-sm-6 order-md-2 d-flex justify-content-center justify-content-md-end">
-    <a routerLink="/checkout" class="btn btn-primary mb-4 btn-lg pl-5 pr-5">Checkout</a>
-  </div>
+  
 </div>
 
 <app-footer></app-footer>

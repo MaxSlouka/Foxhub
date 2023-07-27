@@ -112,9 +112,9 @@
     color: #cfcfcf;
     cursor: pointer;
     margin-right: 10px;
-    transition: all .4s;
+    transition: transform 0.4s ease;
 }
 
 .left-container .icons a i:hover {
-    color: #2c5364;
+    color: #000000;
 }

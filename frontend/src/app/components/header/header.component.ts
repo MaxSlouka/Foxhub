@@ -24,7 +24,8 @@ export class HeaderComponent implements OnInit {
 
   userEmail: string = '';
 
-  constructor(private authService: AuthService,
+  constructor(
+    private authService: AuthService,
     private storageService: StorageService,
     private apiService: ApiService,
     public dataService: DataService) {
