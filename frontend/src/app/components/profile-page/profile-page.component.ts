@@ -2,16 +2,16 @@ import { Component } from '@angular/core';
 import { User } from "../../models/user";
 import { ProfileService } from "../../_services/profile.service";
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
-
-import { SafeUrl, SafeValue } from "@angular/platform-browser";
+import { SafeValue } from "@angular/platform-browser";
 import { filter } from 'rxjs/operators';
-import {StorageService} from "../../_services/storage.service";
+import { StorageService } from "../../_services/storage.service";
 
 @Component({
   selector: 'app-profile-page',
   templateUrl: './profile-page.component.html',
   styleUrls: ['./profile-page.component.css']
 })
+
 export class ProfilePageComponent {
   // @ts-ignore
   username: string | null = "";
