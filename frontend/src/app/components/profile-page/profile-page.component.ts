@@ -6,6 +6,7 @@ import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { SafeUrl, SafeValue } from "@angular/platform-browser";
 import { filter } from 'rxjs/operators';
 import {StorageService} from "../../_services/storage.service";
+import {GlobalConstants} from "../../common/global-constants";
 
 @Component({
   selector: 'app-profile-page',
@@ -19,6 +20,7 @@ export class ProfilePageComponent {
   qrCodeDownloadLink: SafeValue = "";
   isOpen: boolean = false;
   isLoggedIn: boolean = false;
+  prefix: string = GlobalConstants.prefix;
 
   constructor(
     private profileService: ProfileService,
