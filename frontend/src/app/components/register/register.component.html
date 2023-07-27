@@ -96,7 +96,7 @@
           <button class="w-100 btn btn-lg btn-primary" type="submit">Sign up</button>
         </div>
 
-        <div class="alert alert-warning" *ngIf="f.submitted && isSignUpFailed">
+        <div class="alert alert-warning" *ngIf="f.submitted && isRegisterFailed">
           Signup failed!<br />{{ errorMessage }}
         </div>
 
@@ -114,6 +114,10 @@
 
       <div class="alert alert-success" *ngIf="isSuccessful">
         Your registration is successful!
+      </div>
+
+      <div class="alert alert-warning" *ngIf="form.submitted && isRegisterFailed">
+        Registration failed!<br />{{ errorMessage }}
       </div>
 
     </div>
