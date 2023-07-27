@@ -17,7 +17,7 @@ export class PeoplePageCardComponent {
   constructor(
     private cartService: CartService,
     private elementRef: ElementRef
-    ) { }
+  ) { }
 
   addToCart(user: User) {
     this.cartService.addToCart(user);

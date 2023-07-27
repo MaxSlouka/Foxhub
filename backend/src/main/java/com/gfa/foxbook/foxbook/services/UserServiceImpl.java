@@ -10,13 +10,10 @@ import com.gfa.foxbook.foxbook.repositories.TechnologyRepository;
 import com.gfa.foxbook.foxbook.repositories.UserRepository;
 import com.gfa.foxbook.foxbook.services.interfaces.UserService;
 import lombok.AllArgsConstructor;
-
 import org.springframework.stereotype.Service;
-
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-
 
 @Service
 @AllArgsConstructor
@@ -87,7 +84,6 @@ public class UserServiceImpl implements UserService {
 //        commentService.comment(existingUser.getId(), existingUser.getId(), comment);
 //        userRepository.save(existingUser);
 //    }
-
 
     @Override
     public UserBasicDTO convertToUserBasicDTO(User user) {

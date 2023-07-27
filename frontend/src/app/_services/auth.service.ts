@@ -1,16 +1,13 @@
-import {Injectable} from '@angular/core';
-import {HttpClient, HttpErrorResponse, HttpHeaders, HttpResponse} from "@angular/common/http";
-import {catchError, Observable, throwError} from "rxjs";
-import {ToastrService} from 'ngx-toastr';
-import {GlobalConstants} from "../common/global-constants";
-
+import { Injectable } from '@angular/core';
+import { HttpClient, HttpErrorResponse, HttpHeaders, HttpResponse } from "@angular/common/http";
+import { catchError, Observable, throwError } from "rxjs";
+import { ToastrService } from 'ngx-toastr';
+import { GlobalConstants } from "../common/global-constants";
 
 const prefix = GlobalConstants.prefix;
 const AUTH_API = prefix + '/api/v1/auth/';
-
-
 const httpOptions = {
-  headers: new HttpHeaders({'Content-type': 'application/json'})
+  headers: new HttpHeaders({ 'Content-type': 'application/json' })
 }
 
 @Injectable({
@@ -38,12 +35,11 @@ export class AuthService {
         if (error.status === 401) {
           errorMessage = error.error;
         }
-        this.toastr.error(errorMessage, 'Error', {timeOut: 5000});
+        this.toastr.error(errorMessage, 'Error', { timeOut: 5000 });
         return throwError(errorMessage);
       })
     );
   }
-
 
   register(firstName: string, lastName: string, email: string, password: string): Observable<any> {
     return this.http.post(
@@ -64,7 +60,7 @@ export class AuthService {
       {},
       httpOptions
     ).subscribe(ok => {
-      this.toastr.error('Successfully Logged Out!', 'Success', {timeOut: 5000});
+      this.toastr.error('Successfully Logged Out!', 'Success', { timeOut: 5000 });
     });
   }
 
@@ -82,7 +78,7 @@ export class AuthService {
         if (error.status === 400) {
           errorMessage = error.error;
         }
-        this.toastr.error(errorMessage, 'Error', {timeOut: 5000});
+        this.toastr.error(errorMessage, 'Error', { timeOut: 5000 });
         return throwError(errorMessage);
       })
     );

@@ -1,6 +1,6 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Post} from "../../models/post";
-import {PostsService} from "../../_services/posts.service";
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Post } from "../../models/post";
+import { PostsService } from "../../_services/posts.service";
 import { AuthService } from "../../_services/auth.service";
 import { StorageService } from "../../_services/storage.service";
 import { ApiService } from "../../_services/api/api.service";
@@ -11,6 +11,7 @@ import { User } from "../../models/user";
   templateUrl: './post.component.html',
   styleUrls: ['./post.component.css']
 })
+
 export class PostComponent implements OnInit {
   @Input() post!: Post;
   @Input() replies!: Post[];
@@ -39,7 +40,7 @@ export class PostComponent implements OnInit {
     private storageService: StorageService,
     private apiService: ApiService,
     private authService: AuthService
-    ) {
+  ) {
   }
 
   ngOnInit(): void {
@@ -70,7 +71,6 @@ export class PostComponent implements OnInit {
       }
     });
   }
-
 
   isReplying(): Boolean {
     if (!this.activePost) {

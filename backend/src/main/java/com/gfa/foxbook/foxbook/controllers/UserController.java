@@ -44,7 +44,6 @@ public class UserController {
     private final PasswordEncoder passwordEncoder;
     private final CommentService commentService;
 
-
     private String uploadDir = "./uploads";
 
     @GetMapping("/person")
@@ -92,7 +91,7 @@ public class UserController {
             Files.createDirectories(Paths.get(uploadDir));
             Path filePath = Paths.get(uploadDir, nickname + extension);
             file.transferTo(filePath);
-            user.setProfilePictureUrl("http://localhost:8080/uploads/"+nickname+ extension);
+            user.setProfilePictureUrl("http://localhost:8080/uploads/" + nickname + extension);
             userService.saveUser(user);
 
 
@@ -133,8 +132,9 @@ public class UserController {
         postService.save(like.getPost());
         return ResponseEntity.ok().build();
     }
+
     @PostMapping("password-change")
-    public ResponseEntity<?> changePassword(@RequestBody PasswordDTO passwordDTO, HttpServletRequest request){
+    public ResponseEntity<?> changePassword(@RequestBody PasswordDTO passwordDTO, HttpServletRequest request) {
         User user = jwtUtils.getUserFromRequest(request);
         if (user == null) {
             return ResponseEntity.badRequest().build();

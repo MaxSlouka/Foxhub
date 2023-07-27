@@ -11,13 +11,12 @@ import { DataService } from "./_services/api/data.service";
 export class AppComponent {
   title = 'frontend';
 
-
   // @ts-ignore
-  constructor(private apiService: ApiService,
+  constructor(
+    private apiService: ApiService,
     private dataService: DataService,
   ) {
   }
-
 
   ngOnInit(): void {
     this.getUsers();

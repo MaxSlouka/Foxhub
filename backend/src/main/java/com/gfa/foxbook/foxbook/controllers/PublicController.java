@@ -81,7 +81,6 @@ public class PublicController {
         return ResponseEntity.ok(usersDTO);
     }
 
-
     @GetMapping("/personalities")
     public ResponseEntity<?> getAllPersonalities() {
         return ResponseEntity.ok(personalityService.getAllPersonalities());

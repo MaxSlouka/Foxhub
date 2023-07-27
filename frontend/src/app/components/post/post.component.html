@@ -33,13 +33,12 @@
           </div>
         </div>
 
-        <div class="post-text" *ngIf="!isEditing && !isReplying()">
+        <div class="post-text text-formated" *ngIf="!isEditing && !isReplying()">
           <p class="lead my-4">{{ post.content }}</p>
         </div>
 
         <app-post-form *ngIf="isEditing" submitLabel="Update" [hasCancelButton]="true" [initialText]="post.content"
-          (handleSubmit)="updatePost.emit({text: $event, id: post.id}); stopEditing()"
-          (handleCancel)="stopEditing()">
+          (handleSubmit)="updatePost.emit({text: $event, id: post.id}); stopEditing()" (handleCancel)="stopEditing()">
         </app-post-form>
 
         <app-post-form *ngIf="isReplying() && !isEditing" submitLabel="Update" [hasCancelButton]="true"
@@ -59,10 +58,9 @@
 
           <div class="post-comments mr-3">
             <div *ngFor="let comment of post.comments">
-              <p class="lead">{{ comment.content }} </p>
+              <p class="lead text-formated">{{ comment.content }} </p>
             </div>
           </div>
-
         </div>
 
         <div class="post-actions">

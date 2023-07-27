@@ -1,13 +1,12 @@
-import {Component, OnInit, AfterViewInit, ViewChild, ElementRef} from '@angular/core';
-import {Technology} from "../../models/technology";
-import {TechnologyService} from "../../_services/technology.service";
-import {ApiService} from "../../_services/api/api.service";
-import {User} from "../../models/user";
-import {Language} from "../../models/language";
-import {LanguageService} from "../../_services/language.service";
-import {Personality} from "../../models/personality";
-import {PersonalityService} from "../../_services/personality.service";
-
+import { Component, OnInit, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
+import { Technology } from "../../models/technology";
+import { TechnologyService } from "../../_services/technology.service";
+import { ApiService } from "../../_services/api/api.service";
+import { User } from "../../models/user";
+import { Language } from "../../models/language";
+import { LanguageService } from "../../_services/language.service";
+import { Personality } from "../../models/personality";
+import { PersonalityService } from "../../_services/personality.service";
 
 @Component({
   selector: 'app-people-page',
@@ -15,10 +14,9 @@ import {PersonalityService} from "../../_services/personality.service";
   styleUrls: ['./people-page.component.css']
 })
 
-
 export class PeoplePageComponent implements OnInit, AfterViewInit {
-  @ViewChild('customRange3', {static: true}) rangeInputRef!: ElementRef<HTMLInputElement>;
-  @ViewChild('rangeValue', {static: true}) rangeValueRef!: ElementRef<HTMLSpanElement>;
+  @ViewChild('customRange3', { static: true }) rangeInputRef!: ElementRef<HTMLInputElement>;
+  @ViewChild('rangeValue', { static: true }) rangeValueRef!: ElementRef<HTMLSpanElement>;
 
   technologies: Technology[] = [];
   languages: Language[] = [];
@@ -26,26 +24,21 @@ export class PeoplePageComponent implements OnInit, AfterViewInit {
   selectedLanguages: string[] = [];
   usedTechnologies: Technology[] = [];
   usedLanguages: Language[] = [];
-
-
   // @ts-ignore
   users: User[] = [];
   fullUsers: User[] = [];
   filterContentExpanded: boolean = true
   isRangeChanged: boolean = false;
-
   // @ts-ignore
   workStatus: string;
-
   personalities: Personality[] = [];
   selectedPersonality: Personality | undefined;
   selectAllPersonalities: boolean = true;
 
-
   constructor(private technologyService: TechnologyService,
-              private languageService: LanguageService,
-              private apiService: ApiService,
-              private personalityService: PersonalityService) {
+    private languageService: LanguageService,
+    private apiService: ApiService,
+    private personalityService: PersonalityService) {
   }
 
   ngOnInit(): void {
@@ -97,7 +90,6 @@ export class PeoplePageComponent implements OnInit, AfterViewInit {
     this.filterContentExpanded = !this.filterContentExpanded;
   }
 
-
   usedTechnologiesList() {
     const usedTechNames: string[] = [];
     for (let user of this.users) {
@@ -126,7 +118,6 @@ export class PeoplePageComponent implements OnInit, AfterViewInit {
       }
     }
   }
-
 
   addToTechList(event: any, tech: string) {
     if (event.target.checked) {
@@ -189,10 +180,10 @@ export class PeoplePageComponent implements OnInit, AfterViewInit {
     // @ts-ignore
     return users.filter(user =>
       lowerCaseKeys.every(key =>
-          // @ts-ignore
-          user.technologies && user.technologies.some(technology =>
-            technology.name.toLowerCase().includes(key)
-          )
+        // @ts-ignore
+        user.technologies && user.technologies.some(technology =>
+          technology.name.toLowerCase().includes(key)
+        )
       )
     );
   }
@@ -203,10 +194,10 @@ export class PeoplePageComponent implements OnInit, AfterViewInit {
     // @ts-ignore
     return users.filter(user =>
       lowerCaseKeys.every(key =>
-          // @ts-ignore
-          user.languages && user.languages.some(language =>
-            language.name.toLowerCase().includes(key)
-          )
+        // @ts-ignore
+        user.languages && user.languages.some(language =>
+          language.name.toLowerCase().includes(key)
+        )
       )
     );
   }
@@ -248,8 +239,8 @@ export class PeoplePageComponent implements OnInit, AfterViewInit {
       // @ts-ignore
       if (user.personality?.id === this.selectedPersonality?.id) {
         actualFilteredUsers.push(user);
-        } else if (this.selectAllPersonalities) {
-          actualFilteredUsers.push(user);
+      } else if (this.selectAllPersonalities) {
+        actualFilteredUsers.push(user);
       }
     }
     return actualFilteredUsers;

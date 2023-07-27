@@ -7,8 +7,9 @@ import { ApiService } from "../../_services/api/api.service";
   templateUrl: './aside.component.html',
   styleUrls: ['./aside.component.css']
 })
+
 export class AsideComponent implements OnInit {
-  
+
   // @ts-ignore
   users: User[];
 

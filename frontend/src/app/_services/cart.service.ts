@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
-import {User} from "../models/user";
+import { User } from "../models/user";
 
 @Injectable({
   providedIn: 'root'
 })
+
 export class CartService {
-  cartItems:User[] = [];
+  cartItems: User[] = [];
 
   constructor() {
     let storedCart = sessionStorage.getItem('cart');
@@ -14,8 +15,8 @@ export class CartService {
     }
   }
 
-  addToCart(user:User){
-    if (!this.cartItems.some(item => item.nickname === user.nickname)){
+  addToCart(user: User) {
+    if (!this.cartItems.some(item => item.nickname === user.nickname)) {
       this.cartItems.push(user);
       this.updateLocalStorage();
     }

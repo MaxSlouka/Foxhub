@@ -6,12 +6,13 @@ import { ActivatedRoute, Router } from '@angular/router';
   templateUrl: './creators.component.html',
   styleUrls: ['./creators.component.css']
 })
+
 export class CreatorsComponent implements OnInit {
 
   constructor(
-    private route: ActivatedRoute, 
-    private router: Router, 
-    private elementRef: ElementRef) {}
+    private route: ActivatedRoute,
+    private router: Router,
+    private elementRef: ElementRef) { }
 
   ngOnInit(): void {
     this.route.fragment.subscribe(fragment => {
@@ -33,5 +34,5 @@ export class CreatorsComponent implements OnInit {
     this.scrollToElement(targetID);
     this.router.navigate([], { relativeTo: this.route, queryParamsHandling: 'merge' });
   }
-  
+
 }
