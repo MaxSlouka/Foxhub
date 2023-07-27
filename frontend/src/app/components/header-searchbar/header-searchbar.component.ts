@@ -2,7 +2,6 @@ import { Component, Input, EventEmitter, Output } from '@angular/core';
 import { User } from "../../models/user";
 import { ApiService } from "../../_services/api/api.service";
 
-
 @Component({
   selector: 'app-header-searchbar',
   templateUrl: './header-searchbar.component.html',
