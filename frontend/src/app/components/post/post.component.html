@@ -57,15 +57,22 @@
             <p>Comments: {{ post.comments.length }}</p>
           </div>
 
-          <div class="post-comments mr-3">
+        </div>
+
+        <div class="post-comments mr-3 mt-3 border-top">
+          <p class="lead my-4 font-weight-bold">Comments:</p>
+
+          <i class="fas mb-4" [ngClass]="{'fa-chevron-down': !showComments, 'fa-chevron-up': showComments}"
+            (click)="toggleComments()"></i>
+
+          <div *ngIf="showComments">
             <div *ngFor="let comment of post.comments">
               <div class="flex-comment">
-                <img class="profile-img rounded-circle" height="22" width="22" [src]="comment.authorProfilePic"
+                <img class="profile-img rounded-circle mr-2" height="22" width="22" [src]="comment.authorProfilePic"
                   alt="profile picture" />
                 <p class="lead mb-1"><b>{{ comment.username }}</b></p>
               </div>
               <p class="lead">{{ comment.content }}</p>
-
             </div>
           </div>
         </div>
