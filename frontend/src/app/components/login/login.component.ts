@@ -36,11 +36,9 @@ export class LoginComponent implements OnInit {
       this.userNickname = this.storageService.getUserFromSession();
     }
 
-
-
     this.router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe((event) => {
       if (this.showSuccessToast) {
-        this.toastr.success('Successfully Logged In!', 'Success', {timeOut: 5000});
+        this.toastr.success('Successfully Logged In!', 'Success', { timeOut: 5000 });
         this.showSuccessToast = false;
       }
     });
