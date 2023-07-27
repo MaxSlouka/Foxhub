@@ -2,8 +2,10 @@
   <td data-th="Product">
     <div class="row">
       <div class="col-md-3 text-left">
-        <img ngSrc="{{user.profilePictureUrl}}" height=100 width=100 alt=""
-             class="img-fluid d-none d-md-block mb-2 shadow ">
+        <a [routerLink]="['/profile',user.nickname]" class="card">
+          <img *ngIf="user.profilePictureUrl" ngSrc="{{user.profilePictureUrl}}" height=100 width=100
+            alt="profile_picture" class="img-fluid d-none d-md-block mb-2 shadow ">
+        </a>
       </div>
       <div class="col-md-9 text-left mt-sm-2">
         <h4>{{user.firstName}} {{user.lastName}}</h4>
@@ -11,7 +13,9 @@
       </div>
     </div>
   </td>
-  <td data-th="Price">What here?</td>
+  <td data-th="personality-about">
+    <p class="font-weight-light">{{user.personality?.description}}</p>
+  </td>
   <td class="actions" data-th="">
     <div class="text-right">
       <button class="btn btn-outline-danger btn-md mb-2" (click)="removeItem(user)">
