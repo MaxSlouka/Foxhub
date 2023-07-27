@@ -13,32 +13,33 @@
       <button (click)="declineCookies()">Decline</button>
     </div>
 
-    <!-- image -->
+    <div class="container col-xxl-8 px-3 mb-5">
+      <div class="row flex-lg-row-reverse align-items-center g-5 py-1">
 
-    <div class="col-10 col-sm-8 col-lg-6">
+        <div class="col-10 col-sm-8 col-lg-6">
+          <img ngSrc="/assets/img/online.png" class="d-block mx-lg-auto img-fluid" alt="Coder" width="500" height="400"
+            loading="lazy">
+        </div>
 
-      <img ngSrc="/assets/img/online.png" class="d-block mx-lg-auto img-fluid" alt="Coder" width="500" height="400"
-        loading="lazy">
-
-    </div>
-
-    <!-- intro text with image-->
-
-    <div class="col-lg-6">
-      <h1 class="display-5 fw-bold text-body-emphasis lh-1 mb-3 page-header">Welcome to <span>Fox</span>Hub</h1>
-      <p class="lead">The ultimate platform connecting individuals within
-        the dynamic world of IT. </p>
-      <p class="lead">Designed exclusively for the vibrant community of <b>Green Fox Academy</b>, this app bridges
-        the gap between talented professionals, aspiring developers, and eager headhunters.</p>
-      <h2 class="display-5 fw-bold text-body-emphasis lh-1 mb-3">Join the <span>Fox</span>Hub revolution today and take
-        the IT world
-        by storm!</h2>
-      <div class="d-grid gap-2 d-md-flex justify-content-md-start">
-        <a routerLink="/main" class="btn btn-primary btn-lg px-4 me-md-2" role="button" aria-disabled="true">Visit</a>
-        <a routerLink="/login" class="btn btn-outline-secondary btn-lg" role="button" aria-disabled="true"
-          *ngIf="!isLoggedIn">Login</a>
-        <a routerLink="/register" class="btn btn-outline-secondary btn-lg" role="button" aria-disabled="true"
-          *ngIf="!isLoggedIn">Sign up</a>
+        <div class="col-lg-6 md-5">
+          <h1 class="display-5 fw-bold text-body-emphasis lh-1 mb-3 page-header">Welcome to <span>Fox</span>Hub</h1>
+          <p class="lead">The ultimate platform connecting individuals within
+            the dynamic world of IT. </p>
+          <p class="lead">Designed exclusively for the vibrant community of <b>Green Fox Academy</b>, this app bridges
+            the gap between talented professionals, aspiring developers, and eager headhunters.</p>
+          <h2 class="display-5 fw-bold text-body-emphasis lh-1 mb-3">Join the <span>Fox</span>Hub revolution today and
+            take
+            the IT world
+            by storm!</h2>
+          <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+            <a routerLink="/main" class="btn btn-primary btn-lg px-4 me-md-2" role="button"
+              aria-disabled="true">Visit</a>
+            <a routerLink="/login" class="btn btn-outline-secondary btn-lg" role="button" aria-disabled="true"
+              *ngIf="!isLoggedIn">Login</a>
+            <a routerLink="/register" class="btn btn-outline-secondary btn-lg" role="button" aria-disabled="true"
+              *ngIf="!isLoggedIn">Sign up</a>
+          </div>
+        </div>
 
       </div>
     </div>
@@ -125,8 +126,8 @@
       <div class="row flex-lg-row-reverse align-items-center g-5 py-4">
 
         <div class="col-10 col-sm-8 col-lg-6">
-          <img ngSrc="/assets/img/digitalPresentation.png" class="d-block mx-lg-auto img-fluid" alt="Rating" width="700" height="500"
-            loading="lazy">
+          <img ngSrc="/assets/img/digitalPresentation.png" class="d-block mx-lg-auto img-fluid" alt="Rating" width="700"
+            height="500" loading="lazy">
 
         </div>
 
@@ -157,8 +158,8 @@
         <div class="col-10 col-sm-8 col-lg-6">
 
 
-          <img ngSrc="/assets/img/treasure.png" class="d-block mx-lg-auto img-fluid" alt="Launch" width="700" height="500"
-            loading="lazy">
+          <img ngSrc="/assets/img/treasure.png" class="d-block mx-lg-auto img-fluid" alt="Launch" width="700"
+            height="500" loading="lazy">
 
         </div>
 
