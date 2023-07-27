@@ -4,8 +4,10 @@ import {catchError, Observable, throwError} from "rxjs";
 import {ToastrService} from 'ngx-toastr';
 import {GlobalConstants} from "../common/global-constants";
 
+
 const prefix = GlobalConstants.prefix;
 const AUTH_API = prefix + '/api/v1/auth/';
+
 
 const httpOptions = {
   headers: new HttpHeaders({'Content-type': 'application/json'})

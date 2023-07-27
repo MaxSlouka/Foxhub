@@ -47,6 +47,7 @@ import { SwiperArrowComponent } from './components/swiper-arrow/swiper-arrow.com
 import { CreatorsComponent } from './components/creators/creators.component';
 import { RevealOnScrollDirective } from './directives/reveal-on-scroll.directive';
 import { PersonalityInfoPageComponent } from './components/personality-info-page/personality-info-page.component';
+import { RevealWithDelayDirective } from './directives/reveal-with-delay.directive';
 
 
 @NgModule({
@@ -88,7 +89,8 @@ import { PersonalityInfoPageComponent } from './components/personality-info-page
     CreatorsComponent,
     RevealOnScrollDirective,
     PersonalityInfoPageComponent,
-    ItemsCounterComponent
+    ItemsCounterComponent,
+    RevealWithDelayDirective
   ],
   imports: [
     FormsModule,
