@@ -8,7 +8,7 @@
         <div class="card-body">
           <form (submit)="addPost({text: postText.value, parentPostId: null}); postText.value = ''">
             <div class="form-group">
-              <textarea class="form-control" rows="4" placeholder="Type your post here..." #postText
+              <textarea class="form-control preformatted-text" rows="4" placeholder="Type your post here..." #postText
                 required></textarea>
             </div>
             <button type="submit" class="btn btn-primary">Post</button>
