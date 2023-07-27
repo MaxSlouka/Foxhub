@@ -1,5 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { GlobalConstants } from "../../common/global-constants";
+
+const prefix = GlobalConstants.prefix;
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +16,6 @@ export class UploadService {
     const formData: FormData = new FormData();
     formData.append('file', file, file.name);
 
-    return this.http.post('http://localhost:8080/api/v1/user/upload', formData);
+    return this.http.post(prefix + '/api/v1/user/upload', formData);
   }
 }

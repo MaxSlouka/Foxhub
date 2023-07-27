@@ -13,6 +13,7 @@ export class CartComponent implements OnInit {
   countItems: number = 0;
 
   constructor(private cartService: CartService) { }
+
   ngOnInit(): void {
     this.cartItems = this.cartService.getCartItems();
   }

@@ -14,23 +14,21 @@
         coding, networking, and making a positive impact on the world.
       </p>
 
-      <img src="/assets/img/signUp.png" class="d-block mx-lg-auto img-fluid" alt="Refer" width="300"
-
+      <img ngSrc="/assets/img/signUp.png" class="d-block mx-lg-auto img-fluid" alt="Refer" width="300"
         height="200" loading="lazy">
     </div>
 
     <!-- right side (sign up form) -->
 
     <div class="col-md-10 mx-auto col-lg-5">
-
       <form class="p-4 p-md-5 border rounded-3 bg-body-tertiary" *ngIf="!isSuccessful" name="form"
         (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
 
       <!-- first name -->
 
         <div class="form-floating mb-3 form-group">
-          <label for="floatingInput">First Name</label>
-          <input type="email" class="form-control" id="floatingInput" placeholder="enter name" name="firstName"
+          <label for="floatingInput1">First Name</label>
+          <input type="email" class="form-control" id="floatingInput1" placeholder="enter name" name="firstName"
             [(ngModel)]="form.firstName" required minlength="3" maxlength="20" #firstName="ngModel"
             [ngClass]="{ 'is-invalid': f.submitted && firstName.errors }" />
           <div class="invalid-feedback" *ngIf="firstName.errors && f.submitted">
@@ -47,8 +45,8 @@
         <!-- last name -->
 
         <div class="form-floating mb-3 form-group">
-          <label for="floatingInput">Last Name</label>
-          <input type="email" class="form-control" id="floatingInput" placeholder="enter surname" name="lastName"
+          <label for="floatingInput2">Last Name</label>
+          <input type="email" class="form-control" id="floatingInput2" placeholder="enter surname" name="lastName"
             [(ngModel)]="form.lastName" required minlength="3" maxlength="20" #lastName="ngModel"
             [ngClass]="{ 'is-invalid': f.submitted && lastName.errors }" />
           <div class="invalid-feedback" *ngIf="lastName.errors && f.submitted">

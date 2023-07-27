@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import { AuthService } from "../../_services/auth.service";
 import { StorageService } from "../../_services/storage.service";
 import { Router, NavigationEnd } from "@angular/router";
@@ -27,7 +27,8 @@ export class LoginComponent implements OnInit {
     private authService: AuthService,
     private storageService: StorageService,
     private router: Router,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private cdr: ChangeDetectorRef
   ) { }
 
   ngOnInit(): void {
@@ -57,9 +58,10 @@ export class LoginComponent implements OnInit {
       },
       error: err => {
         this.errorMessage = err.error.message;
-        // console.log(err); // todo error message is not placed
+        console.log(JSON.stringify(err, null, 2));
         this.isLoginFailed = true;
         this.toastr.error(this.errorMessage, 'Error');
+        this.cdr.detectChanges();
       }
     });
   }

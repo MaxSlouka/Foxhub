@@ -5,6 +5,7 @@ import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { SafeValue } from "@angular/platform-browser";
 import { filter } from 'rxjs/operators';
 import { StorageService } from "../../_services/storage.service";
+import { GlobalConstants } from "../../common/global-constants";
 
 @Component({
   selector: 'app-profile-page',
@@ -19,6 +20,7 @@ export class ProfilePageComponent {
   qrCodeDownloadLink: SafeValue = "";
   isOpen: boolean = false;
   isLoggedIn: boolean = false;
+  prefix: string = GlobalConstants.prefix;
 
   constructor(
     private profileService: ProfileService,
@@ -49,7 +51,7 @@ export class ProfilePageComponent {
   }
 
   onChangeURL(url: SafeValue) {
-    let qrCodeURL = 'http://localhost:4200/profile/' + this.username;
+    let qrCodeURL = '/profile/' + this.username;
     this.qrCodeDownloadLink = url;
   }
 }

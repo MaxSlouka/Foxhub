@@ -2,6 +2,9 @@ import { Injectable } from '@angular/core';
 import { Observable } from "rxjs";
 import { HttpClient } from "@angular/common/http";
 import { Technology } from "../models/technology";
+import { GlobalConstants } from "../common/global-constants";
+
+const prefix = GlobalConstants.prefix;
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +12,7 @@ import { Technology } from "../models/technology";
 
 export class TechnologyService {
 
-  readonly urlTechnology: string = "http://localhost:8080/api/v1/public/technologies";
+  readonly urlTechnology: string = prefix + "/api/v1/public/technologies";
 
   constructor(private http: HttpClient) { }
 

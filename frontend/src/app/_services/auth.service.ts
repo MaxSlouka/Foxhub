@@ -2,9 +2,10 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpHeaders, HttpResponse } from "@angular/common/http";
 import { catchError, Observable, throwError } from "rxjs";
 import { ToastrService } from 'ngx-toastr';
+import { GlobalConstants } from "../common/global-constants";
 
-const AUTH_API = 'http://localhost:8080/api/v1/auth/';
-
+const prefix = GlobalConstants.prefix;
+const AUTH_API = prefix + '/api/v1/auth/';
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-type': 'application/json' })
 }
@@ -28,6 +29,15 @@ export class AuthService {
         password
       },
       httpOptions
+    ).pipe(
+      catchError((error: HttpErrorResponse) => {
+        let errorMessage = 'An unknown error occurred.';
+        if (error.status === 401) {
+          errorMessage = error.error;
+        }
+        this.toastr.error(errorMessage, 'Error', { timeOut: 5000 });
+        return throwError(errorMessage);
+      })
     );
   }
 
@@ -46,7 +56,7 @@ export class AuthService {
 
   logout(): void {
     this.http.post(
-      'http://localhost:8080/api/v1/auth/signout',
+      prefix + '/api/v1/auth/signout',
       {},
       httpOptions
     ).subscribe(ok => {
@@ -56,7 +66,7 @@ export class AuthService {
 
   resetPassword(email: String, yearOfBirth: number): Observable<any> {
     return this.http.post(
-      'http://localhost:8080/api/v1/auth/password-reset',
+      prefix + '/api/v1/auth/password-reset',
       {
         email,
         yearOfBirth
@@ -76,7 +86,7 @@ export class AuthService {
 
   changePassword(newPassword: String) {
     return this.http.post(
-      'http://localhost:8080/api/v1/user/password-change',
+      prefix + '/api/v1/user/password-change',
       {
         newPassword
       },
