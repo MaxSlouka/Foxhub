@@ -62,3 +62,21 @@ body, nav, a {
   opacity: 1;
   transform: translateY(0);
 }
+
+.preformatted-text {
+  white-space: pre-wrap;
+}
+
+.dropdown-toggle {
+  text-align: start;
+}
+
+.dropdown-toggle:hover {
+  background-color: #fff;
+  color: #007f00;
+  background: #fff;
+}
+
+.text-formated {
+  white-space: pre-wrap;
+}
