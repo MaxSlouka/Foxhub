@@ -2,7 +2,7 @@
 
 <app-back-to-top-btn></app-back-to-top-btn>
 
-<div class="container col-xxl-8 px-4 py-3 my-4">
+<div class="container col-xxl-8 px-4 py-3 my-4 reveal-section" appRevealOnScroll>
     <div class="row flex-lg-row align-items-center g-5 py-3">
 
         <div class="col-10 col-sm-8 col-lg-6">
@@ -20,13 +20,56 @@
                 their own special
                 flair to the table. </p>
             <p class="lead">From dreamers to students to devs.</p>
+            <a class="lead" href="https://storyset.com/online">This app is using Online illustrations by Storyset.</a>
         </div>
     </div>
 </div>
 
 <!-- here should be grid of star team? -->
+<div class="container px-4 py-5 reveal-section" id="icon-grid" appRevealOnScroll>
+    <h2 class="pb-2 border-bottom">Meet the <span>Fox</span>Hub Crew</h2>
 
-<div class="container col-xxl-8 px-4 py-4 my-4">
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-5 g-5 py-5">
+
+        <div class="col d-flex align-items-start creator-profile">
+            <a [routerLink]="['/creators']" [fragment]="'tomas'">
+                <img src="../../../assets/img/logo.png" alt="">
+                <h3 class="fw-bold mb-0 fs-4 text-body-emphasis">Tomáš </h3>
+            </a>
+        </div>
+
+        <div class="col d-flex align-items-start creator-profile">
+            <a [routerLink]="['/creators']" [fragment]="'daniel'">
+                <img src="../../../assets/img/logo.png" alt="">
+                <h3 class="fw-bold mb-0 fs-4 text-body-emphasis">Daniel </h3>
+            </a>
+        </div>
+
+        <div class="col d-flex align-items-start creator-profile">
+            <a [routerLink]="['/creators']" [fragment]="'maxnesazal'">
+                <img src="../../../assets/img/logo.png" alt="">
+                <h3 class="fw-bold mb-0 fs-4 text-body-emphasis">Max N</h3>
+            </a>
+        </div>
+
+        <div class="col d-flex align-items-start creator-profile">
+            <a [routerLink]="['/creators']" [fragment]="'maxslouka'">
+                <img src="../../../assets/img/logo.png" alt="">
+                <h3 class="fw-bold mb-0 fs-4 text-body-emphasis">Max S </h3>
+            </a>
+        </div>
+
+        <div class="col d-flex align-items-start creator-profile">
+            <a [routerLink]="['/creators']" [fragment]="'michal'">
+                <img src="../../../assets/img/logo.png" alt="">
+                <h3 class="fw-bold mb-0 fs-4 text-body-emphasis">Michal </h3>
+            </a>
+        </div>
+
+    </div>
+</div>
+
+<div class="container col-xxl-8 px-4 py-4 my-4 reveal-section" id="tomas" appRevealOnScroll>
     <div class="row flex-lg-row-reverse align-items-center g-5 py-4">
 
         <div class="col-10 col-sm-8 col-lg-6">
@@ -44,7 +87,7 @@
     </div>
 </div>
 
-<div class="container col-xxl-8 px-4 py-4 my-4">
+<div class="container col-xxl-8 px-4 py-4 my-4 reveal-section" id="daniel" appRevealOnScroll>
     <div class="row flex-lg-row align-items-center g-5 py-4">
 
         <div class="col-10 col-sm-8 col-lg-6">
@@ -53,7 +96,7 @@
         </div>
 
         <div class="col-lg-6">
-            <h1 class="display-5 fw-bold text-body-emphasis lh-1 mb-3 page-header">Team <span>Member</span></h1>
+            <h1 class="display-5 fw-bold text-body-emphasis lh-1 mb-3 page-header">Daniel <span>Lipták</span></h1>
             <p class="lead">Something about </p>
             <p class="lead">Something about </p>
             <p class="lead">Something about</p>
@@ -61,7 +104,7 @@
     </div>
 </div>
 
-<div class="container col-xxl-8 px-4 py-4 my-4">
+<div class="container col-xxl-8 px-4 py-4 my-4 reveal-section" id="maxnesazal" appRevealOnScroll>
     <div class="row flex-lg-row-reverse align-items-center g-5 py-4">
 
         <div class="col-10 col-sm-8 col-lg-6">
@@ -70,16 +113,15 @@
         </div>
 
         <div class="col-lg-6">
-            <h1 class="display-5 fw-bold text-body-emphasis lh-1 mb-3 page-header">Tomáš <span>Macoun</span></h1>
-            <h2 class="display-5 fw-bold text-body-emphasis lh-1 mb-3">I like fails, they bring experience.</h2>
-            <p class="lead">I code, in my free time. It brings me joy and unusual spark to my life. And you know what? I
-                want more of this!</p>
-            <p class="lead">I believe there is a solution for everything. So let's apply it, find it or invent it. </p>
+            <h1 class="display-5 fw-bold text-body-emphasis lh-1 mb-3 page-header">Max <span>Nesázal</span></h1>
+            <p class="lead">Something about </p>
+            <p class="lead">Something about </p>
+            <p class="lead">Something about </p>
         </div>
     </div>
 </div>
 
-<div class="container col-xxl-8 px-4 py-4 my-4">
+<div class="container col-xxl-8 px-4 py-4 my-4 reveal-section" id="maxslouka" appRevealOnScroll>
     <div class="row flex-lg-row align-items-center g-5 py-4">
 
         <div class="col-10 col-sm-8 col-lg-6">
@@ -88,15 +130,15 @@
         </div>
 
         <div class="col-lg-6">
-            <h1 class="display-5 fw-bold text-body-emphasis lh-1 mb-3 page-header">Team <span>Member</span></h1>
+            <h1 class="display-5 fw-bold text-body-emphasis lh-1 mb-3 page-header">Max <span>Slouka</span></h1>
             <p class="lead">Something about </p>
             <p class="lead">Something about </p>
-            <p class="lead">Something about</p>
+            <p class="lead">Something about </p>
         </div>
     </div>
 </div>
 
-<div class="container col-xxl-8 px-4 py-4 my-4">
+<div class="container col-xxl-8 px-4 py-4 my-4 reveal-section" id="michal" appRevealOnScroll>
     <div class="row flex-lg-row-reverse align-items-center g-5 py-4">
 
         <div class="col-10 col-sm-8 col-lg-6">
@@ -105,11 +147,10 @@
         </div>
 
         <div class="col-lg-6">
-            <h1 class="display-5 fw-bold text-body-emphasis lh-1 mb-3 page-header">Tomáš <span>Macoun</span></h1>
-            <h2 class="display-5 fw-bold text-body-emphasis lh-1 mb-3">I like fails, they bring experience.</h2>
-            <p class="lead">I code, in my free time. It brings me joy and unusual spark to my life. And you know what? I
-                want more of this!</p>
-            <p class="lead">I believe there is a solution for everything. So let's apply it, find it or invent it. </p>
+            <h1 class="display-5 fw-bold text-body-emphasis lh-1 mb-3 page-header">Michal <span>Čapoun</span></h1>
+            <p class="lead">Something about </p>
+            <p class="lead">Something about </p>
+            <p class="lead">Something about </p>
         </div>
     </div>
 </div>
