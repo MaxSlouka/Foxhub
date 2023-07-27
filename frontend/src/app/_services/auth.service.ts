@@ -3,7 +3,7 @@ import {HttpClient, HttpErrorResponse, HttpHeaders, HttpResponse} from "@angular
 import {catchError, Observable, throwError} from "rxjs";
 import {ToastrService} from 'ngx-toastr';
 
-const AUTH_API = 'http://localhost:8080/api/v1/auth/';
+const AUTH_API = '/api/v1/auth/';
 
 const httpOptions = {
   headers: new HttpHeaders({'Content-type': 'application/json'})
