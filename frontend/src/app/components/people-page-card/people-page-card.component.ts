@@ -1,9 +1,9 @@
-import { Component, Input, ElementRef} from '@angular/core';
+import { Component, Input, ElementRef, OnDestroy } from '@angular/core';
 import { User } from "../../models/user";
 import { CartService } from "../../_services/cart.service";
 import { StorageService } from "../../_services/storage.service";
-import { ApiService } from "../../_services/api/api.service";
 import { AuthService } from "../../_services/auth.service";
+import { Subscription } from "rxjs";
 
 @Component({
   selector: 'app-people-page-card',
@@ -11,7 +11,7 @@ import { AuthService } from "../../_services/auth.service";
   styleUrls: ['./people-page-card.component.css']
 })
 
-export class PeoplePageCardComponent {
+export class PeoplePageCardComponent implements OnDestroy {
 
   // @ts-ignore
   @Input() user: User;
@@ -20,21 +20,20 @@ export class PeoplePageCardComponent {
   userEmail: string = '';
   isOpen: boolean = false;
   isLoggedIn = false;
+  addedUsers: User[] = this.cartService.getCartItems();
+
   // @ts-ignore
-  @Input addedUsers: User[] = [];
-  // @ts-ignore
-  isAdded: boolean = false;
+  private cartItemsSubscription: Subscription;
 
   constructor(
     private authService: AuthService,
     private cartService: CartService,
     private elementRef: ElementRef,
     private storageService: StorageService,
-    private apiService: ApiService,
   ) { }
 
   isUserAdded(user: User) {
-    this.isAdded = this.addedUsers.some(item => item.nickname === user.nickname);
+    this.user.inCart = true;
   }
 
   addToCart(user: User) {
@@ -73,10 +72,22 @@ export class PeoplePageCardComponent {
   }
 
   ngOnInit(): void {
+    if (this.addedUsers.find((user: User) => user.nickname === this.user.nickname)){
+      this.user.inCart = true;
+    }
     if (this.storageService.isLoggedIn()) {
       this.isLoggedIn = true;
       this.userEmail = this.storageService.getUserFromSession();
     }
+    this.cartItemsSubscription = this.cartService.getCartItemsObservable()
+      .subscribe((cartItems: User[]) => {
+        this.addedUsers = cartItems;
+      });
+  }
+
+  ngOnDestroy() {
+    // Unsubscribe from the observable to avoid memory leaks
+    this.cartItemsSubscription.unsubscribe();
   }
 
   logout(): void {

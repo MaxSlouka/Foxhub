@@ -31,4 +31,5 @@ export interface User {
   languages?: Language[],
   role?: Role,
   verified?: boolean,
+  inCart?: boolean,
 }
