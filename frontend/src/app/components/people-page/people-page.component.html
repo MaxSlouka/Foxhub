@@ -87,19 +87,19 @@
         </select>
 
 
-        <p class="lead mt-4 border-bottom">Work Openness</p>
+        <p class="lead mt-4 border-bottom">Seeking employment</p>
         <div class="form-check">
           <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="open" checked
                  [(ngModel)]="workStatus" (ngModelChange)="onWorkStatusChange()">
           <label class="form-check-label" for="exampleRadios1">
-            Open for Work
+            True
           </label>
         </div>
         <div class="form-check">
           <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="closed"
                  [(ngModel)]="workStatus" (ngModelChange)="onWorkStatusChange()">
           <label class="form-check-label" for="exampleRadios2">
-            Closed for Work
+            False
           </label>
         </div>
 
@@ -115,7 +115,7 @@
     <div class="col-md-8">
       <div class="row people-list">
 
-        <app-people-page-card class="ml-4" *ngFor="let user of users" [user]="user"></app-people-page-card>
+        <app-people-page-card class="ml-4" *ngFor="let user of users" [user]="user" [addedUsers]="addedUsers"></app-people-page-card>
 
       </div>
     </div>
