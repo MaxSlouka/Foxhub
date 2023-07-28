@@ -88,4 +88,8 @@ public class User {
         return roles.stream().anyMatch(role -> role.getName().equals("ADMIN"));
 
     }
+
+    public Role getRole() {
+        return roles.get(0);
+    }
 }

@@ -1,7 +1,7 @@
 package com.gfa.foxbook.foxbook.config;
 import org.springframework.context.annotation.Configuration;
-        import org.springframework.web.servlet.config.annotation.CorsRegistry;
-        import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
@@ -13,5 +13,13 @@ public class WebConfig implements WebMvcConfigurer {
                 .allowedMethods("GET", "POST", "PUT", "DELETE", "HEAD", "OPTIONS")
                 .allowedHeaders("*")
                 .allowCredentials(true);
+
+        registry.addMapping("http://foxhub.gfapp.eu")
+                .allowedOrigins("*")
+                .allowedMethods("GET", "POST", "PUT", "DELETE", "HEAD", "OPTIONS")
+                .allowedHeaders("*")
+                .allowCredentials(true);
     }
 }
+
+//todo delete this comment
