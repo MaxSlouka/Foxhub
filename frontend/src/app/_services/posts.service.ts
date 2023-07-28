@@ -52,4 +52,10 @@ export class PostsService {
       { content: commentText }
     );
   }
+
+  deleteComment(postId: number, commentId: number): Observable<any> {
+    return this.httpClient.delete<any>(
+      prefix + `/api/v1/admin/post/${postId}/comment/${commentId}`
+    );
+  }
 }

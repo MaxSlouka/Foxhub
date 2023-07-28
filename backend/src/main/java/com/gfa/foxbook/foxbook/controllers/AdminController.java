@@ -1,14 +1,18 @@
 package com.gfa.foxbook.foxbook.controllers;
 
+import com.gfa.foxbook.foxbook.models.nonusermodels.Comment;
 import com.gfa.foxbook.foxbook.models.nonusermodels.Post;
 import com.gfa.foxbook.foxbook.models.nonusermodels.Role;
 import com.gfa.foxbook.foxbook.models.User;
 import com.gfa.foxbook.foxbook.models.dtos.PostDTO;
+import com.gfa.foxbook.foxbook.repositories.CommentRepository;
 import com.gfa.foxbook.foxbook.security.jwt.JwtUtils;
+import com.gfa.foxbook.foxbook.services.interfaces.CommentService;
 import com.gfa.foxbook.foxbook.services.interfaces.PostService;
 import com.gfa.foxbook.foxbook.services.interfaces.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -23,6 +27,8 @@ public class AdminController {
     public final PostService postService;
     private final JwtUtils jwtUtils;
     public final UserService userService;
+    private final CommentRepository commentRepository;
+    private final CommentService commentService;
 
     @PostMapping("/posts")
     public ResponseEntity<?> makePost(@RequestBody Post post, HttpServletRequest request) {
@@ -81,4 +87,22 @@ public class AdminController {
         userService.delete(user);
         return ResponseEntity.noContent().build();
     }
+
+    @DeleteMapping("post/{postId}/comment/{commentId}")
+    public ResponseEntity<?> deleteComment(@PathVariable Long postId, @PathVariable Long commentId, HttpServletRequest request) {
+        Optional<Post> optionalPost = postService.findById(postId);
+        if (optionalPost.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+        Post post = optionalPost.get();
+        Optional<Comment> optionalComment = commentRepository.findById(commentId);
+        if (optionalComment.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+        Comment comment = optionalComment.get();
+        commentService.deleteComment(comment);
+        return ResponseEntity.noContent().build();
+    }
+
+
 }

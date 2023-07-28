@@ -84,7 +84,8 @@ public class User {
     )
     private Personality personality;
 
-    public Role getRole() {
-        return roles.get(0);
+    public boolean isAdmin() {
+        return roles.stream().anyMatch(role -> role.getName().equals("ADMIN"));
+
     }
 }

@@ -63,12 +63,33 @@
 
           <div class="input-group my-3" *ngIf="isLoggedIn">
             <button class="btn btn-outline-primary mr-2" type="button" [class.liked]="post.isLikedByCurrentUser"
-              (click)="likePost(post.id)">
+                    (click)="likePost(post.id)">
               Like
             </button>
             <input type="text" class="form-control mr-2" placeholder="add comment..." [(ngModel)]="commentText">
             <button class="btn btn-primary" type="button" (click)="commentPost()">Comment</button>
           </div>
+
+          <div class="post-comments mr-3 mt-3 border-top">
+            <p class="lead my-4 font-weight-bold">Comments:</p>
+
+            <i class="fas mb-4" [ngClass]="{'fa-chevron-down': !showComments, 'fa-chevron-up': showComments}"
+               (click)="toggleComments()"></i>
+
+            <div *ngIf="showComments">
+              <div *ngFor="let comment of post.comments">
+                <div class="flex-comment">
+                  <img class="profile-img rounded-circle mr-2" height="22" width="22" [src]="comment.authorProfilePic"
+                       alt="profile picture" />
+                  <p class="lead mb-1"><b>{{ comment.username }}</b></p>
+                  <button class="btn btn-danger btn-sm" *ngIf="userRole === 'ADMIN' || currentUserId === comment.userId"
+                          (click)="deleteComment(comment.id)">Delete</button>
+                </div>
+                <p class="lead">{{ comment.content }}</p>
+              </div>
+            </div>
+          </div>
+
 
         </div>
 
@@ -100,7 +121,8 @@
             <div class="card-body">
               <app-post [post]="reply" (setActivePost)="setActivePost.emit($event)" [activePost]="activePost"
                 (addPost)="addPost.emit($event)" (updatePost)="updatePost.emit($event)" [parentPostId]="post.id"
-                [replies]="[]" [currentUserId]="currentUserId" (deletePost)="deletePost.emit($event)">
+                [replies]="[]" [currentUserId]="currentUserId" (deletePost)="deletePost.emit($event)"
+              (deleteCommentEvent)="deleteCommentEvent.emit($event)">
               </app-post>
             </div>
           </div>
