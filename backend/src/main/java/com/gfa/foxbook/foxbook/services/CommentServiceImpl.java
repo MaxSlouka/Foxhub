@@ -8,6 +8,8 @@ import com.gfa.foxbook.foxbook.services.interfaces.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class CommentServiceImpl implements CommentService {
 
@@ -36,6 +38,16 @@ public class CommentServiceImpl implements CommentService {
     @Override
     public void save(Comment comment) {
         commentRepository.save(comment);
+    }
+
+    @Override
+    public Optional<Comment> findById(Long commentId) {
+        return commentRepository.findById(commentId);
+    }
+
+    @Override
+    public void deleteComment(Comment comment) {
+        commentRepository.delete(comment);
     }
 
 }
