@@ -194,7 +194,8 @@ export class UserSettingsPageComponent {
       workStatus
     )
       .subscribe(() => {
-        window.location.href = "/profile/" + this.user.nickname;
+        this.router.navigate(['/profile', this.user.nickname]);
+
       });
   }
 

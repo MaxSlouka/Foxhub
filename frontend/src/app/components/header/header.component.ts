@@ -25,6 +25,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   userEmail: string = '';
 
+
   // @ts-ignore
   countItems: number = this.cartService.getCartItems().length;
   // @ts-ignore

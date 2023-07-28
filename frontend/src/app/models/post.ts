@@ -6,6 +6,7 @@ export interface Post {
   content: string;
   username: string;
   userId: number;
+  authorProfilePic: string;
   parentPostId: number | null;
   createdAt: string;
   isLikedByCurrentUser: boolean;

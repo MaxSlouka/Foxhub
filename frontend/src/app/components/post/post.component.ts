@@ -1,10 +1,10 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Post } from "../../models/post";
 import { PostsService } from "../../_services/posts.service";
-import { AuthService } from "../../_services/auth.service";
 import { StorageService } from "../../_services/storage.service";
 import { ApiService } from "../../_services/api/api.service";
 import { User } from "../../models/user";
+import { Comment } from "../../models/comment";
 
 @Component({
   selector: 'app-post',
@@ -34,25 +34,37 @@ export class PostComponent implements OnInit {
   user: User = { email: "", firstName: "", lastName: "", password: "" };
   userEmail: string = '';
   isLoggedIn = false;
+  showComments = false;
 
   constructor(
     private postService: PostsService,
     private storageService: StorageService,
-    private apiService: ApiService,
-    private authService: AuthService
+    private apiService: ApiService
   ) {
+
   }
 
-  ngOnInit(): void {
+  rotationClass = ''; 
+
+  toggleComments(): void {
+    this.showComments = !this.showComments;
+    this.rotationClass = this.showComments ? 'rotate-up' : 'rotate-down';
+  }
+
+  async ngOnInit(): Promise<void> {
+    await this.fetchUserProfiles();
+    await this.apiService.getAll().subscribe((usersFetch: User[]) => {
+      this.users = usersFetch;
+      this.findUserProfilePicture();
+    });
+
     const timeToEdit = 300000;
     const timePassed =
-      new Date().getMilliseconds() -
-      new Date(this.post.createdAt).getMilliseconds() > timeToEdit;
+      new Date().getTime() - new Date(this.post.createdAt).getTime() > timeToEdit;
 
     this.canReply = Boolean(this.currentUserId);
     this.canEdit = this.currentUserId === this.post.userId && !timePassed;
     this.canDelete = this.currentUserId === this.post.userId && this.replies.length === 0;
-    this.loadPost();
 
     if (this.storageService.isLoggedIn()) {
       this.isLoggedIn = true;
@@ -64,6 +76,9 @@ export class PostComponent implements OnInit {
   }
 
   loadPost(): void {
+    this.apiService.getAll().subscribe((usersFetch: User[]) => {
+      this.users = usersFetch;
+    });
     this.postService.getPosts().subscribe((posts: Post[]) => {
       const updatedPost = posts.find(p => p.id === this.post.id);
       if (updatedPost) {
@@ -116,4 +131,33 @@ export class PostComponent implements OnInit {
       }
     );
   }
+
+  findUserProfilePicture(): void {
+    const postAuthor = this.users.find(u => u.id === this.post.userId);
+    if (postAuthor) {
+      if (postAuthor.profilePictureUrl != null) {
+        this.post.authorProfilePic = postAuthor.profilePictureUrl;
+      }
+    }
+    this.post.comments.forEach((comment: Comment) => {
+      const commentAuthor = this.users.find(u => u.id === comment.userId);
+      if (commentAuthor) {
+        if (commentAuthor.profilePictureUrl != null) {
+          console.log(commentAuthor.profilePictureUrl);
+          comment.authorProfilePic = commentAuthor.profilePictureUrl;
+        }
+      }
+    });
+  }
+
+  private fetchUserProfiles(): Promise<void> {
+    return new Promise<void>((resolve) => {
+      this.apiService.getAll().subscribe((usersFetch: User[]) => {
+        this.users = usersFetch;
+        this.findUserProfilePicture();
+        resolve();
+      });
+    });
+  }
+
 }

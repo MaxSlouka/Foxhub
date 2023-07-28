@@ -4,8 +4,10 @@ import com.gfa.foxbook.foxbook.models.nonusermodels.Post;
 import com.gfa.foxbook.foxbook.models.nonusermodels.Role;
 import com.gfa.foxbook.foxbook.models.User;
 import com.gfa.foxbook.foxbook.models.dtos.PostDTO;
+import com.gfa.foxbook.foxbook.security.jwt.JwtUtils;
 import com.gfa.foxbook.foxbook.services.interfaces.PostService;
 import com.gfa.foxbook.foxbook.services.interfaces.UserService;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -19,10 +21,16 @@ import java.util.Optional;
 @CrossOrigin(origins = {"http://localhost:4200", "http://foxhub.gfapp.eu"}, maxAge = 3600, allowCredentials = "true")
 public class AdminController {
     public final PostService postService;
+    private final JwtUtils jwtUtils;
     public final UserService userService;
 
     @PostMapping("/posts")
-    public ResponseEntity<?> makePost(@RequestBody Post post) {
+    public ResponseEntity<?> makePost(@RequestBody Post post, HttpServletRequest request) {
+        User user = jwtUtils.getUserFromRequest(request);
+        if (user == null) {
+            return ResponseEntity.badRequest().build();
+        }
+        post.setAuthorProfilePic(user.getProfilePictureUrl());
         return ResponseEntity.ok(postService.save(post));
     }
 

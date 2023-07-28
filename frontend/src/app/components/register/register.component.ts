@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../../_services/auth.service';
+import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
+import {AuthService} from '../../_services/auth.service';
+import {ToastrService} from "ngx-toastr";
 
 @Component({
   selector: 'app-register',
@@ -16,26 +17,26 @@ export class RegisterComponent implements OnInit {
   };
 
   isSuccessful = false;
-  isSignUpFailed = false;
+  isRegisterFailed = false;
   errorMessage = '';
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService) {
+  }
 
   ngOnInit(): void {
   }
 
   onSubmit(): void {
-    const { firstName, lastName, email, password } = this.form;
+    const {firstName, lastName, email, password} = this.form;
 
     this.authService.register(firstName, lastName, email, password).subscribe({
-      next: data => {
-        console.log(data);
+      next: () => {
         this.isSuccessful = true;
-        this.isSignUpFailed = false;
+        this.isRegisterFailed = false;
       },
       error: err => {
         this.errorMessage = err.error.message;
-        this.isSignUpFailed = true;
+        this.isRegisterFailed = true;
       }
     });
   }

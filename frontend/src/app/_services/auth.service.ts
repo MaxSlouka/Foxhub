@@ -51,6 +51,15 @@ export class AuthService {
         password
       },
       httpOptions
+    ).pipe(
+      catchError((error: HttpErrorResponse) => {
+        let errorMessage = 'An unknown error occurred.';
+        if (error.status === 400) {
+          errorMessage = error.error;
+        }
+        this.toastr.error(errorMessage, 'Error', { timeOut: 5000 });
+        return throwError(errorMessage);
+      })
     );
   }
 

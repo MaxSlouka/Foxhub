@@ -35,6 +35,8 @@ export class PostsComponent implements OnInit {
     };
 
     if (this.currentUserId === undefined) {
+      console.error('User is not logged in')
+
       return;
     }
 
