@@ -16,7 +16,7 @@ ng build;
 cd ../backend;
 sh gradlew;
 sh gradlew build;
-sudo systemctl restart Foxbook'
+su'
 # systemctl restart Foxbook
 # exit
 
