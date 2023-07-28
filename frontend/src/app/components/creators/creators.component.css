@@ -37,7 +37,8 @@ h2 span {
 
 @media (max-width: 767px) {
     .medallion-photo {
-        height: 300px;
+        height: 250px;
+        width: 250px;
         border-radius: 10px;
         clip-path: none;
         box-shadow: 10px 10px 19px 0px rgba(0, 0, 0, 0.75);
@@ -54,6 +55,21 @@ h2 span {
     --g: 10px;
     display: grid;
     margin: calc(var(--s) + var(--g));
+}
+
+@media (max-width: 767.98px) {
+
+    .gallery {
+        --s: 100px;
+        --g: 10px;
+        display: grid;
+        margin: calc(var(--s) + var(--g));  
+    }
+
+    .coworkers-grid-header {
+        text-align: start;
+        margin-top: 2rem;
+    }
 }
 
 .gallery>a {

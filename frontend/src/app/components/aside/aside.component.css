@@ -9,24 +9,13 @@ aside {
     border: none;
 }
 
-a {
-    color: #007f00;
-}
-
-.all-people-mobile {
-    display: none;
-}
-
 .all-people-desktop {
     display: block;
 }
 
 @media (max-width: 767.98px) {
-    .all-people-mobile {
-        display: block;
-    }
 
-    .all-people-desktop {
+    aside {
         display: none;
     }
 }
