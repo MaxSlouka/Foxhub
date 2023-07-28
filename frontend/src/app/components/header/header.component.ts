@@ -1,4 +1,4 @@
-import {Component, OnInit, Input, OnDestroy} from '@angular/core';
+import {Component, OnInit, OnDestroy} from '@angular/core';
 import { AuthService } from "../../_services/auth.service";
 import { StorageService } from "../../_services/storage.service";
 import { User } from "../../models/user";
@@ -24,7 +24,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
   isLoggedIn = false;
 
   userEmail: string = '';
-
 
   // @ts-ignore
   countItems: number = this.cartService.getCartItems().length;
@@ -55,7 +54,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
   }
-
 
   handleDataFromChild(data: any) {
     this.users = data;
