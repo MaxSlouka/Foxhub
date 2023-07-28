@@ -5,12 +5,12 @@
       <div class="post-right-part flex-grow-1">
         <div class="post-content d-flex align-items-center justify-content-between">
           <div class="post-info d-flex align-items-center">
+
             <div class="post-author-image mx-2">
-
               <img class="profile-img rounded-circle" height="52" width="52" [src]="post.authorProfilePic"
-                (error)="post.authorProfilePic = '/assets/img/default-profile.png'" alt="profile picture" />
-
+                (error)="post.authorProfilePic = '/assets/img/default-profile.png'" alt="profile picture"/>
             </div>
+
             <div class="post-details ml-2">
               <div class="post-author">
                 <p class="lead mb-1"><b>{{ post.username }}</b></p>
@@ -19,6 +19,7 @@
                 <p style="font-size: smaller;">Created at: {{ post.createdAt }}</p>
               </div>
             </div>
+
           </div>
 
           <div class="post-actions">
@@ -31,6 +32,7 @@
               Delete
             </div>
           </div>
+
         </div>
 
         <div class="post-text text-formated" *ngIf="!isEditing && !isReplying()">
@@ -39,7 +41,6 @@
 
         <app-post-form *ngIf="isEditing" submitLabel="Update" [hasCancelButton]="true" [initialText]="post.content"
           (handleSubmit)="updatePost.emit({text: $event, id: post.id}); stopEditing()" (handleCancel)="stopEditing()">
-
         </app-post-form>
 
         <app-post-form *ngIf="isReplying() && !isEditing" submitLabel="Update" [hasCancelButton]="true"
@@ -63,7 +64,7 @@
 
           <div class="input-group my-3" *ngIf="isLoggedIn">
             <button class="btn btn-outline-primary mr-2" type="button" [class.liked]="post.isLikedByCurrentUser"
-                    (click)="likePost(post.id)">
+              (click)="likePost(post.id)">
               Like
             </button>
             <input type="text" class="form-control mr-2" placeholder="add comment..." [(ngModel)]="commentText">
@@ -74,41 +75,23 @@
             <p class="lead my-4 font-weight-bold">Comments:</p>
 
             <i class="fas mb-4" [ngClass]="{'fa-chevron-down': !showComments, 'fa-chevron-up': showComments}"
-               (click)="toggleComments()"></i>
+              (click)="toggleComments()"></i>
 
             <div *ngIf="showComments">
               <div *ngFor="let comment of post.comments">
                 <div class="flex-comment">
                   <img class="profile-img rounded-circle mr-2" height="22" width="22" [src]="comment.authorProfilePic"
-                       alt="profile picture" />
+                    alt="profile picture" />
                   <p class="lead mb-1"><b>{{ comment.username }}</b></p>
-                  <button class="btn btn-danger btn-sm" *ngIf="userRole === 'ADMIN' || currentUserId === comment.userId"
-                          (click)="deleteComment(comment.id)">Delete</button>
                 </div>
                 <p class="lead">{{ comment.content }}</p>
+                <button class="btn btn-outline-danger btn-sm mb-4"
+                  *ngIf="userRole === 'ADMIN' || currentUserId === comment.userId"
+                  (click)="deleteComment(comment.id)">Delete Comment</button>
               </div>
             </div>
           </div>
 
-
-        </div>
-
-        <div class="post-comments mr-3 mt-3 border-top">
-          <p class="lead my-4 font-weight-bold">Comments:</p>
-
-          <i class="fas mb-4" [ngClass]="{'fa-chevron-down': !showComments, 'fa-chevron-up': showComments}"
-            (click)="toggleComments()"></i>
-
-          <div *ngIf="showComments">
-            <div *ngFor="let comment of post.comments">
-              <div class="flex-comment">
-                <img class="profile-img rounded-circle mr-2" height="22" width="22" [src]="comment.authorProfilePic"
-                  alt="profile picture" />
-                <p class="lead mb-1"><b>{{ comment.username }}</b></p>
-              </div>
-              <p class="lead">{{ comment.content }}</p>
-            </div>
-          </div>
         </div>
 
         <app-post-form *ngIf="isReplying() && !isEditing" submitLabel="Reply"
@@ -122,7 +105,7 @@
               <app-post [post]="reply" (setActivePost)="setActivePost.emit($event)" [activePost]="activePost"
                 (addPost)="addPost.emit($event)" (updatePost)="updatePost.emit($event)" [parentPostId]="post.id"
                 [replies]="[]" [currentUserId]="currentUserId" (deletePost)="deletePost.emit($event)"
-              (deleteCommentEvent)="deleteCommentEvent.emit($event)">
+                (deleteCommentEvent)="deleteCommentEvent.emit($event)">
               </app-post>
             </div>
           </div>
