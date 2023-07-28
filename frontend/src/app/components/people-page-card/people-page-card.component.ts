@@ -69,14 +69,7 @@ export class PeoplePageCardComponent {
     if (this.storageService.isLoggedIn()) {
       this.isLoggedIn = true;
       this.userEmail = this.storageService.getUserFromSession();
-      this.apiService.getUserBasicInfo().subscribe((user: User) => {
-        this.user = user;
-      });
     }
-  }
-
-  handleDataFromChild(data: any) {
-    this.users = data;
   }
 
   logout(): void {

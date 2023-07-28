@@ -1,9 +1,9 @@
 import {Component, OnInit, OnDestroy} from '@angular/core';
-import {AuthService} from "../../_services/auth.service";
-import {StorageService} from "../../_services/storage.service";
-import {User} from "../../models/user";
-import {ApiService} from "../../_services/api/api.service";
-import {CartService} from "../../_services/cart.service";
+import { AuthService } from "../../_services/auth.service";
+import { StorageService } from "../../_services/storage.service";
+import { User } from "../../models/user";
+import { ApiService } from "../../_services/api/api.service";
+import { CartService } from "../../_services/cart.service";
 import {Subscription} from "rxjs";
 
 @Component({
@@ -24,7 +24,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
   isLoggedIn = false;
 
   userEmail: string = '';
-
 
   // @ts-ignore
   countItems: number = this.cartService.getCartItems().length;
