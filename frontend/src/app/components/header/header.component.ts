@@ -1,9 +1,9 @@
-import {Component, OnInit, Input, OnDestroy} from '@angular/core';
-import { AuthService } from "../../_services/auth.service";
-import { StorageService } from "../../_services/storage.service";
-import { User } from "../../models/user";
-import { ApiService } from "../../_services/api/api.service";
-import { CartService } from "../../_services/cart.service";
+import {Component, OnInit, OnDestroy} from '@angular/core';
+import {AuthService} from "../../_services/auth.service";
+import {StorageService} from "../../_services/storage.service";
+import {User} from "../../models/user";
+import {ApiService} from "../../_services/api/api.service";
+import {CartService} from "../../_services/cart.service";
 import {Subscription} from "rxjs";
 
 @Component({
@@ -19,7 +19,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   // @ts-ignore
   users: User[];
-  user: User = { email: "", firstName: "", lastName: "", password: "" };
+  user: User = {email: "", firstName: "", lastName: "", password: ""};
 
   isLoggedIn = false;
 
@@ -47,15 +47,11 @@ export class HeaderComponent implements OnInit, OnDestroy {
         this.user = user;
       });
     }
-    this.cartItemsSubscription = this.cartService.getCartItemsObservable().subscribe((cartItems: User[]) => {
-      this.users = cartItems;
-      this.countItems = this.users.length;
-    });
+    this.cartItemsSubscription = this.cartService.getCartItemsObservable()
+      .subscribe((cartItems: number) => {
+        this.countItems = cartItems;
+      });
   }
-
-  ngOnDestroy(): void {
-  }
-
 
   handleDataFromChild(data: any) {
     this.users = data;
@@ -65,5 +61,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.storageService.logout();
     this.authService.logout();
     this.isLoggedIn = false;
+  }
+
+  ngOnDestroy() {
+    // Unsubscribe from the observable to avoid memory leaks
+    this.cartItemsSubscription.unsubscribe();
   }
 }
