@@ -23,6 +23,7 @@ export class PostComponent implements OnInit {
   @Output() addPost = new EventEmitter<{ text: string, parentPostId: number | null }>();
   @Output() updatePost = new EventEmitter<{ text: string, id: number }>();
   @Output() deletePost = new EventEmitter<number>();
+  @Output() deleteCommentEvent = new EventEmitter<number>();
 
   canReply: boolean = false;
   canEdit: boolean = false;
@@ -44,7 +45,7 @@ export class PostComponent implements OnInit {
 
   }
 
-  rotationClass = ''; 
+  rotationClass = '';
 
   toggleComments(): void {
     this.showComments = !this.showComments;
@@ -105,6 +106,8 @@ export class PostComponent implements OnInit {
   }
 
   commentText = '';
+  // @ts-ignore
+  comment: Comment;
 
   commentPost() {
     this.postService.commentPost(this.post.id, this.commentText).subscribe(
@@ -159,5 +162,24 @@ export class PostComponent implements OnInit {
       });
     });
   }
+
+  deleteComment(commentId: number): void {
+    this.postService.deleteComment(this.post.id, commentId).subscribe(
+      response => {
+        console.log('Comment deleted successfully', response);
+        this.loadPost();
+        this.deleteCommentEvent.emit(commentId);
+      },
+      error => {
+        console.log('Error deleting comment', error);
+        if (error.status === 404) {
+        } else if (error.status === 401) {
+        } else {
+          console.log(error);
+        }
+      }
+    );
+  }
+
 
 }
