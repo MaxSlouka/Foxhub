@@ -2,6 +2,7 @@ package com.gfa.foxbook.foxbook.services.interfaces;
 
 import com.gfa.foxbook.foxbook.models.User;
 import com.gfa.foxbook.foxbook.models.dtos.UserBasicDTO;
+import jakarta.servlet.http.HttpServletRequest;
 
 import java.util.Optional;
 import java.util.List;
@@ -30,4 +31,6 @@ public interface UserService {
 
     List<User> searchUsers(String query);
     void saveUser(User user);
+
+    User getCurrentUser(HttpServletRequest request);
 }
