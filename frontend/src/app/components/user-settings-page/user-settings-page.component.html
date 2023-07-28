@@ -66,6 +66,7 @@
 
           <p class="lead mt-4 border-bottom">Personality</p>
           <select class="btn btn-outline-primary dropdown-toggle" aria-label="Default select example" (change)="onPersonalitySelect($event)">
+            <option selected>Choose your personality</option>
             <option *ngFor="let personality of personalities" [value]="personality.id">{{personality.name}}</option>
           </select>
 

@@ -27,7 +27,8 @@ export class PeoplePageComponent implements OnInit, AfterViewInit {
   // @ts-ignore
   users: User[] = [];
   fullUsers: User[] = [];
-  filterContentExpanded: boolean = true
+  verifiedAndUsersOnly: User[] = [];
+  filterContentExpanded: boolean = true;
   isRangeChanged: boolean = false;
   // @ts-ignore
   workStatus: string;
@@ -55,8 +56,8 @@ export class PeoplePageComponent implements OnInit, AfterViewInit {
     });
     // @ts-ignore
     this.apiService.getAll().subscribe(users => {
-      this.users = users;
-      this.fullUsers = users;
+      this.users = users.filter((user: User) => user.verified && user.role?.name === "USER");
+      this.verifiedAndUsersOnly = users.filter((user: User) => user.verified && user.role?.name === "USER");
       this.usedTechnologiesList();
       this.usedLanguagesList();
     });
@@ -152,7 +153,7 @@ export class PeoplePageComponent implements OnInit, AfterViewInit {
   }
 
   allFilters() {
-    let filteredUsers = [...this.fullUsers];
+    let filteredUsers = [...this.verifiedAndUsersOnly];
 
     if (this.selectedTechnologies.length > 0) {
       filteredUsers = this.technologiesFilter(filteredUsers, this.selectedTechnologies);

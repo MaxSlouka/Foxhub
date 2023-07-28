@@ -8,7 +8,7 @@ import { Subject } from 'rxjs';
 
 export class CartService {
   cartItems: User[] = [];
-  private cartItemsSubject = new Subject<User[]>();
+  private cartItemsSubject = new Subject<number>();
 
   constructor() {
     let storedCart = sessionStorage.getItem('cart');
@@ -21,7 +21,7 @@ export class CartService {
     if (!this.cartItems.some(item => item.nickname === user.nickname)) {
       this.cartItems.push(user);
       this.updateLocalStorage();
-      this.cartItemsSubject.next(this.cartItems); // Notify subscribers about the change
+      this.cartItemsSubject.next(this.cartItems.length); // Notify subscribers about the change
     }
   }
 
@@ -30,7 +30,7 @@ export class CartService {
     if (index > -1) {
       this.cartItems.splice(index, 1);
       this.updateLocalStorage();
-      this.cartItemsSubject.next(this.cartItems); // Notify subscribers about the change
+      this.cartItemsSubject.next(this.cartItems.length); // Notify subscribers about the change
     }
   }
 

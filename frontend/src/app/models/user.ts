@@ -29,4 +29,6 @@ export interface User {
   roles?: Role[],
   technologies?: Technology[],
   languages?: Language[],
+  role?: Role,
+  verified?: boolean,
 }
