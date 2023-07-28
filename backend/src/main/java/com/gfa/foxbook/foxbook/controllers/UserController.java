@@ -135,8 +135,18 @@ public class UserController {
         if (user == null) {
             return ResponseEntity.badRequest().build();
         }
-        user.setPassword(passwordEncoder.encode(passwordDTO.getNewPassword()));
+
+        String newPassword = passwordDTO.getNewPassword();
+        int minimumPasswordLength = 6;
+
+        if (newPassword.length() < minimumPasswordLength) {
+            String errorMessage = "Password must be at least " + minimumPasswordLength + " characters long.";
+            return ResponseEntity.badRequest().body(errorMessage);
+        }
+
+        user.setPassword(passwordEncoder.encode(newPassword));
         userService.saveUser(user);
+
         return ResponseEntity.ok().build();
     }
 
