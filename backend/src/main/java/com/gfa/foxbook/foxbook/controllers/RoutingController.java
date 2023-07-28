@@ -6,8 +6,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class RoutingController {
 
-    @RequestMapping("/**/{path:[^\\.]*}")
-    public String forward() {
+    @RequestMapping(value = "{_:^(?!index\\.html|api|\\.).*$}")
+    public String redirectApi() {
         return "forward:/";
     }
 }
+
