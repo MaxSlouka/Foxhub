@@ -169,4 +169,9 @@ public class JwtUtils {
     private Key key() {
         return Keys.hmacShaKeyFor(SecurityConstants.JWT_SECRET);
     }
+
+    public String extractUsername(String token) {
+        return Jwts.parserBuilder().setSigningKey(key()).build()
+                .parseClaimsJws(token).getBody().getSubject();
+    }
 }
