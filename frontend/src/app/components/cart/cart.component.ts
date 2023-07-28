@@ -10,7 +10,6 @@ import { User } from "../../models/user";
 
 export class CartComponent implements OnInit {
   cartItems: User[] = [];
-  countItems: number = 0;
 
   constructor(private cartService: CartService) { }
 

@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, Input, OnDestroy} from '@angular/core';
 import { AuthService } from "../../_services/auth.service";
 import { StorageService } from "../../_services/storage.service";
 import { User } from "../../models/user";
-import { DataService } from "../../_services/api/data.service";
 import { ApiService } from "../../_services/api/api.service";
+import { CartService } from "../../_services/cart.service";
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'app-header',
@@ -11,11 +12,11 @@ import { ApiService } from "../../_services/api/api.service";
   styleUrls: ['./header.component.css']
 })
 
-export class HeaderComponent implements OnInit {
+export class HeaderComponent implements OnInit, OnDestroy {
 
   // @ts-ignore
   username: string | null = "";
-  
+
   // @ts-ignore
   users: User[];
   user: User = { email: "", firstName: "", lastName: "", password: "" };
@@ -24,11 +25,18 @@ export class HeaderComponent implements OnInit {
 
   userEmail: string = '';
 
+
+  // @ts-ignore
+  countItems: number = this.cartService.getCartItems().length;
+  // @ts-ignore
+  private cartItemsSubscription: Subscription;
+
   constructor(
     private authService: AuthService,
     private storageService: StorageService,
     private apiService: ApiService,
-    public dataService: DataService) {
+    private cartService: CartService
+  ) {
   }
 
   ngOnInit(): void {
@@ -39,7 +47,15 @@ export class HeaderComponent implements OnInit {
         this.user = user;
       });
     }
+    this.cartItemsSubscription = this.cartService.getCartItemsObservable().subscribe((cartItems: User[]) => {
+      this.users = cartItems;
+      this.countItems = this.users.length;
+    });
   }
+
+  ngOnDestroy(): void {
+  }
+
 
   handleDataFromChild(data: any) {
     this.users = data;

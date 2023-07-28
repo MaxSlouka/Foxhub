@@ -37,6 +37,7 @@
 
         <a routerLink="/cart" class="cart-btn" aria-disabled="true">
           <i class="bi bi-bag"></i>
+          <span class="badge badge-danger" *ngIf="countItems !=0">{{countItems}}</span>
         </a>
         <a routerLink="/login" class="btn btn-primary" role="button" aria-disabled="true">Login</a>
         <a routerLink="/register" class="btn btn-outline-secondary" role="button" aria-disabled="true">Sign up</a>

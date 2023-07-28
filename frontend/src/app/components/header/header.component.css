@@ -1,44 +1,55 @@
 .dropdown-menu {
-    left: -125px;
+  left: -125px;
 }
 
 .d-flex {
-    width: 95%;
+  width: 95%;
 }
 
 .text-end a {
-    margin-right: 1rem;
+  margin-right: 1rem;
 }
 
 ul li a {
-    color: rgb(0, 0, 0);
+  color: rgb(0, 0, 0);
 }
 
 .btn {
-    margin-right: 1rem;
+  margin-right: 1rem;
 }
 
 .people-btn,
 .cart-btn {
-    width: 42px;
-    height: 42px;
-    background-color: #ffffff;
-    cursor: pointer;
-    text-decoration: none;
-    color: #007f00;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-right: 1rem;
-    border: 1px solid #007f00;
+  width: 42px;
+  height: 42px;
+  background-color: #ffffff;
+  cursor: pointer;
+  text-decoration: none;
+  color: #007f00;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 1rem;
+  border: 1px solid #007f00;
+}
+
+.cart-btn {
+  position: relative;
+}
+
+.cart-btn > span {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  border-radius: 50%;
 }
 
 .people-btn:hover,
 .cart-btn:hover {
-    transform: scale(1.1);
-    color: white;
-    background-color: #007f00;
+  transform: scale(1.1);
+  color: white;
+  background-color: #007f00;
 }
 
 .dropdown-toggle:hover {
@@ -46,86 +57,86 @@ ul li a {
 }
 
 .dropdown-item {
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
 }
 
 .dropdown-menu a i {
-    width: 32px;
-    height: 32px;
-    color: black;
-    margin-right: 5px;
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
+  width: 32px;
+  height: 32px;
+  color: black;
+  margin-right: 5px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
 }
 
 .btn-group a i {
-    font-size: 20px;
+  font-size: 20px;
 }
 
 .text-end {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
 
 @media only screen and (max-width: 768px) {
-    .search-result-container {
-        top: 75%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        padding-bottom: 5rem;
-    }
+  .search-result-container {
+    top: 75%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding-bottom: 5rem;
+  }
 }
 
 .ham {
-    cursor: pointer;
-    -webkit-tap-highlight-color: transparent;
-    transition: transform 400ms;
-    -moz-user-select: none;
-    -webkit-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform 400ms;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 .hamRotate.active {
-    transform: rotate(45deg);
+  transform: rotate(45deg);
 }
 
 .hamRotate180.active {
-    transform: rotate(180deg);
+  transform: rotate(180deg);
 }
 
 .line {
-    fill: none;
-    transition: stroke-dasharray 400ms, stroke-dashoffset 400ms;
-    stroke: #525252;
-    stroke-width: 5.5;
-    stroke-linecap: round;
+  fill: none;
+  transition: stroke-dasharray 400ms, stroke-dashoffset 400ms;
+  stroke: #525252;
+  stroke-width: 5.5;
+  stroke-linecap: round;
 }
 
 .ham7 .top {
-    stroke-dasharray: 40 82;
+  stroke-dasharray: 40 82;
 }
 
 .ham7 .middle {
-    stroke-dasharray: 40 111;
+  stroke-dasharray: 40 111;
 }
 
 .ham7 .bottom {
-    stroke-dasharray: 40 161;
+  stroke-dasharray: 40 161;
 }
 
 .ham7.active .top {
-    stroke-dasharray: 17 82;
-    stroke-dashoffset: -62px;
+  stroke-dasharray: 17 82;
+  stroke-dashoffset: -62px;
 }
 
 .ham7.active .middle {
-    stroke-dashoffset: 23px;
+  stroke-dashoffset: 23px;
 }
 
 .ham7.active .bottom {
-    stroke-dashoffset: -83px;
+  stroke-dashoffset: -83px;
 }
