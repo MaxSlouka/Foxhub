@@ -7,7 +7,8 @@
   <!--  progress bar   -->
   <div class="d-flex flex-column justify-content-center align-items-center">
     <p class="lead">Profile Completion Progress Bar</p>
-    <p class="lead labels font-weight-bold text-center">Pro tip: If you want to be visible and increase you chances to
+    <p class="lead labels font-weight-bold text-center"><i class="bi bi-lightbulb mr-1"></i>Pro tip: If you want to be
+      visible and increase you chances to
       get a job, fill up all the profile
       information.</p>
   </div>
@@ -65,17 +66,25 @@
           </div>
 
           <p class="lead mt-4 border-bottom">Personality</p>
-          <select class="btn btn-outline-primary dropdown-toggle" aria-label="Default select example" (change)="onPersonalitySelect($event)">
-            <option selected>Choose your personality</option>
-            <option *ngFor="let personality of personalities" [value]="personality.id">{{personality.name}}</option>
-          </select>
+          <div class="row mt-2">
+            <div class="col-md-12">
 
-          <div class="mt-5 text-center">
-            <a href="./personality-test" class="btn btn-outline-primary my-2 mx-2" role="button"
-              aria-disabled="true">More info</a>
-            <a href="https://www.16personalities.com/"
-               class="btn btn-outline-primary my-2 mx-2"
-               role="button" aria-disabled="true">Test Here</a>
+              <div class="d-flex justify-content-center">
+                <select class="btn btn-outline-primary dropdown-toggle mt-2 mr-2" aria-label="Default select example"
+                  (change)="onPersonalitySelect($event)">
+                  <option selected>Choose personality</option>
+                  <option *ngFor="let personality of personalities" [value]="personality.id">{{personality.name}}
+                  </option>
+                </select>
+              </div>
+
+              <div class="d-flex justify-content-center">
+                <a href="/personality-test" class="btn btn-outline-primary mt-2 mr-2" role="button"
+                  aria-disabled="true">More info</a>
+                <a href="https://www.16personalities.com/" class="btn btn-outline-primary mt-2 mr-2" role="button"
+                  aria-disabled="true">Test Here</a>
+              </div>
+            </div>
           </div>
 
           <p class="lead mt-4 border-bottom font-weight-bold">Contacts & About</p>

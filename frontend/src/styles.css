@@ -12,6 +12,7 @@ body, nav, a {
 
 .btn-primary {
   background-color: #007f00;
+  border: #003a00;
   color: rgb(255, 255, 255);
 }
 
