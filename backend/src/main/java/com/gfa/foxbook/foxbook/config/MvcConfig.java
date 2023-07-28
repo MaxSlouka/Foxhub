@@ -7,7 +7,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Configuration
 public class MvcConfig implements WebMvcConfigurer {
 
-    private String uploadDir = "./uploads";
+    private String uploadDir = "/home/user/uploads";
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
