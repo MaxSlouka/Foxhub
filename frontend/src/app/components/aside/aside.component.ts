@@ -12,8 +12,16 @@ export class AsideComponent implements OnInit {
 
   // @ts-ignore
   users: User[];
+  showPeople = false;
 
   constructor(private apiService: ApiService) { }
+
+  rotationClass = ''; 
+
+  togglePeople(): void {
+    this.showPeople = !this.showPeople;
+    this.rotationClass = this.showPeople ? 'rotate-up' : 'rotate-down';
+  }
 
   ngOnInit() {
     // Fetch all users from the API

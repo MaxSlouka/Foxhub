@@ -2,75 +2,60 @@
 
 <app-back-to-top-btn></app-back-to-top-btn>
 
-<div class="container col-xxl-8 px-4 py-3 my-4">
-    <div class="row flex-lg-row align-items-center g-5 py-3">
-
-        <div class="col-10 col-sm-8 col-lg-6 creators">
-            <img ngSrc="/assets/img/creators2.jpg" class="d-block mx-lg-auto img-fluid" alt="Build" width="700"
-                height="700" loading="lazy">
-        </div>
-
-        <div class="col-lg-6">
-            <h1 class="display-5 fw-bold text-body-emphasis lh-1 mb-3 page-header">The <span>Creators</span></h1>
-            <h2 class="display-5 fw-bold text-body-emphasis lh-1 mb-3">Dev Team </h2>
-            <p class="lead">Meet the extraordinary team that powers our cutting-edge app, pushing the boundaries of
-                technology and creating
-                unforgettable experiences for our users.</p>
-            <p class="lead">Our team is a unique blend of talent, passion, and expertise, with each member bringing
-                their own special
-                flair to the table. </p>
-            <p class="lead">From dreamers to students to devs.</p>
+<div class="px-4 py-5 my-5 text-center">
+    <div class="creators-img-container">
+        <img class="d-block mx-auto mb-4 creators-img" src="/assets/img/creators.jpg" alt="creators">
+    </div>
+    <h1 class="display-5 fw-bold text-body-emphasis page-header">The <span>Dev</span> Team</h1>
+    <div class="col-lg-6 mx-auto">
+        <p class="lead">Meet the extraordinary team that powers our cutting-edge app, pushing the boundaries of
+            technology and creating
+            unforgettable experiences for our users.</p>
+        <p class="lead">Our team is a unique blend of talent, passion, and expertise, with each member bringing
+            their own special
+            flair to the table. </p>
+        <p class="lead">From dreamers to students to devs.</p>
+        <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
             <a class="lead" href="https://storyset.com/online">This app is using Online illustrations by Storyset.</a>
         </div>
     </div>
 </div>
 
-<!-- here should be grid of star team? -->
-<div class="container px-4 py-5" id="icon-grid">
-    <h2 class="pb-2 border-bottom">Meet the <span>Fox</span>Hub Crew</h2>
-
-    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-5 g-5 py-5">
-
-        <div class="col d-flex creator-profile mb-4 justify-content-center align-items-center creator-profile mb-4">
-            <a [routerLink]="['/creators']" [fragment]="'tomas'"
-                class="d-flex flex-column align-items-center text-center">
-                <img ngSrc="/assets/img/tomas.jpg" alt="tomas" width=150 height=150>
-                <h3 class="fw-bold mb-0 fs-4 text-body-emphasis my-3">Tomáš </h3>
-            </a>
+<div class="container col-xxl-8 px-4 py-4 my-4" id="daniel">
+    <div class="row flex-lg-row align-items-center g-5 py-4">
+        <div class="col-10 col-sm-8 col-lg-6">
+            <div class="gallery">
+                <a [routerLink]="['/creators']" [fragment]="'tomas'"
+                    class="d-flex flex-column align-items-center text-center">
+                    <img src="/assets/img/tomas.jpg" alt="tomas">
+                </a>
+                <a [routerLink]="['/']" class="d-flex flex-column align-items-center text-center">
+                    <img src="/assets/img/logoBigger.png" alt="logo">
+                </a>
+                <a [routerLink]="['/creators']" [fragment]="'daniel'"
+                    class="d-flex flex-column align-items-center text-center">
+                    <img src="/assets/img/daniel.jpg" alt="daniel">
+                </a>
+                <div class="blank-space"></div>
+                <a [routerLink]="['/creators']" [fragment]="'maxnesazal'"
+                    class="d-flex flex-column align-items-center text-center">
+                    <img src="/assets/img/maxN.jpg" alt="maxN">
+                </a>
+                <a [routerLink]="['/creators']" [fragment]="'michal'"
+                    class="d-flex flex-column align-items-center text-center">
+                    <img src="/assets/img/michal.jpg" alt="michal">
+                </a>
+                <a [routerLink]="['/creators']" [fragment]="'maxslouka'"
+                    class="d-flex flex-column align-items-center text-center">
+                    <img src="/assets/img/maxS.jpg" alt="maxS">
+                </a>
+            </div>
         </div>
 
-        <div class="col d-flex creator-profile mb-4 justify-content-center align-items-centercreator-profile mb-4">
-            <a [routerLink]="['/creators']" [fragment]="'daniel'"
-                class="d-flex flex-column align-items-center text-center">
-                <img ngSrc="/assets/img/daniel.jpg" alt="daniel" width=150 height=150>
-                <h3 class="fw-bold mb-0 fs-4 text-body-emphasis my-3">Daniel </h3>
-            </a>
+        <div class="col-lg-6 text-end"> <!-- Use 'text-end' class to align text to the right -->
+            <h1 class="display-5 fw-bold text-body-emphasis lh-1 mb-3 page-header">Choose Your <span>Hero</span>: Seek
+                Unveiling Wisdom Beyond the Unseen</h1>
         </div>
-
-        <div class="col d-flex creator-profile mb-4 justify-content-center align-items-center creator-profile mb-4">
-            <a [routerLink]="['/creators']" [fragment]="'maxnesazal'"
-                class="d-flex flex-column align-items-center text-center">
-                <img ngSrc="/assets/img/maxN.jpg" alt="maxnesazal" width=150 height=150>
-                <h3 class="fw-bold mb-0 fs-4 text-body-emphasis my-3">Max N</h3>
-            </a>
-        </div>
-
-        <div class="col d-flex creator-profile mb-4 justify-content-center align-items-center creator-profile mb-4">
-            <a [routerLink]="['/creators']" [fragment]="'maxslouka'"
-                class="d-flex flex-column align-items-center text-center">
-                <img ngSrc="/assets/img/maxS.jpg" alt="maxslouka" width=150 height=150>
-                <h3 class="fw-bold mb-0 fs-4 text-body-emphasis my-3">Max S </h3>
-            </a>
-        </div>
-
-        <div class="col d-flex creator-profile mb-4 justify-content-center align-items-center creator-profile mb-4">
-            <a [routerLink]="['/creators']" [fragment]="'michal'"
-                class="d-flex flex-column align-items-center text-center">
-                <img ngSrc="/assets/img/michal.jpg" alt="michal" width=150 height=150>
-                <h3 class="fw-bold mb-0 fs-4 text-body-emphasis my-3">Michal </h3>
-            </a>
-        </div>
-
     </div>
 </div>
 
@@ -87,7 +72,8 @@
             <h2 class="display-5 fw-bold text-body-emphasis lh-1 mb-3">I like fails, they bring experience.</h2>
             <p class="lead">I code, in my free time. It brings me joy and unusual spark to my life. And you know what? I
                 want more of this!</p>
-            <p class="lead">I believe there is a solution for everything. So let's apply it, find it or invent it. </p>
+            <p class="lead">I also believe there is a solution for everything. So let's apply it, find it or invent it.
+            </p>
         </div>
     </div>
 </div>
@@ -118,7 +104,7 @@
         </div>
 
         <div class="col-lg-6">
-            <h1 class="display-5 fw-bold text-body-emphasis lh-1 mb-3 page-header">Max <span>Nesázal</span></h1>
+            <h1 class="display-5 fw-bold text-body-emphasis lh-1 mb-3 page-header">Maxim <span>Nesázal</span></h1>
             <p class="lead">Something about </p>
             <p class="lead">Something about </p>
             <p class="lead">Something about </p>
@@ -135,7 +121,7 @@
         </div>
 
         <div class="col-lg-6">
-            <h1 class="display-5 fw-bold text-body-emphasis lh-1 mb-3 page-header">Max <span>Slouka</span></h1>
+            <h1 class="display-5 fw-bold text-body-emphasis lh-1 mb-3 page-header">Jan Max <span>Slouka</span></h1>
             <p class="lead">Something about </p>
             <p class="lead">Something about </p>
             <p class="lead">Something about </p>

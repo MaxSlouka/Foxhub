@@ -44,7 +44,7 @@ public class UserController {
     private final PasswordEncoder passwordEncoder;
     private final CommentService commentService;
 
-    private String uploadDir = "./uploads";
+    private String uploadDir = "/uploads";
 
     @GetMapping("/person")
     public ResponseEntity<?> getUser(HttpServletRequest request) {
@@ -85,16 +85,12 @@ public class UserController {
         String nickname = user.getNickname();
         String fileName = file.getOriginalFilename();
         String extension = fileName.substring(fileName.lastIndexOf("."));
-        System.out.println(extension);
-        // todo extention
         try {
             Files.createDirectories(Paths.get(uploadDir));
             Path filePath = Paths.get(uploadDir, nickname + extension);
             file.transferTo(filePath);
-            user.setProfilePictureUrl("http://localhost:8080/uploads/" + nickname + extension);
+            user.setProfilePictureUrl("http://foxhub.gfapp.eu/uploads/" + nickname + extension);
             userService.saveUser(user);
-
-
             return ResponseEntity.ok().build();
         } catch (IOException e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
