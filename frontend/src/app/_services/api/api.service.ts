@@ -75,7 +75,6 @@ export class ApiService {
     personality: Personality | undefined,
     yearOfBirth: number | undefined,
     workStatus: boolean | undefined
-
   ): Observable<any> {
 
     return this.http.patch(prefix + "/api/v1/user/people", {

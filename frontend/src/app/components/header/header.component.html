@@ -20,7 +20,7 @@
   <!-- navbar -->
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <div class="d-flex flex-wrap align-items-center py-2 mb-2 border-bottom justify-content-between">
+    <div class="d-flex flex-wrap align-items-center py-2 mb-2 border-bottom justify-content-between mobile-navbar">
 
       <!-- logo -->
 
@@ -31,25 +31,27 @@
       <!-- login and sign up -->
 
       <div class="text-end" *ngIf="!isLoggedIn">
+
         <a routerLink="/people" class="people-btn" aria-disabled="true">
           <i class="bi bi-people"></i>
         </a>
 
         <a routerLink="/cart" class="cart-btn" aria-disabled="true">
           <i class="bi bi-bag"></i>
+          <span class="badge badge-danger" *ngIf="countItems !=0">{{countItems}}</span>
         </a>
+
         <a routerLink="/login" class="btn btn-primary" role="button" aria-disabled="true">Login</a>
         <a routerLink="/register" class="btn btn-outline-secondary" role="button" aria-disabled="true">Sign up</a>
+
       </div>
 
       <!-- user options -->
 
       <div class="btn-group align-items-center" *ngIf="isLoggedIn">
+
         <a routerLink="/people" class="people-btn" aria-disabled="true">
           <i class="bi bi-people"></i>
-        </a>
-        <a routerLink="/cart" class="cart-btn" aria-disabled="true">
-          <i class="bi bi-bag"></i>
         </a>
 
         <div class="d-block link-body-emphasis text-decoration-none dropdown-toggle" data-toggle="dropdown"
@@ -67,6 +69,7 @@
           <a class="dropdown-item" href="#" (click)="logout()">
             <i class="bi bi-door-closed"></i>Sign out</a>
         </div>
+        
       </div>
 
     </div>

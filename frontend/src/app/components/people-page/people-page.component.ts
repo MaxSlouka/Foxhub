@@ -1,12 +1,14 @@
-import { Component, OnInit, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
-import { Technology } from "../../models/technology";
-import { TechnologyService } from "../../_services/technology.service";
-import { ApiService } from "../../_services/api/api.service";
-import { User } from "../../models/user";
-import { Language } from "../../models/language";
-import { LanguageService } from "../../_services/language.service";
-import { Personality } from "../../models/personality";
-import { PersonalityService } from "../../_services/personality.service";
+import {Component, OnInit, AfterViewInit, ViewChild, ElementRef} from '@angular/core';
+import {Technology} from "../../models/technology";
+import {TechnologyService} from "../../_services/technology.service";
+import {ApiService} from "../../_services/api/api.service";
+import {User} from "../../models/user";
+import {Language} from "../../models/language";
+import {LanguageService} from "../../_services/language.service";
+import {Personality} from "../../models/personality";
+import {PersonalityService} from "../../_services/personality.service";
+import {CartService} from "../../_services/cart.service";
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'app-people-page',
@@ -15,8 +17,8 @@ import { PersonalityService } from "../../_services/personality.service";
 })
 
 export class PeoplePageComponent implements OnInit, AfterViewInit {
-  @ViewChild('customRange3', { static: true }) rangeInputRef!: ElementRef<HTMLInputElement>;
-  @ViewChild('rangeValue', { static: true }) rangeValueRef!: ElementRef<HTMLSpanElement>;
+  @ViewChild('customRange3', {static: true}) rangeInputRef!: ElementRef<HTMLInputElement>;
+  @ViewChild('rangeValue', {static: true}) rangeValueRef!: ElementRef<HTMLSpanElement>;
 
   technologies: Technology[] = [];
   languages: Language[] = [];
@@ -27,18 +29,24 @@ export class PeoplePageComponent implements OnInit, AfterViewInit {
   // @ts-ignore
   users: User[] = [];
   fullUsers: User[] = [];
-  filterContentExpanded: boolean = true
+  verifiedAndUsersOnly: User[] = [];
+  filterContentExpanded: boolean = true;
   isRangeChanged: boolean = false;
   // @ts-ignore
   workStatus: string;
   personalities: Personality[] = [];
   selectedPersonality: Personality | undefined;
   selectAllPersonalities: boolean = true;
+  addedUsers: User[] = [];
+
+  // @ts-ignore
+  private cartItemsSubscription: Subscription;
 
   constructor(private technologyService: TechnologyService,
-    private languageService: LanguageService,
-    private apiService: ApiService,
-    private personalityService: PersonalityService) {
+              private languageService: LanguageService,
+              private apiService: ApiService,
+              private personalityService: PersonalityService,
+              private cartService: CartService) {
   }
 
   ngOnInit(): void {
@@ -55,11 +63,15 @@ export class PeoplePageComponent implements OnInit, AfterViewInit {
     });
     // @ts-ignore
     this.apiService.getAll().subscribe(users => {
-      this.users = users;
-      this.fullUsers = users;
+      this.users = users.filter((user: User) => user.verified && user.role?.name === "USER");
+      this.verifiedAndUsersOnly = users.filter((user: User) => user.verified && user.role?.name === "USER");
       this.usedTechnologiesList();
       this.usedLanguagesList();
     });
+    this.cartItemsSubscription = this.cartService.getCartItemsObservable()
+      .subscribe((cartItems: User[]) => {
+        this.addedUsers = cartItems;
+      });
   }
 
   ngAfterViewInit(): void {
@@ -152,7 +164,7 @@ export class PeoplePageComponent implements OnInit, AfterViewInit {
   }
 
   allFilters() {
-    let filteredUsers = [...this.fullUsers];
+    let filteredUsers = [...this.verifiedAndUsersOnly];
 
     if (this.selectedTechnologies.length > 0) {
       filteredUsers = this.technologiesFilter(filteredUsers, this.selectedTechnologies);
@@ -180,10 +192,10 @@ export class PeoplePageComponent implements OnInit, AfterViewInit {
     // @ts-ignore
     return users.filter(user =>
       lowerCaseKeys.every(key =>
-        // @ts-ignore
-        user.technologies && user.technologies.some(technology =>
-          technology.name.toLowerCase().includes(key)
-        )
+          // @ts-ignore
+          user.technologies && user.technologies.some(technology =>
+            technology.name.toLowerCase().includes(key)
+          )
       )
     );
   }
@@ -194,10 +206,10 @@ export class PeoplePageComponent implements OnInit, AfterViewInit {
     // @ts-ignore
     return users.filter(user =>
       lowerCaseKeys.every(key =>
-        // @ts-ignore
-        user.languages && user.languages.some(language =>
-          language.name.toLowerCase().includes(key)
-        )
+          // @ts-ignore
+          user.languages && user.languages.some(language =>
+            language.name.toLowerCase().includes(key)
+          )
       )
     );
   }

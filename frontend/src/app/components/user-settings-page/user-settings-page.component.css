@@ -85,6 +85,11 @@
     overflow: auto;
 }
 
+.myTechnologies{
+  max-height: 150px;
+    overflow: auto;
+}
+
 /* Works for Chrome, Safari, Edge, Opera */
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
@@ -104,5 +109,4 @@ input[type="number"] {
 .dropdown-toggle:hover {
     background-color: #fff;
     color: #007f00;
-    background: #fff;
 }

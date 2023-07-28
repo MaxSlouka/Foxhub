@@ -44,7 +44,7 @@ public class UserController {
     private final PasswordEncoder passwordEncoder;
     private final CommentService commentService;
 
-    private String uploadDir = "/uploads";
+    private String uploadDir = "/home/user/uploads";
 
     @GetMapping("/person")
     public ResponseEntity<?> getUser(HttpServletRequest request) {
@@ -85,12 +85,19 @@ public class UserController {
         String nickname = user.getNickname();
         String fileName = file.getOriginalFilename();
         String extension = fileName.substring(fileName.lastIndexOf("."));
+        System.out.println("-1");
         try {
+            System.out.println("0");
             Files.createDirectories(Paths.get(uploadDir));
+            System.out.println("1");
             Path filePath = Paths.get(uploadDir, nickname + extension);
+            System.out.println("2");
             file.transferTo(filePath);
+            System.out.println("3");
             user.setProfilePictureUrl("http://foxhub.gfapp.eu/uploads/" + nickname + extension);
+            System.out.println("4");
             userService.saveUser(user);
+            System.out.println("5");
             return ResponseEntity.ok().build();
         } catch (IOException e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
@@ -135,8 +142,18 @@ public class UserController {
         if (user == null) {
             return ResponseEntity.badRequest().build();
         }
-        user.setPassword(passwordEncoder.encode(passwordDTO.getNewPassword()));
+
+        String newPassword = passwordDTO.getNewPassword();
+        int minimumPasswordLength = 6;
+
+        if (newPassword.length() < minimumPasswordLength) {
+            String errorMessage = "Password must be at least " + minimumPasswordLength + " characters long.";
+            return ResponseEntity.badRequest().body(errorMessage);
+        }
+
+        user.setPassword(passwordEncoder.encode(newPassword));
         userService.saveUser(user);
+
         return ResponseEntity.ok().build();
     }
 

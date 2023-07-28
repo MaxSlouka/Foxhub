@@ -1,8 +1,7 @@
-import { Component, Input, ElementRef } from '@angular/core';
+import { Component, Input, ElementRef} from '@angular/core';
 import { User } from "../../models/user";
 import { CartService } from "../../_services/cart.service";
 import { StorageService } from "../../_services/storage.service";
-import { DataService } from "../../_services/api/data.service";
 import { ApiService } from "../../_services/api/api.service";
 import { AuthService } from "../../_services/auth.service";
 
@@ -21,6 +20,10 @@ export class PeoplePageCardComponent {
   userEmail: string = '';
   isOpen: boolean = false;
   isLoggedIn = false;
+  // @ts-ignore
+  @Input addedUsers: User[] = [];
+  // @ts-ignore
+  isAdded: boolean = false;
 
   constructor(
     private authService: AuthService,
@@ -28,11 +31,15 @@ export class PeoplePageCardComponent {
     private elementRef: ElementRef,
     private storageService: StorageService,
     private apiService: ApiService,
-    public dataService: DataService
   ) { }
+
+  isUserAdded(user: User) {
+    this.isAdded = this.addedUsers.some(item => item.nickname === user.nickname);
+  }
 
   addToCart(user: User) {
     this.cartService.addToCart(user);
+    this.isUserAdded(user);
   }
 
   toggleLeftContainer() {
@@ -69,14 +76,7 @@ export class PeoplePageCardComponent {
     if (this.storageService.isLoggedIn()) {
       this.isLoggedIn = true;
       this.userEmail = this.storageService.getUserFromSession();
-      this.apiService.getUserBasicInfo().subscribe((user: User) => {
-        this.user = user;
-      });
     }
-  }
-
-  handleDataFromChild(data: any) {
-    this.users = data;
   }
 
   logout(): void {

@@ -13,7 +13,6 @@ const prefix = GlobalConstants.prefix;
 export class LanguageService {
 
   readonly urlLanguage: string = prefix + "/api/v1/public/languages";
-
   constructor(private http: HttpClient) {
   }
 
