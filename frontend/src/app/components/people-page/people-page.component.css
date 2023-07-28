@@ -30,3 +30,8 @@ select {
     background: white !important;
     color: green !important;
 }
+
+.dropdown-menu{
+  max-height: 300px;
+  overflow: auto;
+}

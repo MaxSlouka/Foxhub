@@ -211,7 +211,7 @@
               </div>
 
               <div class="modal-header">
-                <div>
+                <div class="myTechnologies">
                   <h5 class="modal-title mb-3">Your Skills</h5>
                   <app-technology-button *ngFor="let technology of userTechnologies" [technology]="technology"
                     [unusedTechnologies]="unusedTechnologies" [userTechnologies]="userTechnologies"
@@ -221,7 +221,7 @@
 
               <div class="text-center">
                 <button class="btn btn-primary profile-button" type="button" data-dismiss="modal"
-                  aria-label="Close">Sure
+                  aria-label="Close">Done
                 </button>
               </div>
 
@@ -259,7 +259,7 @@
               </div>
 
               <div class="modal-header">
-                <div>
+                <div class="myTechnologies">
                   <h5>Your Languages</h5>
                   <app-language-button *ngFor="let language of userLanguages" [language]="language"
                     [unusedLanguages]="unusedLanguages" [userLanguages]="userLanguages"
@@ -269,7 +269,7 @@
 
               <div class="text-center">
                 <button class="btn btn-primary profile-button" type="button" data-dismiss="modal"
-                  aria-label="Close">Sure
+                  aria-label="Close">Done
                 </button>
               </div>
             </div>
