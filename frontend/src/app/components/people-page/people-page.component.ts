@@ -28,7 +28,6 @@ export class PeoplePageComponent implements OnInit, AfterViewInit {
   usedLanguages: Language[] = [];
   // @ts-ignore
   users: User[] = [];
-  fullUsers: User[] = [];
   verifiedAndUsersOnly: User[] = [];
   filterContentExpanded: boolean = true;
   isRangeChanged: boolean = false;
@@ -39,8 +38,6 @@ export class PeoplePageComponent implements OnInit, AfterViewInit {
   selectAllPersonalities: boolean = true;
   addedUsers: User[] = [];
 
-  // @ts-ignore
-  private cartItemsSubscription: Subscription;
 
   constructor(private technologyService: TechnologyService,
               private languageService: LanguageService,
@@ -61,17 +58,19 @@ export class PeoplePageComponent implements OnInit, AfterViewInit {
     this.personalityService.getAll().subscribe(personalities => {
       this.personalities = personalities
     });
+
     // @ts-ignore
     this.apiService.getAll().subscribe(users => {
       this.users = users.filter((user: User) => user.verified && user.role?.name === "USER");
       this.verifiedAndUsersOnly = users.filter((user: User) => user.verified && user.role?.name === "USER");
       this.usedTechnologiesList();
       this.usedLanguagesList();
+      for(let user of this.users){
+        if(this.addedUsers.includes(user)){
+          user.inCart = true;
+        }
+      }
     });
-    this.cartItemsSubscription = this.cartService.getCartItemsObservable()
-      .subscribe((cartItems: User[]) => {
-        this.addedUsers = cartItems;
-      });
   }
 
   ngAfterViewInit(): void {
