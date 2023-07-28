@@ -1,7 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Post } from "../../models/post";
 import { PostsService } from "../../_services/posts.service";
-import { AuthService } from "../../_services/auth.service";
 import { StorageService } from "../../_services/storage.service";
 import { ApiService } from "../../_services/api/api.service";
 import { User } from "../../models/user";
@@ -35,14 +34,21 @@ export class PostComponent implements OnInit {
   user: User = { email: "", firstName: "", lastName: "", password: "" };
   userEmail: string = '';
   isLoggedIn = false;
+  showComments = false;
 
   constructor(
     private postService: PostsService,
     private storageService: StorageService,
-    private apiService: ApiService,
-    private authService: AuthService,
-    ) {
+    private apiService: ApiService
+  ) {
 
+  }
+
+  rotationClass = ''; 
+
+  toggleComments(): void {
+    this.showComments = !this.showComments;
+    this.rotationClass = this.showComments ? 'rotate-up' : 'rotate-down';
   }
 
   async ngOnInit(): Promise<void> {
@@ -126,7 +132,7 @@ export class PostComponent implements OnInit {
     );
   }
 
-   findUserProfilePicture(): void {
+  findUserProfilePicture(): void {
     const postAuthor = this.users.find(u => u.id === this.post.userId);
     if (postAuthor) {
       if (postAuthor.profilePictureUrl != null) {
@@ -149,7 +155,7 @@ export class PostComponent implements OnInit {
       this.apiService.getAll().subscribe((usersFetch: User[]) => {
         this.users = usersFetch;
         this.findUserProfilePicture();
-        resolve(); // Resolve the promise once the user profiles are fetched.
+        resolve();
       });
     });
   }
