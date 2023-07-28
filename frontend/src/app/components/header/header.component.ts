@@ -19,7 +19,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   // @ts-ignore
   users: User[];
-  user: User = { email: "", firstName: "", lastName: "", password: "" };
+  user: User = {email: "", firstName: "", lastName: "", password: ""};
 
   isLoggedIn = false;
 
@@ -46,13 +46,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
         this.user = user;
       });
     }
-    this.cartItemsSubscription = this.cartService.getCartItemsObservable().subscribe((cartItems: User[]) => {
-      this.users = cartItems;
-      this.countItems = this.users.length;
-    });
-  }
-
-  ngOnDestroy(): void {
+    this.cartItemsSubscription = this.cartService.getCartItemsObservable()
+      .subscribe((cartItems: number) => {
+        this.countItems = cartItems;
+      });
   }
 
   handleDataFromChild(data: any) {
@@ -63,5 +60,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.storageService.logout();
     this.authService.logout();
     this.isLoggedIn = false;
+  }
+
+  ngOnDestroy() {
+    // Unsubscribe from the observable to avoid memory leaks
+    this.cartItemsSubscription.unsubscribe();
   }
 }

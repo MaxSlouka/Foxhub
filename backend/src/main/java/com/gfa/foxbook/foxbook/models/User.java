@@ -84,4 +84,7 @@ public class User {
     )
     private Personality personality;
 
+    public Role getRole() {
+        return roles.get(0);
+    }
 }
