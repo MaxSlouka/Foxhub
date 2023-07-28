@@ -8,7 +8,9 @@ import com.gfa.foxbook.foxbook.models.nonusermodels.Technology;
 import com.gfa.foxbook.foxbook.repositories.LanguageRepository;
 import com.gfa.foxbook.foxbook.repositories.TechnologyRepository;
 import com.gfa.foxbook.foxbook.repositories.UserRepository;
+import com.gfa.foxbook.foxbook.security.jwt.JwtUtils;
 import com.gfa.foxbook.foxbook.services.interfaces.UserService;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import java.util.*;
@@ -22,6 +24,7 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final TechnologyRepository technologyRepository;
     private final LanguageRepository languageRepository;
+    private final JwtUtils jwtUtils;
 
     @Override
     public Optional<User> findById(Long id) {
@@ -113,6 +116,13 @@ public class UserServiceImpl implements UserService {
     @Override
     public void saveUser(User user) {
         userRepository.save(user);
+    }
+
+    @Override
+    public User getCurrentUser(HttpServletRequest request) {
+        String token = request.getHeader("Authorization").substring(7);
+        String nickname = jwtUtils.extractUsername(token);
+        return userRepository.getByNickname(nickname);
     }
 
     @Override
