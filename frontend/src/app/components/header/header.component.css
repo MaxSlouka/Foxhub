@@ -71,13 +71,14 @@ ul li a {
 }
 
 @media only screen and (max-width: 768px) {
-    .search-result-container {
-        top: 75%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        padding-bottom: 5rem;
+    
+    .mobile-navbar {
+        flex-direction: column;
     }
+
 }
+
+/* hamburger menu */
 
 .ham {
     cursor: pointer;
