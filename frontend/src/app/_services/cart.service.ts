@@ -1,6 +1,6 @@
-import {Injectable} from '@angular/core';
-import {User} from "../models/user";
-import {Subject} from "rxjs";
+import { Injectable } from '@angular/core';
+import { User } from "../models/user";
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +8,7 @@ import {Subject} from "rxjs";
 
 export class CartService {
   cartItems: User[] = [];
-  usersLength = new Subject<number>();
+  private cartItemsSubject = new Subject<User[]>();
 
   constructor() {
     let storedCart = sessionStorage.getItem('cart');
@@ -21,6 +21,7 @@ export class CartService {
     if (!this.cartItems.some(item => item.nickname === user.nickname)) {
       this.cartItems.push(user);
       this.updateLocalStorage();
+      this.cartItemsSubject.next(this.cartItems); // Notify subscribers about the change
     }
   }
 
@@ -29,11 +30,16 @@ export class CartService {
     if (index > -1) {
       this.cartItems.splice(index, 1);
       this.updateLocalStorage();
+      this.cartItemsSubject.next(this.cartItems); // Notify subscribers about the change
     }
   }
 
   getCartItems() {
     return this.cartItems;
+  }
+
+  getCartItemsObservable() {
+    return this.cartItemsSubject.asObservable();
   }
 
   private updateLocalStorage() {
