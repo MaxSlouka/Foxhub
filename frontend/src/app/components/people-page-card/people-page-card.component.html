@@ -1,4 +1,3 @@
-
 <div class="center">
     <div class="box center">
 
@@ -10,7 +9,14 @@
         <div>
             <p class="lead username">{{user.firstName}} {{user.lastName}}</p>
             <p class="lead skill">{{user.personality?.name}}</p>
-            <button class="btn btn-outline-primary" type="button" *ngIf="!isLoggedIn" (click)="addToCart(user)" > {{user.inCart? "in 🛒 " : "Add to Cart"}}</button>
+            <button class="btn btn-outline-primary" type="button" *ngIf="!isLoggedIn" (click)="addToCart(user)">
+                <ng-container *ngIf="user.inCart; else addToCartTemplate">
+                    <i class="bi bi-bag-check"></i> <span style="font-style: normal;">  In Bag</span>
+                </ng-container>
+                <ng-template #addToCartTemplate>
+                    <span style="font-style: normal;">Add to Bag</span>
+                </ng-template>
+            </button>
         </div>
 
         <div class="arr-container center">
