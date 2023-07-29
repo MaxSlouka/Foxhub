@@ -72,7 +72,7 @@ export class PeoplePageCardComponent implements OnDestroy {
   }
 
   ngOnInit(): void {
-    if (this.addedUsers.find((user: User) => user.nickname === this.user.nickname)){
+    if (this.addedUsers.find((user: User) => user.nickname === this.user.nickname)) {
       this.user.inCart = true;
     }
     if (this.storageService.isLoggedIn()) {
@@ -86,7 +86,6 @@ export class PeoplePageCardComponent implements OnDestroy {
   }
 
   ngOnDestroy() {
-    // Unsubscribe from the observable to avoid memory leaks
     this.cartItemsSubscription.unsubscribe();
   }
 
