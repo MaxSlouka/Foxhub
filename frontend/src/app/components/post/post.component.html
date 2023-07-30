@@ -8,7 +8,7 @@
 
             <div class="post-author-image mx-2">
               <img class="profile-img rounded-circle" height="52" width="52" [src]="post.authorProfilePic"
-                (error)="post.authorProfilePic = '/assets/img/default-profile.png'" alt="profile picture"/>
+                (error)="post.authorProfilePic = '/assets/img/default-profile.png'" alt="profile picture" />
             </div>
 
             <div class="post-details ml-2">
@@ -51,11 +51,14 @@
         <div class="post-container d-flex justify-items-end">
 
           <div class="post-likes mr-3">
-            <p>Likes: {{ post.likesCount }}</p>
+            <p>
+              <i [class]="post.isLikedByCurrentUser ? 'bi bi-heart-fill' : 'bi bi-heart mr-2'"></i>
+              {{ post.likesCount }}
+            </p>
           </div>
 
           <div class="post-comments mr-3">
-            <p>Comments: {{ post.comments.length }}</p>
+            <p><i class="bi bi-chat-square-text mr-2"></i> {{ post.comments.length }}</p>
           </div>
 
         </div>
