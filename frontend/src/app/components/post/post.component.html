@@ -56,7 +56,7 @@
               {{ post.likesCount }}
             </p>
 
-            <button class="post-likes-btn mr-3" [class.liked]="post.isLikedByCurrentUser" (click)="likePost(post.id)"
+            <button class="post-likes-btn post-likes-toggler mr-3" [class.liked]="post.isLikedByCurrentUser" (click)="likePost(post.id)"
               *ngIf="isLoggedIn">
               <p>
                 <i [class]="post.isLikedByCurrentUser ? 'bi bi-heart-fill mr-2' : 'bi bi-heart mr-2'"></i>
@@ -66,8 +66,8 @@
 
           </div>
 
-          <div class="post-comments mr-3">
-            <p><i class="bi bi-chat-square-text mr-2"></i> {{ post.comments.length }}</p>
+          <div class="post-comments post-comments-toggler mr-3">
+            <p (click)="toggleComments()"><i class="bi bi-chat-square-text mr-2"></i> {{ post.comments.length }}</p>
           </div>
 
         </div>
@@ -79,13 +79,11 @@
             <button class="btn btn-primary" type="button" (click)="commentPost()">Comment</button>
           </div>
 
-          <div class="post-comments mr-3 mt-3 border-top">
-            <p class="lead my-4 font-weight-bold">Comments:</p>
+          <div class="post-comments mr-3 mt-3">
 
-            <i class="fas mb-4" [ngClass]="{'fa-chevron-down': !showComments, 'fa-chevron-up': showComments}"
-              (click)="toggleComments()"></i>
+            <div *ngIf="showComments" class=" border-top">
+              <p class="lead my-4 font-weight-bold">Comments:</p>
 
-            <div *ngIf="showComments">
               <div *ngFor="let comment of post.comments">
                 <div class="flex-comment">
                   <img class="profile-img rounded-circle mr-2" height="22" width="22" [src]="comment.authorProfilePic"
