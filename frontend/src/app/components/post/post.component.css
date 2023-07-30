@@ -1,6 +1,8 @@
 .post-likes p,
 .post-comments p {
     font-size: 15px;
+    display: flex;
+    align-items: center;
 }
 
 .post-author-image img {
@@ -18,6 +20,14 @@ i {
     cursor: pointer;
     font-size: 1.5rem;
     transition: transform 0.5s ease-in-out;
+}
+
+.bi-heart {
+    color: black;
+}
+
+.bi-heart-fill {
+    color: red;
 }
 
 .rotate-up {
