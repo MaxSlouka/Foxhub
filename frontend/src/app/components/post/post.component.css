@@ -30,6 +30,11 @@ i {
     color: red;
 }
 
+.post-likes-btn {
+    border: none;
+    background: none;
+}
+
 .rotate-up {
     transform: rotate(180deg);
 }

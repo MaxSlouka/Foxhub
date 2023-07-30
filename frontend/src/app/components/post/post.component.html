@@ -51,10 +51,19 @@
         <div class="post-container d-flex justify-items-end">
 
           <div class="post-likes mr-3">
-            <p>
-              <i [class]="post.isLikedByCurrentUser ? 'bi bi-heart-fill' : 'bi bi-heart mr-2'"></i>
+            <p *ngIf="!isLoggedIn">
+              <i [class]="post.isLikedByCurrentUser ? 'bi bi-heart-fill mr-2' : 'bi bi-heart mr-2'"></i>
               {{ post.likesCount }}
             </p>
+
+            <button class="post-likes-btn mr-3" [class.liked]="post.isLikedByCurrentUser" (click)="likePost(post.id)"
+              *ngIf="isLoggedIn">
+              <p>
+                <i [class]="post.isLikedByCurrentUser ? 'bi bi-heart-fill mr-2' : 'bi bi-heart mr-2'"></i>
+                {{ post.likesCount }}
+              </p>
+            </button>
+
           </div>
 
           <div class="post-comments mr-3">
@@ -66,10 +75,6 @@
         <div class="post-actions">
 
           <div class="input-group my-3" *ngIf="isLoggedIn">
-            <button class="btn btn-outline-primary mr-2" type="button" [class.liked]="post.isLikedByCurrentUser"
-              (click)="likePost(post.id)">
-              Like
-            </button>
             <input type="text" class="form-control mr-2" placeholder="add comment..." [(ngModel)]="commentText">
             <button class="btn btn-primary" type="button" (click)="commentPost()">Comment</button>
           </div>
