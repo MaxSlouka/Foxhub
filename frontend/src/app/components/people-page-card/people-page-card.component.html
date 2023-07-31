@@ -1,56 +1,30 @@
-<div class="center">
-    <div class="box center">
-
-        <a [routerLink]="['/profile',user.nickname]" class="card">
-            <img *ngIf="user.profilePictureUrl" ngSrc="{{  user.profilePictureUrl  }}" height=100 width=100
-                class="profile-img" loading="lazy" alt="profile_picture">
-        </a>
-
-        <div>
-            <p class="lead username">{{user.firstName}} {{user.lastName}}</p>
-            <p class="lead skill">{{user.personality?.name}}</p>
-            <button class="btn btn-outline-primary" type="button" *ngIf="!isLoggedIn" (click)="addToCart(user)">
+<tr>
+    <td data-th="Product">
+        <div class="row">
+            <div class="col-md-3 text-left">
+                <a [routerLink]="['/profile',user.nickname]" class="card">
+                    <img *ngIf="user.profilePictureUrl" ngSrc="{{user.profilePictureUrl}}" height=500 width=500
+                        alt="profile_picture" class="img-fluid d-none d-md-block mb-2 shadow my-2">
+                </a>
+            </div>
+            <div class="col-md-9 text-left mt-sm-2">
+                <h4>{{ user.firstName }}</h4>
+            </div>
+        </div>
+    </td>
+    <td data-th="personality-about">
+        <p class="font-weight-light">{{ user.location }}</p>
+    </td>
+    <td class="actions" data-th="">
+        <div class="text-right">
+            <button class="btn btn-outline-primary" type="button" (click)="addToCart(user)">
                 <ng-container *ngIf="user.inCart; else addToCartTemplate">
-                    <i class="bi bi-bag-check"></i> <span style="font-style: normal;">  In Bag</span>
+                    <i class="bi bi-cart4"></i> <span style="font-style: normal;"> In Cart</span>
                 </ng-container>
                 <ng-template #addToCartTemplate>
-                    <span style="font-style: normal;">Add to Bag</span>
+                    <span style="font-style: normal;">Add to Cart</span>
                 </ng-template>
             </button>
         </div>
-
-        <div class="arr-container center">
-            <i class="bi bi-arrow-right"></i>
-        </div>
-
-        <div class="left-container off">
-            <p>Personality</p>
-            <div class="personality-about">
-                <div>{{user.personality?.description}}</div>
-            </div>
-
-            <div class="icons">
-                <a [href]="user.facebook">
-                    <i class="bi bi-facebook"></i>
-                </a>
-                <a [href]="user.instagram">
-                    <i class="bi bi-instagram"></i>
-                </a>
-                <a [href]="user.linkedin">
-                    <i class="bi bi-linkedin"></i>
-                </a>
-                <a [href]="user.gitHub">
-                    <i class="bi bi-github"></i>
-                </a>
-                <a [href]="user.optionalPage">
-                    <i class="bi bi-globe"></i>
-                </a>
-            </div>
-
-            <div class="cancel center">
-                <i class="bi bi-x-lg"></i>
-            </div>
-
-        </div>
-    </div>
-</div>
+    </td>
+</tr>
