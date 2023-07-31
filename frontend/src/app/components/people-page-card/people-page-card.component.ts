@@ -18,7 +18,6 @@ export class PeoplePageCardComponent implements OnDestroy {
   // @ts-ignore
   users: User[];
   userEmail: string = '';
-  isOpen: boolean = false;
   isLoggedIn = false;
   addedUsers: User[] = this.cartService.getCartItems();
 
@@ -39,36 +38,6 @@ export class PeoplePageCardComponent implements OnDestroy {
   addToCart(user: User) {
     this.cartService.addToCart(user);
     this.isUserAdded(user);
-  }
-
-  toggleLeftContainer() {
-    const arr = this.elementRef.nativeElement.querySelector(".arr-container");
-    const leftContainer = this.elementRef.nativeElement.querySelector(".left-container");
-
-    if (!this.isOpen) {
-      arr.classList.add("active-arr");
-      leftContainer.classList.remove("off");
-      leftContainer.classList.add("active");
-    } else {
-      arr.classList.remove("active-arr");
-      leftContainer.classList.remove("active");
-      leftContainer.classList.add("off");
-    }
-
-    this.isOpen = !this.isOpen;
-  }
-
-  ngAfterViewInit() {
-    const arr = this.elementRef.nativeElement.querySelector(".arr-container");
-    const clc = this.elementRef.nativeElement.querySelector(".cancel");
-
-    arr.addEventListener("click", () => {
-      this.toggleLeftContainer();
-    });
-
-    clc.addEventListener("click", () => {
-      this.toggleLeftContainer();
-    });
   }
 
   ngOnInit(): void {

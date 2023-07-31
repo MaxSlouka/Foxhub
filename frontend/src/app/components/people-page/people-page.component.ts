@@ -40,6 +40,7 @@ export class PeoplePageComponent implements OnInit, AfterViewInit {
   selectAllPersonalities: boolean = true;
   addedUsers: User[] = [];
 
+
   actualPersonalityValue: string = '';
   actualLanguageValue: string = '';
   actualTechnologyValue: string = '';
@@ -51,6 +52,7 @@ export class PeoplePageComponent implements OnInit, AfterViewInit {
   restAgeFilter: User[] = [];
   restLanguageFilter: User[] = [];
   restTechnologiesFilter: User[] = [];
+
 
 
   constructor(private technologyService: TechnologyService,
@@ -267,7 +269,12 @@ export class PeoplePageComponent implements OnInit, AfterViewInit {
 
     for (let user of users) {
       // @ts-ignore
+
       if (user.languages.some(language => lowerCaseKeys.includes(language.name.toLowerCase()))) {
+
+      const age = currentYear - user.yearOfBirth;
+      if (age <= +this.rangeInputRef.nativeElement.value) {
+
         actualFilteredUsers.push(user);
       }
     }

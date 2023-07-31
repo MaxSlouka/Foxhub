@@ -25,13 +25,26 @@ img {
 
 }
 
+.border {
+    border-radius: 10px;
+}
+
+app-people-page-card {
+    width: 100%;
+    display: contents;
+}
+
 select {
     border-color: green !important;
     background: white !important;
     color: green !important;
 }
 
-.dropdown-menu{
-  max-height: 300px;
-  overflow: auto;
+.dropdown-menu {
+    max-height: 300px;
+    overflow: auto;
+}
+
+.form-check label:hover {
+    cursor: pointer;
 }
