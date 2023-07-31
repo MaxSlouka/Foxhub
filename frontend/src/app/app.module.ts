@@ -49,7 +49,6 @@ import { RevealOnScrollDirective } from './directives/reveal-on-scroll.directive
 import { PersonalityInfoPageComponent } from './components/personality-info-page/personality-info-page.component';
 import { RevealWithDelayDirective } from './directives/reveal-with-delay.directive';
 import { AdminBoardComponent } from './components/admin-board/admin-board.component';
-import { AdminBoardUserComponent } from './components/admin-board/admin-board-user/admin-board-user.component';
 
 
 @NgModule({
@@ -93,8 +92,7 @@ import { AdminBoardUserComponent } from './components/admin-board/admin-board-us
         PersonalityInfoPageComponent,
         ItemsCounterComponent,
         RevealWithDelayDirective,
-        AdminBoardComponent,
-        AdminBoardUserComponent
+        AdminBoardComponent
     ],
   imports: [
     FormsModule,
