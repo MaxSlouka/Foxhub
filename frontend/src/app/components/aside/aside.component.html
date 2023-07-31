@@ -4,12 +4,12 @@
       <p class="lead text-center all-people-desktop">Search by name or technology</p>
 
       <i class="fas mb-4" [ngClass]="{'fa-chevron-down': !showPeople, 'fa-chevron-up': showPeople}"
-        (click)="togglePeople()"></i>
+         (click)="togglePeople()"></i>
 
       <div *ngIf="showPeople">
-        <app-aside-search-bar class="all-people-desktop" [users]="users" [fullUsers]="users"></app-aside-search-bar>
+        <app-aside-search-bar class="all-people-desktop" [users]="verifiedUsers"
+                              [fullUsers]="users"></app-aside-search-bar>
       </div>
-
     </div>
   </div>
 </aside>

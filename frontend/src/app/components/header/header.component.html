@@ -1,19 +1,14 @@
 <nav class="navbar navbar-expand-lg justify-content-end">
 
-  <!-- logo -->
-
-  <a class="navbar-brand" routerLink="/">
-  </a>
-
   <!-- collapse hamburger -->
 
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <svg class="ham hamRotate ham7" viewBox="0 0 100 100" width="50" onclick="this.classList.toggle('active')">
-      <path class="line top" d="m 70,33 h -40 c 0,0 -6,1.368796 -6,8.5 0,7.131204 6,8.5013 6,8.5013 l 20,-0.0013"/>
-      <path class="line middle" d="m 70,50 h -40"/>
+      <path class="line top" d="m 70,33 h -40 c 0,0 -6,1.368796 -6,8.5 0,7.131204 6,8.5013 6,8.5013 l 20,-0.0013" />
+      <path class="line middle" d="m 70,50 h -40" />
       <path class="line bottom"
-            d="m 69.575405,67.073826 h -40 c -5.592752,0 -6.873604,-9.348582 1.371031,-9.348582 8.244634,0 19.053564,21.797129 19.053564,12.274756 l 0,-40"/>
+        d="m 69.575405,67.073826 h -40 c -5.592752,0 -6.873604,-9.348582 1.371031,-9.348582 8.244634,0 19.053564,21.797129 19.053564,12.274756 l 0,-40" />
     </svg>
   </button>
 
@@ -24,42 +19,43 @@
 
       <!-- logo -->
 
-      <a class="navbar-brand" routerLink="/main">
+      <a class="navbar-brand" routerLink="/">
         <img ngSrc="/assets/img/GFA-logo.png" width=50 height=50 alt="GFA logo">
       </a>
 
-      <!-- login and sign up -->
+      <!-- menu for not logged user -->
 
-      <div class="text-end" *ngIf="!isLoggedIn">
+      <div class="text-end mobile-menu" *ngIf="!isLoggedIn">
 
-        <a routerLink="/people" class="people-btn" aria-disabled="true">
-          <i class="bi bi-people"></i>
-        </a>
-
-        <a routerLink="/cart" class="cart-btn" aria-disabled="true">
-          <i class="bi bi-bag"></i>
-          <span class="badge badge-danger" *ngIf="countItems !=0">{{countItems}}</span>
-        </a>
+        <a routerLink="/intro" class="btn btn-outline-primary px-4 me-md-2" role="button" aria-disabled="true">About</a>
+        <a routerLink="/" class="btn btn-outline-primary px-4 me-md-2" role="button" aria-disabled="true">People</a>
+        <a routerLink="/main" class="btn btn-outline-primary px-4 me-md-2" role="button" aria-disabled="true">News</a>
+        <a routerLink="/cart" class="btn btn-outline-primary px-4 me-md-2 cart-btn" role="button"
+          aria-disabled="true"><i class="bi bi-cart4"></i> <span class="badge badge-danger"
+            *ngIf="countItems !=0">{{countItems}}</span></a>
 
         <a routerLink="/login" class="btn btn-primary" role="button" aria-disabled="true">Login</a>
         <a routerLink="/register" class="btn btn-outline-secondary" role="button" aria-disabled="true">Sign up</a>
 
       </div>
 
-      <!-- user options -->
+      <!-- menu for logged user -->
 
-      <div class="btn-group align-items-center" *ngIf="isLoggedIn">
+      <div class="text-end mobile-menu" *ngIf="isLoggedIn">
 
-        <a routerLink="/people" class="people-btn" aria-disabled="true">
-          <i class="bi bi-people"></i>
-        </a>
+        <a routerLink="/intro" class="btn btn-outline-primary px-4 me-md-2" role="button" aria-disabled="true">About</a>
+        <a routerLink="/" class="btn btn-outline-primary px-4 me-md-2" role="button" aria-disabled="true">People</a>
+        <a routerLink="/main" class="btn btn-outline-primary px-4 me-md-2" role="button" aria-disabled="true">News</a>
+        <a routerLink="/cart" class="btn btn-outline-primary px-4 me-md-2 cart-btn" role="button"
+          aria-disabled="true"><i class="bi bi-cart4"></i> <span class="badge badge-danger"
+            *ngIf="countItems !=0">{{countItems}}</span></a>
 
-        <div class="d-block link-body-emphasis text-decoration-none dropdown-toggle" data-toggle="dropdown"
-             aria-expanded="false">
-          <img *ngIf="user.profilePictureUrl" ngSrc="{{  user.profilePictureUrl  }}" alt="mdo" width=42 height=42
-               class="rounded-circle">
-        </div>
-
+        <div class="dropdown">
+          <div class="d-block link-body-emphasis text-decoration-none dropdown-toggle" data-toggle="dropdown"
+            aria-expanded="false">
+            <img *ngIf="user.profilePictureUrl" ngSrc="{{ user.profilePictureUrl }}" alt="mdo" width=42 height=42
+              class="rounded-circle">
+          </div>
         <div class="dropdown-menu">
           <a class="dropdown-item" [routerLink]="['/profile',userEmail]">
             <i class="bi bi-person-circle"></i>Profile - {{userEmail}}</a>
@@ -71,10 +67,7 @@
           <a class="dropdown-item" href="#" (click)="logout()">
             <i class="bi bi-door-closed"></i>Sign out</a>
         </div>
-
       </div>
-
     </div>
   </div>
-
 </nav>

@@ -4,6 +4,7 @@ import { PostsService } from "../../_services/posts.service";
 import { StorageService } from "../../_services/storage.service";
 import { ApiService } from "../../_services/api/api.service";
 import { User } from "../../models/user";
+import { Like } from "../../models/like";
 import { Comment } from "../../models/comment";
 
 @Component({
@@ -72,7 +73,10 @@ export class PostComponent implements OnInit {
       this.userEmail = this.storageService.getUserFromSession();
       this.apiService.getUserBasicInfo().subscribe((user: User) => {
         this.user = user;
+        this.post.isLikedByCurrentUser = this.post.likes.some((like: Like) => like.userId === this.currentUserId);
       });
+    } else {
+      this.post.isLikedByCurrentUser = false;
     }
   }
 
@@ -80,12 +84,18 @@ export class PostComponent implements OnInit {
     this.apiService.getAll().subscribe((usersFetch: User[]) => {
       this.users = usersFetch;
     });
+  
     this.postService.getPosts().subscribe((posts: Post[]) => {
       const updatedPost = posts.find(p => p.id === this.post.id);
       if (updatedPost) {
-        this.post = updatedPost;
+        this.post = updatedPost; 
+        this.checkLikedByCurrentUser(); 
       }
     });
+  }
+
+  checkLikedByCurrentUser() {
+    this.post.isLikedByCurrentUser = this.post.likes.some((like: Like) => like.userId === this.currentUserId);
   }
 
   isReplying(): Boolean {
@@ -103,6 +113,21 @@ export class PostComponent implements OnInit {
 
   stopEditing() {
     this.isEditing = false;
+  }
+  
+  likePost(postId: number) {
+    if (!this.post.isLikedByCurrentUser) {
+      this.postService.likePost(postId).subscribe(
+        () => {
+          console.log('Post liked successfully');
+          this.post.isLikedByCurrentUser = true;
+          this.post.likesCount++;
+        },
+        error => {
+          console.log('Error liking post', error);
+        }
+      );
+    }
   }
 
   commentText = '';
@@ -122,15 +147,20 @@ export class PostComponent implements OnInit {
     );
   }
 
-  likePost(postId: number) {
-    this.postService.likePost(postId).subscribe(
+  deleteComment(commentId: number): void {
+    this.postService.deleteComment(this.post.id, commentId).subscribe(
       response => {
-        console.log('Post liked successfully', response);
+        console.log('Comment deleted successfully', response);
         this.loadPost();
-        this.post.isLikedByCurrentUser = true;
+        this.deleteCommentEvent.emit(commentId);
       },
       error => {
-        console.log('Error liking post', error);
+        console.log('Error deleting comment', error);
+        if (error.status === 404) {
+        } else if (error.status === 401) {
+        } else {
+          console.log(error);
+        }
       }
     );
   }
@@ -162,24 +192,5 @@ export class PostComponent implements OnInit {
       });
     });
   }
-
-  deleteComment(commentId: number): void {
-    this.postService.deleteComment(this.post.id, commentId).subscribe(
-      response => {
-        console.log('Comment deleted successfully', response);
-        this.loadPost();
-        this.deleteCommentEvent.emit(commentId);
-      },
-      error => {
-        console.log('Error deleting comment', error);
-        if (error.status === 404) {
-        } else if (error.status === 401) {
-        } else {
-          console.log(error);
-        }
-      }
-    );
-  }
-
 
 }
