@@ -1,0 +1,22 @@
+
+
+<tr>
+  <td>{{user.firstName}} {{user.lastName}}</td>
+  <td>{{user.role?.name}}</td>
+  <td><button class="btn-primary btn" type="button" data-toggle="modal"
+              data-target="#changeRole">Change Role</button></td>
+  <td>{{user.verified}}</td>
+  <td>
+    <button
+      class="post-action btn btn-outline-danger"
+      type="button"
+      data-toggle="modal"
+      data-target="#confirmDelete"
+      (click)="sayHi()">
+      Remove
+    </button>
+
+  </td>
+</tr>
+
+
