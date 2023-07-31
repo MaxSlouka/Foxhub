@@ -1,6 +1,6 @@
-import { Component, Input } from '@angular/core';
-import { User } from "../../models/user";
-import { ApiService } from "../../_services/api/api.service";
+import {Component, Input} from '@angular/core';
+import {User} from "../../models/user";
+import {ApiService} from "../../_services/api/api.service";
 
 @Component({
   selector: 'app-aside-search-bar',
@@ -9,10 +9,8 @@ import { ApiService } from "../../_services/api/api.service";
 })
 
 export class AsideSearchBarComponent {
-  // @ts-ignore
-  @Input users: User[];
-  // @ts-ignore
-  @Input fullUsers: User[];
+  @Input() users: User[] = [];
+  @Input() fullUsers: User[] = [];
 
   constructor(private apiService: ApiService) {
   }

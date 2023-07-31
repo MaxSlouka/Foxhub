@@ -1,6 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { User } from "../../models/user";
-import { ApiService } from "../../_services/api/api.service";
+import {Component, OnInit} from '@angular/core';
+import {User} from "../../models/user";
+import {ApiService} from "../../_services/api/api.service";
 
 @Component({
   selector: 'app-aside',
@@ -10,13 +10,13 @@ import { ApiService } from "../../_services/api/api.service";
 
 export class AsideComponent implements OnInit {
 
-  // @ts-ignore
-  users: User[];
+  users: User[] = [];
+  verifiedUsers: User[] = [];
   showPeople = false;
+  rotationClass = '';
 
-  constructor(private apiService: ApiService) { }
-
-  rotationClass = ''; 
+  constructor(private apiService: ApiService) {
+  }
 
   togglePeople(): void {
     this.showPeople = !this.showPeople;
@@ -27,6 +27,8 @@ export class AsideComponent implements OnInit {
     // Fetch all users from the API
     this.apiService.getAll().subscribe((usersFetch: User[]) => {
       this.users = usersFetch;
+
+      this.verifiedUsers = this.users.filter(user => user.verified);
     });
   }
 }
