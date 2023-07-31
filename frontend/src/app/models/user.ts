@@ -32,4 +32,5 @@ export interface User {
   role?: Role,
   verified?: boolean,
   inCart?: boolean,
+  outOfFilters?: string[],
 }

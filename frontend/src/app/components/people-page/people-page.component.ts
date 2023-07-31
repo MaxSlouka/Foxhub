@@ -7,8 +7,6 @@ import {Language} from "../../models/language";
 import {LanguageService} from "../../_services/language.service";
 import {Personality} from "../../models/personality";
 import {PersonalityService} from "../../_services/personality.service";
-import {CartService} from "../../_services/cart.service";
-import {Subscription} from "rxjs";
 
 @Component({
   selector: 'app-people-page',
@@ -26,11 +24,15 @@ export class PeoplePageComponent implements OnInit, AfterViewInit {
   selectedLanguages: string[] = [];
   usedTechnologies: Technology[] = [];
   usedLanguages: Language[] = [];
+
   // @ts-ignore
   users: User[] = [];
   verifiedAndUsersOnly: User[] = [];
+  nonFilteredUsers: User[] = [];
+
   filterContentExpanded: boolean = true;
   isRangeChanged: boolean = false;
+
   // @ts-ignore
   workStatus: string;
   personalities: Personality[] = [];
@@ -38,16 +40,27 @@ export class PeoplePageComponent implements OnInit, AfterViewInit {
   selectAllPersonalities: boolean = true;
   addedUsers: User[] = [];
 
+  actualPersonalityValue: string = '';
+  actualLanguageValue: string = '';
+  actualTechnologyValue: string = '';
+  actualAgeValue: string = '';
+  actualWorkStatusValue: string = '';
+
+  restPersonalityFilter: User[] = [];
+  restOpenToWorkFilter: User[] = [];
+  restAgeFilter: User[] = [];
+  restLanguageFilter: User[] = [];
+  restTechnologiesFilter: User[] = [];
+
 
   constructor(private technologyService: TechnologyService,
               private languageService: LanguageService,
               private apiService: ApiService,
-              private personalityService: PersonalityService,
-              private cartService: CartService) {
+              private personalityService: PersonalityService) {
   }
 
   ngOnInit(): void {
-    this.workStatus = 'open';
+    this.workStatus = 'all';
 
     this.technologyService.getAll().subscribe(technologies => {
       this.technologies = technologies;
@@ -63,10 +76,11 @@ export class PeoplePageComponent implements OnInit, AfterViewInit {
     this.apiService.getAll().subscribe(users => {
       this.users = users.filter((user: User) => user.verified && user.role?.name === "USER");
       this.verifiedAndUsersOnly = users.filter((user: User) => user.verified && user.role?.name === "USER");
+      this.nonFilteredUsers = this.verifiedAndUsersOnly;
       this.usedTechnologiesList();
       this.usedLanguagesList();
-      for(let user of this.users){
-        if(this.addedUsers.includes(user)){
+      for (let user of this.users) {
+        if (this.addedUsers.includes(user)) {
           user.inCart = true;
         }
       }
@@ -85,13 +99,18 @@ export class PeoplePageComponent implements OnInit, AfterViewInit {
     });
   }
 
+  get filteredUsers(): any[] {
+    // @ts-ignore
+    return this.nonFilteredUsers.filter(user => user.outOfFilters?.length > 2);
+  }
+
   onPersonalitySelect(event: any) {
     const selectedPersonalityId = +event.target.value;
     this.selectAllPersonalities = false
     this.selectedPersonality = this.personalities.find(p =>
       p.id === selectedPersonalityId
     );
-    if (event.target.value === "All") {
+    if (event.target.value === "all") {
       this.selectAllPersonalities = true;
     }
     this.allFilters();
@@ -167,10 +186,16 @@ export class PeoplePageComponent implements OnInit, AfterViewInit {
 
     if (this.selectedTechnologies.length > 0) {
       filteredUsers = this.technologiesFilter(filteredUsers, this.selectedTechnologies);
+    } else {
+      this.actualTechnologyValue = '';
+      this.restTechnologiesFilter = [];
     }
 
     if (this.selectedLanguages.length > 0) {
       filteredUsers = this.languagesFilter(filteredUsers, this.selectedLanguages);
+    } else {
+      this.actualLanguageValue = '';
+      this.restLanguageFilter = [];
     }
 
     // @ts-ignore
@@ -181,42 +206,131 @@ export class PeoplePageComponent implements OnInit, AfterViewInit {
     filteredUsers = this.openToWorkFilter(filteredUsers);
     filteredUsers = this.personalityFilter(filteredUsers);
 
+    for (let user of this.nonFilteredUsers) {
+
+      user.outOfFilters = [];
+
+      if (this.restTechnologiesFilter.includes(user)) {
+        user.outOfFilters.push(this.actualTechnologyValue);
+      }
+
+      if (this.restLanguageFilter.includes(user)) {
+        user.outOfFilters.push(this.actualLanguageValue);
+      }
+
+      if (this.restAgeFilter.includes(user)) {
+        user.outOfFilters.push(this.actualAgeValue);
+      }
+
+      if (this.actualWorkStatusValue !== "all") {
+        if (this.restOpenToWorkFilter.includes(user)) {
+          user.outOfFilters.push(this.actualWorkStatusValue);
+        }
+      }
+
+      if (!this.selectAllPersonalities === undefined) {
+        if (this.restPersonalityFilter.includes(user)) {
+          user.outOfFilters.push(this.actualPersonalityValue);
+        }
+      }
+    }
+    console.log(this.nonFilteredUsers);
     this.users = filteredUsers;
   }
 
   // @ts-ignore
   technologiesFilter(users, keys: string[]) {
-    const lowerCaseKeys = keys.map(key => key.toLowerCase());
 
-    // @ts-ignore
-    return users.filter(user =>
-      lowerCaseKeys.every(key =>
-          // @ts-ignore
-          user.technologies && user.technologies.some(technology =>
-            technology.name.toLowerCase().includes(key)
-          )
-      )
-    );
+    const lowerCaseKeys = keys.map(key => key.toLowerCase());
+    const actualFilteredUsers: User[] = [];
+    this.restTechnologiesFilter = [];
+
+    for (let user of users) {
+      // @ts-ignore
+      if (user.technologies.some(technology => lowerCaseKeys
+        .includes(technology.name.toLowerCase()))) {
+        actualFilteredUsers.push(user);
+      }
+    }
+
+    this.actualTechnologyValue = lowerCaseKeys.join(', ').toString();
+    this.restTechnologiesFilter = this.verifiedAndUsersOnly
+      .filter(user => !actualFilteredUsers.includes(user));
+    return actualFilteredUsers;
   }
 
   // @ts-ignore
   languagesFilter(users, keys: string[]) {
     const lowerCaseKeys = keys.map(key => key.toLowerCase());
-    // @ts-ignore
-    return users.filter(user =>
-      lowerCaseKeys.every(key =>
-          // @ts-ignore
-          user.languages && user.languages.some(language =>
-            language.name.toLowerCase().includes(key)
-          )
-      )
-    );
+    const actualFilteredUsers: User[] = [];
+    this.restLanguageFilter = [];
+
+    for (let user of users) {
+      // @ts-ignore
+      if (user.languages.some(language => lowerCaseKeys.includes(language.name.toLowerCase()))) {
+        actualFilteredUsers.push(user);
+      }
+    }
+    this.actualLanguageValue = lowerCaseKeys.join(', ');
+    this.restLanguageFilter = this.verifiedAndUsersOnly
+      .filter(user => !actualFilteredUsers.includes(user));
+    return actualFilteredUsers;
   }
 
-  ageFilter(filteredUsers: User[]) {
+  personalityFilter(users: User[]) {
+    const actualFilteredUsers: User[] = [];
+    this.restPersonalityFilter = [];
+
+    for (let user of users) {
+      // @ts-ignore
+      if (user.personality?.id === this.selectedPersonality?.id) {
+        actualFilteredUsers.push(user);
+      } else if (this.selectAllPersonalities) {
+        actualFilteredUsers.push(user);
+      }
+    }
+
+    if (this.selectAllPersonalities === undefined) {
+      this.actualPersonalityValue = "";
+    } else {
+      this.actualPersonalityValue = <string>this.selectedPersonality?.name;
+    }
+
+    this.restPersonalityFilter = this.verifiedAndUsersOnly
+      .filter(user => !actualFilteredUsers.includes(user));
+    return actualFilteredUsers;
+  }
+
+  openToWorkFilter(users: User[]) {
+    const actualFilteredUsers: User[] = [];
+    this.restOpenToWorkFilter = [];
+
+    for (let user of users) {
+      if ((this.workStatus === "open" && user.workStatus === true) ||
+        (this.workStatus === "closed" && user.workStatus === false ||
+          this.workStatus === "all")) {
+        actualFilteredUsers.push(user);
+      }
+    }
+
+    if (this.workStatus === "open") {
+      this.actualWorkStatusValue = "Seeking employment: true"
+    } else if (this.workStatus === "closed") {
+      this.actualWorkStatusValue = "Seeking employment: false"
+    } else {
+      this.actualWorkStatusValue = "all"
+    }
+    this.restOpenToWorkFilter = this.verifiedAndUsersOnly
+      .filter(user => !actualFilteredUsers.includes(user));
+    return actualFilteredUsers;
+  }
+
+  ageFilter(users: User[]) {
     const currentYear = new Date().getFullYear();
     const actualFilteredUsers: User[] = [];
-    for (let user of filteredUsers) {
+    this.restAgeFilter = [];
+
+    for (let user of users) {
       // @ts-ignore
       const age = currentYear - user.yearOfBirth;
       { // @ts-ignore
@@ -225,35 +339,10 @@ export class PeoplePageComponent implements OnInit, AfterViewInit {
         }
       }
     }
-    return actualFilteredUsers;
-  }
 
-  // @ts-ignore
-  openToWorkFilter(filteredUsers) {
-    const actualFilteredUsers: User[] = [];
-    for (let user of filteredUsers) {
-      // @ts-ignore
-      if (this.workStatus === "open" && user.workStatus === true) {
-        actualFilteredUsers.push(user);
-      }
-      // @ts-ignore
-      if (this.workStatus === "closed" && user.workStatus === false) {
-        actualFilteredUsers.push(user);
-      }
-    }
-    return actualFilteredUsers;
-  }
-
-  personalityFilter(filteredUsers: User[]) {
-    const actualFilteredUsers: User[] = [];
-    for (let user of filteredUsers) {
-      // @ts-ignore
-      if (user.personality?.id === this.selectedPersonality?.id) {
-        actualFilteredUsers.push(user);
-      } else if (this.selectAllPersonalities) {
-        actualFilteredUsers.push(user);
-      }
-    }
+    this.actualAgeValue = this.rangeInputRef.nativeElement.value;
+    this.restAgeFilter = this.verifiedAndUsersOnly
+      .filter(user => !actualFilteredUsers.includes(user));
     return actualFilteredUsers;
   }
 }

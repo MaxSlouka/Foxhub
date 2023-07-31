@@ -31,7 +31,8 @@
 
   <div class="py-5 text-center">
     <h2 class="display-5 fw-bold text-body-emphasis mb-4">Shop your colleague and</h2>
-    <h1 class="display-5 fw-bold text-body-emphasis lh-1 mb-4 page-header">Find a perfect <span>Match</span> for you!</h1>
+    <h1 class="display-5 fw-bold text-body-emphasis lh-1 mb-4 page-header">Find a perfect <span>Match</span> for you!
+    </h1>
     <p class="lead"><i class="bi bi-lightbulb mr-1"></i><b>Pro Tip:</b> Use the filters to boost your results.</p>
     <a routerLink="/personality-test" class="btn btn-outline-primary btn-lg px-4 me-md-2" role="button"
        aria-disabled="true">Learn more about personality</a>
@@ -89,7 +90,14 @@
 
         <p class="lead mt-4 border-bottom">Seeking employment</p>
         <div class="form-check">
-          <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="open" checked
+          <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios0" value="all"
+                 [(ngModel)]="workStatus" (ngModelChange)="onWorkStatusChange()">
+          <label class="form-check-label" for="exampleRadios0">
+            All
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="open"
                  [(ngModel)]="workStatus" (ngModelChange)="onWorkStatusChange()">
           <label class="form-check-label" for="exampleRadios1">
             True
@@ -115,7 +123,27 @@
     <div class="col-md-8">
       <div class="row people-list">
 
-        <app-people-page-card class="ml-4" *ngFor="let user of users" [user]="user" ></app-people-page-card>
+        <app-people-page-card class="ml-4" *ngFor="let user of users" [user]="user"></app-people-page-card>
+
+        <p>1 filter missing :</p>
+        <ng-container *ngFor="let user of nonFilteredUsers">
+          <ng-container *ngIf="user.outOfFilters?.length === 1">
+            <app-people-page-card [user]="user"></app-people-page-card>
+          </ng-container>
+        </ng-container>
+
+        <p>2 filter missing :</p>
+        <ng-container *ngFor="let user of nonFilteredUsers">
+          <ng-container *ngIf="user.outOfFilters?.length === 2">
+            <app-people-page-card [user]="user"></app-people-page-card>
+          </ng-container>
+        </ng-container>
+
+        <p>more: </p>
+        <ng-container *ngFor="let user of filteredUsers">
+          <app-people-page-card [user]="user"></app-people-page-card>
+        </ng-container>
+
 
       </div>
     </div>
