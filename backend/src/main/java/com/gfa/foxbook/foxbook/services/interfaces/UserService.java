@@ -33,4 +33,6 @@ public interface UserService {
     void saveUser(User user);
 
     User getCurrentUser(HttpServletRequest request);
+
+    void changeRole(User user);
 }

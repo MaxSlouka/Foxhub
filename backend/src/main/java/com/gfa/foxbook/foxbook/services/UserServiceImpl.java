@@ -126,6 +126,21 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public void changeRole(User user) {
+        String currentRole = user.getRoles().get(0).getName();
+
+        if (currentRole.equals("USER")) {
+            Role newRole = new Role("ADMIN");
+            user.getRoles().set(0, newRole);
+        }
+        else if (currentRole.equals("ADMIN")) {
+            Role newRole = new Role("USER");
+            user.getRoles().set(0, newRole);
+        }
+        userRepository.save(user);
+    }
+
+    @Override
     public User updateProfile(User user, User userDTO) {
         if (userDTO.getFirstName() != null) {
             user.setFirstName(userDTO.getFirstName());

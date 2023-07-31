@@ -22,6 +22,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
   user: User = {email: "", firstName: "", lastName: "", password: ""};
 
   isLoggedIn = false;
+  // @ts-ignore
+  userRole: string;
 
   userEmail: string = '';
 
@@ -44,6 +46,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
       this.userEmail = this.storageService.getUserFromSession();
       this.apiService.getUserBasicInfo().subscribe((user: User) => {
         this.user = user;
+        // @ts-ignore
+        this.userRole = user.roles[0].name;
       });
     }
     this.cartItemsSubscription = this.cartService.getCartItemsObservable()

@@ -1,5 +1,6 @@
 package com.gfa.foxbook.foxbook.controllers;
 
+import com.gfa.foxbook.foxbook.config.Constants;
 import com.gfa.foxbook.foxbook.models.dtos.PasswordDTO;
 import com.gfa.foxbook.foxbook.models.dtos.UserProfileDTO;
 import com.gfa.foxbook.foxbook.models.nonusermodels.Comment;
@@ -35,7 +36,7 @@ import java.util.Optional;
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("api/v1/user")
-@CrossOrigin(origins = {"http://localhost:4200", "http://foxhub.gfapp.eu"}, maxAge = 3600, allowCredentials = "true")
+@CrossOrigin(origins = {"http://localhost:4200", "http://foxhub.gfapp.eu", "https://foxhub.gfapp.eu"}, maxAge = 3600, allowCredentials = "true")
 public class UserController {
     private final UserService userService;
     private final JwtUtils jwtUtils;
@@ -44,7 +45,9 @@ public class UserController {
     private final PasswordEncoder passwordEncoder;
     private final CommentService commentService;
 
+
     private String uploadDir = "/home/user/uploads";
+
 
     @GetMapping("/person")
     public ResponseEntity<?> getUser(HttpServletRequest request) {
@@ -86,10 +89,10 @@ public class UserController {
         String fileName = file.getOriginalFilename();
         String extension = fileName.substring(fileName.lastIndexOf("."));
         try {
-            Files.createDirectories(Paths.get(uploadDir));
-            Path filePath = Paths.get(uploadDir, nickname + extension);
+            Files.createDirectories(Paths.get(Constants.uploadDir));
+            Path filePath = Paths.get(Constants.uploadDir, nickname + extension);
             file.transferTo(filePath);
-            user.setProfilePictureUrl("http://foxhub.gfapp.eu/uploads/" + nickname + extension);
+            user.setProfilePictureUrl(Constants.uploadAddress + nickname + extension);
             userService.saveUser(user);
             return ResponseEntity.ok().build();
         } catch (IOException e) {
