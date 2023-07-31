@@ -1,120 +1,23 @@
-.card {
+.text-left a {
     border: none;
-}
-
-.username {
-    font-weight: bold;
-}
-
-.center {
     display: flex;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
 }
 
-.box {
-    width: 250px;
-    height: 250px;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.288);
-    border-radius: 23px;
-    flex-direction: column;
-    color: rgb(0, 0, 0);
-    position: relative;
-    overflow: hidden;
-    margin: 1rem;
+.text-left a:hover {
+    transform: scale(1.1);
+    cursor: pointer;
 }
 
-.box a img {
-    width: 100px;
-    height: 100px;
+.text-left a img {
     border-radius: 50%;
 }
 
-.box a img:hover {
-    transform: scale(1.1);
-}
-
-.username {
-    margin-bottom: 5px;
-    font-size: 1.5rem;
-}
-
-.btn-outline-primary {
-    border: solid 1px #0f2711;
-    color: #0f2711;
-}
-
-.btn-outline-primary:hover {
-    background-color: #0f2711;
-    color: white;
-}
-
-.arr-container,
-.cancel {
-    position: absolute;
-    width: 50px;
-    height: 50px;
-    background: rgb(128, 128, 128);
-    bottom: 0;
-    right: 0;
-    border-radius: 23px 0 23px 0;
-    color: rgb(255, 255, 255);
-    font-size: 1.5rem;
+tr:hover {
+    background: rgba(0, 0, 0, 0.041);
     cursor: pointer;
-    transition: all .4s;
-}
-
-.arr-container i {
-    transform: rotate(45deg);
-}
-
-.active-arr {
-    transform: translate(80%, 80%);
-}
-
-.left-container {
-    position: absolute;
-    background: #0f2711;
-    color: #ffffff;
-    width: 100%;
-    height: 100%;
-    border-radius: 23px;
-    padding: 20px;
-    transition: all .4s;
-}
-
-.off {
-    transform: translate(-80%, -80%) rotate(90deg);
-}
-
-.active {
-    transform: translate(0) rotate(0);
-}
-
-.left-container p {
-    margin-bottom: 15px;
-    font-size: 1.2rem;
-}
-
-.left-container .personality-about div {
-    display: inline-block;
-    color: rgb(155, 155, 155);
-    font-size: .9rem;
-    margin: 4px 4px 4px 0;
-}
-
-.left-container .icons {
-    font-size: 1.6rem;
-    margin-top: 10px;
-}
-
-.left-container .icons a i {
-    color: #cfcfcf;
-    cursor: pointer;
-    margin-right: 10px;
-    transition: transform 0.4s ease;
-}
-
-.left-container .icons a i:hover {
-    color: #000000;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    border-radius: 10px;
 }
