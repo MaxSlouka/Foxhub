@@ -36,6 +36,11 @@ export class ApiService {
     return this.http.delete(prefix + '/api/v1/user/people');
   }
 
+  removeUser(nickname: string | undefined):void{
+
+    this.http.delete(prefix + 'api/v1/admin/people/'+nickname).subscribe();
+  }
+
   search(user: any, key: string, results: any[]) {
     let hasTechnologyMatch = false;
 
