@@ -38,7 +38,6 @@ export class PeoplePageComponent implements OnInit, AfterViewInit {
   selectAllPersonalities: boolean = true;
   addedUsers: User[] = [];
 
-
   constructor(private technologyService: TechnologyService,
               private languageService: LanguageService,
               private apiService: ApiService,
@@ -219,10 +218,8 @@ export class PeoplePageComponent implements OnInit, AfterViewInit {
     for (let user of filteredUsers) {
       // @ts-ignore
       const age = currentYear - user.yearOfBirth;
-      { // @ts-ignore
-        if (age <= this.rangeInputRef.nativeElement.value) {
-          actualFilteredUsers.push(user);
-        }
+      if (age <= +this.rangeInputRef.nativeElement.value) {
+        actualFilteredUsers.push(user);
       }
     }
     return actualFilteredUsers;
