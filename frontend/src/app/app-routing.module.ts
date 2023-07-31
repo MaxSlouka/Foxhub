@@ -17,11 +17,11 @@ import { CreatorsComponent } from "./components/creators/creators.component";
 import { PersonalityInfoPageComponent } from "./components/personality-info-page/personality-info-page.component";
 
 const routes: Routes = [
-  { path: '', component: IntroComponent },
+  { path: '', component: PeoplePageComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'main', component: MainPageComponent },
-  { path: 'people', component: PeoplePageComponent },
+  { path: 'intro', component: IntroComponent },
   { path: 'profile/:username', component: ProfilePageComponent },
   { path: 'update-profile', component: UserSettingsPageComponent },
   { path: 'reset-password', component: ResetPasswordComponent },
