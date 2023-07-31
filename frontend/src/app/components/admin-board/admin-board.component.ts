@@ -25,8 +25,10 @@ export class AdminBoardComponent implements OnInit{
 
 
 
-  deleteUser(user: User) {
-    console.log(user.firstName)
+  deleteUser() {
+    console.log("hi")
+    // console.log(this.selectedUser.firstName) // todo remove
+    // this.apiService.removeUser(this.selectedUser.nickname)
   }
 
   setSelectedUser(user: User) {
