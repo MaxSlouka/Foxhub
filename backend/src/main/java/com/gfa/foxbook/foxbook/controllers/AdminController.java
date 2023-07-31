@@ -63,18 +63,15 @@ public class AdminController {
         return ResponseEntity.noContent().build();
     }
 
-    @PutMapping("/upgrade/{nickname}")
+    @PostMapping("/change-role/{nickname}")
     public ResponseEntity<?> upgradeUser(@PathVariable String nickname) {
         Optional<User> maybeUser = userService.findByNickname(nickname);
         if (maybeUser.isEmpty()) {
             return ResponseEntity.notFound().build();
         }
         User user = maybeUser.get();
-        Role adminRole = new Role("ADMIN");
-        user.getRoles().add(adminRole);
-        //userService.updateProfile(user);
-        // todo: fix this
-        return ResponseEntity.ok().body(userService.upgradeUser(user.getNickname()));
+        userService.changeRole(user);
+        return ResponseEntity.ok().build();
     }
 
     @DeleteMapping("/people/{nickname}")
