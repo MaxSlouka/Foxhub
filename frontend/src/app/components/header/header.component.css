@@ -1,5 +1,6 @@
 .dropdown-menu {
-  left: -125px;
+  left: -10rem;
+  top: 3rem;
 }
 
 .d-flex {
@@ -16,22 +17,6 @@ ul li a {
 
 .btn {
   margin-right: 1rem;
-}
-
-.people-btn,
-.cart-btn {
-  width: 42px;
-  height: 42px;
-  background-color: #ffffff;
-  cursor: pointer;
-  text-decoration: none;
-  color: #007f00;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-right: 1rem;
-  border: 1px solid #007f00;
 }
 
 .cart-btn {
@@ -54,14 +39,6 @@ ul li a {
   top: -5px;
   right: -5px;
   border-radius: 50%;
-}
-
-
-.people-btn:hover,
-.cart-btn:hover {
-  transform: scale(1.1);
-  color: white;
-  background-color: #007f00;
 }
 
 .dropdown-toggle:hover {
@@ -97,6 +74,20 @@ ul li a {
     
     .mobile-navbar {
         flex-direction: column;
+    }
+
+    .btn {
+      margin-right: 1rem;
+      margin-top: 1rem;
+    }
+
+    .mobile-menu {
+      display: flex;
+      flex-direction: column;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
     }
   
 }
