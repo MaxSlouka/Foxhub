@@ -10,8 +10,7 @@ import {ApiService} from "../../_services/api/api.service";
 export class AdminBoardComponent implements OnInit{
   // @ts-ignore
   users: User[] = [];
-  // @ts-ignore
-  selectedUser: User;
+  selectedUser: User = {password: "", firstName: "", lastName: "", email: ""};
 
   constructor(private apiService:ApiService) {
   }
@@ -23,16 +22,18 @@ export class AdminBoardComponent implements OnInit{
     });
   }
 
-
-
   deleteUser() {
-    console.log("hi")
-    // console.log(this.selectedUser.firstName) // todo remove
+    console.log(this.selectedUser.firstName) // todo remove
     // this.apiService.removeUser(this.selectedUser.nickname)
   }
 
   setSelectedUser(user: User) {
+    console.log("hi")
     this.selectedUser = user;
+    console.log(this.selectedUser);
   }
 
+  sayHi() {
+    console.log("hi")
+  }
 }
