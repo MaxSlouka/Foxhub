@@ -22,18 +22,16 @@ export class AdminBoardComponent implements OnInit{
     });
   }
 
-  deleteUser() {
-    console.log(this.selectedUser.firstName) // todo remove
-    // this.apiService.removeUser(this.selectedUser.nickname)
+  deleteUser(user:User) {
+    this.apiService.removeUser(user.nickname)
   }
 
   setSelectedUser(user: User) {
-    console.log("hi")
     this.selectedUser = user;
-    console.log(this.selectedUser);
   }
 
-  sayHi() {
-    console.log("hi")
+  changeRole(user: User) {
+    this.apiService.changeRole(user.nickname)
+
   }
 }
