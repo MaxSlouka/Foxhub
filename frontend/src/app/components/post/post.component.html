@@ -8,7 +8,7 @@
 
             <div class="post-author-image mx-2">
               <img class="profile-img rounded-circle" height="52" width="52" [src]="post.authorProfilePic"
-                (error)="post.authorProfilePic = '/assets/img/default-profile.png'" alt="profile picture"/>
+                (error)="post.authorProfilePic = '/assets/img/default-profile.png'" alt="profile picture" />
             </div>
 
             <div class="post-details ml-2">
@@ -51,11 +51,23 @@
         <div class="post-container d-flex justify-items-end">
 
           <div class="post-likes mr-3">
-            <p>Likes: {{ post.likesCount }}</p>
+            <p *ngIf="!isLoggedIn">
+              <i [class]="post.isLikedByCurrentUser ? 'bi bi-heart-fill mr-2' : 'bi bi-heart mr-2'"></i>
+              {{ post.likesCount }}
+            </p>
+
+            <button class="post-likes-btn post-likes-toggler mr-3" [class.liked]="post.isLikedByCurrentUser" (click)="likePost(post.id)"
+              *ngIf="isLoggedIn">
+              <p>
+                <i [class]="post.isLikedByCurrentUser ? 'bi bi-heart-fill mr-2' : 'bi bi-heart mr-2'"></i>
+                {{ post.likesCount }}
+              </p>
+            </button>
+
           </div>
 
-          <div class="post-comments mr-3">
-            <p>Comments: {{ post.comments.length }}</p>
+          <div class="post-comments post-comments-toggler mr-3">
+            <p (click)="toggleComments()"><i class="bi bi-chat-square-text mr-2"></i> {{ post.comments.length }}</p>
           </div>
 
         </div>
@@ -63,21 +75,15 @@
         <div class="post-actions">
 
           <div class="input-group my-3" *ngIf="isLoggedIn">
-            <button class="btn btn-outline-primary mr-2" type="button" [class.liked]="post.isLikedByCurrentUser"
-              (click)="likePost(post.id)">
-              Like
-            </button>
             <input type="text" class="form-control mr-2" placeholder="add comment..." [(ngModel)]="commentText">
             <button class="btn btn-primary" type="button" (click)="commentPost()">Comment</button>
           </div>
 
-          <div class="post-comments mr-3 mt-3 border-top">
-            <p class="lead my-4 font-weight-bold">Comments:</p>
+          <div class="post-comments mr-3 mt-3">
 
-            <i class="fas mb-4" [ngClass]="{'fa-chevron-down': !showComments, 'fa-chevron-up': showComments}"
-              (click)="toggleComments()"></i>
+            <div *ngIf="showComments" class=" border-top">
+              <p class="lead my-4 font-weight-bold">Comments:</p>
 
-            <div *ngIf="showComments">
               <div *ngFor="let comment of post.comments">
                 <div class="flex-comment">
                   <img class="profile-img rounded-circle mr-2" height="22" width="22" [src]="comment.authorProfilePic"
