@@ -63,8 +63,10 @@
 
         <p class="lead mt-4 border-bottom">Seeking employment</p>
         <div class="form-check">
+
           <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="open" checked
             [(ngModel)]="workStatus" (ngModelChange)="onWorkStatusChange()">
+
           <label class="form-check-label" for="exampleRadios1">
             True
           </label>
@@ -132,9 +134,7 @@
           <app-people-page-card class="my-4" *ngFor="let user of users" [user]="user"></app-people-page-card>
         </tbody>
       </table>
-
     </div>
-
   </div>
 </div>
 
