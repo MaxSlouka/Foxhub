@@ -1,12 +1,12 @@
-import {Component, OnInit, ViewChild, ElementRef} from '@angular/core';
-import {Technology} from "../../models/technology";
-import {TechnologyService} from "../../_services/technology.service";
-import {ApiService} from "../../_services/api/api.service";
-import {User} from "../../models/user";
-import {Language} from "../../models/language";
-import {LanguageService} from "../../_services/language.service";
-import {Personality} from "../../models/personality";
-import {PersonalityService} from "../../_services/personality.service";
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Technology } from "../../models/technology";
+import { TechnologyService } from "../../_services/technology.service";
+import { ApiService } from "../../_services/api/api.service";
+import { User } from "../../models/user";
+import { Language } from "../../models/language";
+import { LanguageService } from "../../_services/language.service";
+import { Personality } from "../../models/personality";
+import { PersonalityService } from "../../_services/personality.service";
 
 @Component({
   selector: 'app-people-page',
@@ -15,32 +15,29 @@ import {PersonalityService} from "../../_services/personality.service";
 })
 
 export class PeoplePageComponent implements OnInit {
-  @ViewChild('customRange3', {static: true}) rangeInputRef!: ElementRef<HTMLInputElement>;
-  @ViewChild('rangeValue', {static: true}) rangeValueRef!: ElementRef<HTMLSpanElement>;
+  @ViewChild('customRange3', { static: true }) rangeInputRef!: ElementRef<HTMLInputElement>;
+  @ViewChild('rangeValue', { static: true }) rangeValueRef!: ElementRef<HTMLSpanElement>;
 
   technologies: Technology[] = [];
   languages: Language[] = [];
-  selectedTechnologies: string[] = [];
-  selectedLanguages: string[] = [];
-  selectedAges: string[] = [];
+  personalities: Personality[] = [];
+  addedUsers: User[] = [];
   usedTechnologies: Technology[] = [];
   usedLanguages: Language[] = [];
+
+  selectedTechnologies: string[] = [];
+  selectedLanguages: string[] = [];
+  selectedPersonality: Personality | undefined;
+  selectAllPersonalities: boolean = true;
+  selectedAges: string[] = [];
 
   // @ts-ignore
   users: User[] = [];
   verifiedAndUsersOnly: User[] = [];
   nonFilteredUsers: User[] = [];
-
   filterContentExpanded: boolean = true;
-
   // @ts-ignore
   filterWorkStatus: string;
-
-  personalities: Personality[] = [];
-  selectedPersonality: Personality | undefined;
-  selectAllPersonalities: boolean = true;
-  addedUsers: User[] = [];
-
 
   actualPersonalityValue: string = '';
   actualLanguageValue: string = '';
@@ -54,11 +51,10 @@ export class PeoplePageComponent implements OnInit {
   restLanguageFilter: User[] = [];
   restTechnologiesFilter: User[] = [];
 
-
   constructor(private technologyService: TechnologyService,
-              private languageService: LanguageService,
-              private apiService: ApiService,
-              private personalityService: PersonalityService) {
+    private languageService: LanguageService,
+    private apiService: ApiService,
+    private personalityService: PersonalityService) {
   }
 
   ngOnInit(): void {
@@ -184,7 +180,6 @@ export class PeoplePageComponent implements OnInit {
   onWorkStatusChange() {
     this.allFilters();
   }
-
 
   allFilters() {
     let filteredUsers = [...this.verifiedAndUsersOnly];
@@ -363,7 +358,7 @@ export class PeoplePageComponent implements OnInit {
               actualFilteredUsers.push(user)
             }
           }
-          if (ageValue === "40" && age >= 40 ) {
+          if (ageValue === "40" && age >= 40) {
             if (!actualFilteredUsers.includes(user)) {
               actualFilteredUsers.push(user)
             }
@@ -377,6 +372,32 @@ export class PeoplePageComponent implements OnInit {
       .filter(user => !actualFilteredUsers.includes(user));
     return actualFilteredUsers;
   }
+
+  clearAllFilters() {
+    this.selectedTechnologies = [];
+    this.selectedLanguages = [];
+    this.selectedAges = [];
+    this.filterWorkStatus = 'all';
+    this.selectedPersonality = undefined;
+    this.selectAllPersonalities = true;
+
+    for (let user of this.nonFilteredUsers) {
+      user.outOfFilters = [];
+    }
+
+    const ageCheckboxes = document.querySelectorAll<HTMLInputElement>('input[type="checkbox"]');
+    const ageAllCheckbox = document.querySelector<HTMLInputElement>('input[type="checkbox"][value="all"]');
+    ageCheckboxes.forEach((checkbox) => {
+      checkbox.checked = false;
+    });
+
+    if (ageAllCheckbox) {
+      ageAllCheckbox.checked = true;
+    }
+
+    this.allFilters();
+  }
+
 }
 
 
