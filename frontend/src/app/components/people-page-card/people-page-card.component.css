@@ -36,7 +36,6 @@
 .left-side {
     display: flex;
     flex-direction: row;
-    justify-content: space;
     align-items: center;
 }
 

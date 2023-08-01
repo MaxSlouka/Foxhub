@@ -19,22 +19,32 @@ ul li a {
   margin-right: 1rem;
 }
 
+@media only screen and (max-width: 768px) {
+
+  .btn {
+    margin-right: 1rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+
+}
+
 .cart-btn {
   position: relative;
 }
 
-.cart-btn > span {
+.cart-btn>span {
   position: absolute;
   top: -5px;
   right: -5px;
   border-radius: 50%;
 }
 
-.cart-btn{
+.cart-btn {
   position: relative;
 }
 
-.cart-btn>span{
+.cart-btn>span {
   position: absolute;
   top: -5px;
   right: -5px;
@@ -42,7 +52,7 @@ ul li a {
 }
 
 .dropdown-toggle:hover {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .dropdown-item {
@@ -71,25 +81,20 @@ ul li a {
 }
 
 @media only screen and (max-width: 768px) {
-    
-    .mobile-navbar {
-        flex-direction: column;
-    }
 
-    .btn {
-      margin-right: 1rem;
-      margin-top: 1rem;
-    }
+  .mobile-navbar {
+    flex-direction: column;
+  }
 
-    .mobile-menu {
-      display: flex;
-      flex-direction: column;
-      flex-direction: row;
-      align-items: center;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
-  
+  .mobile-menu {
+    display: flex;
+    flex-direction: column;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
 }
 
 /* hamburger menu */
