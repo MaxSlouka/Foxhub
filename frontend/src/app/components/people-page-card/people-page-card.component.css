@@ -1,23 +1,64 @@
-.text-left a {
-    border: none;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.card {
+    border-radius: 10px;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
 }
 
-.text-left a:hover {
-    transform: scale(1.1);
+@media (max-width: 767.98px) {
+
+    .card {
+        width: 320px;
+    }
+
+}
+
+.card:hover {
     cursor: pointer;
 }
 
-.text-left a img {
+.card-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.left-side {
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-items: center;
+}
+
+.left-side a {
+    border: none;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background: none;
+}
+
+.left-side a img {
+    border: 5px solid white;
+    background: rgba(255, 255, 255, 0);
+    width: 100px;
+    height: 100px;
     border-radius: 50%;
 }
 
-tr:hover {
-    background: rgba(0, 0, 0, 0.041);
-    cursor: pointer;
-    margin-top: 1rem;
-    margin-bottom: 1rem;
+@media (max-width: 767.98px) {
+
+    .left-side a {
+        display: none;
+    }
+
+}
+
+.left-side a img:hover {
+    transform: scale(1.1);
+}
+
+.card-body, 
+.collapse {
     border-radius: 10px;
 }
