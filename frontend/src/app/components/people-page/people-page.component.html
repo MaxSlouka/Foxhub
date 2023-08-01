@@ -120,18 +120,7 @@
 
     <div class="col-8 ml-2">
 
-      <table id="shoppingCart" class="table table-condensed">
-        <thead>
-          <tr>
-            <th style="width:40%">Person</th>
-            <th style="width:30%">Location</th>
-            <th style="width:30%"></th>
-          </tr>
-        </thead>
-        <tbody>
-          <app-people-page-card class="my-4" *ngFor="let user of users" [user]="user"></app-people-page-card>
-        </tbody>
-      </table>
+      <app-people-page-card class="my-4" *ngFor="let user of users" [user]="user"></app-people-page-card>
 
     </div>
 
