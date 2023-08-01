@@ -6,6 +6,7 @@ import { Language } from "../../models/language";
 import { Technology } from "../../models/technology";
 import { Personality } from "../../models/personality";
 import { GlobalConstants } from "../../common/global-constants";
+import {Router} from "@angular/router";
 
 const prefix = GlobalConstants.prefix;
 
@@ -21,7 +22,7 @@ export class ApiService {
 
   private apiUrlGetAll: string = prefix + "/api/v1/public/people";
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient,private router:Router) {
   }
 
   getAll(): Observable<User[]> {
@@ -34,6 +35,12 @@ export class ApiService {
 
   deleteUser(): Observable<any> {
     return this.http.delete(prefix + '/api/v1/user/people');
+  }
+
+  removeUser(nickname: string | undefined):void{
+    this.http.delete(prefix + '/api/v1/admin/people/'+nickname).subscribe(next=> {
+      window.location.href = "admin-board"
+    });
   }
 
   search(user: any, key: string, results: any[]) {
@@ -98,5 +105,12 @@ export class ApiService {
     },
       httpOptions
     );
+  }
+
+  changeRole(nickname: string | undefined) {
+    // @ts-ignore
+    this.http.post(prefix + '/api/v1/admin/change-role/'+nickname).subscribe(next=> {
+      window.location.href = "admin-board"
+    });
   }
 }

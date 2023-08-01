@@ -74,7 +74,6 @@ export class UserSettingsPageComponent {
   setProgress(): number {
     let filledFields: number = 0;
     let totalFields: number = Object.keys(this.user).length;
-    console.log(this.user)
 
     for (let prop in this.user) {
       // @ts-ignore
