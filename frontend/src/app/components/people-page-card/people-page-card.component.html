@@ -27,5 +27,5 @@
       </button>
     </div>
   </td>
-  <td>{{user.outOfFilters}}</td>
+  <td *ngFor="let filter of user.outOfFilters">{{filter}}</td>
 </tr>
