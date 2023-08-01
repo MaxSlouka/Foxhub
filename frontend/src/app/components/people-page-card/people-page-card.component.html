@@ -1,17 +1,18 @@
 <div id="accordion">
     <div class="card">
-        <div class="card-header" id="headingOne" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true"
-            aria-controls="collapseOne">
+        <div class="card-header" [id]="'heading-' + user.nickname" data-toggle="collapse"
+            [attr.data-target]="'#collapse-' + user.nickname" [attr.aria-controls]="'collapse-' + user.nickname"
+            aria-expanded="false">
 
             <div class="left-side">
-
-                <a [routerLink]="['/profile',user.nickname]" class="card">
-                    <img *ngIf="user.profilePictureUrl" ngSrc="{{user.profilePictureUrl}}" height=100 width=100
+                <a [routerLink]="['/profile', user.nickname]" class="card">
+                    <img *ngIf="user.profilePictureUrl" [src]="user.profilePictureUrl" height="100" width="100"
                         alt="profile_picture" class="img-fluid d-none d-md-block shadow">
                 </a>
-                <h4 class="mx-3">{{ user.firstName }} <p class="lead">{{ user.location }}</p>
+                <h4 class="py-2 px-2 mx-3">
+                    {{ user.firstName }}
+                    <p class="lead">{{ user.location }}</p>
                 </h4>
-
             </div>
 
             <button class="btn btn-outline-primary" type="button" (click)="addToCart(user)">
@@ -24,14 +25,47 @@
             </button>
         </div>
 
-        <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+        <div [id]="'collapse-' + user.nickname" class="collapse show"
+            [attr.aria-labelledby]="'heading-' + user.nickname" data-parent="#accordion">
+
             <div class="card-body">
-                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf
-                moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod.
-                Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda
-                shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea
-                proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim
-                aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+
+                <div class="card-body-left">
+                    
+                    <h4 class="mb-4">{{ user.firstName }} {{user.lastName}}</h4>
+
+                    <label class="labels">Location</label>
+                    <p class="lead">{{user.location}}</p>
+
+                    
+                    <label class="labels">About</label>
+                    <p class="lead">Short user about text (one liner).</p>
+
+                    <label class="labels">Personality</label>
+                    <p class="lead ">{{user.personality?.name}} - {{user.personality?.description}}</p>
+
+                    <label class="labels">Tech Skills</label>
+                    <div class="row mt-2">
+                        <div class="col-md-12 d-flex flex-wrap">
+                            <app-technologies *ngFor="let technology of user.technologies" [technology]="technology">
+                            </app-technologies>
+                        </div>
+                    </div>
+
+                    <label class="labels">Languages</label>
+                    <div class="row mt-2">
+                        <div class="col-md-12 d-flex flex-wrap">
+                            <app-language *ngFor="let language of user.languages" [language]="language">
+                            </app-language>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="card-body-right">
+
+                </div>
+
             </div>
         </div>
     </div>
