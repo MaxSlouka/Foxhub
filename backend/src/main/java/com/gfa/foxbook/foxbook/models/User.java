@@ -41,8 +41,6 @@ public class User {
     @Column(columnDefinition = "text")
     @Lob
     private String about;
-    private String completeProjects;
-    private String yearsOfExperience;
     private int yearOfBirth;
     @NotNull
     private String password;
@@ -53,6 +51,9 @@ public class User {
     private String gitHub;
     private boolean workStatus;
     private String optionalPage;
+    private String oneLineAbout;
+    private String workLocation;
+    private String whereIWantToWorkFrom;
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
     @JoinTable(
