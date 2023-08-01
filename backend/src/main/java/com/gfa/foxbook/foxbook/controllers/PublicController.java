@@ -1,12 +1,15 @@
 package com.gfa.foxbook.foxbook.controllers;
 
+import com.gfa.foxbook.foxbook.models.dtos.MessageDTO;
 import com.gfa.foxbook.foxbook.models.dtos.UserProfileDTO;
 import com.gfa.foxbook.foxbook.models.dtos.UserSearchDTO;
 import com.gfa.foxbook.foxbook.models.nonusermodels.Post;
 import com.gfa.foxbook.foxbook.models.User;
+import com.gfa.foxbook.foxbook.services.EmailServiceImpl;
 import com.gfa.foxbook.foxbook.services.interfaces.PersonalityService;
 import com.gfa.foxbook.foxbook.services.interfaces.PostService;
 import com.gfa.foxbook.foxbook.services.interfaces.UserService;
+import jakarta.mail.MessagingException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -24,6 +27,7 @@ public class PublicController {
     private final UserService userService;
     private final PostService postService;
     private final PersonalityService personalityService;
+    private final EmailServiceImpl emailService;
 
     @GetMapping("/people")
     public ResponseEntity<?> getAllUsers() {
@@ -95,5 +99,13 @@ public class PublicController {
         Post post = optionalPost.get();
         return ResponseEntity.ok(post.getComments());
 
+    }
+    @PostMapping("/contact")
+    public ResponseEntity<?> contact(@RequestBody MessageDTO message) throws MessagingException {
+        emailService.send("gfafoxbook@gmail.com","Somebody is interested in students","Person:\n"+message.message+"\nFrom email:" +message.from+"\nIs interested in these students:"+message.interestedIn);
+        emailService.send(message.from, "Thanks for interest","You have made interest in our students. We will contact you shortly with more information");
+
+
+        return null;
     }
 }
