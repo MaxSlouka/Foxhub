@@ -194,6 +194,7 @@ export class PeoplePageComponent implements OnInit, AfterViewInit {
     }
 
     if (this.selectedLanguages.length > 0) {
+      // @ts-ignore
       filteredUsers = this.languagesFilter(filteredUsers, this.selectedLanguages);
     } else {
       this.actualLanguageValue = '';
@@ -269,21 +270,20 @@ export class PeoplePageComponent implements OnInit, AfterViewInit {
 
     for (let user of users) {
       // @ts-ignore
-
       if (user.languages.some(language => lowerCaseKeys.includes(language.name.toLowerCase()))) {
 
-      const age = currentYear - user.yearOfBirth;
-      if (age <= +this.rangeInputRef.nativeElement.value) {
+        const age = 2023 - user.yearOfBirth;
+        if (age <= +this.rangeInputRef.nativeElement.value) {
 
-        actualFilteredUsers.push(user);
+          actualFilteredUsers.push(user);
+        }
       }
+      this.actualLanguageValue = lowerCaseKeys.join(', ');
+      this.restLanguageFilter = this.verifiedAndUsersOnly
+        .filter(user => !actualFilteredUsers.includes(user));
+      return actualFilteredUsers;
     }
-    this.actualLanguageValue = lowerCaseKeys.join(', ');
-    this.restLanguageFilter = this.verifiedAndUsersOnly
-      .filter(user => !actualFilteredUsers.includes(user));
-    return actualFilteredUsers;
   }
-
   personalityFilter(users: User[]) {
     const actualFilteredUsers: User[] = [];
     this.restPersonalityFilter = [];
