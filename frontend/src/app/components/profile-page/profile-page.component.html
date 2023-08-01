@@ -98,7 +98,7 @@
       </div>
 
       <div class="my-4 text-center">
-        <button class="btn btn-outline-primary" type="button" (click)="addToCart(user)">
+        <button class="btn btn-primary" type="button" (click)="addToCart(user)">
           <ng-container *ngIf="user.inCart; else addToCartTemplate">
             <i class="bi bi-cart4"></i> <span style="font-style: normal;"> In Cart</span>
           </ng-container>
