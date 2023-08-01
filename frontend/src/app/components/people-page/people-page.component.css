@@ -23,6 +23,18 @@ img {
         padding: 0;
     }
 
+    .mobile-row {
+        flex-direction: column;
+    }
+
+    .filter-mobile {
+        max-width: 100%;
+    }
+
+}
+
+.border {
+    border-radius: 10px;
 }
 
 select {
@@ -31,7 +43,15 @@ select {
     color: green !important;
 }
 
-.dropdown-menu{
-  max-height: 300px;
-  overflow: auto;
+.dropdown-menu {
+    max-height: 300px;
+    overflow: auto;
+}
+
+.form-check label:hover {
+    cursor: pointer;
+}
+
+.card-header:hover {
+    cursor: pointer;
 }

@@ -98,12 +98,12 @@
       </div>
 
       <div class="my-4 text-center">
-        <button class="btn btn-outline-primary" type="button" *ngIf="!isLoggedIn" (click)="addToCart(user)">
+        <button class="btn btn-primary" type="button" (click)="addToCart(user)">
           <ng-container *ngIf="user.inCart; else addToCartTemplate">
-            <i class="bi bi-bag-check"></i> <span style="font-style: normal;"> In Bag</span>
+            <i class="bi bi-cart4"></i> <span style="font-style: normal;"> In Cart</span>
           </ng-container>
           <ng-template #addToCartTemplate>
-            <span style="font-style: normal;">Add to Bag</span>
+            <span style="font-style: normal;">Add to Cart</span>
           </ng-template>
         </button>
       </div>

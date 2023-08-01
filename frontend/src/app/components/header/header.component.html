@@ -1,10 +1,5 @@
 <nav class="navbar navbar-expand-lg justify-content-end">
 
-  <!-- logo -->
-
-  <a class="navbar-brand" routerLink="/">
-  </a>
-
   <!-- collapse hamburger -->
 
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -24,55 +19,56 @@
 
       <!-- logo -->
 
-      <a class="navbar-brand" routerLink="/main">
+      <a class="navbar-brand" routerLink="/">
         <img ngSrc="/assets/img/GFA-logo.png" width=50 height=50 alt="GFA logo">
       </a>
 
-      <!-- login and sign up -->
+      <!-- menu for not logged user -->
 
-      <div class="text-end" *ngIf="!isLoggedIn">
+      <div class="text-end mobile-menu" *ngIf="!isLoggedIn">
 
-        <a routerLink="/people" class="people-btn" aria-disabled="true">
-          <i class="bi bi-people"></i>
-        </a>
-
-        <a routerLink="/cart" class="cart-btn" aria-disabled="true">
-          <i class="bi bi-bag"></i>
-          <span class="badge badge-danger" *ngIf="countItems !=0">{{countItems}}</span>
-        </a>
+        <a routerLink="/intro" class="btn btn-outline-primary px-4 me-md-2" role="button" aria-disabled="true">About</a>
+        <a routerLink="/" class="btn btn-outline-primary px-4 me-md-2" role="button" aria-disabled="true">People</a>
+        <a routerLink="/main" class="btn btn-outline-primary px-4 me-md-2" role="button" aria-disabled="true">News</a>
+        <a routerLink="/cart" class="btn btn-outline-primary px-4 me-md-2 cart-btn" role="button"
+           aria-disabled="true"><i class="bi bi-cart4"></i> <span class="badge badge-danger"
+                                                                  *ngIf="countItems !=0">{{countItems}}</span></a>
 
         <a routerLink="/login" class="btn btn-primary" role="button" aria-disabled="true">Login</a>
         <a routerLink="/register" class="btn btn-outline-secondary" role="button" aria-disabled="true">Sign up</a>
 
       </div>
 
-      <!-- user options -->
+      <!-- menu for logged user -->
 
-      <div class="btn-group align-items-center" *ngIf="isLoggedIn">
+      <div class="text-end mobile-menu" *ngIf="isLoggedIn">
 
-        <a routerLink="/people" class="people-btn" aria-disabled="true">
-          <i class="bi bi-people"></i>
-        </a>
+        <a routerLink="/intro" class="btn btn-outline-primary px-4 me-md-2" role="button" aria-disabled="true">About</a>
+        <a routerLink="/" class="btn btn-outline-primary px-4 me-md-2" role="button" aria-disabled="true">People</a>
+        <a routerLink="/main" class="btn btn-outline-primary px-4 me-md-2" role="button" aria-disabled="true">News</a>
+        <a routerLink="/cart" class="btn btn-outline-primary px-4 me-md-2 cart-btn" role="button"
+           aria-disabled="true"><i class="bi bi-cart4"></i> <span class="badge badge-danger"
+                                                                  *ngIf="countItems !=0">{{countItems}}</span></a>
 
-        <div class="d-block link-body-emphasis text-decoration-none dropdown-toggle" data-toggle="dropdown"
-             aria-expanded="false">
-          <img *ngIf="user.profilePictureUrl" ngSrc="{{  user.profilePictureUrl  }}" alt="mdo" width=42 height=42
-               class="rounded-circle">
+        <div class="dropdown">
+          <div class="d-block link-body-emphasis text-decoration-none dropdown-toggle" data-toggle="dropdown"
+               aria-expanded="false">
+            <img *ngIf="user.profilePictureUrl" ngSrc="{{ user.profilePictureUrl }}" alt="mdo" width=42 height=42
+                 class="rounded-circle">
+          </div>
+          <div class="dropdown-menu">
+            <a class="dropdown-item" [routerLink]="['/profile',userEmail]">
+              <i class="bi bi-person-circle"></i>Profile - {{userEmail}}</a>
+            <a class="dropdown-item" routerLink="/update-profile">
+              <i class="bi bi-gear"></i>Settings</a>
+            <a *ngIf="isLoggedIn &&this.userRole =='ADMIN'" class="dropdown-item" routerLink="/admin-board">
+              <i class="bi bi-gear"></i>Admin Board</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#" (click)="logout()">
+              <i class="bi bi-door-closed"></i>Sign out</a>
+          </div>
         </div>
-
-        <div class="dropdown-menu">
-          <a class="dropdown-item" [routerLink]="['/profile',userEmail]">
-            <i class="bi bi-person-circle"></i>Profile - {{userEmail}}</a>
-          <a class="dropdown-item" routerLink="/update-profile">
-            <i class="bi bi-gear"></i>Settings</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#" (click)="logout()">
-            <i class="bi bi-door-closed"></i>Sign out</a>
-        </div>
-        
       </div>
-
     </div>
   </div>
-
 </nav>

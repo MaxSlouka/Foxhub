@@ -25,10 +25,10 @@ public class UserSearchDTO {
     private Personality personality;
     private Boolean verified;
     private Role role;
-
+    private String location;
+    private String profilePictureUrl;
     private List<Technology> technologies;
     private List<Language> languages;
-    private String profilePictureUrl;
 
     public UserSearchDTO(User user) {
         this.firstName = user.getFirstName();
@@ -43,5 +43,6 @@ public class UserSearchDTO {
         this.personality = user.getPersonality();
         this.verified = user.isVerified();
         this.role = user.getRole();
+        this.location = user.getLocation();
     }
 }
