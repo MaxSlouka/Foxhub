@@ -22,6 +22,7 @@ export class PeoplePageComponent implements OnInit, AfterViewInit {
   languages: Language[] = [];
   selectedTechnologies: string[] = [];
   selectedLanguages: string[] = [];
+  selectedAges: string[] = [];
   usedTechnologies: Technology[] = [];
   usedLanguages: Language[] = [];
 
@@ -34,7 +35,8 @@ export class PeoplePageComponent implements OnInit, AfterViewInit {
   isRangeChanged: boolean = false;
 
   // @ts-ignore
-  workStatus: string;
+  filterWorkStatus: string;
+
   personalities: Personality[] = [];
   selectedPersonality: Personality | undefined;
   selectAllPersonalities: boolean = true;
@@ -61,7 +63,7 @@ export class PeoplePageComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-    this.workStatus = 'all';
+    this.filterWorkStatus = 'all';
 
     this.technologyService.getAll().subscribe(technologies => {
       this.technologies = technologies;
@@ -178,9 +180,24 @@ export class PeoplePageComponent implements OnInit, AfterViewInit {
     this.allFilters();
   }
 
+  addToAgeList(event: any, tech: string) {
+    if (event.target.checked) {
+      if (!this.selectedAges.includes(tech)) {
+        this.selectedAges.push(tech);
+      }
+    } else {
+      const index = this.selectedAges.indexOf(tech);
+      if (index > -1) {
+        this.selectedAges.splice(index, 1);
+      }
+    }
+    this.allFilters();
+  }
+
   onWorkStatusChange() {
     this.allFilters();
   }
+
 
   allFilters() {
     let filteredUsers = [...this.verifiedAndUsersOnly];
@@ -309,16 +326,16 @@ export class PeoplePageComponent implements OnInit, AfterViewInit {
     this.restOpenToWorkFilter = [];
 
     for (let user of users) {
-      if ((this.workStatus === "open" && user.workStatus === true) ||
-        (this.workStatus === "closed" && user.workStatus === false ||
-          this.workStatus === "all")) {
+      if ((this.filterWorkStatus === "open" && user.workStatus === true) ||
+        (this.filterWorkStatus === "closed" && user.workStatus === false ||
+          this.filterWorkStatus=== "all")) {
         actualFilteredUsers.push(user);
       }
     }
 
-    if (this.workStatus === "open") {
+    if (this.filterWorkStatus === "open") {
       this.actualWorkStatusValue = "Seeking employment: true"
-    } else if (this.workStatus === "closed") {
+    } else if (this.filterWorkStatus === "closed") {
       this.actualWorkStatusValue = "Seeking employment: false"
     } else {
       this.actualWorkStatusValue = "all"
