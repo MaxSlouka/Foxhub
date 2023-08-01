@@ -16,4 +16,8 @@ export class CartCheckoutComponent implements OnInit {
     this.cartItems = this.cartService.getCartItems();
   }
 
+  sendForm(){
+
+  }
+
 }
