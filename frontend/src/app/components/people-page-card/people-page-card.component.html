@@ -1,31 +1,31 @@
-
 <tr>
-    <td data-th="Product">
-        <div class="row">
-            <div class="col-md-3 text-left">
-                <a [routerLink]="['/profile',user.nickname]" class="card">
-                    <img *ngIf="user.profilePictureUrl" ngSrc="{{user.profilePictureUrl}}" height=500 width=500
-                        alt="profile_picture" class="img-fluid d-none d-md-block mb-2 shadow my-2">
-                </a>
-            </div>
-            <div class="col-md-9 text-left mt-sm-2">
-                <h4>{{ user.firstName }}</h4>
-            </div>
-        </div>
-    </td>
-    <td data-th="personality-about">
-        <p class="font-weight-light">{{ user.location }}</p>
-    </td>
-    <td class="actions" data-th="">
-        <div class="text-right">
-            <button class="btn btn-outline-primary" type="button" (click)="addToCart(user)">
-                <ng-container *ngIf="user.inCart; else addToCartTemplate">
-                    <i class="bi bi-cart4"></i> <span style="font-style: normal;"> In Cart</span>
-                </ng-container>
-                <ng-template #addToCartTemplate>
-                    <span style="font-style: normal;">Add to Cart</span>
-                </ng-template>
-            </button>
-        </div>
-    </td>
+  <td data-th="Product">
+    <div class="row">
+      <div class="col-md-3 text-left">
+        <a [routerLink]="['/profile',user.nickname]" class="card">
+          <img *ngIf="user.profilePictureUrl" ngSrc="{{user.profilePictureUrl}}" height=500 width=500
+               alt="profile_picture" class="img-fluid d-none d-md-block mb-2 shadow my-2">
+        </a>
+      </div>
+      <div class="col-md-9 text-left mt-sm-2">
+        <h4>{{ user.firstName }}</h4>
+      </div>
+    </div>
+  </td>
+  <td data-th="personality-about">
+    <p class="font-weight-light">{{ user.location }}</p>
+  </td>
+  <td class="actions" data-th="">
+    <div class="text-right">
+      <button class="btn btn-outline-primary" type="button" (click)="addToCart(user)">
+        <ng-container *ngIf="user.inCart; else addToCartTemplate">
+          <i class="bi bi-cart4"></i> <span style="font-style: normal;"> In Cart</span>
+        </ng-container>
+        <ng-template #addToCartTemplate>
+          <span style="font-style: normal;">Add to Cart</span>
+        </ng-template>
+      </button>
+    </div>
+  </td>
+  <td>{{user.outOfFilters}}</td>
 </tr>

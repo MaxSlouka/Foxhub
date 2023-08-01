@@ -26,14 +26,14 @@
         <p class="lead mt-4 border-bottom">Technology</p>
         <div class="dropdown">
           <button class="btn btn-outline-primary dropdown-toggle" type="button" id="techDropdown" data-toggle="dropdown"
-            aria-haspopup="true" aria-expanded="false">
+                  aria-haspopup="true" aria-expanded="false">
             Techs
           </button>
           <div class="dropdown-menu" aria-labelledby="techDropdown">
             <tr *ngFor="let tech of usedTechnologies">
               <td class="py-2 px-2"><label><input class="mr-2" type="checkbox"
-                    (change)="addToTechList($event, tech.name)">
-                  <span>{{tech.name}}</span></label></td>
+                                                  (change)="addToTechList($event, tech.name)">
+                <span>{{tech.name}}</span></label></td>
             </tr>
           </div>
         </div>
@@ -41,21 +41,21 @@
         <p class="lead mt-4 border-bottom">Languages</p>
         <div class="dropdown">
           <button class="btn btn-outline-primary dropdown-toggle" type="button" id="langDropDown" data-toggle="dropdown"
-            aria-haspopup="true" aria-expanded="false">
+                  aria-haspopup="true" aria-expanded="false">
             Languages
           </button>
           <div class="dropdown-menu" aria-labelledby="langDropDown">
             <tr *ngFor="let lang of usedLanguages">
               <td class="py-2 px-2"><label><input class="mr-2" type="checkbox"
-                    (change)="addToLangList($event, lang.name)">
-                  <span>{{lang.name}}</span></label></td>
+                                                  (change)="addToLangList($event, lang.name)">
+                <span>{{lang.name}}</span></label></td>
             </tr>
           </div>
         </div>
 
         <p class="lead mt-4 border-bottom">Personality</p>
         <select class="btn btn-outline-primary dropdown-toggle" type="button" aria-label="Default select example"
-          (change)="onPersonalitySelect($event)">
+                (change)="onPersonalitySelect($event)">
           <option>All</option>
           <option *ngFor="let personality of personalities" [value]="personality.id">{{personality.type}} -
             {{personality.name}}</option>
@@ -63,17 +63,22 @@
 
         <p class="lead mt-4 border-bottom">Seeking employment</p>
         <div class="form-check">
-
-          <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="open" checked
-            [(ngModel)]="workStatus" (ngModelChange)="onWorkStatusChange()">
-
+          <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios0" value="all"
+                 [(ngModel)]="workStatus" (ngModelChange)="onWorkStatusChange()">
+          <label class="form-check-label" for="exampleRadios1">
+            All
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="open"
+                 [(ngModel)]="workStatus" (ngModelChange)="onWorkStatusChange()">
           <label class="form-check-label" for="exampleRadios1">
             True
           </label>
         </div>
         <div class="form-check">
           <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="closed"
-            [(ngModel)]="workStatus" (ngModelChange)="onWorkStatusChange()">
+                 [(ngModel)]="workStatus" (ngModelChange)="onWorkStatusChange()">
           <label class="form-check-label" for="exampleRadios2">
             False
           </label>
@@ -124,14 +129,33 @@
 
       <table id="shoppingCart" class="table table-condensed">
         <thead>
-          <tr>
-            <th style="width:40%">Person</th>
-            <th style="width:30%">Location</th>
-            <th style="width:30%"></th>
-          </tr>
+        <tr>
+          <th style="width:40%">Person</th>
+          <th style="width:30%">Location</th>
+          <th style="width:30%"></th>
+        </tr>
         </thead>
         <tbody>
-          <app-people-page-card class="my-4" *ngFor="let user of users" [user]="user"></app-people-page-card>
+        <app-people-page-card class="my-4" *ngFor="let user of users" [user]="user"></app-people-page-card>
+        </tbody>
+        <tbody>
+        <ng-container *ngFor="let user of nonFilteredUsers">
+          <ng-container *ngIf="user.outOfFilters?.length === 1">
+            <app-people-page-card [user]="user"></app-people-page-card>
+          </ng-container>
+        </ng-container>
+        </tbody>
+        <tbody>
+        <ng-container *ngFor="let user of nonFilteredUsers">
+          <ng-container *ngIf="user.outOfFilters?.length === 2">
+            <app-people-page-card [user]="user"></app-people-page-card>
+          </ng-container>
+        </ng-container>
+        </tbody>
+        <tbody>
+        <ng-container *ngFor="let user of filteredUsers">
+          <app-people-page-card [user]="user"></app-people-page-card>
+        </ng-container>
         </tbody>
       </table>
     </div>
@@ -158,7 +182,7 @@
 
     <div class="col-10 col-sm-8 col-lg-6">
       <img ngSrc="/assets/img/peopleSearch.png" class="d-block img-fluid" alt="Meeting" width="700" height="500"
-        loading="lazy">
+           loading="lazy">
     </div>
   </div>
 </div>

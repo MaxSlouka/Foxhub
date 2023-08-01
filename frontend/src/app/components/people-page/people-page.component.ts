@@ -54,7 +54,6 @@ export class PeoplePageComponent implements OnInit, AfterViewInit {
   restTechnologiesFilter: User[] = [];
 
 
-
   constructor(private technologyService: TechnologyService,
               private languageService: LanguageService,
               private apiService: ApiService,
@@ -230,10 +229,9 @@ export class PeoplePageComponent implements OnInit, AfterViewInit {
         }
       }
 
-      if (!this.selectAllPersonalities === undefined) {
-        if (this.restPersonalityFilter.includes(user)) {
-          user.outOfFilters.push(this.actualPersonalityValue);
-        }
+      if (this.restPersonalityFilter.includes(user)) {
+        user.outOfFilters.push(this.actualPersonalityValue);
+
       }
     }
     console.log(this.nonFilteredUsers);
@@ -262,23 +260,21 @@ export class PeoplePageComponent implements OnInit, AfterViewInit {
   }
 
   // @ts-ignore
-  languagesFilter(users, keys: string[]) {
+  languagesFilter(users: User[], keys: string[]): User[] {
     const lowerCaseKeys = keys.map(key => key.toLowerCase());
     const actualFilteredUsers: User[] = [];
     this.restLanguageFilter = [];
 
     for (let user of users) {
+
       // @ts-ignore
-
-      if (user.languages.some(language => lowerCaseKeys.includes(language.name.toLowerCase()))) {
-
-      const age = currentYear - user.yearOfBirth;
-      if (age <= +this.rangeInputRef.nativeElement.value) {
-
+      if (user.languages.some(language => lowerCaseKeys
+        .includes(language.name.toLowerCase()))) {
         actualFilteredUsers.push(user);
+        }
       }
-    }
-    this.actualLanguageValue = lowerCaseKeys.join(', ');
+
+    this.actualLanguageValue = lowerCaseKeys.join(' ').toString();
     this.restLanguageFilter = this.verifiedAndUsersOnly
       .filter(user => !actualFilteredUsers.includes(user));
     return actualFilteredUsers;
