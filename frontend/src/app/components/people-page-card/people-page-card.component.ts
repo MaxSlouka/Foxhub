@@ -1,4 +1,4 @@
-import { Component, Input, ElementRef, OnDestroy } from '@angular/core';
+import { Component, Input, OnDestroy } from '@angular/core';
 import { User } from "../../models/user";
 import { CartService } from "../../_services/cart.service";
 import { StorageService } from "../../_services/storage.service";
@@ -27,7 +27,6 @@ export class PeoplePageCardComponent implements OnDestroy {
   constructor(
     private authService: AuthService,
     private cartService: CartService,
-    private elementRef: ElementRef,
     private storageService: StorageService,
   ) { }
 

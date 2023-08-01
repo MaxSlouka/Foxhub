@@ -12,158 +12,121 @@
     </h1>
   </div>
 
-  <div class="row my-4">
-    <div class="col-md-3 border">
+  <div class="row my-4 mobile-row">
+    <div class="col-3 filter-mobile">
 
-      <div class="py-2 text-center">
-        <h5 class="display-6 fw-bold text-body-emphasis">Filter</h5>
-        <button class="btn btn-link text-decoration-none" type="button" (click)="toggleFilterContent()">
-          <i [ngClass]="filterContentExpanded ? 'bi bi-chevron-down' : 'bi bi-chevron-up'"></i>
-        </button>
-      </div>
-
-      <div [ngClass]="filterContentExpanded ? 'collapse show' : 'collapse'" id="filterContent">
-        <p class="lead mt-4 border-bottom">Technology</p>
-        <div class="dropdown">
-          <button class="btn btn-outline-primary dropdown-toggle" type="button" id="techDropdown" data-toggle="dropdown"
-                  aria-haspopup="true" aria-expanded="false">
-            Techs
-          </button>
-          <div class="dropdown-menu" aria-labelledby="techDropdown">
-            <tr *ngFor="let tech of usedTechnologies">
-              <td class="py-2 px-2"><label><input class="mr-2" type="checkbox"
-                                                  (change)="addToTechList($event, tech.name)">
-                <span>{{tech.name}}</span></label></td>
-            </tr>
+      <div id="accordion mb-4">
+        <div class="card mb-4">
+          <div class="card-header" id="headingOne">
+            <h5 class="mb-0" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true"
+              aria-controls="collapseOne">Filter </h5>
           </div>
-        </div>
-
-        <p class="lead mt-4 border-bottom">Languages</p>
-        <div class="dropdown">
-          <button class="btn btn-outline-primary dropdown-toggle" type="button" id="langDropDown" data-toggle="dropdown"
-                  aria-haspopup="true" aria-expanded="false">
-            Languages
-          </button>
-          <div class="dropdown-menu" aria-labelledby="langDropDown">
-            <tr *ngFor="let lang of usedLanguages">
-              <td class="py-2 px-2"><label><input class="mr-2" type="checkbox"
-                                                  (change)="addToLangList($event, lang.name)">
-                <span>{{lang.name}}</span></label></td>
-            </tr>
-          </div>
-        </div>
-
-        <p class="lead mt-4 border-bottom">Personality</p>
-        <select class="btn btn-outline-primary dropdown-toggle" type="button" aria-label="Default select example"
+    
+          <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+            <div class="card-body">
+              <p class="lead mt-4 border-bottom">Technology</p>
+              <div class="dropdown">
+                <button class="btn btn-outline-primary dropdown-toggle" type="button" id="techDropdown"
+                  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Techs
+                </button>
+                <div class="dropdown-menu" aria-labelledby="techDropdown">
+                  <tr *ngFor="let tech of usedTechnologies">
+                    <td class="py-2 px-2"><label><input class="mr-2" type="checkbox"
+                          (change)="addToTechList($event, tech.name)">
+                        <span>{{tech.name}}</span></label></td>
+                  </tr>
+                </div>
+              </div>
+    
+              <p class="lead mt-4 border-bottom">Languages</p>
+              <div class="dropdown">
+                <button class="btn btn-outline-primary dropdown-toggle" type="button" id="langDropDown"
+                  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Languages
+                </button>
+                <div class="dropdown-menu" aria-labelledby="langDropDown">
+                  <tr *ngFor="let lang of usedLanguages">
+                    <td class="py-2 px-2"><label><input class="mr-2" type="checkbox"
+                          (change)="addToLangList($event, lang.name)">
+                        <span>{{lang.name}}</span></label></td>
+                  </tr>
+                </div>
+              </div>
+    
+              <p class="lead mt-4 border-bottom">Personality</p>
+              <select class="btn btn-outline-primary dropdown-toggle" type="button" aria-label="Default select example"
                 (change)="onPersonalitySelect($event)">
-          <option>All</option>
-          <option *ngFor="let personality of personalities" [value]="personality.id">{{personality.type}} -
-            {{personality.name}}</option>
-        </select>
-
-        <p class="lead mt-4 border-bottom">Seeking employment</p>
-        <div class="form-check">
-          <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios0" value="all"
-                 [(ngModel)]="filterWorkStatus" (ngModelChange)="onWorkStatusChange()">
-          <label class="form-check-label" for="exampleRadios1">
-            All
-          </label>
+                <option>All</option>
+                <option *ngFor="let personality of personalities" [value]="personality.id">{{personality.type}} -
+                  {{personality.name}}</option>
+              </select>
+    
+              <p class="lead mt-4 border-bottom">Seeking employment</p>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="open" checked
+                  [(ngModel)]="workStatus" (ngModelChange)="onWorkStatusChange()">
+                <label class="form-check-label" for="exampleRadios1">
+                  True
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="closed"
+                  [(ngModel)]="workStatus" (ngModelChange)="onWorkStatusChange()">
+                <label class="form-check-label" for="exampleRadios2">
+                  False
+                </label>
+              </div>
+    
+              <p class="lead mt-4 border-bottom">Age</p>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="all" id="allAge" checked="true">
+                <label class="form-check-label" for="allAge">
+                  All
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="18" id="18">
+                <label class="form-check-label" for="18">
+                  18 - 25
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="25" id="25">
+                <label class="form-check-label" for="25">
+                  25 - 30
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="30" id="30">
+                <label class="form-check-label" for="30">
+                  30 - 35
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="35" id="35">
+                <label class="form-check-label" for="35">
+                  35 - 40
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="40" id="40">
+                <label class="form-check-label" for="40">
+                  40 +
+                </label>
+              </div>
+            </div>
+          </div>
+    
         </div>
-        <div class="form-check">
-          <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="open"
-                 [(ngModel)]="filterWorkStatus" (ngModelChange)="onWorkStatusChange()">
-          <label class="form-check-label" for="exampleRadios1">
-            True
-          </label>
-        </div>
-        <div class="form-check">
-          <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="closed"
-                 [(ngModel)]="filterWorkStatus" (ngModelChange)="onWorkStatusChange()">
-          <label class="form-check-label" for="exampleRadios2">
-            False
-          </label>
-        </div>
-
-        <p class="lead mt-4 border-bottom">Age</p>
-        <div class="form-check">
-          <input class="form-check-input" type="checkbox" value="all" id="allAge"
-                (change)="addToAgeList($event,'all')" checked="true">
-          <label class="form-check-label" for="allAge">
-            All
-          </label>
-        </div>
-        <div class="form-check">
-          <input class="form-check-input" type="checkbox" value="18" id="18"
-                 (change)="addToAgeList($event,'18')">
-          <label class="form-check-label" for="18">
-            18 - 25
-          </label>
-        </div>
-        <div class="form-check">
-          <input class="form-check-input" type="checkbox" value="25" id="25"
-                 (change)="addToAgeList($event,'25')">
-          <label class="form-check-label" for="25">
-            25 - 30
-          </label>
-        </div>
-        <div class="form-check">
-          <input class="form-check-input" type="checkbox" value="30" id="30"
-                 (change)="addToAgeList($event,'30')">
-          <label class="form-check-label" for="30">
-            30 - 35
-          </label>
-        </div>
-        <div class="form-check">
-          <input class="form-check-input" type="checkbox" value="35" id="35"
-                 (change)="addToAgeList($event,'35')">
-          <label class="form-check-label" for="35">
-            35 - 40
-          </label>
-        </div>
-        <div class="form-check mb-5">
-          <input class="form-check-input" type="checkbox" value="40" id="40"
-                 (change)="addToAgeList($event,'40')">
-          <label class="form-check-label" for="40">
-            40 +
-          </label>
-        </div>
-
       </div>
+      
     </div>
 
     <div class="col-8 ml-2">
 
-      <table id="shoppingCart" class="table table-condensed">
-        <thead>
-        <tr>
-          <th style="width:40%">Person</th>
-          <th style="width:30%">Location</th>
-          <th style="width:30%"></th>
-        </tr>
-        </thead>
-        <tbody>
-        <app-people-page-card class="my-4" *ngFor="let user of users" [user]="user"></app-people-page-card>
-        </tbody>
-        <tbody>
-        <ng-container *ngFor="let user of nonFilteredUsers">
-          <ng-container *ngIf="user.outOfFilters?.length === 1">
-            <app-people-page-card [user]="user"></app-people-page-card>
-          </ng-container>
-        </ng-container>
-        </tbody>
-        <tbody>
-        <ng-container *ngFor="let user of nonFilteredUsers">
-          <ng-container *ngIf="user.outOfFilters?.length === 2">
-            <app-people-page-card [user]="user"></app-people-page-card>
-          </ng-container>
-        </ng-container>
-        </tbody>
-        <tbody>
-        <ng-container *ngFor="let user of filteredUsers">
-          <app-people-page-card [user]="user"></app-people-page-card>
-        </ng-container>
-        </tbody>
-      </table>
+      <app-people-page-card class="my-4" *ngFor="let user of users" [user]="user"></app-people-page-card>
+
     </div>
   </div>
 </div>

@@ -23,15 +23,18 @@ img {
         padding: 0;
     }
 
+    .mobile-row {
+        flex-direction: column;
+    }
+
+    .filter-mobile {
+        max-width: 100%;
+    }
+
 }
 
 .border {
     border-radius: 10px;
-}
-
-app-people-page-card {
-    width: 100%;
-    display: contents;
 }
 
 select {
@@ -46,5 +49,9 @@ select {
 }
 
 .form-check label:hover {
+    cursor: pointer;
+}
+
+.card-header:hover {
     cursor: pointer;
 }
