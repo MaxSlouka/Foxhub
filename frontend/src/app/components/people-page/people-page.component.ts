@@ -7,6 +7,8 @@ import {Language} from "../../models/language";
 import {LanguageService} from "../../_services/language.service";
 import {Personality} from "../../models/personality";
 import {PersonalityService} from "../../_services/personality.service";
+import { CookieService } from 'ngx-cookie-service';
+
 
 @Component({
   selector: 'app-people-page',
@@ -25,6 +27,7 @@ export class PeoplePageComponent implements OnInit {
   selectedAges: string[] = [];
   usedTechnologies: Technology[] = [];
   usedLanguages: Language[] = [];
+  workStatus: any;
 
   // @ts-ignore
   users: User[] = [];
@@ -53,16 +56,21 @@ export class PeoplePageComponent implements OnInit {
   restAgeFilter: User[] = [];
   restLanguageFilter: User[] = [];
   restTechnologiesFilter: User[] = [];
+  public showCookiePopup = false;
+
 
 
   constructor(private technologyService: TechnologyService,
               private languageService: LanguageService,
               private apiService: ApiService,
-              private personalityService: PersonalityService) {
+              private personalityService: PersonalityService,
+              private cookieService: CookieService) {
   }
 
   ngOnInit(): void {
     this.filterWorkStatus = 'all';
+    this.showCookiePopup = this.cookieService.get('cookie_consent') !== 'true';
+
 
     this.technologyService.getAll().subscribe(technologies => {
       this.technologies = technologies;
@@ -87,6 +95,16 @@ export class PeoplePageComponent implements OnInit {
         }
       }
     });
+  }
+
+  acceptCookies() {
+    this.cookieService.set('cookie_consent', 'true');
+    this.showCookiePopup = false;
+  }
+
+  declineCookies() {
+    this.cookieService.delete('cookie_consent');
+    this.showCookiePopup = false;
   }
 
   get filteredUsers(): any[] {
