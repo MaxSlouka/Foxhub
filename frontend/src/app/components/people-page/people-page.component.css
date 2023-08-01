@@ -23,6 +23,14 @@ img {
         padding: 0;
     }
 
+    .mobile-row {
+        flex-direction: column;
+    }
+
+    .filter-mobile {
+        max-width: 100%;
+    }
+
 }
 
 .border {
@@ -41,5 +49,9 @@ select {
 }
 
 .form-check label:hover {
+    cursor: pointer;
+}
+
+.card-header:hover {
     cursor: pointer;
 }
