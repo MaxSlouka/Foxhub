@@ -152,16 +152,6 @@ public class UserServiceImpl implements UserService {
         } else {
             user.setLastName(user.getLastName());
         }
-        if (userDTO.getCompleteProjects() != null) {
-            user.setCompleteProjects(userDTO.getCompleteProjects());
-        } else {
-            user.setCompleteProjects(user.getCompleteProjects());
-        }
-        if (userDTO.getYearsOfExperience() != null) {
-            user.setYearsOfExperience(userDTO.getYearsOfExperience());
-        } else {
-            user.setYearsOfExperience(user.getYearsOfExperience());
-        }
         if (userDTO.getPhone() != null) {
             user.setPhone(userDTO.getPhone());
         } else {
