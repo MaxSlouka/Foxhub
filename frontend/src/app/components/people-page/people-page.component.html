@@ -21,7 +21,7 @@
             <h5 class="mb-0" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true"
               aria-controls="collapseOne">Filter </h5>
           </div>
-    
+
           <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
             <div class="card-body">
               <p class="lead mt-4 border-bottom">Technology</p>
@@ -38,7 +38,7 @@
                   </tr>
                 </div>
               </div>
-    
+
               <p class="lead mt-4 border-bottom">Languages</p>
               <div class="dropdown">
                 <button class="btn btn-outline-primary dropdown-toggle" type="button" id="langDropDown"
@@ -53,7 +53,7 @@
                   </tr>
                 </div>
               </div>
-    
+
               <p class="lead mt-4 border-bottom">Personality</p>
               <select class="btn btn-outline-primary dropdown-toggle" type="button" aria-label="Default select example"
                 (change)="onPersonalitySelect($event)">
@@ -61,71 +61,96 @@
                 <option *ngFor="let personality of personalities" [value]="personality.id">{{personality.type}} -
                   {{personality.name}}</option>
               </select>
-    
+
               <p class="lead mt-4 border-bottom">Seeking employment</p>
               <div class="form-check">
-                <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="open" checked
-                  [(ngModel)]="workStatus" (ngModelChange)="onWorkStatusChange()">
+                <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios0" value="all"
+                  checked [(ngModel)]="filterWorkStatus" (ngModelChange)="onWorkStatusChange()">
+                <label class="form-check-label" for="exampleRadios0">
+                  All
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="open"
+                  [(ngModel)]="filterWorkStatus" (ngModelChange)="onWorkStatusChange()">
                 <label class="form-check-label" for="exampleRadios1">
                   True
                 </label>
               </div>
               <div class="form-check">
                 <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="closed"
-                  [(ngModel)]="workStatus" (ngModelChange)="onWorkStatusChange()">
+                  [(ngModel)]="filterWorkStatus" (ngModelChange)="onWorkStatusChange()">
                 <label class="form-check-label" for="exampleRadios2">
                   False
                 </label>
               </div>
-    
+
               <p class="lead mt-4 border-bottom">Age</p>
               <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="all" id="allAge" checked="true">
+                <input class="form-check-input" type="checkbox" value="all" id="allAge"
+                  (change)="addToAgeList($event,'all')" checked="true">
                 <label class="form-check-label" for="allAge">
                   All
                 </label>
               </div>
               <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="18" id="18">
+                <input class="form-check-input" type="checkbox" value="18" id="18" (change)="addToAgeList($event,'18')">
                 <label class="form-check-label" for="18">
                   18 - 25
                 </label>
               </div>
               <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="25" id="25">
+                <input class="form-check-input" type="checkbox" value="25" id="25" (change)="addToAgeList($event,'25')">
                 <label class="form-check-label" for="25">
                   25 - 30
                 </label>
               </div>
               <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="30" id="30">
+                <input class="form-check-input" type="checkbox" value="30" id="30" (change)="addToAgeList($event,'30')">
                 <label class="form-check-label" for="30">
                   30 - 35
                 </label>
               </div>
               <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="35" id="35">
+                <input class="form-check-input" type="checkbox" value="35" id="35" (change)="addToAgeList($event,'35')">
                 <label class="form-check-label" for="35">
                   35 - 40
                 </label>
               </div>
-              <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="40" id="40">
+              <div class="form-check mb-5">
+                <input class="form-check-input" type="checkbox" value="40" id="40" (change)="addToAgeList($event,'40')">
                 <label class="form-check-label" for="40">
                   40 +
                 </label>
               </div>
+
             </div>
           </div>
-    
+
         </div>
       </div>
-      
+
     </div>
 
     <div class="col-8 ml-2">
 
       <app-people-page-card class="my-4" *ngFor="let user of users" [user]="user"></app-people-page-card>
+
+      <ng-container *ngFor="let user of nonFilteredUsers">
+        <ng-container *ngIf="user.outOfFilters?.length===1">
+          <app-people-page-card [user]="user"></app-people-page-card>
+        </ng-container>
+      </ng-container>
+
+      <ng-container *ngFor="let user of nonFilteredUsers">
+        <ng-container *ngIf="user.outOfFilters?.length===2">
+          <app-people-page-card [user]="user"></app-people-page-card>
+        </ng-container>
+      </ng-container>
+
+      <ng-container *ngFor="let user of filteredUsers">
+        <app-people-page-card [user]="user"></app-people-page-card>
+      </ng-container>
 
     </div>
   </div>
@@ -151,7 +176,7 @@
 
     <div class="col-10 col-sm-8 col-lg-6">
       <img ngSrc="/assets/img/peopleSearch.png" class="d-block img-fluid" alt="Meeting" width="700" height="500"
-           loading="lazy">
+        loading="lazy">
     </div>
   </div>
 </div>

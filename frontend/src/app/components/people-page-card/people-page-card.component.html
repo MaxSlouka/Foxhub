@@ -1,4 +1,3 @@
-
 <div id="accordion">
     <div class="card">
         <div class="card-header" [id]="'heading-' + user.nickname" data-toggle="collapse"
@@ -32,13 +31,13 @@
             <div class="card-body">
 
                 <div class="card-body-left">
-                    
+
                     <h4 class="mb-4">{{ user.firstName }} {{user.lastName}}</h4>
 
                     <label class="labels">Location</label>
                     <p class="lead">{{user.location}}</p>
 
-                    
+
                     <label class="labels">About</label>
                     <p class="lead">Short user about text (one liner).</p>
 
@@ -63,8 +62,8 @@
 
                 </div>
 
-                <div class="card-body-right">
-
+                <div class="card-body-bottom">
+                    <p *ngFor="let filter of user.outOfFilters">{{filter}}</p>
                 </div>
 
             </div>
