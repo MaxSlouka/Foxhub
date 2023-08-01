@@ -17,15 +17,26 @@
 
 .card-header {
     display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.card-body-top {
+    display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
 }
 
+.card-body-bottom {
+    display: flex;
+    flex-direction: row;
+}
+
 .left-side {
     display: flex;
     flex-direction: row;
-    justify-content: start;
+    justify-content: space;
     align-items: center;
 }
 
