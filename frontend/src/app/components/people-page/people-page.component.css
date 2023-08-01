@@ -29,11 +29,6 @@ img {
     border-radius: 10px;
 }
 
-app-people-page-card {
-    width: 100%;
-    display: contents;
-}
-
 select {
     border-color: green !important;
     background: white !important;
