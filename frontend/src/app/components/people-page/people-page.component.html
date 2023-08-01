@@ -12,6 +12,15 @@
     </h1>
   </div>
 
+  <!-- cookies -->
+
+  <div *ngIf="showCookiePopup" class="cookie-popup">
+    <p>We use cookies to improve your experience. By using our site, you agree to our use of cookies.</p>
+    <button (click)="acceptCookies()">Accept</button>
+    <button (click)="declineCookies()">Decline</button>
+  </div>
+
+
   <div class="row my-4 mobile-row">
     <div class="col-3 filter-mobile">
 
@@ -21,7 +30,7 @@
             <h5 class="mb-0" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true"
               aria-controls="collapseOne">Filter </h5>
           </div>
-    
+
           <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
             <div class="card-body">
               <p class="lead mt-4 border-bottom">Technology</p>
@@ -38,7 +47,7 @@
                   </tr>
                 </div>
               </div>
-    
+
               <p class="lead mt-4 border-bottom">Languages</p>
               <div class="dropdown">
                 <button class="btn btn-outline-primary dropdown-toggle" type="button" id="langDropDown"
@@ -53,7 +62,7 @@
                   </tr>
                 </div>
               </div>
-    
+
               <p class="lead mt-4 border-bottom">Personality</p>
               <select class="btn btn-outline-primary dropdown-toggle" type="button" aria-label="Default select example"
                 (change)="onPersonalitySelect($event)">
@@ -61,7 +70,7 @@
                 <option *ngFor="let personality of personalities" [value]="personality.id">{{personality.type}} -
                   {{personality.name}}</option>
               </select>
-    
+
               <p class="lead mt-4 border-bottom">Seeking employment</p>
               <div class="form-check">
                 <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="open" checked
@@ -77,7 +86,7 @@
                   False
                 </label>
               </div>
-    
+
               <p class="lead mt-4 border-bottom">Age</p>
               <div class="form-check">
                 <input class="form-check-input" type="checkbox" value="all" id="allAge" checked="true">
@@ -117,10 +126,10 @@
               </div>
             </div>
           </div>
-    
+
         </div>
       </div>
-      
+
     </div>
 
     <div class="col-8 ml-2">
