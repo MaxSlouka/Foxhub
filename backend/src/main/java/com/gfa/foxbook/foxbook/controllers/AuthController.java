@@ -41,7 +41,6 @@ public class AuthController {
     private final EmailServiceImpl emailService;
     private final PasswordEncoder passwordEncoder;
 
-
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginDto loginDto) {
         try {
@@ -51,7 +50,7 @@ public class AuthController {
 
             ResponseCookie jwtRefreshCookie = jwtUtils.generateRefreshJwtCookie(authentication);
             ResponseCookie jwtCookie = jwtUtils.generateJwtCookie(authentication);
-            if (!(userService.findByEmail(authentication.getName()).get().isVerified())){
+            if (!(userService.findByEmail(authentication.getName()).get().isVerified())) {
                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("You have to verify your email");
             }
 
@@ -102,7 +101,7 @@ public class AuthController {
     @PostMapping("password-reset")
     public ResponseEntity<?> resetPassword(@RequestBody EmailDTO emailDTO) throws MessagingException {
         Optional<User> user = userService.findByEmailAndYearOfBirth(emailDTO.getEmail(), emailDTO.getYearOfBirth());
-        if (user.isEmpty()){
+        if (user.isEmpty()) {
             return ResponseEntity.badRequest().body("this user does not exist");
         }
 
@@ -135,10 +134,9 @@ public class AuthController {
                 "</p></div></body></html>";
 
         emailService.send(emailDTO.getEmail(), "FoxHub - Password reset", emailBody);
-      
+
         return ResponseEntity.ok().build();
     }
-
 
     @GetMapping("verify-email/{token}")
     public ResponseEntity<?> verify(@PathVariable String token) {
@@ -162,6 +160,4 @@ public class AuthController {
         }
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid verification token");
     }
-
-
 }
