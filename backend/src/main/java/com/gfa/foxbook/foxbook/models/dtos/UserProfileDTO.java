@@ -22,8 +22,6 @@ public class UserProfileDTO {
     private String email;
     private String phone;
     private String about;
-    private String completeProjects;
-    private String yearsOfExperience;
     private int yearOfBirth;
     private Personality personality;
     private String profilePictureUrl;
@@ -48,8 +46,6 @@ public class UserProfileDTO {
         this.email = user.getEmail();
         this.phone = user.getPhone();
         this.about = user.getAbout();
-        this.completeProjects = user.getCompleteProjects();
-        this.yearsOfExperience = user.getYearsOfExperience();
         this.personality = user.getPersonality();
         this.location = user.getLocation();
         this.facebook = user.getFacebook();
