@@ -21,11 +21,6 @@ h2 {
     font-size: 1.5rem;
 }
 
-h1 span,
-h2 span {
-    color: rgb(0, 127, 0);
-}
-
 h2 span {
     font-weight: bold;
 }
@@ -48,7 +43,6 @@ img {
     margin-top: 6rem !important;
 }
 
-
 .cookie-popup {
     position: fixed;
     left: 0;
@@ -70,23 +64,6 @@ img {
     padding-right: 20px;
 }
 
-.cookie-popup button {
-    background-color: #4CAF50;
-    border: none;
-    color: white;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 4px 2px;
-    cursor: pointer;
-    border-radius: 12px;
-}
-
-.cookie-popup button:hover {
-    background-color: #45a049;
-}
 
 @media (max-width: 767px) {
     app-swiper-arrow {

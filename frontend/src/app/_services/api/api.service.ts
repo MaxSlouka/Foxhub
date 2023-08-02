@@ -67,10 +67,11 @@ export class ApiService {
 
   updateUser(firstName: string,
     lastName: string,
-    completeProjects: string | undefined,
-    yearsOfExperience: string | undefined,
     phone: string | undefined,
     location: string | undefined,
+             workLocation: string | undefined,
+             oneLineAbout: string | undefined,
+    workPreference: string | undefined,
     about: string | undefined,
     gitHub: string | undefined,
     linkedin: string | undefined,
@@ -81,16 +82,18 @@ export class ApiService {
     technologies: Technology[] | undefined,
     personality: Personality | undefined,
     yearOfBirth: number | undefined,
-    workStatus: boolean | undefined
+    workStatus: boolean | undefined,
+
   ): Observable<any> {
 
     return this.http.patch(prefix + "/api/v1/user/people", {
       firstName,
       lastName,
-      completeProjects,
-      yearsOfExperience,
       phone,
       location,
+      workLocation,
+      oneLineAbout,
+      workPreference,
       about,
       gitHub,
       linkedin,
