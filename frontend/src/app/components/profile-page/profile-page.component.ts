@@ -8,6 +8,12 @@ import { StorageService } from "../../_services/storage.service";
 import { GlobalConstants } from "../../common/global-constants";
 import { CartService } from "../../_services/cart.service";
 
+
+
+export interface LocalUser {
+  workLocation?: string;
+  oneLineAbout?: string;
+}
 @Component({
   selector: 'app-profile-page',
   templateUrl: './profile-page.component.html',
@@ -26,6 +32,7 @@ export class ProfilePageComponent {
   addedUsers: User[] = this.cartService.getCartItems();
   // @ts-ignore
   private cartItemsSubscription: Subscription;
+
 
   constructor(
     private profileService: ProfileService,
