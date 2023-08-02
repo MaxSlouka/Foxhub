@@ -33,6 +33,10 @@
     flex-direction: row;
 }
 
+.card-body-bottom p span {
+    text-decoration: line-through;
+}
+
 .left-side {
     display: flex;
     flex-direction: row;
@@ -75,8 +79,4 @@
 label {
     font-size: small;
     font-weight: bold;
-}
-
-.card-body-bottom {
-    text-decoration: line-through;
 }
