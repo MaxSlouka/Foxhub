@@ -39,9 +39,15 @@ export class PeoplePageComponent implements OnInit {
   // @ts-ignore
   filterWorkStatus: string;
 
+  personalities: Personality[] = [];
+  selectedPersonality: Personality | undefined;
+  selectAllPersonalities: boolean = true;
+  addedUsers: User[] = [];
+
+  actualTechnologyValue: string[] = [];
+  actualLanguageValue: string[] = [];
+
   actualPersonalityValue: string = '';
-  actualLanguageValue: string = '';
-  actualTechnologyValue: string = '';
   actualAgeValue: string = '';
   actualWorkStatusValue: string = '';
 
@@ -87,7 +93,7 @@ export class PeoplePageComponent implements OnInit {
 
   get filteredUsers(): any[] {
     // @ts-ignore
-    return this.nonFilteredUsers.filter(user => user.outOfFilters?.length > 2);
+    return this.nonFilteredUsers.filter(user => user.outOfFilters?.length > 4);
   }
 
   onPersonalitySelect(event: any) {
@@ -187,7 +193,7 @@ export class PeoplePageComponent implements OnInit {
     if (this.selectedTechnologies.length > 0) {
       filteredUsers = this.technologiesFilter(filteredUsers, this.selectedTechnologies);
     } else {
-      this.actualTechnologyValue = '';
+      this.actualTechnologyValue = [];
       this.restTechnologiesFilter = [];
     }
 
@@ -195,16 +201,13 @@ export class PeoplePageComponent implements OnInit {
       // @ts-ignore
       filteredUsers = this.languagesFilter(filteredUsers, this.selectedLanguages);
     } else {
-      this.actualLanguageValue = '';
+      this.actualLanguageValue = [];
       this.restLanguageFilter = [];
     }
 
     filteredUsers = this.personalityFilter(filteredUsers);
-
     filteredUsers = this.openToWorkFilter(filteredUsers);
-    console.log(filteredUsers)
     filteredUsers = this.ageFilter(filteredUsers);
-    console.log(filteredUsers)
 
 
     for (let user of this.nonFilteredUsers) {
@@ -212,11 +215,22 @@ export class PeoplePageComponent implements OnInit {
       user.outOfFilters = [];
 
       if (this.restTechnologiesFilter.includes(user)) {
-        user.outOfFilters.push(this.actualTechnologyValue);
+        for (let tech of this.actualTechnologyValue) {
+          if (!user.technologies?.some((userTech) =>
+            userTech.name.toLowerCase() === tech.toLowerCase())) {
+            user.outOfFilters.push(tech);
+          }
+        }
       }
 
       if (this.restLanguageFilter.includes(user)) {
-        user.outOfFilters.push(this.actualLanguageValue);
+
+        for (let lang of this.actualLanguageValue) {
+          if (!user.languages?.some((userLang) =>
+            userLang.name.toLowerCase() === lang.toLowerCase())) {
+            user.outOfFilters.push(lang);
+          }
+        }
       }
 
       if (this.restAgeFilter.includes(user)) {
@@ -240,20 +254,18 @@ export class PeoplePageComponent implements OnInit {
 
   // @ts-ignore
   technologiesFilter(users, keys: string[]) {
-
     const lowerCaseKeys = keys.map(key => key.toLowerCase());
-    const actualFilteredUsers: User[] = [];
     this.restTechnologiesFilter = [];
 
-    for (let user of users) {
-      // @ts-ignore
-      if (user.technologies.some(technology => lowerCaseKeys
-        .includes(technology.name.toLowerCase()))) {
-        actualFilteredUsers.push(user);
-      }
-    }
+    // @ts-ignore
+    const actualFilteredUsers = users.filter(user =>
+      lowerCaseKeys.every(key =>
+        // @ts-ignore
+        user.technologies?.some(technology => technology.name.toLowerCase() === key)
+      )
+    );
 
-    this.actualTechnologyValue = lowerCaseKeys.join(' ').toString();
+    this.actualTechnologyValue = keys;
     this.restTechnologiesFilter = this.verifiedAndUsersOnly
       .filter(user => !actualFilteredUsers.includes(user));
     return actualFilteredUsers;
@@ -262,25 +274,18 @@ export class PeoplePageComponent implements OnInit {
   // @ts-ignore
   languagesFilter(users: User[], keys: string[]): User[] {
     const lowerCaseKeys = keys.map(key => key.toLowerCase());
-    const actualFilteredUsers: User[] = [];
     this.restLanguageFilter = [];
 
-    for (let user of users) {
 
+    // @ts-ignore
+    const actualFilteredUsers = users.filter(user =>
+      lowerCaseKeys.every(key =>
+        // @ts-ignore
+        user.languages?.some(language => language.name.toLowerCase() === key)
+      )
+    );
 
-      // @ts-ignore
-      if (user.languages.some(language => lowerCaseKeys
-        .includes(language.name.toLowerCase()))) {
-        actualFilteredUsers.push(user);
-      }
-      this.actualLanguageValue = lowerCaseKeys.join(', ');
-      this.restLanguageFilter = this.verifiedAndUsersOnly
-        .filter(user => !actualFilteredUsers.includes(user));
-      return actualFilteredUsers;
-    }
-
-
-    this.actualLanguageValue = lowerCaseKeys.join(' ').toString();
+    this.actualLanguageValue = keys;
     this.restLanguageFilter = this.verifiedAndUsersOnly
       .filter(user => !actualFilteredUsers.includes(user));
     return actualFilteredUsers;
