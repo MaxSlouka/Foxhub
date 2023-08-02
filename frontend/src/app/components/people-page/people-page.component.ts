@@ -32,10 +32,7 @@ export class PeoplePageComponent implements OnInit {
   selectedPersonality: Personality | undefined;
   selectAllPersonalities: boolean = true;
   selectedAges: string[] = [];
-  usedTechnologies: Technology[] = [];
-  usedLanguages: Language[] = [];
   workStatus: any;
-
 
   // @ts-ignore
   users: User[] = [];
