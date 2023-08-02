@@ -148,6 +148,18 @@
         </ng-container>
       </ng-container>
 
+      <ng-container *ngFor="let user of nonFilteredUsers">
+        <ng-container *ngIf="user.outOfFilters?.length===3">
+          <app-people-page-card [user]="user"></app-people-page-card>
+        </ng-container>
+      </ng-container>
+
+      <ng-container *ngFor="let user of nonFilteredUsers">
+        <ng-container *ngIf="user.outOfFilters?.length===4">
+          <app-people-page-card [user]="user"></app-people-page-card>
+        </ng-container>
+      </ng-container>
+
       <ng-container *ngFor="let user of filteredUsers">
         <app-people-page-card [user]="user"></app-people-page-card>
       </ng-container>
