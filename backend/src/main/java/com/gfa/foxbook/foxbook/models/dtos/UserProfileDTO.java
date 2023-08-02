@@ -65,6 +65,6 @@ public class UserProfileDTO {
         this.yearOfBirth=user.getYearOfBirth();
         this.oneLineAbout=user.getOneLineAbout();
         this.workLocation=user.getWorkLocation();
-        this.workPreference= WorkPreference.valueOf(user.getWorkPreference());
+        this.workPreference= user.getWorkPreference();
     }
 }
