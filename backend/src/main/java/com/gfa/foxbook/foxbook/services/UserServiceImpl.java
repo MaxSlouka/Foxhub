@@ -152,16 +152,6 @@ public class UserServiceImpl implements UserService {
         } else {
             user.setLastName(user.getLastName());
         }
-        if (userDTO.getCompleteProjects() != null) {
-            user.setCompleteProjects(userDTO.getCompleteProjects());
-        } else {
-            user.setCompleteProjects(user.getCompleteProjects());
-        }
-        if (userDTO.getYearsOfExperience() != null) {
-            user.setYearsOfExperience(userDTO.getYearsOfExperience());
-        } else {
-            user.setYearsOfExperience(user.getYearsOfExperience());
-        }
         if (userDTO.getPhone() != null) {
             user.setPhone(userDTO.getPhone());
         } else {
@@ -216,6 +206,21 @@ public class UserServiceImpl implements UserService {
             user.setPersonality(userDTO.getPersonality());
         } else {
             user.setPersonality(user.getPersonality());
+        }
+        if (userDTO.getWorkLocation() != null) {
+            user.setWorkLocation(userDTO.getWorkLocation());
+        } else {
+            user.setWorkLocation(user.getWorkLocation());
+        }
+        if (userDTO.getOneLineAbout() != null) {
+            user.setOneLineAbout(userDTO.getOneLineAbout());
+        } else {
+            user.setOneLineAbout(user.getOneLineAbout());
+        }
+        if (userDTO.getWorkPreference() != null) {
+            user.setWorkPreference(userDTO.getWorkPreference());
+        } else {
+            user.setWorkPreference(user.getWorkPreference());
         }
         user.setYearOfBirth(userDTO.getYearOfBirth());
         user.setWorkStatus(userDTO.isWorkStatus());

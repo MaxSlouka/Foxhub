@@ -134,17 +134,17 @@
           </div>
         </div>
 
-        <!-- experience section -->
+        <!-- work location and preference -->
         <div class="row mt-2">
-          <div class="col-md-6">
-            <label class="labels">Completed projects</label>
-            <p class="lead">{{ user.completeProjects }}</p>
-          </div>
-          <div class="col-md-6">
-            <label class="labels">Years of Experience</label>
-            <p class="lead">{{ user.yearsOfExperience }}</p>
-          </div>
+<!--          <div class="card">-->
+            <div class="card-body">
+              <p class="card-text">One line about user: {{user.oneLineAbout}}</p>
+              <p class="card-text">Work Preference: {{user.workPreference}}</p>
+              <p class="card-text">Work Location: {{user.workLocation}}</p>
+            </div>
+<!--          </div>-->
         </div>
+
 
         <!-- personality section -->
         <div class="d-flex justify-content-between align-items-center mb-3">
