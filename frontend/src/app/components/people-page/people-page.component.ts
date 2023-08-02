@@ -42,8 +42,8 @@ export class PeoplePageComponent implements OnInit {
   addedUsers: User[] = [];
 
   actualTechnologyValue: string[] = [];
+  actualLanguageValue: string[] = [];
   actualPersonalityValue: string = '';
-  actualLanguageValue: string = '';
   actualAgeValue: string = '';
   actualWorkStatusValue: string = '';
 
@@ -198,7 +198,7 @@ export class PeoplePageComponent implements OnInit {
     if (this.selectedLanguages.length > 0) {
       filteredUsers = this.languagesFilter(filteredUsers, this.selectedLanguages);
     } else {
-      this.actualLanguageValue = '';
+      this.actualLanguageValue = [];
       this.restLanguageFilter = [];
     }
 
@@ -281,7 +281,7 @@ export class PeoplePageComponent implements OnInit {
       )
     );
 
-    this.actualLanguageValue = lowerCaseKeys.join(' ').toString();
+    this.actualLanguageValue = keys;
     this.restLanguageFilter = this.verifiedAndUsersOnly
       .filter(user => !actualFilteredUsers.includes(user));
     return actualFilteredUsers;
