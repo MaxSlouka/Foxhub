@@ -10,6 +10,13 @@ body, nav, a {
   font-size: 3.5rem;
 }
 
+h1 span,
+h2 span, 
+h3 span,
+h4 span {
+    color: rgb(0, 127, 0);
+}
+
 .btn-primary {
   background-color: #007f00;
   border: #003a00;

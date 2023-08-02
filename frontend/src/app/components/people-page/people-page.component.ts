@@ -17,37 +17,38 @@ import { CookieService } from 'ngx-cookie-service';
 })
 
 export class PeoplePageComponent implements OnInit {
-  @ViewChild('customRange3', {static: true}) rangeInputRef!: ElementRef<HTMLInputElement>;
-  @ViewChild('rangeValue', {static: true}) rangeValueRef!: ElementRef<HTMLSpanElement>;
+  @ViewChild('customRange3', { static: true }) rangeInputRef!: ElementRef<HTMLInputElement>;
+  @ViewChild('rangeValue', { static: true }) rangeValueRef!: ElementRef<HTMLSpanElement>;
 
   technologies: Technology[] = [];
   languages: Language[] = [];
+  personalities: Personality[] = [];
+  addedUsers: User[] = [];
+  usedTechnologies: Technology[] = [];
+  usedLanguages: Language[] = [];
+
   selectedTechnologies: string[] = [];
   selectedLanguages: string[] = [];
+  selectedPersonality: Personality | undefined;
+  selectAllPersonalities: boolean = true;
   selectedAges: string[] = [];
   usedTechnologies: Technology[] = [];
   usedLanguages: Language[] = [];
   workStatus: any;
 
+
   // @ts-ignore
   users: User[] = [];
   verifiedAndUsersOnly: User[] = [];
   nonFilteredUsers: User[] = [];
-
   filterContentExpanded: boolean = true;
-
   // @ts-ignore
   filterWorkStatus: string;
 
-  personalities: Personality[] = [];
-  selectedPersonality: Personality | undefined;
-  selectAllPersonalities: boolean = true;
-  addedUsers: User[] = [];
-
+  actualTechnologyValue: string[] = [];
+  actualLanguageValue: string[] = [];
 
   actualPersonalityValue: string = '';
-  actualLanguageValue: string = '';
-  actualTechnologyValue: string = '';
   actualAgeValue: string = '';
   actualWorkStatusValue: string = '';
 
@@ -59,12 +60,12 @@ export class PeoplePageComponent implements OnInit {
   public showCookiePopup = false;
 
 
-
   constructor(private technologyService: TechnologyService,
               private languageService: LanguageService,
               private apiService: ApiService,
               private personalityService: PersonalityService,
               private cookieService: CookieService) {
+
   }
 
   ngOnInit(): void {
@@ -109,7 +110,7 @@ export class PeoplePageComponent implements OnInit {
 
   get filteredUsers(): any[] {
     // @ts-ignore
-    return this.nonFilteredUsers.filter(user => user.outOfFilters?.length > 2);
+    return this.nonFilteredUsers.filter(user => user.outOfFilters?.length > 4);
   }
 
   onPersonalitySelect(event: any) {
@@ -203,38 +204,50 @@ export class PeoplePageComponent implements OnInit {
     this.allFilters();
   }
 
-
   allFilters() {
     let filteredUsers = [...this.verifiedAndUsersOnly];
 
     if (this.selectedTechnologies.length > 0) {
       filteredUsers = this.technologiesFilter(filteredUsers, this.selectedTechnologies);
     } else {
-      this.actualTechnologyValue = '';
+      this.actualTechnologyValue = [];
       this.restTechnologiesFilter = [];
     }
 
     if (this.selectedLanguages.length > 0) {
+      // @ts-ignore
       filteredUsers = this.languagesFilter(filteredUsers, this.selectedLanguages);
     } else {
-      this.actualLanguageValue = '';
+      this.actualLanguageValue = [];
       this.restLanguageFilter = [];
     }
 
-    filteredUsers = this.ageFilter(filteredUsers);
-    filteredUsers = this.openToWorkFilter(filteredUsers);
     filteredUsers = this.personalityFilter(filteredUsers);
+    filteredUsers = this.openToWorkFilter(filteredUsers);
+    filteredUsers = this.ageFilter(filteredUsers);
+
 
     for (let user of this.nonFilteredUsers) {
 
       user.outOfFilters = [];
 
       if (this.restTechnologiesFilter.includes(user)) {
-        user.outOfFilters.push(this.actualTechnologyValue);
+        for (let tech of this.actualTechnologyValue) {
+          if (!user.technologies?.some((userTech) =>
+            userTech.name.toLowerCase() === tech.toLowerCase())) {
+            user.outOfFilters.push(tech);
+          }
+        }
       }
 
       if (this.restLanguageFilter.includes(user)) {
-        user.outOfFilters.push(this.actualLanguageValue);
+
+        for (let lang of this.actualLanguageValue) {
+          if (!user.languages?.some((userLang) =>
+            userLang.name.toLowerCase() === lang.toLowerCase())) {
+            user.outOfFilters.push(lang);
+          }
+        }
       }
 
       if (this.restAgeFilter.includes(user)) {
@@ -252,26 +265,23 @@ export class PeoplePageComponent implements OnInit {
 
       }
     }
-    console.log(this.nonFilteredUsers);
     this.users = filteredUsers;
   }
 
   // @ts-ignore
   technologiesFilter(users, keys: string[]) {
-
     const lowerCaseKeys = keys.map(key => key.toLowerCase());
-    const actualFilteredUsers: User[] = [];
     this.restTechnologiesFilter = [];
 
-    for (let user of users) {
-      // @ts-ignore
-      if (user.technologies.some(technology => lowerCaseKeys
-        .includes(technology.name.toLowerCase()))) {
-        actualFilteredUsers.push(user);
-      }
-    }
+    // @ts-ignore
+    const actualFilteredUsers = users.filter(user =>
+      lowerCaseKeys.every(key =>
+        // @ts-ignore
+        user.technologies?.some(technology => technology.name.toLowerCase() === key)
+      )
+    );
 
-    this.actualTechnologyValue = lowerCaseKeys.join(' ').toString();
+    this.actualTechnologyValue = keys;
     this.restTechnologiesFilter = this.verifiedAndUsersOnly
       .filter(user => !actualFilteredUsers.includes(user));
     return actualFilteredUsers;
@@ -280,28 +290,25 @@ export class PeoplePageComponent implements OnInit {
   // @ts-ignore
   languagesFilter(users: User[], keys: string[]): User[] {
     const lowerCaseKeys = keys.map(key => key.toLowerCase());
-    const actualFilteredUsers: User[] = [];
     this.restLanguageFilter = [];
 
-    for (let user of users) {
 
-      // @ts-ignore
-      if (user.languages.some(language => lowerCaseKeys
-        .includes(language.name.toLowerCase()))) {
-        actualFilteredUsers.push(user);
-      }
-    }
+    // @ts-ignore
+    const actualFilteredUsers = users.filter(user =>
+      lowerCaseKeys.every(key =>
+        // @ts-ignore
+        user.languages?.some(language => language.name.toLowerCase() === key)
+      )
+    );
 
-    this.actualLanguageValue = lowerCaseKeys.join(' ').toString();
+    this.actualLanguageValue = keys;
     this.restLanguageFilter = this.verifiedAndUsersOnly
       .filter(user => !actualFilteredUsers.includes(user));
     return actualFilteredUsers;
   }
-
   personalityFilter(users: User[]) {
     const actualFilteredUsers: User[] = [];
     this.restPersonalityFilter = [];
-
     for (let user of users) {
       // @ts-ignore
       if (user.personality?.id === this.selectedPersonality?.id) {
@@ -327,17 +334,20 @@ export class PeoplePageComponent implements OnInit {
     this.restOpenToWorkFilter = [];
 
     for (let user of users) {
-      if ((this.filterWorkStatus === "open" && user.workStatus === true) ||
-        (this.filterWorkStatus === "closed" && user.workStatus === false ||
-          this.filterWorkStatus === "all")) {
+      if (this.filterWorkStatus === "open" && user.workStatus === true) {
         actualFilteredUsers.push(user);
       }
+      if (this.filterWorkStatus === "closed" && user.workStatus === false) {
+        actualFilteredUsers.push(user);
+      }
+      if (this.filterWorkStatus === "all") {
+        actualFilteredUsers.push(user)
+      }
     }
-
     if (this.filterWorkStatus === "open") {
-      this.actualWorkStatusValue = "Seeking employment: true"
+      this.actualWorkStatusValue = "true"
     } else if (this.filterWorkStatus === "closed") {
-      this.actualWorkStatusValue = "Seeking employment: false"
+      this.actualWorkStatusValue = "false"
     } else {
       this.actualWorkStatusValue = "all"
     }
@@ -355,7 +365,7 @@ export class PeoplePageComponent implements OnInit {
       // @ts-ignore
       const age = currentYear - user.yearOfBirth;
       { // @ts-ignore
-        for (let ageValue: string of this.selectedAges) {
+        for (let ageValue of this.selectedAges) {
           if (ageValue === "all") {
             if (!actualFilteredUsers.includes(user)) {
               actualFilteredUsers.push(user)
@@ -381,7 +391,7 @@ export class PeoplePageComponent implements OnInit {
               actualFilteredUsers.push(user)
             }
           }
-          if (ageValue === "40" && age >= 40 ) {
+          if (ageValue === "40" && age >= 40) {
             if (!actualFilteredUsers.includes(user)) {
               actualFilteredUsers.push(user)
             }
@@ -390,11 +400,37 @@ export class PeoplePageComponent implements OnInit {
       }
     }
 
-    this.actualAgeValue = this.selectedAges.join(" ").toString();
+    this.actualAgeValue = "age"
     this.restAgeFilter = this.verifiedAndUsersOnly
       .filter(user => !actualFilteredUsers.includes(user));
     return actualFilteredUsers;
   }
+
+  clearAllFilters() {
+    this.selectedTechnologies = [];
+    this.selectedLanguages = [];
+    this.selectedAges = [];
+    this.filterWorkStatus = 'all';
+    this.selectedPersonality = undefined;
+    this.selectAllPersonalities = true;
+
+    for (let user of this.nonFilteredUsers) {
+      user.outOfFilters = [];
+    }
+
+    const ageCheckboxes = document.querySelectorAll<HTMLInputElement>('input[type="checkbox"]');
+    const ageAllCheckbox = document.querySelector<HTMLInputElement>('input[type="checkbox"][value="all"]');
+    ageCheckboxes.forEach((checkbox) => {
+      checkbox.checked = false;
+    });
+
+    if (ageAllCheckbox) {
+      ageAllCheckbox.checked = true;
+    }
+
+    this.allFilters();
+  }
+
 }
 
 

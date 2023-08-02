@@ -116,4 +116,7 @@ export class ApiService {
       window.location.href = "admin-board"
     });
   }
+  checkout(message:any){
+    this.http.post(prefix +'/api/v1/public/contact',message,httpOptions).subscribe(()=>{})
+  }
 }

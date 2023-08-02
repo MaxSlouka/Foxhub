@@ -23,12 +23,10 @@ import { AsideComponent } from './components/aside/aside.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { UserSettingsPageComponent } from './components/user-settings-page/user-settings-page.component';
 import { TermsOfUseComponent } from './components/terms-of-use/terms-of-use.component';
-import { HeaderSearchbarComponent } from './components/header-searchbar/header-searchbar.component';
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 import { PostsComponent } from './components/posts/posts.component';
 import { PostComponent } from './components/post/post.component';
 import { PostFormComponent } from './components/post-form/post-form.component';
-import { HeaderSearchbarCardComponent } from './components/header-searchbar-card/header-searchbar-card.component';
 import { QRCodeModule } from 'angularx-qrcode';
 import { CommonModule } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -42,7 +40,6 @@ import { CartComponent } from './components/cart/cart.component';
 import { CardComponent } from './components/cart/card/card.component';
 import { CartCheckoutComponent } from './components/cart-checkout/cart-checkout.component';
 import { PersonalityComponent } from './components/personality/personality.component';
-import { ItemsCounterComponent } from './components/items-counter/items-counter.component';
 import { SwiperArrowComponent } from './components/swiper-arrow/swiper-arrow.component';
 import { CreatorsComponent } from './components/creators/creators.component';
 import { RevealOnScrollDirective } from './directives/reveal-on-scroll.directive';
@@ -73,12 +70,10 @@ import { AdminBoardComponent } from './components/admin-board/admin-board.compon
         PageNotFoundComponent,
         UserSettingsPageComponent,
         TermsOfUseComponent,
-        HeaderSearchbarComponent,
         ResetPasswordComponent,
         PostsComponent,
         PostComponent,
         PostFormComponent,
-        HeaderSearchbarCardComponent,
         LanguageButtonComponent,
         AsideUserCardComponent,
         TechnologyButtonComponent,
@@ -92,7 +87,6 @@ import { AdminBoardComponent } from './components/admin-board/admin-board.compon
         CreatorsComponent,
         RevealOnScrollDirective,
         PersonalityInfoPageComponent,
-        ItemsCounterComponent,
         RevealWithDelayDirective,
         AdminBoardComponent,
     ],

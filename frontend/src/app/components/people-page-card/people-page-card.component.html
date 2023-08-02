@@ -1,44 +1,51 @@
-
 <div id="accordion">
     <div class="card">
         <div class="card-header" [id]="'heading-' + user.nickname" data-toggle="collapse"
             [attr.data-target]="'#collapse-' + user.nickname" [attr.aria-controls]="'collapse-' + user.nickname"
             aria-expanded="false">
 
-            <div class="left-side">
-                <a [routerLink]="['/profile', user.nickname]" class="card">
-                    <img *ngIf="user.profilePictureUrl" [src]="user.profilePictureUrl" height="100" width="100"
-                        alt="profile_picture" class="img-fluid d-none d-md-block shadow">
-                </a>
-                <h4 class="py-2 px-2 mx-3">
-                    {{ user.firstName }}
-                    <p class="lead">{{ user.location }}</p>
-                </h4>
+            <div class="card-body-top">
+                <div class="left-side">
+                    <a [routerLink]="['/profile', user.nickname]" class="card" target="_blank">
+                        <img *ngIf="user.profilePictureUrl" [src]="user.profilePictureUrl" height="100" width="100"
+                            alt="profile_picture" class="img-fluid d-none d-md-block shadow">
+                    </a>
+                    <h4 class="py-2 px-2 mx-3">
+                        {{ user.firstName }}
+                        <p class="lead">{{ user.location }}</p>
+                    </h4>
+                </div>
+
+                <div class="right-side">
+                    <button class="btn btn-outline-primary" type="button" (click)="user.inCart? removeItem(user) : addToCart(user)" >
+                        <ng-container *ngIf="user.inCart; else addToCartTemplate">
+                            <i class="bi bi-cart4"></i> <span style="font-style: normal;"> In Cart</span>
+                        </ng-container>
+                        <ng-template #addToCartTemplate>
+                            <span style="font-style: normal;">Add to Cart</span>
+                        </ng-template>
+                    </button>
+                </div>
             </div>
 
-            <button class="btn btn-outline-primary" type="button" (click)="addToCart(user)">
-                <ng-container *ngIf="user.inCart; else addToCartTemplate">
-                    <i class="bi bi-cart4"></i> <span style="font-style: normal;"> In Cart</span>
-                </ng-container>
-                <ng-template #addToCartTemplate>
-                    <span style="font-style: normal;">Add to Cart</span>
-                </ng-template>
-            </button>
+            <div class="card-body-bottom">
+                <p *ngFor="let filter of user.outOfFilters"><span>{{filter}}</span> &nbsp;</p>
+            </div>
         </div>
 
-        <div [id]="'collapse-' + user.nickname" class="collapse show"
+        <div [id]="'collapse-' + user.nickname" class="collapse"
             [attr.aria-labelledby]="'heading-' + user.nickname" data-parent="#accordion">
 
             <div class="card-body">
 
                 <div class="card-body-left">
-                    
+
                     <h4 class="mb-4">{{ user.firstName }} {{user.lastName}}</h4>
 
                     <label class="labels">Location</label>
                     <p class="lead">{{user.location}}</p>
 
-                    
+
                     <label class="labels">About</label>
                     <p class="lead">Short user about text (one liner).</p>
 
@@ -60,10 +67,6 @@
                             </app-language>
                         </div>
                     </div>
-
-                </div>
-
-                <div class="card-body-right">
 
                 </div>
 

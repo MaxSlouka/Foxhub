@@ -63,3 +63,6 @@ Icon
 Network Trash Folder
 Temporary Items
 .apdisk
+
+# for app properties
+*.properties
