@@ -207,6 +207,21 @@ public class UserServiceImpl implements UserService {
         } else {
             user.setPersonality(user.getPersonality());
         }
+        if (userDTO.getWorkLocation() != null) {
+            user.setWorkLocation(userDTO.getWorkLocation());
+        } else {
+            user.setWorkLocation(user.getWorkLocation());
+        }
+        if (userDTO.getOneLineAbout() != null) {
+            user.setOneLineAbout(userDTO.getOneLineAbout());
+        } else {
+            user.setOneLineAbout(user.getOneLineAbout());
+        }
+        if (userDTO.getWorkPreference() != null) {
+            user.setWorkPreference(userDTO.getWorkPreference());
+        } else {
+            user.setWorkPreference(user.getWorkPreference());
+        }
         user.setYearOfBirth(userDTO.getYearOfBirth());
         user.setWorkStatus(userDTO.isWorkStatus());
 
