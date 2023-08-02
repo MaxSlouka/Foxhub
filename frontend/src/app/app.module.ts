@@ -51,6 +51,8 @@ import { RevealWithDelayDirective } from './directives/reveal-with-delay.directi
 import { AdminBoardComponent } from './components/admin-board/admin-board.component';
 
 
+
+
 @NgModule({
     declarations: [
         AppComponent,
@@ -92,7 +94,7 @@ import { AdminBoardComponent } from './components/admin-board/admin-board.compon
         PersonalityInfoPageComponent,
         ItemsCounterComponent,
         RevealWithDelayDirective,
-        AdminBoardComponent
+        AdminBoardComponent,
     ],
   imports: [
     FormsModule,
