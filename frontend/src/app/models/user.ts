@@ -18,14 +18,15 @@ export interface User {
   dateOfRegistration?: Date,
   profileUrl?: string,
   profilePictureUrl?: string,
-  completeProjects?: string,
-  yearsOfExperience?: string,
   facebook?: string,
   instagram?: string,
   linkedin?: string,
   gitHub?: string,
   workStatus?:boolean;
   optionalPage?: string,
+  workLocation?: string,
+  oneLineAbout?: string,
+  workPreference?: string
   roles?: Role[],
   technologies?: Technology[],
   languages?: Language[],
