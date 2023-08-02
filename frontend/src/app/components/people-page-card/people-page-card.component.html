@@ -17,13 +17,13 @@
                 </div>
 
                 <div class="right-side">
-                    <button class="btn btn-outline-primary" type="button" (click)="user.inCart? removeItem(user) : addToCart(user)" >
-                        <ng-container *ngIf="user.inCart; else addToCartTemplate">
-                            <i class="bi bi-cart4"></i> <span style="font-style: normal;"> In Cart</span>
-                        </ng-container>
-                        <ng-template #addToCartTemplate>
-                            <span style="font-style: normal;">Add to Cart</span>
-                        </ng-template>
+                    <button class="btn btn-outline-primary" type="button" (click)="toggleItem($event, user)" >
+                        <span *ngIf="user.inCart">
+                            <i class="bi bi-cart4"></i> In Cart
+                        </span>
+                        <span *ngIf="!user.inCart">
+                            Add to Cart
+                        </span>
                     </button>
                 </div>
             </div>
