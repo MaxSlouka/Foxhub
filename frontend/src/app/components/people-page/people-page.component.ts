@@ -243,7 +243,6 @@ export class PeoplePageComponent implements OnInit {
 
       }
     }
-    console.log(this.nonFilteredUsers);
     this.users = filteredUsers;
   }
 
@@ -379,7 +378,7 @@ export class PeoplePageComponent implements OnInit {
       }
     }
 
-    this.actualAgeValue = this.selectedAges.join(" ").toString();
+    this.actualAgeValue = "age"
     this.restAgeFilter = this.verifiedAndUsersOnly
       .filter(user => !actualFilteredUsers.includes(user));
     return actualFilteredUsers;
