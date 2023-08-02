@@ -59,10 +59,10 @@ public class UserProfileDTO {
         this.technologies = user.getTechnologies();
         this.languages = user.getLanguages();
         this.profilePictureUrl = user.getProfilePictureUrl();
-        this.workStatus = user.isWorkStatus();
-        this.yearOfBirth = user.getYearOfBirth();
-        this.oneLineAbout = user.getOneLineAbout();
-        this.workLocation = user.getWorkLocation();
-        this.workPreference = WorkPreference.valueOf(user.getWorkPreference());
+        this.workStatus =user.isWorkStatus();
+        this.yearOfBirth=user.getYearOfBirth();
+        this.oneLineAbout=user.getOneLineAbout();
+        this.workLocation=user.getWorkLocation();
+        this.workPreference= user.getWorkPreference();
     }
 }

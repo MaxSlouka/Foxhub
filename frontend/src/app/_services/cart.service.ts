@@ -26,7 +26,9 @@ export class CartService {
   }
 
   removeFromCart(user: User) {
-    const index = this.cartItems.indexOf(user);
+    const index = this.cartItems.findIndex(u => u.nickname === user.nickname);
+
+    console.log(index)
     if (index > -1) {
       this.cartItems.splice(index, 1);
       this.updateLocalStorage();
