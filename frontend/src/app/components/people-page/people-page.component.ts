@@ -9,7 +9,6 @@ import {Personality} from "../../models/personality";
 import {PersonalityService} from "../../_services/personality.service";
 import { CookieService } from 'ngx-cookie-service';
 
-
 @Component({
   selector: 'app-people-page',
   templateUrl: './people-page.component.html',
@@ -17,8 +16,8 @@ import { CookieService } from 'ngx-cookie-service';
 })
 
 export class PeoplePageComponent implements OnInit {
-  @ViewChild('customRange3', { static: true }) rangeInputRef!: ElementRef<HTMLInputElement>;
-  @ViewChild('rangeValue', { static: true }) rangeValueRef!: ElementRef<HTMLSpanElement>;
+  @ViewChild('customRange3', {static: true}) rangeInputRef!: ElementRef<HTMLInputElement>;
+  @ViewChild('rangeValue', {static: true}) rangeValueRef!: ElementRef<HTMLSpanElement>;
 
   technologies: Technology[] = [];
   languages: Language[] = [];
@@ -221,13 +220,13 @@ export class PeoplePageComponent implements OnInit {
 
     filteredUsers = this.personalityFilter(filteredUsers);
     filteredUsers = this.openToWorkFilter(filteredUsers);
-    filteredUsers = this.ageFilter(filteredUsers);
+    if (this.selectedAges.length > 0) {
+      filteredUsers = this.ageFilter(filteredUsers);
+    }
 
 
     for (let user of this.nonFilteredUsers) {
-
       user.outOfFilters = [];
-
       if (this.restTechnologiesFilter.includes(user)) {
         for (let tech of this.actualTechnologyValue) {
           if (!user.technologies?.some((userTech) =>
@@ -238,7 +237,6 @@ export class PeoplePageComponent implements OnInit {
       }
 
       if (this.restLanguageFilter.includes(user)) {
-
         for (let lang of this.actualLanguageValue) {
           if (!user.languages?.some((userLang) =>
             userLang.name.toLowerCase() === lang.toLowerCase())) {
@@ -247,6 +245,9 @@ export class PeoplePageComponent implements OnInit {
         }
       }
 
+      if(this.selectedAges.length === 0){
+        this.restAgeFilter = [];
+      }
       if (this.restAgeFilter.includes(user)) {
         user.outOfFilters.push(this.actualAgeValue);
       }
@@ -303,6 +304,7 @@ export class PeoplePageComponent implements OnInit {
       .filter(user => !actualFilteredUsers.includes(user));
     return actualFilteredUsers;
   }
+
   personalityFilter(users: User[]) {
     const actualFilteredUsers: User[] = [];
     this.restPersonalityFilter = [];
@@ -355,7 +357,7 @@ export class PeoplePageComponent implements OnInit {
 
   ageFilter(users: User[]) {
     const currentYear = new Date().getFullYear();
-    const actualFilteredUsers: User[] = [];
+    let actualFilteredUsers: User[] = [];
     this.restAgeFilter = [];
 
     for (let user of users) {
@@ -363,11 +365,6 @@ export class PeoplePageComponent implements OnInit {
       const age = currentYear - user.yearOfBirth;
       { // @ts-ignore
         for (let ageValue of this.selectedAges) {
-          if (ageValue === "all") {
-            if (!actualFilteredUsers.includes(user)) {
-              actualFilteredUsers.push(user)
-            }
-          }
           if (ageValue === "18" && (age >= 18 && age <= 25)) {
             if (!actualFilteredUsers.includes(user)) {
               actualFilteredUsers.push(user)
@@ -424,10 +421,8 @@ export class PeoplePageComponent implements OnInit {
     if (ageAllCheckbox) {
       ageAllCheckbox.checked = true;
     }
-
     this.allFilters();
   }
-
 }
 
 
