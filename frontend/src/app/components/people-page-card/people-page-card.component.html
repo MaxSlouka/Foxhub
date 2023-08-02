@@ -45,9 +45,11 @@
                     <label class="labels">Location</label>
                     <p class="lead">{{user.location}}</p>
 
-
                     <label class="labels">About</label>
-                    <p class="lead">Short user about text (one liner).</p>
+                    <p class="lead">{{user.oneLineAbout}}</p>
+                    
+                    <label class="labels">Work preferences</label>
+                    <p class="lead">{{user.workPreference}} - {{user.workLocation}}</p>
 
                     <label class="labels">Personality</label>
                     <p class="lead ">{{user.personality?.name}} - {{user.personality?.description}}</p>

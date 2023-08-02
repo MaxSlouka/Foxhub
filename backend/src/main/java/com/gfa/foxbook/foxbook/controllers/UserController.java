@@ -38,11 +38,7 @@ public class UserController {
     private final LikeService likeService;
     private final PasswordEncoder passwordEncoder;
     private final CommentService commentService;
-
-
-
     private String uploadDir = "/home/user/uploads";
-
 
     @GetMapping("/person")
     public ResponseEntity<?> getUser(HttpServletRequest request) {

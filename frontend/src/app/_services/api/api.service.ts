@@ -6,7 +6,7 @@ import { Language } from "../../models/language";
 import { Technology } from "../../models/technology";
 import { Personality } from "../../models/personality";
 import { GlobalConstants } from "../../common/global-constants";
-import {Router} from "@angular/router";
+import { Router } from "@angular/router";
 
 const prefix = GlobalConstants.prefix;
 
@@ -22,7 +22,7 @@ export class ApiService {
 
   private apiUrlGetAll: string = prefix + "/api/v1/public/people";
 
-  constructor(private http: HttpClient,private router:Router) {
+  constructor(private http: HttpClient, private router: Router) {
   }
 
   getAll(): Observable<User[]> {
@@ -37,8 +37,8 @@ export class ApiService {
     return this.http.delete(prefix + '/api/v1/user/people');
   }
 
-  removeUser(nickname: string | undefined):void{
-    this.http.delete(prefix + '/api/v1/admin/people/'+nickname).subscribe(next=> {
+  removeUser(nickname: string | undefined): void {
+    this.http.delete(prefix + '/api/v1/admin/people/' + nickname).subscribe(next => {
       window.location.href = "admin-board"
     });
   }
@@ -69,8 +69,8 @@ export class ApiService {
     lastName: string,
     phone: string | undefined,
     location: string | undefined,
-             workLocation: string | undefined,
-             oneLineAbout: string | undefined,
+    workLocation: string | undefined,
+    oneLineAbout: string | undefined,
     workPreference: string | undefined,
     about: string | undefined,
     gitHub: string | undefined,
@@ -83,7 +83,7 @@ export class ApiService {
     personality: Personality | undefined,
     yearOfBirth: number | undefined,
     workStatus: boolean | undefined,
-
+    
   ): Observable<any> {
 
     return this.http.patch(prefix + "/api/v1/user/people", {
@@ -112,11 +112,11 @@ export class ApiService {
 
   changeRole(nickname: string | undefined) {
     // @ts-ignore
-    this.http.post(prefix + '/api/v1/admin/change-role/'+nickname).subscribe(next=> {
+    this.http.post(prefix + '/api/v1/admin/change-role/' + nickname).subscribe(next => {
       window.location.href = "admin-board"
     });
   }
-  checkout(message:any){
-    this.http.post(prefix +'/api/v1/public/contact',message,httpOptions).subscribe(()=>{})
+  checkout(message: any) {
+    this.http.post(prefix + '/api/v1/public/contact', message, httpOptions).subscribe(() => { })
   }
 }

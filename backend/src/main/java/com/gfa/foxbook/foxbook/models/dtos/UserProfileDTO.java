@@ -40,8 +40,6 @@ public class UserProfileDTO {
     private List<Language> languages;
     private boolean workStatus;
 
-
-
     public UserProfileDTO(User user) {
         this.id = user.getId();
         this.firstName = user.getFirstName();

@@ -26,7 +26,7 @@ export interface User {
   optionalPage?: string,
   workLocation?: string,
   oneLineAbout?: string,
-  workPreference?: string
+  workPreference?: string,
   roles?: Role[],
   technologies?: Technology[],
   languages?: Language[],

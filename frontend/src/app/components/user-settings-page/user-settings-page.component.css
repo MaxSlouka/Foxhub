@@ -7,6 +7,10 @@
     border-color: #007f00;
 }
 
+.form-check input:hover,
+.form-check label:hover {
+    cursor: pointer;
+}
 
 .profile-button:focus {
     background: rgb(0, 90, 0);
@@ -89,8 +93,8 @@
     overflow: auto;
 }
 
-.myTechnologies{
-  max-height: 150px;
+.myTechnologies {
+    max-height: 150px;
     overflow: auto;
 }
 
