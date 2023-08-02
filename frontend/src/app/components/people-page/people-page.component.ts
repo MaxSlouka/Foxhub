@@ -203,7 +203,6 @@ export class PeoplePageComponent implements OnInit {
     }
 
     filteredUsers = this.personalityFilter(filteredUsers);
-
     filteredUsers = this.openToWorkFilter(filteredUsers);
     filteredUsers = this.ageFilter(filteredUsers);
 
@@ -222,7 +221,13 @@ export class PeoplePageComponent implements OnInit {
       }
 
       if (this.restLanguageFilter.includes(user)) {
-        user.outOfFilters.push(this.actualLanguageValue);
+
+        for (let lang of this.actualLanguageValue) {
+          if (!user.languages?.some((userLang) =>
+            userLang.name.toLowerCase() === lang.toLowerCase())) {
+            user.outOfFilters.push(lang);
+          }
+        }
       }
 
       if (this.restAgeFilter.includes(user)) {
@@ -246,23 +251,16 @@ export class PeoplePageComponent implements OnInit {
 
   // @ts-ignore
   technologiesFilter(users, keys: string[]) {
-
     const lowerCaseKeys = keys.map(key => key.toLowerCase());
-    let actualFilteredUsers: User[] = [];
-    const tempActualFilteredUsers: User[] = []
     this.restTechnologiesFilter = [];
 
-
     // @ts-ignore
-    actualFilteredUsers = users.filter(user =>
+    const actualFilteredUsers = users.filter(user =>
       lowerCaseKeys.every(key =>
         // @ts-ignore
         user.technologies?.some(technology => technology.name.toLowerCase() === key)
       )
     );
-
-
-    console.log(actualFilteredUsers)
 
     this.actualTechnologyValue = keys;
     this.restTechnologiesFilter = this.verifiedAndUsersOnly
@@ -273,17 +271,15 @@ export class PeoplePageComponent implements OnInit {
   // @ts-ignore
   languagesFilter(users: User[], keys: string[]): User[] {
     const lowerCaseKeys = keys.map(key => key.toLowerCase());
-    const actualFilteredUsers: User[] = [];
     this.restLanguageFilter = [];
 
-    for (let user of users) {
-
-      // @ts-ignore
-      if (user.languages.some(language => lowerCaseKeys
-        .includes(language.name.toLowerCase()))) {
-        actualFilteredUsers.push(user);
-      }
-    }
+    // @ts-ignore
+    const actualFilteredUsers = users.filter(user =>
+      lowerCaseKeys.every(key =>
+        // @ts-ignore
+        user.languages?.some(language => language.name.toLowerCase() === key)
+      )
+    );
 
     this.actualLanguageValue = lowerCaseKeys.join(' ').toString();
     this.restLanguageFilter = this.verifiedAndUsersOnly
