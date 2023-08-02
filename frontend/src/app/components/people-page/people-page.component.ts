@@ -39,11 +39,6 @@ export class PeoplePageComponent implements OnInit {
   // @ts-ignore
   filterWorkStatus: string;
 
-  personalities: Personality[] = [];
-  selectedPersonality: Personality | undefined;
-  selectAllPersonalities: boolean = true;
-  addedUsers: User[] = [];
-
   actualTechnologyValue: string[] = [];
   actualLanguageValue: string[] = [];
 
