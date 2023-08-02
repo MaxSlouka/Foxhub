@@ -2,6 +2,7 @@ package com.gfa.foxbook.foxbook.models.dtos;
 
 
 import com.gfa.foxbook.foxbook.models.User;
+import com.gfa.foxbook.foxbook.models.WorkPreference;
 import com.gfa.foxbook.foxbook.models.nonusermodels.Language;
 import com.gfa.foxbook.foxbook.models.nonusermodels.Personality;
 import com.gfa.foxbook.foxbook.models.nonusermodels.Role;
@@ -29,6 +30,9 @@ public class UserSearchDTO {
     private String profilePictureUrl;
     private List<Technology> technologies;
     private List<Language> languages;
+    private String workLocation;
+    private WorkPreference workPreference;
+    private String oneLineAbout;
 
     public UserSearchDTO(User user) {
         this.firstName = user.getFirstName();
@@ -44,5 +48,8 @@ public class UserSearchDTO {
         this.verified = user.isVerified();
         this.role = user.getRole();
         this.location = user.getLocation();
+        this.workLocation = user.getWorkLocation();
+        this.workPreference = user.getWorkPreference();
+        this.oneLineAbout = user.getOneLineAbout();
     }
 }
