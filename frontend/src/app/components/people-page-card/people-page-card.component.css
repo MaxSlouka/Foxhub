@@ -51,20 +51,20 @@
     background: none;
 }
 
-.left-side a img {
-    border: 5px solid white;
-    background: rgba(255, 255, 255, 0);
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-}
-
 @media (max-width: 767.98px) {
 
     .left-side a {
         display: none;
     }
 
+}
+
+.left-side a img {
+    border: 5px solid white;
+    background: rgba(255, 255, 255, 0);
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
 }
 
 .left-side a img:hover {

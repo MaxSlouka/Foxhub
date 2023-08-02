@@ -4,16 +4,12 @@ a {
     margin-top: 1rem;
 }
 
-.main-container {
-    margin-top: 4rem;
-}
-
 img {
     margin-bottom: 3rem;
 }
 
-h1 span {
-    color: #007f00;
+.main-container {
+    margin-top: 4rem;
 }
 
 @media (max-width: 767.98px) {
