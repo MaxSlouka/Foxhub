@@ -40,7 +40,6 @@ import { CartComponent } from './components/cart/cart.component';
 import { CardComponent } from './components/cart/card/card.component';
 import { CartCheckoutComponent } from './components/cart-checkout/cart-checkout.component';
 import { PersonalityComponent } from './components/personality/personality.component';
-import { ItemsCounterComponent } from './components/items-counter/items-counter.component';
 import { SwiperArrowComponent } from './components/swiper-arrow/swiper-arrow.component';
 import { CreatorsComponent } from './components/creators/creators.component';
 import { RevealOnScrollDirective } from './directives/reveal-on-scroll.directive';
@@ -86,7 +85,6 @@ import { AdminBoardComponent } from './components/admin-board/admin-board.compon
         CreatorsComponent,
         RevealOnScrollDirective,
         PersonalityInfoPageComponent,
-        ItemsCounterComponent,
         RevealWithDelayDirective,
         AdminBoardComponent
     ],
