@@ -7,7 +7,7 @@
   <!--  progress bar   -->
   <div class="d-flex flex-column justify-content-center align-items-center">
     <p class="lead">Profile Completion Progress Bar</p>
-    <p class="lead labels font-weight-bold text-center"><i class="bi bi-lightbulb mr-1"></i>Pro tip: If you want to be
+    <p class="lead labels font-weight-bold text-center">Pro tip: If you want to be
       visible and increase you chances to
       get a job, fill up all the profile
       information.</p>
@@ -21,23 +21,53 @@
         aria-valuemax="100"></div>
     </div>
   </div>
-  <!-- end progress bar -->
 
   <div class="row">
 
+    <!-- profile picture -->
     <div class="col-md-3 border-right">
-      <div class="d-flex flex-column align-items-center text-center p-3 py-2"><img *ngIf="user.profilePictureUrl"
-          class="rounded-circle mt-2" width=150 height=150 ngSrc="{{  user.profilePictureUrl  }}"
-          alt="profile picture"><span class="font-weight-bold my-4">{{user.firstName}}
-          {{user.lastName}}</span><span class="text-black-50">{{user.email}}</span><span>
-        </span></div>
+      <div class="d-flex flex-column align-items-center text-center p-3 py-2">
+        <img *ngIf="user.profilePictureUrl" class="rounded-circle mt-2" width=150 height=150
+          ngSrc="{{  user.profilePictureUrl  }}" alt="profile picture" data-toggle="modal" data-target="#imgModal">
+        <span class="font-weight-bold my-4">{{user.firstName}} {{user.lastName}}</span>
+        <span class="text-black-50">{{user.email}}</span>
+        <span> </span>
+      </div>
     </div>
+
+    <!-- profile picture edit modal -->
+
+    <div class="modal fade" id="imgModal" tabindex="-1" role="dialog" aria-labelledby="imgModal" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content modal-picture">
+          <div class="modal-header border-bottom">
+            <h5 class="modal-title" id="imgModalLabel">Choose profile picture
+            </h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="mt-5 mb-5 text-center">
+            <input type="file" (change)="onFileSelected($event)"/>
+          </div>
+          <div class="text-center">
+            <button (click)="onUpload()" class="btn btn-primary profile-button" type="button" data-toggle="modal"
+              data-target="#imgModal">Upload picture
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- profile settings -->
 
     <div class="col-md-5 border-right">
 
       <div class="p-3 py-5">
 
         <form name="form" (ngSubmit)="updateUser()" novalidate>
+
+          <!-- basic profile info -->
 
           <p class="lead mt-4 border-bottom font-weight-bold">Profile Settings</p>
 
@@ -65,7 +95,9 @@
             </div>
           </div>
 
-          <p class="lead mt-4 border-bottom">Personality</p>
+          <!-- personality settings -->
+
+          <p class="lead mt-4 border-bottom font-weight-bold">Personality</p>
           <div class="row mt-2">
             <div class="col-md-12">
 
@@ -87,6 +119,8 @@
             </div>
           </div>
 
+          <!-- additional setting (phone, location, about) -->
+
           <p class="lead mt-4 border-bottom font-weight-bold">Contacts & About</p>
           <div class="row mt-3">
             <div class="col-md-12">
@@ -105,6 +139,8 @@
                 placeholder="write something about you..." cols="30" rows="5"></textarea>
             </div>
           </div>
+
+          <!-- job settings -->
 
           <p class="lead mt-4 border-bottom font-weight-bold">Looking for Job?</p>
 
@@ -127,6 +163,8 @@
             </div>
           </div>
 
+          <!-- social media settings -->
+
           <p class="lead mt-4 border-bottom font-weight-bold">Social Media</p>
 
           <div class="row">
@@ -145,6 +183,8 @@
             </div>
           </div>
 
+          <!-- options (save profile, change password, go back) -->
+
           <div class="mt-5 text-center">
             <button class="btn btn-primary profile-button my-2 mx-2" type="button" data-toggle="modal"
               data-target="#addModal">Save Profile</button>
@@ -153,8 +193,7 @@
             <a routerLink="/" class="btn btn-outline-secondary my-2 mx-2" role="button" aria-disabled="true">Go Back</a>
           </div>
 
-
-          <!-- modal add-->
+          <!-- save profile modal -->
 
           <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addModalLabel"
             aria-hidden="true">
@@ -187,6 +226,8 @@
     <div class="col-md-4">
       <div class="p-3 py-5">
 
+        <!-- skills & languages setting -->
+
         <p class="lead mt-4 border-bottom font-weight-bold">Edits</p>
         <div class="d-flex justify-content-between align-items-center experience my-2"><span>Edit
             Skills</span>
@@ -195,7 +236,7 @@
           </button>
         </div>
 
-        <!-- modal skills-->
+        <!-- skills settings modal -->
 
         <div class="modal fade" id="skillsModal" tabindex="-1" role="dialog" aria-labelledby="skillsModalLabel"
           aria-hidden="true">
@@ -237,6 +278,8 @@
           </div>
         </div>
 
+        <!-- languages settings -->
+
         <div class="d-flex justify-content-between align-items-center experience my-2"><span>Edit
             languages</span>
           <button class="btn border px-3 p-1 add-experience" (click)="unusedLanguagesHandle()" type="button"
@@ -244,7 +287,7 @@
           </button>
         </div>
 
-        <!-- modal languages-->
+        <!-- languages settings modal -->
 
         <div class="modal fade" id="languagesModal" tabindex="-1" role="dialog" aria-labelledby="languagesModalLabel"
           aria-hidden="true">
@@ -284,38 +327,7 @@
           </div>
         </div>
 
-        <div class="d-flex justify-content-between align-items-center experience my-2"><span>Edit profile picture</span>
-          <button class="btn border px-3 p-1 add-experience" type="button" data-toggle="modal"
-            data-target="#imgModal"><i class="fa fa-plus"></i>&nbsp;Picture
-          </button>
-        </div>
-
-        <!-- img modal -->
-
-        <div class="modal fade" id="imgModal" tabindex="-1" role="dialog" aria-labelledby="imgModal" aria-hidden="true">
-          <div class="modal-dialog" role="document">
-            <div class="modal-content modal-picture">
-              <div class="modal-header border-bottom">
-                <h5 class="modal-title" id="imgModalLabel">Choose profile picture
-                </h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <div class="mt-5 mb-5 text-center">
-                <input type="file" (change)="onFileSelected($event)" />
-                <br>
-              </div>
-              <div class="text-center">
-                <button (click)="onUpload()" class="btn btn-primary profile-button" type="button" data-toggle="modal"
-                  data-target="#imgModal">Upload picture
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- button trigger modal -->
+        <!-- delete profile btn -->
 
         <div class="mt-5 text-center">
           <button class="btn btn-danger profile-button profile-delete-btn" type="button" data-toggle="modal"
@@ -324,7 +336,7 @@
           </button>
         </div>
 
-        <!-- modal delete -->
+        <!-- delete profile modal -->
 
         <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
           aria-hidden="true">
