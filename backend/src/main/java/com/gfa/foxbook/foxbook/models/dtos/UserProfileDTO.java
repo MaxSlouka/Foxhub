@@ -1,6 +1,7 @@
 package com.gfa.foxbook.foxbook.models.dtos;
 
 import com.gfa.foxbook.foxbook.models.User;
+import com.gfa.foxbook.foxbook.models.WorkPreference;
 import com.gfa.foxbook.foxbook.models.nonusermodels.Language;
 import com.gfa.foxbook.foxbook.models.nonusermodels.Personality;
 import com.gfa.foxbook.foxbook.models.nonusermodels.Role;
@@ -19,6 +20,9 @@ public class UserProfileDTO {
     private String firstName;
     private String lastName;
     private String nickname;
+    private String workLocation;
+    private WorkPreference workPreference;
+    private String oneLineAbout;
     private String email;
     private String phone;
     private String about;
@@ -59,5 +63,8 @@ public class UserProfileDTO {
         this.profilePictureUrl = user.getProfilePictureUrl();
         this.workStatus =user.isWorkStatus();
         this.yearOfBirth=user.getYearOfBirth();
+        this.oneLineAbout=user.getOneLineAbout();
+        this.workLocation=user.getWorkLocation();
+        this.workPreference= WorkPreference.valueOf(user.getWorkPreference());
     }
 }
