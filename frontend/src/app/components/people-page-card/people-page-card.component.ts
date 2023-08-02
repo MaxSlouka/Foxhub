@@ -39,6 +39,11 @@ export class PeoplePageCardComponent implements OnDestroy {
     this.isUserAdded(user);
   }
 
+  removeItem(user: User) {
+    this.cartService.removeFromCart(user)
+    user.inCart=false;
+  }
+
   ngOnInit(): void {
     if (this.addedUsers.find((user: User) => user.nickname === this.user.nickname)) {
       this.user.inCart = true;

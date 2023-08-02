@@ -17,7 +17,7 @@
                 </div>
 
                 <div class="right-side">
-                    <button class="btn btn-outline-primary" type="button" (click)="addToCart(user)">
+                    <button class="btn btn-outline-primary" type="button" (click)="user.inCart? removeItem(user) : addToCart(user)" >
                         <ng-container *ngIf="user.inCart; else addToCartTemplate">
                             <i class="bi bi-cart4"></i> <span style="font-style: normal;"> In Cart</span>
                         </ng-container>
