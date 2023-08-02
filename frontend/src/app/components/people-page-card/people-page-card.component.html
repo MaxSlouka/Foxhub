@@ -6,7 +6,7 @@
 
             <div class="card-body-top">
                 <div class="left-side">
-                    <a [routerLink]="['/profile', user.nickname]" class="card">
+                    <a [routerLink]="['/profile', user.nickname]" class="card" target="_blank">
                         <img *ngIf="user.profilePictureUrl" [src]="user.profilePictureUrl" height="100" width="100"
                             alt="profile_picture" class="img-fluid d-none d-md-block shadow">
                     </a>
