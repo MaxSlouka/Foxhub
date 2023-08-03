@@ -71,7 +71,7 @@
               </div>
 
               <p class="lead mt-4 border-bottom">Personality</p>
-              <select class="btn btn-outline-primary dropdown-toggle" type="button" aria-label="Default select example"
+              <select class="btn btn-outline-primary dropdown-toggle personality-select" type="button" aria-label="Default select example"
                 (change)="onPersonalitySelect($event)">
                 <option>All</option>
                 <option *ngFor="let personality of personalities" [value]="personality.id">{{personality.type}} -
@@ -132,10 +132,8 @@
                   40 +
                 </label>
               </div>
-
             </div>
           </div>
-
         </div>
       </div>
 
