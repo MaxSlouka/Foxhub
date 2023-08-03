@@ -31,7 +31,7 @@ const routes: Routes = [
   { path: 'cart', component: CartComponent },
   { path: 'checkout', component: CartCheckoutComponent },
   { path: 'creators', component: CreatorsComponent },
-  { path: 'personality-test', component: PersonalityInfoPageComponent },
+  { path: '16personalities', component: PersonalityInfoPageComponent },
   { path: 'admin-board', component: AdminBoardComponent},
   { path: '**', pathMatch: 'full', component: PageNotFoundComponent }
 ]
