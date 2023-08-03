@@ -9,6 +9,7 @@ import { GlobalConstants } from "../../common/global-constants";
 import { Router } from "@angular/router";
 import { catchError } from 'rxjs/operators';
 import { of } from 'rxjs';
+import { ColorPersonality } from 'src/app/models/colorPersonality';
 
 const prefix = GlobalConstants.prefix;
 
@@ -88,6 +89,7 @@ export class ApiService {
              languages: Language[] | undefined,
              technologies: Technology[] | undefined,
              personality: Personality | undefined,
+             colorPersonality: ColorPersonality | undefined,
              yearOfBirth: number | undefined,
              workStatus: boolean | undefined,
 
@@ -110,6 +112,7 @@ export class ApiService {
         languages,
         technologies,
         personality,
+        colorPersonality,
         yearOfBirth,
         workStatus
       },
