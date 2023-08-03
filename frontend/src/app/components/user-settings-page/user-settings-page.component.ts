@@ -80,6 +80,9 @@ export class UserSettingsPageComponent {
     this.personalityService.getAll().subscribe((personalities: Personality[]) => {
       this.personalities = personalities;
     });
+    this.colorPersonalityService.getAll().subscribe((colorPersonalities: ColorPersonality[]) => {
+      this.colorPersonalities = colorPersonalities;
+    });
     console.log(this.user);
   }
 

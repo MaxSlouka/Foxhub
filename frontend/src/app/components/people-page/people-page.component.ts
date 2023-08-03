@@ -8,6 +8,8 @@ import { LanguageService } from "../../_services/language.service";
 import { Personality } from "../../models/personality";
 import { PersonalityService } from "../../_services/personality.service";
 import { CookieService } from 'ngx-cookie-service';
+import { ColorPersonality } from 'src/app/models/colorPersonality';
+import { ColorPersonalityService } from 'src/app/_services/color-personality.service';
 
 @Component({
   selector: 'app-people-page',
@@ -22,15 +24,19 @@ export class PeoplePageComponent implements OnInit {
   technologies: Technology[] = [];
   languages: Language[] = [];
   personalities: Personality[] = [];
+  colorPersonalities: ColorPersonality[] = [];
   addedUsers: User[] = [];
   usedTechnologies: Technology[] = [];
   usedLanguages: Language[] = [];
   usedPersonalities: Personality[] = [];
+  usedColorPersonalities: ColorPersonality[] = [];
 
   selectedTechnologies: string[] = [];
   selectedLanguages: string[] = [];
   selectedPersonalities: string[] = [];
   selectAllPersonalities: boolean = true;
+  selectedColorPersonalities: string[] = [];
+  selectAllColorPersonalities: boolean = true;
   selectedAges: string[] = [];
   workStatus: any;
 
@@ -45,11 +51,13 @@ export class PeoplePageComponent implements OnInit {
   actualTechnologyValue: string[] = [];
   actualLanguageValue: string[] = [];
   actualPersonalityValue: string[] = [];
+  actualColorPersonalityValue: string[] = [];
 
   actualAgeValue: string = '';
   actualWorkStatusValue: string = '';
 
   restPersonalityFilter: User[] = [];
+  restColorPersonalityFilter: User[] = [];
   restOpenToWorkFilter: User[] = [];
   restAgeFilter: User[] = [];
   restLanguageFilter: User[] = [];
@@ -61,6 +69,7 @@ export class PeoplePageComponent implements OnInit {
     private languageService: LanguageService,
     private apiService: ApiService,
     private personalityService: PersonalityService,
+    private colorPersonalityService: ColorPersonalityService,
     private cookieService: CookieService) {
 
   }
@@ -68,7 +77,6 @@ export class PeoplePageComponent implements OnInit {
   ngOnInit(): void {
     this.filterWorkStatus = 'all';
     this.showCookiePopup = this.cookieService.get('cookie_consent') !== 'true';
-
 
     this.technologyService.getAll().subscribe(technologies => {
       this.technologies = technologies;
@@ -79,6 +87,9 @@ export class PeoplePageComponent implements OnInit {
     this.personalityService.getAll().subscribe(personalities => {
       this.personalities = personalities
     });
+    this.colorPersonalityService.getAll().subscribe(colorPersonalities => {
+      this.colorPersonalities = colorPersonalities
+    });
 
     // @ts-ignore
     this.apiService.getAll().subscribe(users => {
@@ -88,6 +99,7 @@ export class PeoplePageComponent implements OnInit {
       this.usedTechnologiesList();
       this.usedLanguagesList();
       this.usedPersonalitiesList();
+      this.usedColorPersonalitiesList();
       for (let user of this.users) {
         if (this.addedUsers.includes(user)) {
           user.inCart = true;
@@ -160,6 +172,22 @@ export class PeoplePageComponent implements OnInit {
     }
   }
 
+  // @ts-ignore
+  usedColorPersonalitiesList(): ColorPersonality[] {
+    const usedColorPersonalityNames: string[] = [];
+    for (let user of this.users) {
+      const colorPersonalityName = user.personality?.name.toLowerCase();
+      if (!usedColorPersonalityNames.includes(<string>colorPersonalityName)) {
+        if (colorPersonalityName != null) {
+          usedColorPersonalityNames.push(colorPersonalityName);
+        }
+        if (user.colorPersonality) {
+          this.usedColorPersonalities.push(user.colorPersonality);
+        }
+      }
+    }
+  }
+
   toggleTechSelection(tech: Technology) {
     const techName = tech.name;
     const techIndex = this.selectedTechnologies.indexOf(techName);
@@ -170,11 +198,11 @@ export class PeoplePageComponent implements OnInit {
     }
     this.allFilters();
   }
-  
+
   isSelectedTech(tech: Technology): boolean {
     return this.selectedTechnologies.includes(tech.name);
   }
-  
+
   toggleLangSelection(lang: Language) {
     const langName = lang.name;
     const langIndex = this.selectedLanguages.indexOf(langName);
@@ -185,7 +213,7 @@ export class PeoplePageComponent implements OnInit {
     }
     this.allFilters();
   }
-  
+
   isSelectedLang(lang: Language): boolean {
     return this.selectedLanguages.includes(lang.name);
   }
@@ -197,6 +225,18 @@ export class PeoplePageComponent implements OnInit {
       const index = this.selectedPersonalities.indexOf(pers);
       if (index > -1) {
         this.selectedPersonalities.splice(index, 1);
+      }
+    }
+    this.allFilters();
+  }
+
+  addToColorPersonalitiesList(colorPersonality: string) {
+    if (!this.selectedColorPersonalities.includes(colorPersonality)) {
+      this.selectedColorPersonalities.push(colorPersonality);
+    } else {
+      const index = this.selectedColorPersonalities.indexOf(colorPersonality);
+      if (index > -1) {
+        this.selectedColorPersonalities.splice(index, 1);
       }
     }
     this.allFilters();
@@ -245,12 +285,18 @@ export class PeoplePageComponent implements OnInit {
       this.restPersonalityFilter = [];
     }
 
+    if (this.selectedColorPersonalities.length > 0) {
+      filteredUsers = this.colorPersonalitiesFilter(filteredUsers, this.selectedColorPersonalities);
+    } else {
+      this.actualColorPersonalityValue = [];
+      this.restColorPersonalityFilter = [];
+    }
+
     //filteredUsers = this.personalityFilter(filteredUsers);
     filteredUsers = this.openToWorkFilter(filteredUsers);
     if (this.selectedAges.length > 0) {
       filteredUsers = this.ageFilter(filteredUsers);
     }
-
 
     for (let user of this.nonFilteredUsers) {
       user.outOfFilters = [];
@@ -280,6 +326,13 @@ export class PeoplePageComponent implements OnInit {
         }
       }
 
+      if (this.restColorPersonalityFilter.includes(user)) {
+        for (let colorPersonality of this.actualColorPersonalityValue) {
+          if (user.colorPersonality?.name.toLowerCase() !== colorPersonality.toLowerCase()) {
+            user.outOfFilters.push(colorPersonality);
+          }
+        }
+      }
 
       if (this.selectedAges.length === 0) {
         this.restAgeFilter = [];
@@ -349,6 +402,22 @@ export class PeoplePageComponent implements OnInit {
 
     this.actualPersonalityValue = keys;
     this.restPersonalityFilter = this.verifiedAndUsersOnly
+      .filter(user => !actualFilteredUsers.includes(user));
+    return actualFilteredUsers;
+  }
+
+  colorPersonalitiesFilter(users: User[], keys: string[]): User[] {
+    const lowerCaseKeys = keys.map(key => key.toLowerCase());
+    this.restColorPersonalityFilter = [];
+
+    const actualFilteredUsers = users.filter(user =>
+      lowerCaseKeys.every(key =>
+        user.colorPersonality?.name.toLowerCase() === key
+      )
+    );
+
+    this.actualColorPersonalityValue = keys;
+    this.restColorPersonalityFilter = this.verifiedAndUsersOnly
       .filter(user => !actualFilteredUsers.includes(user));
     return actualFilteredUsers;
   }
@@ -431,6 +500,7 @@ export class PeoplePageComponent implements OnInit {
     this.selectedAges = [];
     this.filterWorkStatus = 'all';
     this.selectedPersonalities = [];
+    this.selectedColorPersonalities = [];
     this.selectAllPersonalities = true;
 
     for (let user of this.nonFilteredUsers) {
