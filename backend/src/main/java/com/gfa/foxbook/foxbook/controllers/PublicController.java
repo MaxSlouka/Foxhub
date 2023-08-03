@@ -11,6 +11,7 @@ import com.gfa.foxbook.foxbook.services.interfaces.PostService;
 import com.gfa.foxbook.foxbook.services.interfaces.UserService;
 import jakarta.mail.MessagingException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -31,17 +32,22 @@ public class PublicController {
 
     @GetMapping("/people")
     public ResponseEntity<?> getAllUsers() {
-        List<User> users = userService.getAll();
-        List<UserSearchDTO> usersDTO = new ArrayList<>();
-        for (User user : users) {
-            usersDTO.add(new UserSearchDTO(user));
+        try {
+            List<User> users = userService.getAll();
+            List<UserSearchDTO> usersDTO = new ArrayList<>();
+            for (User user : users) {
+                usersDTO.add(new UserSearchDTO(user));
+            }
+            if (users.isEmpty()) {
+                System.out.println("No users found");
+                return ResponseEntity.noContent().build();
+            }
+            System.out.println("Users found");
+            return ResponseEntity.ok(usersDTO);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
-        if (users.isEmpty()) {
-            System.out.println("No users found");
-            return ResponseEntity.noContent().build();
-        }
-        System.out.println("Users found");
-        return ResponseEntity.ok(usersDTO);
     }
 
     @GetMapping("/people/{nickname}")
