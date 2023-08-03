@@ -7,7 +7,7 @@ import {Language} from "../../models/language";
 import {LanguageService} from "../../_services/language.service";
 import {Personality} from "../../models/personality";
 import {PersonalityService} from "../../_services/personality.service";
-import { CookieService } from 'ngx-cookie-service';
+import {CookieService} from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-people-page',
@@ -154,11 +154,9 @@ export class PeoplePageComponent implements OnInit {
     }
   }
 
-  addToTechList(event: any, tech: string) {
-    if (event.target.checked) {
-      if (!this.selectedTechnologies.includes(tech)) {
-        this.selectedTechnologies.push(tech);
-      }
+  addToTechList(tech: string) {
+    if (!this.selectedTechnologies.includes(tech)) {
+      this.selectedTechnologies.push(tech);
     } else {
       const index = this.selectedTechnologies.indexOf(tech);
       if (index > -1) {
@@ -245,7 +243,7 @@ export class PeoplePageComponent implements OnInit {
         }
       }
 
-      if(this.selectedAges.length === 0){
+      if (this.selectedAges.length === 0) {
         this.restAgeFilter = [];
       }
       if (this.restAgeFilter.includes(user)) {

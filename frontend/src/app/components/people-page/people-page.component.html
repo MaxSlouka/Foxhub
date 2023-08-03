@@ -41,19 +41,12 @@
               </p>
 
               <p class="lead mt-4 border-bottom">Technology</p>
-              <div class="dropdown">
-                <button class="btn btn-outline-primary dropdown-toggle" type="button" id="techDropdown"
-                  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  Techs
-                </button>
-                <div class="dropdown-menu" aria-labelledby="techDropdown">
-                  <tr *ngFor="let tech of usedTechnologies">
-                    <td class="py-2 px-2"><label><input class="mr-2" type="checkbox"
-                          (change)="addToTechList($event, tech.name)">
-                        <span>{{tech.name}}</span></label></td>
-                  </tr>
+                <div>
+                  <ng-container *ngFor="let tech of usedTechnologies">
+                    <button class="dropdown-item" (click)="addToTechList(tech.name)">{{ tech.name }}</button>
+                  </ng-container>
                 </div>
-              </div>
+
 
               <p class="lead mt-4 border-bottom">Languages</p>
               <div class="dropdown">
