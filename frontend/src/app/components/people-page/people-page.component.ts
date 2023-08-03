@@ -7,7 +7,7 @@ import {Language} from "../../models/language";
 import {LanguageService} from "../../_services/language.service";
 import {Personality} from "../../models/personality";
 import {PersonalityService} from "../../_services/personality.service";
-import { CookieService } from 'ngx-cookie-service';
+import {CookieService} from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-people-page',
@@ -25,10 +25,11 @@ export class PeoplePageComponent implements OnInit {
   addedUsers: User[] = [];
   usedTechnologies: Technology[] = [];
   usedLanguages: Language[] = [];
+  usedPersonalities: Personality[] = [];
 
   selectedTechnologies: string[] = [];
   selectedLanguages: string[] = [];
-  selectedPersonality: Personality | undefined;
+  selectedPersonalities: string[] = [];
   selectAllPersonalities: boolean = true;
   selectedAges: string[] = [];
   workStatus: any;
@@ -43,8 +44,8 @@ export class PeoplePageComponent implements OnInit {
 
   actualTechnologyValue: string[] = [];
   actualLanguageValue: string[] = [];
+  actualPersonalityValue: string[] = [];
 
-  actualPersonalityValue: string = '';
   actualAgeValue: string = '';
   actualWorkStatusValue: string = '';
 
@@ -86,6 +87,7 @@ export class PeoplePageComponent implements OnInit {
       this.nonFilteredUsers = this.verifiedAndUsersOnly;
       this.usedTechnologiesList();
       this.usedLanguagesList();
+      this.usedPersonalitiesList();
       for (let user of this.users) {
         if (this.addedUsers.includes(user)) {
           user.inCart = true;
@@ -107,18 +109,6 @@ export class PeoplePageComponent implements OnInit {
   get filteredUsers(): any[] {
     // @ts-ignore
     return this.nonFilteredUsers.filter(user => user.outOfFilters?.length > 4);
-  }
-
-  onPersonalitySelect(event: any) {
-    const selectedPersonalityId = +event.target.value;
-    this.selectAllPersonalities = false
-    this.selectedPersonality = this.personalities.find(p =>
-      p.id === selectedPersonalityId
-    );
-    if (event.target.value === "all") {
-      this.selectAllPersonalities = true;
-    }
-    this.allFilters();
   }
 
   toggleFilterContent(): void {
@@ -154,11 +144,26 @@ export class PeoplePageComponent implements OnInit {
     }
   }
 
-  addToTechList(event: any, tech: string) {
-    if (event.target.checked) {
-      if (!this.selectedTechnologies.includes(tech)) {
-        this.selectedTechnologies.push(tech);
+  // @ts-ignore
+  usedPersonalitiesList(): Personality[] {
+    const usedPersNames: string[] = [];
+    for (let user of this.users) {
+      const persName = user.personality?.name.toLowerCase();
+      if (!usedPersNames.includes(<string>persName)) {
+        if (persName != null) {
+          usedPersNames.push(persName);
+        }
+        if (user.personality) {
+          this.usedPersonalities.push(user.personality);
+        }
       }
+    }
+  }
+
+
+  addToTechList(tech: string) {
+    if (!this.selectedTechnologies.includes(tech)) {
+      this.selectedTechnologies.push(tech);
     } else {
       const index = this.selectedTechnologies.indexOf(tech);
       if (index > -1) {
@@ -168,15 +173,25 @@ export class PeoplePageComponent implements OnInit {
     this.allFilters()
   }
 
-  addToLangList(event: any, lang: string) {
-    if (event.target.checked) {
-      if (!this.selectedLanguages.includes(lang)) {
-        this.selectedLanguages.push(lang);
-      }
+  addToLangList(lang: string) {
+    if (!this.selectedLanguages.includes(lang)) {
+      this.selectedLanguages.push(lang);
     } else {
       const index = this.selectedLanguages.indexOf(lang);
       if (index > -1) {
         this.selectedLanguages.splice(index, 1);
+      }
+    }
+    this.allFilters();
+  }
+
+  addToPersonalitiesList(pers: string) {
+    if (!this.selectedPersonalities.includes(pers)) {
+      this.selectedPersonalities.push(pers);
+    } else {
+      const index = this.selectedPersonalities.indexOf(pers);
+      if (index > -1) {
+        this.selectedPersonalities.splice(index, 1);
       }
     }
     this.allFilters();
@@ -218,7 +233,14 @@ export class PeoplePageComponent implements OnInit {
       this.restLanguageFilter = [];
     }
 
-    filteredUsers = this.personalityFilter(filteredUsers);
+    if (this.selectedPersonalities.length > 0) {
+      filteredUsers = this.personalitiesFilter(filteredUsers, this.selectedPersonalities);
+    } else {
+      this.actualPersonalityValue = [];
+      this.restPersonalityFilter = [];
+    }
+
+    //filteredUsers = this.personalityFilter(filteredUsers);
     filteredUsers = this.openToWorkFilter(filteredUsers);
     if (this.selectedAges.length > 0) {
       filteredUsers = this.ageFilter(filteredUsers);
@@ -245,7 +267,16 @@ export class PeoplePageComponent implements OnInit {
         }
       }
 
-      if(this.selectedAges.length === 0){
+      if (this.restPersonalityFilter.includes(user)) {
+        for (let pers of this.actualPersonalityValue) {
+          if (user.personality?.name.toLowerCase() !== pers.toLowerCase()) {
+            user.outOfFilters.push(pers);
+          }
+        }
+      }
+
+
+      if (this.selectedAges.length === 0) {
         this.restAgeFilter = [];
       }
       if (this.restAgeFilter.includes(user)) {
@@ -258,10 +289,6 @@ export class PeoplePageComponent implements OnInit {
         }
       }
 
-      if (this.restPersonalityFilter.includes(user)) {
-        user.outOfFilters.push(this.actualPersonalityValue);
-
-      }
     }
     this.users = filteredUsers;
   }
@@ -305,24 +332,17 @@ export class PeoplePageComponent implements OnInit {
     return actualFilteredUsers;
   }
 
-  personalityFilter(users: User[]) {
-    const actualFilteredUsers: User[] = [];
+  personalitiesFilter(users: User[], keys: string[]): User[] {
+    const lowerCaseKeys = keys.map(key => key.toLowerCase());
     this.restPersonalityFilter = [];
-    for (let user of users) {
-      // @ts-ignore
-      if (user.personality?.id === this.selectedPersonality?.id) {
-        actualFilteredUsers.push(user);
-      } else if (this.selectAllPersonalities) {
-        actualFilteredUsers.push(user);
-      }
-    }
 
-    if (this.selectAllPersonalities === undefined) {
-      this.actualPersonalityValue = "";
-    } else {
-      this.actualPersonalityValue = <string>this.selectedPersonality?.name;
-    }
+    const actualFilteredUsers = users.filter(user =>
+      lowerCaseKeys.every(key =>
+        user.personality?.name.toLowerCase() === key
+      )
+    );
 
+    this.actualPersonalityValue = keys;
     this.restPersonalityFilter = this.verifiedAndUsersOnly
       .filter(user => !actualFilteredUsers.includes(user));
     return actualFilteredUsers;
@@ -405,7 +425,7 @@ export class PeoplePageComponent implements OnInit {
     this.selectedLanguages = [];
     this.selectedAges = [];
     this.filterWorkStatus = 'all';
-    this.selectedPersonality = undefined;
+    this.selectedPersonalities = [];
     this.selectAllPersonalities = true;
 
     for (let user of this.nonFilteredUsers) {
