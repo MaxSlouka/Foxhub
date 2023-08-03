@@ -19,7 +19,6 @@ export class IntroComponent implements OnInit {
   ngOnInit(): void {
     if (this.storageService.isLoggedIn()) {
       this.isLoggedIn = true;
-      // this.roles = this.storageService.getUser().roles;
     }
   }
 

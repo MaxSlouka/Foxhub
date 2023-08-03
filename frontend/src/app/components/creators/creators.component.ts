@@ -29,10 +29,4 @@ export class CreatorsComponent implements OnInit {
     }
   }
 
-  handleClick(event: Event, targetID: string) {
-    event.preventDefault();
-    this.scrollToElement(targetID);
-    this.router.navigate([], { relativeTo: this.route, queryParamsHandling: 'merge' });
-  }
-
 }
