@@ -115,10 +115,12 @@
           <!-- personality settings -->
 
           <p class="lead mt-4 border-bottom font-weight-bold">Personality</p>
+
+          <p class="lead mt-4 font-weight-bold">16 Personalities <a href="/16personalities"><i class="bi bi-question-circle" title="16 Personalities Test"></i></a></p>
           <div class="row mt-2">
             <div class="col-md-12">
 
-              <div class="d-flex justify-content-center">
+              <div class="d-flex justify-content-start">
                 <select class="btn btn-outline-primary dropdown-toggle mt-2 mr-2" aria-label="Default select example"
                   (change)="onPersonalitySelect($event)">
                   <option selected>Choose personality</option>
@@ -127,9 +129,27 @@
                 </select>
               </div>
 
-              <div class="d-flex justify-content-center">
-                <a href="/personality-test" class="btn btn-outline-primary mt-2 mr-2" role="button"
-                  aria-disabled="true">More info</a>
+              <div class="d-flex justify-content-start">
+                <a href="https://www.16personalities.com/" class="btn btn-outline-primary mt-2 mr-2" role="button"
+                  aria-disabled="true">Test Here</a>
+              </div>
+            </div>
+          </div>
+
+          <p class="lead mt-4 font-weight-bold">True Color Personality <a href="/color-personality-test"><i class="bi bi-question-circle" title="True Color Personality Test"></i></a></p>
+          <div class="row mt-2">
+            <div class="col-md-12">
+
+              <div class="d-flex justify-content-start">
+                <select class="btn btn-outline-primary dropdown-toggle mt-2 mr-2" aria-label="Default select example"
+                  (change)="onPersonalitySelect($event)">
+                  <option selected>Choose personality</option>
+                  <option *ngFor="let personality of personalities" [value]="personality.id">{{personality.name}}
+                  </option>
+                </select>
+              </div>
+
+              <div class="d-flex justify-content-start">
                 <a href="https://www.16personalities.com/" class="btn btn-outline-primary mt-2 mr-2" role="button"
                   aria-disabled="true">Test Here</a>
               </div>
