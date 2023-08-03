@@ -1,9 +1,9 @@
 import {Component, OnInit, OnDestroy} from '@angular/core';
-import { AuthService } from "../../_services/auth.service";
-import { StorageService } from "../../_services/storage.service";
-import { User } from "../../models/user";
-import { ApiService } from "../../_services/api/api.service";
-import { CartService } from "../../_services/cart.service";
+import {AuthService} from "../../_services/auth.service";
+import {StorageService} from "../../_services/storage.service";
+import {User} from "../../models/user";
+import {ApiService} from "../../_services/api/api.service";
+import {CartService} from "../../_services/cart.service";
 import {Subscription} from "rxjs";
 
 @Component({
@@ -14,21 +14,16 @@ import {Subscription} from "rxjs";
 
 export class HeaderComponent implements OnInit, OnDestroy {
 
-  // @ts-ignore
-  username: string | null = "";
-
-  // @ts-ignore
-  users: User[];
   user: User = {email: "", firstName: "", lastName: "", password: ""};
-
   isLoggedIn = false;
+
   // @ts-ignore
   userRole: string;
-
   userEmail: string = '';
 
   // @ts-ignore
   countItems: number = this.cartService.getCartItems().length;
+
   // @ts-ignore
   private cartItemsSubscription: Subscription;
 
@@ -56,18 +51,14 @@ export class HeaderComponent implements OnInit, OnDestroy {
       });
   }
 
-  handleDataFromChild(data: any) {
-    this.users = data;
+  ngOnDestroy() {
+    // Unsubscribe from the observable to avoid memory leaks
+    this.cartItemsSubscription.unsubscribe();
   }
 
   logout(): void {
     this.storageService.logout();
     this.authService.logout();
     this.isLoggedIn = false;
-  }
-
-  ngOnDestroy() {
-    // Unsubscribe from the observable to avoid memory leaks
-    this.cartItemsSubscription.unsubscribe();
   }
 }
