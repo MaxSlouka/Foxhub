@@ -26,12 +26,21 @@ select {
     overflow: auto;
 }
 
+.dropdown-item:hover {
+    color: rgb(0, 0, 0);
+    font-weight: bolder;
+}
+
 .form-check label:hover {
     cursor: pointer;
 }
 
 .card-header:hover {
     cursor: pointer;
+}
+
+.lead-bold {
+    font-weight: bolder;
 }
 
 .cookie-popup {
