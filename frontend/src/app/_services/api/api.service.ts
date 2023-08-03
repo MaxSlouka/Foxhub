@@ -7,6 +7,8 @@ import { Technology } from "../../models/technology";
 import { Personality } from "../../models/personality";
 import { GlobalConstants } from "../../common/global-constants";
 import { Router } from "@angular/router";
+import { catchError } from 'rxjs/operators';
+import { of } from 'rxjs';
 
 const prefix = GlobalConstants.prefix;
 
@@ -26,7 +28,12 @@ export class ApiService {
   }
 
   getAll(): Observable<User[]> {
-    return this.http.get<User[]>(this.apiUrlGetAll)
+    return this.http.get<User[]>(this.apiUrlGetAll).pipe(
+      catchError(error => {
+        console.error('An error occurred while fetching all users:', error);
+        return of([]);
+      })
+    );
   }
 
   getUserBasicInfo(): Observable<User> {
@@ -66,46 +73,46 @@ export class ApiService {
   }
 
   updateUser(firstName: string,
-    lastName: string,
-    phone: string | undefined,
-    location: string | undefined,
-    workLocation: string | undefined,
-    oneLineAbout: string | undefined,
-    workPreference: string | undefined,
-    about: string | undefined,
-    gitHub: string | undefined,
-    linkedin: string | undefined,
-    facebook: string | undefined,
-    instagram: string | undefined,
-    optionalPage: string | undefined,
-    languages: Language[] | undefined,
-    technologies: Technology[] | undefined,
-    personality: Personality | undefined,
-    yearOfBirth: number | undefined,
-    workStatus: boolean | undefined,
-    
+             lastName: string,
+             phone: string | undefined,
+             location: string | undefined,
+             workLocation: string | undefined,
+             oneLineAbout: string | undefined,
+             workPreference: string | undefined,
+             about: string | undefined,
+             gitHub: string | undefined,
+             linkedin: string | undefined,
+             facebook: string | undefined,
+             instagram: string | undefined,
+             optionalPage: string | undefined,
+             languages: Language[] | undefined,
+             technologies: Technology[] | undefined,
+             personality: Personality | undefined,
+             yearOfBirth: number | undefined,
+             workStatus: boolean | undefined,
+
   ): Observable<any> {
 
     return this.http.patch(prefix + "/api/v1/user/people", {
-      firstName,
-      lastName,
-      phone,
-      location,
-      workLocation,
-      oneLineAbout,
-      workPreference,
-      about,
-      gitHub,
-      linkedin,
-      facebook,
-      instagram,
-      optionalPage,
-      languages,
-      technologies,
-      personality,
-      yearOfBirth,
-      workStatus
-    },
+        firstName,
+        lastName,
+        phone,
+        location,
+        workLocation,
+        oneLineAbout,
+        workPreference,
+        about,
+        gitHub,
+        linkedin,
+        facebook,
+        instagram,
+        optionalPage,
+        languages,
+        technologies,
+        personality,
+        yearOfBirth,
+        workStatus
+      },
       httpOptions
     );
   }
