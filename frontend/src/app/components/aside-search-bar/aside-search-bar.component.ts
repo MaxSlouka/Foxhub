@@ -9,8 +9,9 @@ import {ApiService} from "../../_services/api/api.service";
 })
 
 export class AsideSearchBarComponent {
-  @Input() users: User[] = [];
+
   @Input() fullUsers: User[] = [];
+  @Input() searchedUsers: User[] = [];
 
   constructor(private apiService: ApiService) {
   }
@@ -18,11 +19,11 @@ export class AsideSearchBarComponent {
   ngOnInit() {
   }
 
-  public searchUser(key: string): void {
+  public searchUser(key: string) {
     let results: User[] = [];
     for (const user of this.fullUsers) {
       this.apiService.search(user, key, results)
     }
-    this.users = results;
+    this.searchedUsers = results;
   }
 }

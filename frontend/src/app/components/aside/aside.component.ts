@@ -10,7 +10,7 @@ import {ApiService} from "../../_services/api/api.service";
 
 export class AsideComponent implements OnInit {
 
-  users: User[] = [];
+
   verifiedUsers: User[] = [];
   showPeople = false;
   rotationClass = '';
@@ -24,11 +24,8 @@ export class AsideComponent implements OnInit {
   }
 
   ngOnInit() {
-    // Fetch all users from the API
     this.apiService.getAll().subscribe((usersFetch: User[]) => {
-      this.users = usersFetch;
-
-      this.verifiedUsers = this.users.filter(user => user.verified);
+      this.verifiedUsers = usersFetch.filter(user => user.verified);
     });
   }
 }

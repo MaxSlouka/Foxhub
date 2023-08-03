@@ -7,8 +7,10 @@
          (click)="togglePeople()"></i>
 
       <div *ngIf="showPeople">
-        <app-aside-search-bar class="all-people-desktop" [users]="verifiedUsers"
-                              [fullUsers]="users"></app-aside-search-bar>
+        <app-aside-search-bar class="all-people-desktop"
+                              [fullUsers]="verifiedUsers"
+                              [searchedUsers]="verifiedUsers"
+        ></app-aside-search-bar>
       </div>
     </div>
   </div>
