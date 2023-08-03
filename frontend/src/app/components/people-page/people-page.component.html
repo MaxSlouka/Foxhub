@@ -39,17 +39,21 @@
                 <button class="btn btn-outline-primary" (click)="clearAllFilters()">Clear filters</button>
               </p>
 
-              <p class="lead mt-4 border-bottom">Technology</p>
+              <p class="lead mt-4 border-bottom lead-bold">Technology</p>
               <ng-container *ngFor="let tech of usedTechnologies">
-                <button class="dropdown-item" (click)="addToTechList(tech.name)">{{ tech.name }}</button>
+                <button class="dropdown-item"
+                  [ngStyle]="{ 'background-color': isSelectedTech(tech) ? '#dbdbdb' : 'transparent' }"
+                  (click)="toggleTechSelection(tech)">{{ tech.name }}</button>
               </ng-container>
 
-              <p class="lead mt-4 border-bottom">Languages</p>
+              <p class="lead mt-4 border-bottom lead-bold">Languages</p>
               <ng-container *ngFor="let lang of usedLanguages">
-                <button class="dropdown-item" (click)="addToLangList(lang.name)">{{ lang.name }}</button>
+                <button class="dropdown-item"
+                  [ngStyle]="{ 'background-color': isSelectedLang(lang) ? '#dbdbdb' : 'transparent' }"
+                  (click)="toggleLangSelection(lang)">{{ lang.name }}</button>
               </ng-container>
 
-              <p class="lead mt-4 border-bottom">16 Personalities <a href="/16personalities"><i
+              <p class="lead mt-4 border-bottom lead-bold">16 Personalities <a href="/16personalities"><i
                     class="bi bi-question-circle" title="True Color Personality Test"></i></a></p>
               <div class="btn-group">
                 <button type="button" class="btn btn-outline-primary dropdown-toggle personality-select"
@@ -64,7 +68,7 @@
                 </div>
               </div>
 
-              <p class="lead mt-4 border-bottom">True Color Personality <a href="/color-personality-test"><i
+              <p class="lead mt-4 border-bottom lead-bold">True Color Personality <a href="/color-personality-test"><i
                     class="bi bi-question-circle" title="True Color Personality Test"></i></a></p>
               <div class="btn-group">
                 <button type="button" class="btn btn-outline-primary dropdown-toggle personality-select"
@@ -79,7 +83,7 @@
                 </div>
               </div>
 
-              <p class="lead mt-4 border-bottom">Seeking employment</p>
+              <p class="lead mt-4 border-bottom lead-bold">Seeking employment</p>
               <div class="form-check">
                 <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios0" value="all"
                   checked [(ngModel)]="filterWorkStatus" (ngModelChange)="onWorkStatusChange()">
@@ -102,7 +106,7 @@
                 </label>
               </div>
 
-              <p class="lead mt-4 border-bottom">Age</p>
+              <p class="lead mt-4 border-bottom lead-bold">Age</p>
               <div class="form-check">
                 <input class="form-check-input" type="checkbox" value="18" id="18" (change)="addToAgeList($event,'18')">
                 <label class="form-check-label" for="18">

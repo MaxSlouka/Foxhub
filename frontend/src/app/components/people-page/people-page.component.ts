@@ -160,29 +160,34 @@ export class PeoplePageComponent implements OnInit {
     }
   }
 
-
-  addToTechList(tech: string) {
-    if (!this.selectedTechnologies.includes(tech)) {
-      this.selectedTechnologies.push(tech);
+  toggleTechSelection(tech: Technology) {
+    const techName = tech.name;
+    const techIndex = this.selectedTechnologies.indexOf(techName);
+    if (techIndex === -1) {
+      this.selectedTechnologies.push(techName);
     } else {
-      const index = this.selectedTechnologies.indexOf(tech);
-      if (index > -1) {
-        this.selectedTechnologies.splice(index, 1);
-      }
-    }
-    this.allFilters()
-  }
-
-  addToLangList(lang: string) {
-    if (!this.selectedLanguages.includes(lang)) {
-      this.selectedLanguages.push(lang);
-    } else {
-      const index = this.selectedLanguages.indexOf(lang);
-      if (index > -1) {
-        this.selectedLanguages.splice(index, 1);
-      }
+      this.selectedTechnologies.splice(techIndex, 1);
     }
     this.allFilters();
+  }
+  
+  isSelectedTech(tech: Technology): boolean {
+    return this.selectedTechnologies.includes(tech.name);
+  }
+  
+  toggleLangSelection(lang: Language) {
+    const langName = lang.name;
+    const langIndex = this.selectedLanguages.indexOf(langName);
+    if (langIndex === -1) {
+      this.selectedLanguages.push(langName);
+    } else {
+      this.selectedLanguages.splice(langIndex, 1);
+    }
+    this.allFilters();
+  }
+  
+  isSelectedLang(lang: Language): boolean {
+    return this.selectedLanguages.includes(lang.name);
   }
 
   addToPersonalitiesList(pers: string) {
