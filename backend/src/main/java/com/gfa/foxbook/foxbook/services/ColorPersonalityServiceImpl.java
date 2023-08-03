@@ -1,8 +1,8 @@
 package com.gfa.foxbook.foxbook.services;
 
-import com.gfa.foxbook.foxbook.models.nonusermodels.Personality;
+import com.gfa.foxbook.foxbook.models.nonusermodels.ColorPersonality;
+import com.gfa.foxbook.foxbook.repositories.ColorPersonalityRepository;
 import com.gfa.foxbook.foxbook.services.interfaces.ColorPersonalityService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -10,15 +10,14 @@ import java.util.List;
 @Service
 public class ColorPersonalityServiceImpl implements ColorPersonalityService {
 
-    private final ColorPersonalityService colorPersonalityService;
+    private final ColorPersonalityRepository colorPersonalityRepository;
 
-    @Autowired
-    public ColorPersonalityServiceImpl(ColorPersonalityService colorPersonalityService) {
-        this.colorPersonalityService = colorPersonalityService;
+    public ColorPersonalityServiceImpl(ColorPersonalityRepository colorPersonalityRepository) {
+        this.colorPersonalityRepository = colorPersonalityRepository;
     }
 
     @Override
-    public List<Personality> getAllColorPersonalities() {
-        return colorPersonalityService.getAllColorPersonalities();
+    public List<ColorPersonality> getAllColorPersonalities() {
+        return colorPersonalityRepository.findAll();
     }
 }
