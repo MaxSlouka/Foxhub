@@ -6,18 +6,21 @@
 
             <div class="card-body-top">
                 <div class="left-side">
-                    <a [routerLink]="['/profile', user.nickname]" class="card" target="_blank">
+
+                    <!-- open profile in a new window - just add - target="_blank" - into <a> element -->
+
+                    <a [routerLink]="['/profile', user.nickname]" class="profile-img-desktop mr-4">
                         <img *ngIf="user.profilePictureUrl" [src]="user.profilePictureUrl" height="100" width="100"
-                            alt="profile_picture" class="img-fluid d-none d-md-block shadow">
+                            alt="profile_picture" class="img-fluid d-md-block shadow">
                     </a>
-                    <h4 class="py-2 px-2 mx-3">
+                    <h4 class="py-2">
                         {{ user.firstName }}
-                        <p class="lead">{{ user.location }}</p>
+                        <p class="lead mb-0">{{ user.location }}</p>
                     </h4>
                 </div>
 
                 <div class="right-side">
-                    <button class="btn btn-outline-primary" type="button" (click)="toggleItem($event, user)" >
+                    <button class="btn btn-outline-primary" type="button" (click)="toggleItem($event, user)">
                         <span *ngIf="user.inCart">
                             <i class="bi bi-cart4"></i> In Cart
                         </span>
@@ -33,21 +36,21 @@
             </div>
         </div>
 
-        <div [id]="'collapse-' + user.nickname" class="collapse"
-            [attr.aria-labelledby]="'heading-' + user.nickname" data-parent="#accordion">
+        <div [id]="'collapse-' + user.nickname" class="collapse" [attr.aria-labelledby]="'heading-' + user.nickname"
+            data-parent="#accordion">
 
             <div class="card-body">
 
                 <div class="card-body-left">
 
-                    <h4 class="mb-4">{{ user.firstName }} {{user.lastName}}</h4>
+                    <h4 class="mb-4">{{ user.firstName }} {{ user.lastName }}</h4>
 
                     <label class="labels">Location</label>
                     <p class="lead">{{user.location}}</p>
 
                     <label class="labels">About</label>
                     <p class="lead">{{user.oneLineAbout}}</p>
-                    
+
                     <label class="labels">Work preferences</label>
                     <p class="lead">{{user.workPreference}} - {{user.workLocation}}</p>
 
