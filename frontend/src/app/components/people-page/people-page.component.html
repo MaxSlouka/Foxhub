@@ -70,7 +70,15 @@
                 </div>
               </div>
 
-              <p class="lead mt-4 border-bottom">Personality</p>
+              <p class="lead mt-4 border-bottom personalities">16 Personalities <a href="/personality-test"><i class="bi bi-question-circle" title="16 Personalities Test"></i></a></p>
+              <select class="btn btn-outline-primary dropdown-toggle personality-select" type="button" aria-label="Default select example"
+                (change)="onPersonalitySelect($event)">
+                <option>All</option>
+                <option *ngFor="let personality of personalities" [value]="personality.id">{{personality.type}} -
+                  {{personality.name}}</option>
+              </select>
+
+              <p class="lead mt-4 border-bottom personalities">True Color Personality <a href="/color-personality-test"><i class="bi bi-question-circle" title="True Color Personality Test"></i></a></p>
               <select class="btn btn-outline-primary dropdown-toggle personality-select" type="button" aria-label="Default select example"
                 (change)="onPersonalitySelect($event)">
                 <option>All</option>

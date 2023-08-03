@@ -46,6 +46,7 @@ import { RevealOnScrollDirective } from './directives/reveal-on-scroll.directive
 import { PersonalityInfoPageComponent } from './components/personality-info-page/personality-info-page.component';
 import { RevealWithDelayDirective } from './directives/reveal-with-delay.directive';
 import { AdminBoardComponent } from './components/admin-board/admin-board.component';
+import { PersonalityTrueColorComponent } from './components/personality-true-color/personality-true-color.component';
 
 
 
@@ -89,6 +90,7 @@ import { AdminBoardComponent } from './components/admin-board/admin-board.compon
         PersonalityInfoPageComponent,
         RevealWithDelayDirective,
         AdminBoardComponent,
+        PersonalityTrueColorComponent,
     ],
   imports: [
     FormsModule,
