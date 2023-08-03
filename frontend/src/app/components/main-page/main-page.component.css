@@ -12,7 +12,7 @@ img {
     margin-top: 4rem;
 }
 
-@media (max-width: 767.98px) {
+@media (max-width: 768px) {
     .main-container .row {
         flex-wrap: wrap;
     }
