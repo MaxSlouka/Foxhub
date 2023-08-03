@@ -142,9 +142,9 @@
 
               <div class="d-flex justify-content-start">
                 <select class="btn btn-outline-primary dropdown-toggle mt-2 mr-2" aria-label="Default select example"
-                  (change)="onPersonalitySelect($event)">
+                  (change)="onColorPersonalitySelect($event)">
                   <option selected>Choose personality</option>
-                  <option *ngFor="let personality of personalities" [value]="personality.id">{{personality.name}}
+                  <option *ngFor="let colorPersonality of colorPersonalities" [value]="colorPersonality.id">{{colorPersonality.name}}
                   </option>
                 </select>
               </div>
