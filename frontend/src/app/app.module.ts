@@ -47,6 +47,7 @@ import { PersonalityInfoPageComponent } from './components/personality-info-page
 import { RevealWithDelayDirective } from './directives/reveal-with-delay.directive';
 import { AdminBoardComponent } from './components/admin-board/admin-board.component';
 import { PersonalityTrueColorComponent } from './components/personality-true-color/personality-true-color.component';
+import { ColorPersonalityComponent } from './components/color-personality/color-personality.component';
 
 
 
@@ -91,6 +92,7 @@ import { PersonalityTrueColorComponent } from './components/personality-true-col
         RevealWithDelayDirective,
         AdminBoardComponent,
         PersonalityTrueColorComponent,
+        ColorPersonalityComponent,
     ],
   imports: [
     FormsModule,

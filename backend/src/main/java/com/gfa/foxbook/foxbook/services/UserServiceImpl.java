@@ -152,6 +152,7 @@ public class UserServiceImpl implements UserService {
         if (userDTO.getWorkLocation() != null) user.setWorkLocation(userDTO.getWorkLocation());
         if (userDTO.getOneLineAbout() != null) user.setOneLineAbout(userDTO.getOneLineAbout());
         if (userDTO.getWorkPreference() != null) user.setWorkPreference(userDTO.getWorkPreference());
+        if (userDTO.getColorPersonality() != null) user.setColorPersonality(userDTO.getColorPersonality());
 
         user.setYearOfBirth(userDTO.getYearOfBirth());
         user.setWorkStatus(userDTO.isWorkStatus());

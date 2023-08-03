@@ -26,7 +26,6 @@ public class PersonalitiesDataLoader implements CommandLineRunner {
     }
 
     private void loadInitialPersonalities() {
-        // Add the initial personalities here
         Personality architect = createPersonality("Architect", "INTJ",
                 "Imaginative and strategic thinkers, with a plan for everything.",
                 "Elon Musk, Mark Zuckerberg, Stephen Hawking, Isaac Newton, Nikola Tesla");

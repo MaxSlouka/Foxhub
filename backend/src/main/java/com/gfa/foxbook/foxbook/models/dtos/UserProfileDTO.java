@@ -1,11 +1,7 @@
 package com.gfa.foxbook.foxbook.models.dtos;
 
 import com.gfa.foxbook.foxbook.models.User;
-import com.gfa.foxbook.foxbook.models.WorkPreference;
-import com.gfa.foxbook.foxbook.models.nonusermodels.Language;
-import com.gfa.foxbook.foxbook.models.nonusermodels.Personality;
-import com.gfa.foxbook.foxbook.models.nonusermodels.Role;
-import com.gfa.foxbook.foxbook.models.nonusermodels.Technology;
+import com.gfa.foxbook.foxbook.models.nonusermodels.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -28,6 +24,7 @@ public class UserProfileDTO {
     private String about;
     private int yearOfBirth;
     private Personality personality;
+    private ColorPersonality colorPersonality;
     private String profilePictureUrl;
     private String location;
     private String facebook;
@@ -49,6 +46,7 @@ public class UserProfileDTO {
         this.phone = user.getPhone();
         this.about = user.getAbout();
         this.personality = user.getPersonality();
+        this.colorPersonality = user.getColorPersonality();
         this.location = user.getLocation();
         this.facebook = user.getFacebook();
         this.instagram = user.getInstagram();

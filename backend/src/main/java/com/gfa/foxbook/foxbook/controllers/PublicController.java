@@ -5,6 +5,7 @@ import com.gfa.foxbook.foxbook.models.dtos.UserProfileDTO;
 import com.gfa.foxbook.foxbook.models.dtos.UserSearchDTO;
 import com.gfa.foxbook.foxbook.models.nonusermodels.Post;
 import com.gfa.foxbook.foxbook.models.User;
+import com.gfa.foxbook.foxbook.services.ColorPersonalityServiceImpl;
 import com.gfa.foxbook.foxbook.services.EmailServiceImpl;
 import com.gfa.foxbook.foxbook.services.interfaces.PersonalityService;
 import com.gfa.foxbook.foxbook.services.interfaces.PostService;
@@ -28,6 +29,7 @@ public class PublicController {
     private final UserService userService;
     private final PostService postService;
     private final PersonalityService personalityService;
+    private final ColorPersonalityServiceImpl colorPersonalityService;
     private final EmailServiceImpl emailService;
 
     @GetMapping("/people")
@@ -96,6 +98,11 @@ public class PublicController {
     @GetMapping("/personalities")
     public ResponseEntity<?> getAllPersonalities() {
         return ResponseEntity.ok(personalityService.getAllPersonalities());
+    }
+
+    @GetMapping("/colorPersonalities")
+    public ResponseEntity<?> getAllColorPersonalities() {
+        return ResponseEntity.ok(colorPersonalityService.getAllColorPersonalities());
     }
 
     @GetMapping("/posts/comments/{id}")

@@ -1,9 +1,6 @@
 package com.gfa.foxbook.foxbook.models;
 
-import com.gfa.foxbook.foxbook.models.nonusermodels.Language;
-import com.gfa.foxbook.foxbook.models.nonusermodels.Personality;
-import com.gfa.foxbook.foxbook.models.nonusermodels.Role;
-import com.gfa.foxbook.foxbook.models.nonusermodels.Technology;
+import com.gfa.foxbook.foxbook.models.nonusermodels.*;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
@@ -84,6 +81,14 @@ public class User {
             inverseJoinColumns = {@JoinColumn(name = "personality_id", referencedColumnName = "id")}
     )
     private Personality personality;
+
+    @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
+    @JoinTable(
+            name = "users_colorPersonality",
+            joinColumns = {@JoinColumn(name = "users_id", referencedColumnName = "id")},
+            inverseJoinColumns = {@JoinColumn(name = "colorPersonality_id", referencedColumnName = "id")}
+    )
+    private ColorPersonality colorPersonality;
 
     public boolean isAdmin() {
         return roles.stream().anyMatch(role -> role.getName().equals("ADMIN"));

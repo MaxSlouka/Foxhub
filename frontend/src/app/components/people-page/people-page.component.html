@@ -68,7 +68,7 @@
                 </div>
               </div>
 
-              <p class="lead mt-4 border-bottom lead-bold">True Color Personality <a href="/color-personality-test"><i
+              <p class="lead mt-4 border-bottom lead-bold">Color Personality <a href="/color-personality-test"><i
                     class="bi bi-question-circle" title="True Color Personality Test"></i></a></p>
               <div class="btn-group">
                 <button type="button" class="btn btn-outline-primary dropdown-toggle personality-select"
@@ -76,9 +76,9 @@
                   Selected Personality
                 </button>
                 <div class="dropdown-menu">
-                  <ng-container *ngFor="let personality of usedPersonalities">
-                    <button class="dropdown-item" (click)="addToPersonalitiesList(personality.name)">{{ personality.type
-                      }} - {{ personality.name }}</button>
+                  <ng-container *ngFor="let colorPersonality of usedColorPersonalities">
+                    <button class="dropdown-item" (click)="addToColorPersonalitiesList(colorPersonality.name)">
+                      {{ colorPersonality.name }}</button>
                   </ng-container>
                 </div>
               </div>
