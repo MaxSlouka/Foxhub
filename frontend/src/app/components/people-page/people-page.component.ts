@@ -166,12 +166,11 @@ export class PeoplePageComponent implements OnInit {
     this.allFilters()
   }
 
-  addToLangList(event: any, lang: string) {
-    if (event.target.checked) {
+  addToLangList(lang: string) {
       if (!this.selectedLanguages.includes(lang)) {
         this.selectedLanguages.push(lang);
       }
-    } else {
+     else {
       const index = this.selectedLanguages.indexOf(lang);
       if (index > -1) {
         this.selectedLanguages.splice(index, 1);
