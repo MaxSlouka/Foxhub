@@ -19,10 +19,6 @@ public class Role {
     private Long id;
     private String name;
 
-//    @ManyToMany(mappedBy = "user", fetch = FetchType.LAZY)
-//
-//    private List<User> roles;
-
     public Role(String name) {
         this.name = name;
     }

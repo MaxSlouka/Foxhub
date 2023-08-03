@@ -11,10 +11,6 @@ import {Technology} from "../../models/technology";
 import {TechnologyService} from "../../_services/technology.service";
 import {PersonalityService} from "../../_services/personality.service";
 import {Personality} from "../../models/personality";
-import {NgForm} from "@angular/forms";
-import { FormsModule } from '@angular/forms';
-
-
 
 @Component({
   selector: 'app-user-settings-page',
@@ -263,7 +259,4 @@ async updateUser()
 
     });
 }
-
-// protected readonly
-// innerWidth = innerWidth;
 }

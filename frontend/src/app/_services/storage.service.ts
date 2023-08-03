@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { User } from "../models/user";
 
 const USER_KEY = 'auth-user';
 
@@ -23,11 +24,7 @@ export class StorageService {
   }
 
   public isLoggedIn(): boolean {
-    const user = window.sessionStorage.getItem(USER_KEY)
-    if (user) {
-      return true;
-    }
-    return false;
+    return Boolean(window.sessionStorage.getItem(USER_KEY));
   }
 
   public logout(): void {

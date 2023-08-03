@@ -1,4 +1,4 @@
-import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { AuthService } from "../../_services/auth.service";
 import { StorageService } from "../../_services/storage.service";
 import { Router, NavigationEnd } from "@angular/router";
@@ -10,13 +10,11 @@ import { filter } from 'rxjs/operators';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-
 export class LoginComponent implements OnInit {
   form: any = {
     email: null,
     password: null
   };
-
   isLoggedIn = false;
   isLoginFailed = false;
   errorMessage = '';

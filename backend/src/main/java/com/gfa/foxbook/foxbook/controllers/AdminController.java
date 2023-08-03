@@ -2,7 +2,6 @@ package com.gfa.foxbook.foxbook.controllers;
 
 import com.gfa.foxbook.foxbook.models.nonusermodels.Comment;
 import com.gfa.foxbook.foxbook.models.nonusermodels.Post;
-import com.gfa.foxbook.foxbook.models.nonusermodels.Role;
 import com.gfa.foxbook.foxbook.models.User;
 import com.gfa.foxbook.foxbook.models.dtos.PostDTO;
 import com.gfa.foxbook.foxbook.repositories.CommentRepository;
@@ -12,7 +11,6 @@ import com.gfa.foxbook.foxbook.services.interfaces.PostService;
 import com.gfa.foxbook.foxbook.services.interfaces.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -91,7 +89,6 @@ public class AdminController {
         if (optionalPost.isEmpty()) {
             return ResponseEntity.notFound().build();
         }
-        Post post = optionalPost.get();
         Optional<Comment> optionalComment = commentRepository.findById(commentId);
         if (optionalComment.isEmpty()) {
             return ResponseEntity.notFound().build();

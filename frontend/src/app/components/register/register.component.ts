@@ -1,6 +1,5 @@
-import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {AuthService} from '../../_services/auth.service';
-import {ToastrService} from "ngx-toastr";
 
 @Component({
   selector: 'app-register',

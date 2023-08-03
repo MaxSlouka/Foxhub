@@ -22,4 +22,3 @@ public class WebConfig implements WebMvcConfigurer {
     }
 }
 
-//todo delete this comment

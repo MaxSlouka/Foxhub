@@ -37,8 +37,10 @@ public class PublicController {
             usersDTO.add(new UserSearchDTO(user));
         }
         if (users.isEmpty()) {
+            System.out.println("No users found");
             return ResponseEntity.noContent().build();
         }
+        System.out.println("Users found");
         return ResponseEntity.ok(usersDTO);
     }
 
@@ -100,12 +102,11 @@ public class PublicController {
         return ResponseEntity.ok(post.getComments());
 
     }
+
     @PostMapping("/contact")
     public ResponseEntity<?> contact(@RequestBody MessageDTO message) throws MessagingException {
-        emailService.send("gfafoxbook@gmail.com","Somebody is interested in students","Person:\n"+message.message+"\nFrom email:" +message.from+"\nIs interested in these students:"+message.interestedIn);
-        emailService.send(message.from, "Thanks for interest","You have made interest in our students. We will contact you shortly with more information");
-
-
+        emailService.send("gfafoxbook@gmail.com", "Somebody is interested in students", "Person:\n" + message.message + "\nFrom email:" + message.from + "\nIs interested in these students:" + message.interestedIn);
+        emailService.send(message.from, "Thanks for interest", "You have made interest in our students. We will contact you shortly with more information");
         return null;
     }
 }

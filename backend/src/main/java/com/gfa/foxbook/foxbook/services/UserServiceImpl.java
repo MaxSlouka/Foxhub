@@ -82,12 +82,6 @@ public class UserServiceImpl implements UserService {
         return userRepository.findByEmailAndYearOfBirth(email, yearOfBirth);
     }
 
-//    @Override
-//    public void addComment(User existingUser, String comment) {
-//        commentService.comment(existingUser.getId(), existingUser.getId(), comment);
-//        userRepository.save(existingUser);
-//    }
-
     @Override
     public UserBasicDTO convertToUserBasicDTO(User user) {
         UserBasicDTO userBasicDTO = new UserBasicDTO();
@@ -142,86 +136,23 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User updateProfile(User user, User userDTO) {
-        if (userDTO.getFirstName() != null) {
-            user.setFirstName(userDTO.getFirstName());
-        } else {
-            user.setFirstName(user.getFirstName());
-        }
-        if (userDTO.getLastName() != null) {
-            user.setLastName(userDTO.getLastName());
-        } else {
-            user.setLastName(user.getLastName());
-        }
-        if (userDTO.getPhone() != null) {
-            user.setPhone(userDTO.getPhone());
-        } else {
-            user.setPhone(user.getPhone());
-        }
-        if (userDTO.getLocation() != null) {
-            user.setLocation(userDTO.getLocation());
-        } else {
-            user.setLocation(user.getLocation());
-        }
-        if (userDTO.getAbout() != null) {
-            user.setAbout(userDTO.getAbout());
-        } else {
-            user.setAbout(user.getAbout());
-        }
-        if (userDTO.getGitHub() != null) {
-            user.setGitHub(userDTO.getGitHub());
-        } else {
-            user.setGitHub(user.getGitHub());
-        }
-        if (userDTO.getLinkedin() != null) {
-            user.setLinkedin(userDTO.getLinkedin());
-        } else {
-            user.setLinkedin(user.getLinkedin());
-        }
-        if (userDTO.getFacebook() != null) {
-            user.setFacebook(userDTO.getFacebook());
-        } else {
-            user.setFacebook(user.getFacebook());
-        }
-        if (userDTO.getInstagram() != null) {
-            user.setInstagram(userDTO.getInstagram());
-        } else {
-            user.setInstagram(user.getInstagram());
-        }
-        if (userDTO.getLanguages() != null) {
-            user.setLanguages(userDTO.getLanguages());
-        } else {
-            user.setLanguages(user.getLanguages());
-        }
-        if (userDTO.getTechnologies() != null) {
-            user.setTechnologies(userDTO.getTechnologies());
-        } else {
-            user.setTechnologies(user.getTechnologies());
-        }
-        if (userDTO.getOptionalPage() != null) {
-            user.setOptionalPage(userDTO.getOptionalPage());
-        } else {
-            user.setOptionalPage(user.getOptionalPage());
-        }
-        if (userDTO.getPersonality() != null) {
-            user.setPersonality(userDTO.getPersonality());
-        } else {
-            user.setPersonality(user.getPersonality());
-        }
-        if (userDTO.getWorkLocation() != null) {
-            user.setWorkLocation(userDTO.getWorkLocation());
-        } else {
-            user.setWorkLocation(user.getWorkLocation());
-        }
-        if (userDTO.getOneLineAbout() != null) {
-            user.setOneLineAbout(userDTO.getOneLineAbout());
-        } else {
-            user.setOneLineAbout(user.getOneLineAbout());
-        }
-        if (userDTO.getWorkPreference() != null) {
-            user.setWorkPreference(userDTO.getWorkPreference());
-        } else {
-            user.setWorkPreference(user.getWorkPreference());
-        }
+        if (userDTO.getFirstName() != null) user.setFirstName(userDTO.getFirstName());
+        if (userDTO.getLastName() != null) user.setLastName(userDTO.getLastName());
+        if (userDTO.getPhone() != null) user.setPhone(userDTO.getPhone());
+        if (userDTO.getLocation() != null) user.setLocation(userDTO.getLocation());
+        if (userDTO.getAbout() != null) user.setAbout(userDTO.getAbout());
+        if (userDTO.getGitHub() != null) user.setGitHub(userDTO.getGitHub());
+        if (userDTO.getLinkedin() != null) user.setLinkedin(userDTO.getLinkedin());
+        if (userDTO.getFacebook() != null) user.setFacebook(userDTO.getFacebook());
+        if (userDTO.getInstagram() != null) user.setInstagram(userDTO.getInstagram());
+        if (userDTO.getLanguages() != null) user.setLanguages(userDTO.getLanguages());
+        if (userDTO.getTechnologies() != null) user.setTechnologies(userDTO.getTechnologies());
+        if (userDTO.getOptionalPage() != null) user.setOptionalPage(userDTO.getOptionalPage());
+        if (userDTO.getPersonality() != null) user.setPersonality(userDTO.getPersonality());
+        if (userDTO.getWorkLocation() != null) user.setWorkLocation(userDTO.getWorkLocation());
+        if (userDTO.getOneLineAbout() != null) user.setOneLineAbout(userDTO.getOneLineAbout());
+        if (userDTO.getWorkPreference() != null) user.setWorkPreference(userDTO.getWorkPreference());
+
         user.setYearOfBirth(userDTO.getYearOfBirth());
         user.setWorkStatus(userDTO.isWorkStatus());
 
