@@ -20,6 +20,7 @@
                 </div>
 
                 <div class="right-side">
+                    <a [routerLink]="['/profile', user.nickname]" class="btn btn-outline-primary visit-profile">Visit Profile </a>
                     <button class="btn btn-outline-primary" type="button" (click)="toggleItem($event, user)">
                         <span *ngIf="user.inCart">
                             <i class="bi bi-cart4"></i> In Cart
@@ -31,7 +32,7 @@
                 </div>
             </div>
 
-            <div class="card-body-bottom">
+            <div class="card-body-bottom mt-2">
                 <p *ngFor="let filter of user.outOfFilters"><span>{{filter}}</span> &nbsp;</p>
             </div>
         </div>
