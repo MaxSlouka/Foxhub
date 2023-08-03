@@ -2,6 +2,7 @@ import { Technology } from "./technology";
 import { Language } from "./language";
 import {Role} from "./role";
 import {Personality} from "./personality";
+import { ColorPersonality } from "./colorPersonality";
 
 export interface User {
   id?: number;
@@ -14,6 +15,7 @@ export interface User {
   yearOfBirth?: number,
   password: string,
   personality?: Personality,
+  colorPersonality?: ColorPersonality,
   location?: string,
   dateOfRegistration?: Date,
   profileUrl?: string,
