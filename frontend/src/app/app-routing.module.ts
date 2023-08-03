@@ -15,7 +15,8 @@ import { CartComponent } from "./components/cart/cart.component";
 import { CartCheckoutComponent } from "./components/cart-checkout/cart-checkout.component";
 import { CreatorsComponent } from "./components/creators/creators.component";
 import { PersonalityInfoPageComponent } from "./components/personality-info-page/personality-info-page.component";
-import {AdminBoardComponent} from "./components/admin-board/admin-board.component";
+import { PersonalityTrueColorComponent } from "./components/personality-true-color/personality-true-color.component";
+import { AdminBoardComponent } from "./components/admin-board/admin-board.component";
 
 const routes: Routes = [
   { path: '', component: PeoplePageComponent },
@@ -32,7 +33,8 @@ const routes: Routes = [
   { path: 'checkout', component: CartCheckoutComponent },
   { path: 'creators', component: CreatorsComponent },
   { path: '16personalities', component: PersonalityInfoPageComponent },
-  { path: 'admin-board', component: AdminBoardComponent},
+  { path: 'color-personality-test', component: PersonalityTrueColorComponent },
+  { path: 'admin-board', component: AdminBoardComponent },
   { path: '**', pathMatch: 'full', component: PageNotFoundComponent }
 ]
 
