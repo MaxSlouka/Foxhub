@@ -86,23 +86,53 @@
               <p class="lead mt-4 border-bottom lead-bold">Seeking employment</p>
               <div class="form-check">
                 <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios0" value="all"
-                  checked [(ngModel)]="filterWorkStatus" (ngModelChange)="onWorkStatusChange()">
+                  checked [(ngModel)]="filterWorkEmploymentStatus" (ngModelChange)="onWorkStatusChange()">
                 <label class="form-check-label" for="exampleRadios0">
                   All
                 </label>
               </div>
               <div class="form-check">
                 <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="open"
-                  [(ngModel)]="filterWorkStatus" (ngModelChange)="onWorkStatusChange()">
+                  [(ngModel)]="filterWorkEmploymentStatus" (ngModelChange)="onWorkStatusChange()">
                 <label class="form-check-label" for="exampleRadios1">
                   True
                 </label>
               </div>
               <div class="form-check">
                 <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="closed"
-                  [(ngModel)]="filterWorkStatus" (ngModelChange)="onWorkStatusChange()">
+                  [(ngModel)]="filterWorkEmploymentStatus" (ngModelChange)="onWorkStatusChange()">
                 <label class="form-check-label" for="exampleRadios2">
                   False
+                </label>
+              </div>
+
+              <p class="lead mt-4 border-bottom lead-bold">Preferred work option</p>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="exampleWorkRadios" id="exampleWorkRadios0" value="all"
+                       checked [(ngModel)]="filterWorkPrefermentStatus" (ngModelChange)="onWorkStatusChange()">
+                <label class="form-check-label" for="exampleWorkRadios0">
+                  All
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="exampleWorkRadios" id="exampleWorkRadios1" value="combined"
+                       [(ngModel)]="filterWorkPrefermentStatus" (ngModelChange)="onWorkStatusChange()">
+                <label class="form-check-label" for="exampleWorkRadios1">
+                  Combined
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="exampleWorkRadios" id="exampleWorkRadios2" value="office"
+                       [(ngModel)]="filterWorkPrefermentStatus" (ngModelChange)="onWorkStatusChange()">
+                <label class="form-check-label" for="exampleWorkRadios2">
+                  Office
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="exampleWorkRadios" id="exampleWorkRadios3" value="remote"
+                       [(ngModel)]="filterWorkPrefermentStatus" (ngModelChange)="onWorkStatusChange()">
+                <label class="form-check-label" for="exampleWorkRadios3">
+                  Remote
                 </label>
               </div>
 

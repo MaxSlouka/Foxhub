@@ -1,15 +1,15 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { Technology } from "../../models/technology";
-import { TechnologyService } from "../../_services/technology.service";
-import { ApiService } from "../../_services/api/api.service";
-import { User } from "../../models/user";
-import { Language } from "../../models/language";
-import { LanguageService } from "../../_services/language.service";
-import { Personality } from "../../models/personality";
-import { PersonalityService } from "../../_services/personality.service";
-import { CookieService } from 'ngx-cookie-service';
-import { ColorPersonality } from 'src/app/models/colorPersonality';
-import { ColorPersonalityService } from 'src/app/_services/color-personality.service';
+import {Component, OnInit, ViewChild, ElementRef} from '@angular/core';
+import {Technology} from "../../models/technology";
+import {TechnologyService} from "../../_services/technology.service";
+import {ApiService} from "../../_services/api/api.service";
+import {User} from "../../models/user";
+import {Language} from "../../models/language";
+import {LanguageService} from "../../_services/language.service";
+import {Personality} from "../../models/personality";
+import {PersonalityService} from "../../_services/personality.service";
+import {CookieService} from 'ngx-cookie-service';
+import {ColorPersonality} from 'src/app/models/colorPersonality';
+import {ColorPersonalityService} from 'src/app/_services/color-personality.service';
 
 @Component({
   selector: 'app-people-page',
@@ -18,14 +18,20 @@ import { ColorPersonalityService } from 'src/app/_services/color-personality.ser
 })
 
 export class PeoplePageComponent implements OnInit {
-  @ViewChild('customRange3', { static: true }) rangeInputRef!: ElementRef<HTMLInputElement>;
-  @ViewChild('rangeValue', { static: true }) rangeValueRef!: ElementRef<HTMLSpanElement>;
+  @ViewChild('customRange3', {static: true}) rangeInputRef!: ElementRef<HTMLInputElement>;
+  @ViewChild('rangeValue', {static: true}) rangeValueRef!: ElementRef<HTMLSpanElement>;
+
+  // @ts-ignore
+  users: User[] = [];
+  addedUsers: User[] = [];
+  verifiedAndUsersOnly: User[] = [];
+  nonFilteredUsers: User[] = [];
 
   technologies: Technology[] = [];
   languages: Language[] = [];
   personalities: Personality[] = [];
   colorPersonalities: ColorPersonality[] = [];
-  addedUsers: User[] = [];
+
   usedTechnologies: Technology[] = [];
   usedLanguages: Language[] = [];
   usedPersonalities: Personality[] = [];
@@ -34,34 +40,32 @@ export class PeoplePageComponent implements OnInit {
   selectedTechnologies: string[] = [];
   selectedLanguages: string[] = [];
   selectedPersonalities: string[] = [];
-  selectAllPersonalities: boolean = true;
   selectedColorPersonalities: string[] = [];
-  selectAllColorPersonalities: boolean = true;
+
   selectedAges: string[] = [];
-  workStatus: any;
 
   // @ts-ignore
-  users: User[] = [];
-  verifiedAndUsersOnly: User[] = [];
-  nonFilteredUsers: User[] = [];
-  filterContentExpanded: boolean = true;
+  filterWorkEmploymentStatus: string;
   // @ts-ignore
-  filterWorkStatus: string;
+  filterWorkPrefermentStatus: string;
+  filterContentExpanded: boolean = true;
 
   actualTechnologyValue: string[] = [];
   actualLanguageValue: string[] = [];
   actualPersonalityValue: string[] = [];
   actualColorPersonalityValue: string[] = [];
-
   actualAgeValue: string = '';
   actualWorkStatusValue: string = '';
+  actualWorkPrefermentValue: string = "";
 
   restPersonalityFilter: User[] = [];
   restColorPersonalityFilter: User[] = [];
   restOpenToWorkFilter: User[] = [];
+  restWorkPrefermentFilter: User[] = [];
   restAgeFilter: User[] = [];
   restLanguageFilter: User[] = [];
   restTechnologiesFilter: User[] = [];
+
   public showCookiePopup = false;
 
   constructor(
@@ -75,7 +79,9 @@ export class PeoplePageComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.filterWorkStatus = 'all';
+    this.filterWorkEmploymentStatus = 'all';
+    this.filterWorkPrefermentStatus = "all";
+
     this.showCookiePopup = this.cookieService.get('cookie_consent') !== 'true';
 
     this.technologyService.getAll().subscribe(technologies => {
@@ -121,10 +127,6 @@ export class PeoplePageComponent implements OnInit {
   get filteredUsers(): any[] {
     // @ts-ignore
     return this.nonFilteredUsers.filter(user => user.outOfFilters?.length > 4);
-  }
-
-  toggleFilterContent(): void {
-    this.filterContentExpanded = !this.filterContentExpanded;
   }
 
   usedTechnologiesList() {
@@ -175,8 +177,8 @@ export class PeoplePageComponent implements OnInit {
   // @ts-ignore
   usedColorPersonalitiesList(): ColorPersonality[] {
     const usedColorPersonalityIds: number[] = [];
-    this.usedColorPersonalities = []; 
-  
+    this.usedColorPersonalities = [];
+
     for (let user of this.users) {
       const colorPersonalityId = user.colorPersonality?.id;
       if (colorPersonalityId && !usedColorPersonalityIds.includes(colorPersonalityId)) {
@@ -184,9 +186,9 @@ export class PeoplePageComponent implements OnInit {
         this.usedColorPersonalities.push(user.colorPersonality!);
       }
     }
-  
+
     return this.usedColorPersonalities;
-  }  
+  }
 
   toggleTechSelection(tech: Technology) {
     const techName = tech.name;
@@ -258,97 +260,6 @@ export class PeoplePageComponent implements OnInit {
 
   onWorkStatusChange() {
     this.allFilters();
-  }
-
-  allFilters() {
-    let filteredUsers = [...this.verifiedAndUsersOnly];
-
-    if (this.selectedTechnologies.length > 0) {
-      filteredUsers = this.technologiesFilter(filteredUsers, this.selectedTechnologies);
-    } else {
-      this.actualTechnologyValue = [];
-      this.restTechnologiesFilter = [];
-    }
-
-    if (this.selectedLanguages.length > 0) {
-      // @ts-ignore
-      filteredUsers = this.languagesFilter(filteredUsers, this.selectedLanguages);
-    } else {
-      this.actualLanguageValue = [];
-      this.restLanguageFilter = [];
-    }
-
-    if (this.selectedPersonalities.length > 0) {
-      filteredUsers = this.personalitiesFilter(filteredUsers, this.selectedPersonalities);
-    } else {
-      this.actualPersonalityValue = [];
-      this.restPersonalityFilter = [];
-    }
-
-    if (this.selectedColorPersonalities.length > 0) {
-      filteredUsers = this.colorPersonalitiesFilter(filteredUsers, this.selectedColorPersonalities);
-    } else {
-      this.actualColorPersonalityValue = [];
-      this.restColorPersonalityFilter = [];
-    }
-
-    //filteredUsers = this.personalityFilter(filteredUsers);
-    filteredUsers = this.openToWorkFilter(filteredUsers);
-    if (this.selectedAges.length > 0) {
-      filteredUsers = this.ageFilter(filteredUsers);
-    }
-
-    for (let user of this.nonFilteredUsers) {
-      user.outOfFilters = [];
-      if (this.restTechnologiesFilter.includes(user)) {
-        for (let tech of this.actualTechnologyValue) {
-          if (!user.technologies?.some((userTech) =>
-            userTech.name.toLowerCase() === tech.toLowerCase())) {
-            user.outOfFilters.push(tech);
-          }
-        }
-      }
-
-      if (this.restLanguageFilter.includes(user)) {
-        for (let lang of this.actualLanguageValue) {
-          if (!user.languages?.some((userLang) =>
-            userLang.name.toLowerCase() === lang.toLowerCase())) {
-            user.outOfFilters.push(lang);
-          }
-        }
-      }
-
-      if (this.restPersonalityFilter.includes(user)) {
-        for (let pers of this.actualPersonalityValue) {
-          if (user.personality?.name.toLowerCase() !== pers.toLowerCase()) {
-            user.outOfFilters.push(pers);
-          }
-        }
-      }
-
-      if (this.restColorPersonalityFilter.includes(user)) {
-        for (let colorPersonality of this.actualColorPersonalityValue) {
-          if (user.colorPersonality?.name.toLowerCase() !== colorPersonality.toLowerCase()) {
-            user.outOfFilters.push(colorPersonality);
-          }
-        }
-      }
-
-      if (this.selectedAges.length === 0) {
-        this.restAgeFilter = [];
-      }
-      if (this.restAgeFilter.includes(user)) {
-        user.outOfFilters.push(this.actualAgeValue);
-      }
-
-      if (this.actualWorkStatusValue !== "all") {
-        if (this.restOpenToWorkFilter.includes(user)) {
-          user.outOfFilters.push(this.actualWorkStatusValue);
-        }
-      }
-
-    }
-    this.users = filteredUsers;
   }
 
   // @ts-ignore
@@ -427,19 +338,19 @@ export class PeoplePageComponent implements OnInit {
     this.restOpenToWorkFilter = [];
 
     for (let user of users) {
-      if (this.filterWorkStatus === "open" && user.workStatus === true) {
+      if (this.filterWorkEmploymentStatus === "open" && user.workStatus === true) {
         actualFilteredUsers.push(user);
       }
-      if (this.filterWorkStatus === "closed" && user.workStatus === false) {
+      if (this.filterWorkEmploymentStatus === "closed" && user.workStatus === false) {
         actualFilteredUsers.push(user);
       }
-      if (this.filterWorkStatus === "all") {
+      if (this.filterWorkEmploymentStatus === "all") {
         actualFilteredUsers.push(user)
       }
     }
-    if (this.filterWorkStatus === "open") {
+    if (this.filterWorkEmploymentStatus === "open") {
       this.actualWorkStatusValue = "true"
-    } else if (this.filterWorkStatus === "closed") {
+    } else if (this.filterWorkEmploymentStatus === "closed") {
       this.actualWorkStatusValue = "false"
     } else {
       this.actualWorkStatusValue = "all"
@@ -448,6 +359,40 @@ export class PeoplePageComponent implements OnInit {
       .filter(user => !actualFilteredUsers.includes(user));
     return actualFilteredUsers;
   }
+
+  workPrefermentFilter(users: User[]) {
+    const actualFilteredUsers: User[] = [];
+    this.restWorkPrefermentFilter = [];
+
+    for (let user of users) {
+      if (this.filterWorkPrefermentStatus === "combined" && user.workPreference === "COMBINED") {
+        actualFilteredUsers.push(user);
+      }
+      if (this.filterWorkPrefermentStatus === "office" && user.workPreference === "OFFICE") {
+        actualFilteredUsers.push(user);
+      }
+      if (this.filterWorkPrefermentStatus === "remote" && user.workPreference === "REMOTE") {
+        actualFilteredUsers.push(user);
+      }
+      if (this.filterWorkPrefermentStatus === "all") {
+        actualFilteredUsers.push(user)
+      }
+    }
+
+    if (this.filterWorkPrefermentStatus === "combined") {
+      this.actualWorkPrefermentValue = "combined"
+    } else if (this.filterWorkPrefermentStatus === "office") {
+      this.actualWorkPrefermentValue = "office"
+    } else if (this.filterWorkPrefermentStatus === "remote") {
+      this.actualWorkPrefermentValue = "remote"
+    } else {
+      this.actualWorkPrefermentValue = "all"
+    }
+    this.restWorkPrefermentFilter = this.verifiedAndUsersOnly
+      .filter(user => !actualFilteredUsers.includes(user));
+    return actualFilteredUsers;
+  }
+
 
   ageFilter(users: User[]) {
     const currentYear = new Date().getFullYear();
@@ -494,14 +439,110 @@ export class PeoplePageComponent implements OnInit {
     return actualFilteredUsers;
   }
 
+  allFilters() {
+    let filteredUsers = [...this.verifiedAndUsersOnly];
+
+    if (this.selectedTechnologies.length > 0) {
+      filteredUsers = this.technologiesFilter(filteredUsers, this.selectedTechnologies);
+    } else {
+      this.actualTechnologyValue = [];
+      this.restTechnologiesFilter = [];
+    }
+
+    if (this.selectedLanguages.length > 0) {
+      filteredUsers = this.languagesFilter(filteredUsers, this.selectedLanguages);
+    } else {
+      this.actualLanguageValue = [];
+      this.restLanguageFilter = [];
+    }
+
+    if (this.selectedPersonalities.length > 0) {
+      filteredUsers = this.personalitiesFilter(filteredUsers, this.selectedPersonalities);
+    } else {
+      this.actualPersonalityValue = [];
+      this.restPersonalityFilter = [];
+    }
+
+    if (this.selectedColorPersonalities.length > 0) {
+      filteredUsers = this.colorPersonalitiesFilter(filteredUsers, this.selectedColorPersonalities);
+    } else {
+      this.actualColorPersonalityValue = [];
+      this.restColorPersonalityFilter = [];
+    }
+
+    filteredUsers = this.openToWorkFilter(filteredUsers);
+    filteredUsers = this.workPrefermentFilter(filteredUsers);
+
+    if (this.selectedAges.length > 0) {
+      filteredUsers = this.ageFilter(filteredUsers);
+    }
+
+    for (let user of this.nonFilteredUsers) {
+      user.outOfFilters = [];
+      if (this.restTechnologiesFilter.includes(user)) {
+        for (let tech of this.actualTechnologyValue) {
+          if (!user.technologies?.some((userTech) =>
+            userTech.name.toLowerCase() === tech.toLowerCase())) {
+            user.outOfFilters.push(tech);
+          }
+        }
+      }
+
+      if (this.restLanguageFilter.includes(user)) {
+        for (let lang of this.actualLanguageValue) {
+          if (!user.languages?.some((userLang) =>
+            userLang.name.toLowerCase() === lang.toLowerCase())) {
+            user.outOfFilters.push(lang);
+          }
+        }
+      }
+
+      if (this.restPersonalityFilter.includes(user)) {
+        for (let pers of this.actualPersonalityValue) {
+          if (user.personality?.name.toLowerCase() !== pers.toLowerCase()) {
+            user.outOfFilters.push(pers);
+          }
+        }
+      }
+
+      if (this.restColorPersonalityFilter.includes(user)) {
+        for (let colorPersonality of this.actualColorPersonalityValue) {
+          if (user.colorPersonality?.name.toLowerCase() !== colorPersonality.toLowerCase()) {
+            user.outOfFilters.push(colorPersonality);
+          }
+        }
+      }
+
+      if (this.selectedAges.length === 0) {
+        this.restAgeFilter = [];
+      }
+      if (this.restAgeFilter.includes(user)) {
+        user.outOfFilters.push(this.actualAgeValue);
+      }
+
+      if (this.actualWorkStatusValue !== "all") {
+        if (this.restOpenToWorkFilter.includes(user)) {
+          user.outOfFilters.push(this.actualWorkStatusValue);
+        }
+      }
+
+      if (this.actualWorkPrefermentValue !== "all") {
+        if (this.restWorkPrefermentFilter.includes(user)) {
+          user.outOfFilters.push(this.actualWorkPrefermentValue);
+        }
+      }
+    }
+    this.users = filteredUsers;
+  }
+
   clearAllFilters() {
     this.selectedTechnologies = [];
     this.selectedLanguages = [];
     this.selectedAges = [];
-    this.filterWorkStatus = 'all';
+    this.filterWorkEmploymentStatus = 'all';
+    this.filterWorkPrefermentStatus = "all";
     this.selectedPersonalities = [];
     this.selectedColorPersonalities = [];
-    this.selectAllPersonalities = true;
 
     for (let user of this.nonFilteredUsers) {
       user.outOfFilters = [];
