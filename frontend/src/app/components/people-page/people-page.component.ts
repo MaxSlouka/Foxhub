@@ -519,5 +519,3 @@ export class PeoplePageComponent implements OnInit {
     this.allFilters();
   }
 }
-
-
