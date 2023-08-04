@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
-import { User } from "../../models/user";
-import { ApiService } from "../../_services/api/api.service";
+import { User } from "../../../models/user";
+import { ApiService } from "../../../_services/api/api.service";
 
 @Component({
   selector: 'app-people-page-searchbar',
