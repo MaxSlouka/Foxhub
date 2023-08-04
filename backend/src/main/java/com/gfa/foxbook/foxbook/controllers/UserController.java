@@ -1,4 +1,5 @@
 package com.gfa.foxbook.foxbook.controllers;
+import com.gfa.foxbook.foxbook.repositories.LikeRepository;
 
 import com.gfa.foxbook.foxbook.config.Constants;
 import com.gfa.foxbook.foxbook.models.dtos.PasswordDTO;
@@ -38,6 +39,8 @@ public class UserController {
     private final LikeService likeService;
     private final PasswordEncoder passwordEncoder;
     private final CommentService commentService;
+    private final LikeRepository likeRepository;
+
 
     @GetMapping("/person")
     public ResponseEntity<?> getUser(HttpServletRequest request) {
@@ -109,18 +112,28 @@ public class UserController {
 
         User user = maybeUser.get();
         Post post = maybePost.get();
+        Like like = new Like(post, user.getId(), 0, false);
 
         if (likeService.hasUserLikedPost(postId, user.getId())) {
-            return ResponseEntity.badRequest().body("You already liked this post.");
-        }
+        Like existingLike = likeRepository.findByPostIdAndUserId(postId, user.getId());
+        likeService.removeLike(existingLike);
+        post.setLikesCount(post.getLikesCount() - 1);
+        user.setHasVoted(false);
+        postService.save(post);
+        System.out.println("User has unliked this post");
+        return ResponseEntity.ok().build();
+    }
 
-        Like like = new Like(post, user.getId(), 0, false);
+        user.setHasVoted(true);
         likeService.like(like);
         like.getPost().setLikesCount(like.getPost().getLikesCount() + 1);
 
         postService.save(like.getPost());
+        System.out.println("Post ID: " + postId);
+        System.out.println("User ID: " + user.getId());
+        System.out.println("User has liked this post");
         return ResponseEntity.ok().build();
-    }
+}
 
     @PostMapping("password-change")
     public ResponseEntity<?> changePassword(@RequestBody PasswordDTO passwordDTO, HttpServletRequest request) {

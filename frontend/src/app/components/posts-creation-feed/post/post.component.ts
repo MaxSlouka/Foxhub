@@ -116,19 +116,28 @@ export class PostComponent implements OnInit {
   }
 
   likePost(postId: number) {
-    if (!this.post.isLikedByCurrentUser) {
-      this.postService.likePost(postId).subscribe(
-        () => {
+    this.postService.likePost(postId).subscribe(
+      () => {
+        console.log('Post liked successfully');
+        this.post.isLikedByCurrentUser = true;
+        this.post.likesCount++;
+        this.loadPost();
+        if (this.post.isLikedByCurrentUser) {
+          console.log('Post unliked successfully');
+          this.post.isLikedByCurrentUser = false;
+          this.post.likesCount--;
+        } else {
           console.log('Post liked successfully');
           this.post.isLikedByCurrentUser = true;
           this.post.likesCount++;
-        },
-        error => {
-          console.log('Error liking post', error);
         }
-      );
-    }
+      },
+      error => {
+        console.log('Error toggling like on post', error);
+      }
+    );
   }
+
 
   commentText = '';
   // @ts-ignore

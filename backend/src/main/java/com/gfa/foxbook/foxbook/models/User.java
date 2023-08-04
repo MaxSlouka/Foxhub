@@ -1,4 +1,6 @@
 package com.gfa.foxbook.foxbook.models;
+import com.gfa.foxbook.foxbook.models.User;
+import com.gfa.foxbook.foxbook.models.nonusermodels.*;
 
 import com.gfa.foxbook.foxbook.models.nonusermodels.*;
 import jakarta.persistence.*;
@@ -98,4 +100,13 @@ public class User {
     public Role getRole() {
         return roles.get(0);
     }
+
+
+    public Like getLike() {
+        return new Like(this);
+    }
+
+    private boolean hasVoted = false;
+
 }
+

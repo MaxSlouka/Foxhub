@@ -10,6 +10,10 @@ import com.gfa.foxbook.foxbook.services.interfaces.LikeService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import com.gfa.foxbook.foxbook.models.nonusermodels.Comment;
+import com.gfa.foxbook.foxbook.repositories.CommentRepository;
+import com.gfa.foxbook.foxbook.services.interfaces.CommentService;
+
 
 import java.util.Optional;
 
@@ -21,6 +25,8 @@ public class LikeServiceImpl implements LikeService {
     private final LikeRepository likeRepository;
     private final UserRepository userRepository;
     private final PostRepository postRepository;
+    private final CommentRepository commentRepository;
+
 
     @Override
     public void likePost(Long postId, Long userId) {
@@ -51,6 +57,23 @@ public class LikeServiceImpl implements LikeService {
     public void like(Like like) {
         assert likeRepository != null;
         likeRepository.save(like);
+    }
+
+    @Transactional
+    @Override
+    public void removeLike(Like like) {
+        likeRepository.delete(like);
+    }
+
+
+    @Override
+    public void removeLike(Long postId, Long userId) {
+        assert likeRepository != null;
+        Like like = likeRepository.findByPostIdAndUserId(postId, userId);
+        if (like == null) {
+            return;
+        }
+        likeRepository.delete(like);
     }
 
     @Override
@@ -84,7 +107,8 @@ public class LikeServiceImpl implements LikeService {
 
     @Override
     public boolean hasUserLiked(Long commentId, Long userId) {
-        return false;
+        User user = getUser(userId);
+        return user.isHasVoted();
     }
 
     @Override
