@@ -1,9 +1,9 @@
 import {Component, Input, OnDestroy} from '@angular/core';
-import {User} from "../../models/user";
-import {CartService} from "../../_services/cart.service";
-import {StorageService} from "../../_services/storage.service";
-import {AuthService} from "../../_services/auth.service";
-import {ColorPersonality} from "../../models/colorPersonality";
+import {User} from "../../../models/user";
+import {CartService} from "../../../_services/cart.service";
+import {StorageService} from "../../../_services/storage.service";
+import {AuthService} from "../../../_services/auth.service";
+import {ColorPersonality} from "../../../models/colorPersonality";
 import {Subscription} from "rxjs";
 
 @Component({

@@ -1,11 +1,11 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Post } from "../../models/post";
-import { PostsService } from "../../_services/posts.service";
-import { StorageService } from "../../_services/storage.service";
-import { ApiService } from "../../_services/api/api.service";
-import { User } from "../../models/user";
-import { Like } from "../../models/like";
-import { Comment } from "../../models/comment";
+import { Post } from "../../../models/post";
+import { PostsService } from "../../../_services/posts.service";
+import { StorageService } from "../../../_services/storage.service";
+import { ApiService } from "../../../_services/api/api.service";
+import { User } from "../../../models/user";
+import { Like } from "../../../models/like";
+import { Comment } from "../../../models/comment";
 
 @Component({
   selector: 'app-post',
@@ -84,12 +84,12 @@ export class PostComponent implements OnInit {
     this.apiService.getAll().subscribe((usersFetch: User[]) => {
       this.users = usersFetch;
     });
-  
+
     this.postService.getPosts().subscribe((posts: Post[]) => {
       const updatedPost = posts.find(p => p.id === this.post.id);
       if (updatedPost) {
-        this.post = updatedPost; 
-        this.checkLikedByCurrentUser(); 
+        this.post = updatedPost;
+        this.checkLikedByCurrentUser();
       }
     });
   }
@@ -114,7 +114,7 @@ export class PostComponent implements OnInit {
   stopEditing() {
     this.isEditing = false;
   }
-  
+
   likePost(postId: number) {
     if (!this.post.isLikedByCurrentUser) {
       this.postService.likePost(postId).subscribe(
