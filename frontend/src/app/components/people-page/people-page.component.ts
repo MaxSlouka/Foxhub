@@ -175,7 +175,7 @@ export class PeoplePageComponent implements OnInit {
   // @ts-ignore
   usedColorPersonalitiesList(): ColorPersonality[] {
     const usedColorPersonalityIds: number[] = [];
-    this.usedColorPersonalities = []; // Clear the array to prevent duplicates
+    this.usedColorPersonalities = []; 
   
     for (let user of this.users) {
       const colorPersonalityId = user.colorPersonality?.id;
