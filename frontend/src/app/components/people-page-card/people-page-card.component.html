@@ -9,7 +9,8 @@
 
                     <!-- open profile in a new window - just add - target="_blank" - into <a> element -->
 
-                    <a [routerLink]="['/profile', user.nickname]" class="profile-img-desktop mr-4">
+                    <a [routerLink]="['/profile', user.nickname]" class="profile-img-desktop mr-4"
+                        [ngStyle]="{ 'border': profileImageBorder(user.colorPersonality) }">
                         <img *ngIf="user.profilePictureUrl" [src]="user.profilePictureUrl" height="100" width="100"
                             alt="profile_picture" class="img-fluid d-md-block shadow">
                     </a>
@@ -20,7 +21,8 @@
                 </div>
 
                 <div class="right-side">
-                    <a [routerLink]="['/profile', user.nickname]" class="btn btn-outline-primary visit-profile">Visit Profile </a>
+                    <a [routerLink]="['/profile', user.nickname]" class="btn btn-outline-primary visit-profile">Visit
+                        Profile </a>
                     <button class="btn btn-outline-primary" type="button" (click)="toggleItem($event, user)">
                         <span *ngIf="user.inCart">
                             <i class="bi bi-cart4"></i> In Cart

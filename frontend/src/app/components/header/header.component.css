@@ -19,7 +19,7 @@ ul li a {
   margin-right: 1rem;
 }
 
-@media only screen and (max-width: 768px) {
+@media (max-width: 768px) {
 
   .btn {
     margin-right: 1rem;
@@ -76,7 +76,7 @@ ul li a {
   align-items: center;
 }
 
-@media only screen and (max-width: 768px) {
+@media (max-width: 768px) {
 
   .mobile-navbar {
     flex-direction: column;

@@ -7,8 +7,7 @@ import { filter } from 'rxjs/operators';
 import { StorageService } from "../../_services/storage.service";
 import { GlobalConstants } from "../../common/global-constants";
 import { CartService } from "../../_services/cart.service";
-
-
+import { ColorPersonality } from "../../models/colorPersonality";
 
 export interface LocalUser {
   workLocation?: string;
@@ -32,7 +31,6 @@ export class ProfilePageComponent {
   addedUsers: User[] = this.cartService.getCartItems();
   // @ts-ignore
   private cartItemsSubscription: Subscription;
-
 
   constructor(
     private profileService: ProfileService,
@@ -68,6 +66,21 @@ export class ProfilePageComponent {
       .subscribe((cartItems: User[]) => {
         this.addedUsers = cartItems;
       });
+  }
+
+  profileImageBorder(colorPersonality: ColorPersonality | undefined): string {
+    switch (colorPersonality?.name) {
+      case 'Red':
+        return '3px solid red';
+      case 'Green':
+        return '3px solid green';
+      case 'Blue':
+        return '3px solid blue';
+      case 'Yellow':
+        return '3px solid #ffc107';
+      default:
+        return '1px solid transparent';
+    }
   }
 
   ngOnDestroy() {

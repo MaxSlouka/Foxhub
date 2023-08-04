@@ -3,6 +3,7 @@ import {User} from "../../models/user";
 import {CartService} from "../../_services/cart.service";
 import {StorageService} from "../../_services/storage.service";
 import {AuthService} from "../../_services/auth.service";
+import {ColorPersonality} from "../../models/colorPersonality";
 import {Subscription} from "rxjs";
 
 @Component({
@@ -30,6 +31,21 @@ export class PeoplePageCardComponent implements OnDestroy {
     }
     if (this.storageService.isLoggedIn()) {
       this.isLoggedIn = true;
+    }
+  }
+
+  profileImageBorder(colorPersonality: ColorPersonality | undefined): string {
+    switch (colorPersonality?.name) {
+      case 'Red':
+        return '4px solid red';
+      case 'Green':
+        return '4px solid green';
+      case 'Blue':
+        return '4px solid blue';
+      case 'Yellow':
+        return '4px solid #ffc107';
+      default:
+        return '1px solid transparent';
     }
   }
 
