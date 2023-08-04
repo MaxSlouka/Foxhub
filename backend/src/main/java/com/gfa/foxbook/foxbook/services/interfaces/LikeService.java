@@ -17,4 +17,7 @@ public interface LikeService {
     void likePost(Long postId, Long userId);
 
     void like(Like like);
+
+    void removeLike(Like like);
+    void removeLike(Long postId, Long userId);
 }
