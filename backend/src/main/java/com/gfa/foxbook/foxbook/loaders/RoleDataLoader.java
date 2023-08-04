@@ -25,10 +25,10 @@ public class RoleDataLoader implements CommandLineRunner {
 
     private void loadInitialColorPersonalities() {
 
-        Role admin = createRole("ADMIN");
         Role user = createRole("USER");
+        Role admin = createRole("ADMIN");
 
-        Role[] roles = {admin, user};
+        Role[] roles = {user, admin};
         roleRepository.saveAll(Arrays.asList(roles));
     }
 
