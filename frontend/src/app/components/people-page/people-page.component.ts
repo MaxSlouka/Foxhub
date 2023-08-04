@@ -26,6 +26,7 @@ export class PeoplePageComponent implements OnInit {
   addedUsers: User[] = [];
   verifiedAndUsersOnly: User[] = [];
   nonFilteredUsers: User[] = [];
+  filteredUsersRest: User[]= [];
 
   technologies: Technology[] = [];
   languages: Language[] = [];
@@ -124,9 +125,11 @@ export class PeoplePageComponent implements OnInit {
     this.showCookiePopup = false;
   }
 
-  get filteredUsers(): any[] {
+
+  // @ts-ignore
+  get filteredUsersRestFour(){
     // @ts-ignore
-    return this.nonFilteredUsers.filter(user => user.outOfFilters?.length > 4);
+    this.filteredUsersRest = this.nonFilteredUsers.filter(user => user.outOfFilters?.length > 4);
   }
 
   usedTechnologiesList() {
@@ -442,6 +445,10 @@ export class PeoplePageComponent implements OnInit {
   allFilters() {
     let filteredUsers = [...this.verifiedAndUsersOnly];
 
+    filteredUsers = this.openToWorkFilter(filteredUsers);
+    filteredUsers = this.workPrefermentFilter(filteredUsers);
+
+
     if (this.selectedTechnologies.length > 0) {
       filteredUsers = this.technologiesFilter(filteredUsers, this.selectedTechnologies);
     } else {
@@ -470,8 +477,6 @@ export class PeoplePageComponent implements OnInit {
       this.restColorPersonalityFilter = [];
     }
 
-    filteredUsers = this.openToWorkFilter(filteredUsers);
-    filteredUsers = this.workPrefermentFilter(filteredUsers);
 
     if (this.selectedAges.length > 0) {
       filteredUsers = this.ageFilter(filteredUsers);
@@ -533,6 +538,7 @@ export class PeoplePageComponent implements OnInit {
       }
     }
     this.users = filteredUsers;
+    this.filteredUsersRestFour;
   }
 
   clearAllFilters() {
