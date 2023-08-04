@@ -40,7 +40,7 @@
 .card-body-bottom {
     display: flex;
     flex-direction: row;
-    justify-content: end;
+    justify-content: flex-end;
 }
 
 .card-body-bottom p span {
