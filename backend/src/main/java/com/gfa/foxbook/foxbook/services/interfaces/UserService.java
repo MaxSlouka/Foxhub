@@ -11,6 +11,7 @@ public interface UserService {
     Optional<User> findById(Long id);
 
     void delete(User user);
+
     User getUserByVerificationToken(String verificationToken);
 
     List<User> getAll();
@@ -30,6 +31,7 @@ public interface UserService {
     public UserBasicDTO convertToUserBasicDTO(User user);
 
     List<User> searchUsers(String query);
+
     void saveUser(User user);
 
     User getCurrentUser(HttpServletRequest request);

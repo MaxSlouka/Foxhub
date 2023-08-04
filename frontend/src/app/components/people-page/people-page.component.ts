@@ -174,19 +174,19 @@ export class PeoplePageComponent implements OnInit {
 
   // @ts-ignore
   usedColorPersonalitiesList(): ColorPersonality[] {
-    const usedColorPersonalityNames: string[] = [];
+    const usedColorPersonalityIds: number[] = [];
+    this.usedColorPersonalities = []; 
+  
     for (let user of this.users) {
-      const colorPersonalityName = user.personality?.name.toLowerCase();
-      if (!usedColorPersonalityNames.includes(<string>colorPersonalityName)) {
-        if (colorPersonalityName != null) {
-          usedColorPersonalityNames.push(colorPersonalityName);
-        }
-        if (user.colorPersonality) {
-          this.usedColorPersonalities.push(user.colorPersonality);
-        }
+      const colorPersonalityId = user.colorPersonality?.id;
+      if (colorPersonalityId && !usedColorPersonalityIds.includes(colorPersonalityId)) {
+        usedColorPersonalityIds.push(colorPersonalityId);
+        this.usedColorPersonalities.push(user.colorPersonality!);
       }
     }
-  }
+  
+    return this.usedColorPersonalities;
+  }  
 
   toggleTechSelection(tech: Technology) {
     const techName = tech.name;
@@ -519,5 +519,3 @@ export class PeoplePageComponent implements OnInit {
     this.allFilters();
   }
 }
-
-
