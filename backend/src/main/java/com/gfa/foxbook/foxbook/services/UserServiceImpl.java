@@ -16,6 +16,9 @@ import org.springframework.stereotype.Service;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import java.util.List;
 
 @Service
 @AllArgsConstructor
@@ -25,6 +28,8 @@ public class UserServiceImpl implements UserService {
     private final TechnologyRepository technologyRepository;
     private final LanguageRepository languageRepository;
     private final JwtUtils jwtUtils;
+    private static final Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
+
 
     @Override
     public Optional<User> findById(Long id) {
@@ -45,8 +50,17 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<User> getAll() {
-        assert userRepository != null;
-        return userRepository.findAll();
+        logger.info("Fetching all users from the repository");
+
+        List<User> users = userRepository.findAll();
+
+        if (users.isEmpty()) {
+            logger.warn("No users found in the repository");
+        } else {
+            logger.info("Found {} users in the repository", users.size());
+        }
+
+        return users;
     }
 
     @Override
