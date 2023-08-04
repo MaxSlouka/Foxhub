@@ -9,12 +9,12 @@ import org.springframework.stereotype.Component;
 import java.util.Arrays;
 
 @Component
-public class ColorPersonalityDatLoader implements CommandLineRunner {
+public class ColorPersonalityDataLoader implements CommandLineRunner {
 
     private final ColorPersonalityRepository colorPersonalityRepository;
 
     @Autowired
-    public ColorPersonalityDatLoader(ColorPersonalityRepository colorPersonalityRepository) {
+    public ColorPersonalityDataLoader(ColorPersonalityRepository colorPersonalityRepository) {
         this.colorPersonalityRepository = colorPersonalityRepository;
     }
 
