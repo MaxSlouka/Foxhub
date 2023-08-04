@@ -96,12 +96,17 @@ export class ProfilePageComponent {
     this.qrCodeDownloadLink = url;
   }
 
-  isUserAdded(user: User) {
+  addToCart(user: User) {
+    this.cartService.addToCart(user);
     this.user.inCart = true;
   }
 
-  addToCart(user: User) {
-    this.cartService.addToCart(user);
-    this.isUserAdded(user);
+  removeItem(user: User) {
+    this.cartService.removeFromCart(user)
+    this.user.inCart = false;
+  }
+
+  toggleItem(user: User) {
+    this.user.inCart ? this.removeItem(user) : this.addToCart(user);
   }
 }
