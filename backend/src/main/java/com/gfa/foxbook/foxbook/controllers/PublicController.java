@@ -9,10 +9,7 @@ import com.gfa.foxbook.foxbook.services.ColorPersonalityServiceImpl;
 import com.gfa.foxbook.foxbook.services.DonutFillingServiceImpl;
 import com.gfa.foxbook.foxbook.services.EmailServiceImpl;
 import com.gfa.foxbook.foxbook.services.SpiritAnimalServiceImpl;
-import com.gfa.foxbook.foxbook.services.interfaces.LocationService;
-import com.gfa.foxbook.foxbook.services.interfaces.PersonalityService;
-import com.gfa.foxbook.foxbook.services.interfaces.PostService;
-import com.gfa.foxbook.foxbook.services.interfaces.UserService;
+import com.gfa.foxbook.foxbook.services.interfaces.*;
 import jakarta.mail.MessagingException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -36,6 +33,7 @@ public class PublicController {
     private final EmailServiceImpl emailService;
     private final DonutFillingServiceImpl donutFillingService;
     private final SpiritAnimalServiceImpl spiritAnimalService;
+    private final LanguageService languageService;
 
     @GetMapping("/people")
     public ResponseEntity<?> getAllUsers() {
@@ -108,6 +106,11 @@ public class PublicController {
     @GetMapping("/locations")
     public ResponseEntity<?> getAllLocations() {
         return ResponseEntity.ok(locationService.getAllLocations());
+    }
+
+    @GetMapping("/languages")
+    public ResponseEntity<?> getAllLanguages() {
+        return ResponseEntity.ok(languageService.getAllLanguages());
     }
 
     @GetMapping("/colorPersonalities")
