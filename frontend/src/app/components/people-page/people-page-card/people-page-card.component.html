@@ -15,7 +15,7 @@
           </a>
           <h4 class="py-2">
             {{ user.firstName }}
-            <p class="lead mb-0">{{ user.location }}</p>
+            <p class="lead mb-0" *ngFor="let location of user.locations">{{ location.name }} &nbsp;</p>
           </h4>
         </div>
 

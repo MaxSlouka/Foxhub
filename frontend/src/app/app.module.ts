@@ -50,6 +50,7 @@ import { PersonalityTrueColorComponent } from './components/personality-true-col
 import { ColorPersonalityComponent } from './components/color-personality/color-personality.component';
 import { DonutFillingPageComponent } from './components/donut-filling-page/donut-filling-page.component';
 import { SpiritAnimalPageComponent } from './components/spirit-animal-page/spirit-animal-page.component';
+import { LocationButtonComponent } from './components/location-button/location-button.component';
 
 @NgModule({
   declarations: [
@@ -94,6 +95,7 @@ import { SpiritAnimalPageComponent } from './components/spirit-animal-page/spiri
     ColorPersonalityComponent,
     DonutFillingPageComponent,
     SpiritAnimalPageComponent,
+    LocationButtonComponent,
   ],
   imports: [
     FormsModule,

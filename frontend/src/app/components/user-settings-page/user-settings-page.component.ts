@@ -1,22 +1,24 @@
-import { Component } from '@angular/core';
-import { StorageService } from "../../_services/storage.service";
-import { ApiService } from "../../_services/api/api.service";
-import { User } from "../../models/user";
-import { AuthService } from "../../_services/auth.service";
-import { Router } from "@angular/router";
-import { UploadService } from "../../_services/api/upload.service";
-import { Language } from "../../models/language";
-import { LanguageService } from "../../_services/language.service";
-import { Technology } from "../../models/technology";
-import { TechnologyService } from "../../_services/technology.service";
-import { PersonalityService } from "../../_services/personality.service";
-import { Personality } from "../../models/personality";
-import { ColorPersonality } from 'src/app/models/colorPersonality';
-import { ColorPersonalityService } from "../../_services/color-personality.service";
+import {Component} from '@angular/core';
+import {StorageService} from "../../_services/storage.service";
+import {ApiService} from "../../_services/api/api.service";
+import {User} from "../../models/user";
+import {AuthService} from "../../_services/auth.service";
+import {Router} from "@angular/router";
+import {UploadService} from "../../_services/api/upload.service";
+import {Language} from "../../models/language";
+import {LanguageService} from "../../_services/language.service";
+import {Technology} from "../../models/technology";
+import {TechnologyService} from "../../_services/technology.service";
+import {PersonalityService} from "../../_services/personality.service";
+import {Personality} from "../../models/personality";
+import {ColorPersonality} from 'src/app/models/colorPersonality';
+import {ColorPersonalityService} from "../../_services/color-personality.service";
 import {DonutFillingService} from "../../_services/donutFilling.service";
 import {SpiritAnimalService} from "../../_services/spiritAnimal.service";
 import {DonutFilling} from "../../models/donutFilling";
 import {SpiritAnimal} from "../../models/spiritAnimal";
+import {LocationService} from "../../_services/location.service";
+import {Location} from "../../models/location";
 
 @Component({
   selector: 'app-user-settings-page',
@@ -28,7 +30,7 @@ export class UserSettingsPageComponent {
   // @ts-ignore
   selectedFile: File = null;
   profileProgress: number = 0;
-  user: User = { email: "", firstName: "", lastName: "", password: "" };
+  user: User = {email: "", firstName: "", lastName: "", password: ""};
 
   // @ts-ignore
   private oneLineAbout: string;
@@ -40,12 +42,16 @@ export class UserSettingsPageComponent {
   languages: Language[];
   userLanguages: Language[] | undefined;
   unusedLanguages: Language[] | undefined;
-  languageInput: string = "";
 
   // @ts-ignore
   technologies: Technology[];
   userTechnologies: Technology[] | undefined;
   unusedTechnologies: Technology[] | undefined;
+
+  // @ts-ignore
+  locations: Location[];
+  userLocations: Location[] | undefined;
+  unusedLocations: Location[] | undefined;
 
   // @ts-ignore
   personalities: Personality[];
@@ -67,6 +73,7 @@ export class UserSettingsPageComponent {
     private uploadService: UploadService,
     private languageService: LanguageService,
     private technologyService: TechnologyService,
+    private locationService: LocationService,
     private personalityService: PersonalityService,
     private colorPersonalityService: ColorPersonalityService,
     private donutFillingService: DonutFillingService,
@@ -81,6 +88,7 @@ export class UserSettingsPageComponent {
       this.user = user;
       this.userLanguages = user.languages;
       this.userTechnologies = user.technologies;
+      this.userLanguages = user.languages;
       this.profileProgress = this.setProgress();
     });
     this.languageService.getAll().subscribe((languages: Language[]) => {
@@ -89,6 +97,9 @@ export class UserSettingsPageComponent {
     this.technologyService.getAll().subscribe((technologies: Technology[]) => {
       this.technologies = technologies;
     });
+    this.locationService.getAll().subscribe((locations: Location[]) => {
+      this.locations = locations;
+    })
     this.personalityService.getAll().subscribe((personalities: Personality[]) => {
       this.personalities = personalities;
     });
@@ -101,7 +112,6 @@ export class UserSettingsPageComponent {
     this.spiritAnimalService.getAll().subscribe((spiritAnimals: SpiritAnimal[]) => {
       this.spiritAnimals = spiritAnimals;
     });
-    console.log(this.user);
   }
 
   onWorkPreferenceChange() {
@@ -112,25 +122,17 @@ export class UserSettingsPageComponent {
     this.user.workPreference = clickedWorkPreference;
   }
 
-  onPersonalitySelect(event
-    :
-    any
-  ) {
+  onPersonalitySelect(event: any) {
     const selectedPersonalityId = +event.target.value;
     this.user.personality = this.personalities.find(p => p.id === selectedPersonalityId);
   }
 
-  onColorPersonalitySelect(event
-    :
-    any
-  ) {
+  onColorPersonalitySelect(event: any) {
     const selectedColorPersonalityId = +event.target.value;
     this.user.colorPersonality = this.colorPersonalities.find(p => p.id === selectedColorPersonalityId);
   }
 
-  setProgress()
-    :
-    number {
+  setProgress(): number {
     let filledFields: number = 0;
     let totalFields: number = Object.keys(this.user).length;
 
@@ -143,14 +145,8 @@ export class UserSettingsPageComponent {
     return Math.round((filledFields / totalFields) * 100);
   }
 
-  public searchLanguage(key
-    :
-    string
-  ):
-    void {
-    const results
-      :
-      Language[] = [];
+  public searchLanguage(key: string): void {
+    const results: Language[] = [];
 
     for (const language of this.languages) {
       if (language.name.toLowerCase().includes(key.toLowerCase())) {
@@ -160,14 +156,8 @@ export class UserSettingsPageComponent {
     this.unusedLanguages = results;
   }
 
-  public searchTechnology(key
-    :
-    string
-  ):
-    void {
-    const results
-      :
-      Technology[] = [];
+  public searchTechnology(key: string): void {
+    const results: Technology[] = [];
 
     for (const technology of this.technologies) {
       if (technology.name.toLowerCase().includes(key.toLowerCase())) {
@@ -175,6 +165,16 @@ export class UserSettingsPageComponent {
       }
     }
     this.unusedTechnologies = results;
+  }
+
+  public searchLocation(key: string): void {
+    const results: Location[] = [];
+
+    for (const location of this.locations) {
+      if (location.name.toLowerCase().includes((key.toLowerCase()))) {
+        results.push(location);
+      }
+    }
   }
 
   unusedLanguagesHandle() {
@@ -191,18 +191,23 @@ export class UserSettingsPageComponent {
     });
   }
 
-  handleLanguageComponentEmitter(languages
-    :
-    Language[]
-  ) {
+  unusedLocationsHandle() {
+    this.unusedLocations = this.locations.filter(location => {
+      // @ts-ignore
+      return !this.userLocations.some(userLocations => userLocations.name === location.name);
+    });
+  }
+
+  handleLanguageComponentEmitter(languages: Language[]) {
     this.user.languages = languages;
   }
 
-  handleTechnologyComponentEmitter(technologies
-    :
-    Technology[]
-  ) {
+  handleTechnologyComponentEmitter(technologies: Technology[]) {
     this.user.technologies = technologies
+  }
+
+  handleLocationComponentEmitter(locations: Location[]) {
+    this.user.locations = locations
   }
 
   // @ts-ignore
@@ -219,20 +224,14 @@ export class UserSettingsPageComponent {
     );
   }
 
-  deleteAccount()
-    :
-    void {
+  deleteAccount(): void {
     this.apiService.deleteUser().subscribe();
     this.authService.logout();
     this.storageService.logout();
 
     setTimeout(() => {
       window.location.href = ""
-    }
-      ,
-      2000
-    )
-      ;
+    }, 2000);
   }
 
   async updateUser() {
@@ -241,8 +240,7 @@ export class UserSettingsPageComponent {
       firstName,
       lastName,
       phone,
-      location,
-      workLocation,
+      locations,
       oneLineAbout,
       workPreference,
       about,
@@ -261,8 +259,7 @@ export class UserSettingsPageComponent {
       firstName,
       lastName,
       phone,
-      location,
-      workLocation,
+      locations,
       oneLineAbout,
       workPreference,
       about,

@@ -120,7 +120,6 @@ public class User {
         return roles.get(0);
     }
 
-
     public Like getLike() {
         return new Like(this);
     }

@@ -168,11 +168,6 @@
               <input type="text" class="form-control" placeholder="enter phone number" [(ngModel)]="user.phone"
                 name="phone" value="">
             </div>
-            <div class="col-md-12">
-              <label class="labels">Location</label>
-              <input type="text" class="form-control" placeholder="enter location" [(ngModel)]="user.location"
-                name="location" value="">
-            </div>
 
             <div class="col-md-12">
               <label class="labels">One Line About</label>
@@ -287,26 +282,26 @@
 
             <div class="d-flex justify-content-between align-items-center experience my-2"><span>Edit
                 Work Locations</span>
-              <button class="btn border px-3 p-1 add-experience" (click)="unusedTechnologiesHandle()" type="button"
-                data-toggle="modal" data-target="#skillsModal"><i class="fa fa-plus"></i>&nbsp;Locations
+              <button class="btn border px-3 p-1 add-experience" (click)="unusedLocationsHandle()" type="button"
+                data-toggle="modal" data-target="#locationsModal"><i class="fa fa-plus"></i>&nbsp;Locations
               </button>
             </div>
 
             <!-- work location modal -->
 
-            <div class="modal fade" id="skillsModal" tabindex="-1" role="dialog" aria-labelledby="skillsModalLabel"
+            <div class="modal fade" id="locationsModal" tabindex="-1" role="dialog" aria-labelledby="locationsModalLabel"
               aria-hidden="true">
               <div class="modal-dialog" role="document">
                 <div class="modal-content">
                   <div class="modal-header">
-                    <div class="allTechnologies">
+                    <div class="allLocations">
                       <h5 class="modal-title mb-3">Select your Work Location </h5>
-                      <input type="search" (ngModelChange)="searchTechnology(keyTech.value)" #keyTech="ngModel" ngModel
+                      <input type="search" (ngModelChange)="searchLocation(keyLoc.value)" #keyLoc="ngModel" ngModel
                         name="key" class="form-control form-control-dark text-bg-dark" placeholder="Search location..."
                         aria-label="Search">
-                      <app-technology-button *ngFor="let technology of unusedTechnologies" [technology]="technology"
-                        [unusedTechnologies]="unusedTechnologies" [userTechnologies]="userTechnologies"
-                        (technologyComponentEmitter)="handleTechnologyComponentEmitter($event)"></app-technology-button>
+                      <app-location-button *ngFor="let location of unusedLocations" [location]="location"
+                        [unusedLocations]="unusedLocations" [userLocations]="userLocations"
+                        (locationComponentEmitter)="handleLocationComponentEmitter($event)"></app-location-button>
                     </div>
 
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -318,9 +313,9 @@
                   <div class="modal-header">
                     <div class="myTechnologies">
                       <h5 class="modal-title mb-3">Your Locations</h5>
-                      <app-technology-button *ngFor="let technology of userTechnologies" [technology]="technology"
-                        [unusedTechnologies]="unusedTechnologies" [userTechnologies]="userTechnologies"
-                        (technologyComponentEmitter)="handleTechnologyComponentEmitter($event)"></app-technology-button>
+                      <app-location-button *ngFor="let location of userLocations" [location]="location"
+                        [unusedLocations]="unusedLocations" [userLocations]="userLocations"
+                        (locationComponentEmitter)="handleLocationComponentEmitter($event)"></app-location-button>
                     </div>
                   </div>
 
@@ -329,11 +324,9 @@
                       aria-label="Close">Done
                     </button>
                   </div>
-
                 </div>
               </div>
             </div>
-
           </div>
 
           <div class="col-md-12">

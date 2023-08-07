@@ -1,20 +1,21 @@
-import { Injectable } from '@angular/core';
-import { Observable } from "rxjs";
-import { HttpClient, HttpHeaders } from "@angular/common/http";
-import { User } from "../../models/user";
-import { Language } from "../../models/language";
-import { Technology } from "../../models/technology";
-import { Personality } from "../../models/personality";
-import { GlobalConstants } from "../../common/global-constants";
-import { Router } from "@angular/router";
-import { catchError } from 'rxjs/operators';
-import { of } from 'rxjs';
-import { ColorPersonality } from 'src/app/models/colorPersonality';
+import {Injectable} from '@angular/core';
+import {Observable} from "rxjs";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {User} from "../../models/user";
+import {Language} from "../../models/language";
+import {Technology} from "../../models/technology";
+import {Location} from "../../models/location";
+import {Personality} from "../../models/personality";
+import {GlobalConstants} from "../../common/global-constants";
+import {Router} from "@angular/router";
+import {catchError} from 'rxjs/operators';
+import {of} from 'rxjs';
+import {ColorPersonality} from 'src/app/models/colorPersonality';
 
 const prefix = GlobalConstants.prefix;
 
 const httpOptions = {
-  headers: new HttpHeaders({ 'Content-type': 'application/json' })
+  headers: new HttpHeaders({'Content-type': 'application/json'})
 }
 
 @Injectable({
@@ -76,8 +77,7 @@ export class ApiService {
   updateUser(firstName: string,
              lastName: string,
              phone: string | undefined,
-             location: string | undefined,
-             workLocation: string | undefined,
+             locations: Location[] | undefined,
              oneLineAbout: string | undefined,
              workPreference: string | undefined,
              about: string | undefined,
@@ -91,15 +91,13 @@ export class ApiService {
              personality: Personality | undefined,
              colorPersonality: ColorPersonality | undefined,
              yearOfBirth: number | undefined
-
   ): Observable<any> {
 
     return this.http.patch(prefix + "/api/v1/user/people", {
         firstName,
         lastName,
         phone,
-        location,
-        workLocation,
+        locations,
         oneLineAbout,
         workPreference,
         about,
@@ -124,7 +122,9 @@ export class ApiService {
       window.location.href = "admin-board"
     });
   }
+
   checkout(message: any) {
-    this.http.post(prefix + '/api/v1/public/contact', message, httpOptions).subscribe(() => { })
+    this.http.post(prefix + '/api/v1/public/contact', message, httpOptions).subscribe(() => {
+    })
   }
 }
