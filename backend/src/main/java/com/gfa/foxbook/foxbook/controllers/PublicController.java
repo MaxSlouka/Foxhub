@@ -7,6 +7,7 @@ import com.gfa.foxbook.foxbook.models.nonusermodels.Post;
 import com.gfa.foxbook.foxbook.models.User;
 import com.gfa.foxbook.foxbook.services.ColorPersonalityServiceImpl;
 import com.gfa.foxbook.foxbook.services.EmailServiceImpl;
+import com.gfa.foxbook.foxbook.services.interfaces.LocationService;
 import com.gfa.foxbook.foxbook.services.interfaces.PersonalityService;
 import com.gfa.foxbook.foxbook.services.interfaces.PostService;
 import com.gfa.foxbook.foxbook.services.interfaces.UserService;
@@ -30,6 +31,7 @@ public class PublicController {
     private final PostService postService;
     private final PersonalityService personalityService;
     private final ColorPersonalityServiceImpl colorPersonalityService;
+    private final LocationService locationService;
     private final EmailServiceImpl emailService;
 
     @GetMapping("/people")
@@ -98,6 +100,11 @@ public class PublicController {
     @GetMapping("/personalities")
     public ResponseEntity<?> getAllPersonalities() {
         return ResponseEntity.ok(personalityService.getAllPersonalities());
+    }
+
+    @GetMapping("/locations")
+    public ResponseEntity<?> getAllLocations() {
+        return ResponseEntity.ok(locationService.getAllLocations());
     }
 
     @GetMapping("/colorPersonalities")

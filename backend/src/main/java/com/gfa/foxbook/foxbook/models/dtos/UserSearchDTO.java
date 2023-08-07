@@ -22,11 +22,10 @@ public class UserSearchDTO {
     private ColorPersonality colorPersonality;
     private Boolean verified;
     private Role role;
-    private String location;
+    private List<Location> locations;
     private String profilePictureUrl;
     private List<Technology> technologies;
     private List<Language> languages;
-    private String workLocation;
     private WorkPreference workPreference;
     private String oneLineAbout;
 
@@ -43,8 +42,7 @@ public class UserSearchDTO {
         this.colorPersonality = user.getColorPersonality();
         this.verified = user.isVerified();
         this.role = user.getRole();
-        this.location = user.getLocation();
-        this.workLocation = user.getWorkLocation();
+        this.locations = user.getLocations();
         this.workPreference = user.getWorkPreference();
         this.oneLineAbout = user.getOneLineAbout();
     }
