@@ -43,9 +43,6 @@ export class PeoplePageComponent implements OnInit {
   selectedPersonalities: string[] = [];
   selectedColorPersonalities: string[] = [];
 
-
-  // @ts-ignore
-  filterWorkEmploymentStatus: string;
   // @ts-ignore
   filterWorkPrefermentStatus: string;
   filterContentExpanded: boolean = true;
@@ -54,12 +51,10 @@ export class PeoplePageComponent implements OnInit {
   actualLanguageValue: string[] = [];
   actualPersonalityValue: string[] = [];
   actualColorPersonalityValue: string[] = [];
-  actualWorkStatusValue: string = '';
   actualWorkPrefermentValue: string = "";
 
   restPersonalityFilter: User[] = [];
   restColorPersonalityFilter: User[] = [];
-  restOpenToWorkFilter: User[] = [];
   restWorkPrefermentFilter: User[] = [];
   restLanguageFilter: User[] = [];
   restTechnologiesFilter: User[] = [];
@@ -77,7 +72,6 @@ export class PeoplePageComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.filterWorkEmploymentStatus = 'all';
     this.filterWorkPrefermentStatus = "all";
 
     this.showCookiePopup = this.cookieService.get('cookie_consent') !== 'true';
@@ -205,6 +199,10 @@ export class PeoplePageComponent implements OnInit {
     return this.selectedTechnologies.includes(tech.name);
   }
 
+  onWorkStatusChange() {
+    this.allFilters();
+  }
+
   toggleLangSelection(lang: Language) {
     const langName = lang.name;
     const langIndex = this.selectedLanguages.indexOf(langName);
@@ -244,9 +242,6 @@ export class PeoplePageComponent implements OnInit {
     this.allFilters();
   }
 
-  onWorkStatusChange() {
-    this.allFilters();
-  }
 
   // @ts-ignore
   technologiesFilter(users, keys: string[]) {
@@ -319,33 +314,6 @@ export class PeoplePageComponent implements OnInit {
     return actualFilteredUsers;
   }
 
-  openToWorkFilter(users: User[]) {
-    const actualFilteredUsers: User[] = [];
-    this.restOpenToWorkFilter = [];
-
-    for (let user of users) {
-      if (this.filterWorkEmploymentStatus === "open" && user.workStatus === true) {
-        actualFilteredUsers.push(user);
-      }
-      if (this.filterWorkEmploymentStatus === "closed" && user.workStatus === false) {
-        actualFilteredUsers.push(user);
-      }
-      if (this.filterWorkEmploymentStatus === "all") {
-        actualFilteredUsers.push(user)
-      }
-    }
-    if (this.filterWorkEmploymentStatus === "open") {
-      this.actualWorkStatusValue = "true"
-    } else if (this.filterWorkEmploymentStatus === "closed") {
-      this.actualWorkStatusValue = "false"
-    } else {
-      this.actualWorkStatusValue = "all"
-    }
-    this.restOpenToWorkFilter = this.verifiedAndUsersOnly
-      .filter(user => !actualFilteredUsers.includes(user));
-    return actualFilteredUsers;
-  }
-
   workPrefermentFilter(users: User[]) {
     const actualFilteredUsers: User[] = [];
     this.restWorkPrefermentFilter = [];
@@ -383,7 +351,6 @@ export class PeoplePageComponent implements OnInit {
   allFilters() {
     let filteredUsers = [...this.verifiedAndUsersOnly];
 
-    filteredUsers = this.openToWorkFilter(filteredUsers);
     filteredUsers = this.workPrefermentFilter(filteredUsers);
 
 
@@ -452,13 +419,6 @@ export class PeoplePageComponent implements OnInit {
         }
       }
 
-
-      if (this.actualWorkStatusValue !== "all") {
-        if (this.restOpenToWorkFilter.includes(user)) {
-          user.outOfFilters.push(this.actualWorkStatusValue);
-        }
-      }
-
       if (this.actualWorkPrefermentValue !== "all") {
         if (this.restWorkPrefermentFilter.includes(user)) {
           user.outOfFilters.push(this.actualWorkPrefermentValue);
@@ -472,7 +432,6 @@ export class PeoplePageComponent implements OnInit {
   clearAllFilters() {
     this.selectedTechnologies = [];
     this.selectedLanguages = [];
-    this.filterWorkEmploymentStatus = 'all';
     this.filterWorkPrefermentStatus = "all";
     this.selectedPersonalities = [];
     this.selectedColorPersonalities = [];
