@@ -133,8 +133,8 @@
         <!-- work location and preference -->
         <p class="lead mt-4 border-bottom font-weight-bold">Preferred Work Location(s)</p>
         <div class="row mt-2">
-          <div class="col-md-12">
-            <p class="lead" *ngFor="let location of user.locations">{{location.name}}</p>
+          <div class="col-md-12 d-flex flex-wrap">
+            <app-location *ngFor="let location of user.locations" [location]="location"></app-location>
           </div>
         </div>
         <p class="lead mt-4 border-bottom font-weight-bold">Preferred Work Option</p>
