@@ -24,7 +24,6 @@ export interface User {
   instagram?: string,
   linkedin?: string,
   gitHub?: string,
-  workStatus?:boolean;
   optionalPage?: string,
   workLocation?: string,
   oneLineAbout?: string,
