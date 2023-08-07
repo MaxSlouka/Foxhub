@@ -169,7 +169,6 @@ public class UserServiceImpl implements UserService {
         if (userDTO.getColorPersonality() != null) user.setColorPersonality(userDTO.getColorPersonality());
 
         user.setYearOfBirth(userDTO.getYearOfBirth());
-        user.setWorkStatus(userDTO.isWorkStatus());
 
         return userRepository.save(user);
     }

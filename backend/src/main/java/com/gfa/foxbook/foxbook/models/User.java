@@ -48,7 +48,6 @@ public class User {
     private String instagram;
     private String linkedin;
     private String gitHub;
-    private boolean workStatus;
     private String optionalPage;
     private String oneLineAbout;
     private String workLocation;

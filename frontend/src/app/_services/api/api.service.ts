@@ -90,8 +90,7 @@ export class ApiService {
              technologies: Technology[] | undefined,
              personality: Personality | undefined,
              colorPersonality: ColorPersonality | undefined,
-             yearOfBirth: number | undefined,
-             workStatus: boolean | undefined,
+             yearOfBirth: number | undefined
 
   ): Observable<any> {
 
@@ -113,8 +112,7 @@ export class ApiService {
         technologies,
         personality,
         colorPersonality,
-        yearOfBirth,
-        workStatus
+        yearOfBirth
       },
       httpOptions
     );
