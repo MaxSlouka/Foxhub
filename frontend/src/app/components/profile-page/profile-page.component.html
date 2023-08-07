@@ -119,16 +119,10 @@
             <h1 class="display-4 fw-bold text-body-emphasis lh-1 mb-4 userName-desktop">{{ user.firstName }} {{
               user.lastName }}</h1>
           </div>
-          <div class="col-md-12">
-            <label class="labels">Location</label>
-            <p class="lead">{{ user.location }}</p>
-          </div>
         </div>
 
         <!-- about section -->
-        <div class="d-flex justify-content-between align-items-center mb-3">
-          <label class="labels">About</label>
-        </div>
+        <p class="lead mt-4 border-bottom font-weight-bold">About</p>
         <div class="row mt-2">
           <div class="col-md-12">
             <p class="lead one-line-about">{{user.oneLineAbout}}</p>
@@ -137,17 +131,13 @@
         </div>
 
         <!-- work location and preference -->
-        <div class="d-flex justify-content-between align-items-center mb-3">
-          <label class="labels">Preferred Work Location</label>
-        </div>
+        <p class="lead mt-4 border-bottom font-weight-bold">Preferred Work Location(s)</p>
         <div class="row mt-2">
           <div class="col-md-12">
             <p class="lead">{{user.workLocation}}</p>
           </div>
         </div>
-        <div class="d-flex justify-content-between align-items-center mb-3">
-          <label class="labels">Preferred Work Option</label>
-        </div>
+        <p class="lead mt-4 border-bottom font-weight-bold">Preferred Work Option</p>
         <div class="row mt-2">
           <div class="col-md-12">
 
@@ -170,21 +160,33 @@
             </ng-container>
 
           </div>
+
         </div>
 
+        <!-- spirit animal -->
+        <p class="lead mt-4 border-bottom font-weight-bold">Spirit Animal</p>
+        <div class="row mt-2">
+          <div class="col-md-12">
+            <p class="lead">Fox</p>
+          </div>
+        </div>
+
+        <!-- donut filling -->
+        <p class="lead mt-4 border-bottom font-weight-bold">If I were a Donut I would be the Filling</p>
+        <div class="row mt-2">
+          <div class="col-md-12">
+            <p class="lead">Blueberry</p>
+          </div>
+        </div>
 
         <!-- personality section -->
-        <div class="d-flex justify-content-between align-items-center mb-3">
-          <label class="labels">16 Personalities</label>
-        </div>
+        <p class="lead mt-4 border-bottom font-weight-bold">16 Personalities</p>
         <div class="row mt-2">
           <div class="col-md-12">
             <p class="lead">{{user.personality?.name}} - {{user.personality?.description}}</p>
           </div>
         </div>
-        <div class="d-flex justify-content-between align-items-center mb-3">
-          <label class="labels">True Color Personality</label>
-        </div>
+        <p class="lead mt-4 border-bottom font-weight-bold">True Color Personality</p>
         <div class="row mt-2">
           <div class="col-md-12">
             <p class="lead">{{user.colorPersonality?.name}} - {{user.colorPersonality?.description}}</p>
@@ -192,9 +194,7 @@
         </div>
 
         <!-- tech skills section -->
-        <div class="d-flex justify-content-between align-items-center mb-3">
-          <label class="labels">Tech Skills</label>
-        </div>
+        <p class="lead mt-4 border-bottom font-weight-bold">Tech Skills</p>
         <div class="row mt-2">
           <div class="col-md-12 d-flex flex-wrap">
             <app-technologies *ngFor="let technology of user.technologies" [technology]="technology">
@@ -203,9 +203,7 @@
         </div>
 
         <!-- languages section -->
-        <div class="d-flex justify-content-between align-items-center mb-3">
-          <label class="labels">Languages</label>
-        </div>
+        <p class="lead mt-4 border-bottom font-weight-bold">Languages</p>
         <div class="row mt-2">
           <div class="col-md-12 d-flex flex-wrap">
             <app-language *ngFor="let language of user.languages" [language]="language">
