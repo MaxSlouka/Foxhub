@@ -13,6 +13,10 @@ import { PersonalityService } from "../../_services/personality.service";
 import { Personality } from "../../models/personality";
 import { ColorPersonality } from 'src/app/models/colorPersonality';
 import { ColorPersonalityService } from "../../_services/color-personality.service";
+import {DonutFillingService} from "../../_services/donutFilling.service";
+import {SpiritAnimalService} from "../../_services/spiritAnimal.service";
+import {DonutFilling} from "../../models/donutFilling";
+import {SpiritAnimal} from "../../models/spiritAnimal";
 
 @Component({
   selector: 'app-user-settings-page',
@@ -49,6 +53,12 @@ export class UserSettingsPageComponent {
   // @ts-ignore
   colorPersonalities: ColorPersonality[];
 
+  // @ts-ignore
+  donutFillings: DonutFilling[];
+
+  // @ts-ignore
+  spiritAnimals: SpiritAnimal[];
+
   constructor(
     private storageService: StorageService,
     private apiService: ApiService,
@@ -58,7 +68,9 @@ export class UserSettingsPageComponent {
     private languageService: LanguageService,
     private technologyService: TechnologyService,
     private personalityService: PersonalityService,
-    private colorPersonalityService: ColorPersonalityService
+    private colorPersonalityService: ColorPersonalityService,
+    private donutFillingService: DonutFillingService,
+    private spiritAnimalService: SpiritAnimalService
   ) {
   }
 
@@ -82,6 +94,12 @@ export class UserSettingsPageComponent {
     });
     this.colorPersonalityService.getAll().subscribe((colorPersonalities: ColorPersonality[]) => {
       this.colorPersonalities = colorPersonalities;
+    });
+    this.donutFillingService.getAll().subscribe((donutFillings: DonutFilling[]) => {
+      this.donutFillings = donutFillings;
+    });
+    this.spiritAnimalService.getAll().subscribe((spiritAnimals: SpiritAnimal[]) => {
+      this.spiritAnimals = spiritAnimals;
     });
     console.log(this.user);
   }

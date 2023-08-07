@@ -1,7 +1,4 @@
 package com.gfa.foxbook.foxbook.models;
-import com.gfa.foxbook.foxbook.models.User;
-import com.gfa.foxbook.foxbook.models.nonusermodels.*;
-
 import com.gfa.foxbook.foxbook.models.nonusermodels.*;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
@@ -96,6 +93,23 @@ public class User {
             inverseJoinColumns = {@JoinColumn(name = "colorPersonality_id", referencedColumnName = "id")}
     )
     private ColorPersonality colorPersonality;
+
+    @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
+    @JoinTable(
+            name = "users_spiritAnimal",
+            joinColumns = {@JoinColumn(name = "users_id", referencedColumnName = "id")},
+            inverseJoinColumns = {@JoinColumn(name = "spiritAnimal_id", referencedColumnName = "id")}
+    )
+    private SpiritAnimal spiritAnimals;
+
+
+    @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
+    @JoinTable(
+            name = "users_donutFilling",
+            joinColumns = {@JoinColumn(name = "users_id", referencedColumnName = "id")},
+            inverseJoinColumns = {@JoinColumn(name = "donutFilling_id", referencedColumnName = "id")}
+    )
+    private DonutFilling donutFillings;
 
     public boolean isAdmin() {
         return roles.stream().anyMatch(role -> role.getName().equals("ADMIN"));
