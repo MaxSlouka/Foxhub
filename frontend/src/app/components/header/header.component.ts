@@ -34,6 +34,17 @@ export class HeaderComponent implements OnInit, OnDestroy {
     private apiService: ApiService,
     private cartService: CartService
   ) {
+
+    document.addEventListener("click", (event: Event) => {
+      const target = event.target as HTMLElement;
+      const contentContainer = document.querySelector(".content-container");
+      const navbar = document.querySelector(".navbar");
+
+      if (!(contentContainer?.contains(target) || navbar?.contains(target))) {
+        this.isExpanded = false;
+      }
+    });
+
   }
 
   ngOnInit(): void {
@@ -53,8 +64,11 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    // Unsubscribe from the observable to avoid memory leaks
     this.cartItemsSubscription.unsubscribe();
+    
+    if (this.cartItemsSubscription) {
+      this.cartItemsSubscription.unsubscribe();
+    }
   }
 
   toggleNavbar() {
