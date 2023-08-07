@@ -53,7 +53,11 @@
           <p class="lead">{{user.oneLineAbout}}</p>
 
           <label class="labels">Preferred Work Location(s)</label>
-          <p class="lead">Praha, Olomouc</p>
+          <div class="row mt-2">
+            <div class="col-md-12 d-flex flex-wrap">
+              <app-location *ngFor="let location of user.locations" [location]="location"></app-location>
+            </div>
+          </div>
 
           <label class="labels">Preferred Work Option</label>
           <div>
@@ -85,10 +89,10 @@
           <p class="lead ">{{user.colorPersonality?.name}} - {{user.colorPersonality?.description}}</p>
 
           <label class="labels">Spirit Animal</label>
-          <p class="lead ">Fox</p>
+          <p class="lead">{{user.spiritAnimal?.name}} - {{user.spiritAnimal?.description}}</p>
 
           <label class="labels">Donut Filling</label>
-          <p class="lead ">Blueberry</p>
+          <p class="lead">{{user.donutFilling?.base}} - {{user.donutFilling?.topping}}</p>
 
           <label class="labels">Tech Skills</label>
           <div class="row mt-2">
