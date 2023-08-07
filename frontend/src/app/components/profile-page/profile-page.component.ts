@@ -34,7 +34,7 @@ export class ProfilePageComponent {
 
   constructor(
     private profileService: ProfileService,
-    private activatedroute: ActivatedRoute,
+    private activatedRoute: ActivatedRoute,
     private storageService: StorageService,
     private cartService: CartService,
     private router: Router
@@ -58,7 +58,7 @@ export class ProfilePageComponent {
   }
 
   ngOnInit() {
-    this.username = this.activatedroute.snapshot.paramMap.get("username");
+    this.username = this.activatedRoute.snapshot.paramMap.get("username");
     this.profileService.getUser(this.username).subscribe(user => {
       this.user = user;
       const cartItems = this.cartService.getCartItems();
