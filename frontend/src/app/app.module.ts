@@ -49,6 +49,7 @@ import { AdminBoardComponent } from './components/admin-board/admin-board.compon
 import { PersonalityTrueColorComponent } from './components/personality-true-color-page/personality-true-color.component';
 import { ColorPersonalityComponent } from './components/color-personality/color-personality.component';
 import { DonutFillingPageComponent } from './components/donut-filling-page/donut-filling-page.component';
+import { SpiritAnimalPageComponent } from './components/spirit-animal-page/spirit-animal-page.component';
 
 @NgModule({
   declarations: [
@@ -92,6 +93,7 @@ import { DonutFillingPageComponent } from './components/donut-filling-page/donut
     PersonalityTrueColorComponent,
     ColorPersonalityComponent,
     DonutFillingPageComponent,
+    SpiritAnimalPageComponent,
   ],
   imports: [
     FormsModule,
