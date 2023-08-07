@@ -1,8 +1,8 @@
-import {HttpClient} from "@angular/common/http";
-import {GlobalConstants} from "../common/global-constants";
-import {Observable} from "rxjs";
-import {DonutFilling} from "../models/donutFilling";
-import {Injectable} from "@angular/core";
+import { HttpClient } from "@angular/common/http";
+import { GlobalConstants } from "../common/global-constants";
+import { Observable } from "rxjs";
+import { DonutFilling } from "../models/donutFilling";
+import { Injectable } from "@angular/core";
 
 const prefix = GlobalConstants.prefix;
 
@@ -11,7 +11,7 @@ const prefix = GlobalConstants.prefix;
 })
 
 export class DonutFillingService {
-  readonly urlDonutFilling: string = prefix + "/api/v1/public/donutFilling";
+  readonly urlDonutFilling: string = prefix + "/api/v1/public/donutFillings";
   constructor(private http: HttpClient) { }
 
   getAll(): Observable<DonutFilling[]> {
