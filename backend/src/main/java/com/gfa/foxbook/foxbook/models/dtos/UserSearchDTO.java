@@ -30,6 +30,8 @@ public class UserSearchDTO {
     private String workLocation;
     private WorkPreference workPreference;
     private String oneLineAbout;
+    private DonutFilling donutFilling;
+    private SpiritAnimal spiritAnimal;
 
     public UserSearchDTO(User user) {
         this.firstName = user.getFirstName();
@@ -49,5 +51,7 @@ public class UserSearchDTO {
         this.workLocation = user.getWorkLocation();
         this.workPreference = user.getWorkPreference();
         this.oneLineAbout = user.getOneLineAbout();
+        this.donutFilling = user.getDonutFillings();
+        this.spiritAnimal = user.getSpiritAnimals();
     }
 }
