@@ -18,10 +18,14 @@ export class LocationButtonComponent {
     this.locationComponentEmitter.emit(this.userLocations);
   }
 
+  ngOnInit(): void {
+    console.log(this.location.name)
+  }
+
   switchLocation() {
     if (this.userLocations?.some(userLocation =>
       userLocation.name === this.location.name)) {
-      this.switchLanguageFromUserToUnused();
+      this.switchLocationFromUserToUnused();
     } else {
       this.switchLocationFromUnusedToUser();
     }
@@ -29,7 +33,7 @@ export class LocationButtonComponent {
   }
 
   switchLocationFromUnusedToUser() {
-    // @ts-ignore
+   //@ts-ignore
     for (const location of this.unusedLocations) {
       if (location.name === this.location.name) {
         this.userLocations?.push(location);
@@ -44,13 +48,13 @@ export class LocationButtonComponent {
     }
   }
 
-  switchLanguageFromUserToUnused() {
+  switchLocationFromUserToUnused() {
     //@ts-ignore
     for (const location of this.userLocations) {
       if (location.name === this.location.name) {
         this.unusedLocations?.push(location);
         // @ts-ignore
-        const index = this.userLocation.indexOf(location);
+        const index = this.userLocations.indexOf(location);
         if (index !== -1) {
           // @ts-ignore
           this.userLocations.splice(index, 1);

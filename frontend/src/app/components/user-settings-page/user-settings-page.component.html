@@ -13,7 +13,7 @@
     </div>
     <div class="progress my-4">
       <div class="progress-bar bg-success" role="progressbar" [style.width.%]="profileProgress" aria-valuemin="0"
-        aria-valuemax="100"></div>
+           aria-valuemax="100"></div>
     </div>
   </div>
   <div class="d-flex flex-column justify-content-center align-items-center">
@@ -29,7 +29,7 @@
     <div class="col-md-3 border-right">
       <div class="d-flex flex-column align-items-center text-center p-3 py-2">
         <img *ngIf="user.profilePictureUrl" class="rounded-circle mt-2" width=150 height=150
-          ngSrc="{{  user.profilePictureUrl  }}" alt="profile picture" data-toggle="modal" data-target="#imgModal">
+             ngSrc="{{  user.profilePictureUrl  }}" alt="profile picture" data-toggle="modal" data-target="#imgModal">
 
         <span class="font-weight-bold my-4">{{user.firstName}} {{user.lastName}}</span>
         <span class="text-black-50">{{user.email}}</span>
@@ -50,11 +50,11 @@
             </button>
           </div>
           <div class="mt-5 mb-5 text-center">
-            <input type="file" (change)="onFileSelected($event)" />
+            <input type="file" (change)="onFileSelected($event)"/>
           </div>
           <div class="text-center">
             <button (click)="onUpload()" class="btn btn-primary profile-button" type="button" data-toggle="modal"
-              data-target="#imgModal">Upload picture
+                    data-target="#imgModal">Upload picture
             </button>
           </div>
         </div>
@@ -74,11 +74,11 @@
             </button>
           </div>
           <div class="mt-5 mb-5 text-center">
-            <input type="file" (change)="onFileSelected($event)" />
+            <input type="file" (change)="onFileSelected($event)"/>
           </div>
           <div class="text-center">
             <button (click)="onUpload()" class="btn btn-primary profile-button" type="button" data-toggle="modal"
-              data-target="#imgModal">Upload picture
+                    data-target="#imgModal">Upload picture
             </button>
           </div>
         </div>
@@ -99,16 +99,21 @@
 
           <div class="row mt-2">
             <div class="col-md-6"><label class="labels">First Name</label><input type="text" class="form-control"
-                [(ngModel)]="user.firstName" name="firstName" placeholder="first name" value="">
+                                                                                 [(ngModel)]="user.firstName"
+                                                                                 name="firstName"
+                                                                                 placeholder="first name" value="">
             </div>
             <div class="col-md-6"><label class="labels">Last Name</label><input type="text" class="form-control"
-                [(ngModel)]="user.lastName" name="lastName" value="" placeholder="last name"></div>
+                                                                                [(ngModel)]="user.lastName"
+                                                                                name="lastName" value=""
+                                                                                placeholder="last name"></div>
           </div>
 
           <div class="row mt-2">
             <div class="col-md-12">
               <label class="labels">Year of birth</label><input type="number" class="form-control"
-                [(ngModel)]="user.yearOfBirth" name="yearOfBirth" placeholder="enter year" value="">
+                                                                [(ngModel)]="user.yearOfBirth" name="yearOfBirth"
+                                                                placeholder="enter year" value="">
             </div>
           </div>
 
@@ -117,13 +122,13 @@
           <p class="lead mt-4 border-bottom font-weight-bold">Personality</p>
 
           <p class="lead mt-4 font-weight-bold">16 Personalities <a href="/16personalities"><i
-                class="bi bi-question-circle" title="16 Personalities Test"></i></a></p>
+            class="bi bi-question-circle" title="16 Personalities Test"></i></a></p>
           <div class="row mt-2">
             <div class="col-md-12">
 
               <div class="d-flex justify-content-start">
                 <select class="btn btn-outline-primary dropdown-toggle mt-2 mr-2" aria-label="Default select example"
-                  (change)="onPersonalitySelect($event)">
+                        (change)="onPersonalitySelect($event)">
                   <option selected>Choose personality</option>
                   <option *ngFor="let personality of personalities" [value]="personality.id">{{personality.name}}
                   </option>
@@ -132,19 +137,19 @@
 
               <div class="d-flex justify-content-start">
                 <a href="https://www.16personalities.com/" class="btn btn-outline-primary mt-2 mr-2" role="button"
-                  aria-disabled="true">Test Here</a>
+                   aria-disabled="true">Test Here</a>
               </div>
             </div>
           </div>
 
           <p class="lead mt-4 font-weight-bold">True Color Personality <a href="/color-personality-test"><i
-                class="bi bi-question-circle" title="True Color Personality Test"></i></a></p>
+            class="bi bi-question-circle" title="True Color Personality Test"></i></a></p>
           <div class="row mt-2">
             <div class="col-md-12">
 
               <div class="d-flex justify-content-start">
                 <select class="btn btn-outline-primary dropdown-toggle mt-2 mr-2" aria-label="Default select example"
-                  (change)="onColorPersonalitySelect($event)">
+                        (change)="onColorPersonalitySelect($event)">
                   <option selected>Choose personality</option>
                   <option *ngFor="let colorPersonality of colorPersonalities" [value]="colorPersonality.id">
                     {{colorPersonality.name}}
@@ -154,7 +159,7 @@
 
               <div class="d-flex justify-content-start">
                 <a href="https://www.colorpersonalitytest.net/" class="btn btn-outline-primary mt-2 mr-2" role="button"
-                  aria-disabled="true">Test Here</a>
+                   aria-disabled="true">Test Here</a>
               </div>
             </div>
           </div>
@@ -166,19 +171,20 @@
             <div class="col-md-12">
               <label class="labels">Phone Number</label>
               <input type="text" class="form-control" placeholder="enter phone number" [(ngModel)]="user.phone"
-                name="phone" value="">
+                     name="phone" value="">
             </div>
 
             <div class="col-md-12">
               <label class="labels">One Line About</label>
               <textarea type="text" class="form-control preformatted-text" [(ngModel)]="user.oneLineAbout"
-                name="oneLineAbout" placeholder="Describe yourself in one line..." cols="30" rows="2"></textarea>
+                        name="oneLineAbout" placeholder="Describe yourself in one line..." cols="30"
+                        rows="2"></textarea>
             </div>
 
             <div class="col-md-12">
               <label class="labels">About</label>
               <textarea type="text" class="form-control preformatted-text" [(ngModel)]="user.about" name="about"
-                placeholder="write something about you..." cols="30" rows="5"></textarea>
+                        placeholder="write something about you..." cols="30" rows="5"></textarea>
             </div>
           </div>
 
@@ -186,7 +192,8 @@
 
           <p class="lead mt-4 border-bottom font-weight-bold">Fun Facts</p>
           <p class="lead mt-4 font-weight-bold">Spirit Animal <a href="/spirit-animal"><i class="bi bi-question-circle"
-                title="Spirit Animal"></i></a></p>
+                                                                                          title="Spirit Animal"></i></a>
+          </p>
           <div class="row mt-2">
             <div class="col-md-12">
 
@@ -200,14 +207,16 @@
               </div>
 
               <div class="d-flex justify-content-start">
-                <a href="https://themindfool.com/spirit-animal-list/" class="btn btn-outline-primary mt-2 mr-2" role="button"
-                  aria-disabled="true">Test Here</a>
+                <a href="https://themindfool.com/spirit-animal-list/" class="btn btn-outline-primary mt-2 mr-2"
+                   role="button"
+                   aria-disabled="true">Test Here</a>
               </div>
             </div>
           </div>
 
           <p class="lead mt-4 font-weight-bold">Donut Filling <a href="/donut-filling"><i class="bi bi-question-circle"
-                title="Donut FIlling"></i></a></p>
+                                                                                          title="Donut FIlling"></i></a>
+          </p>
           <div class="row mt-2">
             <div class="col-md-12">
 
@@ -221,7 +230,9 @@
               </div>
 
               <div class="d-flex justify-content-start">
-                <a href="https://www.buzzfeed.com/hannahbrudney1/answer-these-random-questions-to-find-out-what-dou-ejhuynyt66" class="btn btn-outline-primary mt-2 mr-2" role="button"
+                <a
+                  href="https://www.buzzfeed.com/hannahbrudney1/answer-these-random-questions-to-find-out-what-dou-ejhuynyt66"
+                  class="btn btn-outline-primary mt-2 mr-2" role="button"
                   aria-disabled="true">Test Here</a>
               </div>
             </div>
@@ -231,16 +242,17 @@
 
           <div class="mt-5 text-center">
             <button class="btn btn-primary profile-button my-2 mx-2" type="button" data-toggle="modal"
-              data-target="#addModal">Save Profile</button>
+                    data-target="#addModal">Save Profile
+            </button>
             <a routerLink="/change-password" class="btn btn-outline-primary my-2 mx-2" role="button"
-              aria-disabled="true">Change Password</a>
+               aria-disabled="true">Change Password</a>
             <a routerLink="/" class="btn btn-outline-secondary my-2 mx-2" role="button" aria-disabled="true">Leave</a>
           </div>
 
           <!-- save profile modal -->
 
           <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addModalLabel"
-            aria-hidden="true">
+               aria-hidden="true">
             <div class="modal-dialog" role="document">
               <div class="modal-content modal-save">
 
@@ -256,7 +268,7 @@
                 </div>
                 <div class="text-center">
                   <button class="btn btn-primary profile-button" type="submit" data-toggle="modal"
-                    data-target="#addModal">Save profile
+                          data-target="#addModal">Save profile
                   </button>
                 </div>
               </div>
@@ -283,25 +295,27 @@
             <div class="d-flex justify-content-between align-items-center experience my-2"><span>Edit
                 Work Locations</span>
               <button class="btn border px-3 p-1 add-experience" (click)="unusedLocationsHandle()" type="button"
-                data-toggle="modal" data-target="#locationsModal"><i class="fa fa-plus"></i>&nbsp;Locations
+                      data-toggle="modal" data-target="#locationsModal"><i class="fa fa-plus"></i>&nbsp;Locations
               </button>
             </div>
 
             <!-- work location modal -->
 
-            <div class="modal fade" id="locationsModal" tabindex="-1" role="dialog" aria-labelledby="locationsModalLabel"
-              aria-hidden="true">
+            <div class="modal fade" id="locationsModal" tabindex="-1" role="dialog"
+                 aria-labelledby="locationsModalLabel"
+                 aria-hidden="true">
               <div class="modal-dialog" role="document">
                 <div class="modal-content">
                   <div class="modal-header">
                     <div class="allLocations">
                       <h5 class="modal-title mb-3">Select your Work Location </h5>
                       <input type="search" (ngModelChange)="searchLocation(keyLoc.value)" #keyLoc="ngModel" ngModel
-                        name="key" class="form-control form-control-dark text-bg-dark" placeholder="Search location..."
-                        aria-label="Search">
+                             name="key" class="form-control form-control-dark text-bg-dark"
+                             placeholder="Search location..."
+                             aria-label="Search">
                       <app-location-button *ngFor="let location of unusedLocations" [location]="location"
-                        [unusedLocations]="unusedLocations" [userLocations]="userLocations"
-                        (locationComponentEmitter)="handleLocationComponentEmitter($event)"></app-location-button>
+                                           [unusedLocations]="unusedLocations" [userLocations]="userLocations"
+                                           (locationComponentEmitter)="handleLocationComponentEmitter($event)"></app-location-button>
                     </div>
 
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -313,15 +327,18 @@
                   <div class="modal-header">
                     <div class="myTechnologies">
                       <h5 class="modal-title mb-3">Your Locations</h5>
-                      <app-location-button *ngFor="let location of userLocations" [location]="location"
-                        [unusedLocations]="unusedLocations" [userLocations]="userLocations"
-                        (locationComponentEmitter)="handleLocationComponentEmitter($event)"></app-location-button>
+                      <app-location-button *ngFor="let location of userLocations"
+                                           [location]="location"
+                                           [unusedLocations]="unusedLocations"
+                                           [userLocations]="userLocations"
+                                           (locationComponentEmitter)="handleLocationComponentEmitter($event)">
+                      </app-location-button>
                     </div>
                   </div>
 
                   <div class="text-center">
                     <button class="btn btn-primary profile-button" type="button" data-dismiss="modal"
-                      aria-label="Close">Done
+                            aria-label="Close">Done
                     </button>
                   </div>
                 </div>
@@ -335,7 +352,7 @@
             <div class="list-group">
               <label class="list-group-item d-flex gap-2 pl-5" for="officeRadio">
                 <input class="form-check-input flex-shrink-0" type="radio" name="workPreference" value="OFFICE"
-                  [(ngModel)]="user.workPreference" (ngModelChange)="onWorkPreferenceChange()" id="officeRadio">
+                       [(ngModel)]="user.workPreference" (ngModelChange)="onWorkPreferenceChange()" id="officeRadio">
                 <span>
                   Office
                   <small class="d-block text-body-secondary">I prefer working from office.</small>
@@ -343,7 +360,7 @@
               </label>
               <label class="list-group-item d-flex gap-2 pl-5" for="remoteRadio">
                 <input class="form-check-input flex-shrink-0" type="radio" name="workPreference" value="REMOTE"
-                  [(ngModel)]="user.workPreference" (ngModelChange)="onWorkPreferenceChange()" id="remoteRadio">
+                       [(ngModel)]="user.workPreference" (ngModelChange)="onWorkPreferenceChange()" id="remoteRadio">
                 <span>
                   Remote
                   <small class="d-block text-body-secondary">I prefer working from Home.</small>
@@ -351,7 +368,7 @@
               </label>
               <label class="list-group-item d-flex gap-2 pl-5" for="combinedRadio">
                 <input class="form-check-input flex-shrink-0" type="radio" name="workPreference" value="COMBINED"
-                  [(ngModel)]="user.workPreference" (ngModelChange)="onWorkPreferenceChange()" id="combinedRadio">
+                       [(ngModel)]="user.workPreference" (ngModelChange)="onWorkPreferenceChange()" id="combinedRadio">
                 <span>
                   Combined
                   <small class="d-block text-body-secondary">I'd like to work partly from office and partly from
@@ -371,16 +388,25 @@
         <div class="row">
 
           <div class="col-md-12"><label class="labels">Github</label><input type="text" class="form-control"
-              [(ngModel)]="user.gitHub" name="github" placeholder="Github" value=""></div>
+                                                                            [(ngModel)]="user.gitHub" name="github"
+                                                                            placeholder="Github" value=""></div>
           <div class="col-md-12"><label class="labels">LinkedIn</label><input type="text" class="form-control"
-              [(ngModel)]="user.linkedin" name="linkedin" placeholder="LinkedIn" value=""></div>
+                                                                              [(ngModel)]="user.linkedin"
+                                                                              name="linkedin" placeholder="LinkedIn"
+                                                                              value=""></div>
           <div class="col-md-12"><label class="labels">Facebook</label><input type="text" class="form-control"
-              [(ngModel)]="user.facebook" name="facebook" placeholder="Facebook" value=""></div>
+                                                                              [(ngModel)]="user.facebook"
+                                                                              name="facebook" placeholder="Facebook"
+                                                                              value=""></div>
           <div class="col-md-12"><label class="labels">Instagram</label><input type="text" class="form-control"
-              [(ngModel)]="user.instagram" name="instagram" placeholder="Instagram" value="">
+                                                                               [(ngModel)]="user.instagram"
+                                                                               name="instagram" placeholder="Instagram"
+                                                                               value="">
           </div>
           <div class="col-md-12"><label class="labels">Your Webpage</label><input type="text" class="form-control"
-              [(ngModel)]="user.optionalPage" name="optionalPage" placeholder="Your Webpage" value="">
+                                                                                  [(ngModel)]="user.optionalPage"
+                                                                                  name="optionalPage"
+                                                                                  placeholder="Your Webpage" value="">
           </div>
         </div>
 
@@ -390,25 +416,26 @@
         <div class="d-flex justify-content-between align-items-center experience my-2"><span>Edit
             Skills</span>
           <button class="btn border px-3 p-1 add-experience" (click)="unusedTechnologiesHandle()" type="button"
-            data-toggle="modal" data-target="#skillsModal"><i class="fa fa-plus"></i>&nbsp;Skill
+                  data-toggle="modal" data-target="#skillsModal"><i class="fa fa-plus"></i>&nbsp;Skill
           </button>
         </div>
 
         <!-- skills settings modal -->
 
         <div class="modal fade" id="skillsModal" tabindex="-1" role="dialog" aria-labelledby="skillsModalLabel"
-          aria-hidden="true">
+             aria-hidden="true">
           <div class="modal-dialog" role="document">
             <div class="modal-content">
               <div class="modal-header">
                 <div class="allTechnologies">
                   <h5 class="modal-title mb-3">Select your skill </h5>
                   <input type="search" (ngModelChange)="searchTechnology(keyTech.value)" #keyTech="ngModel" ngModel
-                    name="key" class="form-control form-control-dark text-bg-dark" placeholder="Search technology..."
-                    aria-label="Search">
+                         name="key" class="form-control form-control-dark text-bg-dark"
+                         placeholder="Search technology..."
+                         aria-label="Search">
                   <app-technology-button *ngFor="let technology of unusedTechnologies" [technology]="technology"
-                    [unusedTechnologies]="unusedTechnologies" [userTechnologies]="userTechnologies"
-                    (technologyComponentEmitter)="handleTechnologyComponentEmitter($event)"></app-technology-button>
+                                         [unusedTechnologies]="unusedTechnologies" [userTechnologies]="userTechnologies"
+                                         (technologyComponentEmitter)="handleTechnologyComponentEmitter($event)"></app-technology-button>
                 </div>
 
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -421,14 +448,14 @@
                 <div class="myTechnologies">
                   <h5 class="modal-title mb-3">Your Skills</h5>
                   <app-technology-button *ngFor="let technology of userTechnologies" [technology]="technology"
-                    [unusedTechnologies]="unusedTechnologies" [userTechnologies]="userTechnologies"
-                    (technologyComponentEmitter)="handleTechnologyComponentEmitter($event)"></app-technology-button>
+                                         [unusedTechnologies]="unusedTechnologies" [userTechnologies]="userTechnologies"
+                                         (technologyComponentEmitter)="handleTechnologyComponentEmitter($event)"></app-technology-button>
                 </div>
               </div>
 
               <div class="text-center">
                 <button class="btn btn-primary profile-button" type="button" data-dismiss="modal"
-                  aria-label="Close">Done
+                        aria-label="Close">Done
                 </button>
               </div>
 
@@ -441,26 +468,26 @@
         <div class="d-flex justify-content-between align-items-center experience my-2"><span>Edit
             languages</span>
           <button class="btn border px-3 p-1 add-experience" (click)="unusedLanguagesHandle()" type="button"
-            data-toggle="modal" data-target="#languagesModal"><i class="fa fa-plus"></i>&nbsp;Language
+                  data-toggle="modal" data-target="#languagesModal"><i class="fa fa-plus"></i>&nbsp;Language
           </button>
         </div>
 
         <!-- languages settings modal -->
 
         <div class="modal fade" id="languagesModal" tabindex="-1" role="dialog" aria-labelledby="languagesModalLabel"
-          aria-hidden="true">
+             aria-hidden="true">
           <div class="modal-dialog" role="document">
             <div class="modal-content">
               <div class="modal-header">
                 <div class="allTechnologies">
                   <h5 class="modal-title mb-3" id="languagesModalLabel">Languages</h5>
                   <input type="search" (ngModelChange)="searchLanguage(keyLang.value)" #keyLang="ngModel" ngModel
-                    name="key" class="form-control form-control-dark text-bg-dark"
-                    placeholder="Search by name or technology..." aria-label="Search">
+                         name="key" class="form-control form-control-dark text-bg-dark"
+                         placeholder="Search by name or technology..." aria-label="Search">
 
                   <app-language-button *ngFor="let language of unusedLanguages" [language]="language"
-                    [unusedLanguages]="unusedLanguages" [userLanguages]="userLanguages"
-                    (languageComponentEmitter)="handleLanguageComponentEmitter($event)"></app-language-button>
+                                       [unusedLanguages]="unusedLanguages" [userLanguages]="userLanguages"
+                                       (languageComponentEmitter)="handleLanguageComponentEmitter($event)"></app-language-button>
                 </div>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
@@ -471,14 +498,14 @@
                 <div class="myTechnologies">
                   <h5>Your Languages</h5>
                   <app-language-button *ngFor="let language of userLanguages" [language]="language"
-                    [unusedLanguages]="unusedLanguages" [userLanguages]="userLanguages"
-                    (languageComponentEmitter)="handleLanguageComponentEmitter($event)"></app-language-button>
+                                       [unusedLanguages]="unusedLanguages" [userLanguages]="userLanguages"
+                                       (languageComponentEmitter)="handleLanguageComponentEmitter($event)"></app-language-button>
                 </div>
               </div>
 
               <div class="text-center">
                 <button class="btn btn-primary profile-button" type="button" data-dismiss="modal"
-                  aria-label="Close">Done
+                        aria-label="Close">Done
 
                 </button>
               </div>
@@ -490,7 +517,7 @@
 
         <div class="mt-5 text-center">
           <button class="btn btn-danger profile-button profile-delete-btn" type="button" data-toggle="modal"
-            data-target="#exampleModal">Delete
+                  data-target="#exampleModal">Delete
             Profile
           </button>
         </div>
@@ -498,7 +525,7 @@
         <!-- delete profile modal -->
 
         <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-          aria-hidden="true">
+             aria-hidden="true">
           <div class="modal-dialog" role="document">
             <div class="modal-content modal-delete">
               <div class="modal-header border-bottom">
@@ -514,7 +541,7 @@
               </div>
               <div class="text-center">
                 <button (click)="deleteAccount()" class="btn btn-danger profile-button profile-delete-btn" type="button"
-                  data-toggle="modal" data-target="#exampleModal">Delete
+                        data-toggle="modal" data-target="#exampleModal">Delete
                   Profile
                 </button>
               </div>

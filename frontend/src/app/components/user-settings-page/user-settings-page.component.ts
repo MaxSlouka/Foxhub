@@ -88,6 +88,7 @@ export class UserSettingsPageComponent {
       this.user = user;
       this.userLanguages = user.languages;
       this.userTechnologies = user.technologies;
+      this.userLocations = user.locations;
       this.profileProgress = this.setProgress();
     });
     this.languageService.getAll().subscribe((languages: Language[]) => {
