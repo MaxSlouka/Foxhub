@@ -1,4 +1,3 @@
-
 a {
     margin-right: 1rem;
     margin-top: 1rem;
@@ -13,6 +12,16 @@ img {
 }
 
 @media (max-width: 768px) {
+
+    .upper-container {
+        margin-top: 0!important;
+        padding-top: 0!important;
+    }
+
+    .upper-container .row {
+        padding-top: 0!important;
+    }
+
     .main-container .row {
         flex-wrap: wrap;
     }

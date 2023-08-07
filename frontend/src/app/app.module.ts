@@ -48,6 +48,9 @@ import { RevealWithDelayDirective } from './directives/reveal-with-delay.directi
 import { AdminBoardComponent } from './components/admin-board/admin-board.component';
 import { PersonalityTrueColorComponent } from './components/personality-true-color-page/personality-true-color.component';
 import { ColorPersonalityComponent } from './components/color-personality/color-personality.component';
+import { DonutFillingPageComponent } from './components/donut-filling-page/donut-filling-page.component';
+import { SpiritAnimalPageComponent } from './components/spirit-animal-page/spirit-animal-page.component';
+import { LocationButtonComponent } from './components/location-button/location-button.component';
 
 @NgModule({
   declarations: [
@@ -90,6 +93,9 @@ import { ColorPersonalityComponent } from './components/color-personality/color-
     AdminBoardComponent,
     PersonalityTrueColorComponent,
     ColorPersonalityComponent,
+    DonutFillingPageComponent,
+    SpiritAnimalPageComponent,
+    LocationButtonComponent,
   ],
   imports: [
     FormsModule,

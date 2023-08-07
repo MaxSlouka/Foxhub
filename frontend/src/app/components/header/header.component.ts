@@ -1,10 +1,10 @@
-import {Component, OnInit, OnDestroy} from '@angular/core';
-import {AuthService} from "../../_services/auth.service";
-import {StorageService} from "../../_services/storage.service";
-import {User} from "../../models/user";
-import {ApiService} from "../../_services/api/api.service";
-import {CartService} from "../../_services/cart.service";
-import {Subscription} from "rxjs";
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { AuthService } from "../../_services/auth.service";
+import { StorageService } from "../../_services/storage.service";
+import { User } from "../../models/user";
+import { ApiService } from "../../_services/api/api.service";
+import { CartService } from "../../_services/cart.service";
+import { Subscription } from "rxjs";
 
 @Component({
   selector: 'app-header',
@@ -14,8 +14,9 @@ import {Subscription} from "rxjs";
 
 export class HeaderComponent implements OnInit, OnDestroy {
 
-  user: User = {email: "", firstName: "", lastName: "", password: ""};
+  user: User = { email: "", firstName: "", lastName: "", password: "" };
   isLoggedIn = false;
+  isExpanded = false;
 
   // @ts-ignore
   userRole: string;
@@ -33,6 +34,17 @@ export class HeaderComponent implements OnInit, OnDestroy {
     private apiService: ApiService,
     private cartService: CartService
   ) {
+
+    document.addEventListener("click", (event: Event) => {
+      const target = event.target as HTMLElement;
+      const contentContainer = document.querySelector(".content-container");
+      const navbar = document.querySelector(".navbar");
+
+      if (!(contentContainer?.contains(target) || navbar?.contains(target))) {
+        this.isExpanded = false;
+      }
+    });
+
   }
 
   ngOnInit(): void {
@@ -52,8 +64,15 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    // Unsubscribe from the observable to avoid memory leaks
     this.cartItemsSubscription.unsubscribe();
+    
+    if (this.cartItemsSubscription) {
+      this.cartItemsSubscription.unsubscribe();
+    }
+  }
+
+  toggleNavbar() {
+    this.isExpanded = !this.isExpanded;
   }
 
   logout(): void {

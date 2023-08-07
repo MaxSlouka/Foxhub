@@ -83,6 +83,36 @@
                 </div>
               </div>
 
+              <p class="lead mt-4 border-bottom lead-bold">Spirit Animal <a href="/spirit-animal"><i
+                    class="bi bi-question-circle" title="Spirit Animal Test"></i></a></p>
+              <div class="btn-group">
+                <button type="button" class="btn btn-outline-primary dropdown-toggle personality-select"
+                  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Selected Animal
+                </button>
+                <div class="dropdown-menu">
+                  <ng-container *ngFor="let colorPersonality of usedColorPersonalities">
+                    <button class="dropdown-item" (click)="addToColorPersonalitiesList(colorPersonality.name)">
+                      {{ colorPersonality.name }}</button>
+                  </ng-container>
+                </div>
+              </div>
+
+              <p class="lead mt-4 border-bottom lead-bold">Donut FIlling <a href="/donut-filling"><i
+                    class="bi bi-question-circle" title="Donut Filling Test"></i></a></p>
+              <div class="btn-group">
+                <button type="button" class="btn btn-outline-primary dropdown-toggle personality-select"
+                  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Selected Filling
+                </button>
+                <div class="dropdown-menu">
+                  <ng-container *ngFor="let colorPersonality of usedColorPersonalities">
+                    <button class="dropdown-item" (click)="addToColorPersonalitiesList(colorPersonality.name)">
+                      {{ colorPersonality.name }}</button>
+                  </ng-container>
+                </div>
+              </div>
+
               <p class="lead mt-4 border-bottom lead-bold">Preferred work option</p>
               <div class="form-check">
                 <input class="form-check-input" type="radio" name="exampleWorkRadios" id="exampleWorkRadios0" value="all"

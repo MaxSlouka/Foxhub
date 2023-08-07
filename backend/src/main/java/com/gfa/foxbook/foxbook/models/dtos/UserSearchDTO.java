@@ -17,7 +17,6 @@ public class UserSearchDTO {
     private String lastName;
     private String nickname;
     private String about;
-    private Boolean workStatus;
     private Integer yearOfBirth;
     private Personality personality;
     private ColorPersonality colorPersonality;
@@ -29,6 +28,8 @@ public class UserSearchDTO {
     private List<Language> languages;
     private WorkPreference workPreference;
     private String oneLineAbout;
+    private DonutFilling donutFilling;
+    private SpiritAnimal spiritAnimal;
 
     public UserSearchDTO(User user) {
         this.firstName = user.getFirstName();
@@ -39,7 +40,6 @@ public class UserSearchDTO {
         this.technologies = user.getTechnologies();
         this.profilePictureUrl = user.getProfilePictureUrl();
         this.languages = user.getLanguages();
-        this.workStatus = user.isWorkStatus();
         this.personality = user.getPersonality();
         this.colorPersonality = user.getColorPersonality();
         this.verified = user.isVerified();
@@ -47,5 +47,7 @@ public class UserSearchDTO {
         this.locations = user.getLocations();
         this.workPreference = user.getWorkPreference();
         this.oneLineAbout = user.getOneLineAbout();
+        this.donutFilling = user.getDonutFillings();
+        this.spiritAnimal = user.getSpiritAnimals();
     }
 }

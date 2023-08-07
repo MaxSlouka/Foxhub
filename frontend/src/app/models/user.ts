@@ -25,7 +25,6 @@ export interface User {
   instagram?: string,
   linkedin?: string,
   gitHub?: string,
-  workStatus?: boolean;
   optionalPage?: string,
   oneLineAbout?: string,
   workPreference?: string,
@@ -36,4 +35,6 @@ export interface User {
   verified?: boolean,
   inCart?: boolean,
   outOfFilters?: string[],
+  donutFilling?: string,
+  spiritAnimal?: string,
 }

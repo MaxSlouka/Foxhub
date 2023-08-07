@@ -34,7 +34,6 @@ public class UserProfileDTO {
     private List<Role> roles;
     private List<Technology> technologies;
     private List<Language> languages;
-    private boolean workStatus;
 
     public UserProfileDTO(User user) {
         this.id = user.getId();
@@ -55,7 +54,6 @@ public class UserProfileDTO {
         this.technologies = user.getTechnologies();
         this.languages = user.getLanguages();
         this.profilePictureUrl = user.getProfilePictureUrl();
-        this.workStatus =user.isWorkStatus();
         this.yearOfBirth=user.getYearOfBirth();
         this.oneLineAbout=user.getOneLineAbout();
         this.locations= user.getLocations();
