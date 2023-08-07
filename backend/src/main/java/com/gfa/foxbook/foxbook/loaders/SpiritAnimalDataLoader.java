@@ -1,5 +1,7 @@
 package com.gfa.foxbook.foxbook.loaders;
 
+import com.gfa.foxbook.foxbook.models.nonusermodels.SpiritAnimal;
+import com.gfa.foxbook.foxbook.repositories.SpiritAnimalRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
@@ -12,7 +14,7 @@ public class SpiritAnimalDataLoader implements CommandLineRunner {
     private final SpiritAnimalRepository spiritAnimalRepository;
 
     @Autowired
-    public SpiritAnimalsDataLoader(SpiritAnimalRepository spiritAnimalRepository) {
+    public SpiritAnimalDataLoader(SpiritAnimalRepository spiritAnimalRepository) {
         this.spiritAnimalRepository = spiritAnimalRepository;
     }
 

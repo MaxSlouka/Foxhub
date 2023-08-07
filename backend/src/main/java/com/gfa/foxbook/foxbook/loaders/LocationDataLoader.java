@@ -1,6 +1,7 @@
 package com.gfa.foxbook.foxbook.loaders;
 
-import com.gfa.foxbook.foxbook.repositories.DonutFillingRepository;
+import com.gfa.foxbook.foxbook.models.nonusermodels.Location;
+import com.gfa.foxbook.foxbook.repositories.LocationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
@@ -9,24 +10,24 @@ import java.util.Arrays;
 import java.util.List;
 
 @Component
-public class CityDataLoader implements CommandLineRunner {
+public class LocationDataLoader implements CommandLineRunner {
 
-    private final DonutFillingRepository donutFillingRepository;
+    private final LocationRepository locationRepository;
 
     @Autowired
-    public CityDataLoader(DonutFillingRepository donutFillingRepository) {
-        this.donutFillingRepository = donutFillingRepository;
+    public LocationDataLoader(LocationRepository locationRepository) {
+        this.locationRepository = locationRepository;
     }
 
     @Override
     public void run(String... args) throws Exception {
-        if (donutFillingRepository.findAll().isEmpty()) {
+        if (locationRepository.findAll().isEmpty()) {
             loadInitialCities();
         }
     }
 
     private void loadInitialCities() {
-        List<String> citiesList = Arrays.asList(
+        List<String> locationsList = Arrays.asList(
                 "Praha",
                 "Brno",
                 "Ostrava",
@@ -59,10 +60,10 @@ public class CityDataLoader implements CommandLineRunner {
                 "Tabor"
         );
 
-        for (String c : citiesList) {
-            City city = new City();
-            city.setName(c);
-            donutFillingRepository.save(city);
+        for (String city : locationsList) {
+            Location location = new Location();
+            location.setName(city);
+            locationRepository.save(location);
         }
     }
 }
