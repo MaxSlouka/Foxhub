@@ -1,18 +1,5 @@
-.dropdown-menu {
-  left: -10rem;
-  top: 3rem;
-}
-
 .d-flex {
   width: 95%;
-}
-
-.text-end a {
-  margin-right: 1rem;
-}
-
-ul li a {
-  color: rgb(0, 0, 0);
 }
 
 .btn {
@@ -47,6 +34,20 @@ ul li a {
   border-radius: 50%;
 }
 
+.dropdown-menu {
+  left: -10rem;
+  top: 3rem;
+}
+
+@media (max-width: 768px) {
+
+  .dropdown-menu {
+    left: -2rem;
+    top: -10rem;
+  }
+
+}
+
 .dropdown-toggle:hover {
   cursor: pointer;
 }
@@ -67,25 +68,11 @@ ul li a {
   align-items: center;
 }
 
-.btn-group a i {
-  font-size: 20px;
-}
-
-.text-end {
-  display: flex;
-  align-items: center;
-}
-
 @media (max-width: 768px) {
-
-  .mobile-navbar {
-    flex-direction: column;
-  }
 
   .mobile-menu {
     display: flex;
     flex-direction: column;
-    flex-direction: row;
     align-items: center;
     justify-content: center;
     flex-wrap: wrap;
@@ -144,4 +131,72 @@ ul li a {
 
 .ham7.active .bottom {
   stroke-dashoffset: -83px;
+}
+
+/* ============================================================================== */
+
+.content-container {
+  width: 100%;
+}
+
+@media only screen and (max-width: 780px) {
+  .nav {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .content-container {
+    position: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    top: 0;
+    left: -100%;
+    width: 80%;
+    height: 100vh;
+    background-color: #f8f9fa;
+    z-index: 99;
+    transition: left 0.3s ease-in-out;
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    backdrop-filter: blur(6.5px);
+    -webkit-backdrop-filter: blur(6.5px);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+  }
+
+  .content-container.show {
+    left: 0;
+  }
+}
+
+@media only screen and (max-width: 992px) {
+  .nav {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .content-container {
+    position: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    top: 0;
+    left: -100%;
+    width: 80%;
+    height: 100vh;
+    background-color: #f8f9fa;
+    z-index: 99;
+    transition: left 0.3s ease-in-out;
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    backdrop-filter: blur(6.5px);
+    -webkit-backdrop-filter: blur(6.5px);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+  }
+
+  .content-container.show {
+    left: 0;
+  }
+
+  .tablet {
+    flex-direction: column;
+  }
 }
