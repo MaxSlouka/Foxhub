@@ -132,6 +132,16 @@ export class UserSettingsPageComponent {
     this.user.colorPersonality = this.colorPersonalities.find(p => p.id === selectedColorPersonalityId);
   }
 
+  onSpiritAnimalSelect(event: any) {
+    const selectedSpiritAnimalId = +event.target.value;
+    this.user.spiritAnimal = this.spiritAnimals.find(p => p.id === selectedSpiritAnimalId);
+  }
+
+  onDonutFIllingSelect(event: any) {
+    const selectedDonutFillingId = +event.target.value;
+    this.user.donutFilling = this.donutFillings.find(p => p.id === selectedDonutFillingId);
+  }
+
   setProgress(): number {
     let filledFields: number = 0;
     let totalFields: number = Object.keys(this.user).length;
@@ -253,7 +263,9 @@ export class UserSettingsPageComponent {
       technologies,
       personality,
       colorPersonality,
-      yearOfBirth
+      yearOfBirth,
+      donutFilling,
+      spiritAnimal
     } = this.user;
     await this.apiService.updateUser(
       firstName,
@@ -272,11 +284,12 @@ export class UserSettingsPageComponent {
       technologies,
       personality,
       colorPersonality,
-      yearOfBirth
+      yearOfBirth,
+      donutFilling,
+      spiritAnimal
     )
       .subscribe(() => {
         this.router.navigate(['/profile', this.user.nickname]);
-
       });
   }
 }

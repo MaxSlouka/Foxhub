@@ -47,7 +47,7 @@ public class UserSearchDTO {
         this.locations = user.getLocations();
         this.workPreference = user.getWorkPreference();
         this.oneLineAbout = user.getOneLineAbout();
-        this.donutFilling = user.getDonutFillings();
-        this.spiritAnimal = user.getSpiritAnimals();
+        this.donutFilling = user.getDonutFilling();
+        this.spiritAnimal = user.getSpiritAnimal();
     }
 }

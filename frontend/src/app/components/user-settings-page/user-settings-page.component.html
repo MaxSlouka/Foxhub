@@ -8,8 +8,8 @@
 
   <!--  progress bar   -->
   <div class="position-relative mt-5">
-    <div class="progress-label position-absolute w-100 text-center" style="top: -25px;"> Progress Completion:
-      {{ profileProgress }}%
+    <div class="progress-label position-absolute w-100 text-center" style="top: -25px;"> <span>Progress Completion:
+      {{ profileProgress }} %</span>
     </div>
     <div class="progress my-4">
       <div class="progress-bar bg-success" role="progressbar" [style.width.%]="profileProgress" aria-valuemin="0"
@@ -199,9 +199,9 @@
 
               <div class="d-flex justify-content-start">
                 <select class="btn btn-outline-primary dropdown-toggle mt-2 mr-2" aria-label="Default select example"
-                        (change)="onPersonalitySelect($event)">
+                  (change)="onSpiritAnimalSelect($event)">
                   <option selected>Choose Spirit Animal</option>
-                  <option *ngFor="let personality of personalities" [value]="personality.id">{{personality.name}}
+                  <option *ngFor="let spiritAnimal of spiritAnimals" [value]="spiritAnimal.id">{{spiritAnimal.name}}
                   </option>
                 </select>
               </div>
@@ -222,9 +222,9 @@
 
               <div class="d-flex justify-content-start">
                 <select class="btn btn-outline-primary dropdown-toggle mt-2 mr-2" aria-label="Default select example"
-                        (change)="onPersonalitySelect($event)">
+                  (change)="onDonutFIllingSelect($event)">
                   <option selected>Choose Donut FIlling</option>
-                  <option *ngFor="let personality of personalities" [value]="personality.id">{{personality.name}}
+                  <option *ngFor="let donutFilling of donutFillings" [value]="donutFilling.id">{{donutFilling.base}}
                   </option>
                 </select>
               </div>

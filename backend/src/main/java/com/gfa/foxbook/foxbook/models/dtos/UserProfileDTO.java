@@ -34,6 +34,8 @@ public class UserProfileDTO {
     private List<Role> roles;
     private List<Technology> technologies;
     private List<Language> languages;
+    private DonutFilling donutFilling;
+    private SpiritAnimal spiritAnimal;
 
     public UserProfileDTO(User user) {
         this.id = user.getId();
@@ -58,5 +60,7 @@ public class UserProfileDTO {
         this.oneLineAbout=user.getOneLineAbout();
         this.locations= user.getLocations();
         this.workPreference= user.getWorkPreference();
+        this.donutFilling= user.getDonutFilling();
+        this.spiritAnimal= user.getSpiritAnimal();
     }
 }

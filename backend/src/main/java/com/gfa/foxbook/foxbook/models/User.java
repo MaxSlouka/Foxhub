@@ -100,7 +100,7 @@ public class User {
             joinColumns = {@JoinColumn(name = "users_id", referencedColumnName = "id")},
             inverseJoinColumns = {@JoinColumn(name = "spiritAnimal_id", referencedColumnName = "id")}
     )
-    private SpiritAnimal spiritAnimals;
+    private SpiritAnimal spiritAnimal;
 
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
@@ -109,7 +109,7 @@ public class User {
             joinColumns = {@JoinColumn(name = "users_id", referencedColumnName = "id")},
             inverseJoinColumns = {@JoinColumn(name = "donutFilling_id", referencedColumnName = "id")}
     )
-    private DonutFilling donutFillings;
+    private DonutFilling donutFilling;
 
     public boolean isAdmin() {
         return roles.stream().anyMatch(role -> role.getName().equals("ADMIN"));
