@@ -4,6 +4,8 @@ import {Role} from "./role";
 import {Personality} from "./personality";
 import {ColorPersonality} from "./colorPersonality";
 import {Location} from "./location";
+import { DonutFilling } from "./donutFilling";
+import { SpiritAnimal } from "./spiritAnimal";
 
 export interface User {
   id?: number;
@@ -35,6 +37,6 @@ export interface User {
   verified?: boolean,
   inCart?: boolean,
   outOfFilters?: string[],
-  donutFilling?: string,
-  spiritAnimal?: string,
+  donutFilling?: DonutFilling,
+  spiritAnimal?: SpiritAnimal,
 }
