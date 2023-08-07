@@ -51,6 +51,7 @@ import { ColorPersonalityComponent } from './components/color-personality/color-
 import { DonutFillingPageComponent } from './components/donut-filling-page/donut-filling-page.component';
 import { SpiritAnimalPageComponent } from './components/spirit-animal-page/spirit-animal-page.component';
 import { LocationButtonComponent } from './components/location-button/location-button.component';
+import { LocationComponent } from './components/location/location.component';
 
 @NgModule({
   declarations: [
@@ -96,6 +97,7 @@ import { LocationButtonComponent } from './components/location-button/location-b
     DonutFillingPageComponent,
     SpiritAnimalPageComponent,
     LocationButtonComponent,
+    LocationComponent,
   ],
   imports: [
     FormsModule,
