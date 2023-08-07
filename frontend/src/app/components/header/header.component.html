@@ -43,10 +43,10 @@
 
           <div class="mobile-menu" *ngIf="isLoggedIn">
 
-            <a routerLink="/intro" class="btn btn-outline-primary px-4 me-md-2" role="button"
+            <a routerLink="/intro" routerLinkActive="active-link" [routerLinkActiveOptions]="{exact: true}" class="lead nav-item px-4 me-md-2" role="button"
               aria-disabled="true">About</a>
-            <a routerLink="/" class="btn btn-outline-primary px-4 me-md-2" role="button" aria-disabled="true">People</a>
-            <a routerLink="/main" class="btn btn-outline-primary px-4 me-md-2" role="button"
+            <a routerLink="/" routerLinkActive="active-link" [routerLinkActiveOptions]="{exact: true}" class="lead nav-item px-4 me-md-2" role="button" aria-disabled="true">People</a>
+            <a routerLink="/main" routerLinkActive="active-link" [routerLinkActiveOptions]="{exact: true}" class="lead nav-item px-4 me-md-2" role="button"
               aria-disabled="true">News</a>
             <a routerLink="/cart" class="btn btn-outline-primary px-4 me-md-2 cart-btn" role="button"
               aria-disabled="true"><i class="bi bi-cart4"></i> <span class="badge badge-danger"
