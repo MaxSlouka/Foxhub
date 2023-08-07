@@ -43,10 +43,6 @@ export class PeoplePageComponent implements OnInit {
   selectedPersonalities: string[] = [];
   selectedColorPersonalities: string[] = [];
 
-  selectedAges: string[] = [];
-
-  // @ts-ignore
-  filterWorkEmploymentStatus: string;
   // @ts-ignore
   filterWorkPrefermentStatus: string;
   filterContentExpanded: boolean = true;
@@ -55,15 +51,11 @@ export class PeoplePageComponent implements OnInit {
   actualLanguageValue: string[] = [];
   actualPersonalityValue: string[] = [];
   actualColorPersonalityValue: string[] = [];
-  actualAgeValue: string = '';
-  actualWorkStatusValue: string = '';
   actualWorkPrefermentValue: string = "";
 
   restPersonalityFilter: User[] = [];
   restColorPersonalityFilter: User[] = [];
-  restOpenToWorkFilter: User[] = [];
   restWorkPrefermentFilter: User[] = [];
-  restAgeFilter: User[] = [];
   restLanguageFilter: User[] = [];
   restTechnologiesFilter: User[] = [];
 
@@ -80,7 +72,6 @@ export class PeoplePageComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.filterWorkEmploymentStatus = 'all';
     this.filterWorkPrefermentStatus = "all";
 
     this.showCookiePopup = this.cookieService.get('cookie_consent') !== 'true';
@@ -208,6 +199,10 @@ export class PeoplePageComponent implements OnInit {
     return this.selectedTechnologies.includes(tech.name);
   }
 
+  onWorkStatusChange() {
+    this.allFilters();
+  }
+
   toggleLangSelection(lang: Language) {
     const langName = lang.name;
     const langIndex = this.selectedLanguages.indexOf(langName);
@@ -247,23 +242,6 @@ export class PeoplePageComponent implements OnInit {
     this.allFilters();
   }
 
-  addToAgeList(event: any, age: string) {
-    if (event.target.checked) {
-      if (!this.selectedAges.includes(age)) {
-        this.selectedAges.push(age);
-      }
-    } else {
-      const index = this.selectedAges.indexOf(age);
-      if (index > -1) {
-        this.selectedAges.splice(index, 1);
-      }
-    }
-    this.allFilters();
-  }
-
-  onWorkStatusChange() {
-    this.allFilters();
-  }
 
   // @ts-ignore
   technologiesFilter(users, keys: string[]) {
@@ -336,33 +314,6 @@ export class PeoplePageComponent implements OnInit {
     return actualFilteredUsers;
   }
 
-  openToWorkFilter(users: User[]) {
-    const actualFilteredUsers: User[] = [];
-    this.restOpenToWorkFilter = [];
-
-    for (let user of users) {
-      if (this.filterWorkEmploymentStatus === "open" && user.workStatus === true) {
-        actualFilteredUsers.push(user);
-      }
-      if (this.filterWorkEmploymentStatus === "closed" && user.workStatus === false) {
-        actualFilteredUsers.push(user);
-      }
-      if (this.filterWorkEmploymentStatus === "all") {
-        actualFilteredUsers.push(user)
-      }
-    }
-    if (this.filterWorkEmploymentStatus === "open") {
-      this.actualWorkStatusValue = "true"
-    } else if (this.filterWorkEmploymentStatus === "closed") {
-      this.actualWorkStatusValue = "false"
-    } else {
-      this.actualWorkStatusValue = "all"
-    }
-    this.restOpenToWorkFilter = this.verifiedAndUsersOnly
-      .filter(user => !actualFilteredUsers.includes(user));
-    return actualFilteredUsers;
-  }
-
   workPrefermentFilter(users: User[]) {
     const actualFilteredUsers: User[] = [];
     this.restWorkPrefermentFilter = [];
@@ -397,55 +348,9 @@ export class PeoplePageComponent implements OnInit {
   }
 
 
-  ageFilter(users: User[]) {
-    const currentYear = new Date().getFullYear();
-    let actualFilteredUsers: User[] = [];
-    this.restAgeFilter = [];
-
-    for (let user of users) {
-      // @ts-ignore
-      const age = currentYear - user.yearOfBirth;
-      { // @ts-ignore
-        for (let ageValue of this.selectedAges) {
-          if (ageValue === "18" && (age >= 18 && age <= 25)) {
-            if (!actualFilteredUsers.includes(user)) {
-              actualFilteredUsers.push(user)
-            }
-          }
-          if (ageValue === "25" && (age >= 25 && age <= 30)) {
-            if (!actualFilteredUsers.includes(user)) {
-              actualFilteredUsers.push(user)
-            }
-          }
-          if (ageValue === "30" && (age >= 30 && age <= 35)) {
-            if (!actualFilteredUsers.includes(user)) {
-              actualFilteredUsers.push(user)
-            }
-          }
-          if (ageValue === "35" && (age >= 35 && age <= 40)) {
-            if (!actualFilteredUsers.includes(user)) {
-              actualFilteredUsers.push(user)
-            }
-          }
-          if (ageValue === "40" && age >= 40) {
-            if (!actualFilteredUsers.includes(user)) {
-              actualFilteredUsers.push(user)
-            }
-          }
-        }
-      }
-    }
-
-    this.actualAgeValue = "age"
-    this.restAgeFilter = this.verifiedAndUsersOnly
-      .filter(user => !actualFilteredUsers.includes(user));
-    return actualFilteredUsers;
-  }
-
   allFilters() {
     let filteredUsers = [...this.verifiedAndUsersOnly];
 
-    filteredUsers = this.openToWorkFilter(filteredUsers);
     filteredUsers = this.workPrefermentFilter(filteredUsers);
 
 
@@ -477,10 +382,6 @@ export class PeoplePageComponent implements OnInit {
       this.restColorPersonalityFilter = [];
     }
 
-
-    if (this.selectedAges.length > 0) {
-      filteredUsers = this.ageFilter(filteredUsers);
-    }
 
     for (let user of this.nonFilteredUsers) {
       user.outOfFilters = [];
@@ -518,19 +419,6 @@ export class PeoplePageComponent implements OnInit {
         }
       }
 
-      if (this.selectedAges.length === 0) {
-        this.restAgeFilter = [];
-      }
-      if (this.restAgeFilter.includes(user)) {
-        user.outOfFilters.push(this.actualAgeValue);
-      }
-
-      if (this.actualWorkStatusValue !== "all") {
-        if (this.restOpenToWorkFilter.includes(user)) {
-          user.outOfFilters.push(this.actualWorkStatusValue);
-        }
-      }
-
       if (this.actualWorkPrefermentValue !== "all") {
         if (this.restWorkPrefermentFilter.includes(user)) {
           user.outOfFilters.push(this.actualWorkPrefermentValue);
@@ -544,8 +432,6 @@ export class PeoplePageComponent implements OnInit {
   clearAllFilters() {
     this.selectedTechnologies = [];
     this.selectedLanguages = [];
-    this.selectedAges = [];
-    this.filterWorkEmploymentStatus = 'all';
     this.filterWorkPrefermentStatus = "all";
     this.selectedPersonalities = [];
     this.selectedColorPersonalities = [];
