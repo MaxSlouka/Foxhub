@@ -2,6 +2,32 @@
   width: 95%;
 }
 
+.nav-item {
+  padding: 5px;
+  margin-right: 1rem;
+  color: black;
+  text-decoration: none;
+}
+
+@media (max-width: 768px) {
+
+  .nav-item {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+
+}
+
+.nav-item:hover {
+  font-weight: bold;
+  color: #45a049;
+}
+
+.active-link {
+  font-weight: bold;
+  color: #45a049;
+}
+
 .btn {
   margin-right: 1rem;
 }
