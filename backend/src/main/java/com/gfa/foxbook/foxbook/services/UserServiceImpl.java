@@ -166,6 +166,8 @@ public class UserServiceImpl implements UserService {
         if (userDTO.getOneLineAbout() != null) user.setOneLineAbout(userDTO.getOneLineAbout());
         if (userDTO.getWorkPreference() != null) user.setWorkPreference(userDTO.getWorkPreference());
         if (userDTO.getColorPersonality() != null) user.setColorPersonality(userDTO.getColorPersonality());
+        if (userDTO.getDonutFilling() != null) user.setDonutFilling(userDTO.getDonutFilling());
+        if (userDTO.getSpiritAnimal() != null) user.setSpiritAnimal(userDTO.getSpiritAnimal());
 
         user.setYearOfBirth(userDTO.getYearOfBirth());
 
