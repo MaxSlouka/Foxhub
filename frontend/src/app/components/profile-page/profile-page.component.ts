@@ -44,6 +44,17 @@ export class ProfilePageComponent {
     ).subscribe(event => {
       this.ngOnInit();
     });
+
+    document.addEventListener("click", (event: Event) => {
+      const target = event.target as HTMLElement;
+      const linksBox = document.querySelector(".links-box");
+      const profileImgContainer = document.querySelector(".profile-img-container");
+
+      if (!linksBox?.contains(target) && !profileImgContainer?.contains(target)) {
+        this.isOpen = false;
+      }
+    })
+
   }
 
   ngOnInit() {

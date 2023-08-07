@@ -9,6 +9,7 @@ import com.gfa.foxbook.foxbook.services.ColorPersonalityServiceImpl;
 import com.gfa.foxbook.foxbook.services.DonutFillingServiceImpl;
 import com.gfa.foxbook.foxbook.services.EmailServiceImpl;
 import com.gfa.foxbook.foxbook.services.SpiritAnimalServiceImpl;
+import com.gfa.foxbook.foxbook.services.interfaces.LocationService;
 import com.gfa.foxbook.foxbook.services.interfaces.PersonalityService;
 import com.gfa.foxbook.foxbook.services.interfaces.PostService;
 import com.gfa.foxbook.foxbook.services.interfaces.UserService;
@@ -31,6 +32,7 @@ public class PublicController {
     private final PostService postService;
     private final PersonalityService personalityService;
     private final ColorPersonalityServiceImpl colorPersonalityService;
+    private final LocationService locationService;
     private final EmailServiceImpl emailService;
     private final DonutFillingServiceImpl donutFillingService;
     private final SpiritAnimalServiceImpl spiritAnimalService;
@@ -101,6 +103,11 @@ public class PublicController {
     @GetMapping("/personalities")
     public ResponseEntity<?> getAllPersonalities() {
         return ResponseEntity.ok(personalityService.getAllPersonalities());
+    }
+
+    @GetMapping("/locations")
+    public ResponseEntity<?> getAllLocations() {
+        return ResponseEntity.ok(locationService.getAllLocations());
     }
 
     @GetMapping("/colorPersonalities")

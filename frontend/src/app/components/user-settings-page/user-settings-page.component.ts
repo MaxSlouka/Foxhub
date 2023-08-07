@@ -255,8 +255,7 @@ export class UserSettingsPageComponent {
       technologies,
       personality,
       colorPersonality,
-      yearOfBirth,
-      workStatus
+      yearOfBirth
     } = this.user;
     await this.apiService.updateUser(
       firstName,
@@ -276,8 +275,7 @@ export class UserSettingsPageComponent {
       technologies,
       personality,
       colorPersonality,
-      yearOfBirth,
-      workStatus
+      yearOfBirth
     )
       .subscribe(() => {
         this.router.navigate(['/profile', this.user.nickname]);

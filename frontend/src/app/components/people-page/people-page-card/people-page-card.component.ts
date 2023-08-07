@@ -1,10 +1,9 @@
-import {Component, Input, OnDestroy} from '@angular/core';
+import {Component, ElementRef, Input, OnDestroy, ViewChild} from '@angular/core';
 import {User} from "../../../models/user";
 import {CartService} from "../../../_services/cart.service";
 import {StorageService} from "../../../_services/storage.service";
 import {AuthService} from "../../../_services/auth.service";
 import {ColorPersonality} from "../../../models/colorPersonality";
-import {Subscription} from "rxjs";
 
 @Component({
   selector: 'app-people-page-card',
@@ -17,6 +16,8 @@ export class PeoplePageCardComponent implements OnDestroy {
   // @ts-ignore
   @Input() user: User;
   isLoggedIn = false;
+
+  @ViewChild('audioPlayer', {static: false}) audioPlayer!: ElementRef<HTMLAudioElement>;
 
   constructor(
     private authService: AuthService,
@@ -52,10 +53,12 @@ export class PeoplePageCardComponent implements OnDestroy {
   ngOnDestroy() {
   }
 
-
   addToCart(user: User) {
     this.cartService.addToCart(user);
     this.user.inCart = true;
+    const audio: HTMLAudioElement = this.audioPlayer.nativeElement;
+    audio.src = "/assets/audio/gun.mp3";
+    audio.play();
   }
 
   removeItem(user: User) {

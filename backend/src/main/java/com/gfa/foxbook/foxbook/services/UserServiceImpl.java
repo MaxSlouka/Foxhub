@@ -153,7 +153,7 @@ public class UserServiceImpl implements UserService {
         if (userDTO.getFirstName() != null) user.setFirstName(userDTO.getFirstName());
         if (userDTO.getLastName() != null) user.setLastName(userDTO.getLastName());
         if (userDTO.getPhone() != null) user.setPhone(userDTO.getPhone());
-        if (userDTO.getLocation() != null) user.setLocation(userDTO.getLocation());
+        if (userDTO.getLocations() != null) user.setLocations(userDTO.getLocations());
         if (userDTO.getAbout() != null) user.setAbout(userDTO.getAbout());
         if (userDTO.getGitHub() != null) user.setGitHub(userDTO.getGitHub());
         if (userDTO.getLinkedin() != null) user.setLinkedin(userDTO.getLinkedin());
@@ -163,13 +163,11 @@ public class UserServiceImpl implements UserService {
         if (userDTO.getTechnologies() != null) user.setTechnologies(userDTO.getTechnologies());
         if (userDTO.getOptionalPage() != null) user.setOptionalPage(userDTO.getOptionalPage());
         if (userDTO.getPersonality() != null) user.setPersonality(userDTO.getPersonality());
-        if (userDTO.getWorkLocation() != null) user.setWorkLocation(userDTO.getWorkLocation());
         if (userDTO.getOneLineAbout() != null) user.setOneLineAbout(userDTO.getOneLineAbout());
         if (userDTO.getWorkPreference() != null) user.setWorkPreference(userDTO.getWorkPreference());
         if (userDTO.getColorPersonality() != null) user.setColorPersonality(userDTO.getColorPersonality());
 
         user.setYearOfBirth(userDTO.getYearOfBirth());
-        user.setWorkStatus(userDTO.isWorkStatus());
 
         return userRepository.save(user);
     }

@@ -109,16 +109,6 @@
         </button>
       </div>
 
-      <div class="labels text-center mt-4">
-        <label class="labels">Open for Work?</label>
-        <div *ngIf="user.workStatus">
-          <p class="lead green">{{user.workStatus}}</p>
-        </div>
-        <div *ngIf="!user.workStatus">
-          <p class="lead red">{{user.workStatus}}</p>
-        </div>
-      </div>
-
     </div>
 
     <!-- main info section -->
@@ -161,7 +151,7 @@
         <div class="row mt-2">
           <div class="col-md-12">
 
-            <ng-container *ngIf="user.workPreference === 'OFFICE'; ">
+            <ng-container *ngIf="user.workPreference === 'OFFICE'">
               <p class="lead">Office - I'd like to work from the office.</p>
             </ng-container>
 

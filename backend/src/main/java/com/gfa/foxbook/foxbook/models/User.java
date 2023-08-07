@@ -33,7 +33,6 @@ public class User {
     @Email
     private String email;
     private String phone;
-    private String location;
     @Column(columnDefinition = "text")
     @Lob
     private String about;
@@ -45,10 +44,8 @@ public class User {
     private String instagram;
     private String linkedin;
     private String gitHub;
-    private boolean workStatus;
     private String optionalPage;
     private String oneLineAbout;
-    private String workLocation;
     @Enumerated(EnumType.STRING)
     private WorkPreference workPreference;
     @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
@@ -72,6 +69,14 @@ public class User {
             inverseJoinColumns = {@JoinColumn(name = "lang_id", referencedColumnName = "id")}
     )
     private List<Language> languages;
+
+    @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
+    @JoinTable(
+            name = "user_locations",
+            joinColumns = {@JoinColumn(name = "users_id", referencedColumnName = "id")},
+            inverseJoinColumns = {@JoinColumn(name = "location_id", referencedColumnName = "id")}
+    )
+    private List<Location> locations;
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
     @JoinTable(
