@@ -88,7 +88,6 @@ export class UserSettingsPageComponent {
       this.user = user;
       this.userLanguages = user.languages;
       this.userTechnologies = user.technologies;
-      this.userLanguages = user.languages;
       this.profileProgress = this.setProgress();
     });
     this.languageService.getAll().subscribe((languages: Language[]) => {
@@ -130,6 +129,16 @@ export class UserSettingsPageComponent {
   onColorPersonalitySelect(event: any) {
     const selectedColorPersonalityId = +event.target.value;
     this.user.colorPersonality = this.colorPersonalities.find(p => p.id === selectedColorPersonalityId);
+  }
+
+  onSpiritAnimalSelect(event: any) {
+    const selectedSpiritAnimalId = +event.target.value;
+    this.user.spiritAnimal = this.spiritAnimals.find(p => p.id === selectedSpiritAnimalId);
+  }
+
+  onDonutFIllingSelect(event: any) {
+    const selectedDonutFillingId = +event.target.value;
+    this.user.donutFilling = this.donutFillings.find(p => p.id === selectedDonutFillingId);
   }
 
   setProgress(): number {
@@ -253,7 +262,9 @@ export class UserSettingsPageComponent {
       technologies,
       personality,
       colorPersonality,
-      yearOfBirth
+      yearOfBirth,
+      donutFilling,
+      spiritAnimal
     } = this.user;
     await this.apiService.updateUser(
       firstName,
@@ -272,11 +283,12 @@ export class UserSettingsPageComponent {
       technologies,
       personality,
       colorPersonality,
-      yearOfBirth
+      yearOfBirth,
+      donutFilling,
+      spiritAnimal
     )
       .subscribe(() => {
         this.router.navigate(['/profile', this.user.nickname]);
-
       });
   }
 }
