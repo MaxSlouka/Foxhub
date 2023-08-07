@@ -116,7 +116,8 @@
 
           <p class="lead mt-4 border-bottom font-weight-bold">Personality</p>
 
-          <p class="lead mt-4 font-weight-bold">16 Personalities <a href="/16personalities"><i class="bi bi-question-circle" title="16 Personalities Test"></i></a></p>
+          <p class="lead mt-4 font-weight-bold">16 Personalities <a href="/16personalities"><i
+                class="bi bi-question-circle" title="16 Personalities Test"></i></a></p>
           <div class="row mt-2">
             <div class="col-md-12">
 
@@ -136,7 +137,8 @@
             </div>
           </div>
 
-          <p class="lead mt-4 font-weight-bold">True Color Personality <a href="/color-personality-test"><i class="bi bi-question-circle" title="True Color Personality Test"></i></a></p>
+          <p class="lead mt-4 font-weight-bold">True Color Personality <a href="/color-personality-test"><i
+                class="bi bi-question-circle" title="True Color Personality Test"></i></a></p>
           <div class="row mt-2">
             <div class="col-md-12">
 
@@ -144,7 +146,8 @@
                 <select class="btn btn-outline-primary dropdown-toggle mt-2 mr-2" aria-label="Default select example"
                   (change)="onColorPersonalitySelect($event)">
                   <option selected>Choose personality</option>
-                  <option *ngFor="let colorPersonality of colorPersonalities" [value]="colorPersonality.id">{{colorPersonality.name}}
+                  <option *ngFor="let colorPersonality of colorPersonalities" [value]="colorPersonality.id">
+                    {{colorPersonality.name}}
                   </option>
                 </select>
               </div>
@@ -190,9 +193,59 @@
 
           <div class="row mt-3">
             <div class="col-md-12">
-              <label class="labels">Work Location</label>
-              <input type="text" class="form-control" [(ngModel)]="user.workLocation" name="workLocation"
-                placeholder="Preferred work location">
+              <label class="labels">Preferred Work Location</label>
+
+              <!-- work location setting -->
+
+              <div class="d-flex justify-content-between align-items-center experience my-2"><span>Edit
+                  Work Locations</span>
+                <button class="btn border px-3 p-1 add-experience" (click)="unusedTechnologiesHandle()" type="button"
+                  data-toggle="modal" data-target="#skillsModal"><i class="fa fa-plus"></i>&nbsp;Locations
+                </button>
+              </div>
+
+              <!-- work location modal -->
+
+              <div class="modal fade" id="skillsModal" tabindex="-1" role="dialog" aria-labelledby="skillsModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <div class="allTechnologies">
+                        <h5 class="modal-title mb-3">Select your Work Location </h5>
+                        <input type="search" (ngModelChange)="searchTechnology(keyTech.value)" #keyTech="ngModel"
+                          ngModel name="key" class="form-control form-control-dark text-bg-dark"
+                          placeholder="Search location..." aria-label="Search">
+                        <app-technology-button *ngFor="let technology of unusedTechnologies" [technology]="technology"
+                          [unusedTechnologies]="unusedTechnologies" [userTechnologies]="userTechnologies"
+                          (technologyComponentEmitter)="handleTechnologyComponentEmitter($event)"></app-technology-button>
+                      </div>
+
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+
+                    </div>
+
+                    <div class="modal-header">
+                      <div class="myTechnologies">
+                        <h5 class="modal-title mb-3">Your Locations</h5>
+                        <app-technology-button *ngFor="let technology of userTechnologies" [technology]="technology"
+                          [unusedTechnologies]="unusedTechnologies" [userTechnologies]="userTechnologies"
+                          (technologyComponentEmitter)="handleTechnologyComponentEmitter($event)"></app-technology-button>
+                      </div>
+                    </div>
+
+                    <div class="text-center">
+                      <button class="btn btn-primary profile-button" type="button" data-dismiss="modal"
+                        aria-label="Close">Done
+                      </button>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+
             </div>
 
             <div class="col-md-12">
@@ -201,7 +254,7 @@
               <div class="list-group">
                 <label class="list-group-item d-flex gap-2 pl-5" for="officeRadio">
                   <input class="form-check-input flex-shrink-0" type="radio" name="workPreference" value="OFFICE"
-                  [(ngModel)]="user.workPreference" (ngModelChange)="onWorkPreferenceChange()" id="officeRadio">
+                    [(ngModel)]="user.workPreference" (ngModelChange)="onWorkPreferenceChange()" id="officeRadio">
                   <span>
                     Office
                     <small class="d-block text-body-secondary">I prefer working from office.</small>
@@ -209,7 +262,7 @@
                 </label>
                 <label class="list-group-item d-flex gap-2 pl-5" for="remoteRadio">
                   <input class="form-check-input flex-shrink-0" type="radio" name="workPreference" value="REMOTE"
-                  [(ngModel)]="user.workPreference" (ngModelChange)="onWorkPreferenceChange()" id="remoteRadio">
+                    [(ngModel)]="user.workPreference" (ngModelChange)="onWorkPreferenceChange()" id="remoteRadio">
                   <span>
                     Remote
                     <small class="d-block text-body-secondary">I prefer working from Home.</small>
@@ -217,14 +270,15 @@
                 </label>
                 <label class="list-group-item d-flex gap-2 pl-5" for="combinedRadio">
                   <input class="form-check-input flex-shrink-0" type="radio" name="workPreference" value="COMBINED"
-                  [(ngModel)]="user.workPreference" (ngModelChange)="onWorkPreferenceChange()" id="combinedRadio">
+                    [(ngModel)]="user.workPreference" (ngModelChange)="onWorkPreferenceChange()" id="combinedRadio">
                   <span>
                     Combined
-                    <small class="d-block text-body-secondary">I'd like to work partly from office and partly from home.</small>
+                    <small class="d-block text-body-secondary">I'd like to work partly from office and partly from
+                      home.</small>
                   </span>
                 </label>
               </div>
-              
+
             </div>
 
           </div>
