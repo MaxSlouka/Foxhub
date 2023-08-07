@@ -1,8 +1,9 @@
-import { Technology } from "./technology";
-import { Language } from "./language";
+import {Technology} from "./technology";
+import {Language} from "./language";
 import {Role} from "./role";
 import {Personality} from "./personality";
-import { ColorPersonality } from "./colorPersonality";
+import {ColorPersonality} from "./colorPersonality";
+import {Location} from "./location";
 
 export interface User {
   id?: number;
@@ -16,7 +17,7 @@ export interface User {
   password: string,
   personality?: Personality,
   colorPersonality?: ColorPersonality,
-  location?: string,
+  locations?: Location[],
   dateOfRegistration?: Date,
   profileUrl?: string,
   profilePictureUrl?: string,
@@ -24,9 +25,8 @@ export interface User {
   instagram?: string,
   linkedin?: string,
   gitHub?: string,
-  workStatus?:boolean;
+  workStatus?: boolean;
   optionalPage?: string,
-  workLocation?: string,
   oneLineAbout?: string,
   workPreference?: string,
   roles?: Role[],
