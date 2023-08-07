@@ -6,7 +6,10 @@ import com.gfa.foxbook.foxbook.models.dtos.UserSearchDTO;
 import com.gfa.foxbook.foxbook.models.nonusermodels.Post;
 import com.gfa.foxbook.foxbook.models.User;
 import com.gfa.foxbook.foxbook.services.ColorPersonalityServiceImpl;
+import com.gfa.foxbook.foxbook.services.DonutFillingServiceImpl;
 import com.gfa.foxbook.foxbook.services.EmailServiceImpl;
+import com.gfa.foxbook.foxbook.services.SpiritAnimalServiceImpl;
+import com.gfa.foxbook.foxbook.services.interfaces.LocationService;
 import com.gfa.foxbook.foxbook.services.interfaces.PersonalityService;
 import com.gfa.foxbook.foxbook.services.interfaces.PostService;
 import com.gfa.foxbook.foxbook.services.interfaces.UserService;
@@ -14,7 +17,6 @@ import jakarta.mail.MessagingException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -30,7 +32,10 @@ public class PublicController {
     private final PostService postService;
     private final PersonalityService personalityService;
     private final ColorPersonalityServiceImpl colorPersonalityService;
+    private final LocationService locationService;
     private final EmailServiceImpl emailService;
+    private final DonutFillingServiceImpl donutFillingService;
+    private final SpiritAnimalServiceImpl spiritAnimalService;
 
     @GetMapping("/people")
     public ResponseEntity<?> getAllUsers() {
@@ -100,9 +105,24 @@ public class PublicController {
         return ResponseEntity.ok(personalityService.getAllPersonalities());
     }
 
+    @GetMapping("/locations")
+    public ResponseEntity<?> getAllLocations() {
+        return ResponseEntity.ok(locationService.getAllLocations());
+    }
+
     @GetMapping("/colorPersonalities")
     public ResponseEntity<?> getAllColorPersonalities() {
         return ResponseEntity.ok(colorPersonalityService.getAllColorPersonalities());
+    }
+
+    @GetMapping("/donutFillings")
+    public ResponseEntity<?> getAllDonutFillings() {
+        return ResponseEntity.ok(donutFillingService.getAllDonutFillings());
+    }
+
+    @GetMapping("/spiritAnimals")
+    public ResponseEntity<?> getAllSpiritAnimals() {
+        return ResponseEntity.ok(spiritAnimalService.getAllSpiritAnimals());
     }
 
     @GetMapping("/posts/comments/{id}")

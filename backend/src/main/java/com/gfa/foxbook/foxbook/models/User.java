@@ -1,7 +1,4 @@
 package com.gfa.foxbook.foxbook.models;
-import com.gfa.foxbook.foxbook.models.User;
-import com.gfa.foxbook.foxbook.models.nonusermodels.*;
-
 import com.gfa.foxbook.foxbook.models.nonusermodels.*;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
@@ -36,7 +33,6 @@ public class User {
     @Email
     private String email;
     private String phone;
-    private String location;
     @Column(columnDefinition = "text")
     @Lob
     private String about;
@@ -48,10 +44,8 @@ public class User {
     private String instagram;
     private String linkedin;
     private String gitHub;
-    private boolean workStatus;
     private String optionalPage;
     private String oneLineAbout;
-    private String workLocation;
     @Enumerated(EnumType.STRING)
     private WorkPreference workPreference;
     @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
@@ -76,6 +70,14 @@ public class User {
     )
     private List<Language> languages;
 
+    @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
+    @JoinTable(
+            name = "user_locations",
+            joinColumns = {@JoinColumn(name = "users_id", referencedColumnName = "id")},
+            inverseJoinColumns = {@JoinColumn(name = "location_id", referencedColumnName = "id")}
+    )
+    private List<Location> locations;
+
     @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
     @JoinTable(
             name = "users_personality",
@@ -91,6 +93,23 @@ public class User {
             inverseJoinColumns = {@JoinColumn(name = "colorPersonality_id", referencedColumnName = "id")}
     )
     private ColorPersonality colorPersonality;
+
+    @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
+    @JoinTable(
+            name = "users_spiritAnimal",
+            joinColumns = {@JoinColumn(name = "users_id", referencedColumnName = "id")},
+            inverseJoinColumns = {@JoinColumn(name = "spiritAnimal_id", referencedColumnName = "id")}
+    )
+    private SpiritAnimal spiritAnimals;
+
+
+    @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
+    @JoinTable(
+            name = "users_donutFilling",
+            joinColumns = {@JoinColumn(name = "users_id", referencedColumnName = "id")},
+            inverseJoinColumns = {@JoinColumn(name = "donutFilling_id", referencedColumnName = "id")}
+    )
+    private DonutFilling donutFillings;
 
     public boolean isAdmin() {
         return roles.stream().anyMatch(role -> role.getName().equals("ADMIN"));
