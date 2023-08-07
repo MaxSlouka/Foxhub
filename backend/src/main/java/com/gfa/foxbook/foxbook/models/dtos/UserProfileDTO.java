@@ -16,7 +16,7 @@ public class UserProfileDTO {
     private String firstName;
     private String lastName;
     private String nickname;
-    private String workLocation;
+    private List<Location> locations;
     private WorkPreference workPreference;
     private String oneLineAbout;
     private String email;
@@ -26,7 +26,6 @@ public class UserProfileDTO {
     private Personality personality;
     private ColorPersonality colorPersonality;
     private String profilePictureUrl;
-    private String location;
     private String facebook;
     private String instagram;
     private String linkedin;
@@ -47,7 +46,6 @@ public class UserProfileDTO {
         this.about = user.getAbout();
         this.personality = user.getPersonality();
         this.colorPersonality = user.getColorPersonality();
-        this.location = user.getLocation();
         this.facebook = user.getFacebook();
         this.instagram = user.getInstagram();
         this.linkedin = user.getLinkedin();
@@ -60,7 +58,7 @@ public class UserProfileDTO {
         this.workStatus =user.isWorkStatus();
         this.yearOfBirth=user.getYearOfBirth();
         this.oneLineAbout=user.getOneLineAbout();
-        this.workLocation=user.getWorkLocation();
+        this.locations= user.getLocations();
         this.workPreference= user.getWorkPreference();
     }
 }

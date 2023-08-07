@@ -50,7 +50,6 @@ public class User {
     private boolean workStatus;
     private String optionalPage;
     private String oneLineAbout;
-    private String workLocation;
     @Enumerated(EnumType.STRING)
     private WorkPreference workPreference;
     @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
