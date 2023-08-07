@@ -36,4 +36,6 @@ export interface User {
   verified?: boolean,
   inCart?: boolean,
   outOfFilters?: string[],
+  donutFilling?: string,
+  spiritAnimal?: string,
 }
