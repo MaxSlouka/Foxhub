@@ -28,7 +28,6 @@ public class UserSearchDTO {
     private List<Language> languages;
     private WorkPreference workPreference;
     private String oneLineAbout;
-    private DonutFilling donutFilling;
     private SpiritAnimal spiritAnimal;
 
     public UserSearchDTO(User user) {
@@ -47,7 +46,6 @@ public class UserSearchDTO {
         this.locations = user.getLocations();
         this.workPreference = user.getWorkPreference();
         this.oneLineAbout = user.getOneLineAbout();
-        this.donutFilling = user.getDonutFilling();
         this.spiritAnimal = user.getSpiritAnimal();
     }
 }

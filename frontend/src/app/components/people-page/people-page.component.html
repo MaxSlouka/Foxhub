@@ -53,6 +53,13 @@
                   (click)="toggleLangSelection(lang)">{{ lang.name }}</button>
               </ng-container>
 
+              <p class="lead mt-4 border-bottom lead-bold">Locations</p>
+              <ng-container *ngFor="let location of usedLocations">
+                <button class="dropdown-item"
+                        [ngStyle]="{ 'background-color': isSelectedLocation(location) ? '#dbdbdb' : 'transparent' }"
+                        (click)="toggleLocationSelection(location)">{{ location.name }}</button>
+              </ng-container>
+
               <p class="lead mt-4 border-bottom lead-bold">16 Personalities <a href="/16personalities"><i
                     class="bi bi-question-circle" title="True Color Personality Test"></i></a></p>
               <div class="btn-group">
@@ -91,24 +98,9 @@
                   Selected Animal
                 </button>
                 <div class="dropdown-menu">
-                  <ng-container *ngFor="let colorPersonality of usedColorPersonalities">
-                    <button class="dropdown-item" (click)="addToColorPersonalitiesList(colorPersonality.name)">
-                      {{ colorPersonality.name }}</button>
-                  </ng-container>
-                </div>
-              </div>
-
-              <p class="lead mt-4 border-bottom lead-bold">Donut FIlling <a href="/donut-filling"><i
-                    class="bi bi-question-circle" title="Donut Filling Test"></i></a></p>
-              <div class="btn-group">
-                <button type="button" class="btn btn-outline-primary dropdown-toggle personality-select"
-                  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  Selected Filling
-                </button>
-                <div class="dropdown-menu">
-                  <ng-container *ngFor="let colorPersonality of usedColorPersonalities">
-                    <button class="dropdown-item" (click)="addToColorPersonalitiesList(colorPersonality.name)">
-                      {{ colorPersonality.name }}</button>
+                  <ng-container *ngFor="let spiritAnimal of usedSpiritAnimals">
+                    <button class="dropdown-item" (click)="addToSpiritAnimalsList(spiritAnimal.name)">
+                      {{ spiritAnimal.name }}</button>
                   </ng-container>
                 </div>
               </div>

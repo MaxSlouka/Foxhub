@@ -1,15 +1,13 @@
 import {Component, OnInit, ViewChild, ElementRef} from '@angular/core';
-import {Technology} from "../../models/technology";
-import {TechnologyService} from "../../_services/technology.service";
-import {ApiService} from "../../_services/api/api.service";
 import {User} from "../../models/user";
+import {Technology} from "../../models/technology";
 import {Language} from "../../models/language";
-import {LanguageService} from "../../_services/language.service";
+import {Location} from "../../models/location";
 import {Personality} from "../../models/personality";
-import {PersonalityService} from "../../_services/personality.service";
-import {CookieService} from 'ngx-cookie-service';
 import {ColorPersonality} from 'src/app/models/colorPersonality';
-import {ColorPersonalityService} from 'src/app/_services/color-personality.service';
+import {SpiritAnimal} from "../../models/spiritAnimal";
+import {ApiService} from "../../_services/api/api.service";
+import {CookieService} from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-people-page',
@@ -28,66 +26,49 @@ export class PeoplePageComponent implements OnInit {
   nonFilteredUsers: User[] = [];
   filteredUsersRest: User[]= [];
 
-  technologies: Technology[] = [];
-  languages: Language[] = [];
-  personalities: Personality[] = [];
-  colorPersonalities: ColorPersonality[] = [];
-
   usedTechnologies: Technology[] = [];
   usedLanguages: Language[] = [];
   usedPersonalities: Personality[] = [];
   usedColorPersonalities: ColorPersonality[] = [];
+  usedLocations: Location[] = [];
+  usedSpiritAnimals: SpiritAnimal[] = [];
 
   selectedTechnologies: string[] = [];
   selectedLanguages: string[] = [];
   selectedPersonalities: string[] = [];
   selectedColorPersonalities: string[] = [];
+  selectedLocations: string[] = [];
+  selectedSpiritAnimals: string[] = [];
 
   // @ts-ignore
   filterWorkPrefermentStatus: string;
-  filterContentExpanded: boolean = true;
 
   actualTechnologyValue: string[] = [];
   actualLanguageValue: string[] = [];
   actualPersonalityValue: string[] = [];
   actualColorPersonalityValue: string[] = [];
   actualWorkPrefermentValue: string = "";
+  actualLocationValue: string[] = [];
+  actualSpiritAnimalValue: string[] = [];
 
   restPersonalityFilter: User[] = [];
   restColorPersonalityFilter: User[] = [];
   restWorkPrefermentFilter: User[] = [];
   restLanguageFilter: User[] = [];
   restTechnologiesFilter: User[] = [];
+  restLocationFilter: User[] = [];
+  restSpiritAnimalFilter: User[] = [];
 
   public showCookiePopup = false;
 
   constructor(
-    private technologyService: TechnologyService,
-    private languageService: LanguageService,
     private apiService: ApiService,
-    private personalityService: PersonalityService,
-    private colorPersonalityService: ColorPersonalityService,
-    private cookieService: CookieService) {
-
+    private cookieService: CookieService,) {
   }
 
   ngOnInit(): void {
     this.filterWorkPrefermentStatus = "all";
-
     this.showCookiePopup = this.cookieService.get('cookie_consent') !== 'true';
-
-    this.technologyService.getAll().subscribe(technologies => {
-      this.technologies = technologies;
-    });
-    this.languageService.getAll().subscribe(languages => {
-      this.languages = languages;
-    });
-    this.personalityService.getAll().subscribe(personalities => {
-      this.personalities = personalities
-    });
-    this.colorPersonalityService.getAll().subscribe(colorPersonalities => {
-      this.colorPersonalities = colorPersonalities
-    });
 
     // @ts-ignore
     this.apiService.getAll().subscribe(users => {
@@ -98,6 +79,8 @@ export class PeoplePageComponent implements OnInit {
       this.usedLanguagesList();
       this.usedPersonalitiesList();
       this.usedColorPersonalitiesList();
+      this.usedLocationsList();
+      this.usedSpiritAnimalsList();
       for (let user of this.users) {
         if (this.addedUsers.includes(user)) {
           user.inCart = true;
@@ -115,7 +98,6 @@ export class PeoplePageComponent implements OnInit {
     this.cookieService.delete('cookie_consent');
     this.showCookiePopup = false;
   }
-
 
   // @ts-ignore
   get filteredUsersRestFour(){
@@ -137,8 +119,23 @@ export class PeoplePageComponent implements OnInit {
     }
   }
 
+  usedLocationsList() {
+    const usedLocationsNames: string[] = [];
+    for (let user of this.users) {
+      // @ts-ignore
+      for (let location of user.locations) {
+        const locationName = location.name.toLowerCase();
+        if (!usedLocationsNames.includes(locationName)) {
+          usedLocationsNames.push(locationName);
+          // @ts-ignore
+          this.usedLocations.push(location);
+        }
+      }
+    }
+  }
+
   // @ts-ignore
-  usedLanguagesList(): Language[] {
+  usedLanguagesList(){
     const usedLangNames: string[] = [];
     for (let user of this.users) {
       // @ts-ignore
@@ -153,7 +150,7 @@ export class PeoplePageComponent implements OnInit {
   }
 
   // @ts-ignore
-  usedPersonalitiesList(): Personality[] {
+  usedPersonalitiesList(){
     const usedPersNames: string[] = [];
     for (let user of this.users) {
       const persName = user.personality?.name.toLowerCase();
@@ -169,10 +166,9 @@ export class PeoplePageComponent implements OnInit {
   }
 
   // @ts-ignore
-  usedColorPersonalitiesList(): ColorPersonality[] {
+  usedColorPersonalitiesList(){
     const usedColorPersonalityIds: number[] = [];
     this.usedColorPersonalities = [];
-
     for (let user of this.users) {
       const colorPersonalityId = user.colorPersonality?.id;
       if (colorPersonalityId && !usedColorPersonalityIds.includes(colorPersonalityId)) {
@@ -180,8 +176,26 @@ export class PeoplePageComponent implements OnInit {
         this.usedColorPersonalities.push(user.colorPersonality!);
       }
     }
-
     return this.usedColorPersonalities;
+  }
+
+  usedSpiritAnimalsList(){
+    const usedAnimalsNames: string[] = [];
+    for (let user of this.users) {
+      const animalName = user.spiritAnimal?.name.toLowerCase();
+      if (!usedAnimalsNames.includes(<string>animalName)) {
+        if (animalName != null) {
+          usedAnimalsNames.push(animalName);
+        }
+        if (user.spiritAnimal){
+          this.usedSpiritAnimals.push(user.spiritAnimal);
+        }
+      }
+    }
+  }
+
+  onWorkStatusChange() {
+    this.allFilters();
   }
 
   toggleTechSelection(tech: Technology) {
@@ -199,10 +213,6 @@ export class PeoplePageComponent implements OnInit {
     return this.selectedTechnologies.includes(tech.name);
   }
 
-  onWorkStatusChange() {
-    this.allFilters();
-  }
-
   toggleLangSelection(lang: Language) {
     const langName = lang.name;
     const langIndex = this.selectedLanguages.indexOf(langName);
@@ -217,6 +227,22 @@ export class PeoplePageComponent implements OnInit {
   isSelectedLang(lang: Language): boolean {
     return this.selectedLanguages.includes(lang.name);
   }
+
+  toggleLocationSelection(location: Location) {
+    const locationName = location.name;
+    const locationIndex = this.selectedLocations.indexOf(locationName);
+    if (locationIndex === -1) {
+      this.selectedLocations.push(locationName);
+    } else {
+      this.selectedLocations.splice(locationIndex, 1);
+    }
+    this.allFilters();
+  }
+
+  isSelectedLocation(location: Location): boolean {
+    return this.selectedLanguages.includes(location.name);
+  }
+
 
   addToPersonalitiesList(pers: string) {
     if (!this.selectedPersonalities.includes(pers)) {
@@ -242,12 +268,23 @@ export class PeoplePageComponent implements OnInit {
     this.allFilters();
   }
 
+  addToSpiritAnimalsList(animal: string) {
+    if (!this.selectedSpiritAnimals.includes(animal)) {
+      this.selectedSpiritAnimals.push(animal);
+    } else {
+      const index = this.selectedSpiritAnimals.indexOf(animal);
+      if (index > -1) {
+        this.selectedSpiritAnimals.splice(index, 1);
+      }
+    }
+    this.allFilters();
+  }
+
 
   // @ts-ignore
   technologiesFilter(users, keys: string[]) {
     const lowerCaseKeys = keys.map(key => key.toLowerCase());
     this.restTechnologiesFilter = [];
-
     // @ts-ignore
     const actualFilteredUsers = users.filter(user =>
       lowerCaseKeys.every(key =>
@@ -255,7 +292,6 @@ export class PeoplePageComponent implements OnInit {
         user.technologies?.some(technology => technology.name.toLowerCase() === key)
       )
     );
-
     this.actualTechnologyValue = keys;
     this.restTechnologiesFilter = this.verifiedAndUsersOnly
       .filter(user => !actualFilteredUsers.includes(user));
@@ -266,8 +302,6 @@ export class PeoplePageComponent implements OnInit {
   languagesFilter(users: User[], keys: string[]): User[] {
     const lowerCaseKeys = keys.map(key => key.toLowerCase());
     this.restLanguageFilter = [];
-
-
     // @ts-ignore
     const actualFilteredUsers = users.filter(user =>
       lowerCaseKeys.every(key =>
@@ -275,9 +309,25 @@ export class PeoplePageComponent implements OnInit {
         user.languages?.some(language => language.name.toLowerCase() === key)
       )
     );
-
     this.actualLanguageValue = keys;
     this.restLanguageFilter = this.verifiedAndUsersOnly
+      .filter(user => !actualFilteredUsers.includes(user));
+    return actualFilteredUsers;
+  }
+
+  // @ts-ignore
+  locationsFilter(users: User[], keys: string[]): User[] {
+    const lowerCaseKeys = keys.map(key => key.toLowerCase());
+    this.restLocationFilter = [];
+    // @ts-ignore
+    const actualFilteredUsers = users.filter(user =>
+      lowerCaseKeys.every(key =>
+        // @ts-ignore
+        user.locations?.some(location => location.name.toLowerCase() === key)
+      )
+    );
+    this.actualLocationValue = keys;
+    this.restLocationFilter = this.verifiedAndUsersOnly
       .filter(user => !actualFilteredUsers.includes(user));
     return actualFilteredUsers;
   }
@@ -310,6 +360,20 @@ export class PeoplePageComponent implements OnInit {
 
     this.actualColorPersonalityValue = keys;
     this.restColorPersonalityFilter = this.verifiedAndUsersOnly
+      .filter(user => !actualFilteredUsers.includes(user));
+    return actualFilteredUsers;
+  }
+
+  spiritAnimalsFilter(users: User[], keys: string[]): User[] {
+    const lowerCaseKeys = keys.map(key => key.toLowerCase());
+    this.restSpiritAnimalFilter = [];
+    const actualFilteredUsers = users.filter(user =>
+      lowerCaseKeys.every(key =>
+        user.spiritAnimal?.name.toLowerCase() === key
+      )
+    );
+    this.actualSpiritAnimalValue = keys;
+    this.restSpiritAnimalFilter = this.verifiedAndUsersOnly
       .filter(user => !actualFilteredUsers.includes(user));
     return actualFilteredUsers;
   }
@@ -368,6 +432,13 @@ export class PeoplePageComponent implements OnInit {
       this.restLanguageFilter = [];
     }
 
+    if (this.selectedLocations.length > 0) {
+      filteredUsers = this.locationsFilter(filteredUsers, this.selectedLocations);
+    } else {
+      this.actualLocationValue = [];
+      this.restLocationFilter = [];
+    }
+
     if (this.selectedPersonalities.length > 0) {
       filteredUsers = this.personalitiesFilter(filteredUsers, this.selectedPersonalities);
     } else {
@@ -380,6 +451,13 @@ export class PeoplePageComponent implements OnInit {
     } else {
       this.actualColorPersonalityValue = [];
       this.restColorPersonalityFilter = [];
+    }
+
+    if (this.selectedSpiritAnimals.length > 0) {
+      filteredUsers = this.spiritAnimalsFilter(filteredUsers, this.selectedSpiritAnimals);
+    } else {
+      this.actualSpiritAnimalValue = [];
+      this.restSpiritAnimalFilter = [];
     }
 
 
@@ -403,6 +481,15 @@ export class PeoplePageComponent implements OnInit {
         }
       }
 
+      if (this.restLocationFilter.includes(user)) {
+        for (let location of this.actualLocationValue) {
+          if (!user.locations?.some((userLocation) =>
+            userLocation.name.toLowerCase() === location.toLowerCase())) {
+            user.outOfFilters.push(location);
+          }
+        }
+      }
+
       if (this.restPersonalityFilter.includes(user)) {
         for (let pers of this.actualPersonalityValue) {
           if (user.personality?.name.toLowerCase() !== pers.toLowerCase()) {
@@ -415,6 +502,14 @@ export class PeoplePageComponent implements OnInit {
         for (let colorPersonality of this.actualColorPersonalityValue) {
           if (user.colorPersonality?.name.toLowerCase() !== colorPersonality.toLowerCase()) {
             user.outOfFilters.push(colorPersonality);
+          }
+        }
+      }
+
+      if (this.restSpiritAnimalFilter.includes(user)) {
+        for (let spiritAnimal of this.actualSpiritAnimalValue) {
+          if (user.spiritAnimal?.name.toLowerCase() !== spiritAnimal.toLowerCase()) {
+            user.outOfFilters.push(spiritAnimal);
           }
         }
       }
@@ -435,6 +530,7 @@ export class PeoplePageComponent implements OnInit {
     this.filterWorkPrefermentStatus = "all";
     this.selectedPersonalities = [];
     this.selectedColorPersonalities = [];
+    this.selectedSpiritAnimals = [];
 
     for (let user of this.nonFilteredUsers) {
       user.outOfFilters = [];

@@ -102,15 +102,6 @@ public class User {
     )
     private SpiritAnimal spiritAnimal;
 
-
-    @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
-    @JoinTable(
-            name = "users_donutFilling",
-            joinColumns = {@JoinColumn(name = "users_id", referencedColumnName = "id")},
-            inverseJoinColumns = {@JoinColumn(name = "donutFilling_id", referencedColumnName = "id")}
-    )
-    private DonutFilling donutFilling;
-
     public boolean isAdmin() {
         return roles.stream().anyMatch(role -> role.getName().equals("ADMIN"));
 
