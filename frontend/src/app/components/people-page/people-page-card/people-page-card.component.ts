@@ -56,9 +56,9 @@ export class PeoplePageCardComponent implements OnDestroy {
   addToCart(user: User) {
     this.cartService.addToCart(user);
     this.user.inCart = true;
-    const audio: HTMLAudioElement = this.audioPlayer.nativeElement;
-    audio.src = "/assets/audio/gun.mp3";
-    audio.play();
+    // const audio: HTMLAudioElement = this.audioPlayer.nativeElement;
+    // audio.src = "/assets/audio/gun.mp3";
+    // audio.play();
   }
 
   removeItem(user: User) {
