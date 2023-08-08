@@ -4,6 +4,7 @@ import {TechnologyService} from "../../_services/technology.service";
 import {ApiService} from "../../_services/api/api.service";
 import {User} from "../../models/user";
 import {Language} from "../../models/language";
+import {Location} from "../../models/location";
 import {LanguageService} from "../../_services/language.service";
 import {Personality} from "../../models/personality";
 import {PersonalityService} from "../../_services/personality.service";
@@ -32,16 +33,19 @@ export class PeoplePageComponent implements OnInit {
   languages: Language[] = [];
   personalities: Personality[] = [];
   colorPersonalities: ColorPersonality[] = [];
+  locations: Location[] = [];
 
   usedTechnologies: Technology[] = [];
   usedLanguages: Language[] = [];
   usedPersonalities: Personality[] = [];
   usedColorPersonalities: ColorPersonality[] = [];
+  usedLocations: Location[] = [];
 
   selectedTechnologies: string[] = [];
   selectedLanguages: string[] = [];
   selectedPersonalities: string[] = [];
   selectedColorPersonalities: string[] = [];
+  selectedLocations: string[] = [];
 
   // @ts-ignore
   filterWorkPrefermentStatus: string;
@@ -52,12 +56,14 @@ export class PeoplePageComponent implements OnInit {
   actualPersonalityValue: string[] = [];
   actualColorPersonalityValue: string[] = [];
   actualWorkPrefermentValue: string = "";
+  actualLocationValue: string[] = [];
 
   restPersonalityFilter: User[] = [];
   restColorPersonalityFilter: User[] = [];
   restWorkPrefermentFilter: User[] = [];
   restLanguageFilter: User[] = [];
   restTechnologiesFilter: User[] = [];
+  restLocationFilter: User[] = [];
 
   public showCookiePopup = false;
 
@@ -98,6 +104,7 @@ export class PeoplePageComponent implements OnInit {
       this.usedLanguagesList();
       this.usedPersonalitiesList();
       this.usedColorPersonalitiesList();
+      this.usedLocationsList();
       for (let user of this.users) {
         if (this.addedUsers.includes(user)) {
           user.inCart = true;
@@ -132,6 +139,21 @@ export class PeoplePageComponent implements OnInit {
         if (!usedTechNames.includes(techName)) {
           usedTechNames.push(techName);
           this.usedTechnologies.push(tech);
+        }
+      }
+    }
+  }
+
+  usedLocationsList() {
+    const usedLocationsNames: string[] = [];
+    for (let user of this.users) {
+      // @ts-ignore
+      for (let location of user.locations) {
+        const locationName = location.name.toLowerCase();
+        if (!usedLocationsNames.includes(locationName)) {
+          usedLocationsNames.push(locationName);
+          // @ts-ignore
+          this.usedLocations.push(location);
         }
       }
     }
@@ -184,6 +206,10 @@ export class PeoplePageComponent implements OnInit {
     return this.usedColorPersonalities;
   }
 
+  onWorkStatusChange() {
+    this.allFilters();
+  }
+
   toggleTechSelection(tech: Technology) {
     const techName = tech.name;
     const techIndex = this.selectedTechnologies.indexOf(techName);
@@ -197,10 +223,6 @@ export class PeoplePageComponent implements OnInit {
 
   isSelectedTech(tech: Technology): boolean {
     return this.selectedTechnologies.includes(tech.name);
-  }
-
-  onWorkStatusChange() {
-    this.allFilters();
   }
 
   toggleLangSelection(lang: Language) {
@@ -217,6 +239,22 @@ export class PeoplePageComponent implements OnInit {
   isSelectedLang(lang: Language): boolean {
     return this.selectedLanguages.includes(lang.name);
   }
+
+  toggleLocationSelection(location: Location) {
+    const locationName = location.name;
+    const locationIndex = this.selectedLocations.indexOf(locationName);
+    if (locationIndex === -1) {
+      this.selectedLocations.push(locationName);
+    } else {
+      this.selectedLocations.splice(locationIndex, 1);
+    }
+    this.allFilters();
+  }
+
+  isSelectedLocation(location: Location): boolean {
+    return this.selectedLanguages.includes(location.name);
+  }
+
 
   addToPersonalitiesList(pers: string) {
     if (!this.selectedPersonalities.includes(pers)) {
@@ -278,6 +316,26 @@ export class PeoplePageComponent implements OnInit {
 
     this.actualLanguageValue = keys;
     this.restLanguageFilter = this.verifiedAndUsersOnly
+      .filter(user => !actualFilteredUsers.includes(user));
+    return actualFilteredUsers;
+  }
+
+  // @ts-ignore
+  locationsFilter(users: User[], keys: string[]): User[] {
+    const lowerCaseKeys = keys.map(key => key.toLowerCase());
+    this.restLocationFilter = [];
+
+
+    // @ts-ignore
+    const actualFilteredUsers = users.filter(user =>
+      lowerCaseKeys.every(key =>
+        // @ts-ignore
+        user.locations?.some(location => location.name.toLowerCase() === key)
+      )
+    );
+
+    this.actualLocationValue = keys;
+    this.restLocationFilter = this.verifiedAndUsersOnly
       .filter(user => !actualFilteredUsers.includes(user));
     return actualFilteredUsers;
   }
@@ -368,6 +426,13 @@ export class PeoplePageComponent implements OnInit {
       this.restLanguageFilter = [];
     }
 
+    if (this.selectedLocations.length > 0) {
+      filteredUsers = this.locationsFilter(filteredUsers, this.selectedLocations);
+    } else {
+      this.actualLocationValue = [];
+      this.restLocationFilter = [];
+    }
+
     if (this.selectedPersonalities.length > 0) {
       filteredUsers = this.personalitiesFilter(filteredUsers, this.selectedPersonalities);
     } else {
@@ -399,6 +464,15 @@ export class PeoplePageComponent implements OnInit {
           if (!user.languages?.some((userLang) =>
             userLang.name.toLowerCase() === lang.toLowerCase())) {
             user.outOfFilters.push(lang);
+          }
+        }
+      }
+
+      if (this.restLocationFilter.includes(user)) {
+        for (let location of this.actualLocationValue) {
+          if (!user.locations?.some((userLocation) =>
+            userLocation.name.toLowerCase() === location.toLowerCase())) {
+            user.outOfFilters.push(location);
           }
         }
       }

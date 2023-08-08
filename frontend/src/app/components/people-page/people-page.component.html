@@ -53,6 +53,13 @@
                   (click)="toggleLangSelection(lang)">{{ lang.name }}</button>
               </ng-container>
 
+              <p class="lead mt-4 border-bottom lead-bold">Locations</p>
+              <ng-container *ngFor="let location of usedLocations">
+                <button class="dropdown-item"
+                        [ngStyle]="{ 'background-color': isSelectedLocation(location) ? '#dbdbdb' : 'transparent' }"
+                        (click)="toggleLocationSelection(location)">{{ location.name }}</button>
+              </ng-container>
+
               <p class="lead mt-4 border-bottom lead-bold">16 Personalities <a href="/16personalities"><i
                     class="bi bi-question-circle" title="True Color Personality Test"></i></a></p>
               <div class="btn-group">
