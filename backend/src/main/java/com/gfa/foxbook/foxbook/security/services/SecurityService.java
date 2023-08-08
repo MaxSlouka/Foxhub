@@ -33,7 +33,7 @@ public class SecurityService {
         user.setLastName(registerDto.getLastName());
         user.setEmail(registerDto.getEmail());
         user.setVerified(false);
-        user.setWorkPreference(WorkPreference.OFFICE);
+        user.setWorkPreference(WorkPreference.COMBINED);
         user.setVerificationToken(generateToken());
         user.setNickname(generateNickname(registerDto.getFirstName(), registerDto.getLastName()));
         user.setPassword(passwordEncoder.encode(registerDto.getPassword()));

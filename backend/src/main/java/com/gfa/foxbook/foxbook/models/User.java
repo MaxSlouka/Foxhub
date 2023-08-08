@@ -47,7 +47,7 @@ public class User {
     private String optionalPage;
     private String oneLineAbout;
     @Enumerated(EnumType.STRING)
-    private WorkPreference workPreference;
+    private WorkPreference workPreference = WorkPreference.COMBINED;
     @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
     @JoinTable(
             name = "users_roles",
