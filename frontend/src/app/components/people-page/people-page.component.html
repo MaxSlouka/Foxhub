@@ -98,9 +98,9 @@
                   Selected Animal
                 </button>
                 <div class="dropdown-menu">
-                  <ng-container *ngFor="let colorPersonality of usedColorPersonalities">
-                    <button class="dropdown-item" (click)="addToColorPersonalitiesList(colorPersonality.name)">
-                      {{ colorPersonality.name }}</button>
+                  <ng-container *ngFor="let spiritAnimal of usedSpiritAnimals">
+                    <button class="dropdown-item" (click)="addToSpiritAnimalsList(spiritAnimal.name)">
+                      {{ spiritAnimal.name }}</button>
                   </ng-container>
                 </div>
               </div>

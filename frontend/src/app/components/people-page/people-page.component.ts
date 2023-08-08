@@ -42,7 +42,6 @@ export class PeoplePageComponent implements OnInit {
 
   // @ts-ignore
   filterWorkPrefermentStatus: string;
-  filterContentExpanded: boolean = true;
 
   actualTechnologyValue: string[] = [];
   actualLanguageValue: string[] = [];
@@ -69,7 +68,6 @@ export class PeoplePageComponent implements OnInit {
 
   ngOnInit(): void {
     this.filterWorkPrefermentStatus = "all";
-
     this.showCookiePopup = this.cookieService.get('cookie_consent') !== 'true';
 
     // @ts-ignore
@@ -82,6 +80,7 @@ export class PeoplePageComponent implements OnInit {
       this.usedPersonalitiesList();
       this.usedColorPersonalitiesList();
       this.usedLocationsList();
+      this.usedSpiritAnimalsList();
       for (let user of this.users) {
         if (this.addedUsers.includes(user)) {
           user.inCart = true;
@@ -137,7 +136,7 @@ export class PeoplePageComponent implements OnInit {
   }
 
   // @ts-ignore
-  usedLanguagesList(): Language[] {
+  usedLanguagesList(){
     const usedLangNames: string[] = [];
     for (let user of this.users) {
       // @ts-ignore
@@ -152,7 +151,7 @@ export class PeoplePageComponent implements OnInit {
   }
 
   // @ts-ignore
-  usedPersonalitiesList(): Personality[] {
+  usedPersonalitiesList(){
     const usedPersNames: string[] = [];
     for (let user of this.users) {
       const persName = user.personality?.name.toLowerCase();
@@ -168,10 +167,9 @@ export class PeoplePageComponent implements OnInit {
   }
 
   // @ts-ignore
-  usedColorPersonalitiesList(): ColorPersonality[] {
+  usedColorPersonalitiesList(){
     const usedColorPersonalityIds: number[] = [];
     this.usedColorPersonalities = [];
-
     for (let user of this.users) {
       const colorPersonalityId = user.colorPersonality?.id;
       if (colorPersonalityId && !usedColorPersonalityIds.includes(colorPersonalityId)) {
@@ -179,8 +177,22 @@ export class PeoplePageComponent implements OnInit {
         this.usedColorPersonalities.push(user.colorPersonality!);
       }
     }
-
     return this.usedColorPersonalities;
+  }
+
+  usedSpiritAnimalsList(){
+    const usedAnimalsNames: string[] = [];
+    for (let user of this.users) {
+      const animalName = user.spiritAnimal?.name.toLowerCase();
+      if (!usedAnimalsNames.includes(<string>animalName)) {
+        if (animalName != null) {
+          usedAnimalsNames.push(animalName);
+        }
+        if (user.spiritAnimal){
+          this.usedSpiritAnimals.push(user.spiritAnimal);
+        }
+      }
+    }
   }
 
   onWorkStatusChange() {
@@ -252,6 +264,18 @@ export class PeoplePageComponent implements OnInit {
       const index = this.selectedColorPersonalities.indexOf(colorPersonality);
       if (index > -1) {
         this.selectedColorPersonalities.splice(index, 1);
+      }
+    }
+    this.allFilters();
+  }
+
+  addToSpiritAnimalsList(animal: string) {
+    if (!this.selectedSpiritAnimals.includes(animal)) {
+      this.selectedSpiritAnimals.push(animal);
+    } else {
+      const index = this.selectedSpiritAnimals.indexOf(animal);
+      if (index > -1) {
+        this.selectedSpiritAnimals.splice(index, 1);
       }
     }
     this.allFilters();
@@ -349,6 +373,20 @@ export class PeoplePageComponent implements OnInit {
     return actualFilteredUsers;
   }
 
+  spiritAnimalsFilter(users: User[], keys: string[]): User[] {
+    const lowerCaseKeys = keys.map(key => key.toLowerCase());
+    this.restSpiritAnimalFilter = [];
+    const actualFilteredUsers = users.filter(user =>
+      lowerCaseKeys.every(key =>
+        user.spiritAnimal?.name.toLowerCase() === key
+      )
+    );
+    this.actualSpiritAnimalValue = keys;
+    this.restSpiritAnimalFilter = this.verifiedAndUsersOnly
+      .filter(user => !actualFilteredUsers.includes(user));
+    return actualFilteredUsers;
+  }
+
   workPrefermentFilter(users: User[]) {
     const actualFilteredUsers: User[] = [];
     this.restWorkPrefermentFilter = [];
@@ -424,6 +462,13 @@ export class PeoplePageComponent implements OnInit {
       this.restColorPersonalityFilter = [];
     }
 
+    if (this.selectedSpiritAnimals.length > 0) {
+      filteredUsers = this.spiritAnimalsFilter(filteredUsers, this.selectedSpiritAnimals);
+    } else {
+      this.actualSpiritAnimalValue = [];
+      this.restSpiritAnimalFilter = [];
+    }
+
 
     for (let user of this.nonFilteredUsers) {
       user.outOfFilters = [];
@@ -466,6 +511,14 @@ export class PeoplePageComponent implements OnInit {
         for (let colorPersonality of this.actualColorPersonalityValue) {
           if (user.colorPersonality?.name.toLowerCase() !== colorPersonality.toLowerCase()) {
             user.outOfFilters.push(colorPersonality);
+          }
+        }
+      }
+
+      if (this.restSpiritAnimalFilter.includes(user)) {
+        for (let spiritAnimal of this.actualSpiritAnimalValue) {
+          if (user.spiritAnimal?.name.toLowerCase() !== spiritAnimal.toLowerCase()) {
+            user.outOfFilters.push(spiritAnimal);
           }
         }
       }
