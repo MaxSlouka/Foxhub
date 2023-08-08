@@ -6,13 +6,8 @@ import {Location} from "../../models/location";
 import {Personality} from "../../models/personality";
 import {ColorPersonality} from 'src/app/models/colorPersonality';
 import {SpiritAnimal} from "../../models/spiritAnimal";
-import {TechnologyService} from "../../_services/technology.service";
 import {ApiService} from "../../_services/api/api.service";
-import {LanguageService} from "../../_services/language.service";
-import {PersonalityService} from "../../_services/personality.service";
-import {SpiritAnimalService} from "../../_services/spiritAnimal.service";
 import {CookieService} from 'ngx-cookie-service';
-import {ColorPersonalityService} from 'src/app/_services/color-personality.service';
 
 @Component({
   selector: 'app-people-page',
@@ -31,23 +26,19 @@ export class PeoplePageComponent implements OnInit {
   nonFilteredUsers: User[] = [];
   filteredUsersRest: User[]= [];
 
-  technologies: Technology[] = [];
-  languages: Language[] = [];
-  personalities: Personality[] = [];
-  colorPersonalities: ColorPersonality[] = [];
-  locations: Location[] = [];
-
   usedTechnologies: Technology[] = [];
   usedLanguages: Language[] = [];
   usedPersonalities: Personality[] = [];
   usedColorPersonalities: ColorPersonality[] = [];
   usedLocations: Location[] = [];
+  usedSpiritAnimals: SpiritAnimal[] = [];
 
   selectedTechnologies: string[] = [];
   selectedLanguages: string[] = [];
   selectedPersonalities: string[] = [];
   selectedColorPersonalities: string[] = [];
   selectedLocations: string[] = [];
+  selectedSpiritAnimals: string[] = [];
 
   // @ts-ignore
   filterWorkPrefermentStatus: string;
@@ -59,6 +50,7 @@ export class PeoplePageComponent implements OnInit {
   actualColorPersonalityValue: string[] = [];
   actualWorkPrefermentValue: string = "";
   actualLocationValue: string[] = [];
+  actualSpiritAnimalValue: string[] = [];
 
   restPersonalityFilter: User[] = [];
   restColorPersonalityFilter: User[] = [];
@@ -66,36 +58,19 @@ export class PeoplePageComponent implements OnInit {
   restLanguageFilter: User[] = [];
   restTechnologiesFilter: User[] = [];
   restLocationFilter: User[] = [];
+  restSpiritAnimalFilter: User[] = [];
 
   public showCookiePopup = false;
 
   constructor(
-    private technologyService: TechnologyService,
-    private languageService: LanguageService,
     private apiService: ApiService,
-    private personalityService: PersonalityService,
-    private colorPersonalityService: ColorPersonalityService,
-    private cookieService: CookieService) {
-
+    private cookieService: CookieService,) {
   }
 
   ngOnInit(): void {
     this.filterWorkPrefermentStatus = "all";
 
     this.showCookiePopup = this.cookieService.get('cookie_consent') !== 'true';
-
-    this.technologyService.getAll().subscribe(technologies => {
-      this.technologies = technologies;
-    });
-    this.languageService.getAll().subscribe(languages => {
-      this.languages = languages;
-    });
-    this.personalityService.getAll().subscribe(personalities => {
-      this.personalities = personalities
-    });
-    this.colorPersonalityService.getAll().subscribe(colorPersonalities => {
-      this.colorPersonalities = colorPersonalities
-    });
 
     // @ts-ignore
     this.apiService.getAll().subscribe(users => {
