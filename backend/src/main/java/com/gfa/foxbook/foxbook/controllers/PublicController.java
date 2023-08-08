@@ -6,7 +6,6 @@ import com.gfa.foxbook.foxbook.models.dtos.UserSearchDTO;
 import com.gfa.foxbook.foxbook.models.nonusermodels.Post;
 import com.gfa.foxbook.foxbook.models.User;
 import com.gfa.foxbook.foxbook.services.ColorPersonalityServiceImpl;
-import com.gfa.foxbook.foxbook.services.DonutFillingServiceImpl;
 import com.gfa.foxbook.foxbook.services.EmailServiceImpl;
 import com.gfa.foxbook.foxbook.services.SpiritAnimalServiceImpl;
 import com.gfa.foxbook.foxbook.services.interfaces.*;
@@ -31,7 +30,6 @@ public class PublicController {
     private final ColorPersonalityServiceImpl colorPersonalityService;
     private final LocationService locationService;
     private final EmailServiceImpl emailService;
-    private final DonutFillingServiceImpl donutFillingService;
     private final SpiritAnimalServiceImpl spiritAnimalService;
     private final LanguageService languageService;
 
@@ -116,11 +114,6 @@ public class PublicController {
     @GetMapping("/colorPersonalities")
     public ResponseEntity<?> getAllColorPersonalities() {
         return ResponseEntity.ok(colorPersonalityService.getAllColorPersonalities());
-    }
-
-    @GetMapping("/donutFillings")
-    public ResponseEntity<?> getAllDonutFillings() {
-        return ResponseEntity.ok(donutFillingService.getAllDonutFillings());
     }
 
     @GetMapping("/spiritAnimals")
