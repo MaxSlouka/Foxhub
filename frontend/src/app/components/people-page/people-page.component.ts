@@ -1,15 +1,17 @@
 import {Component, OnInit, ViewChild, ElementRef} from '@angular/core';
-import {Technology} from "../../models/technology";
-import {TechnologyService} from "../../_services/technology.service";
-import {ApiService} from "../../_services/api/api.service";
 import {User} from "../../models/user";
+import {Technology} from "../../models/technology";
 import {Language} from "../../models/language";
 import {Location} from "../../models/location";
-import {LanguageService} from "../../_services/language.service";
 import {Personality} from "../../models/personality";
-import {PersonalityService} from "../../_services/personality.service";
-import {CookieService} from 'ngx-cookie-service';
 import {ColorPersonality} from 'src/app/models/colorPersonality';
+import {SpiritAnimal} from "../../models/spiritAnimal";
+import {TechnologyService} from "../../_services/technology.service";
+import {ApiService} from "../../_services/api/api.service";
+import {LanguageService} from "../../_services/language.service";
+import {PersonalityService} from "../../_services/personality.service";
+import {SpiritAnimalService} from "../../_services/spiritAnimal.service";
+import {CookieService} from 'ngx-cookie-service';
 import {ColorPersonalityService} from 'src/app/_services/color-personality.service';
 
 @Component({
