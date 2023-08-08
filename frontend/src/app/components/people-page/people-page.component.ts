@@ -240,7 +240,7 @@ export class PeoplePageComponent implements OnInit {
   }
 
   isSelectedLocation(location: Location): boolean {
-    return this.selectedLanguages.includes(location.name);
+    return this.selectedLocations.includes(location.name);
   }
 
 
