@@ -99,7 +99,6 @@ export class PeoplePageComponent implements OnInit {
     this.showCookiePopup = false;
   }
 
-
   // @ts-ignore
   get filteredUsersRestFour(){
     // @ts-ignore
@@ -286,7 +285,6 @@ export class PeoplePageComponent implements OnInit {
   technologiesFilter(users, keys: string[]) {
     const lowerCaseKeys = keys.map(key => key.toLowerCase());
     this.restTechnologiesFilter = [];
-
     // @ts-ignore
     const actualFilteredUsers = users.filter(user =>
       lowerCaseKeys.every(key =>
@@ -294,7 +292,6 @@ export class PeoplePageComponent implements OnInit {
         user.technologies?.some(technology => technology.name.toLowerCase() === key)
       )
     );
-
     this.actualTechnologyValue = keys;
     this.restTechnologiesFilter = this.verifiedAndUsersOnly
       .filter(user => !actualFilteredUsers.includes(user));
@@ -305,8 +302,6 @@ export class PeoplePageComponent implements OnInit {
   languagesFilter(users: User[], keys: string[]): User[] {
     const lowerCaseKeys = keys.map(key => key.toLowerCase());
     this.restLanguageFilter = [];
-
-
     // @ts-ignore
     const actualFilteredUsers = users.filter(user =>
       lowerCaseKeys.every(key =>
@@ -314,7 +309,6 @@ export class PeoplePageComponent implements OnInit {
         user.languages?.some(language => language.name.toLowerCase() === key)
       )
     );
-
     this.actualLanguageValue = keys;
     this.restLanguageFilter = this.verifiedAndUsersOnly
       .filter(user => !actualFilteredUsers.includes(user));
@@ -325,8 +319,6 @@ export class PeoplePageComponent implements OnInit {
   locationsFilter(users: User[], keys: string[]): User[] {
     const lowerCaseKeys = keys.map(key => key.toLowerCase());
     this.restLocationFilter = [];
-
-
     // @ts-ignore
     const actualFilteredUsers = users.filter(user =>
       lowerCaseKeys.every(key =>
@@ -334,7 +326,6 @@ export class PeoplePageComponent implements OnInit {
         user.locations?.some(location => location.name.toLowerCase() === key)
       )
     );
-
     this.actualLocationValue = keys;
     this.restLocationFilter = this.verifiedAndUsersOnly
       .filter(user => !actualFilteredUsers.includes(user));
@@ -539,6 +530,7 @@ export class PeoplePageComponent implements OnInit {
     this.filterWorkPrefermentStatus = "all";
     this.selectedPersonalities = [];
     this.selectedColorPersonalities = [];
+    this.selectedSpiritAnimals = [];
 
     for (let user of this.nonFilteredUsers) {
       user.outOfFilters = [];

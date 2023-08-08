@@ -13,9 +13,7 @@ import {PersonalityService} from "../../_services/personality.service";
 import {Personality} from "../../models/personality";
 import {ColorPersonality} from 'src/app/models/colorPersonality';
 import {ColorPersonalityService} from "../../_services/color-personality.service";
-import {DonutFillingService} from "../../_services/donutFilling.service";
 import {SpiritAnimalService} from "../../_services/spiritAnimal.service";
-import {DonutFilling} from "../../models/donutFilling";
 import {SpiritAnimal} from "../../models/spiritAnimal";
 import {LocationService} from "../../_services/location.service";
 import {Location} from "../../models/location";
@@ -60,9 +58,6 @@ export class UserSettingsPageComponent {
   colorPersonalities: ColorPersonality[];
 
   // @ts-ignore
-  donutFillings: DonutFilling[];
-
-  // @ts-ignore
   spiritAnimals: SpiritAnimal[];
 
   constructor(
@@ -76,7 +71,6 @@ export class UserSettingsPageComponent {
     private locationService: LocationService,
     private personalityService: PersonalityService,
     private colorPersonalityService: ColorPersonalityService,
-    private donutFillingService: DonutFillingService,
     private spiritAnimalService: SpiritAnimalService
   ) {
   }
@@ -106,9 +100,6 @@ export class UserSettingsPageComponent {
     this.colorPersonalityService.getAll().subscribe((colorPersonalities: ColorPersonality[]) => {
       this.colorPersonalities = colorPersonalities;
     });
-    this.donutFillingService.getAll().subscribe((donutFillings: DonutFilling[]) => {
-      this.donutFillings = donutFillings;
-    });
     this.spiritAnimalService.getAll().subscribe((spiritAnimals: SpiritAnimal[]) => {
       this.spiritAnimals = spiritAnimals;
     });
@@ -135,11 +126,6 @@ export class UserSettingsPageComponent {
   onSpiritAnimalSelect(event: any) {
     const selectedSpiritAnimalId = +event.target.value;
     this.user.spiritAnimal = this.spiritAnimals.find(p => p.id === selectedSpiritAnimalId);
-  }
-
-  onDonutFIllingSelect(event: any) {
-    const selectedDonutFillingId = +event.target.value;
-    this.user.donutFilling = this.donutFillings.find(p => p.id === selectedDonutFillingId);
   }
 
   setProgress(): number {
@@ -264,7 +250,6 @@ export class UserSettingsPageComponent {
       personality,
       colorPersonality,
       yearOfBirth,
-      donutFilling,
       spiritAnimal
     } = this.user;
     await this.apiService.updateUser(
@@ -285,7 +270,6 @@ export class UserSettingsPageComponent {
       personality,
       colorPersonality,
       yearOfBirth,
-      donutFilling,
       spiritAnimal
     )
       .subscribe(() => {

@@ -93,7 +93,6 @@ export class ApiService {
     personality: Personality | undefined,
     colorPersonality: ColorPersonality | undefined,
     yearOfBirth: number | undefined,
-    donutFilling: DonutFilling | undefined,
     spiritAnimal: SpiritAnimal | undefined
   ): Observable<any> {
 
@@ -115,7 +114,6 @@ export class ApiService {
       personality,
       colorPersonality,
       yearOfBirth,
-      donutFilling,
       spiritAnimal
     },
       httpOptions
