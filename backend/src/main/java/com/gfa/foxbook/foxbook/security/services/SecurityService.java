@@ -3,6 +3,7 @@ package com.gfa.foxbook.foxbook.security.services;
 import com.gfa.foxbook.foxbook.models.nonusermodels.Role;
 import com.gfa.foxbook.foxbook.models.User;
 import com.gfa.foxbook.foxbook.models.dtos.security.RegisterDto;
+import com.gfa.foxbook.foxbook.models.nonusermodels.WorkPreference;
 import com.gfa.foxbook.foxbook.repositories.RoleRepository;
 import com.gfa.foxbook.foxbook.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -32,6 +33,7 @@ public class SecurityService {
         user.setLastName(registerDto.getLastName());
         user.setEmail(registerDto.getEmail());
         user.setVerified(false);
+        user.setWorkPreference(WorkPreference.OFFICE);
         user.setVerificationToken(generateToken());
         user.setNickname(generateNickname(registerDto.getFirstName(), registerDto.getLastName()));
         user.setPassword(passwordEncoder.encode(registerDto.getPassword()));
