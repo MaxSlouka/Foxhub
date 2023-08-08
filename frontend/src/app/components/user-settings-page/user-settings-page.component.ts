@@ -167,10 +167,11 @@ export class UserSettingsPageComponent {
     const results: Location[] = [];
 
     for (const location of this.locations) {
-      if (location.name.toLowerCase().includes((key.toLowerCase()))) {
+      if (location.name.toLowerCase().includes(key.toLowerCase())) {
         results.push(location);
       }
     }
+    this.unusedLocations = results;
   }
 
   unusedLanguagesHandle() {
