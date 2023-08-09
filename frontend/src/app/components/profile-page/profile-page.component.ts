@@ -103,7 +103,6 @@ export class ProfilePageComponent {
   }
 
   onChangeURL(url: SafeValue) {
-    let qrCodeURL = '/profile/' + this.username;
     this.qrCodeDownloadLink = url;
   }
 
@@ -120,6 +119,5 @@ export class ProfilePageComponent {
   toggleItem(user: User) {
     this.user.inCart ? this.removeItem(user) : this.addToCart(user);
   }
-
   protected readonly location = location;
 }

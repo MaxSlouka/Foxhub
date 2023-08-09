@@ -17,7 +17,6 @@ export class ProfileService {
   constructor(private http: HttpClient) {
   }
 
-  // @ts-ignore
   getUser(username: string | null): Observable<User> {
     return this.http.get<User>(this.apiUrl + username);
   }
