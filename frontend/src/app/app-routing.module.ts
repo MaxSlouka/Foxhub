@@ -26,12 +26,11 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'main', component: MainPageComponent },
   { path: 'intro', component: IntroComponent },
-  { path: 'profile/:username', component: ProfilePageComponent },
+  { path: 'cart', component: CartComponent },
   { path: 'update-profile', component: UserSettingsPageComponent },
   { path: 'reset-password', component: ResetPasswordComponent },
   { path: 'change-password', component: ChangePasswordComponent },
   { path: 'termsOfUse', component: TermsOfUseComponent },
-  { path: 'cart', component: CartComponent },
   { path: 'checkout', component: CartCheckoutComponent },
   { path: 'creators', component: CreatorsComponent },
   { path: '16personalities', component: PersonalityInfoPageComponent },
@@ -39,6 +38,7 @@ const routes: Routes = [
   { path: 'admin-board', component: AdminBoardComponent },
   { path: 'spirit-animal', component: SpiritAnimalPageComponent },
   { path: 'donut-filling', component: DonutFillingPageComponent },
+  { path: ':username', component: ProfilePageComponent },
   { path: '**', pathMatch: 'full', component: PageNotFoundComponent }
 ]
 
