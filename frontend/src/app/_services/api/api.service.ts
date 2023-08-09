@@ -11,7 +11,6 @@ import { Router } from "@angular/router";
 import { catchError } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { ColorPersonality } from 'src/app/models/colorPersonality';
-import { DonutFilling } from 'src/app/models/donutFilling';
 import { SpiritAnimal } from 'src/app/models/spiritAnimal';
 
 const prefix = GlobalConstants.prefix;
