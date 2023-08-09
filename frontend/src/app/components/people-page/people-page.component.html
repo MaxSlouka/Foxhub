@@ -7,11 +7,8 @@
 <div class="container">
 
   <div class="py-5 text-center">
-    <h2 class="display-5 fw-bold text-body-emphasis mb-4">Choose your colleague and</h2>
-    <h1 class="display-5 fw-bold text-body-emphasis lh-1 mb-4 page-header">Find a perfect <span>Match</span> for you!
-    </h1>
-    <p class="lead">Discover the ideal workmate tailored to your needs from a diverse range of personalities and skills
-      to perfectly fit your work environment.</p>
+    <h1 class="display-5 fw-bold text-body-emphasis lh-1 mb-4 page-header">Your New <span>Perfect</span> Team Mate.</h1>
+    <h2 class="display-5 fw-bold text-body-emphasis mb-4">These heroes achieved junior Developer status in under 6 months!</h2>
   </div>
 
   <!-- cookies -->
@@ -56,8 +53,8 @@
               <p class="lead mt-4 border-bottom lead-bold">Locations</p>
               <ng-container *ngFor="let location of usedLocations">
                 <button class="dropdown-item"
-                        [ngStyle]="{ 'background-color': isSelectedLocation(location) ? '#dbdbdb' : 'transparent' }"
-                        (click)="toggleLocationSelection(location)">{{ location.name }}</button>
+                  [ngStyle]="{ 'background-color': isSelectedLocation(location) ? '#dbdbdb' : 'transparent' }"
+                  (click)="toggleLocationSelection(location)">{{ location.name }}</button>
               </ng-container>
 
               <p class="lead mt-4 border-bottom lead-bold">16 Personalities <a href="/16personalities"><i
@@ -107,29 +104,29 @@
 
               <p class="lead mt-4 border-bottom lead-bold">Preferred work option</p>
               <div class="form-check">
-                <input class="form-check-input" type="radio" name="exampleWorkRadios" id="exampleWorkRadios0" value="all"
-                       checked [(ngModel)]="filterWorkPrefermentStatus" (ngModelChange)="onWorkStatusChange()">
+                <input class="form-check-input" type="radio" name="exampleWorkRadios" id="exampleWorkRadios0"
+                  value="all" checked [(ngModel)]="filterWorkPrefermentStatus" (ngModelChange)="onWorkStatusChange()">
                 <label class="form-check-label" for="exampleWorkRadios0">
                   All
                 </label>
               </div>
               <div class="form-check">
-                <input class="form-check-input" type="radio" name="exampleWorkRadios" id="exampleWorkRadios1" value="combined"
-                       [(ngModel)]="filterWorkPrefermentStatus" (ngModelChange)="onWorkStatusChange()">
+                <input class="form-check-input" type="radio" name="exampleWorkRadios" id="exampleWorkRadios1"
+                  value="combined" [(ngModel)]="filterWorkPrefermentStatus" (ngModelChange)="onWorkStatusChange()">
                 <label class="form-check-label" for="exampleWorkRadios1">
                   Combined
                 </label>
               </div>
               <div class="form-check">
-                <input class="form-check-input" type="radio" name="exampleWorkRadios" id="exampleWorkRadios2" value="office"
-                       [(ngModel)]="filterWorkPrefermentStatus" (ngModelChange)="onWorkStatusChange()">
+                <input class="form-check-input" type="radio" name="exampleWorkRadios" id="exampleWorkRadios2"
+                  value="office" [(ngModel)]="filterWorkPrefermentStatus" (ngModelChange)="onWorkStatusChange()">
                 <label class="form-check-label" for="exampleWorkRadios2">
                   Office
                 </label>
               </div>
               <div class="form-check">
-                <input class="form-check-input" type="radio" name="exampleWorkRadios" id="exampleWorkRadios3" value="remote"
-                       [(ngModel)]="filterWorkPrefermentStatus" (ngModelChange)="onWorkStatusChange()">
+                <input class="form-check-input" type="radio" name="exampleWorkRadios" id="exampleWorkRadios3"
+                  value="remote" [(ngModel)]="filterWorkPrefermentStatus" (ngModelChange)="onWorkStatusChange()">
                 <label class="form-check-label" for="exampleWorkRadios3">
                   Remote
                 </label>

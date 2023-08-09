@@ -2,7 +2,7 @@
   <td data-th="Product">
     <div class="row">
       <div class="col-md-3 text-left">
-        <a [routerLink]="['/profile',user.nickname]" class="card">
+        <a [routerLink]="['/', user.nickname]" class="card">
           <img *ngIf="user.profilePictureUrl" ngSrc="{{user.profilePictureUrl}}" height=100 width=100
             alt="profile_picture" class="img-fluid d-none d-md-block mb-2 shadow ">
         </a>
