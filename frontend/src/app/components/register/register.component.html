@@ -113,11 +113,12 @@
       </form>
 
       <div class="alert alert-success" *ngIf="isSuccessful">
-        Your registration is successful!
+        <p class="lead">Your registration is successful! </p>
+        <p class="lead">Check your email for verification. </p>
       </div>
 
       <div class="alert alert-warning" *ngIf="form.submitted && isRegisterFailed">
-        Registration failed!<br />{{ errorMessage }}
+        <p class="lead">Registration failed!<br />{{ errorMessage }}</p>
       </div>
 
     </div>

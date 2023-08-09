@@ -274,7 +274,7 @@ export class UserSettingsPageComponent {
       spiritAnimal
     )
       .subscribe(() => {
-        this.router.navigate(['/profile', this.user.nickname]);
+        this.router.navigate(['/', this.user.nickname]);
       });
   }
 }
