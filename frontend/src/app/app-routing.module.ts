@@ -17,7 +17,6 @@ import { CreatorsComponent } from "./components/creators/creators.component";
 import { PersonalityInfoPageComponent } from "./components/personality-16personalities-page/personality-info-page.component";
 import { PersonalityTrueColorComponent } from "./components/personality-true-color-page/personality-true-color.component";
 import { AdminBoardComponent } from "./components/admin-board/admin-board.component";
-import { DonutFillingPageComponent } from './components/donut-filling-page/donut-filling-page.component';
 import { SpiritAnimalPageComponent } from './components/spirit-animal-page/spirit-animal-page.component';
 
 const routes: Routes = [
@@ -37,7 +36,6 @@ const routes: Routes = [
   { path: 'color-personality-test', component: PersonalityTrueColorComponent },
   { path: 'admin-board', component: AdminBoardComponent },
   { path: 'spirit-animal', component: SpiritAnimalPageComponent },
-  { path: 'donut-filling', component: DonutFillingPageComponent },
   { path: ':username', component: ProfilePageComponent },
   { path: '**', pathMatch: 'full', component: PageNotFoundComponent }
 ]
