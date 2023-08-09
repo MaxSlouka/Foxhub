@@ -9,7 +9,7 @@
 
           <!-- open profile in a new window - just add - target="_blank" - into <a> element -->
           <a [routerLink]="['/', user.nickname]" class="profile-img-desktop mr-4"
-             [ngStyle]="{ 'border': profileImageBorder(user.colorPersonality) }">
+             [ngStyle]="{ 'border': profileImageBorder(user.colorPersonality) }" target="_blank">
             <img *ngIf="user.profilePictureUrl" [src]="user.profilePictureUrl" height="100" width="100"
                  alt="profile_picture" class="img-fluid d-md-block shadow">
           </a>
