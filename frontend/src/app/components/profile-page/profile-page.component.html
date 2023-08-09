@@ -15,19 +15,19 @@
             <div class="profile-img-label">Click me for Socials!</div>
           </div>
           <div class="links-box" [ngClass]="{ 'open': isOpen }">
-            <a [href]="user.facebook">
+            <a [href]="user.facebook" target="_blank">
               <i class="bi bi-facebook"></i>
             </a>
-            <a [href]="user.instagram">
+            <a [href]="user.instagram" target="_blank">
               <i class="bi bi-instagram"></i>
             </a>
-            <a [href]="user.linkedin">
+            <a [href]="user.linkedin" target="_blank">
               <i class="bi bi-linkedin"></i>
             </a>
-            <a [href]="user.gitHub">
+            <a [href]="user.gitHub" target="_blank">
               <i class="bi bi-github"></i>
             </a>
-            <a [href]="user.optionalPage">
+            <a [href]="user.optionalPage" target="_blank">
               <i class="bi bi-globe"></i>
             </a>
           </div>
@@ -121,15 +121,6 @@
           </div>
         </div>
 
-        <!-- about section -->
-        <p class="lead mt-4 border-bottom font-weight-bold">About</p>
-        <div class="row mt-2">
-          <div class="col-md-12">
-            <p class="lead one-line-about">{{user.oneLineAbout}}</p>
-            <p class="lead text-formated">{{ user.about }}</p>
-          </div>
-        </div>
-
         <!-- work location and preference -->
         <p class="lead mt-4 border-bottom font-weight-bold">Preferred Work Location(s)</p>
         <div class="row mt-2">
@@ -163,6 +154,33 @@
 
         </div>
 
+        <!-- tech skills section -->
+        <p class="lead mt-4 border-bottom font-weight-bold">Tech Skills</p>
+        <div class="row mt-2">
+          <div class="col-md-12 d-flex flex-wrap">
+            <app-technologies *ngFor="let technology of user.technologies" [technology]="technology">
+            </app-technologies>
+          </div>
+        </div>
+
+        <!-- languages section -->
+        <p class="lead mt-4 border-bottom font-weight-bold">Languages</p>
+        <div class="row mt-2">
+          <div class="col-md-12 d-flex flex-wrap">
+            <app-language *ngFor="let language of user.languages" [language]="language">
+            </app-language>
+          </div>
+        </div>
+
+        <!-- about section -->
+        <p class="lead mt-4 border-bottom font-weight-bold">About</p>
+        <div class="row mt-2">
+          <div class="col-md-12">
+            <p class="lead one-line-about">{{user.oneLineAbout}}</p>
+            <p class="lead text-formated">{{ user.about }}</p>
+          </div>
+        </div>
+
         <!-- spirit animal -->
         <p class="lead mt-4 border-bottom font-weight-bold">Spirit Animal</p>
         <div class="row mt-2">
@@ -185,23 +203,6 @@
           </div>
         </div>
 
-        <!-- tech skills section -->
-        <p class="lead mt-4 border-bottom font-weight-bold">Tech Skills</p>
-        <div class="row mt-2">
-          <div class="col-md-12 d-flex flex-wrap">
-            <app-technologies *ngFor="let technology of user.technologies" [technology]="technology">
-            </app-technologies>
-          </div>
-        </div>
-
-        <!-- languages section -->
-        <p class="lead mt-4 border-bottom font-weight-bold">Languages</p>
-        <div class="row mt-2">
-          <div class="col-md-12 d-flex flex-wrap">
-            <app-language *ngFor="let language of user.languages" [language]="language">
-            </app-language>
-          </div>
-        </div>
       </div>
     </div>
   </div>
